@@ -1,0 +1,32 @@
+# ============================================================
+#  SIGSF · Normalización de fin de línea y archivos binarios
+#  (el equipo trabaja en Windows con NetBeans: evita diffs falsos)
+# ============================================================
+* text=auto
+
+# Código y texto: LF en el repositorio
+*.java  text diff=java
+*.sql   text
+*.md    text
+*.html  text diff=html
+*.css   text
+*.js    text
+*.xml   text
+*.properties text
+
+# Scripts: cada uno con el fin de línea de su sistema
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.sh    text eol=lf
+
+# Binarios: nunca se mezclan ni se convierten
+*.jar   binary
+*.png   binary
+*.jpg   binary
+*.xlsx  binary
+*.pdf   binary
+*.zip   binary
+
+# NetBeans guarda un CRC de build-impl.xml en genfiles.properties:
+# se versionan byte a byte para que el IDE no pida regenerarlos.
+nbproject/** -text

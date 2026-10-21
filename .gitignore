@@ -1,0 +1,24 @@
+# ============================================================
+#  SIGSF · Archivos que NO se versionan
+# ============================================================
+
+# --- Compilación (NetBeans / Ant) ---
+build/
+dist/
+nbproject/private/
+*.class
+
+# --- Datos generados al ejecutar ---
+respaldos/
+reportes/
+logs/
+*.log
+
+# --- Sistema operativo / editores ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
