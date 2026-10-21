@@ -51,7 +51,8 @@ public class PrestamoService {
                 .multiply(BigDecimal.valueOf(p.getPlazoMeses()));
         BigDecimal totalPagar = p.getMontoPrestamo()
                 .multiply(BigDecimal.ONE.add(tasaFraccion));
-        BigDecimal cuota = totalPagar.divide(BigDecimal.valueOf(p.getPlazoMeses()), 2, RoundingMode.HALF_UP);
+        // Se trunca la cuota para no cobrar céntimos de más al cliente.
+        BigDecimal cuota = totalPagar.divide(BigDecimal.valueOf(p.getPlazoMeses()), 2, RoundingMode.DOWN);
 
         p.setCuotaMensual(cuota);
         p.setSaldoPendiente(totalPagar.setScale(2, RoundingMode.HALF_UP));
