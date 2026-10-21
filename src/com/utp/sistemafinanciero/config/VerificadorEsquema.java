@@ -1,10 +1,13 @@
 package com.utp.sistemafinanciero.config;
 
+import com.utp.sistemafinanciero.model.sistema.VersionEsquema;
+import com.utp.sistemafinanciero.version.HistorialEsquema;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,6 +58,21 @@ public final class VerificadorEsquema {
                     + "FOR EACH ROW EXECUTE FUNCTION fn_auditoria_inmutable()"
     };
 
+    /** Tabla de versionamiento del esquema (igual a db/version_esquema.sql). */
+    private static final String CREAR_VERSION_ESQUEMA =
+            "CREATE TABLE IF NOT EXISTS version_esquema ("
+                    + " id_version   SERIAL       PRIMARY KEY,"
+                    + " version      VARCHAR(20)  NOT NULL UNIQUE,"
+                    + " descripcion  VARCHAR(200) NOT NULL,"
+                    + " script       VARCHAR(120) NOT NULL,"
+                    + " aplicado_en  TIMESTAMP    NOT NULL DEFAULT now(),"
+                    + " aplicado_por VARCHAR(60)  NOT NULL DEFAULT current_user,"
+                    + " CONSTRAINT ck_version_semver CHECK (version ~ '^[0-9]+\\.[0-9]+\\.[0-9]+$'))";
+
+    private static final String REGISTRAR_VERSION =
+            "INSERT INTO version_esquema (version, descripcion, script) VALUES (?, ?, ?) "
+                    + "ON CONFLICT (version) DO NOTHING";
+
     private VerificadorEsquema() {
     }
 
@@ -69,6 +87,7 @@ public final class VerificadorEsquema {
                 }
                 LOG.info("Tabla «auditoria» creada (con índice y disparador de inmutabilidad).");
             }
+            verificarVersionEsquema(cn);
             List<String> faltan = new ArrayList<>();
             for (String t : TABLAS_PRINCIPALES) {
                 if (!existe(cn, t)) faltan.add(t);
@@ -81,6 +100,45 @@ public final class VerificadorEsquema {
             }
         } catch (SQLException e) {
             LOG.error("No se pudo verificar o crear el esquema: {}", e.getMessage());
+        }
+    }
+
+    /**
+     * Crea {@code version_esquema} si falta y registra las versiones cuyo
+     * script ya se aplicó (se detecta por la existencia de su tabla).
+     * Avisa si la base está en una versión anterior a la que espera el código.
+     */
+    private static void verificarVersionEsquema(Connection cn) throws SQLException {
+        if (!existe(cn, "version_esquema")) {
+            LOG.warn("La tabla «version_esquema» no existe: se crea automáticamente.");
+            try (Statement st = cn.createStatement()) {
+                st.execute(CREAR_VERSION_ESQUEMA);
+            }
+        }
+        try (PreparedStatement ps = cn.prepareStatement(REGISTRAR_VERSION)) {
+            for (VersionEsquema v : HistorialEsquema.conocidas()) {
+                if (existe(cn, HistorialEsquema.tablaMarcadora(v.getVersion()))) {
+                    ps.setString(1, v.getVersion());
+                    ps.setString(2, v.getDescripcion());
+                    ps.setString(3, v.getScript());
+                    ps.addBatch();
+                }
+            }
+            ps.executeBatch();
+        }
+        String actual = null;
+        try (Statement st = cn.createStatement();
+             ResultSet rs = st.executeQuery(
+                     "SELECT version FROM version_esquema ORDER BY id_version DESC LIMIT 1")) {
+            if (rs.next()) {
+                actual = rs.getString(1);
+            }
+        }
+        if (HistorialEsquema.esperada().equals(actual)) {
+            LOG.info("Versión del esquema de la base: {} (la esperada por el código).", actual);
+        } else {
+            LOG.warn("Versión del esquema de la base: {} · el código espera {}. Ejecute los scripts de db/.",
+                    actual, HistorialEsquema.esperada());
         }
     }
 
