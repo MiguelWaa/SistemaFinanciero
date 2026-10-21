@@ -25,12 +25,21 @@ public final class Configuracion {
     private Configuracion() {
     }
 
+    /**
+     * Orden de carga (cada archivo sobrescribe al anterior):
+     * <ol>
+     *   <li>{@code db.properties.ejemplo}: plantilla versionada en Git con
+     *       valores de laboratorio (así el proyecto funciona recién clonado).</li>
+     *   <li>{@code db.properties}: configuración local de cada integrante.
+     *       <b>No se versiona</b> (está en .gitignore) porque guarda credenciales.</li>
+     * </ol>
+     * Si no hay ninguno en la carpeta de trabajo se busca en el classpath.
+     */
     private static void cargar() {
-        try (InputStream in = new FileInputStream("db.properties")) {
-            PROPS.load(in);
+        boolean encontrado = cargarArchivo("db.properties.ejemplo");
+        encontrado |= cargarArchivo("db.properties");
+        if (encontrado) {
             return;
-        } catch (IOException ignore) {
-            // se intenta por classpath
         }
         try (InputStream in = Configuracion.class.getResourceAsStream("/db.properties")) {
             if (in != null) {
@@ -38,6 +47,15 @@ public final class Configuracion {
             }
         } catch (IOException ignore) {
             // valores por defecto
+        }
+    }
+
+    private static boolean cargarArchivo(String nombre) {
+        try (InputStream in = new FileInputStream(nombre)) {
+            PROPS.load(in);
+            return true;
+        } catch (IOException noExiste) {
+            return false;
         }
     }
 

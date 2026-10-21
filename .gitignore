@@ -22,3 +22,9 @@ desktop.ini
 .vscode/
 *.swp
 *~
+
+# --- Configuración local con credenciales (usar db.properties.ejemplo) ---
+db.properties
+
+# --- JUnit descargado por scripts/compilar_y_probar.sh ---
+lib/test/

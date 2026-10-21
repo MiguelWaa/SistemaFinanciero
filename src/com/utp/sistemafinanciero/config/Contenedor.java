@@ -15,6 +15,8 @@ import com.utp.sistemafinanciero.security.PasswordHasher;
 import com.utp.sistemafinanciero.security.Pbkdf2PasswordHasher;
 import com.utp.sistemafinanciero.security.PoliticaAcceso;
 import com.utp.sistemafinanciero.service.*;
+import com.utp.sistemafinanciero.version.GitCli;
+import com.utp.sistemafinanciero.version.VersionService;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,6 +41,8 @@ public class Contenedor {
     public final LimitadorIntentos limitador;
     public final PoliticaAcceso politica;
     public final RespaldoService respaldos;
+    /** Control de versiones: Git + VERSION + esquema de la base. */
+    public final VersionService versiones;
 
     // ---- Servicios (lógica de negocio) ----
     public final AuthService auth;
@@ -96,6 +100,8 @@ public class Contenedor {
                 bd.articulos(), bd.tiposCambio(), prestamos, empenos, hasher, sesiones, limitador);
         this.auditoria = new AuditoriaService(bd.auditoria());
         this.archivos = new ArchivoService(Configuracion.importacionMaxFilas());
+        Path raiz = Paths.get("").toAbsolutePath();
+        this.versiones = new VersionService(new GitCli(raiz), bd.versionesEsquema(), raiz);
     }
 
     /** Arma el sistema según {@code db.properties} (PostgreSQL o memoria). */

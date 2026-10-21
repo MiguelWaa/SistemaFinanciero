@@ -15,7 +15,8 @@ import java.util.Set;
  *
  * <ul>
  *   <li><b>ADMIN</b> puede todo.</li>
- *   <li>Los módulos administrativos (usuarios, respaldos, auditoría) son
+ *   <li>Los módulos administrativos (usuarios, respaldos, auditoría e
+ *       historial de versiones) son
  *       exclusivos del ADMIN.</li>
  *   <li>Un rol personalizado no listado en la matriz solo obtiene lectura
  *       de los módulos no administrativos (mínimo privilegio).</li>
@@ -37,7 +38,7 @@ public class PoliticaAcceso {
             "POST /api/auth/logout",
             "GET /api/auth/sesion");
 
-    private static final Set<String> SOLO_ADMIN = Set.of("usuarios", "respaldos", "auditoria");
+    private static final Set<String> SOLO_ADMIN = Set.of("usuarios", "respaldos", "auditoria", "versiones");
 
     /** módulo → (rol → "L" o "LE"). */
     private final Map<String, Map<String, String>> matriz = new HashMap<>();
@@ -45,17 +46,17 @@ public class PoliticaAcceso {
     public PoliticaAcceso() {
         // Operación de caja y atención al cliente
         permitir("LE", "CAJERO", "clientes", "operaciones", "prestamos", "empenos", "ventas", "solicitudes");
-        permitir("L", "CAJERO", "servicios", "tipos-cambio", "productos", "dashboard", "roles");
+        permitir("L", "CAJERO", "servicios", "tipos-cambio", "productos", "dashboard", "roles", "version");
         // Análisis, marketing, almacén, logística, producción y dirección
         permitir("LE", "ANALISTA", "campanias", "prospectos", "productos", "proveedores",
                 "lineas", "ordenes", "expedientes");
         permitir("L", "ANALISTA", "clientes", "servicios", "tipos-cambio", "operaciones", "prestamos",
-                "empenos", "ventas", "solicitudes", "dashboard", "roles");
+                "empenos", "ventas", "solicitudes", "dashboard", "roles", "version");
         // Supervisión: puede resolver y aprobar
         permitir("LE", "SUPERVISOR", "solicitudes", "operaciones", "expedientes", "clientes",
                 "prestamos", "empenos");
         permitir("L", "SUPERVISOR", "servicios", "tipos-cambio", "ventas", "productos", "proveedores",
-                "campanias", "prospectos", "lineas", "ordenes", "dashboard", "roles");
+                "campanias", "prospectos", "lineas", "ordenes", "dashboard", "roles", "version");
     }
 
     private void permitir(String nivel, String rol, String... modulos) {

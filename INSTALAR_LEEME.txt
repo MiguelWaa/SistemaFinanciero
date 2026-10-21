@@ -46,12 +46,18 @@ PASO 3 · CARGAR LAS TABLAS Y LOS DATOS
          2. db/datos_ejemplo.sql    (carga datos de prueba)
          3. db/portal_cliente.sql   (habilita el Portal del Cliente)
          4. db/seguridad.sql        (auditoria, restricciones y rol seguro)
+         5. db/version_esquema.sql  (version del esquema de la base, v5.0)
 
      Para abrir cada archivo usa el icono de carpeta del Query Tool.
 
 ----------------------------------------------------------------
 PASO 4 · CONFIGURAR LA CONEXION
 ----------------------------------------------------------------
+  Si clonaste el repositorio Git, el archivo db.properties NO viene
+  (guarda contrasenas y no se sube a Git). Crealo copiando la plantilla:
+
+         copy db.properties.ejemplo db.properties
+
   Abre con el Bloc de notas el archivo  db.properties
   (esta en la raiz de la carpeta del proyecto).
 

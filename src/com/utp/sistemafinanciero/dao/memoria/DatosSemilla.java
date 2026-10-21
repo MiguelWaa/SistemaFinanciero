@@ -19,6 +19,7 @@ import com.utp.sistemafinanciero.model.seguridad.Rol;
 import com.utp.sistemafinanciero.model.seguridad.Usuario;
 import com.utp.sistemafinanciero.model.ventas.Venta;
 import com.utp.sistemafinanciero.security.PasswordHasher;
+import com.utp.sistemafinanciero.version.HistorialEsquema;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -40,6 +41,9 @@ public final class DatosSemilla {
     public static void cargar(DaoFactory bd, PasswordHasher hasher) {
         LocalDate hoy = LocalDate.now();
         LocalDateTime ahora = LocalDateTime.now();
+
+        // Versiones del esquema "aplicadas" (en memoria se consideran todas).
+        HistorialEsquema.conocidas().forEach(v -> bd.versionesEsquema().registrar(v));
 
         bd.roles().crear(new Rol(null, "ADMIN", "Administrador del sistema"));
         bd.roles().crear(new Rol(null, "SUPERVISOR", "Supervisa operaciones y reportes"));

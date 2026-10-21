@@ -1,9 +1,17 @@
 # ============================================================
-#  SIGSF · Configuración del sistema
-#  No necesita recompilar: el programa lee este archivo al arrancar.
+#  SIGSF · Configuración del sistema  (PLANTILLA VERSIONADA)
+#
+#  Este archivo SÍ está en Git y trae valores de laboratorio para que el
+#  proyecto funcione recién clonado. Para tu configuración local:
+#
+#      copy db.properties.ejemplo db.properties     (Windows)
+#      cp   db.properties.ejemplo db.properties     (Linux/Mac)
+#
+#  y edita db.properties: ese archivo NO se versiona (.gitignore) y el
+#  hook pre-commit impide subirlo por error. El programa lee primero
+#  este ejemplo y luego db.properties, que tiene prioridad.
 #  Cualquier clave puede darse también por variable de entorno
 #  (SIGSF_ + clave en mayúsculas), p. ej. SIGSF_DB_PASSWORD.
-#  ¡No suba este archivo con contraseñas reales a repositorios públicos!
 # ============================================================
 
 # --- Persistencia ---
@@ -18,6 +26,7 @@ db.name=SistemaFinanciero
 # Recomendado: usar el rol de privilegios mínimos creado por db/seguridad.sql
 #   db.user=sigsf_app
 db.user=postgres
+# Contraseña de laboratorio. En un servidor real use SIGSF_DB_PASSWORD.
 db.password=123456
 
 # --- Servidor web / API ---

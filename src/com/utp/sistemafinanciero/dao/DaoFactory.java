@@ -38,4 +38,6 @@ public interface DaoFactory {
     OrdenProduccionDao ordenesProduccion();
     ExpedienteAprobacionDao expedientes();
     AuditoriaDao auditoria();
+    /** Historial de versiones del esquema de la base (tabla version_esquema). */
+    VersionEsquemaDao versionesEsquema();
 }

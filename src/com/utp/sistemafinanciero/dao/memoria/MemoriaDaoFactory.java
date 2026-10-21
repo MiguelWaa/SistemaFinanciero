@@ -27,6 +27,7 @@ public class MemoriaDaoFactory implements DaoFactory {
     private final OrdenProduccionDao ordenes = new OrdenProduccionDaoMemoria();
     private final ExpedienteAprobacionDao expedientes = new ExpedienteAprobacionDaoMemoria();
     private final AuditoriaDao auditoria = new AuditoriaDaoMemoria();
+    private final VersionEsquemaDao versionesEsquema = new VersionEsquemaDaoMemoria();
 
     @Override public String nombre() { return "Memoria (demostración)"; }
     @Override public RolDao roles() { return roles; }
@@ -48,4 +49,5 @@ public class MemoriaDaoFactory implements DaoFactory {
     @Override public OrdenProduccionDao ordenesProduccion() { return ordenes; }
     @Override public ExpedienteAprobacionDao expedientes() { return expedientes; }
     @Override public AuditoriaDao auditoria() { return auditoria; }
+    @Override public VersionEsquemaDao versionesEsquema() { return versionesEsquema; }
 }

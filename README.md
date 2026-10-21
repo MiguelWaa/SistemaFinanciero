@@ -9,6 +9,25 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 
 ---
 
+## 🆕 Versión 5.0 · Sistema de control de versiones (Git)
+
+Tercera entrega del taller. El proyecto ahora es un **repositorio Git** gestionado con **Git Flow**.
+
+| Tema | Qué se implementó | Dónde |
+|---|---|---|
+| **Repositorio y ramas** | `main` (producción), `develop` (integración), `feature/*`, `release/*`, `hotfix/*`; merges `--no-ff`; etiquetas `v4.0.0`, `v5.0.0`, `v5.0.1` | `docs/07_CONTROL_DE_VERSIONES.md` |
+| **Commits** | Conventional Commits validados por hook `commit-msg`; autoría por integrante | `.githooks/` |
+| **Conflictos y rollback** | Conflicto real resuelto en `CHANGELOG.md`; `git revert -m 1` de un merge que rompía las pruebas | `docs/07` §6 y §7 |
+| **Seguridad del repositorio** | `db.properties` fuera de Git (plantilla `db.properties.ejemplo`); hook `pre-commit` contra credenciales y archivos generados | `.gitignore`, `.githooks/pre-commit` |
+| **Versión en la aplicación** | Pantalla **Control de versiones** (versión, commits, red de ramas, etiquetas, esquema BD) y versión en el pie del panel; `GET /api/version`, `GET /api/versiones` (ADMIN) | `web/versiones.html`, paquete `version/` |
+| **Versionamiento de la BD** | Tabla `version_esquema` (1.0.0 → 5.0.0) creada por `db/version_esquema.sql` o al arrancar | `db/version_esquema.sql` |
+| **Build e integración continua** | `version.properties` con el commit dentro del .jar; GitHub Actions compila y ejecuta **117 pruebas** | `build.xml`, `.github/workflows/ci.yml` |
+| **Documentación** | Inventario v5.0 (T-25…T-34 + inventario de artefactos), `CHANGELOG.md`, `CONTRIBUTING.md`, `VERSION` | `docs/02`, raíz |
+
+> **Al clonar:** `scripts\git\instalar_hooks.bat` y `copy db.properties.ejemplo db.properties`.
+
+---
+
 ## 🆕 Versión 4.0 · Recursos de código fuente, inventario y seguridad Java
 
 Segunda entrega del taller. Agrega:
@@ -40,6 +59,7 @@ automatizadas. Documentación detallada en la carpeta **`docs/`**:
 | `docs/04_RESPALDO_Y_CONFIGURACION_BD.md` | Backup, restauración, rol de mínimo privilegio |
 | `docs/05_PRUEBAS_TDD.md` | 99 pruebas JUnit 4 |
 | `docs/06_RECURSOS_DE_CODIGO_FUENTE.md` | Paquetes, librerías, dependencias, Logback, importación y exportación de ficheros por área |
+| `docs/07_CONTROL_DE_VERSIONES.md` | Git Flow, commits, merge, conflictos, rollback, etiquetas, remoto, CI, versionamiento de la BD |
 
 **Qué cambió (resumen):**
 
@@ -286,8 +306,9 @@ botones de editar/eliminar por fila y, donde aplica, exportación a Excel.
 **Exportaciones disponibles:** `/api/ventas/excel`, `/api/clientes/excel`,
 `/api/operaciones/excel`, `/api/productos/excel`.
 
-El diseño anterior de las páginas quedó guardado en
-`web/_respaldo_diseno_anterior/` por si se quiere consultar.
+El diseño anterior de las páginas ya no se guarda como copia manual: queda en
+el historial de Git (etiqueta `v4.0.0`). Para consultarlo:
+`git show v4.0.0:web/_respaldo_diseno_anterior/login.html`.
 
 > Nota: el módulo de Producción usa dos tablas nuevas del backend
 > (`linea_produccion` y `orden_produccion`) que ya venían en `db/schema.sql`,
