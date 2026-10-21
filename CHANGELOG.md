@@ -17,6 +17,7 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 - Versionamiento del esquema de la base: tabla `version_esquema` y `db/version_esquema.sql`.
 - `version.properties` generado por Ant al compilar (commit, rama, etiqueta).
 - Pantalla `versiones.html` (resumen, historial, red de ramas, etiquetas, esquema BD) y versión en el pie del panel.
+- `docs/07_CONTROL_DE_VERSIONES.md`, inventario de documentación v5.0 y `CONTRIBUTING.md`.
 
 ### Corregido
 - Ramas/etiquetas vacías en la vista de versiones (`for-each-ref` usa `%1f`) y referencias mal detectadas en el grafo.
