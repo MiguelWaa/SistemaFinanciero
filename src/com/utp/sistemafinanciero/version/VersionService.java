@@ -128,11 +128,14 @@ public class VersionService {
         return referencias("refs/tags", null, "-creatordate");
     }
 
-    /** Grafo de texto (como {@code git log --graph}) para la vista «Network». */
+    /**
+     * Grafo de texto (como {@code git log --graph}) para la vista «Network».
+     * Cada línea: dibujo del grafo + hash + mensaje + 0x1F + referencias.
+     */
     public List<String> grafo(int limite) {
         if (!git.disponible()) return List.of();
         return lineas(git.ejecutar("log", "--all", "--graph", "--color=never", "-n", String.valueOf(limite),
-                "--format=%h %s%d"));
+                "--format=%h %s" + F + "%D"));
     }
 
     /** Lanzamientos registrados en CHANGELOG.md ({@code ## [x.y.z] - descripción}). */

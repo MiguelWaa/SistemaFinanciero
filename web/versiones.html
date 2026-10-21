@@ -228,7 +228,8 @@
         col = Math.floor(i / 2) % 6 + 1;
         g += '<span class="g' + col + '">' + esc(ch) + '</span>';
       }
-      var resto = esc(m[3] || '').replace(/\(([^)]*)\)\s*$/, '<span class="d">($1)</span>');
+      var partes = (m[3] || '').split('\u001f');
+      var resto = esc(partes[0]) + (partes[1] ? ' <span class="d">(' + esc(partes[1]) + ')</span>' : '');
       return g + (m[2] ? '<span class="h">' + m[2] + '</span>' : '') + resto;
     }).join('\n');
   }
