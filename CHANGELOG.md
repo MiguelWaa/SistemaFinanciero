@@ -16,8 +16,10 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 - Servicio de versión (`VersionService`) y API `GET /api/version`, `GET /api/versiones` (solo ADMIN).
 - Versionamiento del esquema de la base: tabla `version_esquema` y `db/version_esquema.sql`.
 - `version.properties` generado por Ant al compilar (commit, rama, etiqueta).
+- Pantalla `versiones.html` (resumen, historial, red de ramas, etiquetas, esquema BD) y versión en el pie del panel.
 
 ### Corregido
+- Ramas/etiquetas vacías en la vista de versiones (`for-each-ref` usa `%1f`) y referencias mal detectadas en el grafo.
 
 ## [4.0.0] - Taller de recursos de código fuente
 
