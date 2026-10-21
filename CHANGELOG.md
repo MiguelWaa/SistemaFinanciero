@@ -11,6 +11,8 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 ## [Sin publicar]
 
 ### Agregado
+- Plantilla `db.properties.ejemplo`; `db.properties` sale del repositorio (credenciales).
+- Hooks Git `pre-commit` (bloquea credenciales y archivos generados) y `commit-msg`.
 
 ### Corregido
 
