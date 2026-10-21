@@ -7,11 +7,11 @@
 
 2) Crea la base de datos:
    - Click derecho en "Databases" > Create > Database...
-   - Name: sistema_financiero
+   - Name: SistemaFinanciero
    - Save.
 
 3) Carga la estructura:
-   - Selecciona la base "sistema_financiero".
+   - Selecciona la base "SistemaFinanciero".
    - Menu Tools > Query Tool.
    - Abre el archivo  db/schema.sql  (icono de carpeta) y presiona
      "Execute/Run" (F5). Debe crear 31 tablas.
@@ -26,7 +26,7 @@
    Valores por defecto:
      db.host=localhost
      db.port=5432
-     db.name=sistema_financiero
+     db.name=SistemaFinanciero
      db.user=postgres
      db.password=123456
 
