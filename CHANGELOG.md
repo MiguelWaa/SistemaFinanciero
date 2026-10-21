@@ -10,6 +10,12 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.0.1] - 2026-10-21 · Parche
+
+### Corregido
+- Nombre de la base inconsistente: README y `db/LEEME.txt` decían `sistema_financiero`; el sistema usa `SistemaFinanciero`.
+- Puerto por defecto 8080 en código y README; el sistema usa 8091 (`server.port`).
+
 ## [5.0.0] - 2026-10-21 · Taller de control de versiones
 
 Versión MAYOR: cambia el contrato `DaoFactory` (nuevo `versionesEsquema()`), el

@@ -83,7 +83,7 @@ El hook `.githooks/commit-msg` rechaza mensajes que no siguen el formato.
 |---|---|---|
 | `v4.0.0` | línea base | Estado entregado en el taller de recursos de código fuente |
 | `v5.0.0` | MENOR→MAYOR | Control de versiones: Git Flow, hooks, API y pantalla de versiones, versionamiento del esquema BD, CI, inventario v5 |
-| `v5.0.1` | PARCHE | Corrección del nombre de la base y del puerto en la documentación |
+| `v5.0.1` | PARCHE | `hotfix/5.0.1`: nombre de la base (`SistemaFinanciero`) y puerto (8091) unificados en código y documentación |
 
 ## 5. Flujo de trabajo diario (comandos)
 

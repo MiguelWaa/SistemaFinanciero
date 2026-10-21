@@ -78,7 +78,7 @@ public final class Configuracion {
     // --- Base de datos ---
     public static String dbHost()     { return get("db.host", "localhost"); }
     public static int    dbPort()     { return getInt("db.port", 5432); }
-    public static String dbName()     { return get("db.name", "sistema_financiero"); }
+    public static String dbName()     { return get("db.name", "SistemaFinanciero"); }
     public static String dbUser()     { return get("db.user", "postgres"); }
     public static String dbPassword() { return get("db.password", "postgres"); }
 
@@ -86,7 +86,7 @@ public final class Configuracion {
     public static String persistencia() { return get("persistencia", "postgresql").toLowerCase(); }
 
     // --- Servidor ---
-    public static int    serverPort() { return getInt("server.port", 8080); }
+    public static int    serverPort() { return getInt("server.port", 8091); }
     public static String webDir()     { return get("web.dir", "web"); }
     /** Origen permitido para CORS; vacío = solo el mismo origen (recomendado). */
     public static String corsOrigen() { return get("seguridad.cors.origen", ""); }
