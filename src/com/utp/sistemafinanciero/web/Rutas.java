@@ -37,6 +37,7 @@ public final class Rutas {
                 new SolicitudController(c.solicitudes),
                 new PortalController(c.portal),
                 new RespaldoController(c.respaldos),
+                new VersionController(c.versiones),
                 // Importación / exportación de ficheros de todas las áreas (CSV, Excel, JSON)
                 new ArchivoController(c.archivos, CatalogoArchivos.crear(c)));
         for (Controlador ctrl : controladores) {
