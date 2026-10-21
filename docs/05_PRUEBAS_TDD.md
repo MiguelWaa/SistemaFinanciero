@@ -1,6 +1,8 @@
 # SIGSF · Pruebas automatizadas (TDD)
 
-**Herramienta:** JUnit 4 (incluido en NetBeans). **Carpeta:** `test/`. **Resultado:** 99 pruebas en 21 clases (versión 4.0).
+**Herramienta:** JUnit 4 (incluido en NetBeans). **Carpeta:** `test/`. **Resultado:** 117 pruebas en 24 clases (versión 5.0; eran 99 en 21 clases en la 4.0).
+
+También sin NetBeans: `sh scripts/compilar_y_probar.sh` (o `.bat`); es lo que ejecuta la integración continua en cada push.
 
 ## Cómo ejecutarlas en NetBeans
 
@@ -40,4 +42,7 @@ La inyección de dependencias (DIP) es lo que permite el TDD: el servicio recibe
 | ArchivoServiceTest | 7 | Importación por área: errores por fila, vista previa, mass assignment, operaciones no importables, exportación de las 9 áreas |
 | ArchivosApiTest | 4 | Permisos 401/403 de ficheros, descarga, auditoría IMPORTAR |
 | LogbackConfigTest | 3 | Configuración de Logback, anti log injection, área de cada ruta |
-| **Total** | **99** | |
+| VersionServiceTest | 12 | RF-VER-01…04: versión desde Git / version.properties / VERSION, esquema al día, tipos de commit, CHANGELOG, lista blanca de GitCli |
+| GitCliIntegracionTest | 3 | Repositorio Git real temporal: rama, etiqueta, merge y grafo (se omite si no hay git) |
+| VersionApiTest | 3 | `/api/version` para todo el personal, `/api/versiones` solo ADMIN, 401 sin sesión |
+| **Total** | **117** | |
