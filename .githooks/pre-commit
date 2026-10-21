@@ -1,0 +1,42 @@
+#!/bin/sh
+# ============================================================
+#  SIGSF · Hook pre-commit (se ejecuta antes de cada commit)
+#  Instalar una sola vez:  scripts/git/instalar_hooks.bat  (o .sh)
+#  Bloquea el commit si se intenta subir:
+#    1. db.properties (credenciales locales) u otros archivos prohibidos
+#    2. archivos generados: build/, dist/, logs/, respaldos/, reportes/
+#    3. archivos de más de 5 MB
+#    4. claves privadas o contraseñas escritas en el código Java
+#  Para saltarlo en un caso excepcional:  git commit --no-verify
+# ============================================================
+error=0
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+
+for f in $staged; do
+  case "$f" in
+    db.properties|*/db.properties)
+      echo "[pre-commit] BLOQUEADO: $f contiene credenciales locales. Use db.properties.ejemplo."; error=1;;
+    build/*|dist/*|logs/*|respaldos/*|reportes/*|*.class|*.log)
+      echo "[pre-commit] BLOQUEADO: $f es un archivo generado (ver .gitignore)."; error=1;;
+  esac
+  if [ -f "$f" ]; then
+    size=$(wc -c < "$f" | tr -d ' ')
+    if [ "$size" -gt 5242880 ]; then
+      echo "[pre-commit] BLOQUEADO: $f pesa más de 5 MB ($size bytes)."; error=1
+    fi
+  fi
+done
+
+# Contenido sospechoso en las líneas agregadas
+if git diff --cached -U0 -- '*.java' '*.js' '*.html' '*.sql' | grep -E '^\+' \
+     | grep -Ei '(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|password[[:space:]]*=[[:space:]]*"[^"]{4,}")' >/dev/null; then
+  echo "[pre-commit] BLOQUEADO: se detectó una clave privada o una contraseña escrita en el código."
+  echo "             Muévala a db.properties o a una variable de entorno SIGSF_*."
+  error=1
+fi
+
+if [ $error -ne 0 ]; then
+  echo "[pre-commit] Commit cancelado. Corrija lo indicado y vuelva a intentar."
+  exit 1
+fi
+exit 0
