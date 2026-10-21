@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes · SIGSF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="sigsf.css">
+    
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon"><i class="fa-solid fa-landmark"></i></div>
+                <div class="logo-text">
+                    <h2>SIGSF</h2>
+                    <span>Bancos • Casas de Cambio • Empeño</span>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> <span>Inicio</span></a></li>
+                <li class="menu-label">Gestión</li>
+                <li><a href="usuarios.html"><i class="fa-solid fa-users"></i> <span>Usuarios</span></a></li>
+                <li class="active"><a href="reportes.html"><i class="fa-solid fa-chart-column"></i> <span>Reportes</span></a></li>
+                <li><a href="configuracion.html"><i class="fa-solid fa-gear"></i> <span>Configuración</span></a></li>
+                <li><a href="seguridad.html"><i class="fa-solid fa-shield-halved"></i> <span>Seguridad</span></a></li>
+                <li class="menu-label">Soporte</li>
+                <li><a href="ayuda.html"><i class="fa-solid fa-circle-question"></i> <span>Centro de ayuda</span></a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="login.html" class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar sesión</span></a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="top-navbar">
+                <div class="breadcrumb">
+                    <div class="crumbs"><a href="index.html">Inicio</a> / Reportes</div>
+                    <h1>Reportes y Análisis</h1>
+                    <p>Consulta indicadores y descarga reportes por área</p>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                    <div class="user-info">
+                        <span class="role" id="navUser">Miguel Admin</span>
+                        <span class="status">Administrador</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                </div>
+            </header>
+            <div class="page-body">
+                <div class="toolbar">
+                    <div class="section-heading" style="margin:0;"><h2>Panel de reportes</h2><p>Indicadores de desempeño por área</p></div>
+                    <div style="display:flex;gap:10px;">
+                        <select class="field" style="padding:9px 12px;border:1px solid var(--border-color);border-radius:9px;"><option>Últimos 30 días</option><option>Este trimestre</option><option>Este año</option></select>
+                        <button class="btn btn-primary" onclick="alert('Reporte exportado (demostración).')"><i class="fa-solid fa-file-export"></i> Exportar</button>
+                    </div>
+                </div>
+
+                <div class="kpi-row">
+                    <div class="kpi-card"><div class="kpi-icon" style="background:#d1fae5;color:#059669;"><i class="fa-solid fa-sack-dollar"></i></div><div><div class="kpi-label">Ingresos</div><div class="kpi-value">S/ 482.9K</div><div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-up"></i> 12.4%</div></div></div>
+                    <div class="kpi-card"><div class="kpi-icon" style="background:#ffedd5;color:#ea580c;"><i class="fa-solid fa-right-left"></i></div><div><div class="kpi-label">Operaciones</div><div class="kpi-value">9,842</div><div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-up"></i> 6.7%</div></div></div>
+                    <div class="kpi-card"><div class="kpi-icon" style="background:#dbeafe;color:#2563eb;"><i class="fa-solid fa-hand-holding-dollar"></i></div><div><div class="kpi-label">Préstamos</div><div class="kpi-value">S/ 210.4K</div><div class="kpi-trend trend-down"><i class="fa-solid fa-arrow-down"></i> 2.1%</div></div></div>
+                    <div class="kpi-card"><div class="kpi-icon" style="background:#ede9fe;color:#7c3aed;"><i class="fa-solid fa-percent"></i></div><div><div class="kpi-label">Margen</div><div class="kpi-value">18.9%</div><div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-up"></i> 0.9%</div></div></div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="panel">
+                        <div class="panel-head"><h3>Ingresos por mes</h3><span class="badge green">S/ (miles)</span></div>
+                        <div style="display:flex;align-items:flex-end;gap:14px;height:220px;padding-top:10px;">
+                            <div style="flex:1;text-align:center;"><div style="background:linear-gradient(180deg,#3b82f6,#2563eb);height:90px;border-radius:8px 8px 0 0;"></div><small style="color:var(--text-muted);font-size:.72rem;">Abr</small></div><div style="flex:1;text-align:center;"><div style="background:linear-gradient(180deg,#3b82f6,#2563eb);height:120px;border-radius:8px 8px 0 0;"></div><small style="color:var(--text-muted);font-size:.72rem;">May</small></div><div style="flex:1;text-align:center;"><div style="background:linear-gradient(180deg,#3b82f6,#2563eb);height:105px;border-radius:8px 8px 0 0;"></div><small style="color:var(--text-muted);font-size:.72rem;">Jun</small></div><div style="flex:1;text-align:center;"><div style="background:linear-gradient(180deg,#3b82f6,#2563eb);height:142px;border-radius:8px 8px 0 0;"></div><small style="color:var(--text-muted);font-size:.72rem;">Jul</small></div><div style="flex:1;text-align:center;"><div style="background:linear-gradient(180deg,#3b82f6,#2563eb);height:157px;border-radius:8px 8px 0 0;"></div><small style="color:var(--text-muted);font-size:.72rem;">Ago</small></div><div style="flex:1;text-align:center;"><div style="background:linear-gradient(180deg,#3b82f6,#2563eb);height:180px;border-radius:8px 8px 0 0;"></div><small style="color:var(--text-muted);font-size:.72rem;">Sep</small></div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-head"><h3>Participación por servicio</h3></div>
+                        <div style="display:flex;flex-direction:column;gap:16px;padding-top:6px;">
+                            <div><div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px;"><span>Cambio de moneda</span><b>42%</b></div><div class="bar"><span style="width:42%;background:#2563eb;"></span></div></div><div><div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px;"><span>Préstamos</span><b>28%</b></div><div class="bar"><span style="width:28%;background:#059669;"></span></div></div><div><div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px;"><span>Empeños</span><b>18%</b></div><div class="bar"><span style="width:18%;background:#f97316;"></span></div></div><div><div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px;"><span>Otros servicios</span><b>12%</b></div><div class="bar"><span style="width:12%;background:#8b5cf6;"></span></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head"><h3>Reportes generados recientemente</h3><button class="btn btn-ghost btn-sm"><i class="fa-solid fa-rotate"></i> Actualizar</button></div>
+                    <div class="table-wrap">
+                        <table class="data">
+                            <thead><tr><th>Reporte</th><th>Área</th><th>Formato</th><th>Fecha</th><th>Estado</th><th style="text-align:right;">Acción</th></tr></thead>
+                            <tbody>
+                                <tr><td><i class="fa-solid fa-file-lines" style="color:#2563eb;"></i> Estado de operaciones diarias</td><td>Operaciones</td><td><span class="badge red">PDF</span></td><td>21/09/2026</td><td><span class="badge green">Listo</span></td><td style="text-align:right;"><button class="icon-btn"><i class="fa-solid fa-download"></i></button></td></tr>
+                                <tr><td><i class="fa-solid fa-file-excel" style="color:#16a34a;"></i> Ventas y campañas del mes</td><td>Marketing</td><td><span class="badge green">XLSX</span></td><td>20/09/2026</td><td><span class="badge green">Listo</span></td><td style="text-align:right;"><button class="icon-btn"><i class="fa-solid fa-download"></i></button></td></tr>
+                                <tr><td><i class="fa-solid fa-file-lines" style="color:#2563eb;"></i> Inventario y garantías</td><td>Logística</td><td><span class="badge red">PDF</span></td><td>19/09/2026</td><td><span class="badge amber">Procesando</span></td><td style="text-align:right;"><button class="icon-btn"><i class="fa-solid fa-clock"></i></button></td></tr>
+                                <tr><td><i class="fa-solid fa-file-excel" style="color:#16a34a;"></i> Rentabilidad por línea</td><td>Dirección</td><td><span class="badge green">XLSX</span></td><td>18/09/2026</td><td><span class="badge green">Listo</span></td><td style="text-align:right;"><button class="icon-btn"><i class="fa-solid fa-download"></i></button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <footer class="main-footer">
+                <p>&copy; 2026 Sistema Integral de Gestión de Servicios Financieros. Todos los derechos reservados.</p>
+            </footer>
+        </main>
+    </div>
+    <script>
+        try { var u = sessionStorage.getItem('sigsf_user'); if (u) document.getElementById('navUser').textContent = u.split('@')[0]; } catch (e) {}
+        var lb = document.getElementById('logoutBtn');
+        if (lb) lb.addEventListener('click', function(){ try { sessionStorage.removeItem('sigsf_user'); } catch(e){} });
+    </script>
+    
+
+<!-- SIGSF · modo integrado (oculta la barra propia al cargarse dentro del panel) -->
+<style id="sigsf-embed-css">
+  body.sigsf-embed aside.sidebar,
+  body.sigsf-embed .sidebar,
+  body.sigsf-embed .top-navbar,
+  body.sigsf-embed #sigsfBack { display:none !important; }
+  body.sigsf-embed { height:auto !important; overflow:auto !important; }
+</style>
+<script>
+(function(){
+  if (window.self === window.top) return;            // solo cuando está embebido en el panel
+  var b = document.body; if(!b) return;
+  b.classList.add('sigsf-embed');
+  function fix(){
+    var all = document.querySelectorAll('body *');
+    for (var i=0;i<all.length;i++){
+      var el = all[i];
+      var cs = getComputedStyle(el);
+      if ((parseFloat(cs.marginLeft)||0) >= 180) el.style.marginLeft = '0';
+      if (cs.position === 'fixed' && (parseFloat(cs.left)||0) >= 180) el.style.left = '0';
+    }
+    try { window.scrollTo(0,0); } catch(e){}
+  }
+  if (document.readyState !== 'loading') fix();
+  else document.addEventListener('DOMContentLoaded', fix);
+  setTimeout(fix, 250); setTimeout(fix, 700);
+})();
+</script>
+
+</body>
+</html>

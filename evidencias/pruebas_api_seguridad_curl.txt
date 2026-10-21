@@ -1,0 +1,36 @@
+$ curl /api/clientes                     # sin token
+{"error":"Sesión no válida o expirada. Inicie sesión nuevamente.","codigo":401}   -> HTTP 401
+
+$ curl -X POST /api/auth/login {admin@sigsf.com, admin123}
+{"expiraEnMinutos":30,"nombre":"Miguel","idRol":1,"apellido":"Machaca","estado":"ACTIVO","idUsuario":1,"email":"admin@sigsf.com","rol":"ADMIN","token"
+
+
+$ curl /api/usuarios  -H "Authorization: Bearer <token ADMIN>"
+[{"nombre":"Miguel","idRol":1,"apellido":"Machaca","estado":"ACTIVO","idUsuario":1,"fechaRegistro":"2026-10-10T18:24:43.493342172","email":"admin@sigsf.com"},{"nombre":"Lucia","idRol":3,"apellido":"Ramos","esta
+
+$ curl /api/usuarios  -H "Authorization: Bearer <token CAJERO>"
+{"error":"Su rol (CAJERO) no tiene permiso para consultar en el módulo «usuarios».","codigo":403}   -> HTTP 403
+
+$ curl /api/portal/1/operaciones  -H "Authorization: Bearer <token del cliente 2>"   # IDOR
+{"error":"Su rol (CLIENTE) no tiene permiso para consultar en el módulo «portal».","codigo":403}   -> HTTP 403
+
+$ curl -X POST /api/operaciones {monto:100, idTipoCambio:1, totalRecibir:99999}  # manipulación
+{"idCliente":2,"estado":"COMPLETADA","monedaOrigen":"USD","monedaDestino":"PEN","idTipoCambio":1,"tipoCambio":3.7800,"totalEntregar":100.0,"fechaOperacion":"2026-10-10T18:30:32.855386932","monto":100.0,"idOperacion":6,"tipoOperacion":"CAMBIO","totalRecibir":37
+
+$ 6 intentos de login con clave incorrecta (fuerza bruta)
+{"error":"Usuario o contraseña incorrectos.","codigo":400}
+{"error":"Usuario o contraseña incorrectos.","codigo":400}
+{"error":"Usuario o contraseña incorrectos.","codigo":400}
+{"error":"Usuario o contraseña incorrectos.","codigo":400}
+{"error":"Demasiados intentos fallidos. La cuenta quedó bloqueada temporalmente.","codigo":400}
+{"error":"Cuenta bloqueada temporalmente por varios intentos fallidos. Intente de nuevo en 5 minuto(s).","codigo":400}
+
+$ curl -X POST /api/auth/logout ; luego reutilizar el token
+{"ok":true}
+{"error":"Sesión no válida o expirada. Inicie sesión nuevamente.","codigo":401}   -> HTTP 401
+
+$ curl -I /login.html   (cabeceras de seguridad)
+X-frame-options: SAMEORIGIN
+Referrer-policy: no-referrer
+Content-security-policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https:/
+X-content-type-options: nosniff

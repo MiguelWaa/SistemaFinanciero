@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Respaldos y Auditoría</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+<style>
+  .nota{background:#eff6ff;border:1px solid #dbeafe;color:#1e3a8a;border-radius:10px;padding:12px 14px;font-size:.84rem;line-height:1.6;margin-top:12px}
+  .nota code{background:#dbeafe;padding:1px 6px;border-radius:5px}
+  .b-ambar{background:#fef3c7;color:#b45309}.b-azul{background:#dbeafe;color:#1d4ed8}.b-gris{background:#e2e8f0;color:#475569}
+</style>
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-database"></i></div>
+    <div>
+      <h1>Respaldos y Auditoría</h1>
+      <p>Copias de seguridad de la base de datos y bitácora de actividad</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div class="kpis" id="kpis"></div>
+
+  <div class="mod-tabs">
+    <button data-tab="r" class="on"><i class="fa-solid fa-floppy-disk"></i> Respaldos</button>
+    <button data-tab="a"><i class="fa-solid fa-list-check"></i> Auditoría</button>
+  </div>
+
+  <!-- ====================== RESPALDOS ====================== -->
+  <div data-pane="r">
+    <div class="card">
+      <h2><i class="fa-solid fa-shield-heart" style="color:#2563eb;"></i> Generar respaldo de la base de datos</h2>
+      <div class="sub">El sistema usa <b>pg_dump</b> si está instalado (respaldo completo: estructura + datos).
+        Si no lo encuentra, genera un script SQL con los datos usando JDBC. Además se hace un respaldo
+        automático cada 24 h y se conservan los últimos 10 archivos.</div>
+      <div class="acciones">
+        <button class="btn" id="btnRespaldar"><i class="fa-solid fa-play"></i> <span id="txtRespaldar">Generar respaldo ahora</span></button>
+        <button class="btn gris" id="btnRefrescar"><i class="fa-solid fa-rotate"></i> Actualizar lista</button>
+      </div>
+      <div class="msg" id="msgR"></div>
+      <div class="nota"><i class="fa-solid fa-circle-info"></i> <b>Restaurar:</b> ejecute
+        <code>scripts\restaurar_bd.bat archivo.sql</code> o abra el archivo en el <i>Query Tool</i> de pgAdmin
+        sobre la base <code>SistemaFinanciero</code>. Los respaldos <i>jdbc</i> contienen solo datos:
+        ejecute antes <code>db/schema.sql</code>.</div>
+    </div>
+
+    <div class="card">
+      <div class="tabla-top">
+        <h2 style="margin:0;"><i class="fa-solid fa-box-archive" style="color:#2563eb;"></i> Respaldos disponibles</h2>
+      </div>
+      <div class="tabla-scroll"><table>
+        <thead><tr><th>Archivo</th><th>Método</th><th>Fecha</th><th class="num">Tamaño</th><th style="text-align:right;">Acciones</th></tr></thead>
+        <tbody id="tablaR"><tr><td class="vacio" colspan="5">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- ====================== AUDITORÍA ====================== -->
+  <div data-pane="a" style="display:none;">
+    <div class="card">
+      <div class="tabla-top">
+        <h2 style="margin:0;"><i class="fa-solid fa-user-shield" style="color:#2563eb;"></i> Bitácora de auditoría (últimos 200 eventos)</h2>
+        <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarA" placeholder="Buscar usuario, acción, recurso…"></div>
+      </div>
+      <div class="sub">Se registran inicios de sesión (correctos y fallidos), altas, cambios, bajas,
+        importaciones, exportaciones, respaldos y accesos denegados. La bitácora no se puede editar desde el sistema.</div>
+      <div class="archivos-bar">
+        <span class="t"><i class="fa-solid fa-file-arrow-down"></i> Exportar bitácora</span>
+        <button class="btn verde" type="button" data-expa="xlsx"><i class="fa-solid fa-file-excel"></i> Excel</button>
+        <button class="btn linea" type="button" data-expa="csv"><i class="fa-solid fa-file-csv"></i> CSV</button>
+        <button class="btn linea" type="button" data-expa="json"><i class="fa-solid fa-file-code"></i> JSON</button>
+      </div>
+      <div class="tabla-scroll"><table>
+        <thead><tr><th>N°</th><th>Fecha</th><th>Usuario</th><th>Rol</th><th>Acción</th><th>Recurso</th><th>HTTP</th><th>IP</th></tr></thead>
+        <tbody id="tablaA"><tr><td class="vacio" colspan="8">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+(function(){
+  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = SIGSF.escapar;
+  var respaldos = [], eventos = [];
+
+  // Pestañas
+  document.querySelectorAll('[data-tab]').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('[data-tab]').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      document.querySelectorAll('[data-pane]').forEach(function(p){
+        p.style.display = p.getAttribute('data-pane') === b.getAttribute('data-tab') ? 'block' : 'none';
+      });
+    });
+  });
+
+  function msg(texto, tipo){
+    var m = $('msgR'); m.className = 'msg' + (tipo ? ' ' + tipo : '');
+    m.innerHTML = texto ? ((tipo === 'ok' ? '<i class="fa-solid fa-circle-check"></i> ' : '') + esc(texto)) : '';
+  }
+
+  var COLOR_ACCION = { LOGIN_OK:'b-verde', LOGIN_FALLIDO:'b-rojo', ACCESO_DENEGADO:'b-rojo', ELIMINAR:'b-rojo',
+                       CREAR:'b-azul', ACTUALIZAR:'b-ambar', RESPALDO:'b-verde', EXPORTAR:'b-gris', LOGOUT:'b-gris' };
+
+  function kpis(){
+    var ult = respaldos[0];
+    var fallidos = eventos.filter(function(e){ return e.accion === 'LOGIN_FALLIDO'; }).length;
+    var denegados = eventos.filter(function(e){ return e.accion === 'ACCESO_DENEGADO'; }).length;
+    $('kpis').innerHTML = SIGSF.kpi('Respaldos guardados', SIGSF.num(respaldos.length))
+      + SIGSF.kpi('Último respaldo', ult ? SIGSF.fechaCorta(ult.fecha) : '—', 'verde')
+      + SIGSF.kpi('Logins fallidos', SIGSF.num(fallidos), 'ambar')
+      + SIGSF.kpi('Accesos denegados', SIGSF.num(denegados), 'ambar');
+  }
+
+  function pintarR(){
+    var tb = $('tablaR'); tb.innerHTML = '';
+    if (!respaldos.length){ tb.innerHTML = '<tr><td class="vacio" colspan="5">Aún no hay respaldos. Presiona «Generar respaldo ahora».</td></tr>'; return; }
+    respaldos.forEach(function(r){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td><i class="fa-solid fa-file-code" style="color:#64748b;"></i> ' + esc(r.nombre) + '</td>'
+        + '<td>' + SIGSF.badge(r.metodo.toUpperCase()) + '</td>'
+        + '<td>' + esc(SIGSF.fechaCorta(r.fecha)) + '</td>'
+        + '<td class="num">' + esc(r.tamanio) + '</td>'
+        + '<td><div class="row-btns">'
+        + '<button class="ibtn ok" title="Descargar" data-d="1"><i class="fa-solid fa-download"></i></button>'
+        + '<button class="ibtn danger" title="Eliminar" data-e="1"><i class="fa-solid fa-trash"></i></button></div></td>';
+      tr.querySelector('[data-d]').addEventListener('click', function(){
+        API.descargar('/respaldos/' + encodeURIComponent(r.nombre) + '/descargar', r.nombre)
+           .catch(function(e){ msg('No se pudo descargar: ' + e.message, 'err'); });
+      });
+      tr.querySelector('[data-e]').addEventListener('click', async function(){
+        if (!confirm('¿Eliminar el respaldo ' + r.nombre + '?')) return;
+        try { await API.delete('/respaldos/' + encodeURIComponent(r.nombre)); msg('Respaldo eliminado.', 'ok'); await cargarR(); }
+        catch(e){ msg('No se pudo eliminar: ' + e.message, 'err'); }
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  function pintarA(){
+    var tb = $('tablaA'); tb.innerHTML = '';
+    var f = ($('buscarA').value || '').toLowerCase();
+    var lista = eventos.filter(function(e){ return !f || JSON.stringify(e).toLowerCase().indexOf(f) !== -1; });
+    if (!lista.length){ tb.innerHTML = '<tr><td class="vacio" colspan="8">Sin eventos.</td></tr>'; return; }
+    lista.forEach(function(e){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + esc(e.idAuditoria) + '</td><td>' + esc(SIGSF.fechaCorta(e.fecha)) + '</td>'
+        + '<td>' + esc(e.usuario) + '</td><td>' + esc(e.rol || '—') + '</td>'
+        + '<td><span class="badge ' + (COLOR_ACCION[e.accion] || 'b-azul') + '">' + esc(e.accion) + '</span></td>'
+        + '<td style="font-family:monospace;font-size:.78rem;">' + esc(e.recurso) + '</td>'
+        + '<td>' + esc(e.estadoHttp) + '</td><td>' + esc(e.ip) + '</td>';
+      tb.appendChild(tr);
+    });
+  }
+
+  async function cargarR(){
+    try { respaldos = await API.get('/respaldos'); pintarR(); }
+    catch(e){ $('tablaR').innerHTML = '<tr><td class="error-fila" colspan="5">' + esc(e.message) + '</td></tr>'; }
+    kpis();
+  }
+  async function cargarA(){
+    try { eventos = await API.get('/auditoria'); pintarA(); }
+    catch(e){ $('tablaA').innerHTML = '<tr><td class="error-fila" colspan="8">' + esc(e.message) + '</td></tr>'; }
+    kpis();
+  }
+
+  $('btnRespaldar').addEventListener('click', async function(){
+    var b = this; b.disabled = true; $('txtRespaldar').textContent = 'Generando…'; msg('', '');
+    try {
+      var r = await API.post('/respaldos', {});
+      msg('Respaldo generado: ' + r.nombre + ' (' + r.tamanio + ', método ' + r.metodo + ').', 'ok');
+      await cargarR(); await cargarA();
+    } catch(e){ msg('No se pudo generar el respaldo: ' + e.message, 'err'); }
+    b.disabled = false; $('txtRespaldar').textContent = 'Generar respaldo ahora';
+  });
+  $('btnRefrescar').addEventListener('click', function(){ cargarR(); cargarA(); });
+  $('buscarA').addEventListener('input', pintarA);
+  document.querySelectorAll('[data-expa]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      API.descargar('/auditoria/exportar?formato=' + btn.getAttribute('data-expa'))
+         .catch(function(e){ msg('No se pudo exportar: ' + e.message, 'err'); });
+    });
+  });
+
+  cargarR(); cargarA();
+})();
+</script>
+</body>
+</html>

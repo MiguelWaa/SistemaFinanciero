@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Mis trámites</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh;}
+  header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:18px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  header .izq{display:flex;align-items:center;gap:12px;}
+  header .logo{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+  header h1{font-size:1.05rem;}
+  header .sub{font-size:.78rem;opacity:.75;}
+  header .der{display:flex;align-items:center;gap:14px;}
+  .salir{background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 14px;border-radius:9px;cursor:pointer;font-size:.85rem;font-weight:600;}
+  .salir:hover{background:rgba(255,255,255,.25);}
+  main{max-width:1080px;margin:0 auto;padding:22px 18px 40px;}
+  .bienvenida{background:#fff;border-radius:14px;padding:20px 22px;margin-bottom:18px;box-shadow:0 4px 14px rgba(15,23,42,.06);}
+  .bienvenida h2{font-size:1.18rem;margin-bottom:4px;}
+  .bienvenida p{color:#64748b;font-size:.88rem;}
+  .tramites{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-bottom:18px;}
+  .t{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 14px rgba(15,23,42,.06);border-top:4px solid #2563eb;}
+  .t.verde{border-top-color:#059669;} .t.ambar{border-top-color:#d97706;}
+  .t h3{font-size:1rem;margin-bottom:3px;display:flex;align-items:center;gap:8px;}
+  .t .desc{color:#64748b;font-size:.8rem;margin-bottom:14px;}
+  .f{margin-bottom:10px;}
+  .f label{display:block;font-size:.75rem;font-weight:600;color:#475569;margin-bottom:4px;}
+  .f input,.f select{width:100%;padding:9px 11px;border:1px solid #cbd5e1;border-radius:8px;font-size:.88rem;background:#fff;color:#0f172a;}
+  .btn{width:100%;padding:11px;border:none;border-radius:9px;background:#2563eb;color:#fff;font-weight:600;cursor:pointer;font-size:.88rem;}
+  .btn.verde{background:#059669;} .btn.ambar{background:#d97706;}
+  .btn:hover{filter:brightness(1.08);}
+  .r{font-size:.8rem;margin-top:9px;min-height:1.1em;line-height:1.45;}
+  .panel{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 4px 14px rgba(15,23,42,.06);margin-bottom:18px;}
+  .panel h3{font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  table{width:100%;border-collapse:collapse;font-size:.83rem;}
+  th,td{padding:9px 10px;border-bottom:1px solid #eef2f7;text-align:left;}
+  th{background:#f8fafc;color:#64748b;font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.3px;}
+  .badge{padding:3px 9px;border-radius:999px;font-size:.72rem;font-weight:600;}
+  .b-pend{background:#fef3c7;color:#92400e;} .b-ok{background:#dcfce7;color:#15803d;} .b-otro{background:#e0e7ff;color:#3730a3;}
+  .fila-datos{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;}
+  .fila-datos .f{flex:1;min-width:160px;margin-bottom:0;}
+  .fila-datos .btn{width:auto;padding:10px 18px;}
+
+  /* ===== Mejoras visuales del portal ===== */
+  header{position:relative;overflow:hidden;}
+  header::after{content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 20% 120%,rgba(59,130,246,.35),transparent 55%),
+               radial-gradient(circle at 85% -20%,rgba(14,165,233,.3),transparent 50%);pointer-events:none;}
+  header .izq,header .der{position:relative;z-index:2;}
+  header .logo{animation:latir 3.4s ease-in-out infinite;}
+  @keyframes latir{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+
+  .bienvenida{position:relative;overflow:hidden;background:linear-gradient(120deg,#fff 60%,#eff6ff);
+    animation:entrar .6s cubic-bezier(.22,1,.36,1) both;}
+  .bienvenida::before{content:'';position:absolute;right:-40px;top:-40px;width:190px;height:190px;border-radius:50%;
+    background:radial-gradient(circle,rgba(37,99,235,.13),transparent 70%);animation:flotar 12s ease-in-out infinite;}
+  @keyframes flotar{0%,100%{transform:translate(0,0);}50%{transform:translate(-18px,14px);}}
+  @keyframes entrar{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+
+  .t{animation:entrar .6s cubic-bezier(.22,1,.36,1) both;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
+  .t:nth-child(1){animation-delay:.08s;} .t:nth-child(2){animation-delay:.18s;} .t:nth-child(3){animation-delay:.28s;}
+  .t:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(15,23,42,.14);}
+  .t h3 i{transition:transform .3s;}
+  .t:hover h3 i{transform:scale(1.2) rotate(-8deg);}
+
+  .f input,.f select{transition:.22s;}
+  .f input:focus,.f select:focus{outline:none;border-color:#2563eb;background:#fff;
+    box-shadow:0 0 0 4px rgba(37,99,235,.13);transform:translateY(-2px);}
+
+  .btn{position:relative;overflow:hidden;transition:.25s;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(37,99,235,.32);}
+  .btn.verde:hover{box-shadow:0 10px 22px rgba(5,150,105,.32);}
+  .btn.ambar:hover{box-shadow:0 10px 22px rgba(217,119,6,.32);}
+  .btn::after{content:'';position:absolute;top:0;left:-120%;width:55%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);animation:brillo 3.6s infinite;}
+  @keyframes brillo{0%{left:-120%;}55%,100%{left:130%;}}
+
+  .panel{animation:entrar .6s cubic-bezier(.22,1,.36,1) both;animation-delay:.34s;}
+  tbody tr{transition:background .18s;}
+  tbody tr:hover{background:#f8fafc;}
+  .r{transition:.2s;}
+
+  /* Mini resumen del cliente */
+  .resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px;}
+  .rs{background:rgba(255,255,255,.75);border:1px solid #e2e8f0;border-radius:12px;padding:13px 15px;}
+  .rs .l{font-size:.7rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+  .rs .v{font-size:1.28rem;font-weight:700;margin-top:3px;color:#0f172a;}
+  .rs.amb .v{color:#b45309;} .rs.ver .v{color:#047857;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="izq">
+    <div class="logo"><i class="fa-solid fa-building-columns"></i></div>
+    <div>
+      <h1>SIGSF · Portal del Cliente</h1>
+      <div class="sub" id="hDoc">—</div>
+    </div>
+  </div>
+  <div class="der">
+    <span id="hNombre" style="font-weight:600;font-size:.9rem;">—</span>
+    <button class="salir" id="btnSalir"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+  </div>
+</header>
+
+<main>
+  <div class="bienvenida">
+    <h2>Hola, <span id="saludo">cliente</span> 👋</h2>
+    <p>Desde aquí puedes solicitar tus trámites. Cada solicitud queda registrada y será evaluada por la entidad.</p>
+    <div class="resumen" id="resumen">
+      <div class="rs"><div class="l">Mis trámites</div><div class="v" id="rsTotal">—</div></div>
+      <div class="rs amb"><div class="l">En revisión</div><div class="v" id="rsPend">—</div></div>
+      <div class="rs ver"><div class="l">Aprobados</div><div class="v" id="rsOk">—</div></div>
+      <div class="rs"><div class="l">Monto solicitado</div><div class="v" id="rsMonto">—</div></div>
+    </div>
+  </div>
+
+  <div class="tramites">
+    <!-- CAMBIO DE MONEDA -->
+    <div class="t">
+      <h3><i class="fa-solid fa-right-left" style="color:#2563eb;"></i> Cambio de moneda</h3>
+      <div class="desc">Solicita el cambio al tipo vigente.</div>
+      <div class="f"><label>Tipo de cambio</label><select id="cbTipo"></select></div>
+      <div class="f"><label>Monto a cambiar</label><input type="number" id="cbMonto" step="0.01" min="0" placeholder="0.00"></div>
+      <button class="btn" id="cbBtn">Solicitar cambio</button>
+      <div class="r" id="cbMsg"></div>
+    </div>
+
+    <!-- PRESTAMO -->
+    <div class="t verde">
+      <h3><i class="fa-solid fa-hand-holding-dollar" style="color:#059669;"></i> Préstamo personal</h3>
+      <div class="desc">Calculamos tu cuota mensual al instante.</div>
+      <div class="f"><label>Monto que necesitas (S/)</label><input type="number" id="prMonto" step="0.01" min="0" placeholder="5000.00"></div>
+      <div class="f"><label>Plazo</label>
+        <select id="prPlazo">
+          <option value="6">6 meses</option>
+          <option value="12" selected>12 meses</option>
+          <option value="18">18 meses</option>
+          <option value="24">24 meses</option>
+        </select>
+      </div>
+      <button class="btn verde" id="prBtn">Solicitar préstamo</button>
+      <div class="r" id="prMsg"></div>
+    </div>
+
+    <!-- EMPENO -->
+    <div class="t ambar">
+      <h3><i class="fa-solid fa-gem" style="color:#d97706;"></i> Empeño de artículo</h3>
+      <div class="desc">Deja tu artículo en garantía.</div>
+      <div class="f"><label>¿Qué vas a empeñar?</label><input id="emDesc" placeholder="Ej. Laptop HP 14''"></div>
+      <div class="f"><label>Valor aproximado (S/)</label><input type="number" id="emValor" step="0.01" min="0" placeholder="1800.00"></div>
+      <div class="f"><label>Monto que solicitas (S/)</label><input type="number" id="emMonto" step="0.01" min="0" placeholder="800.00"></div>
+      <button class="btn ambar" id="emBtn">Solicitar empeño</button>
+      <div class="r" id="emMsg"></div>
+    </div>
+  </div>
+
+  <!-- MIS DATOS -->
+  <div class="panel">
+    <h3><i class="fa-solid fa-id-card" style="color:#2563eb;"></i> Mis datos de contacto</h3>
+    <div class="fila-datos">
+      <div class="f"><label>Teléfono</label><input id="mdTel" placeholder="987654321"></div>
+      <div class="f"><label>Correo</label><input id="mdCorreo" placeholder="correo@ejemplo.com"></div>
+      <div class="f"><label>Dirección</label><input id="mdDir" placeholder="Av. Siempre Viva 123"></div>
+      <button class="btn" id="mdBtn">Actualizar</button>
+    </div>
+    <div class="r" id="mdMsg"></div>
+  </div>
+
+  <!-- HISTORIAL -->
+  <div class="panel">
+    <h3><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;"></i> Mis trámites</h3>
+    <table>
+      <thead><tr><th>N°</th><th>Trámite</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
+      <tbody id="histTabla"><tr><td colspan="5">Cargando…</td></tr></tbody>
+    </table>
+  </div>
+</main>
+
+<script src="api.js"></script>
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var cliente = null, tipos = [];
+
+  // --- Sesión ---
+  try { cliente = JSON.parse(sessionStorage.getItem('sigsf_cliente') || 'null'); } catch(e){}
+  if(!cliente || !cliente.idCliente){ window.location.href = 'portal.html'; return; }
+
+  var nombre = ((cliente.nombres||'') + ' ' + (cliente.apellidos||'')).trim();
+  $('hNombre').textContent = nombre || 'Cliente';
+  $('saludo').textContent = (cliente.nombres || 'cliente');
+  $('hDoc').textContent = (cliente.tipoDocumento||'') + ' ' + (cliente.documento||'');
+  $('mdTel').value = cliente.telefono || '';
+  $('mdCorreo').value = cliente.correo || '';
+  $('mdDir').value = cliente.direccion || '';
+
+  $('btnSalir').addEventListener('click', function(){
+    API.logout();
+  });
+
+  function money(n){ return 'S/ ' + Number(n||0).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function ok(el,t){ el.style.color='#059669'; el.textContent='✔ ' + t; }
+  function err(el,t){ el.style.color='#dc2626'; el.textContent=t; }
+
+  // --- Tipos de cambio ---
+  async function cargarTipos(){
+    try{
+      tipos = await API.get('/tipos-cambio');
+      var s = $('cbTipo'); s.innerHTML='';
+      tipos.forEach(function(t){
+        var o=document.createElement('option');
+        o.value=t.idTipoCambio;
+        o.textContent = t.monedaOrigen + ' → ' + t.monedaDestino + '  (venta ' + t.venta + ')';
+        s.appendChild(o);
+      });
+    }catch(e){ err($('cbMsg'), 'No se pudieron cargar los tipos de cambio.'); }
+  }
+
+  // --- Historial ---
+  function resumen(lista){
+    lista = lista || [];
+    var pend = lista.filter(function(o){ return (o.estado||'')==='PENDIENTE'; }).length;
+    var ok   = lista.filter(function(o){ var e=(o.estado||''); return e==='COMPLETADA'||e==='APROBADO'||e==='ACTIVO'; }).length;
+    var tot  = lista.reduce(function(a,o){ return a + Number(o.monto||0); }, 0);
+    $('rsTotal').textContent = lista.length;
+    $('rsPend').textContent  = pend;
+    $('rsOk').textContent    = ok;
+    $('rsMonto').textContent = money(tot);
+  }
+
+  function badge(estado){
+    var e=(estado||'').toUpperCase(), c='b-otro';
+    if(e==='PENDIENTE') c='b-pend';
+    else if(e==='COMPLETADA'||e==='APROBADO'||e==='ACTIVO') c='b-ok';
+    return '<span class="badge '+c+'">'+(estado||'')+'</span>';
+  }
+  async function cargarHistorial(){
+    var tb=$('histTabla');
+    try{
+      var lista = await API.get('/portal/' + cliente.idCliente + '/operaciones');
+      tb.innerHTML='';
+      if(!lista.length){
+        tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:#64748b;padding:18px;">Aún no tienes trámites registrados.</td></tr>';
+        resumen([]);
+        return;
+      }
+      lista.forEach(function(o){
+        var f = o.fechaOperacion ? String(o.fechaOperacion).replace('T',' ').substring(0,16) : '';
+        var tr=document.createElement('tr');
+        tr.innerHTML = '<td>'+o.idOperacion+'</td><td>'+(o.tipoOperacion||'')+'</td><td>'+money(o.monto)+'</td><td>'+badge(o.estado)+'</td><td>'+f+'</td>';
+        tb.appendChild(tr);
+      });
+      resumen(lista);
+    }catch(e){ tb.innerHTML='<tr><td colspan="5" style="color:#dc2626;">Error: '+e.message+'</td></tr>'; }
+  }
+
+  // --- Trámite: cambio ---
+  $('cbBtn').addEventListener('click', async function(){
+    var m=$('cbMsg'), monto=parseFloat($('cbMonto').value), idtc=parseInt($('cbTipo').value,10);
+    if(isNaN(monto)||monto<=0){ err(m,'Ingresa un monto válido.'); return; }
+    this.disabled=true;
+    try{
+      var o = await API.post('/portal/'+cliente.idCliente+'/cambio', { idTipoCambio: idtc, monto: monto });
+      ok(m,'Solicitud enviada. Recibirás ' + money(o.totalRecibir) + '.');
+      $('cbMonto').value=''; cargarHistorial();
+    }catch(e){ err(m, e.message); }
+    this.disabled=false;
+  });
+
+  // --- Trámite: préstamo ---
+  $('prBtn').addEventListener('click', async function(){
+    var m=$('prMsg'), monto=parseFloat($('prMonto').value), plazo=parseInt($('prPlazo').value,10);
+    if(isNaN(monto)||monto<=0){ err(m,'Ingresa el monto que necesitas.'); return; }
+    this.disabled=true;
+    try{
+      var r = await API.post('/portal/'+cliente.idCliente+'/prestamo', { montoPrestamo: monto, plazoMeses: plazo });
+      var cuota = r.prestamo ? r.prestamo.cuotaMensual : null;
+      ok(m,'Solicitud enviada. Cuota estimada: ' + money(cuota) + ' por ' + plazo + ' meses.');
+      $('prMonto').value=''; cargarHistorial();
+    }catch(e){ err(m, e.message); }
+    this.disabled=false;
+  });
+
+  // --- Trámite: empeño ---
+  $('emBtn').addEventListener('click', async function(){
+    var m=$('emMsg'), desc=$('emDesc').value.trim(),
+        valor=parseFloat($('emValor').value), monto=parseFloat($('emMonto').value);
+    if(!desc){ err(m,'Describe el artículo.'); return; }
+    if(isNaN(monto)||monto<=0){ err(m,'Ingresa el monto que solicitas.'); return; }
+    this.disabled=true;
+    try{
+      var r = await API.post('/portal/'+cliente.idCliente+'/empeno', {
+        descripcionArticulo: desc, valorEstimado: isNaN(valor)?null:valor,
+        montoPrestamo: monto, plazoDias: 30
+      });
+      ok(m, r.mensaje || 'Solicitud de empeño enviada.');
+      $('emDesc').value=''; $('emValor').value=''; $('emMonto').value=''; cargarHistorial();
+    }catch(e){ err(m, e.message); }
+    this.disabled=false;
+  });
+
+  // --- Mis datos ---
+  $('mdBtn').addEventListener('click', async function(){
+    var m=$('mdMsg');
+    this.disabled=true;
+    try{
+      var c = await API.put('/portal/'+cliente.idCliente+'/datos', {
+        telefono: $('mdTel').value.trim(),
+        correo: $('mdCorreo').value.trim(),
+        direccion: $('mdDir').value.trim()
+      });
+      cliente = c;
+      try{ sessionStorage.setItem('sigsf_cliente', JSON.stringify(c)); }catch(e){}
+      ok(m,'Datos actualizados.');
+    }catch(e){ err(m, e.message); }
+    this.disabled=false;
+  });
+
+  cargarTipos();
+  cargarHistorial();
+})();
+</script>
+</body>
+</html>

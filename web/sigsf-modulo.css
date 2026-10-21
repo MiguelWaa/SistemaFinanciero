@@ -1,0 +1,97 @@
+/* ============================================================
+   SIGSF · Estilos compartidos de los módulos del sistema
+   Usado por todas las páginas de gestión (clientes, ventas,
+   marketing, almacén, logística, producción, dirección, etc.)
+   ============================================================ */
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f1f5f9;color:#0f172a;}
+
+/* ---- Encabezado del módulo (se oculta dentro del panel) ---- */
+.mod-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:20px 26px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+.mod-header .izq{display:flex;align-items:center;gap:14px;}
+.mod-header .ico{width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.mod-header h1{font-size:1.15rem;}
+.mod-header p{font-size:.82rem;opacity:.78;margin-top:2px;}
+.mod-header a.volver{color:#fff;background:rgba(255,255,255,.15);padding:9px 15px;border-radius:9px;text-decoration:none;font-size:.85rem;font-weight:600;}
+.mod-header a.volver:hover{background:rgba(255,255,255,.27);}
+body.sigsf-embed .mod-header{display:none;}
+
+.mod-wrap{max-width:1180px;margin:0 auto;padding:20px 18px 44px;}
+
+/* ---- Tabs de secciones ---- */
+.mod-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.mod-tabs button{padding:10px 18px;border:1px solid #e2e8f0;background:#fff;border-radius:10px;font-weight:600;font-size:.88rem;color:#64748b;cursor:pointer;}
+.mod-tabs button.on{background:#2563eb;border-color:#2563eb;color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.3);}
+
+/* ---- Tarjetas ---- */
+.card{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 4px 16px rgba(15,23,42,.07);margin-bottom:18px;}
+.card h2{font-size:1.02rem;margin-bottom:3px;display:flex;align-items:center;gap:9px;}
+.card .sub{color:#64748b;font-size:.82rem;margin-bottom:16px;}
+
+/* ---- Indicadores ---- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:18px;}
+.kpi{background:#fff;border-radius:13px;padding:16px 18px;box-shadow:0 4px 14px rgba(15,23,42,.06);border-left:4px solid #2563eb;}
+.kpi .l{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.4px;font-weight:600;}
+.kpi .v{font-size:1.5rem;font-weight:700;margin-top:5px;}
+.kpi.verde{border-left-color:#059669;} .kpi.ambar{border-left-color:#d97706;} .kpi.rojo{border-left-color:#dc2626;}
+
+/* ---- Formularios ---- */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px;}
+.f label{display:block;font-size:.76rem;font-weight:600;color:#475569;margin-bottom:5px;}
+.f label .req{color:#dc2626;}
+.f input,.f select,.f textarea{width:100%;padding:10px 12px;border:1px solid #cbd5e1;border-radius:9px;font-size:.89rem;background:#fff;color:#0f172a;font-family:inherit;}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.14);}
+.f input:disabled{background:#f1f5f9;color:#94a3b8;}
+
+.acciones{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.btn{padding:11px 20px;border:none;border-radius:9px;background:#2563eb;color:#fff;font-weight:600;font-size:.88rem;cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.btn:hover{filter:brightness(1.08);}
+.btn:disabled{opacity:.55;cursor:not-allowed;}
+.btn.gris{background:#64748b;} .btn.verde{background:#059669;} .btn.rojo{background:#dc2626;} .btn.ambar{background:#d97706;}
+.btn.linea{background:#fff;color:#2563eb;border:1px solid #bfdbfe;}
+
+.msg{margin-top:12px;font-size:.85rem;min-height:1.15em;line-height:1.5;}
+.msg.ok{color:#059669;} .msg.err{color:#dc2626;}
+
+/* ---- Tablas ---- */
+.tabla-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.buscador{position:relative;flex:1;min-width:200px;max-width:340px;}
+.buscador input{width:100%;padding:10px 12px 10px 36px;border:1px solid #cbd5e1;border-radius:9px;font-size:.87rem;}
+.buscador i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:.85rem;}
+.tabla-scroll{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px;}
+th,td{padding:10px 11px;border-bottom:1px solid #eef2f7;text-align:left;vertical-align:middle;}
+th{background:#f8fafc;color:#64748b;font-weight:600;font-size:.74rem;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;}
+tbody tr:hover{background:#f8fafc;}
+td.num{text-align:right;font-variant-numeric:tabular-nums;}
+.vacio{text-align:center;color:#64748b;padding:26px 10px;}
+.error-fila{color:#dc2626;padding:18px 10px;text-align:center;}
+
+.badge{padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:600;white-space:nowrap;display:inline-block;}
+.b-verde{background:#dcfce7;color:#15803d;} .b-ambar{background:#fef3c7;color:#92400e;}
+.b-rojo{background:#fee2e2;color:#b91c1c;} .b-azul{background:#dbeafe;color:#1d4ed8;} .b-gris{background:#e2e8f0;color:#475569;}
+
+.row-btns{display:flex;gap:6px;justify-content:flex-end;}
+.ibtn{width:32px;height:32px;border:1px solid #e2e8f0;background:#fff;border-radius:8px;cursor:pointer;color:#64748b;font-size:.8rem;}
+.ibtn:hover{background:#f1f5f9;color:#2563eb;border-color:#bfdbfe;}
+.ibtn.danger:hover{color:#dc2626;border-color:#fecaca;background:#fef2f2;}
+.ibtn.ok:hover{color:#059669;border-color:#bbf7d0;background:#f0fdf4;}
+
+.stock-bajo{color:#b91c1c;font-weight:700;}
+
+@media(max-width:620px){
+  .mod-wrap{padding:14px 12px 34px;}
+  .card{padding:16px;}
+}
+
+/* ---- Barra de ficheros: exportar / plantilla / importar ---- */
+.archivos-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:-2px 0 12px;padding:10px 12px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;}
+.archivos-bar .t{font-size:.76rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.4px;margin-right:4px;}
+.archivos-bar .btn{padding:7px 12px;font-size:.8rem;}
+.archivos-bar .sep{width:1px;height:24px;background:#cbd5e1;margin:0 4px;}
+.import-res{margin:0 0 14px;border:1px solid #e2e8f0;border-radius:10px;padding:12px 14px;background:#fff;font-size:.84rem;}
+.import-res .cifras{display:flex;gap:16px;flex-wrap:wrap;margin:6px 0 8px;}
+.import-res .cifras b{font-size:1.1rem;}
+.import-res table{min-width:0;font-size:.8rem;margin-top:6px;}
+.import-res .nota{color:#64748b;font-size:.78rem;margin-top:6px;}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Solicitudes de clientes</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+<style>
+  .sol{border:1px solid #e2e8f0;border-left:5px solid #d97706;border-radius:12px;padding:16px 18px;margin-bottom:12px;animation:aparecer .35s ease both;}
+  .sol.ok{border-left-color:#059669;} .sol.no{border-left-color:#dc2626;}
+  .sol-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;}
+  .sol .quien{font-weight:700;font-size:.97rem;}
+  .sol .doc{color:#64748b;font-size:.79rem;margin-top:2px;}
+  .sol .detalle{display:flex;flex-wrap:wrap;gap:18px;margin-top:12px;padding-top:12px;border-top:1px dashed #e2e8f0;}
+  .sol .dato .l{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
+  .sol .dato .v{font-size:.92rem;font-weight:600;margin-top:2px;}
+  .sol .btns{display:flex;gap:8px;}
+  .tipo{padding:4px 11px;border-radius:999px;font-size:.73rem;font-weight:700;}
+  .t-cambio{background:#dbeafe;color:#1d4ed8;} .t-prestamo{background:#dcfce7;color:#15803d;} .t-empeno{background:#fef3c7;color:#92400e;}
+  @keyframes aparecer{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .filtros button{padding:9px 16px;border:1px solid #e2e8f0;background:#fff;border-radius:9px;font-weight:600;font-size:.85rem;color:#64748b;cursor:pointer;}
+  .filtros button.on{background:#2563eb;border-color:#2563eb;color:#fff;}
+</style>
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-inbox"></i></div>
+    <div>
+      <h1>Solicitudes de clientes</h1>
+      <p>Lo que los clientes piden desde el Portal · aprueba o rechaza y da permisos</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div class="kpis" id="kpis"></div>
+
+  <div class="mod-tabs">
+    <button data-pane="sol" class="on"><i class="fa-solid fa-inbox"></i> Solicitudes</button>
+    <button data-pane="cue"><i class="fa-solid fa-user-shield"></i> Cuentas de clientes</button>
+  </div>
+
+  <!-- SOLICITUDES -->
+  <div id="paneSol">
+    <div class="card">
+      <div class="tabla-top">
+        <h2 style="margin:0;"><i class="fa-solid fa-clipboard-check" style="color:#2563eb;"></i> Bandeja de solicitudes</h2>
+        <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscar" placeholder="Buscar cliente, documento…"></div>
+      </div>
+      <div class="filtros">
+        <button data-f="PENDIENTE" class="on">Pendientes</button>
+        <button data-f="COMPLETADA">Aprobadas</button>
+        <button data-f="ANULADA">Rechazadas</button>
+        <button data-f="">Todas</button>
+      </div>
+      <div class="msg" id="msg"></div>
+      <div id="lista"><p class="vacio">Cargando…</p></div>
+    </div>
+  </div>
+
+  <!-- CUENTAS -->
+  <div id="paneCue" style="display:none;">
+    <div class="card">
+      <div class="tabla-top">
+        <h2 style="margin:0;"><i class="fa-solid fa-user-shield" style="color:#2563eb;"></i> Permisos de acceso al portal</h2>
+        <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarC" placeholder="Buscar…"></div>
+      </div>
+      <div class="sub">Activa o bloquea la cuenta con la que cada cliente entra al Portal del Cliente.</div>
+      <div class="msg" id="msgC"></div>
+      <div class="tabla-scroll">
+        <table>
+          <thead><tr><th>N°</th><th>Cliente</th><th>Documento</th><th>Teléfono</th><th>Estado</th><th style="text-align:right;">Acceso</th></tr></thead>
+          <tbody id="tablaC"><tr><td class="vacio" colspan="6">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+(function(){
+  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
+  var $=function(i){return document.getElementById(i);};
+  var todas=[], clientes=[], filtro='PENDIENTE';
+
+  document.querySelectorAll('[data-pane]').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('[data-pane]').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      var p=b.getAttribute('data-pane');
+      $('paneSol').style.display = p==='sol'?'block':'none';
+      $('paneCue').style.display = p==='cue'?'block':'none';
+    });
+  });
+  document.querySelectorAll('[data-f]').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('[data-f]').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); filtro=b.getAttribute('data-f'); pintar();
+    });
+  });
+
+  function claseTipo(t){
+    t=(t||'').toUpperCase();
+    if(t.indexOf('PRESTAMO')>=0) return 't-prestamo';
+    if(t.indexOf('EMPENO')>=0) return 't-empeno';
+    return 't-cambio';
+  }
+  function dato(l,v){ return '<div class="dato"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>'; }
+
+  function pintar(){
+    var cont=$('lista');
+    var q=($('buscar').value||'').toLowerCase();
+    var lista=todas.filter(function(s){
+      if(filtro && (s.estado||'')!==filtro) return false;
+      if(q && JSON.stringify(s).toLowerCase().indexOf(q)===-1) return false;
+      return true;
+    });
+    if(!lista.length){
+      cont.innerHTML='<p class="vacio">No hay solicitudes'+(filtro?' en este estado':'')+'.</p>';
+      return;
+    }
+    cont.innerHTML='';
+    lista.forEach(function(s){
+      var pend=(s.estado||'')==='PENDIENTE';
+      var d=document.createElement('div');
+      d.className='sol '+(pend?'':((s.estado==='COMPLETADA')?'ok':'no'));
+      var detalle = dato('Monto', SIGSF.money(s.monto));
+      if((s.tipoOperacion||'').toUpperCase().indexOf('PRESTAMO')>=0){
+        detalle += dato('Cuota mensual', SIGSF.money(s.cuotaMensual)) + dato('Plazo', (s.plazoMeses||0)+' meses');
+      } else if((s.tipoOperacion||'').toUpperCase().indexOf('EMPENO')>=0){
+        detalle += dato('Artículo', SIGSF.escapar(s.articulo||'—')) + dato('Plazo', (s.plazoDias||0)+' días');
+      } else {
+        detalle += dato('Recibe', SIGSF.money(s.totalRecibir)) + dato('Moneda', SIGSF.escapar((s.monedaOrigen||'')+' → '+(s.monedaDestino||'')));
+      }
+      detalle += dato('Fecha', SIGSF.escapar(SIGSF.fechaCorta(s.fechaOperacion)));
+      if(s.telefono) detalle += dato('Teléfono', SIGSF.escapar(s.telefono));
+
+      d.innerHTML =
+        '<div class="sol-top"><div>'
+        + '<span class="tipo '+claseTipo(s.tipoOperacion)+'">'+SIGSF.escapar(s.tipoOperacion||'')+'</span> '
+        + '<span style="color:#94a3b8;font-size:.78rem;">Solicitud N° '+s.idOperacion+'</span>'
+        + '<div class="quien" style="margin-top:6px;">'+SIGSF.escapar(s.cliente||'(sin nombre)')+'</div>'
+        + '<div class="doc">Doc. '+SIGSF.escapar(s.documento||'—')+(s.correo?(' · '+SIGSF.escapar(s.correo)):'')+'</div>'
+        + '</div><div class="btns">'
+        + (pend
+            ? '<button class="btn verde" data-ok="'+s.idOperacion+'"><i class="fa-solid fa-check"></i> Aprobar</button>'
+              +'<button class="btn rojo" data-no="'+s.idOperacion+'"><i class="fa-solid fa-xmark"></i> Rechazar</button>'
+            : SIGSF.badge(s.estado))
+        + '</div></div><div class="detalle">'+detalle+'</div>';
+      cont.appendChild(d);
+    });
+
+    cont.querySelectorAll('[data-ok]').forEach(function(b){
+      b.addEventListener('click', function(){ resolver(b.getAttribute('data-ok'), 'aprobar', b); });
+    });
+    cont.querySelectorAll('[data-no]').forEach(function(b){
+      b.addEventListener('click', function(){
+        if(confirm('¿Rechazar esta solicitud?')) resolver(b.getAttribute('data-no'), 'rechazar', b);
+      });
+    });
+  }
+
+  async function resolver(id, accion, btn){
+    btn.disabled=true;
+    var m=$('msg');
+    try{
+      await API.put('/solicitudes/'+id+'/'+accion, {});
+      m.className='msg ok';
+      m.textContent = accion==='aprobar' ? '✔ Solicitud N° '+id+' aprobada. El trámite quedó activo.' : 'Solicitud N° '+id+' rechazada.';
+      await cargar();
+    }catch(e){ m.className='msg err'; m.textContent='No se pudo: '+e.message; btn.disabled=false; }
+  }
+
+  function kpis(){
+    var p=todas.filter(function(s){return s.estado==='PENDIENTE';}).length;
+    var a=todas.filter(function(s){return s.estado==='COMPLETADA';}).length;
+    var monto=todas.filter(function(s){return s.estado==='PENDIENTE';}).reduce(function(x,s){return x+Number(s.monto||0);},0);
+    $('kpis').innerHTML = SIGSF.kpi('Por atender', SIGSF.num(p), p?'ambar':'verde')
+                        + SIGSF.kpi('Aprobadas', SIGSF.num(a), 'verde')
+                        + SIGSF.kpi('Monto pendiente', SIGSF.money(monto))
+                        + SIGSF.kpi('Cuentas de clientes', SIGSF.num(clientes.length));
+  }
+
+  async function cargar(){
+    try{ todas = await API.get('/solicitudes'); pintar(); kpis(); }
+    catch(e){ $('lista').innerHTML='<p class="error-fila">No se pudo cargar: '+SIGSF.escapar(e.message)+'</p>'; }
+  }
+
+  function pintarClientes(){
+    var tb=$('tablaC'); var q=($('buscarC').value||'').toLowerCase();
+    var lista=q?clientes.filter(function(c){return JSON.stringify(c).toLowerCase().indexOf(q)!==-1;}):clientes;
+    tb.innerHTML='';
+    if(!lista.length){ tb.innerHTML='<tr><td class="vacio" colspan="6">Sin clientes.</td></tr>'; return; }
+    lista.forEach(function(c){
+      var activo=(c.estado||'')==='ACTIVO';
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td>'+c.idCliente+'</td>'
+        +'<td>'+SIGSF.escapar(((c.nombres||'')+' '+(c.apellidos||'')).trim())+'</td>'
+        +'<td>'+SIGSF.escapar((c.tipoDocumento||'')+' '+(c.documento||''))+'</td>'
+        +'<td>'+SIGSF.escapar(c.telefono||'—')+'</td>'
+        +'<td>'+SIGSF.badge(c.estado)+'</td>'
+        +'<td style="text-align:right;"><button class="btn '+(activo?'rojo':'verde')+'" style="padding:7px 14px;font-size:.8rem;" data-cli="'+c.idCliente+'" data-est="'+(activo?'INACTIVO':'ACTIVO')+'">'
+        +'<i class="fa-solid '+(activo?'fa-ban':'fa-check')+'"></i> '+(activo?'Bloquear':'Activar')+'</button></td>';
+      tb.appendChild(tr);
+    });
+    tb.querySelectorAll('[data-cli]').forEach(function(b){
+      b.addEventListener('click', async function(){
+        b.disabled=true;
+        try{
+          await API.put('/clientes/'+b.getAttribute('data-cli')+'/estado', {estado:b.getAttribute('data-est')});
+          $('msgC').className='msg ok'; $('msgC').textContent='Permiso actualizado.';
+          await cargarClientes();
+        }catch(e){ $('msgC').className='msg err'; $('msgC').textContent='No se pudo: '+e.message; b.disabled=false; }
+      });
+    });
+  }
+
+  async function cargarClientes(){
+    try{ clientes = await API.get('/clientes'); pintarClientes(); kpis(); }
+    catch(e){ $('tablaC').innerHTML='<tr><td class="error-fila" colspan="6">Error: '+SIGSF.escapar(e.message)+'</td></tr>'; }
+  }
+
+  $('buscar').addEventListener('input', pintar);
+  $('buscarC').addEventListener('input', pintarClientes);
+  cargar(); cargarClientes();
+  setInterval(cargar, 20000);   // se refresca solo cada 20 segundos
+})();
+</script></body></html>

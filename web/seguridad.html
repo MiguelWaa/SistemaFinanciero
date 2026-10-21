@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Seguridad</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-lock"></i></div>
+    <div>
+      <h1>Seguridad</h1>
+      <p>Roles de acceso y estado de las cuentas del sistema</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div id="moduloContenido"></div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+
+SIGSF.modulo({
+  kpis: async function(cont, secs){
+    var r = secs[0].datos || [];
+    cont.innerHTML = SIGSF.kpi('Roles definidos', SIGSF.num(r.length))
+                   + SIGSF.kpi('Contraseñas', 'PBKDF2 + sal', 'verde')
+                   + SIGSF.kpi('Sesión', 'Token · 30 min', 'ambar');
+  },
+  secciones: [
+    {
+      titulo: 'Roles y permisos de acceso', icono: 'fa-shield-halved',
+      descripcion: 'Cada usuario del sistema pertenece a un rol, que define qué puede hacer.',
+      endpoint: '/roles', idCampo: 'idRol',
+      campos: [
+        {k:'nombre', l:'Nombre del rol', req:true, ph:'AUDITOR'},
+        {k:'descripcion', l:'Permisos que otorga', tipo:'textarea', ph:'Consulta de reportes e indicadores'}
+      ],
+      columnas: [
+        {k:'idRol', l:'N°'},
+        {k:'nombre', l:'Rol', badge:true},
+        {k:'descripcion', l:'Permisos que otorga'}
+      ]
+    }
+  ]
+});
+
+
+// ---- Matriz de permisos por rol (RBAC) que aplica el servidor ----
+(async function(){
+  var cont = document.createElement('div');
+  cont.className = 'card';
+  cont.innerHTML = '<h2><i class="fa-solid fa-table-cells" style="color:#2563eb;"></i> Matriz de permisos por rol (aplicada en el servidor)</h2>'
+    + '<div class="sub">L = consultar · LE = consultar y modificar · — = sin acceso. Cada petición a la API se valida con esta matriz '
+    + '(FiltroSeguridad + PoliticaAcceso). Las sesiones expiran por inactividad y la cuenta se bloquea tras 5 intentos fallidos.</div>'
+    + '<div class="tabla-scroll" id="matrizPermisos"><p class="vacio">Cargando…</p></div>';
+  document.querySelector('.mod-wrap').appendChild(cont);
+  try {
+    var r = await API.get('/auditoria/permisos');
+    var roles = ['ADMIN','SUPERVISOR','CAJERO','ANALISTA'];
+    var h = '<table><thead><tr><th>Módulo (API)</th>' + roles.map(function(x){ return '<th>'+x+'</th>'; }).join('') + '</tr></thead><tbody>';
+    Object.keys(r.matriz).forEach(function(m){
+      h += '<tr><td><b>/api/' + SIGSF.escapar(m) + '</b></td>';
+      roles.forEach(function(rol){
+        var v = r.matriz[m][rol];
+        h += '<td>' + (v ? SIGSF.badge(v) : '<span style="color:#94a3b8;">—</span>') + '</td>';
+      });
+      h += '</tr>';
+    });
+    h += '</tbody></table><p class="sub" style="margin-top:10px;">Sesiones activas en este momento: <b>' + r.sesionesActivas
+      + '</b> · Duración de sesión: <b>' + r.minutosSesion + ' min</b></p>';
+    document.getElementById('matrizPermisos').innerHTML = h;
+  } catch (e) {
+    document.getElementById('matrizPermisos').innerHTML = '<p class="error-fila">' + SIGSF.escapar(e.message) + '</p>';
+  }
+})();
+</script>
+</body>
+</html>

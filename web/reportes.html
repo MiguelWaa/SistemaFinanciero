@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Reportes</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+<style>
+  .descargas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
+  .d{border:1px solid #e2e8f0;border-radius:12px;padding:18px;text-align:center;transition:.15s;}
+  .d:hover{border-color:#bfdbfe;box-shadow:0 6px 16px rgba(37,99,235,.12);transform:translateY(-2px);}
+  .d i.big{font-size:1.9rem;color:#059669;margin-bottom:10px;display:block;}
+  .d h4{font-size:.95rem;margin-bottom:4px;}
+  .d p{font-size:.78rem;color:#64748b;margin-bottom:13px;line-height:1.45;}
+</style>
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-chart-line"></i></div>
+    <div>
+      <h1>Reportes</h1>
+      <p>Indicadores en tiempo real y exportación de datos a Excel</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h2><i class="fa-solid fa-file-excel" style="color:#059669;"></i> Exportar a Excel</h2>
+    <div class="sub">Los archivos se descargan con la información actual de la base de datos.</div>
+    <div class="descargas">
+      <div class="d">
+        <i class="fa-solid fa-cart-shopping big"></i>
+        <h4>Ventas</h4>
+        <p>Todas las ventas con cliente, servicio, fecha e importe.</p>
+        <button class="btn verde" data-url="/api/ventas/excel"><i class="fa-solid fa-download"></i> Descargar</button>
+      </div>
+      <div class="d">
+        <i class="fa-solid fa-users big"></i>
+        <h4>Clientes</h4>
+        <p>Padrón completo de clientes con sus datos de contacto.</p>
+        <button class="btn verde" data-url="/api/clientes/excel"><i class="fa-solid fa-download"></i> Descargar</button>
+      </div>
+      <div class="d">
+        <i class="fa-solid fa-right-left big"></i>
+        <h4>Operaciones</h4>
+        <p>Cambios, préstamos y empeños con sus montos y estados.</p>
+        <button class="btn verde" data-url="/api/operaciones/excel"><i class="fa-solid fa-download"></i> Descargar</button>
+      </div>
+      <div class="d">
+        <i class="fa-solid fa-boxes-stacked big"></i>
+        <h4>Almacén</h4>
+        <p>Inventario de productos con stock actual y mínimo.</p>
+        <button class="btn verde" data-url="/api/productos/excel"><i class="fa-solid fa-download"></i> Descargar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tabla-top">
+      <h2 style="margin:0;"><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;"></i> Últimas operaciones</h2>
+      <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscar" placeholder="Buscar…"></div>
+    </div>
+    <div class="tabla-scroll">
+      <table>
+        <thead><tr><th>N°</th><th>Tipo</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
+        <tbody id="tablaOps"><tr><td class="vacio" colspan="5">Cargando…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+(function(){
+  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
+  var ops = [];
+
+  document.querySelectorAll('[data-url]').forEach(function(b){
+    b.addEventListener('click', function(){
+      API.descargar(b.getAttribute('data-url').replace(/^\/api/, '')).catch(function(e){ alert('No se pudo descargar: ' + e.message); });
+    });
+  });
+
+  async function cargarKPIs(){
+    var c = document.getElementById('kpis');
+    try{
+      var d = await API.dashboard();
+      c.innerHTML = SIGSF.kpi('Ingresos del mes', SIGSF.money(d.ingresosDelMes), 'verde')
+                  + SIGSF.kpi('Clientes activos', SIGSF.num(d.clientesActivos))
+                  + SIGSF.kpi('Operaciones hoy', SIGSF.num(d.operacionesHoy), 'ambar')
+                  + SIGSF.kpi('Prestamos colocados', SIGSF.money(d.prestamosColocados), 'verde')
+                  + SIGSF.kpi('Productos con stock bajo', SIGSF.num(d.productosStockBajo), Number(d.productosStockBajo)>0 ? 'rojo' : 'verde')
+                  + SIGSF.kpi('Expedientes pendientes', SIGSF.num(d.expedientesPendientes), 'ambar');
+    }catch(e){
+      c.innerHTML = '<div class="kpi rojo"><div class="l">Indicadores</div><div class="v" style="font-size:.95rem;">No disponibles</div></div>';
+    }
+  }
+
+  function pintar(){
+    var tb = document.getElementById('tablaOps');
+    var q = (document.getElementById('buscar').value||'').toLowerCase();
+    var lista = q ? ops.filter(function(o){ return JSON.stringify(o).toLowerCase().indexOf(q)!==-1; }) : ops;
+    tb.innerHTML = '';
+    if(!lista.length){ tb.innerHTML='<tr><td class="vacio" colspan="5">Sin operaciones registradas.</td></tr>'; return; }
+    lista.slice(0,25).forEach(function(o){
+      var tr=document.createElement('tr');
+      tr.innerHTML='<td>'+o.idOperacion+'</td><td>'+SIGSF.escapar(o.tipoOperacion||'')+'</td>'
+                 + '<td class="num">'+SIGSF.money(o.monto)+'</td><td>'+SIGSF.badge(o.estado)+'</td>'
+                 + '<td>'+SIGSF.escapar(SIGSF.fechaCorta(o.fechaOperacion))+'</td>';
+      tb.appendChild(tr);
+    });
+  }
+
+  async function cargarOps(){
+    try{ ops = await API.get('/operaciones'); pintar(); }
+    catch(e){ document.getElementById('tablaOps').innerHTML='<tr><td class="error-fila" colspan="5">No se pudo cargar: '+SIGSF.escapar(e.message)+'</td></tr>'; }
+  }
+
+  document.getElementById('buscar').addEventListener('input', pintar);
+  cargarKPIs(); cargarOps();
+})();
+</script>
+</body>
+</html>

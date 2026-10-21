@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Operaciones Financieras</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-right-left"></i></div>
+    <div>
+      <h1>Operaciones Financieras</h1>
+      <p>Cambio de moneda, préstamos, empeños y tipos de cambio</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div id="moduloContenido"></div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+
+var TIPOS = [];
+
+SIGSF.modulo({
+  kpis: async function(cont, secs){
+    var ops = secs[0].datos || [];
+    var pend = ops.filter(function(o){ return (o.estado||'')==='PENDIENTE'; }).length;
+    var total = ops.reduce(function(a,o){ return a + Number(o.monto||0); }, 0);
+    cont.innerHTML = SIGSF.kpi('Operaciones', SIGSF.num(ops.length))
+                   + SIGSF.kpi('Pendientes', SIGSF.num(pend), pend ? 'ambar' : 'verde')
+                   + SIGSF.kpi('Monto acumulado', SIGSF.money(total), 'verde')
+                   + SIGSF.kpi('Préstamos', SIGSF.num((secs[2].datos||[]).length), 'ambar');
+  },
+  secciones: [
+    {
+      titulo: 'Registrar cambio de moneda', tab: 'Operaciones', icono: 'fa-right-left',
+      descripcion: 'Elige el tipo de cambio y el monto: el total a recibir se calcula solo.',
+      endpoint: '/operaciones', idCampo: 'idOperacion', sinEditar: true, excel: '/operaciones/excel', archivos: {importar: false},
+      campos: [
+        {k:'idCliente', l:'Cliente', req:true, tipo:'select',
+         lookup:{endpoint:'/clientes', id:'idCliente', texto:function(c){ return ((c.nombres||'')+' '+(c.apellidos||'')).trim()+' ('+(c.documento||'')+')'; }}},
+        {k:'idTipoCambio', l:'Tipo de cambio', req:true, tipo:'select',
+         lookup:{endpoint:'/tipos-cambio', id:'idTipoCambio', texto:function(t){ return t.monedaOrigen+' → '+t.monedaDestino+'  (venta '+t.venta+')'; }}},
+        {k:'monto', l:'Monto a cambiar', req:true, tipo:'money', ph:'100.00'},
+        {k:'estado', l:'Estado', tipo:'select', opciones:['COMPLETADA','PENDIENTE','ANULADA']}
+      ],
+      antesDeGuardar: function(d, sec){
+        var lista = sec.lookups['idTipoCambio'] || [];
+        var tc = lista.filter(function(t){ return String(t.idTipoCambio)===String(d.idTipoCambio); })[0];
+        if(tc){
+          d.tipoOperacion='CAMBIO'; d.monedaOrigen=tc.monedaOrigen; d.monedaDestino=tc.monedaDestino;
+          d.tipoCambio=Number(tc.venta);
+        }
+      },
+      columnas: [
+        {k:'idOperacion', l:'N°'},
+        {k:'idCliente', l:'Cliente', lookup:'idCliente'},
+        {k:'tipoOperacion', l:'Tipo', badge:true},
+        {k:'monto', l:'Monto', money:true},
+        {k:'totalRecibir', l:'Total a recibir', money:true},
+        {k:'estado', l:'Estado', badge:true},
+        {k:'fechaOperacion', l:'Fecha', fecha:true}
+      ],
+      acciones: [
+        {icono:'fa-check', titulo:'Aprobar / completar', clase:'ok', exito:'Operación aprobada.',
+         visible:function(f){ return (f.estado||'')==='PENDIENTE'; },
+         ejecutar:function(f){ return API.put('/operaciones/'+f.idOperacion+'/estado',{estado:'COMPLETADA'}); }},
+        {icono:'fa-xmark', titulo:'Rechazar / anular', clase:'danger', exito:'Operación anulada.',
+         confirmar:'¿Anular esta operación?',
+         visible:function(f){ return (f.estado||'')!=='ANULADA'; },
+         ejecutar:function(f){ return API.put('/operaciones/'+f.idOperacion+'/estado',{estado:'ANULADA'}); }}
+      ]
+    },
+    {
+      titulo: 'Tipos de cambio', tab: 'Tipos de cambio', icono: 'fa-coins',
+      descripcion: 'Cotizaciones vigentes de compra y venta.',
+      endpoint: '/tipos-cambio', idCampo: 'idTipoCambio', archivos: {importar: false},
+      campos: [
+        {k:'monedaOrigen', l:'Moneda origen', req:true, tipo:'select', opciones:['USD','EUR','PEN']},
+        {k:'monedaDestino', l:'Moneda destino', req:true, tipo:'select', opciones:['PEN','USD','EUR']},
+        {k:'compra', l:'Compra', req:true, tipo:'money', ph:'3.7200'},
+        {k:'venta', l:'Venta', req:true, tipo:'money', ph:'3.7800'},
+        {k:'fechaInicio', l:'Vigente desde', tipo:'date'},
+        {k:'estado', l:'Estado', tipo:'select', opciones:['ACTIVO','INACTIVO']}
+      ],
+      columnas: [
+        {k:'idTipoCambio', l:'N°'},
+        {k:'monedaOrigen', l:'Par', render:function(f){ return SIGSF.escapar(f.monedaOrigen+' → '+f.monedaDestino); }},
+        {k:'compra', l:'Compra', num:true},
+        {k:'venta', l:'Venta', num:true},
+        {k:'fechaInicio', l:'Desde'},
+        {k:'estado', l:'Estado', badge:true}
+      ]
+    },
+    {
+      titulo: 'Registrar préstamo', tab: 'Préstamos', icono: 'fa-hand-holding-dollar',
+      descripcion: 'La cuota mensual y la fecha de vencimiento se calculan automáticamente.',
+      endpoint: '/prestamos', idCampo: 'idPrestamo', sinEditar: true, archivos: {importar: false},
+      campos: [
+        {k:'idOperacion', l:'Operación asociada', tipo:'select',
+         lookup:{endpoint:'/operaciones', id:'idOperacion', texto:function(o){ return 'N° '+o.idOperacion+' · '+(o.tipoOperacion||'')+' · S/ '+o.monto; }}},
+        {k:'montoPrestamo', l:'Monto del préstamo', req:true, tipo:'money', ph:'5000.00'},
+        {k:'tasaInteres', l:'Tasa de interés (%)', req:true, tipo:'money', ph:'15'},
+        {k:'plazoMeses', l:'Plazo (meses)', req:true, tipo:'entero', ph:'12'},
+        {k:'fechaInicio', l:'Fecha de inicio', tipo:'date'},
+        {k:'estado', l:'Estado', tipo:'select', opciones:['ACTIVO','PENDIENTE','CANCELADO']}
+      ],
+      columnas: [
+        {k:'idPrestamo', l:'N°'},
+        {k:'montoPrestamo', l:'Monto', money:true},
+        {k:'tasaInteres', l:'Tasa %', num:true},
+        {k:'plazoMeses', l:'Plazo', num:true},
+        {k:'cuotaMensual', l:'Cuota mensual', money:true},
+        {k:'saldoPendiente', l:'Saldo', money:true},
+        {k:'fechaVencimiento', l:'Vence'},
+        {k:'estado', l:'Estado', badge:true}
+      ]
+    },
+    {
+      titulo: 'Registrar empeño', tab: 'Empeños', icono: 'fa-gem',
+      descripcion: 'Préstamo con un artículo en garantía.',
+      endpoint: '/empenos', idCampo: 'idEmpeno', sinEditar: true, archivos: {importar: false},
+      campos: [
+        {k:'idOperacion', l:'Operación asociada', tipo:'select',
+         lookup:{endpoint:'/operaciones', id:'idOperacion', texto:function(o){ return 'N° '+o.idOperacion+' · '+(o.tipoOperacion||''); }}},
+        {k:'montoPrestamo', l:'Monto prestado', req:true, tipo:'money', ph:'800.00'},
+        {k:'tasaInteres', l:'Tasa de interés (%)', req:true, tipo:'money', ph:'10'},
+        {k:'plazoDias', l:'Plazo (días)', req:true, tipo:'entero', ph:'30'},
+        {k:'fechaEmpeno', l:'Fecha de empeño', tipo:'date'},
+        {k:'estado', l:'Estado', tipo:'select', opciones:['ACTIVO','PENDIENTE','RECUPERADO','VENCIDO']}
+      ],
+      columnas: [
+        {k:'idEmpeno', l:'N°'},
+        {k:'montoPrestamo', l:'Monto', money:true},
+        {k:'tasaInteres', l:'Tasa %', num:true},
+        {k:'plazoDias', l:'Días', num:true},
+        {k:'fechaVencimiento', l:'Vence'},
+        {k:'saldoPendiente', l:'Saldo', money:true},
+        {k:'estado', l:'Estado', badge:true}
+      ]
+    }
+  ]
+});
+
+</script>
+</body>
+</html>

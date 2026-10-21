@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ============================================================================
+  SIGSF · Configuración de registro (Logback 1.5 + SLF4J 2.0)
+  ============================================================================
+  NetBeans copia este archivo de src/ a build/classes/, así que queda en el
+  classpath y Logback lo carga solo al arrancar ServerMain.
+
+  Archivos que se generan (carpeta logs/, junto a db.properties):
+    sigsf.log            todo lo de la aplicación (INFO o superior)
+    sigsf-acceso.log     una línea por petición a la API: método, ruta, HTTP, ms
+    sigsf-seguridad.log  login fallido, acceso denegado, respaldos, import/export
+    sigsf-errores.log    solo WARN y ERROR, con la traza completa
+    areas/<AREA>.log     un archivo por área del negocio (MARKETING, VENTAS,
+                         LOGISTICA, ALMACEN, PRODUCCION, OPERACIONES,
+                         DIRECCION_GERENCIA, CLIENTES, SEGURIDAD, SISTEMA)
+
+  Rotación: diaria y por tamaño (10 MB), comprimida en .gz; se guardan 30 días
+  (seguridad: 90 días) con un tope de espacio total.
+
+  Seguridad del registro:
+    - %replace quita saltos de línea del mensaje: un usuario no puede
+      "inventar" líneas falsas en el log (log injection / CWE-117).
+    - El código nunca registra contraseñas, tokens ni el cuerpo de las
+      peticiones; solo usuario, rol, IP, recurso y código HTTP.
+    - scan="true": se puede subir el nivel (p. ej. DEBUG para dao) sin
+      reiniciar el servidor; Logback relee el archivo cada 60 s.
+
+  Carpeta de logs: -Dsigsf.log.dir=D:/sigsf/logs (por defecto "logs").
+  ============================================================================
+-->
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <property name="LOG_DIR" value="${sigsf.log.dir:-logs}"/>
+
+    <!-- fecha nivel [hilo] [área] [usuario@ip] [id petición] clase - mensaje -->
+    <property name="PATRON"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n"/>
+    <property name="PATRON_CONSOLA"
+              value="%d{HH:mm:ss} %-5level [%X{area:-SISTEMA}] %logger{20} - %replace(%msg){'[\r\n]+', ' | '}%n"/>
+
+    <!-- ===================== Consola (NetBeans / terminal) ===================== -->
+    <appender name="CONSOLA" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${PATRON_CONSOLA}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ===================== Log general de la aplicación ===================== -->
+    <appender name="ARCHIVO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/sigsf.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/historial/sigsf.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${PATRON}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Escritura asíncrona: el hilo de la petición no espera al disco -->
+    <appender name="ARCHIVO_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>1024</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="ARCHIVO"/>
+    </appender>
+
+    <!-- ===================== Solo advertencias y errores ===================== -->
+    <appender name="ERRORES" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/sigsf-errores.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>500MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${PATRON}%ex</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ===================== Acceso a la API (una línea por petición) ===================== -->
+    <appender name="ACCESO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/sigsf-acceso.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxFileSize>20MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${PATRON}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ACCESO_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>2048</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="ACCESO"/>
+    </appender>
+
+    <!-- ===================== Eventos de seguridad (se guardan 90 días) ===================== -->
+    <appender name="SEGURIDAD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/sigsf-seguridad.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${PATRON}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ===================== Un archivo por área del negocio (MDC "area") ===================== -->
+    <appender name="AREAS" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>area</key>
+            <defaultValue>SISTEMA</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="AREA-${area}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${LOG_DIR}/areas/${area}.log</file>
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <fileNamePattern>${LOG_DIR}/areas/historial/${area}.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                    <maxHistory>30</maxHistory>
+                </rollingPolicy>
+                <encoder>
+                    <pattern>${PATRON}</pattern>
+                    <charset>UTF-8</charset>
+                </encoder>
+            </appender>
+        </sift>
+    </appender>
+
+    <!-- ===================== Loggers ===================== -->
+
+    <!-- Acceso: solo a su archivo y al de su área (no ensucia la consola) -->
+    <logger name="SIGSF.ACCESO" level="INFO" additivity="false">
+        <appender-ref ref="ACCESO_ASYNC"/>
+        <appender-ref ref="AREAS"/>
+        <appender-ref ref="ERRORES"/>
+    </logger>
+
+    <!-- Seguridad: archivo propio y además consola/log general (additivity) -->
+    <logger name="SIGSF.SEGURIDAD" level="INFO">
+        <appender-ref ref="SEGURIDAD"/>
+    </logger>
+
+    <!-- Código de SIGSF. Para ver detalle de una capa, cambie su nivel a DEBUG. -->
+    <logger name="com.utp.sistemafinanciero" level="INFO"/>
+    <logger name="com.utp.sistemafinanciero.dao" level="WARN"/>
+
+    <!-- Librerías externas: solo advertencias -->
+    <logger name="org.postgresql" level="WARN"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLA"/>
+        <appender-ref ref="ARCHIVO_ASYNC"/>
+        <appender-ref ref="ERRORES"/>
+        <appender-ref ref="AREAS"/>
+    </root>
+</configuration>

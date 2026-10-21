@@ -1,0 +1,36 @@
+========================================================
+ SIGSF · Base de datos PostgreSQL — pasos en pgAdmin 4
+========================================================
+
+1) Abre pgAdmin 4 y conectate a tu servidor PostgreSQL
+   (usuario por defecto: postgres).
+
+2) Crea la base de datos:
+   - Click derecho en "Databases" > Create > Database...
+   - Name: sistema_financiero
+   - Save.
+
+3) Carga la estructura:
+   - Selecciona la base "sistema_financiero".
+   - Menu Tools > Query Tool.
+   - Abre el archivo  db/schema.sql  (icono de carpeta) y presiona
+     "Execute/Run" (F5). Debe crear 31 tablas.
+
+4) Carga los datos de ejemplo:
+   - En el mismo Query Tool abre  db/datos_ejemplo.sql  y ejecutalo (F5).
+
+5) Ajusta la conexion del backend si hace falta:
+   - Edita el archivo  db.properties  (en la raiz del proyecto) con tu
+     host, puerto, usuario y contrasena de PostgreSQL.
+
+   Valores por defecto:
+     db.host=localhost
+     db.port=5432
+     db.name=sistema_financiero
+     db.user=postgres
+     db.password=123456
+
+6) Usuarios de acceso al sistema (para el login):
+     admin@sigsf.com        / admin123
+     lucia.ramos@sigsf.com  / lucia123
+     jorge.torres@sigsf.com / jorge123

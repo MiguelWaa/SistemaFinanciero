@@ -1,0 +1,194 @@
+================================================================
+  SIGSF · Sistema Integral de Gestion de Servicios Financieros
+  Curso Integrador I Sistemas - Software (UTP)
+
+  INSTRUCCIONES DE INSTALACION
+  (leelo completo antes de empezar, toma unos 10 minutos)
+================================================================
+
+QUE NECESITAS INSTALADO
+-----------------------
+  1) JDK 17 o superior
+  2) PostgreSQL (incluye pgAdmin 4)
+     -> Al instalarlo te pide una CONTRASENA para el usuario "postgres".
+        APUNTALA, la vas a necesitar en el paso 4.
+  3) NetBeans
+
+----------------------------------------------------------------
+PASO 1 · DESCOMPRIMIR
+----------------------------------------------------------------
+  Descomprime el archivo .zip (clic derecho > Extraer todo).
+  Queda una carpeta llamada  SistemaFinanciero
+  Sugerencia: muevela a una ruta corta, por ejemplo  C:\SIGSF\
+
+----------------------------------------------------------------
+PASO 2 · CREAR LA BASE DE DATOS (pgAdmin)
+----------------------------------------------------------------
+  a) Abre pgAdmin 4 y conectate a tu servidor PostgreSQL.
+  b) Clic derecho en "Databases" > Create > Database...
+  c) En el campo Database escribe EXACTAMENTE:
+
+         SistemaFinanciero
+
+     (con S y F mayusculas, sin espacios ni guiones)
+  d) Guardar (Save).
+
+----------------------------------------------------------------
+PASO 3 · CARGAR LAS TABLAS Y LOS DATOS
+----------------------------------------------------------------
+  a) Haz UN CLIC sobre la base  SistemaFinanciero  (que quede marcada).
+  b) Menu  Tools > Query Tool.
+     Verifica que arriba diga "SistemaFinanciero" y no "postgres".
+  c) Abre y ejecuta (tecla F5) los tres archivos, EN ESTE ORDEN,
+     desde la carpeta  db  del proyecto:
+
+         1. db/schema.sql           (crea las 31 tablas)
+         2. db/datos_ejemplo.sql    (carga datos de prueba)
+         3. db/portal_cliente.sql   (habilita el Portal del Cliente)
+         4. db/seguridad.sql        (auditoria, restricciones y rol seguro)
+
+     Para abrir cada archivo usa el icono de carpeta del Query Tool.
+
+----------------------------------------------------------------
+PASO 4 · CONFIGURAR LA CONEXION
+----------------------------------------------------------------
+  Abre con el Bloc de notas el archivo  db.properties
+  (esta en la raiz de la carpeta del proyecto).
+
+  Cambia SOLO esta linea y pon TU contrasena de PostgreSQL:
+
+         db.password=postgres      -> db.password=TU_CONTRASENA
+
+  Si el puerto 8091 te da problemas, puedes cambiar:
+         server.port=8091          -> server.port=8092
+
+  Guarda el archivo.
+
+----------------------------------------------------------------
+PASO 5a · LIBRERIAS DE REGISTRO (SLF4J + LOGBACK) - OBLIGATORIO
+----------------------------------------------------------------
+  El sistema registra su actividad con Logback (carpeta logs/).
+  Haz DOBLE CLIC en:
+
+         scripts\descargar_librerias.bat
+
+  Descarga a la carpeta lib\ estos 3 archivos (necesita internet):
+         slf4j-api-2.0.16.jar
+         logback-core-1.5.12.jar
+         logback-classic-1.5.12.jar
+  Sin ellos el proyecto NO compila. Detalle en lib\LEEME.txt.
+
+----------------------------------------------------------------
+PASO 5 · EL DRIVER DE POSTGRESQL
+----------------------------------------------------------------
+  Revisa si dentro de la carpeta  lib  ya existe  postgresql.jar
+
+  -> SI EXISTE: no hagas nada, pasa al paso 6.
+
+  -> SI NO EXISTE:
+     a) Descargalo de:  https://jdbc.postgresql.org/download/
+        (archivo postgresql-42.x.jar)
+     b) Copialo dentro de la carpeta  lib
+     c) Renombralo exactamente a:  postgresql.jar
+
+----------------------------------------------------------------
+PASO 6 · ABRIR Y EJECUTAR EN NETBEANS
+----------------------------------------------------------------
+  a) Abre NetBeans.
+  b) File > Open Project...
+  c) Busca y selecciona la carpeta  SistemaFinanciero
+     (la que tiene adentro build.xml y la carpeta nbproject;
+      NetBeans la muestra con un icono de taza de cafe)
+  d) Clic en Open Project.
+  e) Presiona F6 (Run).
+
+  En la ventana Output (abajo) debe aparecer:
+
+         Conexion a PostgreSQL correcta.
+         SIGSF - Servidor iniciado
+         Frontend:  http://localhost:8091/
+
+  Si sale "Address already in use", cambia server.port en
+  db.properties por otro numero (8092, 8093...) y ejecuta de nuevo.
+
+----------------------------------------------------------------
+PASO 7 · USAR EL SISTEMA
+----------------------------------------------------------------
+  Abre el navegador en:   http://localhost:8091
+
+  ACCESO DEL PERSONAL (administrador)
+      Correo:      admin@sigsf.com
+      Contrasena:  admin123
+
+      Otros usuarios:
+      lucia.ramos@sigsf.com  / lucia123   (Cajero)
+      jorge.torres@sigsf.com / jorge123   (Analista)
+
+  ACCESO DE CLIENTE (Portal del Cliente)
+      Boton "Soy cliente" en la pantalla de inicio,
+      o directo:  http://localhost:8091/portal.html
+
+      Documento:   70000001
+      Contrasena:  70000001
+      (los clientes antiguos usan su documento como clave inicial;
+       tambien se puede crear una cuenta nueva desde "Crear cuenta")
+
+----------------------------------------------------------------
+PASO 8 · PRUEBAS AUTOMATICAS (TDD)
+----------------------------------------------------------------
+  En NetBeans: clic derecho en "Test Libraries" > Add Library >
+  "JUnit 4.13.2" y "Hamcrest 1.3". Luego Run > Test Project (Alt+F6).
+  Deben salir 77 pruebas correctas. No necesitan PostgreSQL.
+
+----------------------------------------------------------------
+PASO 9 · RESPALDOS
+----------------------------------------------------------------
+  Entre como admin > menu "Respaldos y auditoria" > "Generar respaldo".
+  Los archivos quedan en la carpeta  respaldos  del proyecto.
+  Si pg_dump no esta en C:\Program Files\PostgreSQL\XX\bin, indique su
+  ruta en db.properties (backup.pgdump=...). Restaurar:
+      scripts\restaurar_bd.bat respaldos\archivo.sql
+
+----------------------------------------------------------------
+MODO DEMOSTRACION (sin PostgreSQL)
+----------------------------------------------------------------
+  En db.properties cambie  persistencia=postgresql  por
+  persistencia=memoria  y ejecute. Usa los mismos usuarios de prueba.
+
+================================================================
+PROBLEMAS FRECUENTES
+================================================================
+  "no existe la base de datos ..."
+      -> El nombre en db.properties (db.name) no coincide con el
+         nombre real de la base en pgAdmin. Deben ser identicos.
+
+  "password authentication failed"
+      -> La contrasena de db.properties no es la de PostgreSQL.
+
+  "Address already in use"
+      -> El puerto esta ocupado. Cambia server.port en db.properties.
+
+  "No suitable driver" / no conecta
+      -> Falta el postgresql.jar en la carpeta lib (paso 5).
+
+  El login dice "Usuario o contrasena incorrectos"
+      -> No se ejecuto datos_ejemplo.sql (paso 3).
+
+  "Sesion no valida o expirada" al abrir un modulo
+      -> La sesion dura 30 min sin actividad. Vuelva a iniciar sesion.
+
+  "Cuenta bloqueada temporalmente"
+      -> Hubo 5 intentos fallidos. Espere 5 minutos.
+
+  "Su rol (...) no tiene permiso..."
+      -> Es correcto: ese rol no puede usar ese modulo. Entre como admin.
+
+  El Portal del Cliente da error de "cliente_acceso"
+      -> No se ejecuto portal_cliente.sql (paso 3).
+
+================================================================
+  Integrantes: Miguel Angel Machaca Machaca
+               Ricardo Gabriel Cervantes Tejada
+               Cesar Huaripaucar Huaman
+  Docente:     Rene Alonso Nieto Valencia
+================================================================

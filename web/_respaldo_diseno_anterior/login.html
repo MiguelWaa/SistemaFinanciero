@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión · SIGSF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { min-height: 100vh; display: flex; background: #0b1f46; color: #1e293b; }
+
+        /* Left brand panel */
+        .brand-panel {
+            flex: 1; position: relative; color: #fff; padding: 56px 60px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            background: radial-gradient(900px 500px at 90% 0%, #1e3a8a 0%, transparent 60%),
+                        radial-gradient(700px 500px at 0% 100%, #0ea5e9 0%, transparent 55%),
+                        #0b1f46;
+            overflow: hidden;
+        }
+        .brand-panel::after {
+            content: ""; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+            background-size: 40px 40px; opacity: .5;
+        }
+        .brand-panel > * { position: relative; z-index: 1; }
+        .bp-logo { display: flex; align-items: center; gap: 12px; }
+        .bp-logo .mark {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+            box-shadow: 0 8px 24px rgba(37,99,235,.4);
+        }
+        .bp-logo h1 { font-size: 1.2rem; }
+        .bp-logo span { font-size: .72rem; color: #94a3b8; }
+        .bp-mid h2 { font-size: 2.3rem; line-height: 1.15; font-weight: 800; margin-bottom: 16px; }
+        .bp-mid h2 .grad { background: linear-gradient(90deg,#60a5fa,#34d399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .bp-mid p { color: #cbd5e1; max-width: 420px; line-height: 1.6; }
+        .bp-features { display: flex; flex-direction: column; gap: 14px; margin-top: 26px; }
+        .bp-feat { display: flex; align-items: center; gap: 12px; color: #e2e8f0; font-size: .92rem; }
+        .bp-feat i { width: 34px; height: 34px; border-radius: 9px; background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center; color: #60a5fa; }
+        .bp-foot { font-size: .78rem; color: #64748b; }
+
+        /* Right form panel */
+        .form-panel {
+            width: 480px; background: #f4f6f9; display: flex; align-items: center; justify-content: center;
+            padding: 40px;
+        }
+        .login-card {
+            width: 100%; max-width: 380px; background: #fff; border-radius: 20px;
+            padding: 38px 34px; box-shadow: 0 20px 60px rgba(0,0,0,.12);
+        }
+        .login-card .head { text-align: center; margin-bottom: 28px; }
+        .login-card .head .mini-mark {
+            width: 54px; height: 54px; margin: 0 auto 16px; border-radius: 14px;
+            background: linear-gradient(135deg, #0b1f46, #2563eb); color: #fff;
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+        }
+        .login-card h3 { font-size: 1.4rem; color: #0b1f46; font-weight: 700; }
+        .login-card .head p { color: #64748b; font-size: .88rem; margin-top: 4px; }
+
+        .field { margin-bottom: 18px; }
+        .field label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: 7px; color: #334155; }
+        .input-wrap { position: relative; }
+        .input-wrap i.lead { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: .9rem; }
+        .input-wrap input {
+            width: 100%; padding: 12px 44px; border: 1px solid #e2e8f0; border-radius: 11px;
+            font-size: .92rem; outline: none; transition: border .2s, box-shadow .2s;
+        }
+        .input-wrap input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
+        .input-wrap .toggle-eye {
+            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: #94a3b8; cursor: pointer; font-size: .9rem;
+        }
+        .row-between { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; font-size: .82rem; }
+        .row-between label { display: flex; align-items: center; gap: 7px; color: #475569; cursor: pointer; }
+        .row-between a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .row-between a:hover { text-decoration: underline; }
+
+        .btn-login {
+            width: 100%; padding: 13px; border: none; border-radius: 11px; cursor: pointer;
+            background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; font-weight: 700; font-size: .95rem;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 10px 26px rgba(37,99,235,.35); transition: transform .15s, filter .2s;
+        }
+        .btn-login:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+        .error-msg {
+            display: none; background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;
+            padding: 10px 12px; border-radius: 10px; font-size: .82rem; margin-bottom: 16px;
+            align-items: center; gap: 8px;
+        }
+        .demo-note {
+            margin-top: 20px; text-align: center; font-size: .78rem; color: #64748b;
+            background: #f1f5f9; border: 1px dashed #cbd5e1; padding: 10px; border-radius: 10px;
+        }
+        .demo-note b { color: #334155; }
+        .back-home { display: block; text-align: center; margin-top: 18px; font-size: .82rem; color: #64748b; text-decoration: none; }
+        .back-home:hover { color: #2563eb; }
+
+        @media (max-width: 900px) {
+            .brand-panel { display: none; }
+            .form-panel { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <section class="brand-panel">
+        <div class="bp-logo">
+            <div class="mark"><i class="fa-solid fa-landmark"></i></div>
+            <div>
+                <h1>SIGSF</h1>
+                <span>Gestión de Servicios Financieros</span>
+            </div>
+        </div>
+        <div class="bp-mid">
+            <h2>Bienvenido de<br><span class="grad">nuevo al sistema</span></h2>
+            <p>Accede a tu panel empresarial para gestionar marketing, logística, operaciones, clientes y dirección desde un solo lugar.</p>
+            <div class="bp-features">
+                <div class="bp-feat"><i class="fa-solid fa-shield-halved"></i> Acceso seguro con control de roles</div>
+                <div class="bp-feat"><i class="fa-solid fa-gauge-high"></i> Indicadores y reportes en tiempo real</div>
+                <div class="bp-feat"><i class="fa-solid fa-layer-group"></i> 5 módulos integrados</div>
+            </div>
+        </div>
+        <div class="bp-foot">&copy; 2026 SIGSF · Todos los derechos reservados.</div>
+    </section>
+
+    <section class="form-panel">
+        <div class="login-card">
+            <div class="head">
+                <div class="mini-mark"><i class="fa-solid fa-user-lock"></i></div>
+                <h3>Iniciar sesión</h3>
+                <p>Ingresa tus credenciales para continuar</p>
+            </div>
+
+            <div class="error-msg" id="errorMsg"><i class="fa-solid fa-circle-exclamation"></i> <span>Completa todos los campos para continuar.</span></div>
+
+            <form id="loginForm" novalidate>
+                <div class="field">
+                    <label for="user">Usuario o correo</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user lead"></i>
+                        <input type="text" id="user" placeholder="admin@sigsf.com" autocomplete="username">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="pass">Contraseña</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock lead"></i>
+                        <input type="password" id="pass" placeholder="••••••••" autocomplete="current-password">
+                        <button type="button" class="toggle-eye" id="toggleEye" aria-label="Mostrar contraseña"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                </div>
+                <div class="row-between">
+                    <label><input type="checkbox" id="remember"> Recordarme</label>
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="btn-login">Ingresar <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+            </form>
+
+            <div class="demo-note">Demo: usa <b>cualquier usuario y contraseña</b> para acceder al panel.</div>
+            <a href="portal.html" style="display:block;text-align:center;margin-bottom:10px;color:#2563eb;font-weight:600;text-decoration:none;font-size:.88rem;"><i class="fa-solid fa-user"></i> ¿Eres cliente? Ingresa al Portal del Cliente</a>
+            <a href="welcome.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
+        </div>
+    </section>
+
+    <script src="api.js"></script>
+    <script>
+        const form = document.getElementById('loginForm');
+        const err = document.getElementById('errorMsg');
+        const eye = document.getElementById('toggleEye');
+        const pass = document.getElementById('pass');
+
+        eye.addEventListener('click', () => {
+            const isPwd = pass.type === 'password';
+            pass.type = isPwd ? 'text' : 'password';
+            eye.innerHTML = isPwd ? '<i class="fa-solid fa-eye-slash"></i>' : '<i class="fa-solid fa-eye"></i>';
+        });
+
+        function mostrarError(msg) {
+            const span = err.querySelector('span');
+            if (span) span.textContent = msg;
+            err.style.display = 'flex';
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const u = document.getElementById('user').value.trim();
+            const p = pass.value.trim();
+            if (!u || !p) {
+                mostrarError('Completa todos los campos para continuar.');
+                return;
+            }
+            err.style.display = 'none';
+            const btn = form.querySelector('.btn-login');
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = 'Ingresando… <i class="fa-solid fa-spinner fa-spin"></i>';
+            try {
+                // Autenticación real contra el backend (tabla usuario en PostgreSQL).
+                const usuario = await API.login(u, p);
+                try {
+                    sessionStorage.setItem('sigsf_user', usuario.nombre || u);
+                    sessionStorage.setItem('sigsf_usuario', JSON.stringify(usuario));
+                } catch (_) {}
+                window.location.href = 'index.html';
+            } catch (ex) {
+                btn.disabled = false;
+                btn.innerHTML = original;
+                mostrarError(ex.message || 'No se pudo iniciar sesión.');
+            }
+        });
+    </script>
+</body>
+</html>

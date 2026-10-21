@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Control de Almacén</title>
+
+    <link rel="stylesheet" href="almacen.css">
+
+    <!-- ICONOS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="sistema">
+
+    <!-- =====================================================
+         BARRA LATERAL
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-building-columns"></i>
+
+            <div>
+                <h2>SISTEMA INTEGRAL</h2>
+                <h2>GESTIÓN FINANCIERA</h2>
+            </div>
+
+        </div>
+
+
+        <div class="menu-titulo">
+            MENÚ
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="#">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-users"></i>
+                Clientes
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-bullhorn"></i>
+                Marketing
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Ventas
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-gem"></i>
+                Casa de Empeño
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                Cambio de Moneda
+            </a>
+
+            <a href="#" class="activo">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                Almacén
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-file-lines"></i>
+                Reportes
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Configuración
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-truck-fast"></i>
+                Logística
+            </a>
+
+        </nav>
+
+
+        <div class="cerrar">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Cerrar sesión
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CONTENIDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="contenido">
+
+
+        <!-- CABECERA -->
+
+        <header class="cabecera">
+
+            <div class="titulo">
+
+                <div class="icono-titulo">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </div>
+
+                <div>
+
+                    <h1>CONTROL DE ALMACÉN</h1>
+
+                    <p>
+                        Administración y control del inventario
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="usuario">
+
+                <div class="notificacion">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span>3</span>
+
+                </div>
+
+
+                <div class="usuario-info">
+
+                    <div class="usuario-icono">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>Administrador</strong>
+
+                        <small>Control de Almacén</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             BUSCADOR
+        ====================================================== -->
+
+        <section class="busqueda">
+
+            <div class="busqueda-icono">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <div class="busqueda-texto">
+                <label>Buscar producto / bien</label>
+
+                <input
+                    type="text"
+                    placeholder="Código, nombre o descripción..."
+                >
+            </div>
+
+            <button class="btn-buscar">
+                <i class="fa-solid fa-search"></i>
+                Buscar
+            </button>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             INDICADORES
+        ====================================================== -->
+
+        <section class="indicadores">
+
+
+            <div class="indicador">
+
+                <div class="indicador-icono entrada">
+                    <i class="fa-solid fa-arrow-down"></i>
+                </div>
+
+                <div>
+
+                    <span>ENTRADAS</span>
+
+                    <strong>125</strong>
+
+                    <small>
+                        Este mes
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="indicador">
+
+                <div class="indicador-icono salida">
+                    <i class="fa-solid fa-arrow-up"></i>
+                </div>
+
+                <div>
+
+                    <span>SALIDAS</span>
+
+                    <strong>48</strong>
+
+                    <small>
+                        Este mes
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="indicador">
+
+                <div class="indicador-icono stock">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                <div>
+
+                    <span>STOCK TOTAL</span>
+
+                    <strong>860</strong>
+
+                    <small>
+                        Unidades disponibles
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="indicador">
+
+                <div class="indicador-icono bajo">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <div>
+
+                    <span>STOCK BAJO</span>
+
+                    <strong>03</strong>
+
+                    <small>
+                        Productos en alerta
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CONTROL DE MOVIMIENTOS
+        ====================================================== -->
+
+        <section class="panel">
+
+            <div class="panel-titulo">
+
+                <div>
+
+                    <h2>
+                        <i class="fa-solid fa-right-left"></i>
+                        CONTROL DE MOVIMIENTOS
+                    </h2>
+
+                    <p>
+                        Registre entradas y salidas del almacén
+                    </p>
+
+                </div>
+
+                <span class="estado">
+                    <i class="fa-solid fa-circle"></i>
+                    Almacén activo
+                </span>
+
+            </div>
+
+
+
+            <!-- BOTONES -->
+
+            <div class="botones-movimiento">
+
+                <button class="btn-entrada">
+
+                    <i class="fa-solid fa-arrow-down"></i>
+
+                    REGISTRAR ENTRADA
+
+                </button>
+
+
+                <button class="btn-salida">
+
+                    <i class="fa-solid fa-arrow-up"></i>
+
+                    REGISTRAR SALIDA
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FORMULARIO -->
+
+            <div class="formulario">
+
+
+                <div class="campo">
+
+                    <label>
+                        <i class="fa-solid fa-box"></i>
+                        Producto
+                    </label>
+
+                    <select>
+
+                        <option>
+                            Laptop (B001)
+                        </option>
+
+                        <option>
+                            Celular (B002)
+                        </option>
+
+                        <option>
+                            Garantía (B003)
+                        </option>
+
+                        <option>
+                            Audífonos (B004)
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        <i class="fa-solid fa-cubes"></i>
+                        Cantidad
+                    </label>
+
+                    <input
+                        type="number"
+                        value="15"
+                        min="1"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        <i class="fa-solid fa-truck"></i>
+                        Proveedor
+                    </label>
+
+                    <select>
+
+                        <option>
+                            TechImport S.A.C.
+                        </option>
+
+                        <option>
+                            Distribuidora Lima
+                        </option>
+
+                        <option>
+                            Comercial Andina
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        <i class="fa-solid fa-location-dot"></i>
+                        Ubicación
+                    </label>
+
+                    <select>
+
+                        <option>
+                            Almacén principal
+                        </option>
+
+                        <option>
+                            Almacén A
+                        </option>
+
+                        <option>
+                            Almacén B
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        <i class="fa-solid fa-calendar"></i>
+                        Fecha
+                    </label>
+
+                    <input
+                        type="date"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label>
+                        <i class="fa-solid fa-user"></i>
+                        Responsable
+                    </label>
+
+                    <input
+                        type="text"
+                        value="Administrador"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BOTONES FINALES -->
+
+            <div class="acciones">
+
+                <button class="cancelar">
+                    <i class="fa-solid fa-xmark"></i>
+                    CANCELAR
+                </button>
+
+                <button class="guardar">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    GUARDAR MOVIMIENTO
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             INVENTARIO
+        ====================================================== -->
+
+        <section class="panel inventario">
+
+            <div class="panel-titulo">
+
+                <div>
+
+                    <h2>
+                        <i class="fa-solid fa-warehouse"></i>
+                        INVENTARIO ACTUAL
+                    </h2>
+
+                    <p>
+                        Productos y bienes disponibles en almacén
+                    </p>
+
+                </div>
+
+                <button class="btn-inventario">
+                    <i class="fa-solid fa-list"></i>
+                    Ver inventario completo
+                </button>
+
+            </div>
+
+
+
+            <div class="tabla-contenedor">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>CÓDIGO</th>
+
+                            <th>PRODUCTO / BIEN</th>
+
+                            <th>CATEGORÍA</th>
+
+                            <th>CANTIDAD</th>
+
+                            <th>UBICACIÓN</th>
+
+                            <th>ESTADO</th>
+
+                            <th>ACCIONES</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>B001</strong>
+                            </td>
+
+                            <td>
+                                <i class="fa-solid fa-laptop"></i>
+                                Laptop
+                            </td>
+
+                            <td>
+                                Tecnología
+                            </td>
+
+                            <td>
+                                <strong>15</strong>
+                            </td>
+
+                            <td>
+                                Almacén A
+                            </td>
+
+                            <td>
+                                <span class="estado-stock disponible">
+                                    Disponible
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="accion ver">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                                <button class="accion editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>B002</strong>
+                            </td>
+
+                            <td>
+                                <i class="fa-solid fa-mobile-screen"></i>
+                                Celular
+                            </td>
+
+                            <td>
+                                Tecnología
+                            </td>
+
+                            <td>
+                                <strong>08</strong>
+                            </td>
+
+                            <td>
+                                Almacén A
+                            </td>
+
+                            <td>
+                                <span class="estado-stock disponible">
+                                    Disponible
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="accion ver">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                                <button class="accion editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>B003</strong>
+                            </td>
+
+                            <td>
+                                <i class="fa-solid fa-shield-halved"></i>
+                                Garantía
+                            </td>
+
+                            <td>
+                                Servicios
+                            </td>
+
+                            <td>
+                                <strong>03</strong>
+                            </td>
+
+                            <td>
+                                Almacén B
+                            </td>
+
+                            <td>
+                                <span class="estado-stock evaluacion">
+                                    En evaluación
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="accion ver">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                                <button class="accion editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>B004</strong>
+                            </td>
+
+                            <td>
+                                <i class="fa-solid fa-headphones"></i>
+                                Audífonos
+                            </td>
+
+                            <td>
+                                Accesorios
+                            </td>
+
+                            <td>
+                                <strong>45</strong>
+                            </td>
+
+                            <td>
+                                Almacén A
+                            </td>
+
+                            <td>
+                                <span class="estado-stock disponible">
+                                    Disponible
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="accion ver">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                                <button class="accion editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>B005</strong>
+                            </td>
+
+                            <td>
+                                <i class="fa-solid fa-bolt"></i>
+                                Cargador
+                            </td>
+
+                            <td>
+                                Accesorios
+                            </td>
+
+                            <td>
+                                <strong>22</strong>
+                            </td>
+
+                            <td>
+                                Almacén B
+                            </td>
+
+                            <td>
+                                <span class="estado-stock disponible">
+                                    Disponible
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button class="accion ver">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+
+                                <button class="accion editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PARTE INFERIOR
+        ====================================================== -->
+
+        <section class="inferior">
+
+
+            <!-- ALERTA -->
+
+            <div class="alerta">
+
+                <div class="alerta-icono">
+
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+
+                </div>
+
+                <div>
+
+                    <strong>
+                        ALERTA: 3 PRODUCTOS TIENEN STOCK BAJO
+                    </strong>
+
+                    <p>
+                        Revise los productos que requieren reposición.
+                    </p>
+
+                </div>
+
+                <button>
+                    Ver alertas
+                </button>
+
+            </div>
+
+
+
+            <!-- ACCIONES -->
+
+            <div class="acciones-almacen">
+
+                <button>
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    CONSULTAR STOCK
+
+                </button>
+
+
+                <button>
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    HISTORIAL DE MOVIMIENTOS
+
+                </button>
+
+
+                <button>
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    REPORTE DE ALMACÉN
+
+                </button>
+
+
+                <button>
+
+                    <i class="fa-solid fa-box"></i>
+
+                    NUEVO PRODUCTO
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>
+                © 2026 Sistema Integral de Gestión Financiera
+            </span>
+
+            <span>
+                Módulo Control de Almacén
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- SIGSF · navegación integrada -->
+<a href="index.html" id="sigsfBack" title="Volver al panel principal"
+   style="position:fixed;left:20px;bottom:20px;z-index:9999;display:inline-flex;align-items:center;gap:10px;
+          background:linear-gradient(135deg,#0b1f46,#2563eb);color:#fff;text-decoration:none;font-family:'Inter',sans-serif;
+          font-weight:600;font-size:.86rem;padding:12px 18px;border-radius:30px;
+          box-shadow:0 10px 26px rgba(11,31,70,.35);transition:transform .15s,filter .2s;">
+   <i class="fa-solid fa-table-columns"></i> Volver al panel
+</a>
+<script>
+  (function(){
+    var b=document.getElementById('sigsfBack');
+    if(b){ b.onmouseenter=function(){b.style.transform='translateY(-2px)';b.style.filter='brightness(1.08)';};
+           b.onmouseleave=function(){b.style.transform='none';b.style.filter='none';}; }
+  })();
+</script>
+
+
+<!-- SIGSF · modo integrado (oculta la barra propia al cargarse dentro del panel) -->
+<style id="sigsf-embed-css">
+  body.sigsf-embed aside.sidebar,
+  body.sigsf-embed .sidebar,
+  body.sigsf-embed .top-navbar,
+  body.sigsf-embed #sigsfBack { display:none !important; }
+  body.sigsf-embed { height:auto !important; overflow:auto !important; }
+</style>
+<script>
+(function(){
+  if (window.self === window.top) return;            // solo cuando está embebido en el panel
+  var b = document.body; if(!b) return;
+  b.classList.add('sigsf-embed');
+  function fix(){
+    var all = document.querySelectorAll('body *');
+    for (var i=0;i<all.length;i++){
+      var el = all[i];
+      var cs = getComputedStyle(el);
+      if ((parseFloat(cs.marginLeft)||0) >= 180) el.style.marginLeft = '0';
+      if (cs.position === 'fixed' && (parseFloat(cs.left)||0) >= 180) el.style.left = '0';
+    }
+    try { window.scrollTo(0,0); } catch(e){}
+  }
+  if (document.readyState !== 'loading') fix();
+  else document.addEventListener('DOMContentLoaded', fix);
+  setTimeout(fix, 250); setTimeout(fix, 700);
+})();
+</script>
+
+</body>
+</html>

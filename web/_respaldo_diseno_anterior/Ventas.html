@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Integral de Gestión Financiera</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Iconos -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+
+            <div>
+                <h2>SISTEMA INTEGRAL</h2>
+                <h2>DE GESTIÓN FINANCIERA</h2>
+            </div>
+        </div>
+
+        <div class="menu-title">MENÚ</div>
+
+        <nav class="menu">
+
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-users"></i>
+                <span>Clientes</span>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Marketing</span>
+            </a>
+
+            <a href="#" class="active">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Ventas</span>
+            </a>
+
+            <!-- NUEVO -->
+            <a href="#">
+                <i class="fa-solid fa-gem"></i>
+                <span>Casa de Empeño</span>
+            </a>
+
+            <!-- NUEVO -->
+            <a href="#">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>Cambio de Moneda</span>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-box"></i>
+                <span>Productos / Servicios</span>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <span>Almacén</span>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Reportes</span>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                <span>Configuración</span>
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-truck"></i>
+                <span>Logística</span>
+            </a>
+
+        </nav>
+
+        <div class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Cerrar sesión
+        </div>
+
+    </aside>
+
+
+    <!-- ================= CONTENIDO ================= -->
+    <main class="content">
+
+<style>
+  .sf-card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:16px 20px;box-shadow:0 6px 18px rgba(15,23,42,.06);font-family:'Segoe UI',system-ui,sans-serif;color:#0f172a;}
+  .sf-card h2{margin:0 0 4px;font-size:1.15rem;}
+  .sf-card .sf-sub{color:#64748b;font-size:.85rem;margin-bottom:14px;}
+  .sf-row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;}
+  .sf-field{display:flex;flex-direction:column;gap:4px;}
+  .sf-field label{font-size:.78rem;color:#475569;font-weight:600;}
+  .sf-field input,.sf-field select{padding:9px 11px;border:1px solid #cbd5e1;border-radius:8px;font-size:.9rem;min-width:150px;background:#fff;color:#0f172a;}
+  .sf-btn{padding:10px 16px;border:none;border-radius:8px;background:#2563eb;color:#fff;font-weight:600;cursor:pointer;font-size:.9rem;}
+  .sf-btn:hover{filter:brightness(1.06);}
+  .sf-btn.alt{background:#059669;}
+  .sf-msg{margin-top:10px;font-size:.85rem;min-height:1.1em;}
+  .sf-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:.85rem;}
+  .sf-table th,.sf-table td{border-bottom:1px solid #eef2f7;padding:8px 10px;text-align:left;}
+  .sf-table th{color:#64748b;font-weight:600;background:#f8fafc;}
+  .sf-badge{padding:2px 8px;border-radius:999px;font-size:.72rem;background:#dbeafe;color:#1d4ed8;}
+</style>
+<script src="api.js"></script>
+<div class="sf-card" id="sfVentas">
+  <h2><i class="fa-solid fa-cart-shopping"></i> Registrar venta</h2>
+  <div class="sf-sub">Cada venta se guarda en la base de datos y en el Excel descargable (reportes/ventas.xlsx).</div>
+  <div class="sf-row">
+    <div class="sf-field"><label>Cliente</label><select id="sfvCliente"></select></div>
+    <div class="sf-field"><label>Servicio</label><select id="sfvServicio"></select></div>
+    <div class="sf-field"><label>Importe (S/)</label><input type="number" id="sfvImporte" step="0.01" min="0" placeholder="0.00"></div>
+    <button class="sf-btn" id="sfvGuardar">Registrar venta</button>
+    <button class="sf-btn alt" id="sfvExcel"><i class="fa-solid fa-file-excel"></i> Descargar Excel</button>
+  </div>
+  <div class="sf-msg" id="sfvMsg"></div>
+  <table class="sf-table">
+    <thead><tr><th>N°</th><th>Cliente</th><th>Servicio</th><th>Fecha</th><th>Importe</th><th>Estado</th></tr></thead>
+    <tbody id="sfvTabla"><tr><td colspan="6">Cargando…</td></tr></tbody>
+  </table>
+</div>
+<script>
+(function(){
+  var byId=function(id){return document.getElementById(id);};
+  var clientes=[], servicios=[];
+  function money(n){return 'S/ '+Number(n||0).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function opt(v,t){var o=document.createElement('option');o.value=v;o.textContent=t;return o;}
+  function nomC(c){return ((c.nombres||'')+' '+(c.apellidos||'')).trim()||('Cliente '+c.idCliente);}
+  async function cargarCombos(){
+    try{
+      clientes=await API.get('/clientes'); servicios=await API.get('/servicios');
+      var sc=byId('sfvCliente'); sc.innerHTML=''; clientes.forEach(function(c){sc.appendChild(opt(c.idCliente,nomC(c)));});
+      var ss=byId('sfvServicio'); ss.innerHTML=''; servicios.forEach(function(s){ss.appendChild(opt(s.idServicio,s.nombre||('Servicio '+s.idServicio)));});
+    }catch(e){var m=byId('sfvMsg');m.style.color='#dc2626';m.textContent='No se pudieron cargar clientes/servicios: '+e.message;}
+  }
+  async function cargarVentas(){
+    var tb=byId('sfvTabla');
+    try{
+      var lista=await API.get('/ventas');
+      var mc={}, ms={}; clientes.forEach(function(c){mc[c.idCliente]=nomC(c);}); servicios.forEach(function(s){ms[s.idServicio]=s.nombre;});
+      tb.innerHTML='';
+      if(!lista.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;color:#64748b;">Sin ventas registradas.</td></tr>';return;}
+      lista.forEach(function(v){
+        var tr=document.createElement('tr');
+        var f=v.fechaVenta?String(v.fechaVenta).replace('T',' ').substring(0,16):'';
+        tr.innerHTML='<td>'+v.idVenta+'</td><td>'+(mc[v.idCliente]||('#'+(v.idCliente||'')))+'</td><td>'+(ms[v.idServicio]||'')+'</td><td>'+f+'</td><td>'+money(v.importe)+'</td><td><span class="sf-badge">'+(v.estado||'')+'</span></td>';
+        tb.appendChild(tr);
+      });
+    }catch(e){tb.innerHTML='<tr><td colspan="6" style="color:#dc2626;">Error: '+e.message+'</td></tr>';}
+  }
+  function init(){
+    byId('sfvGuardar').addEventListener('click',async function(){
+      var idc=parseInt(byId('sfvCliente').value,10), ids=parseInt(byId('sfvServicio').value,10), imp=parseFloat(byId('sfvImporte').value), m=byId('sfvMsg');
+      if(!idc||!ids||isNaN(imp)){m.style.color='#dc2626';m.textContent='Completa cliente, servicio e importe.';return;}
+      try{ await API.post('/ventas',{idCliente:idc,idServicio:ids,importe:imp}); m.style.color='#059669';m.textContent='\u2714 Venta registrada y guardada en el Excel.'; byId('sfvImporte').value=''; await cargarVentas(); }
+      catch(e){m.style.color='#dc2626';m.textContent='No se pudo registrar: '+e.message;}
+    });
+    byId('sfvExcel').addEventListener('click',function(){window.open('/api/ventas/excel','_blank');});
+    cargarCombos().then(cargarVentas);
+  }
+  if(document.readyState!=='loading') init(); else document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="page-title">
+
+                <div class="title-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <div>
+                    <h1>VENTAS</h1>
+                    <p>Gestión y registro de ventas</p>
+                </div>
+
+            </div>
+
+            <div class="search">
+
+                <label>Buscar cliente:</label>
+
+                <div class="search-box">
+                    <input type="text"
+                           placeholder="Escriba el nombre...">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= ESTADÍSTICAS ================= -->
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+
+                <div>
+                    <span>VENTAS DE HOY</span>
+                    <strong>S/ 7,850</strong>
+                    <small>+12% vs ayer</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-chart-column"></i>
+                </div>
+
+                <div>
+                    <span>VENTAS DEL MES</span>
+                    <strong>S/ 48,250</strong>
+                    <small>+18% vs mes anterior</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <span>CLIENTES ATENDIDOS</span>
+                    <strong>132</strong>
+                    <small>+5% vs ayer</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-tag"></i>
+                </div>
+
+                <div>
+                    <span>TICKET PROMEDIO</span>
+                    <strong>S/ 365</strong>
+                    <small>+8% vs mes anterior</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CONTENIDO PRINCIPAL ================= -->
+        <section class="main-grid">
+
+            <!-- REGISTRAR VENTA -->
+            <div class="card register">
+
+                <h2>REGISTRAR VENTA</h2>
+
+                <div class="form-group">
+
+                    <label>Tipo de operación:</label>
+
+                    <select>
+                        <option>Registro de venta</option>
+                        <option>Casa de empeño</option>
+                        <option>Cambio de moneda</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Cliente:</label>
+
+                    <select>
+                        <option>Seleccionar cliente...</option>
+                        <option>Juan Pérez</option>
+                        <option>María López</option>
+                        <option>Carlos Torres</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Servicio / Producto:</label>
+
+                    <select>
+                        <option>Seleccione servicio...</option>
+                        <option>Préstamo</option>
+                        <option>Compra de producto</option>
+                        <option>Servicio financiero</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Descripción:</label>
+
+                    <input type="text"
+                           placeholder="Ingrese descripción...">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Monto:</label>
+
+                    <input type="number"
+                           value="343">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Importe:</label>
+
+                    <input class="readonly"
+                           type="text"
+                           value="S/ 0.00"
+                           readonly>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Método de pago:</label>
+
+                    <select>
+                        <option>Efectivo</option>
+                        <option>Tarjeta</option>
+                        <option>Transferencia</option>
+                        <option>Yape / Plin</option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Fecha:</label>
+
+                    <input type="date">
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button class="cancel">
+                        <i class="fa-solid fa-xmark"></i>
+                        CANCELAR
+                    </button>
+
+                    <button class="confirm">
+                        <i class="fa-solid fa-check"></i>
+                        CONFIRMAR
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- TIPO DE OPERACIÓN -->
+            <div>
+
+                <div class="card operations">
+
+                    <h2>TIPO DE OPERACIÓN</h2>
+
+                    <div class="operation-grid">
+
+
+                        <!-- VENTA -->
+                        <div class="operation sale">
+
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                            <h3>REGISTRO DE<br>VENTAS</h3>
+
+                            <p>
+                                Registrar ventas de
+                                productos o servicios.
+                            </p>
+
+                        </div>
+
+
+                        <!-- EMPEÑO -->
+                        <div class="operation pawn">
+
+                            <i class="fa-solid fa-house"></i>
+
+                            <h3>CASA DE<br>EMPEÑO</h3>
+
+                            <p>
+                                Registrar empeños y
+                                préstamos.
+                            </p>
+
+                        </div>
+
+
+                        <!-- CAMBIO -->
+                        <div class="operation exchange">
+
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+
+                            <h3>CAMBIO DE<br>MONEDA</h3>
+
+                            <p>
+                                Realizar cambio de
+                                moneda extranjera.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCIONES RÁPIDAS -->
+                <div class="card quick">
+
+                    <h2>ACCIONES RÁPIDAS</h2>
+
+                    <div class="quick-grid">
+
+                        <div>
+                            <i class="fa-solid fa-circle-plus"></i>
+                            Nueva venta
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-clock"></i>
+                            Historial de ventas
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-user"></i>
+                            Cliente frecuente
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-chart-column"></i>
+                            Reporte del día
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-box"></i>
+                            Productos / Servicios
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-cash-register"></i>
+                            Cierre de caja
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- VENTAS RECIENTES -->
+            <div class="right-column">
+
+                <div class="card recent">
+
+                    <h2>VENTAS RECIENTES</h2>
+
+                    <div class="recent-item">
+
+                        <span>
+                            #001 Préstamo
+                            <b class="tag purple-tag">
+                                Casa de Empeño
+                            </b>
+                        </span>
+
+                        <span>Hace 5 min</span>
+
+                    </div>
+
+
+                    <div class="recent-item">
+
+                        <span>
+                            #002 Cambio moneda
+                            <b class="tag blue-tag">
+                                Cambio de Moneda
+                            </b>
+                        </span>
+
+                        <span>Hace 12 min</span>
+
+                    </div>
+
+
+                    <div class="recent-item">
+
+                        <span>
+                            #003 Empeño
+                            <b class="tag purple-tag">
+                                Casa de Empeño
+                            </b>
+                        </span>
+
+                        <span>Hace 25 min</span>
+
+                    </div>
+
+
+                    <div class="recent-item">
+
+                        <span>
+                            #004 Venta de producto
+                            <b class="tag green-tag">
+                                Registro de Venta
+                            </b>
+                        </span>
+
+                        <span>Hace 35 min</span>
+
+                    </div>
+
+
+                    <div class="recent-item">
+
+                        <span>
+                            #005 Cambio moneda
+                            <b class="tag blue-tag">
+                                Cambio de Moneda
+                            </b>
+                        </span>
+
+                        <span>Hace 45 min</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESUMEN -->
+                <div class="card summary">
+
+                    <h2>RESUMEN DEL DÍA</h2>
+
+                    <div>
+                        <span>Total ventas:</span>
+                        <strong>S/ 7,850</strong>
+                    </div>
+
+                    <div>
+                        <span>Operaciones:</span>
+                        <strong>24</strong>
+                    </div>
+
+                    <div>
+                        <span>Efectivo recibido:</span>
+                        <strong>S/ 5,200</strong>
+                    </div>
+
+                    <div>
+                        <span>Tarjeta / Transferencia:</span>
+                        <strong>S/ 2,650</strong>
+                    </div>
+
+                    <div>
+                        <span>Devoluciones:</span>
+                        <strong class="red">S/ 0.00</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= GRÁFICO ================= -->
+        <section class="card chart-card">
+
+            <h2>VENTAS POR TIPO DE OPERACIÓN (HOY)</h2>
+
+            <div class="chart-content">
+
+                <div class="donut"></div>
+
+                <div class="chart-data">
+
+                    <div>
+                        <span>
+                            <i class="dot green-dot"></i>
+                            Registro de ventas
+                        </span>
+
+                        <strong>S/ 4,350</strong>
+                        <b>55%</b>
+                    </div>
+
+
+                    <div>
+                        <span>
+                            <i class="dot purple-dot"></i>
+                            Casa de empeño
+                        </span>
+
+                        <strong>S/ 2,100</strong>
+                        <b>27%</b>
+                    </div>
+
+
+                    <div>
+                        <span>
+                            <i class="dot blue-dot"></i>
+                            Cambio de moneda
+                        </span>
+
+                        <strong>S/ 1,400</strong>
+                        <b>18%</b>
+                    </div>
+
+                </div>
+
+
+                <div class="info">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <p>
+                        Los datos se actualizan en tiempo real
+                        en función de las operaciones realizadas.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- SIGSF · navegación integrada -->
+<a href="index.html" id="sigsfBack" title="Volver al panel principal"
+   style="position:fixed;left:20px;bottom:20px;z-index:9999;display:inline-flex;align-items:center;gap:10px;
+          background:linear-gradient(135deg,#0b1f46,#2563eb);color:#fff;text-decoration:none;font-family:'Inter',sans-serif;
+          font-weight:600;font-size:.86rem;padding:12px 18px;border-radius:30px;
+          box-shadow:0 10px 26px rgba(11,31,70,.35);transition:transform .15s,filter .2s;">
+   <i class="fa-solid fa-table-columns"></i> Volver al panel
+</a>
+<script>
+  (function(){
+    var b=document.getElementById('sigsfBack');
+    if(b){ b.onmouseenter=function(){b.style.transform='translateY(-2px)';b.style.filter='brightness(1.08)';};
+           b.onmouseleave=function(){b.style.transform='none';b.style.filter='none';}; }
+  })();
+</script>
+
+
+<!-- SIGSF · modo integrado (oculta la barra propia al cargarse dentro del panel) -->
+<style id="sigsf-embed-css">
+  body.sigsf-embed aside.sidebar,
+  body.sigsf-embed .sidebar,
+  body.sigsf-embed .top-navbar,
+  body.sigsf-embed #sigsfBack { display:none !important; }
+  body.sigsf-embed { height:auto !important; overflow:auto !important; }
+</style>
+<script>
+(function(){
+  if (window.self === window.top) return;            // solo cuando está embebido en el panel
+  var b = document.body; if(!b) return;
+  b.classList.add('sigsf-embed');
+  function fix(){
+    var all = document.querySelectorAll('body *');
+    for (var i=0;i<all.length;i++){
+      var el = all[i];
+      var cs = getComputedStyle(el);
+      if ((parseFloat(cs.marginLeft)||0) >= 180) el.style.marginLeft = '0';
+      if (cs.position === 'fixed' && (parseFloat(cs.left)||0) >= 180) el.style.left = '0';
+    }
+    try { window.scrollTo(0,0); } catch(e){}
+  }
+  if (document.readyState !== 'loading') fix();
+  else document.addEventListener('DOMContentLoaded', fix);
+  setTimeout(fix, 250); setTimeout(fix, 700);
+})();
+</script>
+
+</body>
+</html>

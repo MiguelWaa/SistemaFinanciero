@@ -1,0 +1,37 @@
+========================================================
+ SIGSF · Librerías externas (carpeta lib/)
+========================================================
+
+El proyecto usa solo 4 archivos .jar. Ya están configurados en
+nbproject/project.properties con estos nombres exactos:
+
+  Archivo                        Para qué sirve                      Licencia
+  -----------------------------  ----------------------------------  -----------
+  postgresql.jar  (42.7.x)       Driver JDBC de PostgreSQL           BSD-2
+  slf4j-api-2.0.16.jar           API de registro (Logger, MDC)       MIT
+  logback-core-1.5.12.jar        Motor de Logback (appenders)        EPL/LGPL
+  logback-classic-1.5.12.jar     Implementación SLF4J de Logback     EPL/LGPL
+
+FORMA RÁPIDA (Windows, con internet)
+------------------------------------
+  Doble clic en  scripts\descargar_librerias.bat
+  (descarga los .jar desde Maven Central a esta carpeta)
+
+FORMA MANUAL
+------------
+  Descargue de https://repo1.maven.org/maven2/ :
+    org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar
+    ch/qos/logback/logback-core/1.5.12/logback-core-1.5.12.jar
+    ch/qos/logback/logback-classic/1.5.12/logback-classic-1.5.12.jar
+    org/postgresql/postgresql/42.7.4/postgresql-42.7.4.jar  → renombrar a postgresql.jar
+  y cópielos aquí con esos nombres.
+
+PRUEBAS (JUnit)
+---------------
+  JUnit 4.13.2 y Hamcrest 1.3 vienen con NetBeans (Test Libraries).
+  No hace falta copiarlos aquí.
+
+IMPORTANTE
+----------
+  Sin los 3 .jar de SLF4J/Logback el proyecto NO compila (el código usa
+  org.slf4j.Logger). La configuración de Logback está en src/logback.xml.

@@ -1,0 +1,21 @@
+Evidencias del Taller de Arquitectura (SIGSF)
+
+Capturas tomadas con el servidor real en modo demostracion (persistencia=memoria,
+mismos datos de db/datos_ejemplo.sql). Se recomienda volver a capturarlas con
+PostgreSQL antes de exponer.
+
+01-02 Login correcto e incorrecto
+03    Panel principal con KPIs
+04-05 Respaldos y auditoria
+06    Seguridad: matriz de permisos por rol
+07-17 Mantenimientos por modulo
+18    CAJERO intentando entrar a Usuarios (403)
+19    Pagina interna sin sesion: redirige al login
+20    Portal del cliente
+21    Resultado de las 77 pruebas (TDD)
+22    Consola del servidor
+23    Pruebas de seguridad de la API con curl
+24    Importacion de prospectos: vista previa con error por fila (v4.0)
+25    Importacion confirmada: 4 prospectos registrados (v4.0)
+26    Excel exportado de clientes (formato y ceros conservados) (v4.0)
+27    Barra de ficheros: exportar Excel/CSV/JSON, plantilla e importar (v4.0)

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Ventas</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-cart-shopping"></i></div>
+    <div>
+      <h1>Ventas</h1>
+      <p>Registro de ventas de servicios · cada venta se guarda también en Excel</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div id="moduloContenido"></div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+
+SIGSF.modulo({
+  kpis: async function(cont, secs){
+    var v = secs[0].datos || [];
+    var total = v.reduce(function(a,x){ return a + Number(x.importe||0); }, 0);
+    var hoy = new Date().toISOString().substring(0,10);
+    var delDia = v.filter(function(x){ return String(x.fechaVenta||'').substring(0,10)===hoy; }).length;
+    cont.innerHTML = SIGSF.kpi('Ventas registradas', SIGSF.num(v.length))
+                   + SIGSF.kpi('Importe acumulado', SIGSF.money(total), 'verde')
+                   + SIGSF.kpi('Ventas de hoy', SIGSF.num(delDia), 'ambar');
+  },
+  secciones: [
+    {
+      titulo: 'Registrar venta', icono: 'fa-cart-plus',
+      descripcion: 'Al guardar, la venta se agrega al archivo Excel de reportes automáticamente.',
+      endpoint: '/ventas', idCampo: 'idVenta', sinEditar: true, excel: '/ventas/excel', archivos: {importar: false},
+      campos: [
+        {k:'idCliente', l:'Cliente', req:true, tipo:'select',
+         lookup:{endpoint:'/clientes', id:'idCliente', texto:function(c){ return ((c.nombres||'')+' '+(c.apellidos||'')).trim()+' ('+(c.documento||'')+')'; }}},
+        {k:'idServicio', l:'Servicio vendido', req:true, tipo:'select',
+         lookup:{endpoint:'/servicios', id:'idServicio', texto:function(s){ return s.nombre; }}},
+        {k:'importe', l:'Importe cobrado (S/)', req:true, tipo:'money', ph:'350.00'},
+        {k:'estado', l:'Estado', tipo:'select', opciones:['REGISTRADA','ANULADA']}
+      ],
+      columnas: [
+        {k:'idVenta', l:'N°'},
+        {k:'idCliente', l:'Cliente', lookup:'idCliente'},
+        {k:'idServicio', l:'Servicio', lookup:'idServicio'},
+        {k:'importe', l:'Importe', money:true},
+        {k:'estado', l:'Estado', badge:true},
+        {k:'fechaVenta', l:'Fecha', fecha:true}
+      ]
+    }
+  ]
+});
+
+</script>
+</body>
+</html>

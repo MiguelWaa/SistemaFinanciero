@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SIGSF · Logback para las pruebas (JUnit). Logback da prioridad a
+  logback-test.xml: durante las pruebas solo se muestran advertencias y
+  errores por consola y NO se crean archivos en logs/.
+-->
+<configuration>
+    <appender name="CONSOLA" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level [%X{area:-SISTEMA}] %logger{20} - %replace(%msg){'[\r\n]+', ' | '}%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <root level="WARN">
+        <appender-ref ref="CONSOLA"/>
+    </root>
+</configuration>

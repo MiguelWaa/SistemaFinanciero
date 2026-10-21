@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Configuración</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-gear"></i></div>
+    <div>
+      <h1>Configuración</h1>
+      <p>Parámetros del sistema y cotizaciones vigentes</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div id="moduloContenido"></div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+
+SIGSF.modulo({
+  kpis: async function(cont, secs){
+    var estado = 'Sin conexión';
+    try { var h = await API.get('/health'); estado = h.status === 'ok' ? 'Operativo' : 'Revisar'; } catch(e) {}
+    cont.innerHTML = SIGSF.kpi('Estado del servidor', estado, 'verde')
+                   + SIGSF.kpi('Base de datos', 'PostgreSQL', 'ambar')
+                   + SIGSF.kpi('Tipos de cambio', SIGSF.num((secs[0].datos||[]).length));
+  },
+  secciones: [
+    {
+      titulo: 'Tipos de cambio del sistema', icono: 'fa-coins',
+      descripcion: 'Estas cotizaciones son las que usan Operaciones y el Portal del Cliente.',
+      endpoint: '/tipos-cambio', idCampo: 'idTipoCambio',
+      campos: [
+        {k:'monedaOrigen', l:'Moneda origen', req:true, tipo:'select', opciones:['USD','EUR','PEN']},
+        {k:'monedaDestino', l:'Moneda destino', req:true, tipo:'select', opciones:['PEN','USD','EUR']},
+        {k:'compra', l:'Compra', req:true, tipo:'money', ph:'3.7200'},
+        {k:'venta', l:'Venta', req:true, tipo:'money', ph:'3.7800'},
+        {k:'fechaInicio', l:'Vigente desde', tipo:'date'},
+        {k:'estado', l:'Estado', tipo:'select', opciones:['ACTIVO','INACTIVO']}
+      ],
+      columnas: [
+        {k:'idTipoCambio', l:'N°'},
+        {k:'monedaOrigen', l:'Par', render:function(f){ return SIGSF.escapar(f.monedaOrigen+' → '+f.monedaDestino); }},
+        {k:'compra', l:'Compra', num:true},
+        {k:'venta', l:'Venta', num:true},
+        {k:'fechaInicio', l:'Desde'},
+        {k:'estado', l:'Estado', badge:true}
+      ]
+    }
+  ]
+});
+
+</script>
+</body>
+</html>
