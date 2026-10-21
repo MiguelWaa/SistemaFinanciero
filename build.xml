@@ -5,6 +5,66 @@
 <project name="SistemaFinanciero" default="default" basedir=".">
     <description>Builds, tests, and runs the project SistemaFinanciero.</description>
     <import file="nbproject/build-impl.xml"/>
+
+    <!-- ============================================================
+         SIGSF · Versionamiento en la compilación
+         Después de compilar genera build/classes/version.properties con
+         la versión (archivo VERSION) y los datos del commit de Git.
+         Ese archivo viaja dentro del .jar, así el sistema sabe qué
+         versión es aunque se ejecute sin la carpeta .git.
+         Si Git no está instalado, el build NO falla (solo omite esos datos).
+         ============================================================ -->
+    <target name="-post-compile" depends="-sigsf-version"/>
+
+    <target name="-sigsf-version">
+        <loadfile property="sigsf.version" srcFile="VERSION" failonerror="false">
+            <filterchain><striplinebreaks/><trim/></filterchain>
+        </loadfile>
+        <property name="sigsf.version" value="desconocida"/>
+
+        <exec executable="git" outputproperty="git.commit" errorproperty="git.e1" failifexecutionfails="false" resultproperty="git.r1">
+            <arg value="rev-parse"/><arg value="HEAD"/>
+        </exec>
+        <exec executable="git" outputproperty="git.rama" errorproperty="git.e2" failifexecutionfails="false" resultproperty="git.r2">
+            <arg value="rev-parse"/><arg value="--abbrev-ref"/><arg value="HEAD"/>
+        </exec>
+        <exec executable="git" outputproperty="git.etiqueta" errorproperty="git.e3" failifexecutionfails="false" resultproperty="git.r3">
+            <arg value="describe"/><arg value="--tags"/><arg value="--always"/>
+        </exec>
+        <exec executable="git" outputproperty="git.datos" errorproperty="git.e4" failifexecutionfails="false" resultproperty="git.r4">
+            <arg value="log"/><arg value="-1"/><arg value="--date=iso-strict"/><arg value="--format=%ad|%an|%s"/>
+        </exec>
+        <!-- Valores por defecto si Git no está disponible (las propiedades de Ant no se sobrescriben) -->
+        <property name="git.commit" value=""/>
+        <property name="git.rama" value=""/>
+        <property name="git.etiqueta" value=""/>
+        <property name="git.datos" value="||"/>
+        <loadresource property="git.fecha"><propertyresource name="git.datos"/>
+            <filterchain><tokenfilter><replaceregex pattern="^([^|]*)\|.*$" replace="\1"/></tokenfilter></filterchain>
+        </loadresource>
+        <loadresource property="git.autor"><propertyresource name="git.datos"/>
+            <filterchain><tokenfilter><replaceregex pattern="^[^|]*\|([^|]*)\|.*$" replace="\1"/></tokenfilter></filterchain>
+        </loadresource>
+        <loadresource property="git.mensaje"><propertyresource name="git.datos"/>
+            <filterchain><tokenfilter><replaceregex pattern="^[^|]*\|[^|]*\|(.*)$" replace="\1"/></tokenfilter></filterchain>
+        </loadresource>
+        <property name="git.fecha" value=""/>
+        <property name="git.autor" value=""/>
+        <property name="git.mensaje" value=""/>
+        <tstamp><format property="sigsf.fecha.compilacion" pattern="yyyy-MM-dd'T'HH:mm:ss"/></tstamp>
+
+        <propertyfile file="${build.classes.dir}/version.properties" comment="SIGSF - generado por build.xml (no editar)">
+            <entry key="version" value="${sigsf.version}"/>
+            <entry key="commit" value="${git.commit}"/>
+            <entry key="rama" value="${git.rama}"/>
+            <entry key="etiqueta" value="${git.etiqueta}"/>
+            <entry key="fecha.commit" value="${git.fecha}"/>
+            <entry key="autor" value="${git.autor}"/>
+            <entry key="mensaje" value="${git.mensaje}"/>
+            <entry key="fecha.compilacion" value="${sigsf.fecha.compilacion}"/>
+        </propertyfile>
+        <echo message="SIGSF ${sigsf.version} - rama ${git.rama} - ${git.etiqueta} -> version.properties"/>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be
