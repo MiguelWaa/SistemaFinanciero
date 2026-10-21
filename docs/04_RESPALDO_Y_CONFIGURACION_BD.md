@@ -21,7 +21,10 @@
 1. `db/schema.sql` — 32 tablas (incluye `auditoria`).
 2. `db/datos_ejemplo.sql` — datos de prueba.
 3. `db/portal_cliente.sql` — accesos del Portal.
-4. `db/seguridad.sql` — **nuevo**: auditoría inmutable, CHECK, índices, migración de claves en texto plano y rol `sigsf_app`.
+4. `db/seguridad.sql` — auditoría inmutable, CHECK, índices, migración de claves en texto plano y rol `sigsf_app`.
+5. `db/version_esquema.sql` — **v5.0**: historial de versiones del esquema (si no se ejecuta, el sistema crea la tabla al arrancar).
+
+> Configuración: desde la v5.0 `db.properties` **no se versiona**. Copie `db.properties.ejemplo` a `db.properties` y edítelo; si no existe, el sistema usa los valores del ejemplo.
 
 ## 3. Rol de mínimo privilegio
 
