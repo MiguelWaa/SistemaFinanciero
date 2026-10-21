@@ -77,7 +77,9 @@ public class GitCli implements FuenteGit {
             if (p.exitValue() != 0) {
                 return Optional.empty();
             }
-            return Optional.of(new String(salida, StandardCharsets.UTF_8).trim());
+            // Solo se quitan los saltos de línea finales: trim() borraría también
+            // el separador 0x1F de los campos vacíos (ej. commit raíz sin padres).
+            return Optional.of(new String(salida, StandardCharsets.UTF_8).replaceAll("[\\r\\n]+$", ""));
         } catch (IOException e) {
             return Optional.empty();               // git no instalado
         } catch (InterruptedException e) {

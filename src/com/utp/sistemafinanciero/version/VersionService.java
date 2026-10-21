@@ -35,8 +35,10 @@ public class VersionService {
 
     /** Separador de campos en la salida de git (carácter US, 0x1F). */
     private static final String SEP = "\u001f";
-    /** El mismo separador escrito como escape de formato de git (seguro en Windows). */
+    /** El mismo separador escrito como escape de formato de git log (seguro en Windows). */
     private static final String F = "%x1f";
+    /** En git for-each-ref el escape hexadecimal se escribe sin la «x». */
+    private static final String FR = "%1f";
     private static final Pattern LANZAMIENTO = Pattern.compile("^## \\[([^\\]]+)\\](?:\\s*-\\s*(.*))?$");
 
     private final FuenteGit git;
@@ -99,7 +101,7 @@ public class VersionService {
 
     public List<Map<String, Object>> commits(int limite) {
         List<Map<String, Object>> lista = new ArrayList<>();
-        Optional<String> salida = git.disponible() ? git.ejecutar("log", "--all", "-n", String.valueOf(limite),
+        Optional<String> salida = git.disponible() ? git.ejecutar("log", "--all", "--topo-order", "-n", String.valueOf(limite),
                 "--date=iso-strict", "--format=%h" + F + "%an" + F + "%ad" + F + "%s" + F + "%D" + F + "%p")
                 : Optional.empty();
         for (String linea : lineas(salida)) {
@@ -126,11 +128,14 @@ public class VersionService {
         return referencias("refs/tags", null, "-creatordate");
     }
 
-    /** Grafo de texto (como {@code git log --graph}) para la vista «Network». */
+    /**
+     * Grafo de texto (como {@code git log --graph}) para la vista «Network».
+     * Cada línea: dibujo del grafo + hash + mensaje + 0x1F + referencias.
+     */
     public List<String> grafo(int limite) {
         if (!git.disponible()) return List.of();
         return lineas(git.ejecutar("log", "--all", "--graph", "--color=never", "-n", String.valueOf(limite),
-                "--format=%h %s%d"));
+                "--format=%h %s" + F + "%D"));
     }
 
     /** Lanzamientos registrados en CHANGELOG.md ({@code ## [x.y.z] - descripción}). */
@@ -176,8 +181,8 @@ public class VersionService {
     private List<Map<String, Object>> referencias(String ref1, String ref2, String orden) {
         List<Map<String, Object>> lista = new ArrayList<>();
         if (!git.disponible()) return lista;
-        String formato = "--format=%(refname:short)" + F + "%(objectname:short)" + F
-                + "%(creatordate:iso-strict)" + F + "%(contents:subject)";
+        String formato = "--format=%(refname:short)" + FR + "%(objectname:short)" + FR
+                + "%(creatordate:iso-strict)" + FR + "%(contents:subject)";
         Optional<String> salida = ref2 == null
                 ? git.ejecutar("for-each-ref", "--sort=" + orden, formato, ref1)
                 : git.ejecutar("for-each-ref", "--sort=" + orden, formato, ref1, ref2);
