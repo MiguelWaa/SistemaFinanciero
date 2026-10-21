@@ -286,8 +286,9 @@ botones de editar/eliminar por fila y, donde aplica, exportación a Excel.
 **Exportaciones disponibles:** `/api/ventas/excel`, `/api/clientes/excel`,
 `/api/operaciones/excel`, `/api/productos/excel`.
 
-El diseño anterior de las páginas quedó guardado en
-`web/_respaldo_diseno_anterior/` por si se quiere consultar.
+El diseño anterior de las páginas ya no se guarda como copia manual: queda en
+el historial de Git (etiqueta `v4.0.0`). Para consultarlo:
+`git show v4.0.0:web/_respaldo_diseno_anterior/login.html`.
 
 > Nota: el módulo de Producción usa dos tablas nuevas del backend
 > (`linea_produccion` y `orden_produccion`) que ya venían en `db/schema.sql`,
