@@ -11,6 +11,9 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 ## [Sin publicar]
 
 ### Agregado
+- Servicio de versión (`VersionService`) y API `GET /api/version`, `GET /api/versiones` (solo ADMIN).
+- Versionamiento del esquema de la base: tabla `version_esquema` y `db/version_esquema.sql`.
+- `version.properties` generado por Ant al compilar (commit, rama, etiqueta).
 
 ### Corregido
 
