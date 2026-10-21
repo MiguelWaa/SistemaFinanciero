@@ -136,7 +136,7 @@ problemas de CORS y todo funciona abriendo una sola URL.
 ## Puesta en marcha (3 pasos)
 
 ### 1) Base de datos (pgAdmin)
-1. Crea una base de datos llamada **`sistema_financiero`**.
+1. Crea una base de datos llamada **`SistemaFinanciero`** (con S y F mayúsculas).
 2. En el **Query Tool**, ejecuta **`db/schema.sql`** (crea 31 tablas).
 3. Luego ejecuta **`db/datos_ejemplo.sql`** (carga datos de prueba).
 
@@ -156,7 +156,7 @@ Abre el proyecto en **NetBeans** y presiona **Run (F6)**.
 Se ejecuta `com.utp.sistemafinanciero.ServerMain`, que:
 
 - comprueba la conexión a PostgreSQL,
-- levanta el servidor en **<http://localhost:8080>**.
+- levanta el servidor en **<http://localhost:8091>** (puerto de `server.port`).
 
 Abre esa URL en el navegador: verás la pantalla de inicio (splash) → login.
 
@@ -176,7 +176,7 @@ Las contraseñas se guardan con **PBKDF2-HMAC-SHA256 y sal** (los hashes SHA-256
 
 ## Endpoints principales de la API
 
-Base: `http://localhost:8080/api`
+Base: `http://localhost:8091/api`
 
 | Método | Ruta                     | Descripción                          |
 |--------|--------------------------|--------------------------------------|
