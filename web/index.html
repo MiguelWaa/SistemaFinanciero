@@ -43,6 +43,7 @@
                 <li data-key="cfg"><a href="#" onclick="sigsfNavigate('configuracion.html','Configuración','Configuración',this);return false;"><i class="fa-solid fa-gear"></i> <span>Configuración</span></a></li>
                 <li data-key="seg"><a href="#" onclick="sigsfNavigate('seguridad.html','Seguridad','Seguridad',this);return false;"><i class="fa-solid fa-shield-halved"></i> <span>Seguridad</span></a></li>
                 <li data-key="bkp"><a href="#" onclick="sigsfNavigate('respaldos.html','Respaldos y Auditoría','Respaldos',this);return false;"><i class="fa-solid fa-database"></i> <span>Respaldos y auditoría</span></a></li>
+                <li data-key="ver"><a href="#" onclick="sigsfNavigate('versiones.html','Control de versiones','Versiones',this);return false;"><i class="fa-solid fa-code-branch"></i> <span>Control de versiones</span></a></li>
                 <li class="menu-label">Soporte</li>
                 <li data-key="ayu"><a href="#" onclick="sigsfNavigate('ayuda.html','Centro de Ayuda','Ayuda',this);return false;"><i class="fa-solid fa-headset"></i> <span>Centro de ayuda</span></a></li>
             </ul>
@@ -175,10 +176,17 @@
                             <div class="card-body"><h3>Respaldos y Auditoría</h3><p>Copias de seguridad de la base de datos y bitácora de actividad.</p></div>
                             <a href="#" class="card-btn" style="background:#334155;" onclick="openMod('respaldos.html','Respaldos y Auditoría');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
                         </div>
+
+                        <div class="module-card">
+                            <div class="card-icon" style="background:#ede9fe;color:#7c3aed;"><i class="fa-solid fa-code-branch"></i></div>
+                            <div class="card-body"><h3>Control de versiones</h3><p>Versión del sistema, commits, ramas, etiquetas y esquema de la base.</p></div>
+                            <a href="#" class="card-btn" style="background:#7c3aed;" onclick="openMod('versiones.html','Control de versiones');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
                     </div>
 
                     <footer class="main-footer" style="margin-top:32px;border-radius:14px;border:1px solid var(--border-color);">
                         <p>&copy; 2026 Sistema Integral de Gestión de Servicios Financieros. Todos los derechos reservados.</p>
+                        <p id="pieVersion" style="font-size:.78rem;opacity:.75;margin-top:4px;"></p>
                     </footer>
                 </div>
 
@@ -548,6 +556,13 @@
         }
         if (document.readyState !== 'loading') cargarKPIs();
         else document.addEventListener('DOMContentLoaded', cargarKPIs);
+
+        // Pie con la versión en ejecución (GET /api/version).
+        API.get('/version').then(function (v) {
+          var t = 'SIGSF v' + v.version + (v.rama ? ' · rama ' + v.rama : '') + (v.commitCorto ? ' · commit ' + v.commitCorto : '')
+                + (v.versionEsquema ? ' · esquema BD v' + v.versionEsquema : '') + (v.cambiosSinCommit ? ' · cambios sin commit' : '');
+          set('pieVersion', t);
+        }).catch(function () { /* sin versión */ });
       })();
     </script>
 
