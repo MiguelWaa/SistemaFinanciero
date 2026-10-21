@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Control de versiones</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="sigsf-modulo.css">
+<style>
+  .b-ambar{background:#fef3c7;color:#b45309}.b-azul{background:#dbeafe;color:#1d4ed8}.b-gris{background:#e2e8f0;color:#475569}
+  .b-morado{background:#ede9fe;color:#6d28d9}.b-cian{background:#cffafe;color:#0e7490}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 22px;}
+  .info-grid .it{border-bottom:1px dashed #e2e8f0;padding:7px 0;}
+  .info-grid .it .l{font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.4px;font-weight:600;}
+  .info-grid .it .v{font-size:.92rem;margin-top:2px;word-break:break-word;}
+  .mono{font-family:Consolas,'Cascadia Mono','Courier New',monospace;}
+  .hash{font-family:Consolas,'Courier New',monospace;background:#f1f5f9;border-radius:6px;padding:2px 7px;font-size:.8rem;color:#0f172a;}
+  .ref{display:inline-block;font-size:.7rem;font-weight:700;border-radius:20px;padding:2px 8px;margin:1px 3px 1px 0;}
+  .ref.rama{background:#dcfce7;color:#166534}.ref.tag{background:#fef3c7;color:#92400e}.ref.head{background:#dbeafe;color:#1e40af}.ref.remota{background:#fee2e2;color:#991b1b}
+  .terminal{background:#0b1220;color:#cbd5e1;border-radius:12px;padding:16px 18px;font-family:Consolas,'Cascadia Mono','Courier New',monospace;font-size:.8rem;line-height:1.45;overflow:auto;max-height:560px;white-space:pre;}
+  .terminal .g1{color:#f87171}.terminal .g2{color:#4ade80}.terminal .g3{color:#facc15}.terminal .g4{color:#60a5fa}.terminal .g5{color:#c084fc}.terminal .g6{color:#22d3ee}
+  .terminal .h{color:#fbbf24}.terminal .d{color:#4ade80;font-weight:700}
+  .timeline{position:relative;padding-left:26px;}
+  .timeline:before{content:'';position:absolute;left:9px;top:4px;bottom:4px;width:2px;background:#cbd5e1;}
+  .tl{position:relative;margin-bottom:16px;}
+  .tl:before{content:'';position:absolute;left:-22px;top:5px;width:12px;height:12px;border-radius:50%;background:#2563eb;box-shadow:0 0 0 3px #dbeafe;}
+  .tl.pend:before{background:#d97706;box-shadow:0 0 0 3px #fef3c7;}
+  .tl h3{font-size:.95rem;}.tl h3 small{color:#64748b;font-weight:500;margin-left:6px;}
+  .tl ul{margin:6px 0 0 18px;font-size:.84rem;color:#334155;line-height:1.55;}
+  .aviso{border-radius:10px;padding:12px 14px;font-size:.85rem;line-height:1.55;margin-bottom:16px;}
+  .aviso.ok{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+  .aviso.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+  .aviso.info{background:#eff6ff;border:1px solid #dbeafe;color:#1e3a8a}
+  .aviso code{background:rgba(15,23,42,.07);padding:1px 6px;border-radius:5px}
+  .leyenda{display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0 12px;font-size:.78rem;color:#64748b;align-items:center;}
+</style>
+</head>
+<body>
+
+<header class="mod-header">
+  <div class="izq">
+    <div class="ico"><i class="fa-solid fa-code-branch"></i></div>
+    <div>
+      <h1>Control de versiones</h1>
+      <p>Versión en ejecución, repositorio Git (commits, ramas, etiquetas) y versión del esquema de la base</p>
+    </div>
+  </div>
+  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+</header>
+
+<div class="mod-wrap">
+  <div class="kpis" id="kpis"></div>
+  <div id="avisos"></div>
+
+  <div class="mod-tabs">
+    <button data-tab="res" class="on"><i class="fa-solid fa-circle-info"></i> Resumen</button>
+    <button data-tab="his" data-admin="1"><i class="fa-solid fa-clock-rotate-left"></i> Historial de commits</button>
+    <button data-tab="red" data-admin="1"><i class="fa-solid fa-diagram-project"></i> Red (network)</button>
+    <button data-tab="ram" data-admin="1"><i class="fa-solid fa-code-branch"></i> Ramas y etiquetas</button>
+    <button data-tab="bd" data-admin="1"><i class="fa-solid fa-database"></i> Esquema BD</button>
+  </div>
+
+  <!-- ====================== RESUMEN ====================== -->
+  <div data-pane="res">
+    <div class="card">
+      <h2><i class="fa-solid fa-code-commit" style="color:#2563eb;"></i> Versión en ejecución</h2>
+      <div class="sub">Datos tomados del repositorio Git del proyecto, de <code>version.properties</code> (generado al compilar) o del archivo <code>VERSION</code>.</div>
+      <div class="info-grid" id="info"></div>
+    </div>
+    <div class="card">
+      <h2><i class="fa-solid fa-flag-checkered" style="color:#2563eb;"></i> Lanzamientos (CHANGELOG.md)</h2>
+      <div class="sub">Versiones publicadas con numeración SemVer <b>MAYOR.MENOR.PARCHE</b>.</div>
+      <div class="timeline" id="lanzamientos"><div class="vacio">Cargando…</div></div>
+    </div>
+  </div>
+
+  <!-- ====================== HISTORIAL ====================== -->
+  <div data-pane="his" style="display:none;">
+    <div class="card">
+      <div class="tabla-top">
+        <h2 style="margin:0;"><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;"></i> Últimos 40 commits (todas las ramas)</h2>
+        <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarC" placeholder="Buscar autor, mensaje, hash…"></div>
+      </div>
+      <div class="leyenda" id="leyenda"></div>
+      <div class="tabla-scroll"><table>
+        <thead><tr><th>Commit</th><th>Tipo</th><th>Mensaje</th><th>Autor</th><th>Fecha</th></tr></thead>
+        <tbody id="tablaC"><tr><td class="vacio" colspan="5">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- ====================== RED ====================== -->
+  <div data-pane="red" style="display:none;">
+    <div class="card">
+      <h2><i class="fa-solid fa-diagram-project" style="color:#2563eb;"></i> Red de ramas (git log --all --graph)</h2>
+      <div class="sub">Cada línea vertical es una rama; los puntos de unión son <i>merges</i>. Equivale a la vista «Network» de GitHub.</div>
+      <div class="terminal" id="grafo">Cargando…</div>
+    </div>
+  </div>
+
+  <!-- ====================== RAMAS ====================== -->
+  <div data-pane="ram" style="display:none;">
+    <div class="card">
+      <h2><i class="fa-solid fa-code-branch" style="color:#2563eb;"></i> Ramas (locales y del remoto <i>origin</i>)</h2>
+      <div class="tabla-scroll"><table>
+        <thead><tr><th>Rama</th><th>Tipo</th><th>Último commit</th><th>Mensaje</th><th>Fecha</th></tr></thead>
+        <tbody id="tablaR"><tr><td class="vacio" colspan="5">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <h2><i class="fa-solid fa-tags" style="color:#d97706;"></i> Etiquetas (versiones publicadas)</h2>
+      <div class="tabla-scroll"><table>
+        <thead><tr><th>Etiqueta</th><th>Commit</th><th>Descripción</th><th>Fecha</th></tr></thead>
+        <tbody id="tablaT"><tr><td class="vacio" colspan="4">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- ====================== ESQUEMA BD ====================== -->
+  <div data-pane="bd" style="display:none;">
+    <div class="card">
+      <h2><i class="fa-solid fa-database" style="color:#2563eb;"></i> Versiones del esquema de la base (tabla <code>version_esquema</code>)</h2>
+      <div class="sub">Cada script SQL del proyecto registra aquí su versión. Así se sabe si la base de cada integrante está al día.</div>
+      <div class="tabla-scroll"><table>
+        <thead><tr><th>Versión</th><th>Descripción</th><th>Script</th><th>Aplicado</th><th>Por</th></tr></thead>
+        <tbody id="tablaE"><tr><td class="vacio" colspan="5">Cargando…</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<script src="api.js"></script>
+<script src="sigsf-crud.js"></script>
+<script>
+(function(){
+  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = SIGSF.escapar;
+  var commits = [];
+
+  var TIPOS = { feat:['b-verde','Funcionalidad'], fix:['b-rojo','Corrección'], docs:['b-azul','Documentación'],
+                test:['b-cian','Pruebas'], build:['b-gris','Build'], ci:['b-gris','CI'], chore:['b-gris','Mantenimiento'],
+                refactor:['b-morado','Refactor'], perf:['b-ambar','Rendimiento'], merge:['b-morado','Merge'],
+                revert:['b-rojo','Rollback'], style:['b-gris','Estilo'], otro:['b-gris','Otro'] };
+
+  document.querySelectorAll('[data-tab]').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('[data-tab]').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      document.querySelectorAll('[data-pane]').forEach(function(p){
+        p.style.display = p.getAttribute('data-pane') === b.getAttribute('data-tab') ? 'block' : 'none';
+      });
+    });
+  });
+
+  function fecha(v){ return v ? SIGSF.fechaCorta(String(v).substring(0,19)) : '—'; }
+  function tipoBadge(t){ var x = TIPOS[t] || TIPOS.otro; return '<span class="badge ' + x[0] + '">' + esc(x[1]) + '</span>'; }
+
+  function refs(texto){
+    if (!texto) return '';
+    return texto.split(',').map(function(r){
+      r = r.trim(); if (!r) return '';
+      var cls = 'rama';
+      if (r.indexOf('tag: ') === 0){ cls = 'tag'; r = r.substring(5); }
+      else if (r.indexOf('HEAD') === 0){ cls = 'head'; }
+      else if (r.indexOf('origin/') === 0){ cls = 'remota'; }
+      return '<span class="ref ' + cls + '">' + esc(r) + '</span>';
+    }).join('');
+  }
+
+  function item(l, v, cls){ return '<div class="it"><div class="l">' + esc(l) + '</div><div class="v ' + (cls||'') + '">' + v + '</div></div>'; }
+
+  function pintarActual(v){
+    $('kpis').innerHTML = SIGSF.kpi('Versión del sistema', 'v' + (v.version || '—'))
+      + SIGSF.kpi('Rama', v.rama || '—', 'verde')
+      + SIGSF.kpi('Commit', v.commitCorto || '—', 'ambar')
+      + SIGSF.kpi('Esquema BD', v.versionEsquema ? 'v' + v.versionEsquema : 'sin registrar', v.esquemaAlDia ? 'verde' : 'rojo');
+    $('info').innerHTML =
+        item('Versión (SemVer)', '<b>' + esc(v.version || '—') + '</b>')
+      + item('Etiqueta más cercana (git describe)', esc(v.etiqueta || '—'), 'mono')
+      + item('Rama', esc(v.rama || '—'), 'mono')
+      + item('Commit', v.commit ? '<span class="hash">' + esc(v.commit) + '</span>' : '—')
+      + item('Último mensaje', esc(v.mensaje || '—'))
+      + item('Autor del commit', esc(v.autor || '—'))
+      + item('Fecha del commit', esc(fecha(v.fechaCommit)))
+      + item('Fecha de compilación', esc(fecha(v.fechaCompilacion)))
+      + item('Origen del dato', SIGSF.badge(v.origen || '—'))
+      + item('Esquema de la base', esc(v.versionEsquema || '—') + ' (esperado ' + esc(v.versionEsquemaEsperada || '—') + ')');
+    var av = '';
+    if (v.cambiosSinCommit) av += '<div class="aviso warn"><i class="fa-solid fa-triangle-exclamation"></i> Hay <b>cambios sin confirmar</b> en el proyecto: esta ejecución no corresponde exactamente al commit ' + esc(v.commitCorto) + '. Use <code>git status</code> y <code>git commit</code>.</div>';
+    if (!v.esquemaAlDia) av += '<div class="aviso warn"><i class="fa-solid fa-database"></i> La base de datos está en la versión <b>' + esc(v.versionEsquema || 'sin registrar') + '</b> y el código espera la <b>' + esc(v.versionEsquemaEsperada) + '</b>. Ejecute en pgAdmin los scripts pendientes de la carpeta <code>db/</code> (al menos <code>db/version_esquema.sql</code>).</div>';
+    else av += '<div class="aviso ok"><i class="fa-solid fa-circle-check"></i> Código y base de datos en versiones compatibles: aplicación <b>v' + esc(v.version) + '</b> · esquema <b>v' + esc(v.versionEsquema) + '</b>.</div>';
+    $('avisos').innerHTML = av;
+  }
+
+  function pintarLanzamientos(lista){
+    if (!lista || !lista.length){ $('lanzamientos').innerHTML = '<div class="vacio">No se encontró CHANGELOG.md.</div>'; return; }
+    $('lanzamientos').innerHTML = lista.map(function(l){
+      var pend = /publicar/i.test(l.version);
+      var cambios = (l.cambios || []).slice(0, 6).map(function(c){ return '<li>' + esc(c.replace(/`/g,'')) + '</li>'; }).join('');
+      return '<div class="tl' + (pend ? ' pend' : '') + '"><h3>' + esc(pend ? l.version : 'v' + l.version) + '<small>' + esc(l.titulo || '') + '</small></h3>'
+        + (cambios ? '<ul>' + cambios + '</ul>' : '<ul><li style="color:#94a3b8;list-style:none;margin-left:-18px;">Sin cambios pendientes.</li></ul>') + '</div>';
+    }).join('');
+  }
+
+  function pintarCommits(){
+    var q = ($('buscarC').value || '').toLowerCase();
+    var tb = $('tablaC'); tb.innerHTML = '';
+    var lista = commits.filter(function(c){ return !q || (c.hash + ' ' + c.autor + ' ' + c.mensaje + ' ' + c.referencias).toLowerCase().indexOf(q) >= 0; });
+    if (!lista.length){ tb.innerHTML = '<tr><td class="vacio" colspan="5">Sin resultados.</td></tr>'; return; }
+    lista.forEach(function(c){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td><span class="hash">' + esc(c.hash) + '</span></td><td>' + tipoBadge(c.tipo) + '</td>'
+        + '<td>' + refs(c.referencias) + ' ' + esc(c.mensaje) + '</td><td>' + esc(c.autor) + '</td><td>' + esc(fecha(c.fecha)) + '</td>';
+      tb.appendChild(tr);
+    });
+  }
+
+  function pintarGrafo(lineas){
+    if (!lineas || !lineas.length){ $('grafo').textContent = 'Sin repositorio Git en la carpeta del proyecto.'; return; }
+    $('grafo').innerHTML = lineas.map(function(l){
+      var m = l.match(/^([\s|\\\/*_.-]*)([0-9a-f]{7,})?(.*)$/);
+      if (!m) return esc(l);
+      var g = '', col = 0;
+      for (var i = 0; i < m[1].length; i++){
+        var ch = m[1][i];
+        if (ch === ' ') { g += ' '; continue; }
+        col = Math.floor(i / 2) % 6 + 1;
+        g += '<span class="g' + col + '">' + esc(ch) + '</span>';
+      }
+      var resto = esc(m[3] || '').replace(/\(([^)]*)\)\s*$/, '<span class="d">($1)</span>');
+      return g + (m[2] ? '<span class="h">' + m[2] + '</span>' : '') + resto;
+    }).join('\n');
+  }
+
+  function pintarRamas(ramas, etiquetas){
+    $('tablaR').innerHTML = ramas.length ? ramas.map(function(r){
+      var tipo = r.remota ? 'remota' : (/^(main|master)$/.test(r.nombre) ? 'producción' : r.nombre === 'develop' ? 'integración'
+               : r.nombre.split('/')[0]);
+      return '<tr><td><span class="ref ' + (r.remota ? 'remota' : 'rama') + '">' + esc(r.nombre) + '</span></td><td>' + SIGSF.badge(tipo)
+        + '</td><td><span class="hash">' + esc(r.commit) + '</span></td><td>' + esc(r.descripcion) + '</td><td>' + esc(fecha(r.fecha)) + '</td></tr>';
+    }).join('') : '<tr><td class="vacio" colspan="5">Sin ramas.</td></tr>';
+    $('tablaT').innerHTML = etiquetas.length ? etiquetas.map(function(t){
+      return '<tr><td><span class="ref tag">' + esc(t.nombre) + '</span></td><td><span class="hash">' + esc(t.commit) + '</span></td><td>'
+        + esc(t.descripcion) + '</td><td>' + esc(fecha(t.fecha)) + '</td></tr>';
+    }).join('') : '<tr><td class="vacio" colspan="4">Sin etiquetas.</td></tr>';
+  }
+
+  function pintarEsquema(lista){
+    $('tablaE').innerHTML = lista && lista.length ? lista.map(function(v){
+      return '<tr><td><b>v' + esc(v.version) + '</b></td><td>' + esc(v.descripcion) + '</td><td class="mono">' + esc(v.script)
+        + '</td><td>' + esc(fecha(v.aplicadoEn)) + '</td><td>' + esc(v.aplicadoPor || '') + '</td></tr>';
+    }).join('') : '<tr><td class="vacio" colspan="5">La tabla version_esquema está vacía.</td></tr>';
+  }
+
+  async function cargar(){
+    try {
+      var d = await API.get('/versiones');
+      pintarActual(d.actual);
+      pintarLanzamientos(d.lanzamientos);
+      commits = d.commits || [];
+      var usados = {}; commits.forEach(function(c){ usados[c.tipo] = 1; });
+      $('leyenda').innerHTML = 'Tipos (Conventional Commits): ' + Object.keys(usados).map(tipoBadge).join(' ');
+      pintarCommits();
+      pintarGrafo(d.grafo);
+      pintarRamas(d.ramas || [], d.etiquetas || []);
+      pintarEsquema(d.esquema);
+      if (!d.repositorio) $('avisos').innerHTML += '<div class="aviso info"><i class="fa-solid fa-circle-info"></i> El sistema no se está ejecutando dentro de un repositorio Git: se muestran los datos de compilación.</div>';
+    } catch (e) {
+      // Usuarios que no son ADMIN: solo la versión en ejecución.
+      try {
+        pintarActual(await API.get('/version'));
+        $('lanzamientos').innerHTML = '<div class="vacio">El historial del repositorio es visible solo para el Administrador.</div>';
+        document.querySelectorAll('[data-admin]').forEach(function(b){ b.style.display = 'none'; });
+      } catch (e2) {
+        $('avisos').innerHTML = '<div class="aviso warn">No se pudo consultar la versión: ' + esc(e2.message) + '</div>';
+      }
+    }
+  }
+  $('buscarC').addEventListener('input', pintarCommits);
+  cargar();
+})();
+</script>
+</body>
+</html>
