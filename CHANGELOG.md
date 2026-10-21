@@ -10,6 +10,12 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.0.0] - 2026-10-21 · Taller de control de versiones
+
+Versión MAYOR: cambia el contrato `DaoFactory` (nuevo `versionesEsquema()`), el
+esquema de la base (tabla `version_esquema`) y la forma de configurar la conexión
+(`db.properties` ya no viene en el repositorio).
+
 ### Agregado
 - Plantilla `db.properties.ejemplo`; `db.properties` sale del repositorio (credenciales).
 - Hooks Git `pre-commit` (bloquea credenciales y archivos generados) y `commit-msg`.
@@ -22,6 +28,9 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ### Corregido
 - Ramas/etiquetas vacías en la vista de versiones (`for-each-ref` usa `%1f`) y referencias mal detectadas en el grafo.
+
+### Revertido
+- Truncamiento de la cuota mensual de préstamos (`RoundingMode.DOWN`): rompía `PrestamoServiceTest` y descuadraba el saldo. Se revirtió el merge con `git revert -m 1`.
 
 ## [4.0.0] - Taller de recursos de código fuente
 
