@@ -21,7 +21,7 @@ import java.util.List;
  * {@code INSERT} de todas las tablas del esquema {@code public} y
  * reajusta las secuencias {@code SERIAL}.
  *
- * <p>Para restaurar: ejecutar primero {@code db/schema.sql} (estructura)
+ * <p>Para restaurar: ejecutar primero (estructura)
  * y luego este archivo.</p>
  */
 public class RespaldoJdbcSql implements EstrategiaRespaldo {
