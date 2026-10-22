@@ -3,11 +3,6 @@ package com.utp.sistemafinanciero.archivos;
 import java.util.Objects;
 import java.util.function.Function;
 
-/**
- * Una columna de un fichero de exportación/importación.
- *
- * @param <T> entidad o DTO de la fila
- */
 public final class Columna<T> {
 
     private final String clave;
