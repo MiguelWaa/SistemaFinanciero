@@ -9,6 +9,21 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 
 ---
 
+## 🆕 Versión 5.1 · Avance 3: 100 registros por módulo
+
+| Tema | Qué se implementó | Dónde |
+|---|---|---|
+| **Datos de demostración (PostgreSQL)** | 100 registros por módulo en las 32 tablas (300 operaciones); re-ejecutable, sin borrar datos, claves foráneas por clave natural | `db/datos_100_registros.sql` |
+| **Datos de demostración (memoria)** | Los mismos datos con `persistencia=memoria`; `memoria.datos.masivos=false` los desactiva | `dao/memoria/DatosMasivos.java`, `semilla_100.tsv` |
+| **Generador** | Determinista (semilla 20261025): produce el SQL y el TSV desde una sola fuente | `scripts/datos/generar_datos_100.py` |
+| **Pruebas** | 117 → **126** (`DatosMasivosTest`) | `test/.../dao/memoria/` |
+
+**Cómo cargarlos:** en pgAdmin, después de `schema.sql`, `datos_ejemplo.sql`, `portal_cliente.sql` y `seguridad.sql`, ejecutar `db/datos_100_registros.sql`.
+Usuarios generados: `<correo>` / `sigsf123`. Clientes del portal generados: documento `71000001` a `71000100` (clave = documento).
+Detalle en `docs/08_DATOS_DE_DEMOSTRACION.md`.
+
+---
+
 ## 🆕 Versión 5.0 · Sistema de control de versiones (Git)
 
 Tercera entrega del taller. El proyecto ahora es un **repositorio Git** gestionado con **Git Flow**.
@@ -21,7 +36,7 @@ Tercera entrega del taller. El proyecto ahora es un **repositorio Git** gestiona
 | **Seguridad del repositorio** | `db.properties` fuera de Git (plantilla `db.properties.ejemplo`); hook `pre-commit` contra credenciales y archivos generados | `.gitignore`, `.githooks/pre-commit` |
 | **Versión en la aplicación** | Pantalla **Control de versiones** (versión, commits, red de ramas, etiquetas, esquema BD) y versión en el pie del panel; `GET /api/version`, `GET /api/versiones` (ADMIN) | `web/versiones.html`, paquete `version/` |
 | **Versionamiento de la BD** | Tabla `version_esquema` (1.0.0 → 5.0.0) creada por `db/version_esquema.sql` o al arrancar | `db/version_esquema.sql` |
-| **Build e integración continua** | `version.properties` con el commit dentro del .jar; GitHub Actions compila y ejecuta **117 pruebas** | `build.xml`, `.github/workflows/ci.yml` |
+| **Build e integración continua** | `version.properties` con el commit dentro del .jar; GitHub Actions compila y ejecuta **126 pruebas** | `build.xml`, `.github/workflows/ci.yml` |
 | **Documentación** | Inventario v5.0 (T-25…T-34 + inventario de artefactos), `CHANGELOG.md`, `CONTRIBUTING.md`, `VERSION` | `docs/02`, raíz |
 
 > **Al clonar:** `scripts\git\instalar_hooks.bat` y `copy db.properties.ejemplo db.properties`.
@@ -139,6 +154,7 @@ problemas de CORS y todo funciona abriendo una sola URL.
 1. Crea una base de datos llamada **`SistemaFinanciero`** (con S y F mayúsculas).
 2. En el **Query Tool**, ejecuta **`db/schema.sql`** (crea 31 tablas).
 3. Luego ejecuta **`db/datos_ejemplo.sql`** (carga datos de prueba).
+4. (Opcional) **`db/portal_cliente.sql`**, **`db/seguridad.sql`** y **`db/datos_100_registros.sql`** (100 registros por módulo).
 
 Detalle paso a paso en **`db/LEEME.txt`**.
 

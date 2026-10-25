@@ -1,6 +1,6 @@
 # SIGSF · Pruebas automatizadas (TDD)
 
-**Herramienta:** JUnit 4 (incluido en NetBeans). **Carpeta:** `test/`. **Resultado:** 117 pruebas en 24 clases (versión 5.0; eran 99 en 21 clases en la 4.0).
+**Herramienta:** JUnit 4 (incluido en NetBeans). **Carpeta:** `test/`. **Resultado:** 126 pruebas en 25 clases (versión 5.1; eran 117 en 24 clases en la 5.0 y 99 en 21 en la 4.0).
 
 También sin NetBeans: `sh scripts/compilar_y_probar.sh` (o `.bat`); es lo que ejecuta la integración continua en cada push.
 
@@ -37,6 +37,7 @@ La inyección de dependencias (DIP) es lo que permite el TDD: el servicio recibe
 | RespaldoServiceTest | 5 | Respaldo, retención, path traversal |
 | RepositorioMemoriaTest | 3 | Contrato DAO |
 | ApiIntegracionTest | 10 | Integración Vista↔API↔Servicio↔DAO, 401/403, cabeceras, auditoría |
+| DatosMasivosTest | 9 | 100 registros por módulo, 300 operaciones, idempotencia, claves foráneas (versión 5.1) |
 | LectorCsvTest | 4 | Importación CSV: separadores, comillas, Windows-1252, límites |
 | EscrituraArchivosTest | 4 | Fórmulas neutralizadas, CSV con BOM, Excel ida y vuelta, XXE |
 | ArchivoServiceTest | 7 | Importación por área: errores por fila, vista previa, mass assignment, operaciones no importables, exportación de las 9 áreas |
