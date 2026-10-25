@@ -19,6 +19,13 @@
 4) Carga los datos de ejemplo:
    - En el mismo Query Tool abre  db/datos_ejemplo.sql  y ejecutalo (F5).
 
+4b) (Opcional, recomendado para la demostracion) Carga 100 registros por modulo:
+   - Ejecuta, EN ESTE ORDEN: db/portal_cliente.sql, db/seguridad.sql y
+     luego  db/datos_100_registros.sql  (F5).
+   - Completa cada tabla hasta 100 filas (operacion: 300). Se puede ejecutar
+     varias veces: no duplica. No borra nada. Usuarios generados: <correo> / sigsf123.
+     Clientes del portal generados: documento 71000001..71000100 (clave = documento).
+
 5) Ajusta la conexion del backend si hace falta:
    - Edita el archivo  db.properties  (en la raiz del proyecto) con tu
      host, puerto, usuario y contrasena de PostgreSQL.

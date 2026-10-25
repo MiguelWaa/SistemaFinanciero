@@ -1,0 +1,1920 @@
+# SIGSF - datos de demostracion (modo memoria). Generado por scripts/datos/generar_datos_100.py
+@rol
+ADMIN	Administrador del sistema
+SUPERVISOR	Supervisa operaciones y reportes
+CAJERO	Registra operaciones de caja y cambio
+ANALISTA	Analiza prestamos, empenos y riesgos
+CAJERO_AQP_CENTRO	Sucursal Arequipa Centro: registra operaciones de caja y cambio
+CAJERO_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: registra operaciones de caja y cambio
+CAJERO_AQP_CAYMA	Sucursal Arequipa Cayma: registra operaciones de caja y cambio
+CAJERO_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: registra operaciones de caja y cambio
+CAJERO_LIMA_MIRAFLORES	Sucursal Lima Miraflores: registra operaciones de caja y cambio
+CAJERO_CUSCO	Sucursal Cusco: registra operaciones de caja y cambio
+CAJERO_JULIACA	Sucursal Juliaca: registra operaciones de caja y cambio
+CAJERO_TACNA	Sucursal Tacna: registra operaciones de caja y cambio
+ANALISTA_AQP_CENTRO	Sucursal Arequipa Centro: analiza prestamos, empenos y riesgos
+ANALISTA_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: analiza prestamos, empenos y riesgos
+ANALISTA_AQP_CAYMA	Sucursal Arequipa Cayma: analiza prestamos, empenos y riesgos
+ANALISTA_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: analiza prestamos, empenos y riesgos
+ANALISTA_LIMA_MIRAFLORES	Sucursal Lima Miraflores: analiza prestamos, empenos y riesgos
+ANALISTA_CUSCO	Sucursal Cusco: analiza prestamos, empenos y riesgos
+ANALISTA_JULIACA	Sucursal Juliaca: analiza prestamos, empenos y riesgos
+ANALISTA_TACNA	Sucursal Tacna: analiza prestamos, empenos y riesgos
+SUPERVISOR_AQP_CENTRO	Sucursal Arequipa Centro: supervisa operaciones y aprueba solicitudes
+SUPERVISOR_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: supervisa operaciones y aprueba solicitudes
+SUPERVISOR_AQP_CAYMA	Sucursal Arequipa Cayma: supervisa operaciones y aprueba solicitudes
+SUPERVISOR_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: supervisa operaciones y aprueba solicitudes
+SUPERVISOR_LIMA_MIRAFLORES	Sucursal Lima Miraflores: supervisa operaciones y aprueba solicitudes
+SUPERVISOR_CUSCO	Sucursal Cusco: supervisa operaciones y aprueba solicitudes
+SUPERVISOR_JULIACA	Sucursal Juliaca: supervisa operaciones y aprueba solicitudes
+SUPERVISOR_TACNA	Sucursal Tacna: supervisa operaciones y aprueba solicitudes
+AUDITOR_AQP_CENTRO	Sucursal Arequipa Centro: consulta reportes y bitacora
+AUDITOR_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: consulta reportes y bitacora
+AUDITOR_AQP_CAYMA	Sucursal Arequipa Cayma: consulta reportes y bitacora
+AUDITOR_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: consulta reportes y bitacora
+AUDITOR_LIMA_MIRAFLORES	Sucursal Lima Miraflores: consulta reportes y bitacora
+AUDITOR_CUSCO	Sucursal Cusco: consulta reportes y bitacora
+AUDITOR_JULIACA	Sucursal Juliaca: consulta reportes y bitacora
+AUDITOR_TACNA	Sucursal Tacna: consulta reportes y bitacora
+TESORERO_AQP_CENTRO	Sucursal Arequipa Centro: controla la liquidez y los tipos de cambio
+TESORERO_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: controla la liquidez y los tipos de cambio
+TESORERO_AQP_CAYMA	Sucursal Arequipa Cayma: controla la liquidez y los tipos de cambio
+TESORERO_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: controla la liquidez y los tipos de cambio
+TESORERO_LIMA_MIRAFLORES	Sucursal Lima Miraflores: controla la liquidez y los tipos de cambio
+TESORERO_CUSCO	Sucursal Cusco: controla la liquidez y los tipos de cambio
+TESORERO_JULIACA	Sucursal Juliaca: controla la liquidez y los tipos de cambio
+TESORERO_TACNA	Sucursal Tacna: controla la liquidez y los tipos de cambio
+EJECUTIVO_VENTAS_AQP_CENTRO	Sucursal Arequipa Centro: registra ventas de servicios financieros
+EJECUTIVO_VENTAS_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: registra ventas de servicios financieros
+EJECUTIVO_VENTAS_AQP_CAYMA	Sucursal Arequipa Cayma: registra ventas de servicios financieros
+EJECUTIVO_VENTAS_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: registra ventas de servicios financieros
+EJECUTIVO_VENTAS_LIMA_MIRAFLORES	Sucursal Lima Miraflores: registra ventas de servicios financieros
+EJECUTIVO_VENTAS_CUSCO	Sucursal Cusco: registra ventas de servicios financieros
+EJECUTIVO_VENTAS_JULIACA	Sucursal Juliaca: registra ventas de servicios financieros
+EJECUTIVO_VENTAS_TACNA	Sucursal Tacna: registra ventas de servicios financieros
+JEFE_ALMACEN_AQP_CENTRO	Sucursal Arequipa Centro: administra productos y stock
+JEFE_ALMACEN_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: administra productos y stock
+JEFE_ALMACEN_AQP_CAYMA	Sucursal Arequipa Cayma: administra productos y stock
+JEFE_ALMACEN_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: administra productos y stock
+JEFE_ALMACEN_LIMA_MIRAFLORES	Sucursal Lima Miraflores: administra productos y stock
+JEFE_ALMACEN_CUSCO	Sucursal Cusco: administra productos y stock
+JEFE_ALMACEN_JULIACA	Sucursal Juliaca: administra productos y stock
+JEFE_ALMACEN_TACNA	Sucursal Tacna: administra productos y stock
+JEFE_LOGISTICA_AQP_CENTRO	Sucursal Arequipa Centro: gestiona proveedores y abastecimiento
+JEFE_LOGISTICA_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: gestiona proveedores y abastecimiento
+JEFE_LOGISTICA_AQP_CAYMA	Sucursal Arequipa Cayma: gestiona proveedores y abastecimiento
+JEFE_LOGISTICA_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: gestiona proveedores y abastecimiento
+JEFE_LOGISTICA_LIMA_MIRAFLORES	Sucursal Lima Miraflores: gestiona proveedores y abastecimiento
+JEFE_LOGISTICA_CUSCO	Sucursal Cusco: gestiona proveedores y abastecimiento
+JEFE_LOGISTICA_JULIACA	Sucursal Juliaca: gestiona proveedores y abastecimiento
+JEFE_LOGISTICA_TACNA	Sucursal Tacna: gestiona proveedores y abastecimiento
+JEFE_PRODUCCION_AQP_CENTRO	Sucursal Arequipa Centro: gestiona lineas y ordenes de produccion
+JEFE_PRODUCCION_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: gestiona lineas y ordenes de produccion
+JEFE_PRODUCCION_AQP_CAYMA	Sucursal Arequipa Cayma: gestiona lineas y ordenes de produccion
+JEFE_PRODUCCION_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: gestiona lineas y ordenes de produccion
+JEFE_PRODUCCION_LIMA_MIRAFLORES	Sucursal Lima Miraflores: gestiona lineas y ordenes de produccion
+JEFE_PRODUCCION_CUSCO	Sucursal Cusco: gestiona lineas y ordenes de produccion
+JEFE_PRODUCCION_JULIACA	Sucursal Juliaca: gestiona lineas y ordenes de produccion
+JEFE_PRODUCCION_TACNA	Sucursal Tacna: gestiona lineas y ordenes de produccion
+GERENTE_AQP_CENTRO	Sucursal Arequipa Centro: resuelve expedientes de gerencia
+GERENTE_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: resuelve expedientes de gerencia
+GERENTE_AQP_CAYMA	Sucursal Arequipa Cayma: resuelve expedientes de gerencia
+GERENTE_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: resuelve expedientes de gerencia
+GERENTE_LIMA_MIRAFLORES	Sucursal Lima Miraflores: resuelve expedientes de gerencia
+GERENTE_CUSCO	Sucursal Cusco: resuelve expedientes de gerencia
+GERENTE_JULIACA	Sucursal Juliaca: resuelve expedientes de gerencia
+GERENTE_TACNA	Sucursal Tacna: resuelve expedientes de gerencia
+ASESOR_MARKETING_AQP_CENTRO	Sucursal Arequipa Centro: gestiona campanias y prospectos
+ASESOR_MARKETING_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: gestiona campanias y prospectos
+ASESOR_MARKETING_AQP_CAYMA	Sucursal Arequipa Cayma: gestiona campanias y prospectos
+ASESOR_MARKETING_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: gestiona campanias y prospectos
+ASESOR_MARKETING_LIMA_MIRAFLORES	Sucursal Lima Miraflores: gestiona campanias y prospectos
+ASESOR_MARKETING_CUSCO	Sucursal Cusco: gestiona campanias y prospectos
+ASESOR_MARKETING_JULIACA	Sucursal Juliaca: gestiona campanias y prospectos
+ASESOR_MARKETING_TACNA	Sucursal Tacna: gestiona campanias y prospectos
+TASADOR_AQP_CENTRO	Sucursal Arequipa Centro: evalua articulos en garantia
+TASADOR_AQP_YANAHUARA	Sucursal Arequipa Yanahuara: evalua articulos en garantia
+TASADOR_AQP_CAYMA	Sucursal Arequipa Cayma: evalua articulos en garantia
+TASADOR_AQP_PAUCARPATA	Sucursal Arequipa Paucarpata: evalua articulos en garantia
+TASADOR_LIMA_MIRAFLORES	Sucursal Lima Miraflores: evalua articulos en garantia
+TASADOR_CUSCO	Sucursal Cusco: evalua articulos en garantia
+TASADOR_JULIACA	Sucursal Juliaca: evalua articulos en garantia
+TASADOR_TACNA	Sucursal Tacna: evalua articulos en garantia
+@usuario
+Sergio	Zegarra Paredes	sergio.zegarra01@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-114-2-52
+Yesenia	Rojas Pacheco	yesenia.rojas02@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	SUPERVISOR	PENDIENTE	T-113-12-40
+Yesenia	Arenas Portugal	yesenia.arenas03@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-149-1-38
+Lucia	Torres Huanca	lucia.torres04@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-56-15-2
+Mario	Zegarra Delgado	mario.zegarra05@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-83-7-8
+Alvaro	Condori Palomino	alvaro.condori06@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-31-10-10
+Katherine	Sucasaca Choque	katherine.sucasaca07@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-72-17-25
+Carlos	Pacheco Vargas	carlos.pacheco08@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-16-16-19
+Flor	Zegarra Salazar	flor.zegarra09@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-21-5-48
+Nestor	Cornejo Cruz	nestor.cornejo10@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-74-20-30
+Maria	Portugal Vargas	maria.portugal11@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-137-14-59
+Patricia	Medina Soncco	patricia.medina12@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-4-7-32
+Carlos	Gutierrez Gutierrez	carlos.gutierrez13@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-134-11-47
+Jose	Pinto Condori	jose.pinto14@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-64-6-12
+Nancy	Ccama Yanque	nancy.ccama15@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	BLOQUEADO	T-139-7-34
+Renzo	Bellido Ccori	renzo.bellido16@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-63-18-46
+Yesenia	Caceres Cutipa	yesenia.caceres17@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	INACTIVO	T-109-21-17
+Ricardo	Apaza Ramos	ricardo.apaza18@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-111-0-4
+Marco	Paredes Chavez	marco.paredes19@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-3-19-46
+Miguel	Vargas Mamani	miguel.vargas20@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-98-7-26
+Sofia	Vargas Ticona	sofia.vargas21@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-53-21-41
+Jose	Vargas Zapata	jose.vargas22@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-2-2-5
+Rosa	Delgado Portugal	rosa.delgado23@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-135-21-8
+Hugo	Yanque Zapata	hugo.yanque24@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	SUPERVISOR	ACTIVO	T-1-23-53
+Carlos	Rojas Rojas	carlos.rojas25@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-91-10-46
+Karen	Valdivia Valdivia	karen.valdivia26@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-76-9-45
+Rocio	Caceres Nina	rocio.caceres27@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-40-6-25
+Milagros	Zapata Rojas	milagros.zapata28@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	SUPERVISOR	ACTIVO	T-34-1-7
+Elena	Cutipa Cutipa	elena.cutipa29@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-153-9-40
+Lourdes	Valdivia Medina	lourdes.valdivia30@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	BLOQUEADO	T-36-9-42
+Monica	Pacheco Portugal	monica.pacheco31@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-28-0-27
+Ana	Gutierrez Sucasaca	ana.gutierrez32@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-142-10-35
+Hugo	Huanca Chavez	hugo.huanca33@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-12-2-7
+Silvia	Salazar Valdivia	silvia.salazar34@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-152-0-20
+Fiorella	Condori Rojas	fiorella.condori35@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-63-18-49
+Andres	Zapata Portugal	andres.zapata36@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-148-4-24
+Mario	Pinto Cruz	mario.pinto37@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-63-3-0
+Monica	Rivera Cornejo	monica.rivera38@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-95-9-29
+Valeria	Lazo Gutierrez	valeria.lazo39@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-25-2-23
+Diego	Cutipa Arenas	diego.cutipa40@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-121-13-53
+Jorge	Ticona Salazar	jorge.ticona41@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-111-11-46
+Nancy	Ramos Huamani	nancy.ramos42@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-83-12-22
+Flor	Delgado Flores	flor.delgado43@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-137-9-49
+Lucia	Condori Huanca	lucia.condori44@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-11-17-53
+Hugo	Apaza Pinto	hugo.apaza45@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-58-12-59
+Karen	Zegarra Mamani	karen.zegarra46@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-77-15-11
+Carmen	Chavez Ramos	carmen.chavez47@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	SUPERVISOR	ACTIVO	T-145-23-51
+Lourdes	Salazar Paredes	lourdes.salazar48@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-113-17-28
+Rocio	Benavides Callo	rocio.benavides49@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-121-21-7
+Jorge	Ccori Salazar	jorge.ccori50@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-146-19-10
+Carlos	Sucasaca Palomino	carlos.sucasaca51@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-112-7-56
+Carmen	Condori Zegarra	carmen.condori52@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-42-0-31
+Cesar	Callo Pinto	cesar.callo53@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-41-5-9
+Paola	Pinto Zapata	paola.pinto54@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-138-19-56
+Percy	Zegarra Pacheco	percy.zegarra55@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-73-1-42
+Flor	Lazo Choque	flor.lazo56@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	SUPERVISOR	ACTIVO	T-148-7-24
+Edwin	Ticona Bellido	edwin.ticona57@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	SUPERVISOR	ACTIVO	T-14-19-52
+Diego	Salazar Rivera	diego.salazar58@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-88-13-54
+Silvia	Zapata Palomino	silvia.zapata59@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-75-8-36
+Oscar	Medina Benavides	oscar.medina60@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-123-0-27
+Mario	Apaza Lazo	mario.apaza61@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	PENDIENTE	T-102-18-34
+Hugo	Benavides Cruz	hugo.benavides62@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-10-19-32
+Raul	Chavez Soncco	raul.chavez63@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-3-7-42
+Cesar	Soncco Ticona	cesar.soncco64@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-4-10-58
+Andres	Huanca Rivera	andres.huanca65@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-82-8-14
+Wilber	Huanca Castillo	wilber.huanca66@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ADMIN	ACTIVO	T-109-2-5
+Paola	Rivera Rivera	paola.rivera67@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-115-9-5
+Silvia	Bellido Paredes	silvia.bellido68@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-19-7-10
+Fiorella	Choque Gutierrez	fiorella.choque69@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-149-0-49
+Miguel	Valdivia Nina	miguel.valdivia70@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-8-5-59
+Rocio	Flores Lazo	rocio.flores71@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ADMIN	INACTIVO	T-19-4-49
+Rosa	Cruz Chavez	rosa.cruz72@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	BLOQUEADO	T-97-21-9
+Mario	Callo Condori	mario.callo73@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-91-4-23
+Cesar	Salazar Soncco	cesar.salazar74@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-113-18-58
+Ana	Pacheco Sucasaca	ana.pacheco75@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-106-14-4
+Katherine	Pinto Gutierrez	katherine.pinto76@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-100-19-56
+Jose	Cutipa Mamani	jose.cutipa77@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	BLOQUEADO	T-115-15-55
+Pedro	Torres Yanque	pedro.torres78@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-141-15-26
+Jimena	Medina Flores	jimena.medina79@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	BLOQUEADO	T-131-14-38
+Lourdes	Bellido Choque	lourdes.bellido80@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	PENDIENTE	T-79-15-28
+Cesar	Vargas Huanca	cesar.vargas81@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-159-3-9
+Andres	Huanca Ticona	andres.huanca82@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-104-0-4
+Nancy	Ccama Palomino	nancy.ccama83@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-120-20-22
+Carlos	Callo Pinto	carlos.callo84@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-58-17-17
+Maria	Rojas Ccori	maria.rojas85@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-102-2-37
+Lourdes	Ramos Bellido	lourdes.ramos86@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-30-20-12
+Cesar	Nina Cornejo	cesar.nina87@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-25-19-16
+Sofia	Benavides Quispe	sofia.benavides88@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-149-20-21
+Pedro	Rivera Zapata	pedro.rivera89@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	BLOQUEADO	T-109-21-43
+Miguel	Castillo Ccori	miguel.castillo90@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	SUPERVISOR	ACTIVO	T-122-12-9
+Javier	Ramos Paredes	javier.ramos91@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	INACTIVO	T-107-11-36
+Yesenia	Nina Arenas	yesenia.nina92@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	BLOQUEADO	T-15-10-29
+Percy	Bellido Cruz	percy.bellido93@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-125-22-31
+Mario	Zapata Mamani	mario.zapata94@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-3-21-32
+Jimena	Delgado Cornejo	jimena.delgado95@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-137-15-55
+Nancy	Cornejo Mamani	nancy.cornejo96@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	ACTIVO	T-139-10-27
+Edwin	Vargas Callo	edwin.vargas97@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	ANALISTA	INACTIVO	T-146-18-17
+Hugo	Chavez Condori	hugo.chavez98@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	ACTIVO	T-21-16-42
+Percy	Palomino Yanque	percy.palomino99@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	INACTIVO	T-157-8-58
+Nancy	Benavides Mendoza	nancy.benavides100@sigsf.com	05c503673ebf39c56e600b92baf38a72941318a7d892c0e779d7f3d171b84ef8	CAJERO	PENDIENTE	T-37-8-7
+@servicio
+Cambio de moneda USD - Sucursal Centro	CAMBIO	Compra y venta de dolares (Sucursal Centro)	ACTIVO
+Cambio de moneda EUR - Sucursal Centro	CAMBIO	Compra y venta de euros (Sucursal Centro)	ACTIVO
+Cambio de moneda GBP - Sucursal Centro	CAMBIO	Compra y venta de libras (Sucursal Centro)	ACTIVO
+Prestamo personal - Sucursal Centro	CREDITO	Prestamo con interes simple (Sucursal Centro)	ACTIVO
+Prestamo de libre disponibilidad - Sucursal Centro	CREDITO	Credito sin garantia (Sucursal Centro)	ACTIVO
+Prestamo para capital de trabajo - Sucursal Centro	CREDITO	Credito para negocios (Sucursal Centro)	ACTIVO
+Empeno de joyas - Sucursal Centro	EMPENO	Prestamo con garantia de joyas (Sucursal Centro)	ACTIVO
+Empeno de electronicos - Sucursal Centro	EMPENO	Prestamo con garantia de equipos (Sucursal Centro)	ACTIVO
+Empeno de herramientas - Sucursal Centro	EMPENO	Prestamo con garantia de herramientas (Sucursal Centro)	ACTIVO
+Giro nacional - Sucursal Centro	GIRO	Envio de dinero nacional (Sucursal Centro)	ACTIVO
+Envio de remesas - Sucursal Centro	GIRO	Recepcion y envio de remesas (Sucursal Centro)	ACTIVO
+Deposito a plazo fijo - Sucursal Centro	AHORRO	Deposito con tasa fija (Sucursal Centro)	ACTIVO
+Cuenta de ahorros - Sucursal Centro	AHORRO	Cuenta de ahorro personal (Sucursal Centro)	ACTIVO
+Seguro de vida - Sucursal Centro	SEGURO	Cobertura de vida (Sucursal Centro)	ACTIVO
+Seguro de articulos empenados - Sucursal Centro	SEGURO	Cobertura de articulos en garantia (Sucursal Centro)	ACTIVO
+Tarjeta de debito - Sucursal Centro	TARJETA	Emision de tarjeta de debito (Sucursal Centro)	ACTIVO
+Alquiler de caja de seguridad - Sucursal Centro	CUSTODIA	Custodia de valores (Sucursal Centro)	ACTIVO
+Pago de servicios - Sucursal Centro	PAGOS	Recaudacion de servicios (Sucursal Centro)	ACTIVO
+Asesoria financiera - Sucursal Centro	ASESORIA	Asesoria personalizada (Sucursal Centro)	ACTIVO
+Tasacion de articulos - Sucursal Centro	ASESORIA	Tasacion profesional (Sucursal Centro)	ACTIVO
+Cambio de moneda USD - Sucursal Yanahuara	CAMBIO	Compra y venta de dolares (Sucursal Yanahuara)	ACTIVO
+Cambio de moneda EUR - Sucursal Yanahuara	CAMBIO	Compra y venta de euros (Sucursal Yanahuara)	ACTIVO
+Cambio de moneda GBP - Sucursal Yanahuara	CAMBIO	Compra y venta de libras (Sucursal Yanahuara)	ACTIVO
+Prestamo personal - Sucursal Yanahuara	CREDITO	Prestamo con interes simple (Sucursal Yanahuara)	ACTIVO
+Prestamo de libre disponibilidad - Sucursal Yanahuara	CREDITO	Credito sin garantia (Sucursal Yanahuara)	ACTIVO
+Prestamo para capital de trabajo - Sucursal Yanahuara	CREDITO	Credito para negocios (Sucursal Yanahuara)	INACTIVO
+Empeno de joyas - Sucursal Yanahuara	EMPENO	Prestamo con garantia de joyas (Sucursal Yanahuara)	INACTIVO
+Empeno de electronicos - Sucursal Yanahuara	EMPENO	Prestamo con garantia de equipos (Sucursal Yanahuara)	ACTIVO
+Empeno de herramientas - Sucursal Yanahuara	EMPENO	Prestamo con garantia de herramientas (Sucursal Yanahuara)	ACTIVO
+Giro nacional - Sucursal Yanahuara	GIRO	Envio de dinero nacional (Sucursal Yanahuara)	ACTIVO
+Envio de remesas - Sucursal Yanahuara	GIRO	Recepcion y envio de remesas (Sucursal Yanahuara)	ACTIVO
+Deposito a plazo fijo - Sucursal Yanahuara	AHORRO	Deposito con tasa fija (Sucursal Yanahuara)	ACTIVO
+Cuenta de ahorros - Sucursal Yanahuara	AHORRO	Cuenta de ahorro personal (Sucursal Yanahuara)	ACTIVO
+Seguro de vida - Sucursal Yanahuara	SEGURO	Cobertura de vida (Sucursal Yanahuara)	ACTIVO
+Seguro de articulos empenados - Sucursal Yanahuara	SEGURO	Cobertura de articulos en garantia (Sucursal Yanahuara)	ACTIVO
+Tarjeta de debito - Sucursal Yanahuara	TARJETA	Emision de tarjeta de debito (Sucursal Yanahuara)	ACTIVO
+Alquiler de caja de seguridad - Sucursal Yanahuara	CUSTODIA	Custodia de valores (Sucursal Yanahuara)	ACTIVO
+Pago de servicios - Sucursal Yanahuara	PAGOS	Recaudacion de servicios (Sucursal Yanahuara)	ACTIVO
+Asesoria financiera - Sucursal Yanahuara	ASESORIA	Asesoria personalizada (Sucursal Yanahuara)	ACTIVO
+Tasacion de articulos - Sucursal Yanahuara	ASESORIA	Tasacion profesional (Sucursal Yanahuara)	ACTIVO
+Cambio de moneda USD - Sucursal Cayma	CAMBIO	Compra y venta de dolares (Sucursal Cayma)	ACTIVO
+Cambio de moneda EUR - Sucursal Cayma	CAMBIO	Compra y venta de euros (Sucursal Cayma)	ACTIVO
+Cambio de moneda GBP - Sucursal Cayma	CAMBIO	Compra y venta de libras (Sucursal Cayma)	ACTIVO
+Prestamo personal - Sucursal Cayma	CREDITO	Prestamo con interes simple (Sucursal Cayma)	ACTIVO
+Prestamo de libre disponibilidad - Sucursal Cayma	CREDITO	Credito sin garantia (Sucursal Cayma)	ACTIVO
+Prestamo para capital de trabajo - Sucursal Cayma	CREDITO	Credito para negocios (Sucursal Cayma)	ACTIVO
+Empeno de joyas - Sucursal Cayma	EMPENO	Prestamo con garantia de joyas (Sucursal Cayma)	INACTIVO
+Empeno de electronicos - Sucursal Cayma	EMPENO	Prestamo con garantia de equipos (Sucursal Cayma)	ACTIVO
+Empeno de herramientas - Sucursal Cayma	EMPENO	Prestamo con garantia de herramientas (Sucursal Cayma)	ACTIVO
+Giro nacional - Sucursal Cayma	GIRO	Envio de dinero nacional (Sucursal Cayma)	ACTIVO
+Envio de remesas - Sucursal Cayma	GIRO	Recepcion y envio de remesas (Sucursal Cayma)	INACTIVO
+Deposito a plazo fijo - Sucursal Cayma	AHORRO	Deposito con tasa fija (Sucursal Cayma)	ACTIVO
+Cuenta de ahorros - Sucursal Cayma	AHORRO	Cuenta de ahorro personal (Sucursal Cayma)	ACTIVO
+Seguro de vida - Sucursal Cayma	SEGURO	Cobertura de vida (Sucursal Cayma)	ACTIVO
+Seguro de articulos empenados - Sucursal Cayma	SEGURO	Cobertura de articulos en garantia (Sucursal Cayma)	ACTIVO
+Tarjeta de debito - Sucursal Cayma	TARJETA	Emision de tarjeta de debito (Sucursal Cayma)	ACTIVO
+Alquiler de caja de seguridad - Sucursal Cayma	CUSTODIA	Custodia de valores (Sucursal Cayma)	ACTIVO
+Pago de servicios - Sucursal Cayma	PAGOS	Recaudacion de servicios (Sucursal Cayma)	ACTIVO
+Asesoria financiera - Sucursal Cayma	ASESORIA	Asesoria personalizada (Sucursal Cayma)	ACTIVO
+Tasacion de articulos - Sucursal Cayma	ASESORIA	Tasacion profesional (Sucursal Cayma)	ACTIVO
+Cambio de moneda USD - Agencia Paucarpata	CAMBIO	Compra y venta de dolares (Agencia Paucarpata)	ACTIVO
+Cambio de moneda EUR - Agencia Paucarpata	CAMBIO	Compra y venta de euros (Agencia Paucarpata)	ACTIVO
+Cambio de moneda GBP - Agencia Paucarpata	CAMBIO	Compra y venta de libras (Agencia Paucarpata)	ACTIVO
+Prestamo personal - Agencia Paucarpata	CREDITO	Prestamo con interes simple (Agencia Paucarpata)	ACTIVO
+Prestamo de libre disponibilidad - Agencia Paucarpata	CREDITO	Credito sin garantia (Agencia Paucarpata)	ACTIVO
+Prestamo para capital de trabajo - Agencia Paucarpata	CREDITO	Credito para negocios (Agencia Paucarpata)	ACTIVO
+Empeno de joyas - Agencia Paucarpata	EMPENO	Prestamo con garantia de joyas (Agencia Paucarpata)	ACTIVO
+Empeno de electronicos - Agencia Paucarpata	EMPENO	Prestamo con garantia de equipos (Agencia Paucarpata)	ACTIVO
+Empeno de herramientas - Agencia Paucarpata	EMPENO	Prestamo con garantia de herramientas (Agencia Paucarpata)	ACTIVO
+Giro nacional - Agencia Paucarpata	GIRO	Envio de dinero nacional (Agencia Paucarpata)	ACTIVO
+Envio de remesas - Agencia Paucarpata	GIRO	Recepcion y envio de remesas (Agencia Paucarpata)	ACTIVO
+Deposito a plazo fijo - Agencia Paucarpata	AHORRO	Deposito con tasa fija (Agencia Paucarpata)	ACTIVO
+Cuenta de ahorros - Agencia Paucarpata	AHORRO	Cuenta de ahorro personal (Agencia Paucarpata)	INACTIVO
+Seguro de vida - Agencia Paucarpata	SEGURO	Cobertura de vida (Agencia Paucarpata)	ACTIVO
+Seguro de articulos empenados - Agencia Paucarpata	SEGURO	Cobertura de articulos en garantia (Agencia Paucarpata)	ACTIVO
+Tarjeta de debito - Agencia Paucarpata	TARJETA	Emision de tarjeta de debito (Agencia Paucarpata)	ACTIVO
+Alquiler de caja de seguridad - Agencia Paucarpata	CUSTODIA	Custodia de valores (Agencia Paucarpata)	INACTIVO
+Pago de servicios - Agencia Paucarpata	PAGOS	Recaudacion de servicios (Agencia Paucarpata)	ACTIVO
+Asesoria financiera - Agencia Paucarpata	ASESORIA	Asesoria personalizada (Agencia Paucarpata)	ACTIVO
+Tasacion de articulos - Agencia Paucarpata	ASESORIA	Tasacion profesional (Agencia Paucarpata)	ACTIVO
+Cambio de moneda USD - Portal del Cliente	CAMBIO	Compra y venta de dolares (Portal del Cliente)	INACTIVO
+Cambio de moneda EUR - Portal del Cliente	CAMBIO	Compra y venta de euros (Portal del Cliente)	ACTIVO
+Cambio de moneda GBP - Portal del Cliente	CAMBIO	Compra y venta de libras (Portal del Cliente)	ACTIVO
+Prestamo personal - Portal del Cliente	CREDITO	Prestamo con interes simple (Portal del Cliente)	ACTIVO
+Prestamo de libre disponibilidad - Portal del Cliente	CREDITO	Credito sin garantia (Portal del Cliente)	ACTIVO
+Prestamo para capital de trabajo - Portal del Cliente	CREDITO	Credito para negocios (Portal del Cliente)	ACTIVO
+Empeno de joyas - Portal del Cliente	EMPENO	Prestamo con garantia de joyas (Portal del Cliente)	ACTIVO
+Empeno de electronicos - Portal del Cliente	EMPENO	Prestamo con garantia de equipos (Portal del Cliente)	ACTIVO
+Empeno de herramientas - Portal del Cliente	EMPENO	Prestamo con garantia de herramientas (Portal del Cliente)	INACTIVO
+Giro nacional - Portal del Cliente	GIRO	Envio de dinero nacional (Portal del Cliente)	ACTIVO
+Envio de remesas - Portal del Cliente	GIRO	Recepcion y envio de remesas (Portal del Cliente)	ACTIVO
+Deposito a plazo fijo - Portal del Cliente	AHORRO	Deposito con tasa fija (Portal del Cliente)	ACTIVO
+Cuenta de ahorros - Portal del Cliente	AHORRO	Cuenta de ahorro personal (Portal del Cliente)	ACTIVO
+Seguro de vida - Portal del Cliente	SEGURO	Cobertura de vida (Portal del Cliente)	ACTIVO
+Seguro de articulos empenados - Portal del Cliente	SEGURO	Cobertura de articulos en garantia (Portal del Cliente)	INACTIVO
+Tarjeta de debito - Portal del Cliente	TARJETA	Emision de tarjeta de debito (Portal del Cliente)	ACTIVO
+Alquiler de caja de seguridad - Portal del Cliente	CUSTODIA	Custodia de valores (Portal del Cliente)	ACTIVO
+Pago de servicios - Portal del Cliente	PAGOS	Recaudacion de servicios (Portal del Cliente)	ACTIVO
+Asesoria financiera - Portal del Cliente	ASESORIA	Asesoria personalizada (Portal del Cliente)	ACTIVO
+Tasacion de articulos - Portal del Cliente	ASESORIA	Tasacion profesional (Portal del Cliente)	ACTIVO
+@cliente
+DNI	71000001	Patricia	Pinto Mendoza	D-17572	925143531	patricia.pinto1@gmail.com	Calle Puente Bolognesi 350, Tiabaya	ACTIVO	T-39-4-2
+DNI	71000002	Cesar	Huanca Soncco	D-12771	916414305	cesar.huanca2@hotmail.com	Calle Santa Catalina 1653, Mariano Melgar	ACTIVO	T-147-12-54
+DNI	71000003	Maria	Yucra Bellido	D-14233	960822635	maria.yucra3@hotmail.com	Av. Parra 1958, Hunter	BLOQUEADO	T-105-17-1
+DNI	71000004	Marco	Nina Ticona	D-13023	910833415	marco.nina4@yahoo.es	Av. Parra 1443, Miraflores	ACTIVO	T-125-5-35
+DNI	71000005	Ricardo	Ccama Palomino	D-13333	986469162	ricardo.ccama5@hotmail.com	Calle Jerusalen 1203, J.L. Bustamante y Rivero	BLOQUEADO	T-149-23-41
+DNI	71000006	Jimena	Pacheco Sucasaca	D-19659	932431991	jimena.pacheco6@gmail.com	Calle Jerusalen 693, J.L. Bustamante y Rivero	ACTIVO	T-102-12-53
+DNI	71000007	Andres	Soncco Condori	D-17363	931579688	andres.soncco7@hotmail.com	Av. Parra 141, Hunter	ACTIVO	T-120-9-53
+DNI	71000008	Luis	Zegarra Pinto	D-17873	962027030	luis.zegarra8@outlook.com	Calle Mercaderes 1201, Yanahuara	ACTIVO	T-163-1-30
+DNI	71000009	Maria	Valdivia Portugal	D-10445	980114872	maria.valdivia9@yahoo.es	Calle Peral 2202, Yanahuara	ACTIVO	T-33-11-33
+DNI	71000010	Valeria	Yucra Chavez	D-15159	910369133	valeria.yucra10@yahoo.es	Av. Progreso 748, Cerro Colorado	ACTIVO	T-66-22-11
+DNI	71000011	Alvaro	Cutipa Torres	D-14015	930865104	alvaro.cutipa11@gmail.com	Calle San Francisco 807, Sachaca	ACTIVO	T-72-7-14
+CE	002000012	Rosa	Sucasaca Ramos	D-13215	955947958	rosa.sucasaca12@outlook.com	Av. Lima 1750, Cercado	ACTIVO	T-39-18-38
+DNI	71000013	Alvaro	Callo Yucra	D-14659	928537742	alvaro.callo13@outlook.com	Av. Lima 982, Characato	ACTIVO	T-113-9-30
+DNI	71000014	Alvaro	Huanca Ccama	D-12093	911705039	alvaro.huanca14@gmail.com	Av. Lima 204, Cerro Colorado	INACTIVO	T-134-16-56
+DNI	71000015	Alvaro	Benavides Yucra	D-19366	982097482	alvaro.benavides15@outlook.com	Calle Jerusalen 1624, Miraflores	ACTIVO	T-12-18-47
+DNI	71000016	Mario	Portugal Castillo	D-15730	995371082	mario.portugal16@gmail.com	Av. Venezuela 2295, Cayma	ACTIVO	T-58-20-5
+DNI	71000017	Judith	Ramos Llerena	D-8083	963288484	judith.ramos17@outlook.com	Av. Progreso 2035, Characato	ACTIVO	T-115-15-46
+DNI	71000018	Pedro	Zapata Soncco	D-15914	999702177	pedro.zapata18@yahoo.es	Calle San Francisco 653, Sachaca	ACTIVO	T-29-18-49
+DNI	71000019	Flor	Chavez Gutierrez	D-7760	953053995	flor.chavez19@outlook.com	Calle San Francisco 1658, Paucarpata	ACTIVO	T-132-17-0
+DNI	71000020	Milagros	Ccori Cutipa	D-10431	937146435	milagros.ccori20@outlook.com	Av. Lima 861, Hunter	ACTIVO	T-32-11-39
+DNI	71000021	Milagros	Medina Soncco	D-14913	989428507	milagros.medina21@yahoo.es	Calle Peral 613, Characato	ACTIVO	T-146-12-44
+DNI	71000022	Miguel	Arenas Quispe	D-9898	998971818	miguel.arenas22@hotmail.com	Calle Mercaderes 821, Yanahuara	ACTIVO	T-166-9-8
+DNI	71000023	Victor	Ramos Callo	D-13982	955925001	victor.ramos23@hotmail.com	Calle Mercaderes 335, Cerro Colorado	ACTIVO	T-135-5-56
+CE	002000024	Marco	Sucasaca Ccama	D-8209	933694266	marco.sucasaca24@outlook.com	Calle Peral 1743, Cayma	ACTIVO	T-98-13-55
+DNI	71000025	Sofia	Huanca Ticona	D-12759	988730722	sofia.huanca25@yahoo.es	Av. Lima 832, Paucarpata	ACTIVO	T-72-7-48
+DNI	71000026	Jorge	Mamani Gutierrez	D-16741	968148215	jorge.mamani26@hotmail.com	Calle Puente Bolognesi 2241, Hunter	ACTIVO	T-133-1-51
+DNI	71000027	Renzo	Benavides Torres	D-7563	977014201	renzo.benavides27@hotmail.com	Av. Kennedy 146, Mariano Melgar	BLOQUEADO	T-30-5-9
+DNI	71000028	Carlos	Chavez Pacheco	D-21647	985876500	carlos.chavez28@yahoo.es	Av. Dolores 2317, Mariano Melgar	ACTIVO	T-125-10-31
+DNI	71000029	Oscar	Callo Portugal	D-19787	910971559	oscar.callo29@outlook.com	Jr. Union 1488, Hunter	ACTIVO	T-100-18-5
+DNI	71000030	Elena	Huanca Torres	D-19774	970035929	elena.huanca30@gmail.com	Calle Santa Catalina 2204, Yanahuara	ACTIVO	T-78-16-58
+DNI	71000031	Pedro	Pinto Mamani	D-21764	948192742	pedro.pinto31@yahoo.es	Av. Dolores 1277, Hunter	ACTIVO	T-131-14-48
+DNI	71000032	Valeria	Cutipa Caceres	D-7566	942487972	valeria.cutipa32@hotmail.com	Calle San Francisco 1659, Sachaca	ACTIVO	T-16-23-15
+DNI	71000033	Rosa	Vargas Portugal	D-20972	925142754	rosa.vargas33@gmail.com	Av. Venezuela 402, Cercado	ACTIVO	T-146-2-44
+DNI	71000034	Cesar	Cutipa Lazo	D-8943	936491236	cesar.cutipa34@gmail.com	Av. Goyeneche 1357, Cerro Colorado	ACTIVO	T-127-6-12
+DNI	71000035	Wilber	Huamani Ticona	D-14439	948424975	wilber.huamani35@hotmail.com	Av. Ejercito 1311, J.L. Bustamante y Rivero	ACTIVO	T-60-18-48
+CE	002000036	Oscar	Pinto Delgado	D-15439	992198633	oscar.pinto36@outlook.com	Calle Santa Catalina 214, Paucarpata	ACTIVO	T-61-10-43
+DNI	71000037	Hugo	Medina Torres	D-18890	995160749	hugo.medina37@outlook.com	Calle Bolivar 1287, Tiabaya	ACTIVO	T-22-14-41
+DNI	71000038	Elena	Vargas Sucasaca	D-17135	946636065	elena.vargas38@yahoo.es	Calle Jerusalen 2263, Mariano Melgar	ACTIVO	T-48-22-34
+DNI	71000039	Andres	Condori Llerena	D-10214	955052962	andres.condori39@yahoo.es	Av. Dolores 586, J.L. Bustamante y Rivero	ACTIVO	T-43-0-29
+DNI	71000040	Nestor	Bellido Bellido	D-13873	990371098	nestor.bellido40@gmail.com	Av. Goyeneche 266, Sachaca	ACTIVO	T-150-11-30
+DNI	71000041	Miguel	Castillo Castillo	D-19985	961431022	miguel.castillo41@outlook.com	Calle Santa Catalina 2013, Tiabaya	ACTIVO	T-61-4-37
+DNI	71000042	Judith	Flores Zegarra	D-14107	967354178	judith.flores42@outlook.com	Av. Dolores 2216, Cayma	ACTIVO	T-10-11-7
+DNI	71000043	Cesar	Cruz Llerena	D-11031	946220160	cesar.cruz43@gmail.com	Av. Lima 2007, Yanahuara	ACTIVO	T-151-8-49
+DNI	71000044	Jose	Yucra Rojas	D-12071	993438924	jose.yucra44@gmail.com	Av. Ejercito 1769, J.L. Bustamante y Rivero	ACTIVO	T-45-20-27
+DNI	71000045	Maria	Choque Zegarra	D-18975	923104615	maria.choque45@outlook.com	Calle Peral 2204, Sachaca	ACTIVO	T-55-20-46
+DNI	71000046	Carmen	Quispe Vargas	D-21221	941503727	carmen.quispe46@yahoo.es	Av. Lima 320, Mariano Melgar	ACTIVO	T-3-23-34
+DNI	71000047	Nestor	Yanque Mendoza	D-11536	957243814	nestor.yanque47@hotmail.com	Jr. Union 1668, Mariano Melgar	ACTIVO	T-68-21-10
+CE	002000048	Pedro	Cutipa Gutierrez	D-22567	992644181	pedro.cutipa48@hotmail.com	Av. Lima 1725, Cayma	ACTIVO	T-102-14-8
+DNI	71000049	Nestor	Chavez Vargas	D-22119	914864465	nestor.chavez49@hotmail.com	Av. Venezuela 842, Hunter	ACTIVO	T-61-22-1
+DNI	71000050	Yesenia	Mendoza Torres	D-21418	997883362	yesenia.mendoza50@hotmail.com	Av. Progreso 1868, Miraflores	ACTIVO	T-62-8-51
+DNI	71000051	Ana	Callo Palomino	D-18262	957331052	ana.callo51@yahoo.es	Av. Venezuela 1873, Cercado	ACTIVO	T-166-17-4
+DNI	71000052	Monica	Valdivia Benavides	D-13782	932666813	monica.valdivia52@outlook.com	Av. Progreso 2080, Hunter	ACTIVO	T-143-5-55
+DNI	71000053	Hugo	Chavez Zapata	D-15442	987670291	hugo.chavez53@gmail.com	Calle Puente Bolognesi 1166, Cercado	ACTIVO	T-78-3-34
+DNI	71000054	Karen	Huamani Benavides	D-17265	912771723	karen.huamani54@gmail.com	Av. Lima 1766, Cercado	BLOQUEADO	T-125-2-18
+DNI	71000055	Silvia	Delgado Pacheco	D-11699	967208776	silvia.delgado55@yahoo.es	Calle Peral 1163, Hunter	ACTIVO	T-78-2-25
+DNI	71000056	Raul	Ticona Arenas	D-13037	926801493	raul.ticona56@hotmail.com	Jr. Union 1998, Hunter	ACTIVO	T-137-9-50
+DNI	71000057	Victor	Cornejo Chavez	D-10053	944991998	victor.cornejo57@gmail.com	Av. Parra 1109, Cerro Colorado	ACTIVO	T-123-15-11
+DNI	71000058	Judith	Ccori Quispe	D-11917	937961902	judith.ccori58@outlook.com	Calle Puente Bolognesi 624, Socabaya	ACTIVO	T-96-22-14
+DNI	71000059	Milagros	Huanca Rivera	D-21498	992108130	milagros.huanca59@hotmail.com	Av. Goyeneche 348, Mariano Melgar	ACTIVO	T-134-9-0
+CE	002000060	Pedro	Gutierrez Zapata	D-14919	953201898	pedro.gutierrez60@outlook.com	Jr. Union 705, Tiabaya	ACTIVO	T-21-20-35
+DNI	71000061	Elena	Cruz Delgado	D-8891	947007433	elena.cruz61@outlook.com	Av. Progreso 1231, Socabaya	ACTIVO	T-64-6-6
+DNI	71000062	Diego	Sucasaca Ccori	D-7383	989765491	diego.sucasaca62@hotmail.com	Av. Dolores 347, Cercado	ACTIVO	T-88-12-44
+DNI	71000063	Oscar	Sucasaca Huanca	D-18262	986236358	oscar.sucasaca63@outlook.com	Av. Kennedy 2054, Cerro Colorado	ACTIVO	T-89-11-9
+DNI	71000064	Luis	Benavides Nina	D-19297	951726810	luis.benavides64@gmail.com	Calle San Francisco 637, Miraflores	ACTIVO	T-40-1-47
+DNI	71000065	Valeria	Palomino Zegarra	D-12009	921632085	valeria.palomino65@yahoo.es	Calle Puente Bolognesi 377, Tiabaya	ACTIVO	T-12-20-30
+DNI	71000066	Patricia	Arenas Nina	D-12995	931341861	patricia.arenas66@gmail.com	Av. Venezuela 2103, Yanahuara	ACTIVO	T-103-4-20
+DNI	71000067	Milagros	Ticona Cruz	D-10239	936519086	milagros.ticona67@outlook.com	Calle Peral 126, Cayma	ACTIVO	T-16-4-15
+DNI	71000068	Jimena	Nina Quispe	D-7667	917663640	jimena.nina68@outlook.com	Calle Mercaderes 2008, Characato	ACTIVO	T-72-20-31
+DNI	71000069	Edwin	Chavez Huanca	D-21912	986688775	edwin.chavez69@yahoo.es	Av. Ejercito 2196, Cercado	ACTIVO	T-152-17-42
+DNI	71000070	Victor	Yucra Huamani	D-18722	948724415	victor.yucra70@outlook.com	Jr. Union 1511, Cayma	ACTIVO	T-89-4-0
+DNI	71000071	Diego	Ccori Portugal	D-17992	923317772	diego.ccori71@gmail.com	Av. Ejercito 1325, Paucarpata	BLOQUEADO	T-115-15-42
+CE	002000072	Hugo	Bellido Choque	D-15834	963328864	hugo.bellido72@hotmail.com	Av. Kennedy 1636, Socabaya	ACTIVO	T-71-10-12
+DNI	71000073	Victor	Pacheco Flores	D-17911	912303005	victor.pacheco73@hotmail.com	Calle Bolivar 592, Tiabaya	ACTIVO	T-73-9-58
+DNI	71000074	Patricia	Pacheco Mamani	D-19749	974370141	patricia.pacheco74@hotmail.com	Calle Bolivar 1530, Cercado	INACTIVO	T-92-11-34
+DNI	71000075	Diego	Vargas Torres	D-17308	960799415	diego.vargas75@yahoo.es	Calle Mercaderes 1261, J.L. Bustamante y Rivero	ACTIVO	T-156-2-49
+DNI	71000076	Monica	Pinto Llerena	D-11322	930991574	monica.pinto76@yahoo.es	Calle Bolivar 1003, Cercado	ACTIVO	T-68-5-20
+DNI	71000077	Jimena	Yucra Gutierrez	D-18623	947755587	jimena.yucra77@gmail.com	Calle Peral 926, Miraflores	ACTIVO	T-133-2-58
+DNI	71000078	Lucia	Cutipa Huanca	D-21095	981290659	lucia.cutipa78@gmail.com	Av. Kennedy 1133, Hunter	ACTIVO	T-134-21-28
+DNI	71000079	Luis	Chavez Soncco	D-12457	995878633	luis.chavez79@outlook.com	Av. Ejercito 2317, Sachaca	ACTIVO	T-39-7-0
+DNI	71000080	Valeria	Zapata Arenas	D-19530	943011588	valeria.zapata80@outlook.com	Av. Ejercito 1923, Tiabaya	ACTIVO	T-70-1-39
+DNI	71000081	Rocio	Pinto Paredes	D-21434	984788609	rocio.pinto81@yahoo.es	Av. Kennedy 2350, Characato	ACTIVO	T-87-20-19
+DNI	71000082	Sofia	Soncco Ccama	D-7725	981836259	sofia.soncco82@yahoo.es	Calle Peral 2093, Cerro Colorado	BLOQUEADO	T-0-15-6
+DNI	71000083	Daniela	Vargas Huamani	D-10568	927294743	daniela.vargas83@hotmail.com	Av. Venezuela 1493, Sachaca	ACTIVO	T-140-11-48
+CE	002000084	Maria	Rojas Yucra	D-10511	935611669	maria.rojas84@gmail.com	Calle Peral 1698, Yanahuara	ACTIVO	T-150-9-53
+DNI	71000085	Miguel	Zapata Portugal	D-15278	981086247	miguel.zapata85@hotmail.com	Jr. Union 391, Sachaca	ACTIVO	T-59-1-5
+DNI	71000086	Diego	Benavides Ramos	D-10576	920422976	diego.benavides86@hotmail.com	Av. Dolores 901, Mariano Melgar	ACTIVO	T-31-12-6
+DNI	71000087	Wilber	Sucasaca Bellido	D-8671	928852267	wilber.sucasaca87@yahoo.es	Av. Dolores 2103, Cerro Colorado	ACTIVO	T-61-18-9
+DNI	71000088	Javier	Mamani Yanque	D-16446	975163217	javier.mamani88@yahoo.es	Av. Ejercito 1765, Cercado	ACTIVO	T-86-4-50
+DNI	71000089	Jorge	Caceres Torres	D-14264	959844053	jorge.caceres89@hotmail.com	Calle Bolivar 1942, Socabaya	INACTIVO	T-117-15-14
+DNI	71000090	Nestor	Cutipa Sucasaca	D-20174	949972503	nestor.cutipa90@gmail.com	Av. Kennedy 2357, Cercado	ACTIVO	T-68-20-14
+DNI	71000091	Jorge	Rivera Yanque	D-14744	919435654	jorge.rivera91@hotmail.com	Calle Peral 493, Sachaca	ACTIVO	T-99-14-19
+DNI	71000092	Yesenia	Vargas Condori	D-20557	962850311	yesenia.vargas92@gmail.com	Av. Ejercito 2314, Sachaca	ACTIVO	T-21-11-45
+DNI	71000093	Hugo	Valdivia Zegarra	D-21436	939031070	hugo.valdivia93@hotmail.com	Av. Kennedy 1688, Yanahuara	ACTIVO	T-73-8-48
+DNI	71000094	Marco	Yucra Valdivia	D-18639	925690675	marco.yucra94@yahoo.es	Calle Mercaderes 1542, J.L. Bustamante y Rivero	ACTIVO	T-72-1-52
+DNI	71000095	Victor	Yucra Gutierrez	D-11007	965678916	victor.yucra95@gmail.com	Calle Peral 1719, Cerro Colorado	ACTIVO	T-50-17-26
+CE	002000096	Yesenia	Benavides Torres	D-21355	983547120	yesenia.benavides96@hotmail.com	Calle Puente Bolognesi 1998, Hunter	ACTIVO	T-86-4-32
+DNI	71000097	Fiorella	Llerena Ccama	D-15628	985707932	fiorella.llerena97@outlook.com	Av. Venezuela 773, Cayma	ACTIVO	T-42-8-39
+DNI	71000098	Nestor	Zapata Medina	D-7801	950883542	nestor.zapata98@outlook.com	Av. Goyeneche 1952, Cercado	ACTIVO	T-10-10-53
+DNI	71000099	Pedro	Ccori Caceres	D-10491	983418170	pedro.ccori99@outlook.com	Av. Ejercito 585, Cercado	ACTIVO	T-120-23-55
+DNI	71000100	Maria	Choque Pacheco	D-13583	931021624	maria.choque100@gmail.com	Calle Mercaderes 1690, Paucarpata	ACTIVO	T-66-4-50
+@tipo_cambio
+GBP	PEN	4.6337	4.7737	D+0	ACTIVO
+GBP	PEN	4.6225	4.7625	D-1	INACTIVO
+GBP	PEN	4.6355	4.7755	D-2	INACTIVO
+GBP	PEN	4.6478	4.7878	D-3	INACTIVO
+GBP	PEN	4.6677	4.8077	D-4	INACTIVO
+GBP	PEN	4.681	4.821	D-5	INACTIVO
+GBP	PEN	4.6792	4.8192	D-6	INACTIVO
+GBP	PEN	4.6943	4.8343	D-7	INACTIVO
+GBP	PEN	4.7129	4.8529	D-8	INACTIVO
+GBP	PEN	4.7172	4.8572	D-9	INACTIVO
+GBP	PEN	4.7207	4.8607	D-10	INACTIVO
+GBP	PEN	4.7364	4.8764	D-11	INACTIVO
+GBP	PEN	4.7267	4.8667	D-12	INACTIVO
+GBP	PEN	4.7109	4.8509	D-13	INACTIVO
+GBP	PEN	4.695	4.835	D-14	INACTIVO
+GBP	PEN	4.6783	4.8183	D-15	INACTIVO
+GBP	PEN	4.6922	4.8322	D-16	INACTIVO
+GBP	PEN	4.6875	4.8275	D-17	INACTIVO
+GBP	PEN	4.6706	4.8106	D-18	INACTIVO
+GBP	PEN	4.6757	4.8157	D-19	INACTIVO
+CHF	PEN	4.0807	4.1807	D+0	ACTIVO
+CHF	PEN	4.0892	4.1892	D-1	INACTIVO
+CHF	PEN	4.0995	4.1995	D-2	INACTIVO
+CHF	PEN	4.108	4.208	D-3	INACTIVO
+CHF	PEN	4.1015	4.2015	D-4	INACTIVO
+CHF	PEN	4.0935	4.1935	D-5	INACTIVO
+CHF	PEN	4.1032	4.2032	D-6	INACTIVO
+CHF	PEN	4.1195	4.2195	D-7	INACTIVO
+CHF	PEN	4.1271	4.2271	D-8	INACTIVO
+CHF	PEN	4.1246	4.2246	D-9	INACTIVO
+CHF	PEN	4.107	4.207	D-10	INACTIVO
+CHF	PEN	4.1074	4.2074	D-11	INACTIVO
+CHF	PEN	4.1162	4.2162	D-12	INACTIVO
+CHF	PEN	4.1164	4.2164	D-13	INACTIVO
+CHF	PEN	4.11	4.21	D-14	INACTIVO
+CHF	PEN	4.1261	4.2261	D-15	INACTIVO
+CHF	PEN	4.1327	4.2327	D-16	INACTIVO
+CHF	PEN	4.1507	4.2507	D-17	INACTIVO
+CHF	PEN	4.1493	4.2493	D-18	INACTIVO
+CHF	PEN	4.1484	4.2484	D-19	INACTIVO
+CAD	PEN	2.662	2.732	D+0	ACTIVO
+CAD	PEN	2.6523	2.7223	D-1	INACTIVO
+CAD	PEN	2.6665	2.7365	D-2	INACTIVO
+CAD	PEN	2.6799	2.7499	D-3	INACTIVO
+CAD	PEN	2.695	2.765	D-4	INACTIVO
+CAD	PEN	2.7126	2.7826	D-5	INACTIVO
+CAD	PEN	2.6987	2.7687	D-6	INACTIVO
+CAD	PEN	2.6943	2.7643	D-7	INACTIVO
+CAD	PEN	2.6902	2.7602	D-8	INACTIVO
+CAD	PEN	2.6924	2.7624	D-9	INACTIVO
+CAD	PEN	2.6866	2.7566	D-10	INACTIVO
+CAD	PEN	2.6679	2.7379	D-11	INACTIVO
+CAD	PEN	2.664	2.734	D-12	INACTIVO
+CAD	PEN	2.6515	2.7215	D-13	INACTIVO
+CAD	PEN	2.6381	2.7081	D-14	INACTIVO
+CAD	PEN	2.6263	2.6963	D-15	INACTIVO
+CAD	PEN	2.6423	2.7123	D-16	INACTIVO
+CAD	PEN	2.6247	2.6947	D-17	INACTIVO
+CAD	PEN	2.6257	2.6957	D-18	INACTIVO
+CAD	PEN	2.6169	2.6869	D-19	INACTIVO
+USD	PEN	3.6282	3.6882	D-1	INACTIVO
+USD	PEN	3.6117	3.6717	D-2	INACTIVO
+USD	PEN	3.6265	3.6865	D-3	INACTIVO
+USD	PEN	3.6149	3.6749	D-4	INACTIVO
+USD	PEN	3.6124	3.6724	D-5	INACTIVO
+USD	PEN	3.6257	3.6857	D-6	INACTIVO
+USD	PEN	3.6083	3.6683	D-7	INACTIVO
+USD	PEN	3.592	3.652	D-8	INACTIVO
+USD	PEN	3.6004	3.6604	D-9	INACTIVO
+USD	PEN	3.5894	3.6494	D-10	INACTIVO
+USD	PEN	3.6017	3.6617	D-11	INACTIVO
+USD	PEN	3.5865	3.6465	D-12	INACTIVO
+USD	PEN	3.5854	3.6454	D-13	INACTIVO
+USD	PEN	3.572	3.632	D-14	INACTIVO
+USD	PEN	3.5862	3.6462	D-15	INACTIVO
+USD	PEN	3.5832	3.6432	D-16	INACTIVO
+USD	PEN	3.5748	3.6348	D-17	INACTIVO
+USD	PEN	3.572	3.632	D-18	INACTIVO
+USD	PEN	3.5642	3.6242	D-19	INACTIVO
+USD	PEN	3.5631	3.6231	D-20	INACTIVO
+EUR	PEN	3.9891	4.0891	D-1	INACTIVO
+EUR	PEN	4.0062	4.1062	D-2	INACTIVO
+EUR	PEN	4.0222	4.1222	D-3	INACTIVO
+EUR	PEN	4.0211	4.1211	D-4	INACTIVO
+EUR	PEN	4.0101	4.1101	D-5	INACTIVO
+EUR	PEN	4.017	4.117	D-6	INACTIVO
+EUR	PEN	4.0187	4.1187	D-7	INACTIVO
+EUR	PEN	4.0178	4.1178	D-8	INACTIVO
+EUR	PEN	4.0132	4.1132	D-9	INACTIVO
+EUR	PEN	4.0268	4.1268	D-10	INACTIVO
+EUR	PEN	4.037	4.137	D-11	INACTIVO
+EUR	PEN	4.0348	4.1348	D-12	INACTIVO
+EUR	PEN	4.0191	4.1191	D-13	INACTIVO
+EUR	PEN	4.032	4.132	D-14	INACTIVO
+EUR	PEN	4.0127	4.1127	D-15	INACTIVO
+EUR	PEN	4.0325	4.1325	D-16	INACTIVO
+EUR	PEN	4.0257	4.1257	D-17	INACTIVO
+EUR	PEN	4.0302	4.1302	D-18	INACTIVO
+EUR	PEN	4.0296	4.1296	D-19	INACTIVO
+EUR	PEN	4.0403	4.1403	D-20	INACTIVO
+@producto
+PRD-101	Formularios de operacion	Producto de papeleria para las sucursales	Papeleria	PAQUETE	123	40	ACTIVO
+PRD-102	Sobres de seguridad	Producto de seguridad para las sucursales	Seguridad	UND	91	40	ACTIVO
+PRD-103	Cinta para contadora	Producto de insumos para las sucursales	Insumos	UND	96	50	ACTIVO
+PRD-104	Tinta para sellos	Producto de insumos para las sucursales	Insumos	UND	99	20	ACTIVO
+PRD-105	Calculadora financiera	Producto de equipos para las sucursales	Equipos	UND	90	20	ACTIVO
+PRD-106	Contadora de billetes	Producto de equipos para las sucursales	Equipos	UND	137	40	ACTIVO
+PRD-107	Detector de billetes falsos	Producto de equipos para las sucursales	Equipos	UND	57	15	ACTIVO
+PRD-108	Papel bond A4	Producto de papeleria para las sucursales	Papeleria	PAQUETE	12	40	ACTIVO
+PRD-109	Toner para impresora	Producto de tecnologia para las sucursales	Tecnologia	UND	69	50	ACTIVO
+PRD-110	Lapicero azul	Producto de papeleria para las sucursales	Papeleria	UND	54	25	ACTIVO
+PRD-111	Archivador de palanca	Producto de papeleria para las sucursales	Papeleria	PAQUETE	182	50	ACTIVO
+PRD-112	Bolsa de seguridad numerada	Producto de seguridad para las sucursales	Seguridad	PAQUETE	17	5	ACTIVO
+PRD-113	Candado de seguridad	Producto de seguridad para las sucursales	Seguridad	UND	75	25	ACTIVO
+PRD-114	Balanza de precision	Producto de equipos para las sucursales	Equipos	UND	31	25	ACTIVO
+PRD-115	Lupa de joyero	Producto de equipos para las sucursales	Equipos	UND	89	50	ACTIVO
+PRD-116	Etiquetas adhesivas	Producto de papeleria para las sucursales	Papeleria	PAQUETE	3	5	ACTIVO
+PRD-117	Cinta de embalaje	Producto de insumos para las sucursales	Insumos	UND	27	10	INACTIVO
+PRD-118	Guantes de latex	Producto de limpieza para las sucursales	Limpieza	CAJA	108	25	ACTIVO
+PRD-119	Desinfectante	Producto de limpieza para las sucursales	Limpieza	CAJA	23	5	ACTIVO
+PRD-120	Silla ergonomica	Producto de mobiliario para las sucursales	Mobiliario	UND	64	25	ACTIVO
+PRD-121	Escritorio de oficina	Producto de mobiliario para las sucursales	Mobiliario	UND	30	25	ACTIVO
+PRD-122	Camara de seguridad	Producto de tecnologia para las sucursales	Tecnologia	UND	61	50	ACTIVO
+PRD-123	Disco duro externo	Producto de tecnologia para las sucursales	Tecnologia	UND	68	25	ACTIVO
+PRD-124	Memoria USB 64GB	Producto de tecnologia para las sucursales	Tecnologia	UND	4	5	ACTIVO
+PRD-125	Sello automatico	Producto de insumos para las sucursales	Insumos	UND	123	25	ACTIVO
+PRD-126	Almohadilla para sellos	Producto de insumos para las sucursales	Insumos	ROLLO	79	25	ACTIVO
+PRD-127	Folder manila	Producto de papeleria para las sucursales	Papeleria	PAQUETE	97	25	ACTIVO
+PRD-128	Clips metalicos	Producto de papeleria para las sucursales	Papeleria	PAQUETE	131	40	ACTIVO
+PRD-129	Grapas	Producto de papeleria para las sucursales	Papeleria	PAQUETE	89	20	ACTIVO
+PRD-130	Perforador	Producto de equipos para las sucursales	Equipos	UND	75	15	ACTIVO
+PRD-131	Formularios de operacion (lote 2)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	34	10	ACTIVO
+PRD-132	Sobres de seguridad (lote 2)	Producto de seguridad para las sucursales	Seguridad	UND	4	15	ACTIVO
+PRD-133	Cinta para contadora (lote 2)	Producto de insumos para las sucursales	Insumos	ROLLO	45	20	ACTIVO
+PRD-134	Tinta para sellos (lote 2)	Producto de insumos para las sucursales	Insumos	ROLLO	97	20	INACTIVO
+PRD-135	Calculadora financiera (lote 2)	Producto de equipos para las sucursales	Equipos	UND	160	50	ACTIVO
+PRD-136	Contadora de billetes (lote 2)	Producto de equipos para las sucursales	Equipos	UND	21	5	ACTIVO
+PRD-137	Detector de billetes falsos (lote 2)	Producto de equipos para las sucursales	Equipos	UND	11	5	ACTIVO
+PRD-138	Papel bond A4 (lote 2)	Producto de papeleria para las sucursales	Papeleria	MILLAR	194	40	ACTIVO
+PRD-139	Toner para impresora (lote 2)	Producto de tecnologia para las sucursales	Tecnologia	UND	13	5	ACTIVO
+PRD-140	Lapicero azul (lote 2)	Producto de papeleria para las sucursales	Papeleria	MILLAR	4	40	ACTIVO
+PRD-141	Archivador de palanca (lote 2)	Producto de papeleria para las sucursales	Papeleria	UND	86	20	ACTIVO
+PRD-142	Bolsa de seguridad numerada (lote 2)	Producto de seguridad para las sucursales	Seguridad	UND	45	15	ACTIVO
+PRD-143	Candado de seguridad (lote 2)	Producto de seguridad para las sucursales	Seguridad	PAQUETE	12	5	ACTIVO
+PRD-144	Balanza de precision (lote 2)	Producto de equipos para las sucursales	Equipos	UND	237	50	ACTIVO
+PRD-145	Lupa de joyero (lote 2)	Producto de equipos para las sucursales	Equipos	UND	184	40	ACTIVO
+PRD-146	Etiquetas adhesivas (lote 2)	Producto de papeleria para las sucursales	Papeleria	UND	196	40	ACTIVO
+PRD-147	Cinta de embalaje (lote 2)	Producto de insumos para las sucursales	Insumos	ROLLO	54	25	ACTIVO
+PRD-148	Guantes de latex (lote 2)	Producto de limpieza para las sucursales	Limpieza	CAJA	10	15	ACTIVO
+PRD-149	Desinfectante (lote 2)	Producto de limpieza para las sucursales	Limpieza	UND	153	40	ACTIVO
+PRD-150	Silla ergonomica (lote 2)	Producto de mobiliario para las sucursales	Mobiliario	UND	27	15	ACTIVO
+PRD-151	Escritorio de oficina (lote 2)	Producto de mobiliario para las sucursales	Mobiliario	UND	164	40	INACTIVO
+PRD-152	Camara de seguridad (lote 2)	Producto de tecnologia para las sucursales	Tecnologia	UND	21	15	ACTIVO
+PRD-153	Disco duro externo (lote 2)	Producto de tecnologia para las sucursales	Tecnologia	UND	51	50	ACTIVO
+PRD-154	Memoria USB 64GB (lote 2)	Producto de tecnologia para las sucursales	Tecnologia	UND	8	5	ACTIVO
+PRD-155	Sello automatico (lote 2)	Producto de insumos para las sucursales	Insumos	UND	43	15	ACTIVO
+PRD-156	Almohadilla para sellos (lote 2)	Producto de insumos para las sucursales	Insumos	UND	24	25	ACTIVO
+PRD-157	Folder manila (lote 2)	Producto de papeleria para las sucursales	Papeleria	UND	97	20	ACTIVO
+PRD-158	Clips metalicos (lote 2)	Producto de papeleria para las sucursales	Papeleria	MILLAR	197	50	ACTIVO
+PRD-159	Grapas (lote 2)	Producto de papeleria para las sucursales	Papeleria	UND	120	25	ACTIVO
+PRD-160	Perforador (lote 2)	Producto de equipos para las sucursales	Equipos	UND	105	40	ACTIVO
+PRD-161	Formularios de operacion (lote 3)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	75	40	ACTIVO
+PRD-162	Sobres de seguridad (lote 3)	Producto de seguridad para las sucursales	Seguridad	UND	75	20	ACTIVO
+PRD-163	Cinta para contadora (lote 3)	Producto de insumos para las sucursales	Insumos	UND	122	25	ACTIVO
+PRD-164	Tinta para sellos (lote 3)	Producto de insumos para las sucursales	Insumos	UND	15	50	ACTIVO
+PRD-165	Calculadora financiera (lote 3)	Producto de equipos para las sucursales	Equipos	UND	152	40	ACTIVO
+PRD-166	Contadora de billetes (lote 3)	Producto de equipos para las sucursales	Equipos	UND	101	25	ACTIVO
+PRD-167	Detector de billetes falsos (lote 3)	Producto de equipos para las sucursales	Equipos	UND	49	25	ACTIVO
+PRD-168	Papel bond A4 (lote 3)	Producto de papeleria para las sucursales	Papeleria	MILLAR	52	50	INACTIVO
+PRD-169	Toner para impresora (lote 3)	Producto de tecnologia para las sucursales	Tecnologia	UND	29	15	ACTIVO
+PRD-170	Lapicero azul (lote 3)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	34	25	ACTIVO
+PRD-171	Archivador de palanca (lote 3)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	13	5	ACTIVO
+PRD-172	Bolsa de seguridad numerada (lote 3)	Producto de seguridad para las sucursales	Seguridad	PAQUETE	23	25	ACTIVO
+PRD-173	Candado de seguridad (lote 3)	Producto de seguridad para las sucursales	Seguridad	PAQUETE	11	5	ACTIVO
+PRD-174	Balanza de precision (lote 3)	Producto de equipos para las sucursales	Equipos	UND	14	5	ACTIVO
+PRD-175	Lupa de joyero (lote 3)	Producto de equipos para las sucursales	Equipos	UND	71	25	ACTIVO
+PRD-176	Etiquetas adhesivas (lote 3)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	110	40	ACTIVO
+PRD-177	Cinta de embalaje (lote 3)	Producto de insumos para las sucursales	Insumos	ROLLO	34	15	ACTIVO
+PRD-178	Guantes de latex (lote 3)	Producto de limpieza para las sucursales	Limpieza	CAJA	35	10	ACTIVO
+PRD-179	Desinfectante (lote 3)	Producto de limpieza para las sucursales	Limpieza	UND	55	20	ACTIVO
+PRD-180	Silla ergonomica (lote 3)	Producto de mobiliario para las sucursales	Mobiliario	UND	35	40	ACTIVO
+PRD-181	Escritorio de oficina (lote 3)	Producto de mobiliario para las sucursales	Mobiliario	UND	14	5	ACTIVO
+PRD-182	Camara de seguridad (lote 3)	Producto de tecnologia para las sucursales	Tecnologia	UND	130	40	ACTIVO
+PRD-183	Disco duro externo (lote 3)	Producto de tecnologia para las sucursales	Tecnologia	UND	57	50	ACTIVO
+PRD-184	Memoria USB 64GB (lote 3)	Producto de tecnologia para las sucursales	Tecnologia	UND	28	10	ACTIVO
+PRD-185	Sello automatico (lote 3)	Producto de insumos para las sucursales	Insumos	UND	45	20	INACTIVO
+PRD-186	Almohadilla para sellos (lote 3)	Producto de insumos para las sucursales	Insumos	UND	73	25	ACTIVO
+PRD-187	Folder manila (lote 3)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	13	10	ACTIVO
+PRD-188	Clips metalicos (lote 3)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	3	5	ACTIVO
+PRD-189	Grapas (lote 3)	Producto de papeleria para las sucursales	Papeleria	PAQUETE	161	40	ACTIVO
+PRD-190	Perforador (lote 3)	Producto de equipos para las sucursales	Equipos	UND	40	15	ACTIVO
+PRD-191	Formularios de operacion (lote 4)	Producto de papeleria para las sucursales	Papeleria	UND	222	50	ACTIVO
+PRD-192	Sobres de seguridad (lote 4)	Producto de seguridad para las sucursales	Seguridad	PAQUETE	121	25	ACTIVO
+PRD-193	Cinta para contadora (lote 4)	Producto de insumos para las sucursales	Insumos	ROLLO	38	15	ACTIVO
+PRD-194	Tinta para sellos (lote 4)	Producto de insumos para las sucursales	Insumos	UND	12	10	ACTIVO
+PRD-195	Calculadora financiera (lote 4)	Producto de equipos para las sucursales	Equipos	UND	20	20	ACTIVO
+PRD-196	Contadora de billetes (lote 4)	Producto de equipos para las sucursales	Equipos	UND	1	5	ACTIVO
+PRD-197	Detector de billetes falsos (lote 4)	Producto de equipos para las sucursales	Equipos	UND	100	20	ACTIVO
+PRD-198	Papel bond A4 (lote 4)	Producto de papeleria para las sucursales	Papeleria	MILLAR	41	20	ACTIVO
+PRD-199	Toner para impresora (lote 4)	Producto de tecnologia para las sucursales	Tecnologia	UND	115	50	ACTIVO
+PRD-200	Lapicero azul (lote 4)	Producto de papeleria para las sucursales	Papeleria	MILLAR	245	50	ACTIVO
+@proveedor
+Limpieza Nacional SRL	20500007920	Gabriela Cutipa	054247073	ventas1@nacional.pe	Av. Ejercito 611, Paucarpata	ACTIVO
+Mobiliario Pacifico SAC	20500015840	Katherine Ccori	054365114	ventas2@pacifico.pe	Av. Progreso 734, Mariano Melgar	ACTIVO
+Importaciones Colca SRL	20500023760	Gabriela Bellido	054226603	ventas3@colca.pe	Calle Peral 1348, Socabaya	ACTIVO
+Comercial Canon SRL	20500031680	Ricardo Rivera	054318813	ventas4@canon.pe	Jr. Union 2036, Yanahuara	ACTIVO
+Suministros Nacional EIRL	20500039600	Carmen Cutipa	054338888	ventas5@nacional.pe	Av. Dolores 349, J.L. Bustamante y Rivero	ACTIVO
+Papelera Andina SRL	20500047520	Maria Ticona	054309390	ventas6@andina.pe	Calle Jerusalen 2099, Cerro Colorado	ACTIVO
+Limpieza Altiplano EIRL	20500055440	Diego Torres	054206503	ventas7@altiplano.pe	Calle Peral 819, Socabaya	ACTIVO
+Papelera Arequipa EIRL	20500063360	Rocio Caceres	054301996	ventas8@arequipa.pe	Calle Jerusalen 986, Paucarpata	ACTIVO
+Servicios Graficos Peruana SRL	20500071280	Victor Llerena	054252393	ventas9@graficos.pe	Av. Goyeneche 573, J.L. Bustamante y Rivero	INACTIVO
+Servicios Graficos Campina SAC	20500079200	Nancy Rojas	054272047	ventas10@graficos.pe	Av. Venezuela 1526, Hunter	ACTIVO
+Distribuidora Canon EIRL	20500087120	Yesenia Flores	054227750	ventas11@canon.pe	Calle Bolivar 457, Miraflores	ACTIVO
+Tecnologia Nacional SRL	20500095040	Victor Bellido	054322335	ventas12@nacional.pe	Av. Lima 1198, Characato	ACTIVO
+Seguridad Campina SRL	20500102960	Marco Ramos	054375267	ventas13@campina.pe	Av. Kennedy 2376, Cayma	ACTIVO
+Distribuidora Pacifico SAC	20500110880	Patricia Llerena	054369288	ventas14@pacifico.pe	Av. Ejercito 999, Hunter	ACTIVO
+Tecnologia Campina EIRL	20500118800	Jose Medina	054346181	ventas15@campina.pe	Av. Kennedy 1349, Hunter	ACTIVO
+Comercial Arequipa EIRL	20500126720	Karen Mamani	054202358	ventas16@arequipa.pe	Av. Goyeneche 1305, J.L. Bustamante y Rivero	ACTIVO
+Importaciones Colca SA	20500134640	Miguel Bellido	054357523	ventas17@colca.pe	Av. Parra 1813, Paucarpata	ACTIVO
+Mobiliario Andina SAC	20500142560	Fiorella Huamani	054235679	ventas18@andina.pe	Av. Ejercito 1431, Cerro Colorado	INACTIVO
+Tecnologia Sillar SAC	20500150480	Valeria Ticona	054333459	ventas19@sillar.pe	Av. Parra 2311, Paucarpata	ACTIVO
+Distribuidora Imperial EIRL	20500158400	Nancy Gutierrez	054397150	ventas20@imperial.pe	Av. Progreso 586, Mariano Melgar	ACTIVO
+Mobiliario Nacional EIRL	20500166320	Karen Flores	054386544	ventas21@nacional.pe	Calle San Francisco 628, Paucarpata	ACTIVO
+Papelera Peruana SRL	20500174240	Sofia Chavez	054354906	ventas22@peruana.pe	Av. Ejercito 1144, Socabaya	ACTIVO
+Distribuidora del Sur EIRL	20500182160	Patricia Portugal	054272237	ventas23@del.pe	Calle Mercaderes 2018, J.L. Bustamante y Rivero	ACTIVO
+Seguridad Andina SAC	20500190080	Andres Huamani	054308782	ventas24@andina.pe	Calle Santa Catalina 1329, Cayma	ACTIVO
+Importaciones Nacional EIRL	20500198000	Rocio Nina	054230742	ventas25@nacional.pe	Av. Progreso 523, Cercado	ACTIVO
+Suministros Colca SRL	20500205920	Hugo Arenas	054391707	ventas26@colca.pe	Calle Jerusalen 2170, Paucarpata	ACTIVO
+Suministros Volcan SAC	20500213840	Carmen Paredes	054263978	ventas27@volcan.pe	Calle Santa Catalina 1569, Cercado	INACTIVO
+Distribuidora Altiplano SRL	20500221760	Luis Salazar	054233488	ventas28@altiplano.pe	Av. Parra 2346, Socabaya	ACTIVO
+Comercial Campina SRL	20500229680	Rocio Callo	054364552	ventas29@campina.pe	Calle Bolivar 1239, Hunter	ACTIVO
+Tecnologia Misti SAC	20500237600	Edwin Ccama	054311988	ventas30@misti.pe	Av. Ejercito 1766, Miraflores	ACTIVO
+Servicios Graficos Andina SAC	20500245520	Ana Gutierrez	054284880	ventas31@graficos.pe	Calle Bolivar 1922, Hunter	ACTIVO
+Servicios Graficos Arequipa SA	20500253440	Patricia Ccama	054299637	ventas32@graficos.pe	Av. Ejercito 2033, Cerro Colorado	ACTIVO
+Comercial Sillar SAC	20500261360	Luis Chavez	054323610	ventas33@sillar.pe	Av. Dolores 1648, Paucarpata	ACTIVO
+Mobiliario Andina SA	20500269280	Marco Cornejo	054316784	ventas34@andina.pe	Calle Bolivar 1885, Sachaca	ACTIVO
+Seguridad Imperial SA	20500277200	Pedro Sucasaca	054292278	ventas35@imperial.pe	Av. Kennedy 344, J.L. Bustamante y Rivero	ACTIVO
+Comercial Peruana SAC	20500285120	Raul Huamani	054228223	ventas36@peruana.pe	Calle Bolivar 927, Miraflores	INACTIVO
+Importaciones Misti SA	20500293040	Katherine Apaza	054254066	ventas37@misti.pe	Av. Ejercito 632, Socabaya	ACTIVO
+Servicios Graficos Campina EIRL	20500300960	Maria Mendoza	054350397	ventas38@graficos.pe	Calle Jerusalen 1395, Characato	ACTIVO
+Papelera Misti SAC	20500308880	Hugo Sucasaca	054220053	ventas39@misti.pe	Calle San Francisco 1542, Cayma	ACTIVO
+Mobiliario Volcan EIRL	20500316800	Cesar Cornejo	054383550	ventas40@volcan.pe	Av. Lima 2043, Cayma	ACTIVO
+Limpieza Imperial SAC	20500324720	Elena Portugal	054317180	ventas41@imperial.pe	Calle Puente Bolognesi 787, Paucarpata	ACTIVO
+Servicios Graficos Imperial SAC	20500332640	Jose Zapata	054215579	ventas42@graficos.pe	Calle Mercaderes 724, Cercado	ACTIVO
+Suministros Andina EIRL	20500340560	Oscar Huamani	054291944	ventas43@andina.pe	Calle Jerusalen 460, Cerro Colorado	ACTIVO
+Distribuidora Chachani SA	20500348480	Monica Cornejo	054241914	ventas44@chachani.pe	Calle Jerusalen 1631, Paucarpata	ACTIVO
+Tecnologia Arequipa SRL	20500356400	Paola Ccama	054221871	ventas45@arequipa.pe	Av. Lima 1379, Sachaca	INACTIVO
+Mobiliario Altiplano EIRL	20500364320	Daniela Apaza	054223308	ventas46@altiplano.pe	Av. Ejercito 446, Yanahuara	ACTIVO
+Seguridad Sillar SAC	20500372240	Alvaro Vargas	054208581	ventas47@sillar.pe	Calle Mercaderes 763, Yanahuara	ACTIVO
+Limpieza Misti SRL	20500380160	Cesar Huamani	054232408	ventas48@misti.pe	Av. Kennedy 2270, Tiabaya	ACTIVO
+Distribuidora Misti SA	20500388080	Yesenia Apaza	054250834	ventas49@misti.pe	Av. Progreso 2215, Tiabaya	ACTIVO
+Suministros Misti SA	20500396000	Luis Cruz	054223588	ventas50@misti.pe	Av. Parra 926, Cerro Colorado	ACTIVO
+Limpieza Peruana SA	20500403920	Mario Yanque	054314251	ventas51@peruana.pe	Av. Kennedy 2327, Hunter	ACTIVO
+Comercial Altiplano SAC	20500411840	Raul Benavides	054352558	ventas52@altiplano.pe	Calle Puente Bolognesi 714, Mariano Melgar	ACTIVO
+Servicios Graficos del Sur EIRL	20500419760	Hugo Portugal	054341714	ventas53@graficos.pe	Av. Kennedy 570, Tiabaya	ACTIVO
+Comercial del Sur EIRL	20500427680	Paola Ccama	054215393	ventas54@del.pe	Av. Venezuela 1895, Cerro Colorado	INACTIVO
+Tecnologia Peruana SAC	20500435600	Paola Delgado	054228265	ventas55@peruana.pe	Calle Bolivar 2045, Tiabaya	ACTIVO
+Seguridad Misti SA	20500443520	Oscar Flores	054204263	ventas56@misti.pe	Calle Mercaderes 968, Yanahuara	ACTIVO
+Tecnologia Imperial SRL	20500451440	Victor Callo	054374311	ventas57@imperial.pe	Av. Goyeneche 2328, J.L. Bustamante y Rivero	ACTIVO
+Importaciones Altiplano SRL	20500459360	Elena Sucasaca	054266907	ventas58@altiplano.pe	Av. Parra 900, J.L. Bustamante y Rivero	ACTIVO
+Importaciones Volcan SRL	20500467280	Jose Valdivia	054316783	ventas59@volcan.pe	Av. Venezuela 1917, Yanahuara	ACTIVO
+Distribuidora Campina SRL	20500475200	Lourdes Sucasaca	054239622	ventas60@campina.pe	Av. Parra 408, Cayma	ACTIVO
+Seguridad Arequipa SA	20500483120	Percy Salazar	054343448	ventas61@arequipa.pe	Calle San Francisco 140, Sachaca	ACTIVO
+Comercial Misti EIRL	20500491040	Milagros Choque	054297898	ventas62@misti.pe	Calle San Francisco 213, Cayma	ACTIVO
+Papelera Arequipa SRL	20500498960	Oscar Quispe	054282227	ventas63@arequipa.pe	Calle Peral 2303, Miraflores	INACTIVO
+Suministros Campina SRL	20500506880	Fiorella Delgado	054352297	ventas64@campina.pe	Av. Ejercito 2051, Cerro Colorado	ACTIVO
+Papelera Colca SA	20500514800	Oscar Delgado	054332602	ventas65@colca.pe	Av. Goyeneche 428, Yanahuara	ACTIVO
+Mobiliario Misti SAC	20500522720	Fiorella Yanque	054248691	ventas66@misti.pe	Calle Jerusalen 1890, J.L. Bustamante y Rivero	ACTIVO
+Papelera del Sur EIRL	20500530640	Ricardo Portugal	054366569	ventas67@del.pe	Calle Bolivar 2060, Paucarpata	ACTIVO
+Suministros Sillar SRL	20500538560	Monica Huamani	054378674	ventas68@sillar.pe	Calle Jerusalen 442, Miraflores	ACTIVO
+Tecnologia del Sur SRL	20500546480	Renzo Ramos	054297882	ventas69@del.pe	Calle Peral 1390, Socabaya	ACTIVO
+Limpieza Canon SAC	20500554400	Javier Choque	054246158	ventas70@canon.pe	Av. Ejercito 2118, Mariano Melgar	ACTIVO
+Servicios Graficos del Sur SRL	20500562320	Elena Soncco	054229834	ventas71@graficos.pe	Jr. Union 1423, Cercado	ACTIVO
+Limpieza Sillar SAC	20500570240	Fiorella Choque	054239410	ventas72@sillar.pe	Calle San Francisco 127, Hunter	INACTIVO
+Limpieza Imperial SA	20500578160	Milagros Condori	054221254	ventas73@imperial.pe	Av. Goyeneche 1437, Hunter	ACTIVO
+Distribuidora Pacifico SA	20500586080	Yesenia Condori	054285740	ventas74@pacifico.pe	Av. Ejercito 454, Mariano Melgar	ACTIVO
+Distribuidora Nacional SA	20500594000	Sofia Cruz	054364243	ventas75@nacional.pe	Av. Progreso 2152, Socabaya	ACTIVO
+Servicios Graficos del Sur SA	20500601920	Silvia Huamani	054214991	ventas76@graficos.pe	Calle San Francisco 768, Paucarpata	ACTIVO
+Servicios Graficos Arequipa SAC	20500609840	Paola Yucra	054356936	ventas77@graficos.pe	Av. Venezuela 763, Yanahuara	ACTIVO
+Seguridad del Sur EIRL	20500617760	Jose Caceres	054313328	ventas78@del.pe	Av. Progreso 2367, Yanahuara	ACTIVO
+Limpieza Andina EIRL	20500625680	Milagros Bellido	054214931	ventas79@andina.pe	Calle Peral 2332, Characato	ACTIVO
+Comercial Colca SAC	20500633600	Monica Valdivia	054331227	ventas80@colca.pe	Calle Bolivar 397, Hunter	ACTIVO
+Limpieza Colca EIRL	20500641520	Karen Yucra	054364049	ventas81@colca.pe	Av. Dolores 1265, Cercado	INACTIVO
+Suministros Peruana SRL	20500649440	Sofia Cornejo	054397381	ventas82@peruana.pe	Calle Puente Bolognesi 177, J.L. Bustamante y Rivero	ACTIVO
+Servicios Graficos Arequipa EIRL	20500657360	Carlos Castillo	054323179	ventas83@graficos.pe	Calle Bolivar 1565, Hunter	ACTIVO
+Importaciones Altiplano SA	20500665280	Alvaro Torres	054316400	ventas84@altiplano.pe	Av. Progreso 1762, Tiabaya	ACTIVO
+Servicios Graficos Altiplano SAC	20500673200	Silvia Torres	054225123	ventas85@graficos.pe	Av. Lima 1100, Cayma	ACTIVO
+Limpieza Volcan SA	20500681120	Valeria Zapata	054284337	ventas86@volcan.pe	Av. Kennedy 1625, J.L. Bustamante y Rivero	ACTIVO
+Seguridad Pacifico EIRL	20500689040	Jimena Chavez	054296991	ventas87@pacifico.pe	Av. Dolores 394, Hunter	ACTIVO
+Suministros Peruana SAC	20500696960	Hugo Yanque	054279688	ventas88@peruana.pe	Av. Goyeneche 1580, Sachaca	ACTIVO
+Papelera Peruana EIRL	20500704880	Wilber Ccama	054358698	ventas89@peruana.pe	Av. Ejercito 2201, Cayma	ACTIVO
+Limpieza Campina SAC	20500712800	Silvia Ccama	054258248	ventas90@campina.pe	Calle Peral 1280, Socabaya	INACTIVO
+Tecnologia Colca SA	20500720720	Sergio Zegarra	054322193	ventas91@colca.pe	Av. Progreso 2355, Tiabaya	ACTIVO
+Comercial Altiplano SRL	20500728640	Hugo Apaza	054297491	ventas92@altiplano.pe	Av. Progreso 1054, Paucarpata	ACTIVO
+Tecnologia Arequipa SA	20500736560	Milagros Huanca	054211413	ventas93@arequipa.pe	Calle San Francisco 1986, Mariano Melgar	ACTIVO
+Seguridad Andina SA	20500744480	Milagros Lazo	054314811	ventas94@andina.pe	Calle Peral 1353, Hunter	ACTIVO
+Limpieza Arequipa SRL	20500752400	Andres Torres	054349964	ventas95@arequipa.pe	Calle Puente Bolognesi 1646, Cerro Colorado	ACTIVO
+Importaciones Volcan SAC	20500760320	Fernando Llerena	054389715	ventas96@volcan.pe	Calle Bolivar 1181, Mariano Melgar	ACTIVO
+Mobiliario Volcan SRL	20500768240	Pedro Ticona	054381952	ventas97@volcan.pe	Av. Lima 1165, Cerro Colorado	ACTIVO
+Limpieza Peruana SRL	20500776160	Milagros Palomino	054398929	ventas98@peruana.pe	Calle Mercaderes 459, Yanahuara	ACTIVO
+Distribuidora Imperial SRL	20500784080	Flor Mamani	054394589	ventas99@imperial.pe	Av. Dolores 118, J.L. Bustamante y Rivero	INACTIVO
+Suministros del Sur EIRL	20500792000	Ricardo Nina	054301341	ventas100@del.pe	Calle San Francisco 2241, Cerro Colorado	ACTIVO
+@prospecto
+Miguel	Benavides Valdivia	72000001	926082952	miguel.benavides301@gmail.com	FERIA	DESCARTADO	T-60-23-45
+Edwin	Condori Rojas	72000002	966681943	edwin.condori302@gmail.com	REDES	NUEVO	T-72-15-52
+Flor	Ccama Bellido	72000003	936650979	flor.ccama303@gmail.com	LLAMADA	NUEVO	T-28-12-41
+Oscar	Ramos Vargas	72000004	949194989	oscar.ramos304@gmail.com	VOLANTES	CONVERTIDO	T-30-20-32
+Gabriela	Lazo Zegarra	72000005	937007980	gabriela.lazo305@gmail.com	WEB	DESCARTADO	T-5-12-29
+Wilber	Llerena Paredes	72000006	973364578	wilber.llerena306@gmail.com	REFERIDO	NUEVO	T-33-21-1
+Daniela	Mamani Torres	72000007	983272618	daniela.mamani307@gmail.com	VOLANTES	NUEVO	T-72-9-2
+Judith	Mendoza Rojas	72000008	910051962	judith.mendoza308@gmail.com	REDES	DESCARTADO	T-39-8-46
+Karen	Sucasaca Gutierrez	72000009	928769083	karen.sucasaca309@gmail.com	REFERIDO	NUEVO	T-116-13-51
+Rocio	Huamani Yanque	72000010	939144115	rocio.huamani310@gmail.com	WEB	NUEVO	T-56-9-4
+Ana	Benavides Ccama	72000011	998684000	ana.benavides311@gmail.com	WEB	DESCARTADO	T-56-5-39
+Alvaro	Benavides Huamani	72000012	990411042	alvaro.benavides312@gmail.com	FERIA	CONTACTADO	T-8-11-31
+Rocio	Chavez Mamani	72000013	951390974	rocio.chavez313@gmail.com	LLAMADA	INTERESADO	T-60-23-16
+Patricia	Nina Cutipa	72000014	956566584	patricia.nina314@gmail.com	VOLANTES	NUEVO	T-77-17-44
+Milagros	Condori Chavez	72000015	965900345	milagros.condori315@gmail.com	REFERIDO	NUEVO	T-57-10-21
+Fernando	Ticona Portugal	72000016	951684865	fernando.ticona316@gmail.com	LLAMADA	CONVERTIDO	T-42-18-44
+Judith	Delgado Quispe	72000017	955282607	judith.delgado317@gmail.com	VOLANTES	NUEVO	T-75-18-25
+Ana	Benavides Soncco	72000018	938946902	ana.benavides318@gmail.com	REFERIDO	INTERESADO	T-104-19-59
+Gabriela	Cutipa Palomino	72000019	913268706	gabriela.cutipa319@gmail.com	VOLANTES	NUEVO	T-26-0-5
+Patricia	Valdivia Gutierrez	72000020	958881708	patricia.valdivia320@gmail.com	WEB	NUEVO	T-55-12-6
+Javier	Flores Quispe	72000021	955317333	javier.flores321@gmail.com	REDES	NUEVO	T-92-15-54
+Nancy	Arenas Cutipa	72000022	961675347	nancy.arenas322@gmail.com	FERIA	CONTACTADO	T-74-20-55
+Lourdes	Benavides Cutipa	72000023	912089271	lourdes.benavides323@gmail.com	LLAMADA	CONTACTADO	T-97-18-31
+Victor	Callo Valdivia	72000024	965250422	victor.callo324@gmail.com	VOLANTES	NUEVO	T-115-4-44
+Nestor	Huamani Lazo	72000025	947635813	nestor.huamani325@gmail.com	VOLANTES	CONTACTADO	T-9-23-25
+Gabriela	Choque Lazo	72000026	960909812	gabriela.choque326@gmail.com	REFERIDO	DESCARTADO	T-7-21-46
+Pedro	Caceres Ramos	72000027	932739957	pedro.caceres327@gmail.com	VOLANTES	NUEVO	T-89-17-18
+Marco	Soncco Portugal	72000028	931609750	marco.soncco328@gmail.com	VOLANTES	NUEVO	T-27-16-22
+Flor	Nina Valdivia	72000029	919477052	flor.nina329@gmail.com	VOLANTES	NUEVO	T-70-17-56
+Ricardo	Caceres Soncco	72000030	964853943	ricardo.caceres330@gmail.com	LLAMADA	CONTACTADO	T-39-10-46
+Jimena	Yanque Torres	72000031	944555373	jimena.yanque331@gmail.com	REDES	NUEVO	T-7-10-1
+Nestor	Mendoza Caceres	72000032	920371845	nestor.mendoza332@gmail.com	VOLANTES	INTERESADO	T-21-10-17
+Lucia	Llerena Portugal	72000033	928251363	lucia.llerena333@gmail.com	FERIA	CONTACTADO	T-39-2-29
+Milagros	Arenas Portugal	72000034	950078164	milagros.arenas334@gmail.com	REFERIDO	CONVERTIDO	T-74-7-22
+Monica	Zapata Arenas	72000035	949811019	monica.zapata335@gmail.com	FERIA	CONTACTADO	T-80-9-57
+Miguel	Zapata Rojas	72000036	919019052	miguel.zapata336@gmail.com	VOLANTES	NUEVO	T-97-8-49
+Monica	Torres Torres	72000037	985071591	monica.torres337@gmail.com	LLAMADA	NUEVO	T-31-12-54
+Katherine	Ccori Paredes	72000038	936440650	katherine.ccori338@gmail.com	VOLANTES	NUEVO	T-71-8-20
+Karen	Ramos Cornejo	72000039	991890201	karen.ramos339@gmail.com	FERIA	INTERESADO	T-62-21-16
+Judith	Ccori Cutipa	72000040	932036279	judith.ccori340@gmail.com	FERIA	CONVERTIDO	T-18-19-3
+Mario	Ccori Mendoza	72000041	921143144	mario.ccori341@gmail.com	REFERIDO	INTERESADO	T-102-15-56
+Gabriela	Nina Condori	72000042	922564521	gabriela.nina342@gmail.com	VOLANTES	INTERESADO	T-68-6-47
+Luis	Castillo Nina	72000043	959784029	luis.castillo343@gmail.com	FERIA	NUEVO	T-14-18-19
+Ana	Palomino Mendoza	72000044	987568975	ana.palomino344@gmail.com	FERIA	CONTACTADO	T-9-4-55
+Percy	Pinto Vargas	72000045	979429030	percy.pinto345@gmail.com	FERIA	INTERESADO	T-117-0-42
+Monica	Llerena Caceres	72000046	959283631	monica.llerena346@gmail.com	REDES	NUEVO	T-89-10-7
+Percy	Ccori Castillo	72000047	995278602	percy.ccori347@gmail.com	WEB	INTERESADO	T-4-16-2
+Cesar	Mendoza Mamani	72000048	922206422	cesar.mendoza348@gmail.com	LLAMADA	CONTACTADO	T-16-15-57
+Katherine	Bellido Medina	72000049	973811391	katherine.bellido349@gmail.com	WEB	CONTACTADO	T-57-4-25
+Carlos	Flores Castillo	72000050	918432879	carlos.flores350@gmail.com	LLAMADA	CONVERTIDO	T-49-13-58
+Sergio	Mamani Zegarra	72000051	954962019	sergio.mamani351@gmail.com	VOLANTES	NUEVO	T-104-13-53
+Jorge	Rivera Callo	72000052	929801717	jorge.rivera352@gmail.com	WEB	CONTACTADO	T-75-8-39
+Milagros	Zegarra Pacheco	72000053	989366517	milagros.zegarra353@gmail.com	LLAMADA	CONTACTADO	T-6-12-3
+Raul	Vargas Huamani	72000054	980621037	raul.vargas354@gmail.com	FERIA	NUEVO	T-55-10-51
+Victor	Salazar Rojas	72000055	967579352	victor.salazar355@gmail.com	VOLANTES	DESCARTADO	T-106-12-5
+Percy	Huanca Salazar	72000056	945578078	percy.huanca356@gmail.com	FERIA	CONVERTIDO	T-116-7-36
+Karen	Mendoza Ccori	72000057	923026688	karen.mendoza357@gmail.com	FERIA	CONVERTIDO	T-106-16-10
+Paola	Ccori Callo	72000058	920581864	paola.ccori358@gmail.com	LLAMADA	NUEVO	T-96-22-25
+Alvaro	Valdivia Gutierrez	72000059	927756154	alvaro.valdivia359@gmail.com	REFERIDO	NUEVO	T-6-9-6
+Miguel	Salazar Soncco	72000060	975172407	miguel.salazar360@gmail.com	REDES	CONTACTADO	T-119-9-9
+Maria	Cornejo Flores	72000061	934057666	maria.cornejo361@gmail.com	REFERIDO	NUEVO	T-118-20-4
+Fernando	Nina Huanca	72000062	922100576	fernando.nina362@gmail.com	WEB	CONTACTADO	T-80-16-14
+Lucia	Ramos Benavides	72000063	976455400	lucia.ramos363@gmail.com	WEB	CONTACTADO	T-59-17-40
+Marco	Ccama Paredes	72000064	936301552	marco.ccama364@gmail.com	FERIA	CONTACTADO	T-19-0-27
+Elena	Castillo Huanca	72000065	966377997	elena.castillo365@gmail.com	LLAMADA	CONTACTADO	T-90-1-33
+Ricardo	Pacheco Cutipa	72000066	928716567	ricardo.pacheco366@gmail.com	VOLANTES	INTERESADO	T-1-5-54
+Jorge	Cutipa Ramos	72000067	995292078	jorge.cutipa367@gmail.com	LLAMADA	INTERESADO	T-95-20-12
+Silvia	Chavez Huamani	72000068	923005249	silvia.chavez368@gmail.com	WEB	INTERESADO	T-111-23-13
+Paola	Mamani Salazar	72000069	979436759	paola.mamani369@gmail.com	WEB	INTERESADO	T-57-14-29
+Valeria	Salazar Ticona	72000070	990095508	valeria.salazar370@gmail.com	VOLANTES	DESCARTADO	T-6-6-43
+Lourdes	Cutipa Cruz	72000071	960457791	lourdes.cutipa371@gmail.com	WEB	INTERESADO	T-62-8-2
+Carmen	Ticona Arenas	72000072	965161627	carmen.ticona372@gmail.com	FERIA	INTERESADO	T-31-3-10
+Yesenia	Benavides Mendoza	72000073	928476573	yesenia.benavides373@gmail.com	LLAMADA	CONTACTADO	T-43-15-46
+Miguel	Ticona Flores	72000074	955531773	miguel.ticona374@gmail.com	REFERIDO	NUEVO	T-80-17-34
+Monica	Chavez Llerena	72000075	978037314	monica.chavez375@gmail.com	REDES	NUEVO	T-3-14-27
+Patricia	Torres Ccama	72000076	988375349	patricia.torres376@gmail.com	VOLANTES	INTERESADO	T-95-19-37
+Fiorella	Quispe Rivera	72000077	997269449	fiorella.quispe377@gmail.com	WEB	INTERESADO	T-13-2-59
+Lucia	Sucasaca Bellido	72000078	985434771	lucia.sucasaca378@gmail.com	WEB	NUEVO	T-103-7-10
+Rosa	Mendoza Quispe	72000079	916301145	rosa.mendoza379@gmail.com	VOLANTES	INTERESADO	T-64-15-48
+Paola	Yucra Castillo	72000080	912332764	paola.yucra380@gmail.com	LLAMADA	CONVERTIDO	T-79-2-44
+Gabriela	Yanque Medina	72000081	940861228	gabriela.yanque381@gmail.com	REFERIDO	NUEVO	T-119-12-11
+Rocio	Chavez Rivera	72000082	964073099	rocio.chavez382@gmail.com	LLAMADA	CONTACTADO	T-100-13-49
+Oscar	Callo Palomino	72000083	953465795	oscar.callo383@gmail.com	WEB	NUEVO	T-3-22-4
+Rocio	Mamani Huanca	72000084	984880218	rocio.mamani384@gmail.com	FERIA	CONTACTADO	T-63-16-39
+Victor	Condori Llerena	72000085	978106994	victor.condori385@gmail.com	REFERIDO	INTERESADO	T-63-14-49
+Elena	Pacheco Gutierrez	72000086	960366393	elena.pacheco386@gmail.com	WEB	CONTACTADO	T-57-13-34
+Andres	Yucra Ccori	72000087	911595759	andres.yucra387@gmail.com	LLAMADA	NUEVO	T-23-5-3
+Paola	Chavez Rojas	72000088	943938380	paola.chavez388@gmail.com	VOLANTES	NUEVO	T-105-4-9
+Fiorella	Cutipa Huamani	72000089	983245647	fiorella.cutipa389@gmail.com	VOLANTES	INTERESADO	T-70-19-51
+Diego	Pacheco Benavides	72000090	945644134	diego.pacheco390@gmail.com	VOLANTES	NUEVO	T-74-16-24
+Paola	Bellido Mendoza	72000091	988041412	paola.bellido391@gmail.com	FERIA	NUEVO	T-73-8-6
+Judith	Ccama Rivera	72000092	976458972	judith.ccama392@gmail.com	FERIA	NUEVO	T-72-7-47
+Ana	Pinto Zapata	72000093	974246628	ana.pinto393@gmail.com	REFERIDO	NUEVO	T-5-13-34
+Karen	Bellido Ccori	72000094	967927189	karen.bellido394@gmail.com	FERIA	NUEVO	T-65-22-57
+Carmen	Apaza Ccori	72000095	934826045	carmen.apaza395@gmail.com	FERIA	NUEVO	T-100-22-16
+Carmen	Quispe Llerena	72000096	952630535	carmen.quispe396@gmail.com	LLAMADA	CONTACTADO	T-106-15-44
+Sofia	Zapata Quispe	72000097	952541524	sofia.zapata397@gmail.com	VOLANTES	CONTACTADO	T-50-18-8
+Victor	Ticona Llerena	72000098	949543845	victor.ticona398@gmail.com	REFERIDO	DESCARTADO	T-111-16-19
+Andres	Huamani Cutipa	72000099	911503705	andres.huamani399@gmail.com	FERIA	NUEVO	T-57-7-15
+Daniela	Mamani Pacheco	72000100	988512504	daniela.mamani400@gmail.com	WEB	NUEVO	T-38-2-6
+@campania
+Deposito a plazo - Enero 2026	Difusion de deposito a plazo	D-11	D+34	2500.0	EVENTO	ACTIVA
+Tarjeta de debito - Enero 2026	Difusion de tarjeta de debito	D-15	D+45	2500.0	VOLANTES	ACTIVA
+Dia del cliente - Enero 2026	Difusion de dia del cliente	D-14	D+1	6000.0	REDES	ACTIVA
+Aniversario de Arequipa - Enero 2026	Difusion de aniversario de arequipa	D-5	D+40	9000.0	REDES	ACTIVA
+Credito para negocios - Enero 2026	Difusion de credito para negocios	D-3	D+12	800.0	REDES	ACTIVA
+Ahorro joven - Enero 2026	Difusion de ahorro joven	D-4	D+26	2500.0	EMAIL	ACTIVA
+Cuenta de ahorros - Enero 2026	Difusion de cuenta de ahorros	D-9	D+6	9000.0	EVENTO	ACTIVA
+Caja de seguridad - Enero 2026	Difusion de caja de seguridad	D-9	D+21	6000.0	TV	ACTIVA
+Deposito a plazo - Marzo 2026	Difusion de deposito a plazo	D-3	D+12	12000.0	VOLANTES	ACTIVA
+Tarjeta de debito - Marzo 2026	Difusion de tarjeta de debito	D-5	D+10	1200.0	EMAIL	ACTIVA
+Campana navidena - Marzo 2026	Difusion de campana navidena	D-1	D+59	800.0	REDES	ACTIVA
+Aniversario de Arequipa - Marzo 2026	Difusion de aniversario de arequipa	D-17	D-2	500.0	RADIO	ACTIVA
+Ahorro joven - Marzo 2026	Difusion de ahorro joven	D-2	D+28	4000.0	REDES	ACTIVA
+Cuenta de ahorros - Marzo 2026	Difusion de cuenta de ahorros	D-4	D+41	1500.0	EMAIL	ACTIVA
+Asesoria gratuita - Marzo 2026	Difusion de asesoria gratuita	D-13	D+2	800.0	WEB	ACTIVA
+Referidos premiados - Marzo 2026	Difusion de referidos premiados	D-14	D+31	800.0	RADIO	ACTIVA
+Giros a todo el Peru - Mayo 2026	Difusion de giros a todo el peru	D-6	D+24	1200.0	REDES	ACTIVA
+Campana escolar - Mayo 2026	Difusion de campana escolar	D-5	D+10	800.0	EVENTO	ACTIVA
+Credito para negocios - Mayo 2026	Difusion de credito para negocios	D-3	D+42	12000.0	REDES	ACTIVA
+Caja de seguridad - Mayo 2026	Difusion de caja de seguridad	D-5	D+10	4000.0	VOLANTES	ACTIVA
+Asesoria gratuita - Mayo 2026	Difusion de asesoria gratuita	D-9	D+36	800.0	RADIO	ACTIVA
+Tasacion sin costo - Mayo 2026	Difusion de tasacion sin costo	D-20	D-5	12000.0	WEB	ACTIVA
+Prestamos rapidos - Julio 2026	Difusion de prestamos rapidos	D-17	D-2	6000.0	RADIO	ACTIVA
+Empeno con mejor tasa - Julio 2026	Difusion de empeno con mejor tasa	D-12	D+48	1500.0	VOLANTES	ACTIVA
+Dia del cliente - Julio 2026	Difusion de dia del cliente	D-15	D+30	2500.0	REDES	ACTIVA
+Fiestas patrias - Julio 2026	Difusion de fiestas patrias	D-15	D+0	9000.0	REDES	ACTIVA
+Caja de seguridad - Julio 2026	Difusion de caja de seguridad	D-14	D+46	6000.0	VOLANTES	ACTIVA
+Asesoria gratuita - Julio 2026	Difusion de asesoria gratuita	D-13	D+17	9000.0	EVENTO	ACTIVA
+Tasacion sin costo - Julio 2026	Difusion de tasacion sin costo	D-15	D+45	1500.0	RADIO	ACTIVA
+Deposito a plazo - Setiembre 2026	Difusion de deposito a plazo	D-13	D+17	4000.0	TV	ACTIVA
+Seguro de vida - Setiembre 2026	Difusion de seguro de vida	D-15	D+30	2500.0	EMAIL	ACTIVA
+Aniversario de Arequipa - Setiembre 2026	Difusion de aniversario de arequipa	D-2	D+43	12000.0	EMAIL	ACTIVA
+Credito para negocios - Setiembre 2026	Difusion de credito para negocios	D-1	D+29	12000.0	WEB	ACTIVA
+Asesoria gratuita - Setiembre 2026	Difusion de asesoria gratuita	D-12	D+48	4000.0	REDES	ACTIVA
+Tasacion sin costo - Setiembre 2026	Difusion de tasacion sin costo	D-6	D+24	500.0	VOLANTES	ACTIVA
+Cambio sin comision - Enero 2026	Difusion de cambio sin comision	D-166	D-121	6000.0	RADIO	FINALIZADA
+Prestamos rapidos - Enero 2026	Difusion de prestamos rapidos	D-124	D-64	1500.0	REDES	FINALIZADA
+Empeno con mejor tasa - Enero 2026	Difusion de empeno con mejor tasa	D+22	D+67	2500.0	EVENTO	PROGRAMADA
+Giros a todo el Peru - Enero 2026	Difusion de giros a todo el peru	D+28	D+73	9000.0	EMAIL	PROGRAMADA
+Seguro de vida - Enero 2026	Difusion de seguro de vida	D-50	D+10	500.0	TV	FINALIZADA
+Campana escolar - Enero 2026	Difusion de campana escolar	D-151	D-136	2500.0	TV	FINALIZADA
+Campana navidena - Enero 2026	Difusion de campana navidena	D+8	D+68	500.0	EVENTO	PROGRAMADA
+Fiestas patrias - Enero 2026	Difusion de fiestas patrias	D+10	D+25	12000.0	TV	PROGRAMADA
+Remesas familiares - Enero 2026	Difusion de remesas familiares	D-67	D-52	6000.0	TV	FINALIZADA
+Asesoria gratuita - Enero 2026	Difusion de asesoria gratuita	D-162	D-132	12000.0	EMAIL	FINALIZADA
+Tasacion sin costo - Enero 2026	Difusion de tasacion sin costo	D-105	D-45	1200.0	EMAIL	FINALIZADA
+Referidos premiados - Enero 2026	Difusion de referidos premiados	D-172	D-127	1500.0	EMAIL	FINALIZADA
+Cambio sin comision - Marzo 2026	Difusion de cambio sin comision	D+28	D+58	800.0	REDES	PROGRAMADA
+Prestamos rapidos - Marzo 2026	Difusion de prestamos rapidos	D-110	D-95	6000.0	REDES	FINALIZADA
+Empeno con mejor tasa - Marzo 2026	Difusion de empeno con mejor tasa	D+13	D+58	800.0	VOLANTES	PROGRAMADA
+Giros a todo el Peru - Marzo 2026	Difusion de giros a todo el peru	D-200	D-185	4000.0	TV	FINALIZADA
+Seguro de vida - Marzo 2026	Difusion de seguro de vida	D-115	D-85	12000.0	VOLANTES	FINALIZADA
+Dia del cliente - Marzo 2026	Difusion de dia del cliente	D+12	D+57	800.0	VOLANTES	PROGRAMADA
+Campana escolar - Marzo 2026	Difusion de campana escolar	D-155	D-95	800.0	WEB	FINALIZADA
+Fiestas patrias - Marzo 2026	Difusion de fiestas patrias	D-152	D-137	1200.0	WEB	FINALIZADA
+Remesas familiares - Marzo 2026	Difusion de remesas familiares	D+3	D+18	800.0	WEB	PROGRAMADA
+Credito para negocios - Marzo 2026	Difusion de credito para negocios	D-83	D-68	1200.0	TV	FINALIZADA
+Caja de seguridad - Marzo 2026	Difusion de caja de seguridad	D-167	D-152	800.0	REDES	FINALIZADA
+Tasacion sin costo - Marzo 2026	Difusion de tasacion sin costo	D+31	D+91	9000.0	EVENTO	PROGRAMADA
+Cambio sin comision - Mayo 2026	Difusion de cambio sin comision	D-101	D-41	4000.0	VOLANTES	FINALIZADA
+Prestamos rapidos - Mayo 2026	Difusion de prestamos rapidos	D-75	D-45	6000.0	WEB	FINALIZADA
+Empeno con mejor tasa - Mayo 2026	Difusion de empeno con mejor tasa	D-116	D-86	500.0	WEB	FINALIZADA
+Deposito a plazo - Mayo 2026	Difusion de deposito a plazo	D-166	D-121	1200.0	RADIO	FINALIZADA
+Seguro de vida - Mayo 2026	Difusion de seguro de vida	D-150	D-135	12000.0	EVENTO	FINALIZADA
+Tarjeta de debito - Mayo 2026	Difusion de tarjeta de debito	D-198	D-183	800.0	EVENTO	FINALIZADA
+Dia del cliente - Mayo 2026	Difusion de dia del cliente	D-142	D-82	1200.0	WEB	FINALIZADA
+Campana navidena - Mayo 2026	Difusion de campana navidena	D+24	D+39	12000.0	TV	PROGRAMADA
+Fiestas patrias - Mayo 2026	Difusion de fiestas patrias	D-117	D-72	2500.0	EVENTO	FINALIZADA
+Aniversario de Arequipa - Mayo 2026	Difusion de aniversario de arequipa	D-177	D-132	2500.0	EMAIL	FINALIZADA
+Remesas familiares - Mayo 2026	Difusion de remesas familiares	D+12	D+72	1500.0	RADIO	PROGRAMADA
+Ahorro joven - Mayo 2026	Difusion de ahorro joven	D+25	D+40	800.0	REDES	PROGRAMADA
+Cuenta de ahorros - Mayo 2026	Difusion de cuenta de ahorros	D-147	D-87	1200.0	EVENTO	FINALIZADA
+Referidos premiados - Mayo 2026	Difusion de referidos premiados	D-122	D-62	2500.0	EVENTO	FINALIZADA
+Cambio sin comision - Julio 2026	Difusion de cambio sin comision	D-110	D-65	12000.0	RADIO	FINALIZADA
+Giros a todo el Peru - Julio 2026	Difusion de giros a todo el peru	D-137	D-122	9000.0	EMAIL	FINALIZADA
+Deposito a plazo - Julio 2026	Difusion de deposito a plazo	D-49	D+11	500.0	RADIO	FINALIZADA
+Seguro de vida - Julio 2026	Difusion de seguro de vida	D+36	D+51	9000.0	VOLANTES	PROGRAMADA
+Tarjeta de debito - Julio 2026	Difusion de tarjeta de debito	D-125	D-110	4000.0	RADIO	FINALIZADA
+Campana escolar - Julio 2026	Difusion de campana escolar	D-136	D-91	2500.0	VOLANTES	FINALIZADA
+Campana navidena - Julio 2026	Difusion de campana navidena	D-43	D+17	1200.0	TV	FINALIZADA
+Aniversario de Arequipa - Julio 2026	Difusion de aniversario de arequipa	D-154	D-109	800.0	EVENTO	FINALIZADA
+Remesas familiares - Julio 2026	Difusion de remesas familiares	D-47	D-32	12000.0	VOLANTES	FINALIZADA
+Credito para negocios - Julio 2026	Difusion de credito para negocios	D-94	D-79	6000.0	WEB	FINALIZADA
+Ahorro joven - Julio 2026	Difusion de ahorro joven	D+36	D+51	9000.0	RADIO	PROGRAMADA
+Cuenta de ahorros - Julio 2026	Difusion de cuenta de ahorros	D-154	D-94	2500.0	TV	FINALIZADA
+Referidos premiados - Julio 2026	Difusion de referidos premiados	D+19	D+79	800.0	WEB	PROGRAMADA
+Cambio sin comision - Setiembre 2026	Difusion de cambio sin comision	D-84	D-69	9000.0	EVENTO	FINALIZADA
+Prestamos rapidos - Setiembre 2026	Difusion de prestamos rapidos	D-118	D-88	12000.0	RADIO	FINALIZADA
+Empeno con mejor tasa - Setiembre 2026	Difusion de empeno con mejor tasa	D-146	D-131	500.0	REDES	FINALIZADA
+Giros a todo el Peru - Setiembre 2026	Difusion de giros a todo el peru	D-123	D-108	2500.0	WEB	FINALIZADA
+Tarjeta de debito - Setiembre 2026	Difusion de tarjeta de debito	D-70	D-40	2500.0	RADIO	FINALIZADA
+Dia del cliente - Setiembre 2026	Difusion de dia del cliente	D-184	D-154	1500.0	VOLANTES	FINALIZADA
+Campana escolar - Setiembre 2026	Difusion de campana escolar	D-100	D-40	12000.0	VOLANTES	FINALIZADA
+Campana navidena - Setiembre 2026	Difusion de campana navidena	D+19	D+79	4000.0	REDES	PROGRAMADA
+Fiestas patrias - Setiembre 2026	Difusion de fiestas patrias	D+38	D+83	2500.0	RADIO	PROGRAMADA
+Remesas familiares - Setiembre 2026	Difusion de remesas familiares	D-194	D-134	2500.0	VOLANTES	FINALIZADA
+Ahorro joven - Setiembre 2026	Difusion de ahorro joven	D-65	D-20	12000.0	VOLANTES	FINALIZADA
+Cuenta de ahorros - Setiembre 2026	Difusion de cuenta de ahorros	D+3	D+63	4000.0	EMAIL	PROGRAMADA
+Caja de seguridad - Setiembre 2026	Difusion de caja de seguridad	D-160	D-145	6000.0	RADIO	FINALIZADA
+Referidos premiados - Setiembre 2026	Difusion de referidos premiados	D+23	D+83	500.0	VOLANTES	PROGRAMADA
+@articulo
+71000076	Reloj Citizen	Joyeria	Citizen	M1803	SN-JOY-00001	MUY BUENO	5180.66	D-22	ACTIVO
+71000030	Anillo de oro 18k	Joyeria	-	M2024	SN-JOY-00002	REGULAR	751.63	D-25	ACTIVO
+71000033	Cadena de oro 18k	Joyeria	-	M1152	SN-JOY-00003	MUY BUENO	4495.43	D-68	ACTIVO
+71000026	Refrigeradora Indurama	Electrodomesticos	Indurama	M6724	SN-ELE-00004	BUENO	2143.46	D-64	ACTIVO
+002000048	Cocina Indurama	Electrodomesticos	Indurama	M5765	SN-ELE-00005	MUY BUENO	271.86	D-66	ACTIVO
+71000010	Licuadora Oster	Electrodomesticos	Oster	M8258	SN-ELE-00006	REGULAR	276.03	D-16	ACTIVO
+002000036	Cocina Indurama	Electrodomesticos	Indurama	M5265	SN-ELE-00007	MUY BUENO	5844.13	D-58	ACTIVO
+71000090	Taladro Bosch	Herramientas	Bosch	M3215	SN-HER-00008	BUENO	332.69	D-5	ACTIVO
+71000021	Pulsera de plata	Joyeria	-	M4673	SN-JOY-00009	BUENO	3219.39	D-16	ACTIVO
+71000069	Amoladora Truper	Herramientas	Truper	M2679	SN-HER-00010	REGULAR	1339.84	D-16	ACTIVO
+71000090	Licuadora Oster	Electrodomesticos	Oster	M8575	SN-ELE-00011	MUY BUENO	4032.43	D-25	ACTIVO
+71000005	Cadena de oro 18k	Joyeria	-	M5876	SN-JOY-00012	MUY BUENO	1279.21	D-28	ACTIVO
+71000083	Reloj Casio	Joyeria	Casio	M6969	SN-JOY-00013	BUENO	1521.15	D-42	ACTIVO
+71000025	Taladro DeWalt	Herramientas	DeWalt	M1974	SN-HER-00014	REGULAR	523.41	D-33	ACTIVO
+71000013	Taladro Bosch	Herramientas	Bosch	M0045	SN-HER-00015	BUENO	1525.13	D-53	ACTIVO
+71000020	Anillo de oro 18k	Joyeria	-	M9415	SN-JOY-00016	BUENO	4574.01	D-57	ACTIVO
+71000058	Refrigeradora Samsung	Electrodomesticos	Samsung	M7816	SN-ELE-00017	REGULAR	365.69	D-59	ACTIVO
+71000052	Anillo de oro 18k	Joyeria	-	M4046	SN-JOY-00018	BUENO	298.55	D-25	ACTIVO
+71000026	Cadena de oro 18k	Joyeria	-	M5392	SN-JOY-00019	MUY BUENO	4649.86	D-23	ACTIVO
+71000041	Amoladora Truper	Herramientas	Truper	M0574	SN-HER-00020	REGULAR	645.8	D-10	ACTIVO
+71000051	Refrigeradora Samsung	Electrodomesticos	Samsung	M6787	SN-ELE-00021	MUY BUENO	676.57	D-33	ACTIVO
+71000070	Celular Xiaomi	Electronica	Xiaomi	M3672	SN-ELE-00022	MUY BUENO	3114.75	D-21	ACTIVO
+71000082	Cadena de oro 18k	Joyeria	-	M1449	SN-JOY-00023	REGULAR	381.45	D-53	ACTIVO
+71000003	Soldadora Miller	Herramientas	Miller	M9735	SN-HER-00024	MUY BUENO	1373.33	D-43	ACTIVO
+71000063	Licuadora Oster	Electrodomesticos	Oster	M9204	SN-ELE-00025	BUENO	4503.71	D-10	ACTIVO
+71000027	Celular Xiaomi	Electronica	Xiaomi	M3111	SN-ELE-00026	MUY BUENO	814.18	D-4	ACTIVO
+71000031	Cadena de oro 18k	Joyeria	-	M2721	SN-JOY-00027	BUENO	1531.81	D-17	ACTIVO
+71000005	Televisor Sony	Electronica	Sony	M3720	SN-ELE-00028	BUENO	2849.18	D-11	ACTIVO
+71000069	Anillo de oro 18k	Joyeria	-	M1415	SN-JOY-00029	MUY BUENO	523.91	D-26	ACTIVO
+71000037	Refrigeradora Indurama	Electrodomesticos	Indurama	M6393	SN-ELE-00030	MUY BUENO	329.42	D-68	ACTIVO
+71000083	Reloj Casio	Joyeria	Casio	M6436	SN-JOY-00031	REGULAR	802.77	D-33	ACTIVO
+71000030	Amoladora Truper	Herramientas	Truper	M0635	SN-HER-00032	BUENO	1356.44	D-51	ACTIVO
+71000026	Taladro DeWalt	Herramientas	DeWalt	M7785	SN-HER-00033	BUENO	5066.79	D-4	ACTIVO
+71000010	Amoladora Bosch	Herramientas	Bosch	M1017	SN-HER-00034	REGULAR	277.59	D-63	ACTIVO
+002000024	Cocina Indurama	Electrodomesticos	Indurama	M1470	SN-ELE-00035	DETERIORADO	3583.69	D-24	ACTIVO
+71000003	Anillo de oro 18k	Joyeria	-	M0915	SN-JOY-00036	REGULAR	293.04	D-62	ACTIVO
+71000077	Cadena de oro 18k	Joyeria	-	M5438	SN-JOY-00037	BUENO	2817.3	D-42	ACTIVO
+71000054	Amoladora Bosch	Herramientas	Bosch	M7630	SN-HER-00038	DETERIORADO	525.69	D-55	ACTIVO
+71000023	Soldadora Miller	Herramientas	Miller	M6813	SN-HER-00039	BUENO	3718.86	D-50	ACTIVO
+71000035	Anillo de oro 18k	Joyeria	-	M5262	SN-JOY-00040	BUENO	6320.02	D-40	ACTIVO
+71000016	Cocina Mabe	Electrodomesticos	Mabe	M5884	SN-ELE-00041	BUENO	849.47	D-45	ACTIVO
+71000042	Televisor LG	Electronica	LG	M8480	SN-ELE-00042	BUENO	2599.88	D-10	ACTIVO
+002000048	Anillo de oro 18k	Joyeria	-	M4876	SN-JOY-00043	MUY BUENO	321.62	D-47	ACTIVO
+71000039	Pulsera de plata	Joyeria	-	M9769	SN-JOY-00044	MUY BUENO	4126.65	D-18	ACTIVO
+71000007	Soldadora Miller	Herramientas	Miller	M2548	SN-HER-00045	BUENO	4000.64	D-28	ACTIVO
+71000054	Pulsera de plata	Joyeria	-	M5054	SN-JOY-00046	BUENO	315.12	D-19	ACTIVO
+71000002	Tablet Lenovo	Electronica	Lenovo	M4577	SN-ELE-00047	REGULAR	597.52	D-5	ACTIVO
+71000022	Taladro DeWalt	Herramientas	DeWalt	M2951	SN-HER-00048	MUY BUENO	891.7	D-65	ACTIVO
+71000076	Televisor Sony	Electronica	Sony	M9126	SN-ELE-00049	REGULAR	332.52	D-52	ACTIVO
+71000034	Cadena de oro 18k	Joyeria	-	M8730	SN-JOY-00050	MUY BUENO	785.01	D-25	ACTIVO
+71000054	Cadena de oro 18k	Joyeria	-	M1833	SN-JOY-00051	REGULAR	4254.52	D-2	ACTIVO
+71000074	Taladro DeWalt	Herramientas	DeWalt	M4143	SN-HER-00052	DETERIORADO	264.28	D-11	ACTIVO
+002000072	Reloj Seiko	Joyeria	Seiko	M3276	SN-JOY-00053	REGULAR	3980.77	D-32	ACTIVO
+71000029	Cadena de oro 18k	Joyeria	-	M8020	SN-JOY-00054	REGULAR	1437.92	D-6	ACTIVO
+71000066	Soldadora Miller	Herramientas	Miller	M4166	SN-HER-00055	BUENO	1811.72	D-44	ACTIVO
+71000044	Cadena de oro 18k	Joyeria	-	M0558	SN-JOY-00056	REGULAR	5443.92	D-27	ACTIVO
+71000077	Laptop Lenovo	Electronica	Lenovo	M7165	SN-ELE-00057	BUENO	767.81	D-13	ACTIVO
+71000045	Televisor Sony	Electronica	Sony	M7360	SN-ELE-00058	MUY BUENO	1239.52	D-64	ACTIVO
+71000081	Pulsera de plata	Joyeria	-	M5584	SN-JOY-00059	MUY BUENO	1827.08	D-24	ACTIVO
+71000085	Televisor Sony	Electronica	Sony	M3814	SN-ELE-00060	MUY BUENO	1938.06	D-60	ACTIVO
+71000004	Amoladora Bosch	Herramientas	Bosch	M1228	SN-HER-00061	MUY BUENO	470.22	D-62	ACTIVO
+71000041	Taladro Bosch	Herramientas	Bosch	M9306	SN-HER-00062	MUY BUENO	1544.11	D-54	ACTIVO
+71000042	Pulsera de plata	Joyeria	-	M5515	SN-JOY-00063	MUY BUENO	6191.33	D-10	ACTIVO
+71000061	Consola Sony	Electronica	Sony	M2683	SN-ELE-00064	BUENO	1005.26	D-69	ACTIVO
+71000026	Cocina Mabe	Electrodomesticos	Mabe	M3424	SN-ELE-00065	BUENO	827.58	D-67	ACTIVO
+71000054	Anillo de oro 18k	Joyeria	-	M9032	SN-JOY-00066	MUY BUENO	2938.6	D-64	ACTIVO
+71000068	Soldadora Miller	Herramientas	Miller	M3323	SN-HER-00067	BUENO	1391.24	D-60	ACTIVO
+71000033	Cocina Mabe	Electrodomesticos	Mabe	M7448	SN-ELE-00068	BUENO	562.01	D-1	ACTIVO
+71000029	Consola Nintendo	Electronica	Nintendo	M8698	SN-ELE-00069	BUENO	1332.96	D-15	ACTIVO
+71000085	Taladro Makita	Herramientas	Makita	M0160	SN-HER-00070	MUY BUENO	2822.68	D-32	ACTIVO
+71000029	Cocina Indurama	Electrodomesticos	Indurama	M5434	SN-ELE-00071	MUY BUENO	2814.23	D-16	ACTIVO
+71000079	Amoladora Truper	Herramientas	Truper	M8102	SN-HER-00072	BUENO	2193.93	D-59	ACTIVO
+002000060	Reloj Citizen	Joyeria	Citizen	M6684	SN-JOY-00073	MUY BUENO	6128.71	D-31	ACTIVO
+71000050	Consola Microsoft	Electronica	Microsoft	M5521	SN-ELE-00074	DETERIORADO	1070.38	D-5	ACTIVO
+71000007	Pulsera de plata	Joyeria	-	M7012	SN-JOY-00075	BUENO	5697.46	D-50	ACTIVO
+002000012	Cocina Indurama	Electrodomesticos	Indurama	M7638	SN-ELE-00076	BUENO	1479.59	D-44	ACTIVO
+71000027	Refrigeradora Indurama	Electrodomesticos	Indurama	M6251	SN-ELE-00077	REGULAR	4522.68	D-49	ACTIVO
+71000053	Cocina Mabe	Electrodomesticos	Mabe	M3386	SN-ELE-00078	MUY BUENO	3685.97	D-8	ACTIVO
+71000020	Cocina Indurama	Electrodomesticos	Indurama	M6276	SN-ELE-00079	BUENO	994.28	D-11	ACTIVO
+71000014	Soldadora Miller	Herramientas	Miller	M2464	SN-HER-00080	MUY BUENO	961.76	D-53	ACTIVO
+71000039	Pulsera de plata	Joyeria	-	M3948	SN-JOY-00081	BUENO	364.73	D-24	ACTIVO
+71000002	Refrigeradora Indurama	Electrodomesticos	Indurama	M2725	SN-ELE-00082	BUENO	2229.39	D-35	ACTIVO
+71000032	Pulsera de plata	Joyeria	-	M1006	SN-JOY-00083	MUY BUENO	1939.62	D-47	ACTIVO
+71000081	Tablet Samsung	Electronica	Samsung	M6810	SN-ELE-00084	REGULAR	2754.22	D-34	ACTIVO
+71000010	Reloj Casio	Joyeria	Casio	M0284	SN-JOY-00085	BUENO	3103.41	D-2	ACTIVO
+71000061	Pulsera de plata	Joyeria	-	M4455	SN-JOY-00086	BUENO	426.0	D-10	ACTIVO
+71000005	Televisor Samsung	Electronica	Samsung	M8238	SN-ELE-00087	MUY BUENO	4687.97	D-67	ACTIVO
+71000087	Soldadora Miller	Herramientas	Miller	M1770	SN-HER-00088	BUENO	353.82	D-38	ACTIVO
+71000011	Cocina Mabe	Electrodomesticos	Mabe	M9028	SN-ELE-00089	BUENO	615.34	D-9	ACTIVO
+002000036	Amoladora Truper	Herramientas	Truper	M9151	SN-HER-00090	BUENO	2116.72	D-39	ACTIVO
+71000053	Soldadora Miller	Herramientas	Miller	M5563	SN-HER-00091	BUENO	2566.01	D-18	ACTIVO
+71000085	Taladro DeWalt	Herramientas	DeWalt	M6390	SN-HER-00092	MUY BUENO	5515.29	D-58	ACTIVO
+71000030	Amoladora Truper	Herramientas	Truper	M3038	SN-HER-00093	MUY BUENO	2177.86	D-30	ACTIVO
+71000018	Licuadora Philips	Electrodomesticos	Philips	M3483	SN-ELE-00094	BUENO	2960.94	D-63	ACTIVO
+002000072	Consola Nintendo	Electronica	Nintendo	M8128	SN-ELE-00095	BUENO	3103.78	D-21	ACTIVO
+002000084	Pulsera de plata	Joyeria	-	M1728	SN-JOY-00096	REGULAR	1056.04	D-34	ACTIVO
+71000067	Consola Microsoft	Electronica	Microsoft	M5237	SN-ELE-00097	MUY BUENO	2899.3	D-51	ACTIVO
+71000032	Taladro DeWalt	Herramientas	DeWalt	M6619	SN-HER-00098	REGULAR	2218.93	D-16	ACTIVO
+71000038	Refrigeradora Indurama	Electrodomesticos	Indurama	M4003	SN-ELE-00099	BUENO	328.68	D-1	ACTIVO
+002000036	Televisor Sony	Electronica	Sony	M3945	SN-ELE-00100	BUENO	2279.93	D-3	ACTIVO
+@operacion_cambio
+71000050	CAMBIO	USD	PEN	50.33	3.78	50.33	190.25	COMPLETADA	T-0-0-33
+71000062	CAMBIO	USD	PEN	1500.28	3.78	1500.28	5671.06	COMPLETADA	T-0-1-20
+71000079	CAMBIO	GBP	PEN	1000.27	4.7737	1000.27	4774.99	COMPLETADA	T-0-7-58
+71000057	CAMBIO	USD	PEN	1000.97	3.78	1000.97	3783.67	PENDIENTE	T-4-18-25
+71000017	CAMBIO	EUR	PEN	80.36	4.15	80.36	333.49	COMPLETADA	T-0-1-19
+002000024	CAMBIO	USD	PEN	1000.47	3.78	1000.47	3781.78	COMPLETADA	T-0-6-59
+71000067	CAMBIO	USD	PEN	1000.48	3.78	1000.48	3781.81	COMPLETADA	T-0-5-18
+71000062	CAMBIO	USD	PEN	3000.82	3.78	3000.82	11343.1	ANULADA	T-40-18-55
+71000026	CAMBIO	USD	PEN	3000.57	3.78	3000.57	11342.15	COMPLETADA	T-45-0-29
+71000082	CAMBIO	CHF	PEN	50.36	4.1807	50.36	210.54	ANULADA	T-53-7-53
+71000033	CAMBIO	USD	PEN	50.94	3.78	50.94	192.55	COMPLETADA	T-23-0-47
+71000045	CAMBIO	USD	PEN	1000.22	3.78	1000.22	3780.83	COMPLETADA	T-3-0-33
+71000057	CAMBIO	EUR	PEN	1500.8	4.15	1500.8	6228.32	COMPLETADA	T-4-18-18
+71000075	CAMBIO	GBP	PEN	50.29	4.7737	50.29	240.07	PENDIENTE	T-5-15-4
+71000022	CAMBIO	USD	PEN	150.5	3.78	150.5	568.89	COMPLETADA	T-56-8-27
+71000044	CAMBIO	GBP	PEN	2000.48	4.7737	2000.48	9549.69	COMPLETADA	T-57-0-30
+002000024	CAMBIO	USD	PEN	2000.73	3.78	2000.73	7562.76	COMPLETADA	T-26-12-2
+71000045	CAMBIO	USD	PEN	150.93	3.78	150.93	570.52	COMPLETADA	T-54-2-7
+71000001	CAMBIO	CHF	PEN	100.34	4.1807	100.34	419.49	COMPLETADA	T-74-10-53
+71000011	CAMBIO	USD	PEN	3000.96	3.78	3000.96	11343.63	PENDIENTE	T-6-19-12
+71000051	CAMBIO	USD	PEN	50.07	3.78	50.07	189.26	COMPLETADA	T-19-3-35
+71000028	CAMBIO	EUR	PEN	80.54	4.15	80.54	334.24	PENDIENTE	T-7-3-17
+71000075	CAMBIO	USD	PEN	50.96	3.78	50.96	192.63	PENDIENTE	T-8-12-25
+71000047	CAMBIO	CHF	PEN	2000.43	4.1807	2000.43	8363.2	PENDIENTE	T-2-2-48
+71000017	CAMBIO	EUR	PEN	1500.62	4.15	1500.62	6227.57	COMPLETADA	T-43-22-21
+71000047	CAMBIO	USD	PEN	500.48	3.78	500.48	1891.81	PENDIENTE	T-6-6-45
+002000012	CAMBIO	GBP	PEN	800.92	4.7737	800.92	3823.35	COMPLETADA	T-8-17-13
+71000064	CAMBIO	CAD	PEN	2000.31	2.732	2000.31	5464.85	ANULADA	T-65-16-17
+71000037	CAMBIO	GBP	PEN	3000.58	4.7737	3000.58	14323.87	COMPLETADA	T-23-2-39
+002000012	CAMBIO	EUR	PEN	1500.91	4.15	1500.91	6228.78	COMPLETADA	T-66-6-43
+71000089	CAMBIO	CHF	PEN	150.62	4.1807	150.62	629.7	PENDIENTE	T-9-4-44
+71000079	CAMBIO	USD	PEN	300.94	3.78	300.94	1137.55	COMPLETADA	T-23-9-36
+71000049	CAMBIO	USD	PEN	1500.99	3.78	1500.99	5673.74	COMPLETADA	T-49-13-11
+71000007	CAMBIO	USD	PEN	150.12	3.78	150.12	567.45	COMPLETADA	T-21-6-54
+71000020	CAMBIO	EUR	PEN	500.35	4.15	500.35	2076.45	PENDIENTE	T-2-19-49
+71000013	CAMBIO	USD	PEN	200.14	3.78	200.14	756.53	COMPLETADA	T-38-11-51
+71000085	CAMBIO	USD	PEN	200.83	3.78	200.83	759.14	COMPLETADA	T-45-21-57
+71000067	CAMBIO	EUR	PEN	50.37	4.15	50.37	209.04	COMPLETADA	T-41-8-6
+71000075	CAMBIO	EUR	PEN	2000.17	4.15	2000.17	8300.71	COMPLETADA	T-18-7-53
+71000083	CAMBIO	USD	PEN	150.09	3.78	150.09	567.34	COMPLETADA	T-42-13-47
+71000077	CAMBIO	USD	PEN	150.14	3.78	150.14	567.53	COMPLETADA	T-18-19-23
+71000061	CAMBIO	USD	PEN	3000.91	3.78	3000.91	11343.44	COMPLETADA	T-44-22-56
+71000082	CAMBIO	GBP	PEN	80.73	4.7737	80.73	385.38	COMPLETADA	T-22-14-49
+71000028	CAMBIO	USD	PEN	500.63	3.78	500.63	1892.38	COMPLETADA	T-47-6-40
+71000066	CAMBIO	USD	PEN	3000.15	3.78	3000.15	11340.57	PENDIENTE	T-7-0-45
+71000041	CAMBIO	USD	PEN	3000.85	3.78	3000.85	11343.21	COMPLETADA	T-33-0-2
+71000007	CAMBIO	CHF	PEN	300.89	4.1807	300.89	1257.93	ANULADA	T-67-19-37
+71000034	CAMBIO	EUR	PEN	3000.8	4.15	3000.8	12453.32	COMPLETADA	T-39-8-42
+002000012	CAMBIO	EUR	PEN	100.95	4.15	100.95	418.94	PENDIENTE	T-6-17-7
+71000049	CAMBIO	EUR	PEN	3000.59	4.15	3000.59	12452.45	COMPLETADA	T-68-16-58
+71000037	CAMBIO	USD	PEN	3000.77	3.78	3000.77	11342.91	COMPLETADA	T-56-17-19
+71000075	CAMBIO	USD	PEN	200.93	3.78	200.93	759.52	COMPLETADA	T-12-0-49
+71000002	CAMBIO	EUR	PEN	3000.37	4.15	3000.37	12451.54	COMPLETADA	T-36-10-54
+71000078	CAMBIO	USD	PEN	800.17	3.78	800.17	3024.64	PENDIENTE	T-6-22-46
+71000055	CAMBIO	USD	PEN	300.37	3.78	300.37	1135.4	COMPLETADA	T-29-7-1
+71000066	CAMBIO	EUR	PEN	3000.21	4.15	3000.21	12450.87	COMPLETADA	T-59-0-19
+71000090	CAMBIO	USD	PEN	800.44	3.78	800.44	3025.66	PENDIENTE	T-8-9-31
+71000023	CAMBIO	USD	PEN	800.12	3.78	800.12	3024.45	PENDIENTE	T-2-22-44
+71000006	CAMBIO	GBP	PEN	300.26	4.7737	300.26	1433.35	COMPLETADA	T-48-10-2
+71000066	CAMBIO	USD	PEN	1500.03	3.78	1500.03	5670.11	COMPLETADA	T-22-18-25
+71000027	CAMBIO	EUR	PEN	200.92	4.15	200.92	833.82	PENDIENTE	T-6-14-54
+71000042	CAMBIO	EUR	PEN	2000.44	4.15	2000.44	8301.83	PENDIENTE	T-3-6-9
+71000018	CAMBIO	USD	PEN	50.25	3.78	50.25	189.95	COMPLETADA	T-44-9-12
+71000074	CAMBIO	EUR	PEN	200.72	4.15	200.72	832.99	PENDIENTE	T-6-22-42
+71000033	CAMBIO	USD	PEN	200.7	3.78	200.7	758.65	ANULADA	T-38-4-3
+71000031	CAMBIO	CHF	PEN	200.2	4.1807	200.2	836.98	PENDIENTE	T-1-7-38
+71000071	CAMBIO	EUR	PEN	100.41	4.15	100.41	416.7	COMPLETADA	T-28-9-40
+002000048	CAMBIO	EUR	PEN	1000.17	4.15	1000.17	4150.71	COMPLETADA	T-41-16-41
+71000067	CAMBIO	USD	PEN	2000.29	3.78	2000.29	7561.1	PENDIENTE	T-2-5-33
+71000044	CAMBIO	USD	PEN	800.36	3.78	800.36	3025.36	COMPLETADA	T-6-20-19
+71000069	CAMBIO	USD	PEN	200.74	3.78	200.74	758.8	PENDIENTE	T-7-18-11
+71000016	CAMBIO	USD	PEN	1500.6	3.78	1500.6	5672.27	COMPLETADA	T-61-18-58
+71000067	CAMBIO	EUR	PEN	150.7	4.15	150.7	625.41	COMPLETADA	T-48-22-42
+71000009	CAMBIO	CHF	PEN	300.51	4.1807	300.51	1256.34	COMPLETADA	T-17-20-19
+71000015	CAMBIO	USD	PEN	1500.48	3.78	1500.48	5671.81	PENDIENTE	T-3-5-48
+71000039	CAMBIO	USD	PEN	3000.26	3.78	3000.26	11340.98	COMPLETADA	T-75-2-51
+71000049	CAMBIO	CAD	PEN	1500.32	2.732	1500.32	4098.87	COMPLETADA	T-32-12-1
+71000054	CAMBIO	USD	PEN	80.13	3.78	80.13	302.89	COMPLETADA	T-31-11-1
+71000004	CAMBIO	EUR	PEN	1500.55	4.15	1500.55	6227.28	ANULADA	T-38-10-42
+71000044	CAMBIO	USD	PEN	1000.99	3.78	1000.99	3783.74	COMPLETADA	T-14-11-38
+71000055	CAMBIO	EUR	PEN	50.47	4.15	50.47	209.45	COMPLETADA	T-55-13-47
+71000031	CAMBIO	USD	PEN	100.68	3.78	100.68	380.57	COMPLETADA	T-67-1-56
+71000030	CAMBIO	GBP	PEN	2000.58	4.7737	2000.58	9550.17	PENDIENTE	T-8-23-40
+71000073	CAMBIO	USD	PEN	500.03	3.78	500.03	1890.11	COMPLETADA	T-31-17-18
+71000034	CAMBIO	USD	PEN	80.74	3.78	80.74	305.2	COMPLETADA	T-69-19-18
+71000020	CAMBIO	USD	PEN	500.06	3.78	500.06	1890.23	ANULADA	T-47-23-54
+71000079	CAMBIO	USD	PEN	150.89	3.78	150.89	570.36	COMPLETADA	T-74-12-28
+71000056	CAMBIO	USD	PEN	1000.11	3.78	1000.11	3780.42	COMPLETADA	T-31-12-40
+71000026	CAMBIO	GBP	PEN	2000.68	4.7737	2000.68	9550.65	COMPLETADA	T-75-8-12
+71000055	CAMBIO	USD	PEN	80.89	3.78	80.89	305.76	PENDIENTE	T-0-13-20
+71000002	CAMBIO	USD	PEN	1000.91	3.78	1000.91	3783.44	COMPLETADA	T-53-15-23
+71000075	CAMBIO	USD	PEN	1500.7	3.78	1500.7	5672.65	ANULADA	T-53-23-52
+71000006	CAMBIO	EUR	PEN	3000.66	4.15	3000.66	12452.74	PENDIENTE	T-1-11-52
+71000038	CAMBIO	EUR	PEN	1500.29	4.15	1500.29	6226.2	COMPLETADA	T-58-0-35
+002000024	CAMBIO	USD	PEN	150.9	3.78	150.9	570.4	PENDIENTE	T-5-23-15
+71000089	CAMBIO	EUR	PEN	1000.54	4.15	1000.54	4152.24	COMPLETADA	T-52-4-7
+71000002	CAMBIO	USD	PEN	150.77	3.78	150.77	569.91	COMPLETADA	T-48-23-7
+71000075	CAMBIO	CHF	PEN	3000.99	4.1807	3000.99	12546.24	PENDIENTE	T-1-13-16
+71000054	CAMBIO	USD	PEN	500.21	3.78	500.21	1890.79	COMPLETADA	T-42-22-43
+71000068	CAMBIO	GBP	PEN	1500.38	4.7737	1500.38	7162.36	COMPLETADA	T-11-14-22
+@operacion_prestamo
+71000049	PRESTAMO	PEN	PEN	2000.76	\N	\N	\N	COMPLETADA	T-0-2-20
+71000056	PRESTAMO	PEN	PEN	4000.16	\N	\N	\N	COMPLETADA	T-0-6-52
+71000035	PRESTAMO	PEN	PEN	8000.39	\N	\N	\N	PENDIENTE	T-4-22-17
+71000058	PRESTAMO	PEN	PEN	10000.49	\N	\N	\N	COMPLETADA	T-0-3-1
+71000031	PRESTAMO	PEN	PEN	1500.33	\N	\N	\N	COMPLETADA	T-0-1-4
+71000019	PRESTAMO	PEN	PEN	500.62	\N	\N	\N	ANULADA	T-0-1-36
+71000076	PRESTAMO	PEN	PEN	2000.72	\N	\N	\N	COMPLETADA	T-0-0-18
+71000044	PRESTAMO	PEN	PEN	500.56	\N	\N	\N	COMPLETADA	T-62-11-29
+71000051	PRESTAMO	PEN	PEN	1500.06	\N	\N	\N	COMPLETADA	T-60-18-33
+002000060	PRESTAMO	PEN	PEN	1000.15	\N	\N	\N	COMPLETADA	T-17-14-21
+71000053	PRESTAMO	PEN	PEN	4000.98	\N	\N	\N	COMPLETADA	T-45-23-3
+71000059	PRESTAMO	PEN	PEN	800.98	\N	\N	\N	COMPLETADA	T-52-3-55
+71000086	PRESTAMO	PEN	PEN	8000.88	\N	\N	\N	ANULADA	T-67-15-1
+71000088	PRESTAMO	PEN	PEN	1000.79	\N	\N	\N	PENDIENTE	T-2-9-23
+71000028	PRESTAMO	PEN	PEN	1000.46	\N	\N	\N	PENDIENTE	T-8-6-3
+002000036	PRESTAMO	PEN	PEN	1500.77	\N	\N	\N	PENDIENTE	T-1-0-44
+71000026	PRESTAMO	PEN	PEN	500.44	\N	\N	\N	COMPLETADA	T-18-1-46
+71000073	PRESTAMO	PEN	PEN	500.97	\N	\N	\N	PENDIENTE	T-6-23-24
+71000079	PRESTAMO	PEN	PEN	8000.6	\N	\N	\N	COMPLETADA	T-5-13-43
+71000045	PRESTAMO	PEN	PEN	5000.56	\N	\N	\N	ANULADA	T-66-21-24
+71000090	PRESTAMO	PEN	PEN	800.79	\N	\N	\N	PENDIENTE	T-4-13-43
+71000088	PRESTAMO	PEN	PEN	4000.46	\N	\N	\N	COMPLETADA	T-8-8-7
+71000021	PRESTAMO	PEN	PEN	8000.02	\N	\N	\N	COMPLETADA	T-22-0-21
+71000017	PRESTAMO	PEN	PEN	500.58	\N	\N	\N	COMPLETADA	T-42-22-49
+002000048	PRESTAMO	PEN	PEN	15000.37	\N	\N	\N	COMPLETADA	T-30-6-12
+71000071	PRESTAMO	PEN	PEN	8000.79	\N	\N	\N	ANULADA	T-75-1-42
+71000015	PRESTAMO	PEN	PEN	1000.6	\N	\N	\N	PENDIENTE	T-0-7-42
+71000007	PRESTAMO	PEN	PEN	3000.61	\N	\N	\N	PENDIENTE	T-7-19-19
+71000077	PRESTAMO	PEN	PEN	10000.34	\N	\N	\N	PENDIENTE	T-2-22-17
+71000022	PRESTAMO	PEN	PEN	5000.12	\N	\N	\N	PENDIENTE	T-5-3-58
+71000049	PRESTAMO	PEN	PEN	800.37	\N	\N	\N	COMPLETADA	T-35-5-50
+71000037	PRESTAMO	PEN	PEN	1500.15	\N	\N	\N	COMPLETADA	T-3-5-48
+71000054	PRESTAMO	PEN	PEN	3000.87	\N	\N	\N	COMPLETADA	T-21-2-25
+71000079	PRESTAMO	PEN	PEN	5000.33	\N	\N	\N	COMPLETADA	T-23-6-32
+71000065	PRESTAMO	PEN	PEN	3000.68	\N	\N	\N	COMPLETADA	T-60-5-2
+71000059	PRESTAMO	PEN	PEN	15000.38	\N	\N	\N	PENDIENTE	T-8-5-45
+71000019	PRESTAMO	PEN	PEN	15000.55	\N	\N	\N	COMPLETADA	T-18-7-49
+71000083	PRESTAMO	PEN	PEN	800.58	\N	\N	\N	PENDIENTE	T-2-20-14
+71000028	PRESTAMO	PEN	PEN	2000.07	\N	\N	\N	COMPLETADA	T-62-13-51
+71000022	PRESTAMO	PEN	PEN	2000.69	\N	\N	\N	COMPLETADA	T-46-23-40
+71000017	PRESTAMO	PEN	PEN	1500.57	\N	\N	\N	COMPLETADA	T-43-22-54
+71000001	PRESTAMO	PEN	PEN	2000.59	\N	\N	\N	COMPLETADA	T-50-18-13
+002000048	PRESTAMO	PEN	PEN	1500.12	\N	\N	\N	COMPLETADA	T-18-8-57
+002000060	PRESTAMO	PEN	PEN	10000.05	\N	\N	\N	COMPLETADA	T-16-10-50
+71000074	PRESTAMO	PEN	PEN	8000.08	\N	\N	\N	COMPLETADA	T-56-10-53
+71000086	PRESTAMO	PEN	PEN	1000.62	\N	\N	\N	PENDIENTE	T-5-1-11
+71000064	PRESTAMO	PEN	PEN	2000.25	\N	\N	\N	COMPLETADA	T-71-23-47
+71000054	PRESTAMO	PEN	PEN	1000.61	\N	\N	\N	PENDIENTE	T-1-11-40
+002000012	PRESTAMO	PEN	PEN	1500.35	\N	\N	\N	PENDIENTE	T-8-19-38
+71000070	PRESTAMO	PEN	PEN	15000.34	\N	\N	\N	COMPLETADA	T-19-22-13
+71000015	PRESTAMO	PEN	PEN	8000.66	\N	\N	\N	COMPLETADA	T-33-10-56
+71000032	PRESTAMO	PEN	PEN	5000.82	\N	\N	\N	COMPLETADA	T-71-8-13
+71000040	PRESTAMO	PEN	PEN	15000.92	\N	\N	\N	COMPLETADA	T-66-17-44
+71000045	PRESTAMO	PEN	PEN	8000.09	\N	\N	\N	COMPLETADA	T-71-3-50
+002000060	PRESTAMO	PEN	PEN	5000.99	\N	\N	\N	ANULADA	T-40-17-49
+71000031	PRESTAMO	PEN	PEN	3000.76	\N	\N	\N	COMPLETADA	T-65-11-36
+71000038	PRESTAMO	PEN	PEN	800.21	\N	\N	\N	COMPLETADA	T-49-12-24
+71000062	PRESTAMO	PEN	PEN	1500.19	\N	\N	\N	PENDIENTE	T-1-22-45
+71000007	PRESTAMO	PEN	PEN	1000.87	\N	\N	\N	COMPLETADA	T-58-23-43
+71000015	PRESTAMO	PEN	PEN	8000.65	\N	\N	\N	COMPLETADA	T-40-11-22
+71000051	PRESTAMO	PEN	PEN	5000.74	\N	\N	\N	COMPLETADA	T-43-10-44
+71000077	PRESTAMO	PEN	PEN	1000.56	\N	\N	\N	COMPLETADA	T-60-4-25
+71000056	PRESTAMO	PEN	PEN	4000.44	\N	\N	\N	COMPLETADA	T-7-8-30
+71000062	PRESTAMO	PEN	PEN	1500.81	\N	\N	\N	COMPLETADA	T-34-2-17
+71000030	PRESTAMO	PEN	PEN	5000.68	\N	\N	\N	ANULADA	T-26-12-47
+71000034	PRESTAMO	PEN	PEN	1500.07	\N	\N	\N	COMPLETADA	T-74-14-33
+71000081	PRESTAMO	PEN	PEN	5000.25	\N	\N	\N	COMPLETADA	T-46-8-10
+71000079	PRESTAMO	PEN	PEN	1000.63	\N	\N	\N	PENDIENTE	T-2-12-41
+71000046	PRESTAMO	PEN	PEN	1500.08	\N	\N	\N	COMPLETADA	T-39-8-8
+002000072	PRESTAMO	PEN	PEN	800.41	\N	\N	\N	COMPLETADA	T-25-5-1
+002000012	PRESTAMO	PEN	PEN	10000.02	\N	\N	\N	PENDIENTE	T-7-21-48
+71000078	PRESTAMO	PEN	PEN	8000.45	\N	\N	\N	PENDIENTE	T-4-1-4
+71000046	PRESTAMO	PEN	PEN	1000.19	\N	\N	\N	COMPLETADA	T-25-11-53
+71000086	PRESTAMO	PEN	PEN	500.49	\N	\N	\N	COMPLETADA	T-7-20-9
+71000038	PRESTAMO	PEN	PEN	4000.72	\N	\N	\N	COMPLETADA	T-72-4-56
+71000061	PRESTAMO	PEN	PEN	500.78	\N	\N	\N	COMPLETADA	T-64-6-12
+71000077	PRESTAMO	PEN	PEN	1000.36	\N	\N	\N	COMPLETADA	T-72-23-14
+71000008	PRESTAMO	PEN	PEN	10000.32	\N	\N	\N	COMPLETADA	T-28-6-22
+71000009	PRESTAMO	PEN	PEN	4000.57	\N	\N	\N	COMPLETADA	T-9-12-36
+71000039	PRESTAMO	PEN	PEN	500.65	\N	\N	\N	COMPLETADA	T-7-10-24
+71000062	PRESTAMO	PEN	PEN	1000.02	\N	\N	\N	PENDIENTE	T-4-19-54
+71000045	PRESTAMO	PEN	PEN	4000.27	\N	\N	\N	ANULADA	T-62-7-26
+71000063	PRESTAMO	PEN	PEN	800.01	\N	\N	\N	COMPLETADA	T-50-20-5
+71000016	PRESTAMO	PEN	PEN	1500.71	\N	\N	\N	PENDIENTE	T-5-2-42
+71000076	PRESTAMO	PEN	PEN	800.3	\N	\N	\N	COMPLETADA	T-46-13-56
+71000004	PRESTAMO	PEN	PEN	4000.38	\N	\N	\N	COMPLETADA	T-74-8-36
+71000001	PRESTAMO	PEN	PEN	4000.11	\N	\N	\N	COMPLETADA	T-72-1-59
+71000051	PRESTAMO	PEN	PEN	4000.01	\N	\N	\N	COMPLETADA	T-25-19-17
+71000078	PRESTAMO	PEN	PEN	10000.41	\N	\N	\N	COMPLETADA	T-15-0-38
+71000057	PRESTAMO	PEN	PEN	3000.09	\N	\N	\N	COMPLETADA	T-68-7-18
+71000090	PRESTAMO	PEN	PEN	8000.81	\N	\N	\N	PENDIENTE	T-0-15-55
+71000069	PRESTAMO	PEN	PEN	500.22	\N	\N	\N	COMPLETADA	T-1-16-54
+71000088	PRESTAMO	PEN	PEN	8000.55	\N	\N	\N	ANULADA	T-67-11-12
+71000042	PRESTAMO	PEN	PEN	1500.72	\N	\N	\N	PENDIENTE	T-0-12-12
+71000061	PRESTAMO	PEN	PEN	800.95	\N	\N	\N	COMPLETADA	T-57-2-40
+002000060	PRESTAMO	PEN	PEN	15000.4	\N	\N	\N	ANULADA	T-24-6-22
+71000021	PRESTAMO	PEN	PEN	4000.24	\N	\N	\N	ANULADA	T-41-23-23
+71000040	PRESTAMO	PEN	PEN	800.18	\N	\N	\N	COMPLETADA	T-31-17-4
+002000084	PRESTAMO	PEN	PEN	1500.26	\N	\N	\N	COMPLETADA	T-58-20-9
+71000013	PRESTAMO	PEN	PEN	1000.66	\N	\N	\N	COMPLETADA	T-33-6-15
+@operacion_empeno
+71000033	EMPENO	PEN	PEN	1000.73	\N	\N	\N	PENDIENTE	T-0-17-43
+71000087	EMPENO	PEN	PEN	1800.52	\N	\N	\N	COMPLETADA	T-0-2-30
+71000074	EMPENO	PEN	PEN	500.45	\N	\N	\N	COMPLETADA	T-0-2-46
+71000022	EMPENO	PEN	PEN	1200.18	\N	\N	\N	COMPLETADA	T-0-3-5
+002000036	EMPENO	PEN	PEN	300.54	\N	\N	\N	COMPLETADA	T-0-5-6
+71000025	EMPENO	PEN	PEN	1800.29	\N	\N	\N	COMPLETADA	T-0-5-2
+71000017	EMPENO	PEN	PEN	1800.32	\N	\N	\N	COMPLETADA	T-0-2-50
+71000076	EMPENO	PEN	PEN	1800.33	\N	\N	\N	PENDIENTE	T-2-13-14
+002000036	EMPENO	PEN	PEN	500.23	\N	\N	\N	COMPLETADA	T-55-2-38
+71000082	EMPENO	PEN	PEN	500.57	\N	\N	\N	PENDIENTE	T-8-10-40
+71000021	EMPENO	PEN	PEN	800.82	\N	\N	\N	PENDIENTE	T-4-8-59
+71000002	EMPENO	PEN	PEN	2500.91	\N	\N	\N	COMPLETADA	T-5-15-15
+71000082	EMPENO	PEN	PEN	500.75	\N	\N	\N	ANULADA	T-64-16-50
+71000005	EMPENO	PEN	PEN	3500.26	\N	\N	\N	COMPLETADA	T-32-15-14
+71000030	EMPENO	PEN	PEN	3500.56	\N	\N	\N	COMPLETADA	T-38-21-6
+71000025	EMPENO	PEN	PEN	200.24	\N	\N	\N	COMPLETADA	T-68-8-50
+71000011	EMPENO	PEN	PEN	800.84	\N	\N	\N	COMPLETADA	T-17-10-31
+71000080	EMPENO	PEN	PEN	1800.42	\N	\N	\N	PENDIENTE	T-8-4-50
+002000036	EMPENO	PEN	PEN	300.25	\N	\N	\N	COMPLETADA	T-12-22-45
+002000084	EMPENO	PEN	PEN	300.23	\N	\N	\N	ANULADA	T-71-21-52
+71000013	EMPENO	PEN	PEN	500.29	\N	\N	\N	COMPLETADA	T-20-9-24
+71000013	EMPENO	PEN	PEN	1200.68	\N	\N	\N	COMPLETADA	T-41-18-17
+71000010	EMPENO	PEN	PEN	1200.37	\N	\N	\N	COMPLETADA	T-52-6-36
+71000071	EMPENO	PEN	PEN	3500.05	\N	\N	\N	COMPLETADA	T-54-5-50
+71000007	EMPENO	PEN	PEN	800.43	\N	\N	\N	PENDIENTE	T-0-16-23
+71000042	EMPENO	PEN	PEN	500.37	\N	\N	\N	COMPLETADA	T-12-16-54
+71000061	EMPENO	PEN	PEN	1200.41	\N	\N	\N	ANULADA	T-8-11-10
+71000066	EMPENO	PEN	PEN	300.57	\N	\N	\N	COMPLETADA	T-55-23-40
+71000080	EMPENO	PEN	PEN	800.57	\N	\N	\N	COMPLETADA	T-1-16-9
+71000040	EMPENO	PEN	PEN	500.76	\N	\N	\N	PENDIENTE	T-5-20-58
+71000044	EMPENO	PEN	PEN	200.77	\N	\N	\N	COMPLETADA	T-42-23-3
+71000087	EMPENO	PEN	PEN	1800.49	\N	\N	\N	PENDIENTE	T-3-4-9
+71000003	EMPENO	PEN	PEN	2500.83	\N	\N	\N	COMPLETADA	T-10-1-12
+71000089	EMPENO	PEN	PEN	800.66	\N	\N	\N	PENDIENTE	T-9-8-38
+71000087	EMPENO	PEN	PEN	800.54	\N	\N	\N	COMPLETADA	T-64-9-14
+71000043	EMPENO	PEN	PEN	500.72	\N	\N	\N	COMPLETADA	T-60-16-57
+71000035	EMPENO	PEN	PEN	800.27	\N	\N	\N	COMPLETADA	T-50-11-13
+71000014	EMPENO	PEN	PEN	300.42	\N	\N	\N	COMPLETADA	T-32-11-44
+71000062	EMPENO	PEN	PEN	1000.14	\N	\N	\N	COMPLETADA	T-38-21-42
+71000020	EMPENO	PEN	PEN	3500.64	\N	\N	\N	ANULADA	T-21-16-38
+71000065	EMPENO	PEN	PEN	1800.09	\N	\N	\N	ANULADA	T-35-21-40
+71000021	EMPENO	PEN	PEN	300.62	\N	\N	\N	COMPLETADA	T-63-22-14
+71000081	EMPENO	PEN	PEN	300.58	\N	\N	\N	PENDIENTE	T-1-7-15
+71000021	EMPENO	PEN	PEN	1200.08	\N	\N	\N	COMPLETADA	T-6-18-50
+71000047	EMPENO	PEN	PEN	1800.01	\N	\N	\N	COMPLETADA	T-57-11-15
+71000003	EMPENO	PEN	PEN	1000.05	\N	\N	\N	COMPLETADA	T-21-1-53
+71000011	EMPENO	PEN	PEN	300.31	\N	\N	\N	COMPLETADA	T-36-14-46
+71000049	EMPENO	PEN	PEN	1200.66	\N	\N	\N	COMPLETADA	T-65-16-36
+71000085	EMPENO	PEN	PEN	1200.81	\N	\N	\N	COMPLETADA	T-54-17-35
+002000048	EMPENO	PEN	PEN	800.85	\N	\N	\N	COMPLETADA	T-17-18-12
+71000040	EMPENO	PEN	PEN	1800.34	\N	\N	\N	COMPLETADA	T-38-9-11
+71000058	EMPENO	PEN	PEN	300.52	\N	\N	\N	COMPLETADA	T-2-19-46
+71000019	EMPENO	PEN	PEN	3500.07	\N	\N	\N	PENDIENTE	T-4-22-43
+71000055	EMPENO	PEN	PEN	3500.13	\N	\N	\N	COMPLETADA	T-54-7-20
+71000017	EMPENO	PEN	PEN	1200.87	\N	\N	\N	PENDIENTE	T-3-15-49
+71000018	EMPENO	PEN	PEN	800.45	\N	\N	\N	COMPLETADA	T-66-18-44
+71000021	EMPENO	PEN	PEN	300.05	\N	\N	\N	COMPLETADA	T-13-9-34
+71000029	EMPENO	PEN	PEN	500.46	\N	\N	\N	COMPLETADA	T-56-6-41
+71000050	EMPENO	PEN	PEN	300.24	\N	\N	\N	COMPLETADA	T-74-23-59
+71000088	EMPENO	PEN	PEN	800.38	\N	\N	\N	COMPLETADA	T-33-17-30
+71000040	EMPENO	PEN	PEN	800.22	\N	\N	\N	COMPLETADA	T-36-3-19
+71000003	EMPENO	PEN	PEN	1200.07	\N	\N	\N	PENDIENTE	T-6-22-38
+002000084	EMPENO	PEN	PEN	200.8	\N	\N	\N	ANULADA	T-40-21-3
+71000001	EMPENO	PEN	PEN	1800.43	\N	\N	\N	PENDIENTE	T-7-2-19
+71000075	EMPENO	PEN	PEN	500.38	\N	\N	\N	COMPLETADA	T-10-20-21
+71000030	EMPENO	PEN	PEN	1200.82	\N	\N	\N	COMPLETADA	T-41-15-34
+71000010	EMPENO	PEN	PEN	3500.19	\N	\N	\N	ANULADA	T-64-23-53
+71000063	EMPENO	PEN	PEN	3500.95	\N	\N	\N	COMPLETADA	T-75-8-21
+71000056	EMPENO	PEN	PEN	300.29	\N	\N	\N	COMPLETADA	T-6-14-32
+71000053	EMPENO	PEN	PEN	500.61	\N	\N	\N	COMPLETADA	T-3-11-58
+71000033	EMPENO	PEN	PEN	500.71	\N	\N	\N	COMPLETADA	T-47-0-33
+71000050	EMPENO	PEN	PEN	1800.56	\N	\N	\N	COMPLETADA	T-34-17-45
+71000011	EMPENO	PEN	PEN	300.84	\N	\N	\N	COMPLETADA	T-46-4-42
+71000020	EMPENO	PEN	PEN	1000.24	\N	\N	\N	PENDIENTE	T-1-23-34
+71000063	EMPENO	PEN	PEN	2500.24	\N	\N	\N	PENDIENTE	T-0-17-28
+71000090	EMPENO	PEN	PEN	200.32	\N	\N	\N	COMPLETADA	T-22-12-4
+71000070	EMPENO	PEN	PEN	300.18	\N	\N	\N	COMPLETADA	T-66-5-42
+71000046	EMPENO	PEN	PEN	2500.36	\N	\N	\N	PENDIENTE	T-3-22-22
+71000063	EMPENO	PEN	PEN	1800.6	\N	\N	\N	COMPLETADA	T-25-9-2
+71000044	EMPENO	PEN	PEN	1000.49	\N	\N	\N	COMPLETADA	T-26-22-5
+71000082	EMPENO	PEN	PEN	300.21	\N	\N	\N	COMPLETADA	T-6-20-9
+71000081	EMPENO	PEN	PEN	200.99	\N	\N	\N	PENDIENTE	T-9-17-43
+71000019	EMPENO	PEN	PEN	2500.35	\N	\N	\N	ANULADA	T-18-13-12
+002000060	EMPENO	PEN	PEN	800.89	\N	\N	\N	COMPLETADA	T-24-12-24
+71000030	EMPENO	PEN	PEN	3500.14	\N	\N	\N	COMPLETADA	T-36-22-8
+71000063	EMPENO	PEN	PEN	1000.84	\N	\N	\N	COMPLETADA	T-14-11-53
+71000019	EMPENO	PEN	PEN	1000.16	\N	\N	\N	COMPLETADA	T-13-23-21
+71000037	EMPENO	PEN	PEN	2500.28	\N	\N	\N	COMPLETADA	T-34-12-44
+71000014	EMPENO	PEN	PEN	1200.25	\N	\N	\N	PENDIENTE	T-8-17-26
+71000068	EMPENO	PEN	PEN	1000.06	\N	\N	\N	PENDIENTE	T-9-6-19
+71000013	EMPENO	PEN	PEN	200.34	\N	\N	\N	COMPLETADA	T-25-14-26
+71000017	EMPENO	PEN	PEN	200.76	\N	\N	\N	PENDIENTE	T-3-5-21
+002000024	EMPENO	PEN	PEN	800.59	\N	\N	\N	COMPLETADA	T-43-2-42
+71000008	EMPENO	PEN	PEN	1800.28	\N	\N	\N	COMPLETADA	T-23-15-36
+71000035	EMPENO	PEN	PEN	3500.27	\N	\N	\N	COMPLETADA	T-20-13-50
+71000045	EMPENO	PEN	PEN	2500.84	\N	\N	\N	ANULADA	T-63-18-4
+71000081	EMPENO	PEN	PEN	3500.99	\N	\N	\N	COMPLETADA	T-72-0-5
+71000085	EMPENO	PEN	PEN	300.27	\N	\N	\N	COMPLETADA	T-47-17-25
+71000053	EMPENO	PEN	PEN	800.76	\N	\N	\N	COMPLETADA	T-52-19-38
+71000008	EMPENO	PEN	PEN	800.42	\N	\N	\N	PENDIENTE	T-3-11-36
+@prestamo
+2000.76	1.5	12	196.74	D+0	D+360	2360.9	ACTIVO
+4000.16	2.5	9	544.47	D+0	D+270	4900.2	ACTIVO
+8000.39	1.2	24	429.35	D-4	D+716	10304.5	PENDIENTE
+10000.49	1.8	36	457.8	D+0	D+1080	16480.81	ACTIVO
+1500.33	1.8	18	110.36	D+0	D+540	1986.44	ACTIVO
+500.62	1.8	24	29.87	D+0	D+720	716.89	ANULADO
+2000.72	1.8	24	119.38	D+0	D+720	2865.03	ACTIVO
+500.56	2.5	18	40.32	D-62	D+478	725.81	ACTIVO
+1500.06	2.0	36	71.67	D-60	D+1020	2580.1	ACTIVO
+1000.15	1.8	9	129.13	D-17	D+253	1162.17	ACTIVO
+4000.98	1.8	36	183.16	D-45	D+1035	6593.62	ACTIVO
+800.98	3.0	18	68.53	D-52	D+488	1233.51	ACTIVO
+8000.88	1.5	24	453.38	D-67	D+653	10881.2	ANULADO
+1000.79	2.5	6	191.82	D-2	D+178	1150.91	PENDIENTE
+1000.46	2.5	6	191.75	D-8	D+172	1150.53	PENDIENTE
+1500.77	1.5	18	105.89	D-1	D+539	1905.98	PENDIENTE
+500.44	2.5	6	95.92	D-18	D+162	575.51	ACTIVO
+500.97	1.8	12	50.76	D-6	D+354	609.18	PENDIENTE
+8000.6	3.0	36	462.26	D-5	D+1075	16641.25	ACTIVO
+5000.56	2.5	24	333.37	D-66	D+654	8000.9	ANULADO
+800.79	2.0	9	104.99	D-4	D+266	944.93	PENDIENTE
+4000.46	1.2	18	270.25	D-8	D+532	4864.56	ACTIVO
+8000.02	1.8	18	588.45	D-22	D+518	0.0	CANCELADO
+500.58	2.5	12	54.23	D-42	D+318	650.75	ACTIVO
+15000.37	1.8	12	1520.04	D-30	D+330	18240.45	ACTIVO
+8000.79	1.2	24	429.38	D-75	D+645	10305.02	ANULADO
+1000.6	2.0	18	75.6	D+0	D+540	1360.82	PENDIENTE
+3000.61	2.5	9	408.42	D-7	D+263	3675.75	PENDIENTE
+10000.34	2.5	6	1916.73	D-2	D+178	11500.39	PENDIENTE
+5000.12	3.0	18	427.79	D-5	D+535	7700.18	PENDIENTE
+800.37	1.8	36	36.64	D-35	D+1045	0.0	CANCELADO
+1500.15	1.2	18	101.34	D-3	D+537	1824.18	ACTIVO
+3000.87	1.2	18	202.73	D-21	D+519	3649.06	ACTIVO
+5000.33	3.0	9	705.6	D-23	D+247	0.0	CANCELADO
+3000.68	1.5	12	295.07	D-60	D+300	3540.8	ACTIVO
+15000.38	3.0	9	2116.72	D-8	D+262	19050.48	PENDIENTE
+15000.55	1.2	18	1013.37	D-18	D+522	18240.67	ACTIVO
+800.58	2.5	9	108.97	D-2	D+268	980.71	PENDIENTE
+2000.07	1.5	24	113.34	D-62	D+658	2720.1	ACTIVO
+2000.69	1.8	18	147.16	D-46	D+494	2648.91	ACTIVO
+1500.57	1.5	12	147.56	D-43	D+317	1770.67	ACTIVO
+2000.59	2.5	36	105.59	D-50	D+1030	3801.12	ACTIVO
+1500.12	1.8	6	277.02	D-18	D+162	1662.13	ACTIVO
+10000.05	1.8	6	1846.68	D-16	D+164	11080.06	ACTIVO
+8000.08	1.8	36	366.23	D-56	D+1024	0.0	CANCELADO
+1000.62	1.5	6	181.78	D-5	D+175	1090.68	PENDIENTE
+2000.25	1.8	24	119.35	D-71	D+649	2864.36	ACTIVO
+1000.61	1.2	36	39.8	D-1	D+1079	1432.87	PENDIENTE
+1500.35	2.0	24	92.52	D-8	D+712	2220.52	PENDIENTE
+15000.34	1.8	36	686.68	D-19	D+1061	24720.56	ACTIVO
+8000.66	2.5	18	644.5	D-33	D+507	11600.96	ACTIVO
+5000.82	2.0	6	933.49	D-71	D+109	5600.92	ACTIVO
+15000.92	1.5	24	850.05	D-66	D+654	20401.25	ACTIVO
+8000.09	2.5	6	1533.35	D-71	D+109	9200.1	ACTIVO
+5000.99	2.5	12	541.77	D-40	D+320	6501.29	ANULADO
+3000.76	2.5	9	408.44	D-65	D+205	3675.93	ACTIVO
+800.21	2.5	36	42.23	D-49	D+1031	1520.4	ACTIVO
+1500.19	2.5	9	204.19	D-1	D+269	1837.73	PENDIENTE
+1000.87	1.8	6	184.83	D-58	D+122	1108.96	ACTIVO
+8000.65	1.2	18	540.49	D-40	D+500	0.0	CANCELADO
+5000.74	3.0	12	566.75	D-43	D+317	6801.01	ACTIVO
+1000.56	2.0	18	75.6	D-60	D+480	1360.76	ACTIVO
+4000.44	1.8	6	738.75	D-7	D+173	0.0	CANCELADO
+1500.81	1.2	6	268.14	D-34	D+146	1608.87	ACTIVO
+5000.68	1.2	18	337.82	D-26	D+514	6080.83	ANULADO
+1500.07	2.0	36	71.67	D-74	D+1006	2580.12	ACTIVO
+5000.25	3.0	12	566.7	D-46	D+314	6800.34	ACTIVO
+1000.63	1.8	36	45.81	D-2	D+1078	1649.04	PENDIENTE
+1500.08	1.8	6	277.01	D-39	D+141	1662.09	ACTIVO
+800.41	2.5	12	86.71	D-25	D+335	1040.53	ACTIVO
+10000.02	1.5	18	705.56	D-7	D+533	12700.03	PENDIENTE
+8000.45	2.5	18	644.48	D-4	D+536	11600.65	PENDIENTE
+1000.19	2.0	9	131.14	D-25	D+245	1180.22	ACTIVO
+500.49	3.0	9	70.62	D-7	D+263	635.62	ACTIVO
+4000.72	3.0	18	342.28	D-72	D+468	0.0	CANCELADO
+500.78	1.8	6	92.48	D-64	D+116	554.86	ACTIVO
+1000.36	3.0	12	113.37	D-72	D+288	1360.49	ACTIVO
+10000.32	1.8	6	1846.73	D-28	D+152	11080.35	ACTIVO
+4000.57	2.5	18	322.27	D-9	D+531	0.0	CANCELADO
+500.65	2.0	24	30.87	D-7	D+713	740.96	ACTIVO
+1000.02	2.0	24	61.67	D-4	D+716	1480.03	PENDIENTE
+4000.27	2.0	36	191.12	D-62	D+1018	6880.46	ANULADO
+800.01	2.5	6	153.34	D-50	D+130	920.01	ACTIVO
+1500.71	1.8	18	110.39	D-5	D+535	1986.94	PENDIENTE
+800.3	1.8	9	103.33	D-46	D+224	929.95	ACTIVO
+4000.38	2.0	9	524.49	D-74	D+196	4720.45	ACTIVO
+4000.11	2.5	6	766.69	D-72	D+108	4600.13	ACTIVO
+4000.01	1.5	24	226.67	D-25	D+695	5440.01	ACTIVO
+10000.41	2.5	12	1083.38	D-15	D+345	13000.53	ACTIVO
+3000.09	1.2	12	286.01	D-68	D+292	3432.1	ACTIVO
+8000.81	3.0	6	1573.49	D+0	D+180	9440.96	PENDIENTE
+500.22	1.2	9	61.58	D-1	D+269	554.24	ACTIVO
+8000.55	3.0	6	1573.44	D-67	D+113	9440.65	ANULADO
+1500.72	3.0	12	170.08	D+0	D+360	2040.98	PENDIENTE
+800.95	1.8	36	36.67	D-57	D+1023	1319.97	ACTIVO
+15000.4	3.0	12	1700.05	D-24	D+336	20400.54	ANULADO
+4000.24	2.0	9	524.48	D-41	D+229	4720.28	ANULADO
+800.18	1.2	9	98.51	D-31	D+239	886.6	ACTIVO
+1500.26	1.2	24	80.51	D-58	D+662	1932.33	ACTIVO
+1000.66	2.0	24	61.71	D-33	D+687	0.0	CANCELADO
+@empeno
+SN-JOY-00001	1000.73	12.0	60	D+0	D+60	1000.73	PENDIENTE
+SN-JOY-00002	1800.52	8.0	30	D+0	D+30	0.0	CANCELADO
+SN-JOY-00003	500.45	10.0	60	D+0	D+60	500.45	ACTIVO
+SN-ELE-00004	1200.18	10.0	90	D+0	D+90	1200.18	ACTIVO
+SN-ELE-00005	300.54	10.0	45	D+0	D+45	0.0	CANCELADO
+SN-ELE-00006	1800.29	15.0	45	D+0	D+45	0.0	CANCELADO
+SN-ELE-00007	1800.32	8.0	30	D+0	D+30	0.0	CANCELADO
+SN-HER-00008	1800.33	8.0	30	D-2	D+28	1800.33	PENDIENTE
+SN-JOY-00009	500.23	8.0	90	D-55	D+35	500.23	ACTIVO
+SN-HER-00010	500.57	8.0	30	D-8	D+22	500.57	PENDIENTE
+SN-ELE-00011	800.82	15.0	90	D-4	D+86	800.82	PENDIENTE
+SN-JOY-00012	2500.91	12.0	90	D-5	D+85	2500.91	ACTIVO
+SN-JOY-00013	500.75	10.0	45	D-64	D-19	500.75	ANULADO
+SN-HER-00014	3500.26	12.0	90	D-32	D+58	3500.26	ACTIVO
+SN-HER-00015	3500.56	12.0	30	D-38	D-8	0.0	CANCELADO
+SN-JOY-00016	200.24	15.0	90	D-68	D+22	0.0	CANCELADO
+SN-ELE-00017	800.84	8.0	30	D-17	D+13	800.84	ACTIVO
+SN-JOY-00018	1800.42	15.0	60	D-8	D+52	1800.42	PENDIENTE
+SN-JOY-00019	300.25	15.0	45	D-12	D+33	300.25	ACTIVO
+SN-HER-00020	300.23	10.0	30	D-71	D-41	300.23	ANULADO
+SN-ELE-00021	500.29	15.0	45	D-20	D+25	0.0	CANCELADO
+SN-ELE-00022	1200.68	12.0	60	D-41	D+19	0.0	CANCELADO
+SN-JOY-00023	1200.37	15.0	90	D-52	D+38	1200.37	ACTIVO
+SN-HER-00024	3500.05	8.0	90	D-54	D+36	3500.05	ACTIVO
+SN-ELE-00025	800.43	15.0	45	D+0	D+45	800.43	PENDIENTE
+SN-ELE-00026	500.37	12.0	45	D-12	D+33	500.37	ACTIVO
+SN-JOY-00027	1200.41	8.0	45	D-8	D+37	1200.41	ANULADO
+SN-ELE-00028	300.57	15.0	30	D-55	D-25	0.0	CANCELADO
+SN-JOY-00029	800.57	10.0	90	D-1	D+89	800.57	ACTIVO
+SN-ELE-00030	500.76	8.0	45	D-5	D+40	500.76	PENDIENTE
+SN-JOY-00031	200.77	8.0	60	D-42	D+18	0.0	CANCELADO
+SN-HER-00032	1800.49	8.0	60	D-3	D+57	1800.49	PENDIENTE
+SN-HER-00033	2500.83	15.0	60	D-10	D+50	2500.83	ACTIVO
+SN-HER-00034	800.66	8.0	60	D-9	D+51	800.66	PENDIENTE
+SN-ELE-00035	800.54	15.0	90	D-64	D+26	800.54	ACTIVO
+SN-JOY-00036	500.72	8.0	90	D-60	D+30	500.72	ACTIVO
+SN-JOY-00037	800.27	15.0	90	D-50	D+40	0.0	CANCELADO
+SN-HER-00038	300.42	8.0	45	D-32	D+13	0.0	CANCELADO
+SN-HER-00039	1000.14	8.0	30	D-38	D-8	1000.14	ACTIVO
+SN-JOY-00040	3500.64	8.0	90	D-21	D+69	3500.64	ANULADO
+SN-ELE-00041	1800.09	12.0	60	D-35	D+25	1800.09	ANULADO
+SN-ELE-00042	300.62	10.0	45	D-63	D-18	300.62	ACTIVO
+SN-JOY-00043	300.58	8.0	45	D-1	D+44	300.58	PENDIENTE
+SN-JOY-00044	1200.08	8.0	60	D-6	D+54	1200.08	ACTIVO
+SN-HER-00045	1800.01	8.0	45	D-57	D-12	1800.01	ACTIVO
+SN-JOY-00046	1000.05	15.0	90	D-21	D+69	1000.05	ACTIVO
+SN-ELE-00047	300.31	12.0	60	D-36	D+24	300.31	ACTIVO
+SN-HER-00048	1200.66	12.0	30	D-65	D-35	0.0	CANCELADO
+SN-ELE-00049	1200.81	12.0	90	D-54	D+36	0.0	CANCELADO
+SN-JOY-00050	800.85	12.0	90	D-17	D+73	800.85	ACTIVO
+SN-JOY-00051	1800.34	12.0	45	D-38	D+7	0.0	CANCELADO
+SN-HER-00052	300.52	10.0	90	D-2	D+88	300.52	ACTIVO
+SN-JOY-00053	3500.07	15.0	60	D-4	D+56	3500.07	PENDIENTE
+SN-JOY-00054	3500.13	12.0	30	D-54	D-24	3500.13	ACTIVO
+SN-HER-00055	1200.87	15.0	60	D-3	D+57	1200.87	PENDIENTE
+SN-JOY-00056	800.45	15.0	45	D-66	D-21	0.0	CANCELADO
+SN-ELE-00057	300.05	15.0	30	D-13	D+17	0.0	CANCELADO
+SN-ELE-00058	500.46	15.0	90	D-56	D+34	500.46	ACTIVO
+SN-JOY-00059	300.24	10.0	30	D-74	D-44	0.0	CANCELADO
+SN-ELE-00060	800.38	10.0	30	D-33	D-3	0.0	CANCELADO
+SN-HER-00061	800.22	8.0	30	D-36	D-6	800.22	ACTIVO
+SN-HER-00062	1200.07	8.0	30	D-6	D+24	1200.07	PENDIENTE
+SN-JOY-00063	200.8	15.0	90	D-40	D+50	200.8	ANULADO
+SN-ELE-00064	1800.43	15.0	45	D-7	D+38	1800.43	PENDIENTE
+SN-ELE-00065	500.38	10.0	60	D-10	D+50	500.38	ACTIVO
+SN-JOY-00066	1200.82	10.0	30	D-41	D-11	1200.82	ACTIVO
+SN-HER-00067	3500.19	10.0	60	D-64	D-4	3500.19	ANULADO
+SN-ELE-00068	3500.95	15.0	90	D-75	D+15	3500.95	ACTIVO
+SN-ELE-00069	300.29	15.0	60	D-6	D+54	300.29	ACTIVO
+SN-HER-00070	500.61	12.0	90	D-3	D+87	0.0	CANCELADO
+SN-ELE-00071	500.71	12.0	45	D-47	D-2	0.0	CANCELADO
+SN-HER-00072	1800.56	8.0	60	D-34	D+26	1800.56	ACTIVO
+SN-JOY-00073	300.84	10.0	90	D-46	D+44	300.84	ACTIVO
+SN-ELE-00074	1000.24	10.0	60	D-1	D+59	1000.24	PENDIENTE
+SN-JOY-00075	2500.24	8.0	30	D+0	D+30	2500.24	PENDIENTE
+SN-ELE-00076	200.32	15.0	30	D-22	D+8	0.0	CANCELADO
+SN-ELE-00077	300.18	12.0	60	D-66	D-6	300.18	ACTIVO
+SN-ELE-00078	2500.36	12.0	90	D-3	D+87	2500.36	PENDIENTE
+SN-ELE-00079	1800.6	8.0	60	D-25	D+35	0.0	CANCELADO
+SN-HER-00080	1000.49	10.0	60	D-26	D+34	1000.49	ACTIVO
+SN-JOY-00081	300.21	8.0	60	D-6	D+54	300.21	ACTIVO
+SN-ELE-00082	200.99	12.0	30	D-9	D+21	200.99	PENDIENTE
+SN-JOY-00083	2500.35	12.0	60	D-18	D+42	2500.35	ANULADO
+SN-ELE-00084	800.89	8.0	60	D-24	D+36	0.0	CANCELADO
+SN-JOY-00085	3500.14	15.0	45	D-36	D+9	3500.14	ACTIVO
+SN-JOY-00086	1000.84	12.0	30	D-14	D+16	1000.84	ACTIVO
+SN-ELE-00087	1000.16	12.0	30	D-13	D+17	0.0	CANCELADO
+SN-HER-00088	2500.28	12.0	90	D-34	D+56	2500.28	ACTIVO
+SN-ELE-00089	1200.25	10.0	90	D-8	D+82	1200.25	PENDIENTE
+SN-HER-00090	1000.06	8.0	90	D-9	D+81	1000.06	PENDIENTE
+SN-HER-00091	200.34	15.0	90	D-25	D+65	0.0	CANCELADO
+SN-HER-00092	200.76	8.0	60	D-3	D+57	200.76	PENDIENTE
+SN-HER-00093	800.59	8.0	30	D-43	D-13	800.59	ACTIVO
+SN-ELE-00094	1800.28	12.0	30	D-23	D+7	1800.28	ACTIVO
+SN-ELE-00095	3500.27	8.0	45	D-20	D+25	0.0	CANCELADO
+SN-JOY-00096	2500.84	15.0	90	D-63	D+27	2500.84	ANULADO
+SN-ELE-00097	3500.99	15.0	30	D-72	D-42	0.0	CANCELADO
+SN-HER-00098	300.27	8.0	90	D-47	D+43	0.0	CANCELADO
+SN-JOY-00001	800.76	10.0	60	D-52	D+8	0.0	CANCELADO
+SN-JOY-00002	800.42	12.0	30	D-3	D+27	0.0	CANCELADO
+@venta
+71000079	Cambio de moneda GBP - Sucursal Centro	T-0-5-37	772.15	772.93	REGISTRADA
+71000077	Asesoria financiera - Sucursal Cayma	T-0-2-24	297.48	312.5	REGISTRADA
+71000045	Asesoria financiera - Sucursal Centro	T-0-6-58	226.29	231.72	REGISTRADA
+71000086	Seguro de vida - Sucursal Centro	T-22-21-43	137.68	137.9	REGISTRADA
+002000048	Prestamo personal - Sucursal Yanahuara	T-19-2-15	6094.03	6216.81	REGISTRADA
+71000063	Prestamo para capital de trabajo - Sucursal Centro	T-3-4-50	2198.1	2308.35	REGISTRADA
+71000085	Asesoria financiera - Sucursal Yanahuara	T-21-3-13	237.02	240.08	REGISTRADA
+71000023	Prestamo de libre disponibilidad - Sucursal Cayma	T-11-20-58	1296.54	1323.33	REGISTRADA
+71000082	Seguro de vida - Sucursal Yanahuara	T-18-16-33	260.84	274.21	REGISTRADA
+002000072	Seguro de vida - Sucursal Centro	T-24-13-58	143.84	144.23	REGISTRADA
+71000027	Cambio de moneda USD - Portal del Cliente	T-21-13-20	677.04	677.77	REGISTRADA
+71000035	Deposito a plazo fijo - Sucursal Cayma	T-18-2-35	1771.73	1772.47	REGISTRADA
+71000038	Empeno de herramientas - Agencia Paucarpata	T-0-8-22	1482.19	1512.65	REGISTRADA
+71000031	Prestamo personal - Sucursal Cayma	T-23-6-58	2558.54	2584.66	REGISTRADA
+71000062	Empeno de joyas - Sucursal Cayma	T-24-12-21	1337.88	1364.69	REGISTRADA
+71000029	Cuenta de ahorros - Sucursal Cayma	T-4-21-46	1542.81	1543.15	REGISTRADA
+71000042	Alquiler de caja de seguridad - Sucursal Centro	T-1-12-54	78.74	82.71	REGISTRADA
+71000050	Seguro de vida - Sucursal Yanahuara	T-7-3-14	111.52	112.85	REGISTRADA
+71000058	Cambio de moneda USD - Sucursal Centro	T-3-19-57	378.94	379.92	REGISTRADA
+71000085	Seguro de articulos empenados - Sucursal Centro	T-8-17-0	138.43	138.66	REGISTRADA
+71000047	Giro nacional - Sucursal Yanahuara	T-20-10-31	639.94	646.99	ANULADA
+71000026	Tasacion de articulos - Sucursal Yanahuara	T-16-9-52	332.88	333.2	REGISTRADA
+71000070	Tarjeta de debito - Agencia Paucarpata	T-15-21-39	14.15	14.67	REGISTRADA
+71000077	Asesoria financiera - Sucursal Centro	T-20-1-26	257.05	258.04	REGISTRADA
+71000057	Prestamo para capital de trabajo - Sucursal Cayma	T-20-11-19	4654.97	4655.12	REGISTRADA
+71000074	Prestamo para capital de trabajo - Portal del Cliente	T-14-7-45	5073.08	5124.39	REGISTRADA
+71000079	Empeno de herramientas - Portal del Cliente	T-20-0-45	1785.04	1802.95	REGISTRADA
+71000027	Cambio de moneda GBP - Agencia Paucarpata	T-12-12-42	549.66	577.76	REGISTRADA
+71000067	Envio de remesas - Sucursal Yanahuara	T-105-12-23	417.53	425.94	REGISTRADA
+71000067	Empeno de joyas - Sucursal Cayma	T-43-17-37	1876.59	1876.93	REGISTRADA
+71000059	Pago de servicios - Agencia Paucarpata	T-98-4-19	220.31	232.19	REGISTRADA
+002000024	Tarjeta de debito - Sucursal Cayma	T-82-3-39	45.52	46.23	ANULADA
+71000085	Cambio de moneda EUR - Sucursal Centro	T-75-8-16	727.63	742.35	REGISTRADA
+71000009	Seguro de vida - Sucursal Cayma	T-90-1-2	134.1	135.04	REGISTRADA
+71000001	Deposito a plazo fijo - Agencia Paucarpata	T-92-0-31	1479.12	1479.37	REGISTRADA
+71000067	Seguro de vida - Sucursal Yanahuara	T-76-7-32	260.11	273.47	REGISTRADA
+71000056	Seguro de articulos empenados - Agencia Paucarpata	T-63-19-37	245.45	248.32	REGISTRADA
+002000060	Seguro de articulos empenados - Sucursal Centro	T-51-17-57	207.33	209.91	REGISTRADA
+71000011	Giro nacional - Agencia Paucarpata	T-51-21-11	266.61	280.54	REGISTRADA
+71000050	Prestamo personal - Sucursal Cayma	T-68-7-28	2782.81	2782.88	REGISTRADA
+71000050	Tarjeta de debito - Sucursal Cayma	T-38-12-8	21.43	22.63	REGISTRADA
+71000053	Alquiler de caja de seguridad - Agencia Paucarpata	T-59-6-4	159.75	168.03	REGISTRADA
+71000046	Prestamo personal - Sucursal Centro	T-35-13-55	6268.79	6332.27	REGISTRADA
+71000082	Prestamo de libre disponibilidad - Portal del Cliente	T-119-13-35	5141.09	5141.64	REGISTRADA
+71000061	Seguro de articulos empenados - Sucursal Yanahuara	T-78-13-18	88.77	90.58	REGISTRADA
+002000012	Cambio de moneda GBP - Sucursal Centro	T-55-4-21	699.68	734.91	REGISTRADA
+71000068	Alquiler de caja de seguridad - Sucursal Centro	T-100-15-31	102.14	104.38	REGISTRADA
+71000078	Giro nacional - Sucursal Cayma	T-91-21-4	666.8	700.31	ANULADA
+71000017	Tasacion de articulos - Sucursal Yanahuara	T-67-1-31	277.16	277.2	REGISTRADA
+71000047	Tasacion de articulos - Agencia Paucarpata	T-56-13-51	108.99	110.83	REGISTRADA
+71000080	Pago de servicios - Sucursal Cayma	T-40-21-15	300.97	307.53	ANULADA
+71000077	Asesoria financiera - Sucursal Centro	T-97-18-50	104.09	106.21	REGISTRADA
+71000086	Prestamo personal - Agencia Paucarpata	T-64-8-52	5337.45	5337.7	ANULADA
+71000032	Empeno de electronicos - Portal del Cliente	T-84-1-2	719.67	720.12	ANULADA
+71000047	Prestamo personal - Sucursal Yanahuara	T-50-5-38	1860.25	1954.07	REGISTRADA
+71000069	Envio de remesas - Sucursal Cayma	T-60-20-47	446.6	446.94	REGISTRADA
+71000062	Tarjeta de debito - Sucursal Yanahuara	T-72-6-22	29.13	31.04	REGISTRADA
+71000083	Envio de remesas - Sucursal Cayma	T-85-0-17	244.9	245.69	REGISTRADA
+71000037	Pago de servicios - Sucursal Cayma	T-100-5-15	253.08	253.56	REGISTRADA
+71000033	Pago de servicios - Sucursal Centro	T-116-18-22	172.3	172.85	REGISTRADA
+71000014	Empeno de joyas - Sucursal Yanahuara	T-56-5-15	1393.1	1421.5	REGISTRADA
+71000077	Pago de servicios - Agencia Paucarpata	T-40-19-25	121.77	122.26	REGISTRADA
+71000073	Prestamo de libre disponibilidad - Agencia Paucarpata	T-62-18-43	2574.34	2574.39	REGISTRADA
+71000057	Envio de remesas - Sucursal Cayma	T-30-3-45	761.11	769.12	REGISTRADA
+71000066	Cambio de moneda GBP - Sucursal Yanahuara	T-60-3-19	316.19	323.45	REGISTRADA
+002000072	Tarjeta de debito - Sucursal Yanahuara	T-118-19-53	20.98	22.78	REGISTRADA
+71000075	Prestamo de libre disponibilidad - Sucursal Centro	T-28-3-56	1863.74	1883.04	REGISTRADA
+71000076	Alquiler de caja de seguridad - Sucursal Yanahuara	T-87-12-45	35.94	36.66	REGISTRADA
+002000024	Tarjeta de debito - Sucursal Yanahuara	T-52-14-27	50.69	52.08	REGISTRADA
+71000076	Giro nacional - Sucursal Centro	T-31-15-17	661.08	694.38	REGISTRADA
+71000074	Seguro de vida - Sucursal Cayma	T-72-22-9	98.08	103.96	REGISTRADA
+71000051	Asesoria financiera - Agencia Paucarpata	T-42-12-34	307.15	323.05	REGISTRADA
+71000034	Cuenta de ahorros - Sucursal Yanahuara	T-108-11-1	653.56	686.34	REGISTRADA
+71000026	Cambio de moneda GBP - Sucursal Yanahuara	T-105-0-59	357.6	357.78	REGISTRADA
+71000032	Seguro de articulos empenados - Sucursal Cayma	T-27-21-34	258.98	261.82	REGISTRADA
+71000080	Empeno de joyas - Sucursal Centro	T-82-22-3	1766.17	1801.93	REGISTRADA
+71000077	Tarjeta de debito - Sucursal Cayma	T-77-6-9	31.33	32.12	REGISTRADA
+71000067	Prestamo de libre disponibilidad - Sucursal Cayma	T-83-22-2	3726.53	3801.2	REGISTRADA
+71000015	Cambio de moneda GBP - Sucursal Centro	T-120-11-59	192.31	192.53	REGISTRADA
+71000037	Seguro de articulos empenados - Sucursal Centro	T-110-13-13	55.24	58.1	ANULADA
+71000080	Giro nacional - Portal del Cliente	T-94-12-10	482.7	483.59	REGISTRADA
+71000029	Empeno de herramientas - Sucursal Centro	T-117-8-3	1084.19	1084.36	REGISTRADA
+71000089	Prestamo para capital de trabajo - Sucursal Centro	T-48-9-16	3505.24	3540.41	REGISTRADA
+71000053	Cambio de moneda GBP - Sucursal Cayma	T-93-16-14	391.34	399.76	REGISTRADA
+71000074	Cambio de moneda EUR - Agencia Paucarpata	T-84-6-8	599.32	605.8	REGISTRADA
+71000081	Seguro de articulos empenados - Sucursal Cayma	T-29-17-42	157.25	161.1	REGISTRADA
+71000058	Empeno de electronicos - Sucursal Centro	T-33-1-40	1680.24	1697.11	REGISTRADA
+71000035	Cuenta de ahorros - Sucursal Yanahuara	T-40-17-47	2239.27	2351.6	REGISTRADA
+71000064	Tasacion de articulos - Sucursal Yanahuara	T-112-3-9	126.41	129.72	REGISTRADA
+71000043	Empeno de joyas - Sucursal Cayma	T-88-16-1	1442.41	1471.83	REGISTRADA
+71000077	Pago de servicios - Sucursal Yanahuara	T-92-2-52	204.05	214.97	REGISTRADA
+71000047	Giro nacional - Sucursal Cayma	T-59-14-30	579.07	579.37	REGISTRADA
+71000001	Asesoria financiera - Sucursal Cayma	T-78-12-4	407.95	408.17	REGISTRADA
+71000050	Cambio de moneda EUR - Sucursal Cayma	T-36-11-30	734.8	750.27	REGISTRADA
+71000057	Seguro de vida - Agencia Paucarpata	T-66-0-58	248.79	249.08	ANULADA
+71000090	Tasacion de articulos - Sucursal Centro	T-62-16-42	80.55	85.15	REGISTRADA
+71000077	Pago de servicios - Sucursal Cayma	T-108-21-12	94.76	95.74	REGISTRADA
+71000043	Prestamo para capital de trabajo - Agencia Paucarpata	T-58-6-38	6277.09	6277.6	REGISTRADA
+71000003	Cambio de moneda GBP - Sucursal Centro	T-35-16-2	547.52	553.04	REGISTRADA
+71000066	Pago de servicios - Sucursal Cayma	T-61-2-18	114.14	117.29	REGISTRADA
+@linea
+LIN-001	Emision de tarjetas - Turno manana	Linea de emision de tarjetas (turno manana)	INACTIVA
+LIN-002	Impresion de formularios - Turno manana	Linea de impresion de formularios (turno manana)	ACTIVA
+LIN-003	Sellado de bolsas de seguridad - Turno manana	Linea de sellado de bolsas de seguridad (turno manana)	INACTIVA
+LIN-004	Troquelado de comprobantes - Turno manana	Linea de troquelado de comprobantes (turno manana)	ACTIVA
+LIN-005	Encuadernacion de expedientes - Turno manana	Linea de encuadernacion de expedientes (turno manana)	ACTIVA
+LIN-006	Impresion de talonarios - Turno manana	Linea de impresion de talonarios (turno manana)	ACTIVA
+LIN-007	Plastificado de carnets - Turno manana	Linea de plastificado de carnets (turno manana)	MANTENIMIENTO
+LIN-008	Etiquetado de articulos empenados - Turno manana	Linea de etiquetado de articulos empenados (turno manana)	ACTIVA
+LIN-009	Embalaje de remesas - Turno manana	Linea de embalaje de remesas (turno manana)	INACTIVA
+LIN-010	Personalizacion de chequeras - Turno manana	Linea de personalizacion de chequeras (turno manana)	INACTIVA
+LIN-011	Emision de tarjetas - Turno tarde	Linea de emision de tarjetas (turno tarde)	INACTIVA
+LIN-012	Impresion de formularios - Turno tarde	Linea de impresion de formularios (turno tarde)	ACTIVA
+LIN-013	Sellado de bolsas de seguridad - Turno tarde	Linea de sellado de bolsas de seguridad (turno tarde)	MANTENIMIENTO
+LIN-014	Troquelado de comprobantes - Turno tarde	Linea de troquelado de comprobantes (turno tarde)	ACTIVA
+LIN-015	Encuadernacion de expedientes - Turno tarde	Linea de encuadernacion de expedientes (turno tarde)	ACTIVA
+LIN-016	Impresion de talonarios - Turno tarde	Linea de impresion de talonarios (turno tarde)	ACTIVA
+LIN-017	Plastificado de carnets - Turno tarde	Linea de plastificado de carnets (turno tarde)	ACTIVA
+LIN-018	Etiquetado de articulos empenados - Turno tarde	Linea de etiquetado de articulos empenados (turno tarde)	ACTIVA
+LIN-019	Embalaje de remesas - Turno tarde	Linea de embalaje de remesas (turno tarde)	ACTIVA
+LIN-020	Personalizacion de chequeras - Turno tarde	Linea de personalizacion de chequeras (turno tarde)	ACTIVA
+LIN-021	Emision de tarjetas - Turno noche	Linea de emision de tarjetas (turno noche)	ACTIVA
+LIN-022	Impresion de formularios - Turno noche	Linea de impresion de formularios (turno noche)	ACTIVA
+LIN-023	Sellado de bolsas de seguridad - Turno noche	Linea de sellado de bolsas de seguridad (turno noche)	ACTIVA
+LIN-024	Troquelado de comprobantes - Turno noche	Linea de troquelado de comprobantes (turno noche)	ACTIVA
+LIN-025	Encuadernacion de expedientes - Turno noche	Linea de encuadernacion de expedientes (turno noche)	ACTIVA
+LIN-026	Impresion de talonarios - Turno noche	Linea de impresion de talonarios (turno noche)	ACTIVA
+LIN-027	Plastificado de carnets - Turno noche	Linea de plastificado de carnets (turno noche)	ACTIVA
+LIN-028	Etiquetado de articulos empenados - Turno noche	Linea de etiquetado de articulos empenados (turno noche)	ACTIVA
+LIN-029	Embalaje de remesas - Turno noche	Linea de embalaje de remesas (turno noche)	ACTIVA
+LIN-030	Personalizacion de chequeras - Turno noche	Linea de personalizacion de chequeras (turno noche)	ACTIVA
+LIN-031	Emision de tarjetas - Sede Centro	Linea de emision de tarjetas (sede centro)	ACTIVA
+LIN-032	Impresion de formularios - Sede Centro	Linea de impresion de formularios (sede centro)	MANTENIMIENTO
+LIN-033	Sellado de bolsas de seguridad - Sede Centro	Linea de sellado de bolsas de seguridad (sede centro)	MANTENIMIENTO
+LIN-034	Troquelado de comprobantes - Sede Centro	Linea de troquelado de comprobantes (sede centro)	ACTIVA
+LIN-035	Encuadernacion de expedientes - Sede Centro	Linea de encuadernacion de expedientes (sede centro)	ACTIVA
+LIN-036	Impresion de talonarios - Sede Centro	Linea de impresion de talonarios (sede centro)	ACTIVA
+LIN-037	Plastificado de carnets - Sede Centro	Linea de plastificado de carnets (sede centro)	ACTIVA
+LIN-038	Etiquetado de articulos empenados - Sede Centro	Linea de etiquetado de articulos empenados (sede centro)	ACTIVA
+LIN-039	Embalaje de remesas - Sede Centro	Linea de embalaje de remesas (sede centro)	ACTIVA
+LIN-040	Personalizacion de chequeras - Sede Centro	Linea de personalizacion de chequeras (sede centro)	ACTIVA
+LIN-041	Emision de tarjetas - Sede Yanahuara	Linea de emision de tarjetas (sede yanahuara)	ACTIVA
+LIN-042	Impresion de formularios - Sede Yanahuara	Linea de impresion de formularios (sede yanahuara)	ACTIVA
+LIN-043	Sellado de bolsas de seguridad - Sede Yanahuara	Linea de sellado de bolsas de seguridad (sede yanahuara)	INACTIVA
+LIN-044	Troquelado de comprobantes - Sede Yanahuara	Linea de troquelado de comprobantes (sede yanahuara)	ACTIVA
+LIN-045	Encuadernacion de expedientes - Sede Yanahuara	Linea de encuadernacion de expedientes (sede yanahuara)	ACTIVA
+LIN-046	Impresion de talonarios - Sede Yanahuara	Linea de impresion de talonarios (sede yanahuara)	ACTIVA
+LIN-047	Plastificado de carnets - Sede Yanahuara	Linea de plastificado de carnets (sede yanahuara)	ACTIVA
+LIN-048	Etiquetado de articulos empenados - Sede Yanahuara	Linea de etiquetado de articulos empenados (sede yanahuara)	ACTIVA
+LIN-049	Embalaje de remesas - Sede Yanahuara	Linea de embalaje de remesas (sede yanahuara)	ACTIVA
+LIN-050	Personalizacion de chequeras - Sede Yanahuara	Linea de personalizacion de chequeras (sede yanahuara)	ACTIVA
+LIN-051	Emision de tarjetas - Sede Cayma	Linea de emision de tarjetas (sede cayma)	INACTIVA
+LIN-052	Impresion de formularios - Sede Cayma	Linea de impresion de formularios (sede cayma)	ACTIVA
+LIN-053	Sellado de bolsas de seguridad - Sede Cayma	Linea de sellado de bolsas de seguridad (sede cayma)	ACTIVA
+LIN-054	Troquelado de comprobantes - Sede Cayma	Linea de troquelado de comprobantes (sede cayma)	ACTIVA
+LIN-055	Encuadernacion de expedientes - Sede Cayma	Linea de encuadernacion de expedientes (sede cayma)	ACTIVA
+LIN-056	Impresion de talonarios - Sede Cayma	Linea de impresion de talonarios (sede cayma)	ACTIVA
+LIN-057	Plastificado de carnets - Sede Cayma	Linea de plastificado de carnets (sede cayma)	ACTIVA
+LIN-058	Etiquetado de articulos empenados - Sede Cayma	Linea de etiquetado de articulos empenados (sede cayma)	ACTIVA
+LIN-059	Embalaje de remesas - Sede Cayma	Linea de embalaje de remesas (sede cayma)	ACTIVA
+LIN-060	Personalizacion de chequeras - Sede Cayma	Linea de personalizacion de chequeras (sede cayma)	ACTIVA
+LIN-061	Emision de tarjetas - Sede Paucarpata	Linea de emision de tarjetas (sede paucarpata)	ACTIVA
+LIN-062	Impresion de formularios - Sede Paucarpata	Linea de impresion de formularios (sede paucarpata)	ACTIVA
+LIN-063	Sellado de bolsas de seguridad - Sede Paucarpata	Linea de sellado de bolsas de seguridad (sede paucarpata)	ACTIVA
+LIN-064	Troquelado de comprobantes - Sede Paucarpata	Linea de troquelado de comprobantes (sede paucarpata)	ACTIVA
+LIN-065	Encuadernacion de expedientes - Sede Paucarpata	Linea de encuadernacion de expedientes (sede paucarpata)	ACTIVA
+LIN-066	Impresion de talonarios - Sede Paucarpata	Linea de impresion de talonarios (sede paucarpata)	ACTIVA
+LIN-067	Plastificado de carnets - Sede Paucarpata	Linea de plastificado de carnets (sede paucarpata)	ACTIVA
+LIN-068	Etiquetado de articulos empenados - Sede Paucarpata	Linea de etiquetado de articulos empenados (sede paucarpata)	MANTENIMIENTO
+LIN-069	Embalaje de remesas - Sede Paucarpata	Linea de embalaje de remesas (sede paucarpata)	ACTIVA
+LIN-070	Personalizacion de chequeras - Sede Paucarpata	Linea de personalizacion de chequeras (sede paucarpata)	ACTIVA
+LIN-071	Emision de tarjetas - Sede Miraflores	Linea de emision de tarjetas (sede miraflores)	ACTIVA
+LIN-072	Impresion de formularios - Sede Miraflores	Linea de impresion de formularios (sede miraflores)	ACTIVA
+LIN-073	Sellado de bolsas de seguridad - Sede Miraflores	Linea de sellado de bolsas de seguridad (sede miraflores)	ACTIVA
+LIN-074	Troquelado de comprobantes - Sede Miraflores	Linea de troquelado de comprobantes (sede miraflores)	ACTIVA
+LIN-075	Encuadernacion de expedientes - Sede Miraflores	Linea de encuadernacion de expedientes (sede miraflores)	ACTIVA
+LIN-076	Impresion de talonarios - Sede Miraflores	Linea de impresion de talonarios (sede miraflores)	ACTIVA
+LIN-077	Plastificado de carnets - Sede Miraflores	Linea de plastificado de carnets (sede miraflores)	MANTENIMIENTO
+LIN-078	Etiquetado de articulos empenados - Sede Miraflores	Linea de etiquetado de articulos empenados (sede miraflores)	ACTIVA
+LIN-079	Embalaje de remesas - Sede Miraflores	Linea de embalaje de remesas (sede miraflores)	ACTIVA
+LIN-080	Personalizacion de chequeras - Sede Miraflores	Linea de personalizacion de chequeras (sede miraflores)	MANTENIMIENTO
+LIN-081	Emision de tarjetas - Planta 1	Linea de emision de tarjetas (planta 1)	ACTIVA
+LIN-082	Impresion de formularios - Planta 1	Linea de impresion de formularios (planta 1)	ACTIVA
+LIN-083	Sellado de bolsas de seguridad - Planta 1	Linea de sellado de bolsas de seguridad (planta 1)	MANTENIMIENTO
+LIN-084	Troquelado de comprobantes - Planta 1	Linea de troquelado de comprobantes (planta 1)	ACTIVA
+LIN-085	Encuadernacion de expedientes - Planta 1	Linea de encuadernacion de expedientes (planta 1)	ACTIVA
+LIN-086	Impresion de talonarios - Planta 1	Linea de impresion de talonarios (planta 1)	ACTIVA
+LIN-087	Plastificado de carnets - Planta 1	Linea de plastificado de carnets (planta 1)	ACTIVA
+LIN-088	Etiquetado de articulos empenados - Planta 1	Linea de etiquetado de articulos empenados (planta 1)	ACTIVA
+LIN-089	Embalaje de remesas - Planta 1	Linea de embalaje de remesas (planta 1)	ACTIVA
+LIN-090	Personalizacion de chequeras - Planta 1	Linea de personalizacion de chequeras (planta 1)	ACTIVA
+LIN-091	Emision de tarjetas - Planta 2	Linea de emision de tarjetas (planta 2)	MANTENIMIENTO
+LIN-092	Impresion de formularios - Planta 2	Linea de impresion de formularios (planta 2)	ACTIVA
+LIN-093	Sellado de bolsas de seguridad - Planta 2	Linea de sellado de bolsas de seguridad (planta 2)	MANTENIMIENTO
+LIN-094	Troquelado de comprobantes - Planta 2	Linea de troquelado de comprobantes (planta 2)	ACTIVA
+LIN-095	Encuadernacion de expedientes - Planta 2	Linea de encuadernacion de expedientes (planta 2)	ACTIVA
+LIN-096	Impresion de talonarios - Planta 2	Linea de impresion de talonarios (planta 2)	ACTIVA
+LIN-097	Plastificado de carnets - Planta 2	Linea de plastificado de carnets (planta 2)	ACTIVA
+LIN-098	Etiquetado de articulos empenados - Planta 2	Linea de etiquetado de articulos empenados (planta 2)	INACTIVA
+LIN-099	Embalaje de remesas - Planta 2	Linea de embalaje de remesas (planta 2)	ACTIVA
+LIN-100	Personalizacion de chequeras - Planta 2	Linea de personalizacion de chequeras (planta 2)	ACTIVA
+@orden
+PRD-105	LIN-037	500	D-45	D-25	\N	0	PENDIENTE	Lote 001 - programado
+PRD-116	LIN-082	200	D-24	D-9	D-11	100	TERMINADA	Lote 002 - programado
+PRD-113	LIN-086	2000	D-82	D-62	D-62	100	TERMINADA	Lote 003 - programado
+PRD-135	LIN-070	100	D-15	D-10	D-12	100	TERMINADA	Lote 004 - programado
+PRD-176	LIN-077	1000	D-40	D-30	\N	75	EN_PROCESO	Lote 005 - programado
+PRD-148	LIN-097	2000	D-16	D-9	\N	0	PENDIENTE	Lote 006 - programado
+PRD-153	LIN-006	100	D-2	D+18	\N	35	EN_PROCESO	Lote 007 - programado
+PRD-109	LIN-094	300	D-52	D-32	\N	0	PENDIENTE	Lote 008 - programado
+PRD-188	LIN-014	5000	D-41	D-26	\N	0	PENDIENTE	Lote 009 - programado
+PRD-186	LIN-002	300	D-18	D+2	\N	0	PENDIENTE	Lote 010 - programado
+PRD-147	LIN-042	200	D-30	D-25	\N	0	PENDIENTE	Lote 011 - urgente
+PRD-113	LIN-051	1000	D-20	D-10	D-12	100	TERMINADA	Lote 012 - programado
+PRD-169	LIN-009	1000	D-89	D-74	D-76	100	TERMINADA	Lote 013 - programado
+PRD-137	LIN-028	100	D-39	D-29	\N	0	PENDIENTE	Lote 014 - programado
+PRD-130	LIN-056	800	D-38	D-28	\N	75	EN_PROCESO	Lote 015 - programado
+PRD-184	LIN-062	5000	D-12	D+8	\N	55	EN_PROCESO	Lote 016 - programado
+PRD-145	LIN-097	2000	D-4	D+6	\N	0	PENDIENTE	Lote 017 - programado
+PRD-141	LIN-004	500	D-18	D-3	D-3	100	TERMINADA	Lote 018 - programado
+PRD-167	LIN-039	5000	D-90	D-83	\N	60	EN_PROCESO	Lote 019 - programado
+PRD-180	LIN-048	500	D-25	D-20	\N	0	PENDIENTE	Lote 020 - programado
+PRD-145	LIN-018	100	D-51	D-36	\N	0	ANULADA	Lote 021 - programado
+PRD-194	LIN-008	800	D-51	D-44	\N	10	EN_PROCESO	Lote 022 - urgente
+PRD-167	LIN-031	800	D-77	D-62	D-62	100	TERMINADA	Lote 023 - programado
+PRD-152	LIN-080	200	D-80	D-75	\N	15	ANULADA	Lote 024 - programado
+PRD-160	LIN-018	200	D-48	D-43	\N	60	EN_PROCESO	Lote 025 - programado
+PRD-170	LIN-073	500	D-22	D-12	D-13	100	TERMINADA	Lote 026 - programado
+PRD-177	LIN-048	500	D-23	D-13	D-14	100	TERMINADA	Lote 027 - programado
+PRD-102	LIN-027	1000	D-37	D-22	\N	20	EN_PROCESO	Lote 028 - programado
+PRD-141	LIN-080	300	D-6	D+1	\N	40	EN_PROCESO	Lote 029 - programado
+PRD-163	LIN-029	300	D-33	D-23	\N	55	EN_PROCESO	Lote 030 - programado
+PRD-126	LIN-051	500	D-30	D-15	\N	40	EN_PROCESO	Lote 031 - programado
+PRD-112	LIN-089	800	D-9	D-4	\N	20	EN_PROCESO	Lote 032 - programado
+PRD-177	LIN-073	800	D-72	D-52	\N	10	EN_PROCESO	Lote 033 - urgente
+PRD-120	LIN-021	5000	D-68	D-63	\N	55	EN_PROCESO	Lote 034 - programado
+PRD-125	LIN-023	800	D-77	D-62	\N	75	EN_PROCESO	Lote 035 - programado
+PRD-134	LIN-028	300	D-33	D-18	\N	0	PENDIENTE	Lote 036 - programado
+PRD-127	LIN-014	500	D-76	D-56	D-56	100	TERMINADA	Lote 037 - programado
+PRD-178	LIN-088	1000	D-32	D-25	D-26	100	TERMINADA	Lote 038 - programado
+PRD-112	LIN-066	200	D-3	D+7	\N	40	EN_PROCESO	Lote 039 - programado
+PRD-187	LIN-053	2000	D-45	D-30	D-30	100	TERMINADA	Lote 040 - programado
+PRD-171	LIN-009	200	D-51	D-46	\N	75	EN_PROCESO	Lote 041 - programado
+PRD-184	LIN-063	500	D-64	D-59	\N	35	EN_PROCESO	Lote 042 - programado
+PRD-172	LIN-026	500	D-28	D-21	D-23	100	TERMINADA	Lote 043 - programado
+PRD-121	LIN-006	1000	D-53	D-46	D-46	100	TERMINADA	Lote 044 - urgente
+PRD-185	LIN-025	800	D-63	D-53	D-53	100	TERMINADA	Lote 045 - programado
+PRD-122	LIN-044	2000	D-34	D-29	D-30	100	TERMINADA	Lote 046 - programado
+PRD-165	LIN-086	2000	D-85	D-80	D-81	100	TERMINADA	Lote 047 - programado
+PRD-106	LIN-042	2000	D-16	D-11	\N	0	PENDIENTE	Lote 048 - programado
+PRD-161	LIN-006	5000	D-47	D-32	D-34	100	TERMINADA	Lote 049 - programado
+PRD-118	LIN-016	1000	D-11	D+9	D+9	100	TERMINADA	Lote 050 - programado
+PRD-165	LIN-023	800	D-36	D-16	D-16	100	TERMINADA	Lote 051 - programado
+PRD-161	LIN-001	1000	D-71	D-64	\N	40	EN_PROCESO	Lote 052 - programado
+PRD-140	LIN-023	200	D-52	D-47	D-48	100	TERMINADA	Lote 053 - programado
+PRD-106	LIN-095	100	D-26	D-11	\N	55	EN_PROCESO	Lote 054 - programado
+PRD-106	LIN-075	500	D-11	D+9	D+9	100	TERMINADA	Lote 055 - urgente
+PRD-174	LIN-027	1000	D-27	D-7	D-9	100	TERMINADA	Lote 056 - programado
+PRD-106	LIN-059	200	D-76	D-66	D-67	100	TERMINADA	Lote 057 - programado
+PRD-174	LIN-051	300	D-31	D-11	\N	10	EN_PROCESO	Lote 058 - programado
+PRD-112	LIN-059	500	D-29	D-19	\N	75	EN_PROCESO	Lote 059 - programado
+PRD-192	LIN-059	500	D-8	D+12	\N	75	EN_PROCESO	Lote 060 - programado
+PRD-137	LIN-001	2000	D-36	D-31	\N	0	ANULADA	Lote 061 - programado
+PRD-169	LIN-021	2000	D-19	D-14	\N	55	EN_PROCESO	Lote 062 - programado
+PRD-134	LIN-052	800	D-11	D-6	D-8	100	TERMINADA	Lote 063 - programado
+PRD-149	LIN-004	200	D-5	D+10	\N	10	EN_PROCESO	Lote 064 - programado
+PRD-112	LIN-081	200	D-25	D-20	\N	15	ANULADA	Lote 065 - programado
+PRD-171	LIN-045	800	D-31	D-24	\N	0	PENDIENTE	Lote 066 - urgente
+PRD-111	LIN-011	5000	D-34	D-24	\N	90	EN_PROCESO	Lote 067 - programado
+PRD-190	LIN-016	300	D-52	D-32	D-34	100	TERMINADA	Lote 068 - programado
+PRD-188	LIN-010	5000	D-14	D-9	\N	60	EN_PROCESO	Lote 069 - programado
+PRD-118	LIN-032	800	D-30	D-10	\N	0	ANULADA	Lote 070 - programado
+PRD-113	LIN-086	200	D-46	D-36	D-37	100	TERMINADA	Lote 071 - programado
+PRD-143	LIN-049	800	D-27	D-7	\N	60	EN_PROCESO	Lote 072 - programado
+PRD-115	LIN-079	200	D-71	D-64	D-65	100	TERMINADA	Lote 073 - programado
+PRD-115	LIN-066	800	D-84	D-74	D-75	100	TERMINADA	Lote 074 - programado
+PRD-111	LIN-044	100	D-36	D-31	\N	35	EN_PROCESO	Lote 075 - programado
+PRD-130	LIN-033	500	D-59	D-44	\N	40	EN_PROCESO	Lote 076 - programado
+PRD-158	LIN-002	1000	D-6	D-1	D-2	100	TERMINADA	Lote 077 - urgente
+PRD-114	LIN-053	200	D-67	D-62	\N	55	EN_PROCESO	Lote 078 - programado
+PRD-178	LIN-021	800	D-42	D-37	\N	75	EN_PROCESO	Lote 079 - programado
+PRD-166	LIN-015	300	D-24	D-4	D-5	100	TERMINADA	Lote 080 - programado
+PRD-129	LIN-040	5000	D-12	D-2	D-4	100	TERMINADA	Lote 081 - programado
+PRD-117	LIN-060	2000	D-47	D-40	\N	20	EN_PROCESO	Lote 082 - programado
+PRD-104	LIN-039	300	D-21	D-1	\N	40	EN_PROCESO	Lote 083 - programado
+PRD-193	LIN-096	500	D-22	D-12	\N	0	PENDIENTE	Lote 084 - programado
+PRD-131	LIN-073	100	D-48	D-43	D-45	100	TERMINADA	Lote 085 - programado
+PRD-163	LIN-073	5000	D-47	D-27	\N	0	PENDIENTE	Lote 086 - programado
+PRD-158	LIN-007	2000	D-42	D-27	\N	10	EN_PROCESO	Lote 087 - programado
+PRD-165	LIN-064	500	D-24	D-9	\N	15	ANULADA	Lote 088 - urgente
+PRD-148	LIN-087	300	D-26	D-6	\N	75	EN_PROCESO	Lote 089 - programado
+PRD-146	LIN-058	2000	D-90	D-83	\N	40	EN_PROCESO	Lote 090 - programado
+PRD-187	LIN-031	1000	D-17	D-10	\N	35	EN_PROCESO	Lote 091 - programado
+PRD-136	LIN-022	200	D-12	D-5	\N	55	EN_PROCESO	Lote 092 - programado
+PRD-171	LIN-078	500	D-2	D+3	\N	75	EN_PROCESO	Lote 093 - programado
+PRD-160	LIN-059	5000	D-5	D+0	\N	0	PENDIENTE	Lote 094 - programado
+PRD-168	LIN-073	300	D-2	D+13	\N	55	EN_PROCESO	Lote 095 - programado
+PRD-152	LIN-002	5000	D-25	D-18	\N	0	PENDIENTE	Lote 096 - programado
+PRD-167	LIN-066	300	D-75	D-60	\N	75	EN_PROCESO	Lote 097 - programado
+PRD-147	LIN-045	300	D-58	D-53	\N	55	EN_PROCESO	Lote 098 - programado
+PRD-145	LIN-034	800	D-26	D-16	\N	40	EN_PROCESO	Lote 099 - urgente
+PRD-126	LIN-037	300	D-78	D-63	\N	60	EN_PROCESO	Lote 100 - programado
+@expediente
+EXP-004	FINANZAS	Miguel Ccori	60000.0	MEDIO	Presupuesto adicional para campania (area solicitante)	APROBADO	T-79-10-10	T-76-19-1
+EXP-005	ALMACEN	Edwin Ticona	20000.0	BAJO	Adquisicion de contadoras de billetes (area solicitante)	APROBADO	T-119-8-33	T-115-20-10
+EXP-006	OPERACIONES	Rocio Llerena	12000.0	MEDIO	Mantenimiento de linea de produccion (area solicitante)	APROBADO	T-50-3-58	T-49-0-2
+EXP-007	MARKETING	Andres Portugal	5000.0	MEDIO	Adquisicion de contadoras de billetes (area solicitante)	RECHAZADO	T-118-4-11	T-113-20-32
+EXP-008	FINANZAS	Yesenia Ramos	1500.0	BAJO	Ampliacion de limite de caja (area solicitante)	OBSERVADO	T-117-12-32	T-113-0-58
+EXP-009	ALMACEN	Milagros Zapata	3000.0	BAJO	Contratacion de personal temporal (area solicitante)	APROBADO	T-39-10-39	T-34-18-53
+EXP-010	SISTEMAS	Katherine Zapata	8000.0	ALTO	Presupuesto adicional para campania (area solicitante)	APROBADO	T-97-16-12	T-94-22-33
+EXP-011	MARKETING	Renzo Cutipa	800.0	MEDIO	Aumento de tasa de prestamos (area solicitante)	PENDIENTE	T-80-12-17	\N
+EXP-012	ALMACEN	Yesenia Ramos	1500.0	ALTO	Ampliacion de limite de caja (area solicitante)	OBSERVADO	T-111-0-45	T-106-23-47
+EXP-013	FINANZAS	Edwin Apaza	3000.0	ALTO	Mantenimiento de linea de produccion (area solicitante)	APROBADO	T-42-9-10	T-39-17-47
+EXP-014	SISTEMAS	Jorge Condori	3000.0	MEDIO	Adquisicion de contadoras de billetes (area solicitante)	APROBADO	T-17-4-52	T-13-15-15
+EXP-015	VENTAS	Nancy Apaza	5000.0	ALTO	Adquisicion de contadoras de billetes (area solicitante)	APROBADO	T-33-13-22	T-30-19-5
+EXP-016	VENTAS	Carmen Delgado	3000.0	MEDIO	Aumento de tasa de prestamos (area solicitante)	APROBADO	T-66-8-15	T-65-4-32
+EXP-017	VENTAS	Javier Ccama	800.0	ALTO	Adquisicion de contadoras de billetes (area solicitante)	APROBADO	T-34-8-43	T-31-9-1
+EXP-018	FINANZAS	Elena Apaza	8000.0	BAJO	Renovacion de equipos de computo (area solicitante)	PENDIENTE	T-120-12-25	\N
+EXP-019	PRODUCCION	Diego Callo	60000.0	BAJO	Presupuesto adicional para campania (area solicitante)	RECHAZADO	T-38-12-46	T-36-15-32
+EXP-020	OPERACIONES	Javier Quispe	35000.0	BAJO	Adquisicion de contadoras de billetes (area solicitante)	RECHAZADO	T-19-13-21	T-18-10-13
+EXP-021	VENTAS	Lourdes Ramos	20000.0	ALTO	Compra de insumos de caja (area solicitante)	APROBADO	T-117-14-30	T-114-8-28
+EXP-022	SISTEMAS	Marco Flores	8000.0	MEDIO	Contratacion de personal temporal (area solicitante)	OBSERVADO	T-103-16-35	T-102-9-3
+EXP-023	VENTAS	Milagros Benavides	35000.0	MEDIO	Cambio de proveedor de seguridad (area solicitante)	PENDIENTE	T-110-15-24	\N
+EXP-024	MARKETING	Flor Arenas	800.0	MEDIO	Aumento de tasa de prestamos (area solicitante)	APROBADO	T-105-13-25	T-100-4-6
+EXP-025	ALMACEN	Mario Pinto	800.0	ALTO	Contratacion de personal temporal (area solicitante)	APROBADO	T-89-14-29	T-86-17-59
+EXP-026	ALMACEN	Pedro Palomino	8000.0	MEDIO	Aumento de tasa de prestamos (area solicitante)	OBSERVADO	T-24-22-11	T-21-5-48
+EXP-027	SISTEMAS	Andres Torres	1500.0	BAJO	Compra de insumos de caja (area solicitante)	OBSERVADO	T-97-9-2	T-96-18-26
+EXP-028	FINANZAS	Gabriela Torres	8000.0	ALTO	Contratacion de personal temporal (area solicitante)	OBSERVADO	T-64-14-11	T-61-23-32
+EXP-029	LOGISTICA	Silvia Portugal	35000.0	MEDIO	Apertura de nueva agencia (area solicitante)	PENDIENTE	T-37-11-0	\N
+EXP-030	ALMACEN	Paola Rojas	8000.0	ALTO	Contratacion de personal temporal (area solicitante)	APROBADO	T-54-13-32	T-52-8-40
+EXP-031	LOGISTICA	Jorge Cruz	35000.0	ALTO	Contratacion de personal temporal (area solicitante)	APROBADO	T-92-20-7	T-88-11-55
+EXP-032	SISTEMAS	Fiorella Caceres	800.0	ALTO	Renovacion de equipos de computo (area solicitante)	RECHAZADO	T-42-1-47	T-38-4-1
+EXP-033	ALMACEN	Fiorella Mamani	60000.0	ALTO	Presupuesto adicional para campania (area solicitante)	PENDIENTE	T-111-9-21	\N
+EXP-034	OPERACIONES	Ana Zapata	20000.0	BAJO	Adquisicion de contadoras de billetes (area solicitante)	OBSERVADO	T-65-11-50	T-63-8-39
+EXP-035	OPERACIONES	Karen Lazo	8000.0	ALTO	Aumento de tasa de prestamos (area solicitante)	OBSERVADO	T-3-21-24	T-0-19-42
+EXP-036	VENTAS	Sergio Lazo	20000.0	ALTO	Apertura de nueva agencia (area solicitante)	APROBADO	T-59-17-42	T-55-1-29
+EXP-037	OPERACIONES	Silvia Condori	20000.0	MEDIO	Mantenimiento de linea de produccion (area solicitante)	OBSERVADO	T-80-15-56	T-76-8-31
+EXP-038	VENTAS	Hugo Llerena	60000.0	BAJO	Presupuesto adicional para campania (area solicitante)	PENDIENTE	T-116-21-6	\N
+EXP-039	OPERACIONES	Carlos Huamani	5000.0	BAJO	Compra de insumos de caja (area solicitante)	PENDIENTE	T-66-21-39	\N
+EXP-040	ALMACEN	Victor Portugal	1500.0	ALTO	Adquisicion de contadoras de billetes (area solicitante)	OBSERVADO	T-32-19-45	T-27-6-19
+EXP-041	OPERACIONES	Sergio Pinto	800.0	ALTO	Presupuesto adicional para campania (area solicitante)	APROBADO	T-77-10-31	T-76-3-4
+EXP-042	PRODUCCION	Victor Gutierrez	20000.0	MEDIO	Compra de insumos de caja (area solicitante)	APROBADO	T-102-4-8	T-99-8-29
+EXP-043	LOGISTICA	Carlos Huanca	35000.0	ALTO	Aumento de tasa de prestamos (area solicitante)	RECHAZADO	T-22-17-6	T-17-11-34
+EXP-044	LOGISTICA	Paola Rojas	8000.0	MEDIO	Apertura de nueva agencia (area solicitante)	RECHAZADO	T-15-2-33	T-13-13-42
+EXP-045	LOGISTICA	Victor Flores	1500.0	BAJO	Cambio de proveedor de seguridad (area solicitante)	PENDIENTE	T-41-10-40	\N
+EXP-046	ALMACEN	Andres Lazo	800.0	BAJO	Renovacion de equipos de computo (area solicitante)	APROBADO	T-43-16-18	T-41-2-51
+EXP-047	ALMACEN	Alvaro Cornejo	35000.0	MEDIO	Presupuesto adicional para campania (area solicitante)	RECHAZADO	T-82-6-12	T-81-2-20
+EXP-048	PRODUCCION	Pedro Cutipa	5000.0	MEDIO	Renovacion de equipos de computo (area solicitante)	PENDIENTE	T-105-10-18	\N
+EXP-049	MARKETING	Victor Yucra	20000.0	ALTO	Cambio de proveedor de seguridad (area solicitante)	RECHAZADO	T-19-13-38	T-14-15-28
+EXP-050	MARKETING	Patricia Llerena	1500.0	MEDIO	Presupuesto adicional para campania (area solicitante)	RECHAZADO	T-111-2-34	T-110-3-48
+EXP-051	OPERACIONES	Diego Apaza	5000.0	ALTO	Adquisicion de contadoras de billetes (area solicitante)	OBSERVADO	T-32-21-52	T-27-19-51
+EXP-052	FINANZAS	Elena Yanque	3000.0	ALTO	Cambio de proveedor de seguridad (area solicitante)	APROBADO	T-68-0-22	T-63-9-15
+EXP-053	VENTAS	Jorge Salazar	8000.0	ALTO	Mantenimiento de linea de produccion (area solicitante)	PENDIENTE	T-18-23-17	\N
+EXP-054	LOGISTICA	Milagros Mendoza	800.0	BAJO	Apertura de nueva agencia (area solicitante)	PENDIENTE	T-63-20-44	\N
+EXP-055	PRODUCCION	Oscar Ccori	3000.0	MEDIO	Renovacion de equipos de computo (area solicitante)	RECHAZADO	T-75-15-49	T-71-18-37
+EXP-056	LOGISTICA	Jose Cruz	8000.0	MEDIO	Adquisicion de contadoras de billetes (area solicitante)	OBSERVADO	T-70-4-33	T-66-1-50
+EXP-057	FINANZAS	Nancy Castillo	35000.0	ALTO	Ampliacion de limite de caja (area solicitante)	OBSERVADO	T-104-0-14	T-101-23-39
+EXP-058	VENTAS	Valeria Delgado	5000.0	MEDIO	Presupuesto adicional para campania (area solicitante)	OBSERVADO	T-67-7-3	T-64-1-57
+EXP-059	ALMACEN	Hugo Bellido	3000.0	MEDIO	Contratacion de personal temporal (area solicitante)	OBSERVADO	T-58-2-19	T-55-21-43
+EXP-060	OPERACIONES	Elena Apaza	8000.0	ALTO	Compra de insumos de caja (area solicitante)	RECHAZADO	T-14-17-20	T-11-17-43
+EXP-061	ALMACEN	Carlos Delgado	8000.0	BAJO	Apertura de nueva agencia (area solicitante)	PENDIENTE	T-95-16-33	\N
+EXP-062	ALMACEN	Carlos Apaza	1500.0	MEDIO	Presupuesto adicional para campania (area solicitante)	APROBADO	T-10-5-27	T-9-17-19
+EXP-063	FINANZAS	Percy Portugal	5000.0	ALTO	Apertura de nueva agencia (area solicitante)	PENDIENTE	T-20-21-3	\N
+EXP-064	OPERACIONES	Oscar Mamani	1500.0	ALTO	Renovacion de equipos de computo (area solicitante)	RECHAZADO	T-27-10-7	T-26-20-59
+EXP-065	LOGISTICA	Daniela Chavez	3000.0	BAJO	Presupuesto adicional para campania (area solicitante)	PENDIENTE	T-70-9-9	\N
+EXP-066	SISTEMAS	Miguel Delgado	1500.0	MEDIO	Compra de insumos de caja (area solicitante)	RECHAZADO	T-114-6-45	T-109-22-56
+EXP-067	LOGISTICA	Paola Apaza	3000.0	BAJO	Mantenimiento de linea de produccion (area solicitante)	RECHAZADO	T-98-3-17	T-97-20-28
+EXP-068	VENTAS	Valeria Benavides	8000.0	BAJO	Ampliacion de limite de caja (area solicitante)	OBSERVADO	T-55-22-22	T-51-18-31
+EXP-069	SISTEMAS	Flor Delgado	20000.0	MEDIO	Aumento de tasa de prestamos (area solicitante)	APROBADO	T-118-9-10	T-117-9-9
+EXP-070	FINANZAS	Miguel Chavez	5000.0	ALTO	Presupuesto adicional para campania (area solicitante)	APROBADO	T-24-4-26	T-21-0-54
+EXP-071	FINANZAS	Rocio Mamani	8000.0	BAJO	Mantenimiento de linea de produccion (area solicitante)	PENDIENTE	T-67-4-19	\N
+EXP-072	SISTEMAS	Miguel Mamani	8000.0	MEDIO	Cambio de proveedor de seguridad (area solicitante)	APROBADO	T-62-21-54	T-58-15-8
+EXP-073	MARKETING	Daniela Paredes	800.0	ALTO	Ampliacion de limite de caja (area solicitante)	PENDIENTE	T-62-7-12	\N
+EXP-074	MARKETING	Percy Valdivia	12000.0	BAJO	Cambio de proveedor de seguridad (area solicitante)	OBSERVADO	T-73-2-12	T-71-15-56
+EXP-075	ALMACEN	Ana Pacheco	1500.0	ALTO	Adquisicion de contadoras de billetes (area solicitante)	PENDIENTE	T-43-22-10	\N
+EXP-076	ALMACEN	Paola Cruz	1500.0	MEDIO	Apertura de nueva agencia (area solicitante)	APROBADO	T-11-1-10	T-6-19-32
+EXP-077	OPERACIONES	Rocio Portugal	800.0	MEDIO	Mantenimiento de linea de produccion (area solicitante)	APROBADO	T-0-16-36	T-0-0-10
+EXP-078	MARKETING	Jimena Nina	5000.0	ALTO	Mantenimiento de linea de produccion (area solicitante)	APROBADO	T-48-8-34	T-46-9-13
+EXP-079	FINANZAS	Mario Bellido	60000.0	MEDIO	Ampliacion de limite de caja (area solicitante)	APROBADO	T-87-21-39	T-82-18-29
+EXP-080	OPERACIONES	Elena Ccori	12000.0	ALTO	Adquisicion de contadoras de billetes (area solicitante)	APROBADO	T-93-12-12	T-92-22-17
+EXP-081	FINANZAS	Andres Medina	8000.0	ALTO	Ampliacion de limite de caja (area solicitante)	APROBADO	T-83-19-22	T-79-21-21
+EXP-082	PRODUCCION	Marco Mendoza	3000.0	ALTO	Ampliacion de limite de caja (area solicitante)	PENDIENTE	T-100-22-42	\N
+EXP-083	SISTEMAS	Alvaro Salazar	8000.0	ALTO	Ampliacion de limite de caja (area solicitante)	RECHAZADO	T-39-19-40	T-36-6-51
+EXP-084	SISTEMAS	Daniela Bellido	800.0	ALTO	Renovacion de equipos de computo (area solicitante)	APROBADO	T-9-18-43	T-7-18-10
+EXP-085	SISTEMAS	Fiorella Salazar	8000.0	ALTO	Renovacion de equipos de computo (area solicitante)	APROBADO	T-48-13-18	T-47-6-52
+EXP-086	SISTEMAS	Lourdes Llerena	20000.0	BAJO	Mantenimiento de linea de produccion (area solicitante)	RECHAZADO	T-13-16-53	T-12-14-58
+EXP-087	VENTAS	Patricia Condori	20000.0	ALTO	Contratacion de personal temporal (area solicitante)	OBSERVADO	T-31-13-28	T-28-20-31
+EXP-088	SISTEMAS	Karen Caceres	35000.0	MEDIO	Compra de insumos de caja (area solicitante)	RECHAZADO	T-44-2-56	T-41-12-31
+EXP-089	PRODUCCION	Nancy Portugal	8000.0	ALTO	Apertura de nueva agencia (area solicitante)	PENDIENTE	T-45-2-9	\N
+EXP-090	LOGISTICA	Victor Nina	8000.0	ALTO	Presupuesto adicional para campania (area solicitante)	APROBADO	T-29-6-17	T-26-1-18
+EXP-091	OPERACIONES	Lucia Ccama	8000.0	ALTO	Ampliacion de limite de caja (area solicitante)	APROBADO	T-9-4-49	T-8-23-9
+EXP-092	VENTAS	Karen Ccama	20000.0	MEDIO	Apertura de nueva agencia (area solicitante)	APROBADO	T-95-18-41	T-92-14-11
+EXP-093	PRODUCCION	Edwin Condori	60000.0	BAJO	Aumento de tasa de prestamos (area solicitante)	PENDIENTE	T-41-7-24	\N
+EXP-094	LOGISTICA	Miguel Portugal	1500.0	MEDIO	Renovacion de equipos de computo (area solicitante)	OBSERVADO	T-71-18-24	T-68-13-39
+EXP-095	LOGISTICA	Daniela Ccori	800.0	BAJO	Aumento de tasa de prestamos (area solicitante)	PENDIENTE	T-29-17-51	\N
+EXP-096	FINANZAS	Patricia Choque	20000.0	BAJO	Mantenimiento de linea de produccion (area solicitante)	APROBADO	T-38-7-23	T-35-0-51
+EXP-097	FINANZAS	Raul Paredes	8000.0	ALTO	Presupuesto adicional para campania (area solicitante)	RECHAZADO	T-116-7-9	T-113-6-57
+EXP-098	MARKETING	Judith Flores	60000.0	BAJO	Apertura de nueva agencia (area solicitante)	PENDIENTE	T-95-3-58	\N
+EXP-099	OPERACIONES	Pedro Cutipa	800.0	ALTO	Mantenimiento de linea de produccion (area solicitante)	PENDIENTE	T-69-0-9	\N
+EXP-100	LOGISTICA	Silvia Huamani	8000.0	ALTO	Contratacion de personal temporal (area solicitante)	PENDIENTE	T-42-1-37	\N
+EXP-101	PRODUCCION	Sergio Apaza	3000.0	BAJO	Mantenimiento de linea de produccion (area solicitante)	APROBADO	T-102-6-28	T-100-23-24
+EXP-102	MARKETING	Silvia Yucra	20000.0	BAJO	Aumento de tasa de prestamos (area solicitante)	PENDIENTE	T-22-17-12	\N
+EXP-103	SISTEMAS	Jorge Portugal	12000.0	BAJO	Renovacion de equipos de computo (area solicitante)	APROBADO	T-3-2-10	T-0-0-28
