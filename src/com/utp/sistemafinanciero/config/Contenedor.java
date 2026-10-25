@@ -7,6 +7,7 @@ import com.utp.sistemafinanciero.backup.RespaldoPgDump;
 import com.utp.sistemafinanciero.backup.RespaldoService;
 import com.utp.sistemafinanciero.dao.DaoFactory;
 import com.utp.sistemafinanciero.dao.jdbc.JdbcDaoFactory;
+import com.utp.sistemafinanciero.dao.memoria.DatosMasivos;
 import com.utp.sistemafinanciero.dao.memoria.DatosSemilla;
 import com.utp.sistemafinanciero.dao.memoria.MemoriaDaoFactory;
 import com.utp.sistemafinanciero.security.GestorSesiones;
@@ -115,6 +116,9 @@ public class Contenedor {
         if ("memoria".equals(Configuracion.persistencia())) {
             MemoriaDaoFactory bd = new MemoriaDaoFactory();
             DatosSemilla.cargar(bd, hasher);
+            if (!"false".equalsIgnoreCase(Configuracion.get("memoria.datos.masivos", "true"))) {
+                DatosMasivos.cargar(bd, hasher);   // 100 registros por módulo (solo modo demostración)
+            }
             return new Contenedor(bd, hasher, sesiones, limitador,
                     List.of(new RespaldoMemoriaJson(bd)), carpeta, Configuracion.backupRetener());
         }
