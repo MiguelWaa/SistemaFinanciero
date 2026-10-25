@@ -3,7 +3,8 @@
   Curso Integrador I Sistemas - Software (UTP)
 
   INSTRUCCIONES DE INSTALACION
-  (leelo completo antes de empezar, toma unos 10 minutos)
+  (leelo completo antes de empezar, toma unos 10-15 minutos)
+  Manual de usuario completo: docs/manual/SIGSF_Manual_Usuario_v2.pdf
 ================================================================
 
 QUE NECESITAS INSTALADO
@@ -13,13 +14,29 @@ QUE NECESITAS INSTALADO
      -> Al instalarlo te pide una CONTRASENA para el usuario "postgres".
         APUNTALA, la vas a necesitar en el paso 4.
   3) NetBeans
+  4) Git (Git for Windows)  -> desde la v5.0 el proyecto es un
+     repositorio Git y el sistema muestra su version con Git.
 
 ----------------------------------------------------------------
-PASO 1 · DESCOMPRIMIR
+PASO 1 · OBTENER EL PROYECTO
 ----------------------------------------------------------------
-  Descomprime el archivo .zip (clic derecho > Extraer todo).
+  OPCION A (recomendada) - clonar desde GitHub. En Git Bash:
+
+         git clone https://github.com/MiguelWaa/SistemaFinanciero.git
+
+  OPCION B - si recibiste un .zip: descomprimelo (clic derecho >
+  Extraer todo) CONSERVANDO la carpeta oculta .git.
+
   Queda una carpeta llamada  SistemaFinanciero
   Sugerencia: muevela a una ruta corta, por ejemplo  C:\SIGSF\
+
+  Luego activa los hooks del equipo (una sola vez), dentro de la carpeta:
+
+         scripts\git\instalar_hooks.bat
+         (Linux/macOS: scripts/git/instalar_hooks.sh)
+
+  Los hooks bloquean subir db.properties (contrasenas) y rechazan
+  mensajes de commit que no tengan el formato  tipo(ambito): descripcion
 
 ----------------------------------------------------------------
 PASO 2 · CREAR LA BASE DE DATOS (pgAdmin)
@@ -39,23 +56,26 @@ PASO 3 · CARGAR LAS TABLAS Y LOS DATOS
   a) Haz UN CLIC sobre la base  SistemaFinanciero  (que quede marcada).
   b) Menu  Tools > Query Tool.
      Verifica que arriba diga "SistemaFinanciero" y no "postgres".
-  c) Abre y ejecuta (tecla F5) los tres archivos, EN ESTE ORDEN,
+  c) Abre y ejecuta (tecla F5) los archivos, EN ESTE ORDEN,
      desde la carpeta  db  del proyecto:
 
-         1. db/schema.sql           (crea las 31 tablas)
+         1. db/schema.sql           (crea las tablas base)
          2. db/datos_ejemplo.sql    (carga datos de prueba)
          3. db/portal_cliente.sql   (habilita el Portal del Cliente)
          4. db/seguridad.sql        (auditoria, restricciones y rol seguro)
          5. db/version_esquema.sql  (version del esquema de la base, v5.0)
-         6. db/datos_100_registros.sql  (OPCIONAL v5.1: 100 registros por modulo)
+         6. db/datos_100_registros.sql  (OPCIONAL v5.1: 100 registros
+                                         por modulo, para pruebas)
 
+     Los pasos 1 al 5 son obligatorios. Al terminar, la base tiene
+     34 tablas. El script 5 se puede ejecutar varias veces sin problema.
      Para abrir cada archivo usa el icono de carpeta del Query Tool.
 
 ----------------------------------------------------------------
 PASO 4 · CONFIGURAR LA CONEXION
 ----------------------------------------------------------------
-  Si clonaste el repositorio Git, el archivo db.properties NO viene
-  (guarda contrasenas y no se sube a Git). Crealo copiando la plantilla:
+  El archivo db.properties NO viene en el repositorio (guarda
+  contrasenas y no se sube a Git). Crealo copiando la plantilla:
 
          copy db.properties.ejemplo db.properties
 
@@ -69,7 +89,7 @@ PASO 4 · CONFIGURAR LA CONEXION
   Si el puerto 8091 te da problemas, puedes cambiar:
          server.port=8091          -> server.port=8092
 
-  Guarda el archivo.
+  Guarda el archivo. NUNCA lo subas a GitHub.
 
 ----------------------------------------------------------------
 PASO 5a · LIBRERIAS DE REGISTRO (SLF4J + LOGBACK) - OBLIGATORIO
@@ -112,6 +132,7 @@ PASO 6 · ABRIR Y EJECUTAR EN NETBEANS
   En la ventana Output (abajo) debe aparecer:
 
          Conexion a PostgreSQL correcta.
+         Version del esquema de la base: 5.0.0 (la esperada por el codigo)
          SIGSF - Servidor iniciado
          Frontend:  http://localhost:8091/
 
@@ -131,6 +152,9 @@ PASO 7 · USAR EL SISTEMA
       lucia.ramos@sigsf.com  / lucia123   (Cajero)
       jorge.torres@sigsf.com / jorge123   (Analista)
 
+      (cambie estas claves antes de usar datos reales; las nuevas
+       deben tener minimo 8 caracteres con letras y numeros)
+
   ACCESO DE CLIENTE (Portal del Cliente)
       Boton "Soy cliente" en la pantalla de inicio,
       o directo:  http://localhost:8091/portal.html
@@ -138,20 +162,32 @@ PASO 7 · USAR EL SISTEMA
       Documento:   70000001
       Contrasena:  70000001
       (los clientes antiguos usan su documento como clave inicial;
-       tambien se puede crear una cuenta nueva desde "Crear cuenta")
+       tambien se puede crear una cuenta nueva desde "Crear cuenta",
+       con clave de minimo 6 caracteres)
+
+  CONTROL DE VERSIONES (solo administrador)
+      Menu lateral > "Control de versiones": muestra la version en
+      ejecucion, commits, ramas, etiquetas y version del esquema BD.
+      La version tambien aparece al pie del panel principal.
 
 ----------------------------------------------------------------
 PASO 8 · PRUEBAS AUTOMATICAS (TDD)
 ----------------------------------------------------------------
   En NetBeans: clic derecho en "Test Libraries" > Add Library >
   "JUnit 4.13.2" y "Hamcrest 1.3". Luego Run > Test Project (Alt+F6).
-  Deben salir 77 pruebas correctas. No necesitan PostgreSQL.
+  Deben salir 117 pruebas correctas (v5.0). No necesitan PostgreSQL.
+
+  Sin NetBeans:   scripts\compilar_y_probar.bat
+                  (Linux/macOS: sh scripts/compilar_y_probar.sh)
+  Es lo mismo que ejecuta GitHub Actions en cada push.
 
 ----------------------------------------------------------------
 PASO 9 · RESPALDOS
 ----------------------------------------------------------------
   Entre como admin > menu "Respaldos y auditoria" > "Generar respaldo".
-  Los archivos quedan en la carpeta  respaldos  del proyecto.
+  Los archivos quedan en la carpeta  respaldos  del proyecto
+  (el sistema tambien genera uno automatico cada 24 horas y conserva
+  los ultimos 10).
   Si pg_dump no esta en C:\Program Files\PostgreSQL\XX\bin, indique su
   ruta en db.properties (backup.pgdump=...). Restaurar:
       scripts\restaurar_bd.bat respaldos\archivo.sql
@@ -161,6 +197,24 @@ MODO DEMOSTRACION (sin PostgreSQL)
 ----------------------------------------------------------------
   En db.properties cambie  persistencia=postgresql  por
   persistencia=memoria  y ejecute. Usa los mismos usuarios de prueba.
+  Los datos se pierden al cerrar el servidor.
+
+----------------------------------------------------------------
+TRABAJO EN EQUIPO CON GIT (resumen)
+----------------------------------------------------------------
+  Ramas: main (produccion), develop (integracion), feature/*,
+         release/*, hotfix/*.   Nadie hace commit directo en main.
+
+      git switch develop && git pull
+      git switch -c feature/mi-cambio
+      git add <archivos>
+      git commit -m "feat(ventas): exportar ventas a CSV"
+      git push -u origin feature/mi-cambio
+      (y abrir un Pull Request hacia develop)
+
+  Tipos de commit: feat fix docs style refactor perf test build ci
+                   chore revert
+  Detalle completo: docs/07_CONTROL_DE_VERSIONES.md
 
 ================================================================
 PROBLEMAS FRECUENTES
@@ -178,6 +232,9 @@ PROBLEMAS FRECUENTES
   "No suitable driver" / no conecta
       -> Falta el postgresql.jar en la carpeta lib (paso 5).
 
+  No compila / "package org.slf4j does not exist"
+      -> Faltan las librerias de Logback (paso 5a).
+
   El login dice "Usuario o contrasena incorrectos"
       -> No se ejecuto datos_ejemplo.sql (paso 3).
 
@@ -192,6 +249,13 @@ PROBLEMAS FRECUENTES
 
   El Portal del Cliente da error de "cliente_acceso"
       -> No se ejecuto portal_cliente.sql (paso 3).
+
+  Aviso de "esquema atrasado" en la consola o en Control de versiones
+      -> Falta ejecutar algun script de la carpeta db (paso 3).
+
+  El commit es rechazado por un hook
+      -> El mensaje debe ser  tipo(ambito): descripcion, o incluiste
+         db.properties. Quitalo con: git restore --staged db.properties
 
 ================================================================
   Integrantes: Miguel Angel Machaca Machaca
