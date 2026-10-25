@@ -19,7 +19,8 @@ rm -rf build/ci && mkdir -p build/ci/classes build/ci/test
 
 echo "== Compilando $(find src -name '*.java' | wc -l) clases..."
 javac -encoding UTF-8 --release 17 -cp "$CP" -d build/ci/classes $(find src -name '*.java')
-cp src/logback.xml build/ci/classes/
+   # copia los recursos (.tsv, .xml...) que javac no copia
+   (cd src && find . -type f ! -name '*.java' -exec cp --parents {} ../build/ci/classes/ \;)
 
 echo "== Compilando $(find test -name '*.java' | wc -l) clases de prueba..."
 javac -encoding UTF-8 --release 17 -cp "$CP:build/ci/classes:$JUNIT" -d build/ci/test $(find test -name '*.java')
