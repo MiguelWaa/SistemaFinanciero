@@ -10,6 +10,18 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.1.0] - 2026-10-25 · Avance 3: datos de demostración
+
+### Agregado
+- `db/datos_100_registros.sql`: completa **100 registros por módulo** (300 operaciones = 100 cambios + 100 préstamos + 100 empeños) en las 32 tablas. Es re-ejecutable (no duplica), no borra datos y resuelve las claves foráneas por clave natural.
+- `DatosMasivos` + `semilla_100.tsv`: los mismos datos en el modo demostración (`persistencia=memoria`); se desactiva con `memoria.datos.masivos=false`.
+- `scripts/datos/generar_datos_100.py`: generador determinista (semilla fija) que produce el SQL y el TSV.
+- `DatosMasivosTest` (9 pruebas): 100 por módulo, 300 operaciones, idempotencia, claves foráneas, avance 100 % y acceso al portal.
+- `docs/08_DATOS_DE_DEMOSTRACION.md` y capturas de los módulos con 100 registros en `evidencias/`.
+
+### Cambiado
+- Guías de instalación (`db/LEEME.txt`, `INSTALAR_LEEME.txt`) con el paso opcional de los 100 registros. Pruebas: 117 → 126.
+
 ## [5.0.1] - 2026-10-21 · Parche
 
 ### Corregido
