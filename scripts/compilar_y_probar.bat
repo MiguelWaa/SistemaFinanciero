@@ -21,6 +21,7 @@ dir /s /b test\*.java > build\ci\pruebas.txt
 echo == Compilando...
 javac -encoding UTF-8 --release 17 -cp "%CP%" -d build\ci\classes @build\ci\fuentes.txt || goto :error
 copy /y src\logback.xml build\ci\classes\ >nul
+robocopy src build\ci\classes /E /XF *.java /NFL /NDL /NJH /NJS /NP >nul
 javac -encoding UTF-8 --release 17 -cp "%CP%;build\ci\classes;%JUNIT%" -d build\ci\test @build\ci\pruebas.txt || goto :error
 copy /y test\logback-test.xml build\ci\test\ >nul
 
