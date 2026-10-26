@@ -7,8 +7,6 @@ import java.time.LocalDateTime;
  * los scripts SQL aplicados a la base de datos (versionamiento del
  * esquema). Permite saber en qué versión está la base de cada equipo y
  * qué script falta ejecutar.
- *
- * Proyecto: Curso Integrador I Sistemas - Software (UTP)
  */
 public class VersionEsquema {
 
