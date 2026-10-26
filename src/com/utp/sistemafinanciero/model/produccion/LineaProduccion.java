@@ -3,8 +3,6 @@ package com.utp.sistemafinanciero.model.produccion;
 /**
  * Entidad que representa la tabla lineas_produccion del
  * Sistema Integral de Gestion de Servicios Financieros.
- *
- * Proyecto: Curso Integrador I Sistemas - Software (UTP)
  */
 public class LineaProduccion {
 
