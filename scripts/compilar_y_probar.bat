@@ -20,7 +20,9 @@ dir /s /b src\*.java > build\ci\fuentes.txt
 dir /s /b test\*.java > build\ci\pruebas.txt
 echo == Compilando...
 javac -encoding UTF-8 --release 17 -cp "%CP%" -d build\ci\classes @build\ci\fuentes.txt || goto :error
-copy /y src\logback.xml build\ci\classes\ >nul
+REM Recursos que no son .java (logback.xml, semilla_100.tsv...) al classpath, como hace NetBeans/Ant.
+xcopy /s /y /q /i src\*.xml build\ci\classes\ >nul
+xcopy /s /y /q /i src\*.tsv build\ci\classes\ >nul
 javac -encoding UTF-8 --release 17 -cp "%CP%;build\ci\classes;%JUNIT%" -d build\ci\test @build\ci\pruebas.txt || goto :error
 copy /y test\logback-test.xml build\ci\test\ >nul
 
