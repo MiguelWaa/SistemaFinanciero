@@ -16,8 +16,6 @@ import java.time.LocalDateTime;
  * Crea algunos objetos de ejemplo usando las entidades del paquete
  * com.utp.sistemafinanciero.model y los muestra por consola, para
  * verificar que el proyecto compila y ejecuta correctamente en NetBeans.
- *
- * Proyecto: Curso Integrador I Sistemas - Software (UTP)
  */
 public class Main {
 

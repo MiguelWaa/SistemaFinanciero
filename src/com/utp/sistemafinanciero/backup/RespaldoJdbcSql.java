@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Respaldo de <b>datos</b> escrito en Java puro (JDBC), útil cuando
+ * Respaldo de <b>datos</b> escrito en Java puro (JDBC), útil 
  * {@code pg_dump} no está instalado. Genera un script SQL con los
  * {@code INSERT} de todas las tablas del esquema {@code public} y
  * reajusta las secuencias {@code SERIAL}.
  *
- * <p>Para restaurar: ejecutar primero {@code db/schema.sql} (estructura)
+ * <p>Para restaurar: ejecutar primero (estructura)
  * y luego este archivo.</p>
  */
 public class RespaldoJdbcSql implements EstrategiaRespaldo {

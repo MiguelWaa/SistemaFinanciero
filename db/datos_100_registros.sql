@@ -126,7 +126,6 @@ FROM v
 WHERE NOT EXISTS (SELECT 1 FROM rol x WHERE x.nombre = v.nombre)
 ORDER BY v.n
 LIMIT CASE WHEN (SELECT COUNT(*) FROM rol) < 100 THEN 100 - (SELECT COUNT(*) FROM rol) ELSE 0 END;
-
 -- ---- Seguridad: permisos (100) ----
 WITH v (n, nombre, descripcion) AS (VALUES
   (1, 'VER_USUARIOS', 'Consultar registros de usuarios'),
