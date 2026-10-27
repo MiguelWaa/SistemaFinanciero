@@ -6,19 +6,16 @@
 1) Abre pgAdmin 4 y conectate a tu servidor PostgreSQL
    (usuario por defecto: postgres).
 
-
 2) Crea la base de datos:
    - Click derecho en "Databases" > Create > Database...
    - Name: SistemaFinanciero
    - Save.
-
 
 3) Carga la estructura:
    - Selecciona la base "SistemaFinanciero".
    - Menu Tools > Query Tool.
    - Abre el archivo  db/schema.sql  (icono de carpeta) y presiona
      "Execute/Run" (F5). Debe crear 31 tablas.
-
 
 4) Carga los datos de ejemplo:
    - En el mismo Query Tool abre  db/datos_ejemplo.sql  y ejecutalo (F5).
