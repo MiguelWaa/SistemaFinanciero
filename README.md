@@ -9,6 +9,12 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 
 ---
 
+## 🆕 Versión 5.4 · Fondo animado
+
+Fondo con degradado, auroras en movimiento, rejilla de puntos y trama tipo billete (`web/img/guilloche.svg`) en todas las páginas, con tarjetas tipo vidrio. Capturas: `evidencias/v54_*.png`.
+
+---
+
 ## 🆕 Versión 5.3 · Interfaz animada
 
 Capa visual `web/sigsf-anim.css` + `web/sigsf-anim.js` en todas las páginas: degradados en movimiento, indicadores con ícono y números que cuentan, entradas escalonadas, botones con brillo y onda, gráficos que se dibujan, ticket de pago con escaneo y confeti al confirmar un pago. Respeta «reducir movimiento». Capturas: `evidencias/v53_*.png`.

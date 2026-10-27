@@ -10,6 +10,11 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+### Cambiado
+- Fondo nuevo en todo el sistema: degradado de color, auroras más vivas en movimiento, rejilla de puntos y una trama
+  ondulada tipo billete (`web/img/guilloche.svg`) que se desliza lentamente. Tarjetas, indicadores y barras con efecto
+  vidrio para que el fondo se vea detrás. Al imprimir, el fondo se quita.
+
 ## [5.3.0] - 2026-10-26 · Interfaz animada
 
 ### Agregado
