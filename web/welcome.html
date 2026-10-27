@@ -1,180 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido · SIGSF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body {
-            min-height: 100vh;
-            background: radial-gradient(1200px 600px at 80% -10%, #1e3a8a 0%, transparent 60%),
-                        radial-gradient(900px 500px at -10% 110%, #0ea5e9 0%, transparent 55%),
-                        #0b1f46;
-            color: #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-        .topbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 22px 6vw;
-        }
-        .brand { display: flex; align-items: center; gap: 12px; }
-        .brand .mark {
-            width: 46px; height: 46px; border-radius: 12px;
-            background: linear-gradient(135deg, #2563eb, #60a5fa);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; color: #fff; box-shadow: 0 8px 24px rgba(37,99,235,.4);
-        }
-        .brand h1 { font-size: 1.15rem; letter-spacing: .5px; color: #fff; }
-        .brand span { font-size: .72rem; color: #94a3b8; }
-        .topbar .nav-link {
-            color: #cbd5e1; text-decoration: none; font-size: .9rem; font-weight: 600;
-            padding: 10px 18px; border: 1px solid rgba(255,255,255,.15); border-radius: 30px;
-            transition: all .25s;
-        }
-        .topbar .nav-link:hover { background: rgba(255,255,255,.08); color: #fff; }
-
-        .hero {
-            flex: 1; display: grid; grid-template-columns: 1.1fr .9fr;
-            gap: 40px; align-items: center; padding: 20px 6vw 40px;
-        }
-        .hero-copy .pill {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(96,165,250,.12); color: #93c5fd;
-            border: 1px solid rgba(96,165,250,.25);
-            padding: 7px 14px; border-radius: 30px; font-size: .78rem; font-weight: 600;
-            margin-bottom: 22px;
-        }
-        .hero-copy h2 {
-            font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; color: #fff;
-            font-weight: 800; margin-bottom: 18px;
-        }
-        .hero-copy h2 .grad {
-            background: linear-gradient(90deg, #60a5fa, #34d399);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        .hero-copy p { font-size: 1.02rem; color: #cbd5e1; max-width: 540px; line-height: 1.6; margin-bottom: 30px; }
-        .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
-        .btn {
-            padding: 14px 26px; border-radius: 12px; font-weight: 700; font-size: .95rem;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
-            cursor: pointer; border: none; transition: transform .15s, filter .2s, background .2s;
-        }
-        .btn-primary { background: linear-gradient(135deg, #2563eb, #3b82f6); color: #fff; box-shadow: 0 10px 30px rgba(37,99,235,.45); }
-        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
-        .btn-outline { background: rgba(255,255,255,.06); color: #fff; border: 1px solid rgba(255,255,255,.2); }
-        .btn-outline:hover { background: rgba(255,255,255,.12); }
-
-        .stats { display: flex; gap: 34px; margin-top: 40px; flex-wrap: wrap; }
-        .stat strong { display: block; font-size: 1.7rem; color: #fff; font-weight: 800; }
-        .stat span { font-size: .78rem; color: #94a3b8; }
-
-        /* Visual panel */
-        .hero-visual { position: relative; display: flex; justify-content: center; }
-        .glass {
-            width: 100%; max-width: 440px;
-            background: rgba(255,255,255,.06);
-            border: 1px solid rgba(255,255,255,.12);
-            border-radius: 22px; padding: 26px;
-            backdrop-filter: blur(14px);
-            box-shadow: 0 30px 70px rgba(0,0,0,.45);
-        }
-        .glass .g-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .glass .g-head h3 { color: #fff; font-size: 1rem; }
-        .glass .g-head .live { font-size: .72rem; color: #86efac; display: flex; align-items: center; gap: 6px; }
-        .glass .g-head .live i { font-size: .6rem; }
-        .mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-        .mini {
-            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
-            border-radius: 14px; padding: 16px;
-        }
-        .mini .ic { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 10px; }
-        .mini small { color: #94a3b8; font-size: .72rem; }
-        .mini b { display: block; color: #fff; font-size: 1.15rem; margin-top: 2px; }
-        .modules-strip { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
-        .m-item { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.04); border-radius: 12px; padding: 12px 14px; }
-        .m-item .mi { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: .9rem; flex-shrink: 0; }
-        .m-item span { color: #e2e8f0; font-size: .85rem; font-weight: 500; }
-        .m-item .chev { margin-left: auto; color: #64748b; font-size: .8rem; }
-
-        .footer { text-align: center; padding: 18px; font-size: .78rem; color: #64748b; }
-
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero-copy .cta-row, .stats { justify-content: center; }
-            .hero-copy p { margin-left: auto; margin-right: auto; }
-            .hero-visual { margin-top: 10px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Bienvenido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
+<style>
+  body { background: var(--sg-ink); color: #c9d3e1; min-height: 100vh; display: flex; flex-direction: column; }
+  .w-top { max-width: 1120px; width: 100%; margin: 0 auto; padding: 1.25rem; display: flex; align-items: center; gap: .7rem; color: #fff; font-weight: 600; letter-spacing: .04em; }
+  .w-top span { width: 2.4rem; height: 2.4rem; border-radius: .5rem; background: var(--sg-gold); color: var(--sg-ink); display: flex; align-items: center; justify-content: center; }
+  .w-main { flex: 1; max-width: 1120px; width: 100%; margin: 0 auto; padding: 2rem 1.25rem 3rem; display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+  .w-main h1 { color: #fff; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 1rem; }
+  .w-main p.lead { color: #aebbd0; max-width: 32rem; }
+  .puerta { display: flex; gap: 1rem; align-items: center; background: #fff; color: var(--sg-text); border-radius: .75rem; padding: 1.25rem 1.4rem; text-decoration: none; border: 2px solid transparent; }
+  .puerta + .puerta { margin-top: .9rem; }
+  .puerta:hover { border-color: var(--sg-gold); color: var(--sg-text); }
+  .puerta i.ic { width: 3rem; height: 3rem; border-radius: .6rem; background: var(--sg-primary-soft); color: var(--sg-primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .puerta b { display: block; font-size: 1.05rem; color: var(--sg-ink); }
+  .puerta span { font-size: .86rem; color: var(--sg-muted); }
+  .puerta .fa-arrow-right { margin-left: auto; color: var(--sg-muted); }
+  .w-billeteras { display: flex; gap: .5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .w-billeteras .wallet { color: #fff; background: rgba(255,255,255,.06); padding: .35rem .6rem .35rem .35rem; border-radius: 999px; }
+  footer { text-align: center; font-size: .78rem; color: #7f91ab; padding: 1rem; }
+  @media (max-width: 860px) { .w-main { grid-template-columns: 1fr; gap: 1.5rem; padding-top: .5rem; } }
+</style>
 </head>
 <body>
-    <header class="topbar">
-        <div class="brand">
-            <div class="mark"><i class="fa-solid fa-landmark"></i></div>
-            <div>
-                <h1>SIGSF</h1>
-                <span>Sistema Integral de Gestión de Servicios Financieros</span>
-            </div>
-        </div>
-        <a href="login.html" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i> Iniciar sesión</a>
-        <a href="portal.html" style="display:inline-block;margin-top:12px;padding:12px 22px;border:2px solid #2563eb;border-radius:10px;color:#2563eb;font-weight:700;text-decoration:none;background:#fff;">Soy cliente · Portal del Cliente</a>
-    </header>
-
-    <main class="hero">
-        <div class="hero-copy">
-            <div class="pill"><i class="fa-solid fa-bolt"></i> Plataforma empresarial · Bancos · Casas de Cambio · Empeño</div>
-            <h2>Gestiona toda tu operación financiera <span class="grad">en un solo lugar</span></h2>
-            <p>Marketing, logística, operaciones, clientes y dirección integrados en un panel profesional, navegable y en tiempo real. Toma decisiones con datos claros y controla cada área desde un mismo sistema.</p>
-            <div class="cta-row">
-                <a href="login.html" class="btn btn-primary">Ingresar al sistema <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="#modulos" class="btn btn-outline"><i class="fa-solid fa-grip"></i> Ver módulos</a>
-            </div>
-            <div class="stats">
-                <div class="stat"><strong>5</strong><span>Módulos integrados</span></div>
-                <div class="stat"><strong>360°</strong><span>Visión del negocio</span></div>
-                <div class="stat"><strong>24/7</strong><span>Disponibilidad</span></div>
-            </div>
-        </div>
-
-        <div class="hero-visual" id="modulos">
-            <div class="glass">
-                <div class="g-head">
-                    <h3>Panel de control</h3>
-                    <span class="live"><i class="fa-solid fa-circle"></i> En vivo</span>
-                </div>
-                <div class="mini-grid">
-                    <div class="mini">
-                        <div class="ic" style="background:#d1fae5;color:#059669;"><i class="fa-solid fa-sack-dollar"></i></div>
-                        <small>Ingresos del mes</small><b>S/ 482,900</b>
-                    </div>
-                    <div class="mini">
-                        <div class="ic" style="background:#dbeafe;color:#2563eb;"><i class="fa-solid fa-users"></i></div>
-                        <small>Clientes activos</small><b>1,284</b>
-                    </div>
-                    <div class="mini">
-                        <div class="ic" style="background:#ffedd5;color:#ea580c;"><i class="fa-solid fa-right-left"></i></div>
-                        <small>Operaciones hoy</small><b>327</b>
-                    </div>
-                    <div class="mini">
-                        <div class="ic" style="background:#ede9fe;color:#7c3aed;"><i class="fa-solid fa-chart-line"></i></div>
-                        <small>Rentabilidad</small><b>+12.4%</b>
-                    </div>
-                </div>
-                <div class="modules-strip">
-                    <div class="m-item"><div class="mi" style="background:#d1fae5;color:#10b981;"><i class="fa-solid fa-chart-line"></i></div><span>Marketing y Ventas</span><i class="fa-solid fa-chevron-right chev"></i></div>
-                    <div class="m-item"><div class="mi" style="background:#e0f2fe;color:#0ea5e9;"><i class="fa-solid fa-truck-fast"></i></div><span>Logística y Almacén</span><i class="fa-solid fa-chevron-right chev"></i></div>
-                    <div class="m-item"><div class="mi" style="background:#ede9fe;color:#8b5cf6;"><i class="fa-solid fa-chess-board"></i></div><span>Dirección y Gerencia</span><i class="fa-solid fa-chevron-right chev"></i></div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="footer">
-        &copy; 2026 SIGSF · Sistema Integral de Gestión de Servicios Financieros. Todos los derechos reservados.
-    </footer>
+<header class="w-top"><span><i class="fa-solid fa-landmark"></i></span>SIGSF</header>
+<main class="w-main">
+  <div>
+    <h1>Servicios financieros, sin papeleo</h1>
+    <p class="lead">Cambio de moneda, préstamos y empeños en un solo sistema: el personal gestiona y verifica, y el cliente cotiza y paga desde su celular.</p>
+    <div class="w-billeteras" aria-label="Billeteras aceptadas">
+      <span class="wallet wallet-YAPE"><i>Y</i>Yape</span><span class="wallet wallet-PLIN"><i>P</i>Plin</span><span class="wallet wallet-TUNKI"><i>T</i>Tunki</span>
+    </div>
+  </div>
+  <div>
+    <a class="puerta" href="portal.html"><i class="ic fa-solid fa-user"></i><div><b>Soy cliente</b><span>Paga con QR, cotiza y revisa tus trámites</span></div><i class="fa-solid fa-arrow-right"></i></a>
+    <a class="puerta" href="login.html"><i class="ic fa-solid fa-briefcase"></i><div><b>Soy personal de la entidad</b><span>Ingresa al panel de gestión</span></div><i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+</main>
+<footer>© 2026 SIGSF · Sistema Integral de Gestión de Servicios Financieros</footer>
 </body>
 </html>
