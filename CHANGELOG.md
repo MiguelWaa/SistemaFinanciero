@@ -10,6 +10,35 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.2.0] - 2026-10-26 · Pagos con QR, cotizaciones e interfaz Bootstrap 5
+
+### Agregado
+- **Pagos con Yape, Plin y Tunki desde el Portal del Cliente**: elegir trámite, monto y billetera; QR de cobro con monto, número, titular y referencia; registro del número de operación y de la captura de la constancia (`PagoService`, `PortalController`).
+- **Módulo interno Pagos y cobranzas** (`web/pagos.html`): bandeja *Por verificar* con confirmar/rechazar, historial con filtros, cobro en caja, cotizaciones y configuración de billeteras con subida del QR.
+- Al confirmar un pago se descuenta el saldo del préstamo o empeño (pasa a `CANCELADO` / `RECUPERADO` en cero) y se emite el comprobante `RC-000001`.
+- **Cotizaciones** de préstamo (con cronograma), empeño y cambio de moneda, con número, vigencia de 7 días y conversión en solicitud (`CotizacionService`).
+- Documentos imprimibles / PDF: comprobante de pago, cotización, estado de cuenta y reporte de pagos (`documento.html`, `portal-documento.html`, `sigsf-documentos.js`).
+- Exportación de pagos y cotizaciones a Excel, CSV y JSON; nuevos indicadores en `GET /api/dashboard` (`pagosPorVerificar`, `montoPorVerificar`, `cobradoMes`, `cotizacionesVigentes`).
+- Esquema de BD **5.2.0**: `db/pagos_qr.sql` (tablas `billetera`, `pago`, `cotizacion`); el servidor las crea solo si faltan.
+- Configuración `pagos.confirmacion.automatica` y `pagos.monto.maximo` en `db.properties`.
+- Pruebas: `PagoServiceTest`, `CotizacionServiceTest`, `PagosApiTest` (126 → 151).
+- `docs/09_PAGOS_QR_Y_COTIZACIONES.md` y capturas `evidencias/v52_*.png`.
+
+### Cambiado
+- **Toda la interfaz migrada a Bootstrap 5.3.3** servido desde `web/vendor/` (también Font Awesome y el generador de QR): funciona sin internet.
+- Nuevo tema `sigsf-ui.css` + utilidades `sigsf-ui.js`; el motor `sigsf-crud.js` ahora ordena por columna, pagina, valida y confirma con ventanas modales, manteniendo la misma configuración de cada módulo.
+- Panel principal con menú lateral agrupado (adaptable a celular), campana de pagos por verificar, gráfico de cobros de 14 días y apertura directa de módulos (`index.html#pagos.html`).
+- Portal del Cliente, ingreso del personal, bienvenida, solicitudes y reportes rediseñados.
+- Servidor de archivos: caché de 7 días para `web/vendor`, `ETag`, compresión gzip y más hilos; CSP sin CDN.
+- Centro de ayuda: respuestas corregidas según lo que el sistema hace realmente y nuevas preguntas sobre pagos.
+
+### Corregido
+- `scripts/compilar_y_probar.*` no copiaba `semilla_100.tsv` al classpath: 9 pruebas fallaban en GitHub Actions.
+- Configuración mostraba «PostgreSQL» aun en modo memoria.
+
+### Eliminado
+- Hojas de estilo antiguas que ninguna página usaba (`styles*.css`, `almacen.css`, `logistica.css`…); siguen en el historial de Git (`v5.1.0`).
+
 ## [5.1.0] - 2026-10-25 · Avance 3: datos de demostración
 
 ### Agregado

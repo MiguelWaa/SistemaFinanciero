@@ -65,7 +65,7 @@ public class VersionApiTest {
         assertEquals(200, r.statusCode());
         Map<String, Object> v = Json.parseObject(r.body());
         assertNotNull(v.get("version"));
-        assertEquals("5.0.0", v.get("versionEsquemaEsperada"));
+        assertEquals("5.2.0", v.get("versionEsquemaEsperada"));
         assertEquals(Boolean.TRUE, v.get("esquemaAlDia"));
     }
 

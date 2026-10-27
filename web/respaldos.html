@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Respaldos y Auditoría</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 <link rel="stylesheet" href="sigsf-modulo.css">
 <style>
   .nota{background:#eff6ff;border:1px solid #dbeafe;color:#1e3a8a;border-radius:10px;padding:12px 14px;font-size:.84rem;line-height:1.6;margin-top:12px}
@@ -35,7 +39,7 @@
 
   <!-- ====================== RESPALDOS ====================== -->
   <div data-pane="r">
-    <div class="card">
+    <div class="card sg-legacy">
       <h2><i class="fa-solid fa-shield-heart" style="color:#2563eb;"></i> Generar respaldo de la base de datos</h2>
       <div class="sub">El sistema usa <b>pg_dump</b> si está instalado (respaldo completo: estructura + datos).
         Si no lo encuentra, genera un script SQL con los datos usando JDBC. Además se hace un respaldo
@@ -51,7 +55,7 @@
         ejecute antes <code>db/schema.sql</code>.</div>
     </div>
 
-    <div class="card">
+    <div class="card sg-legacy">
       <div class="tabla-top">
         <h2 style="margin:0;"><i class="fa-solid fa-box-archive" style="color:#2563eb;"></i> Respaldos disponibles</h2>
       </div>
@@ -64,7 +68,7 @@
 
   <!-- ====================== AUDITORÍA ====================== -->
   <div data-pane="a" style="display:none;">
-    <div class="card">
+    <div class="card sg-legacy">
       <div class="tabla-top">
         <h2 style="margin:0;"><i class="fa-solid fa-user-shield" style="color:#2563eb;"></i> Bitácora de auditoría (últimos 200 eventos)</h2>
         <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarA" placeholder="Buscar usuario, acción, recurso…"></div>
@@ -85,11 +89,13 @@
   </div>
 </div>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
 <script src="sigsf-crud.js"></script>
 <script>
 (function(){
-  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
+  SIGSF.embebido();
   var $ = function(id){ return document.getElementById(id); };
   var esc = SIGSF.escapar;
   var respaldos = [], eventos = [];

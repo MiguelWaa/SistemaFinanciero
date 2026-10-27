@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Pagos y cobranzas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
+<style>
+  .pv { border: 1px solid var(--sg-line); border-left: 4px solid var(--sg-warning); border-radius: .6rem; background: #fff; padding: .9rem 1rem; }
+  .pv + .pv { margin-top: .75rem; }
+  .pv .monto { font-size: 1.35rem; font-weight: 600; color: var(--sg-ink); }
+  .pv dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .5rem 1rem; margin: .75rem 0 0; }
+  .pv dt { font-size: .74rem; color: var(--sg-muted); font-weight: 400; }
+  .pv dd { margin: 0; font-weight: 600; font-size: .86rem; word-break: break-word; }
+  .pv .nop { font-family: var(--bs-font-monospace); background: var(--sg-gold-soft); padding: .05rem .4rem; border-radius: .3rem; }
+  .qr-prev { width: 150px; height: 150px; border: 1px dashed #cfd7e0; border-radius: .5rem; display: flex; align-items: center; justify-content: center; background: #f7f9fb; overflow: hidden; }
+  .qr-prev img { max-width: 100%; max-height: 100%; }
+  .bil-head { color: #fff; border-radius: .6rem .6rem 0 0; padding: .7rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+  .cot-prev { background: var(--sg-gold-soft); border: 1px solid #efdcab; border-radius: .6rem; padding: .9rem 1rem; }
+</style>
+</head>
+<body>
+<header class="sg-page-head">
+  <div class="d-flex align-items-center"><span class="ico"><i class="fa-solid fa-qrcode"></i></span>
+    <div><h1>Pagos y cobranzas</h1><p>Pagos con Yape, Plin y Tunki desde el portal, cobros en caja y cotizaciones</p></div></div>
+  <a class="btn btn-sm btn-outline-light" href="index.html"><i class="fa-solid fa-arrow-left me-1"></i>Volver al panel</a>
+</header>
+
+<div class="sg-wrap">
+  <div class="sg-kpis" id="kpis">
+    <div class="sg-kpi warn"><div class="l">Por verificar</div><div class="v" id="kPend">—</div><div class="d" id="kPendM">—</div></div>
+    <div class="sg-kpi ok"><div class="l">Cobrado hoy</div><div class="v" id="kHoy">—</div><div class="d" id="kHoyN">—</div></div>
+    <div class="sg-kpi gold"><div class="l">Cobrado este mes</div><div class="v" id="kMes">—</div><div class="d">pagos confirmados</div></div>
+    <div class="sg-kpi"><div class="l">Pagos registrados</div><div class="v" id="kTot">—</div><div class="d" id="kRech">—</div></div>
+  </div>
+
+  <ul class="nav nav-underline" role="tablist" id="tabs">
+    <li class="nav-item"><button class="nav-link active" data-tab="verificar" type="button"><i class="fa-solid fa-hourglass-half me-1"></i>Por verificar <span class="badge rounded-pill text-bg-warning" id="tabPend">0</span></button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="historial" type="button"><i class="fa-solid fa-list me-1"></i>Historial y reporte</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="caja" type="button"><i class="fa-solid fa-cash-register me-1"></i>Cobrar en caja</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="cotizaciones" type="button"><i class="fa-solid fa-file-invoice-dollar me-1"></i>Cotizaciones</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="billeteras" type="button"><i class="fa-solid fa-wallet me-1"></i>Billeteras y QR</button></li>
+  </ul>
+
+  <!-- ====================== POR VERIFICAR ====================== -->
+  <section data-pane="verificar">
+    <div class="row g-3">
+      <div class="col-xl-8">
+        <div class="alert alert-info d-flex gap-2 align-items-start">
+          <i class="fa-solid fa-circle-info mt-1"></i>
+          <div>Antes de confirmar, abre la app de la billetera de la empresa y busca el movimiento con el <b>mismo monto</b> y el
+            <b>número de operación</b> que registró el cliente. Al confirmar se descuenta el saldo del préstamo o empeño y se emite el comprobante.</div>
+        </div>
+        <div id="listaPend"><div class="sg-empty">Cargando…</div></div>
+      </div>
+      <div class="col-xl-4">
+        <div class="card mb-3">
+          <div class="card-header"><h2>Cobrado por billetera</h2><p class="card-sub">Pagos confirmados (histórico)</p></div>
+          <div class="card-body d-flex align-items-center gap-3">
+            <div id="dona" style="width:150px"></div>
+            <div class="sg-legend flex-column" id="donaLeyenda" style="gap:.4rem"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h2>Últimos 14 días</h2></div>
+          <div class="card-body"><div id="barras"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== HISTORIAL ====================== -->
+  <section data-pane="historial" hidden>
+    <div class="card">
+      <div class="sg-toolbar">
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+          <select class="form-select form-select-sm w-auto" id="fEstado" aria-label="Estado">
+            <option value="">Todos los estados</option><option value="POR_VERIFICAR">Por verificar</option>
+            <option value="CONFIRMADO">Confirmados</option><option value="RECHAZADO">Rechazados</option>
+          </select>
+          <select class="form-select form-select-sm w-auto" id="fMetodo" aria-label="Método">
+            <option value="">Todos los métodos</option><option>YAPE</option><option>PLIN</option><option>TUNKI</option><option>EFECTIVO</option><option>TRANSFERENCIA</option>
+          </select>
+          <label class="small text-muted" for="fDesde">Desde</label><input type="date" class="form-control form-control-sm w-auto" id="fDesde">
+          <label class="small text-muted" for="fHasta">Hasta</label><input type="date" class="form-control form-control-sm w-auto" id="fHasta">
+          <div class="input-group input-group-sm search" style="max-width:240px"><span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input class="form-control" type="search" id="fBuscar" placeholder="Cliente, documento, N° op…" aria-label="Buscar"></div>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-sm btn-outline-primary" id="btnImprimir"><i class="fa-solid fa-print me-1"></i>Reporte imprimible</button>
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-success dropdown-toggle" data-bs-toggle="dropdown" type="button"><i class="fa-solid fa-file-arrow-down me-1"></i>Exportar</button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><button class="dropdown-item" data-exp="xlsx"><i class="fa-solid fa-file-excel text-success me-2"></i>Excel (.xlsx)</button></li>
+              <li><button class="dropdown-item" data-exp="csv"><i class="fa-solid fa-file-csv me-2"></i>CSV</button></li>
+              <li><button class="dropdown-item" data-exp="json"><i class="fa-solid fa-file-code me-2"></i>JSON</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="px-3 py-2 small text-muted border-bottom" id="hResumen">—</div>
+      <div class="table-wrap">
+        <table class="table table-hover align-middle">
+          <thead><tr><th>Código</th><th>Fecha</th><th>Cliente</th><th>Concepto</th><th>Método</th><th>N° operación</th><th class="num">Monto</th><th>Estado</th><th class="text-end">Acciones</th></tr></thead>
+          <tbody id="tablaHist"><tr class="empty-row"><td colspan="9">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+      <div class="sg-foot"><div id="hRango">—</div><nav aria-label="Páginas"><ul class="pagination pagination-sm" id="hPag"></ul></nav></div>
+    </div>
+  </section>
+
+  <!-- ====================== CAJA ====================== -->
+  <section data-pane="caja" hidden>
+    <div class="row g-3">
+      <div class="col-lg-7">
+        <form class="card" id="formCaja" novalidate>
+          <div class="card-header"><h2><i class="fa-solid fa-cash-register text-primary me-2"></i>Registrar un pago recibido en ventanilla</h2>
+            <p class="card-sub">Úsalo cuando el cliente paga en el local (efectivo, transferencia o mostrando su Yape/Plin/Tunki). Queda confirmado al instante.</p></div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="cCliente">Cliente <span class="req">*</span></label>
+                <input class="form-control" list="dlClientes" id="cCliente" placeholder="Escribe nombre o documento" autocomplete="off" required>
+                <datalist id="dlClientes"></datalist>
+                <div class="invalid-feedback">Elige un cliente de la lista.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="cTramite">Qué paga <span class="req">*</span></label>
+                <select class="form-select" id="cTramite"><option value="">Elige primero el cliente</option></select>
+              </div>
+              <div class="col-12 d-none" id="cDescWrap">
+                <label class="form-label" for="cDesc">Descripción <span class="req">*</span></label>
+                <input class="form-control" id="cDesc" maxlength="200" placeholder="Ej.: comisión por giro, adelanto">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="cMonto">Monto <span class="req">*</span></label>
+                <div class="input-group"><span class="input-group-text">S/</span><input class="form-control" type="number" min="0.01" step="0.01" id="cMonto" required></div>
+                <div class="form-text" id="cMax"></div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="cMetodo">Método <span class="req">*</span></label>
+                <select class="form-select" id="cMetodo"><option>EFECTIVO</option><option>YAPE</option><option>PLIN</option><option>TUNKI</option><option>TRANSFERENCIA</option></select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="cNumero">N° de operación <span class="req d-none" id="cNumReq">*</span></label>
+                <input class="form-control" id="cNumero" maxlength="30" placeholder="Opcional en efectivo">
+              </div>
+            </div>
+            <div class="d-flex gap-2 mt-3">
+              <button class="btn btn-primary" type="submit" id="cGuardar"><i class="fa-solid fa-check me-1"></i>Registrar cobro</button>
+              <button class="btn btn-light" type="reset">Limpiar</button>
+            </div>
+            <div class="mt-3" id="cMsg"></div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-5">
+        <div class="card"><div class="card-header"><h2>Lo que debe el cliente</h2></div>
+          <ul class="sg-feed" id="cDeudas"><li class="sg-empty">Elige un cliente para ver sus préstamos y empeños con saldo.</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== COTIZACIONES ====================== -->
+  <section data-pane="cotizaciones" hidden>
+    <div class="row g-3">
+      <div class="col-lg-5">
+        <form class="card" id="formCot" novalidate>
+          <div class="card-header"><h2><i class="fa-solid fa-file-invoice-dollar text-primary me-2"></i>Nueva cotización</h2>
+            <p class="card-sub">Calculada con las mismas tasas del sistema. Vigente 7 días.</p></div>
+          <div class="card-body">
+            <div class="mb-3">
+              <label class="form-label" for="qCliente">Cliente <span class="req">*</span></label>
+              <input class="form-control" list="dlClientes" id="qCliente" placeholder="Nombre o documento" autocomplete="off">
+            </div>
+            <div class="btn-group w-100 mb-3" role="group" aria-label="Tipo">
+              <input type="radio" class="btn-check" name="qTipo" id="qT1" value="PRESTAMO" checked><label class="btn btn-outline-primary" for="qT1">Préstamo</label>
+              <input type="radio" class="btn-check" name="qTipo" id="qT2" value="EMPENO"><label class="btn btn-outline-primary" for="qT2">Empeño</label>
+              <input type="radio" class="btn-check" name="qTipo" id="qT3" value="CAMBIO"><label class="btn btn-outline-primary" for="qT3">Cambio</label>
+            </div>
+            <div class="row g-3">
+              <div class="col-6"><label class="form-label" for="qMonto">Monto <span class="req">*</span></label><input class="form-control" type="number" min="1" step="0.01" id="qMonto" placeholder="5000"></div>
+              <div class="col-6" data-q="PRESTAMO"><label class="form-label" for="qPlazo">Plazo (meses)</label>
+                <select class="form-select" id="qPlazo"><option>3</option><option>6</option><option selected>12</option><option>18</option><option>24</option><option>36</option></select></div>
+              <div class="col-6" data-q="EMPENO" hidden><label class="form-label" for="qDias">Plazo (días)</label>
+                <select class="form-select" id="qDias"><option>15</option><option selected>30</option><option>60</option><option>90</option></select></div>
+              <div class="col-12" data-q="EMPENO" hidden><label class="form-label" for="qArt">Artículo</label><input class="form-control" id="qArt" placeholder="Ej.: laptop HP 14&quot;"></div>
+              <div class="col-12" data-q="EMPENO" hidden><label class="form-label" for="qValor">Valor estimado</label><input class="form-control" type="number" min="0" step="0.01" id="qValor"></div>
+              <div class="col-6" data-q="CAMBIO" hidden><label class="form-label" for="qTc">Tipo de cambio</label><select class="form-select" id="qTc"></select></div>
+            </div>
+            <button class="btn btn-primary w-100 mt-3" type="submit"><i class="fa-solid fa-calculator me-1"></i>Generar cotización</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="sg-toolbar">
+            <h2 class="h6 mb-0">Cotizaciones emitidas <span class="badge text-bg-light border" id="qTotal">—</span></h2>
+            <div class="d-flex gap-2">
+              <select class="form-select form-select-sm w-auto" id="qFiltro" aria-label="Estado"><option value="">Todas</option><option>VIGENTE</option><option>CONVERTIDA</option><option>VENCIDA</option></select>
+              <button class="btn btn-sm btn-outline-success" data-expq="xlsx"><i class="fa-solid fa-file-excel me-1"></i>Excel</button>
+            </div>
+          </div>
+          <div class="table-wrap" style="max-height:560px">
+            <table class="table table-hover align-middle">
+              <thead><tr><th>Número</th><th>Cliente</th><th>Tipo</th><th class="num">Monto</th><th class="num">Cuota / recibe</th><th>Estado</th><th class="text-end">Ver</th></tr></thead>
+              <tbody id="tablaCot"><tr class="empty-row"><td colspan="7">Cargando…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== BILLETERAS ====================== -->
+  <section data-pane="billeteras" hidden>
+    <div class="alert alert-light border d-flex gap-2">
+      <i class="fa-solid fa-circle-info text-primary mt-1"></i>
+      <div>Sube aquí la <b>imagen del QR de cobro</b> que genera la app de cada billetera de la empresa. Es la que verá el cliente en el portal
+        para pagar. Si no subes la imagen, el portal muestra un QR con el número y el monto como respaldo, y el cliente puede pagar al número.
+        Solo el administrador puede modificar estos datos.</div>
+    </div>
+    <div class="row g-3" id="gridBil"><div class="sg-empty">Cargando…</div></div>
+  </section>
+</div>
+
+<!-- Modal de constancia -->
+<div class="modal fade" id="modalConst" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title fs-6">Constancia adjunta por el cliente</h5><button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button></div>
+    <div class="modal-body text-center" id="constBody">Cargando…</div>
+  </div></div>
+</div>
+
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
+<script>
+(function () {
+  'use strict';
+  var S = SIGSF, $ = function (i) { return document.getElementById(i); }, esc = S.escapar;
+  S.embebido();
+  var pagos = [], clientes = [], cotizaciones = [], tipos = [], deudasCaja = [];
+  var usuario = null; try { usuario = JSON.parse(sessionStorage.getItem('sigsf_usuario') || 'null'); } catch (e) { }
+  var esAdmin = usuario && usuario.rol === 'ADMIN';
+
+  // ---------------- Pestañas (recuerda la última) ----------------
+  function mostrar(tab) {
+    document.querySelectorAll('#tabs [data-tab]').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-tab') === tab); });
+    document.querySelectorAll('[data-pane]').forEach(function (p) { p.hidden = p.getAttribute('data-pane') !== tab; });
+    try { sessionStorage.setItem('sigsf_tab_pagos', tab); } catch (e) { }
+    if (tab === 'cotizaciones') cargarCotizaciones();
+    if (tab === 'billeteras') cargarBilleteras();
+  }
+  document.querySelectorAll('#tabs [data-tab]').forEach(function (b) { b.addEventListener('click', function () { mostrar(b.getAttribute('data-tab')); }); });
+
+  // ---------------- Resumen e indicadores ----------------
+  async function cargarResumen() {
+    try {
+      var r = await API.get('/pagos/resumen');
+      $('kPend').textContent = S.num(r.porVerificar); $('kPendM').textContent = S.money(r.montoPorVerificar) + ' en espera';
+      $('kHoy').textContent = S.money(r.cobradoHoy); $('kHoyN').textContent = S.num(r.confirmadosHoy) + ' pagos confirmados';
+      $('kMes').textContent = S.money(r.cobradoMes);
+      $('kTot').textContent = S.num(r.total); $('kRech').textContent = S.num(r.rechazados) + ' rechazados';
+      $('tabPend').textContent = r.porVerificar;
+      var m = r.porMetodo.filter(function (x) { return Number(x.monto) > 0; });
+      S.graficoDona($('dona'), m.map(function (x) { return { label: x.metodo, valor: Number(x.monto), color: S.COLOR_METODO[x.metodo] }; }),
+        { centro: S.money(r.cobradoTotal).replace(/\.\d+$/, '') });
+      $('donaLeyenda').innerHTML = m.map(function (x) {
+        return '<span><b style="background:' + S.COLOR_METODO[x.metodo] + '"></b>' + esc(S.etiqueta(x.metodo)) + ' · ' + S.money(x.monto) + '</span>';
+      }).join('') || '<span class="text-muted">Sin cobros todavía.</span>';
+      S.graficoBarras($('barras'), r.porDia.map(function (d) { return { label: S.fecha(d.fecha).substring(0, 5), valor: Number(d.monto) }; }),
+        { alto: 160, formato: S.money });
+    } catch (e) { S.toast('No se pudo cargar el resumen: ' + e.message, 'err'); }
+  }
+
+  // ---------------- Por verificar ----------------
+  function tarjetaPendiente(p) {
+    return '<article class="pv" data-id="' + p.idPago + '">'
+      + '<div class="d-flex flex-wrap justify-content-between gap-2 align-items-start">'
+      + '<div><div class="d-flex align-items-center gap-2 mb-1">' + S.wallet(p.metodo) + '<span class="text-muted small">' + esc(p.codigo) + ' · ' + esc(S.fechaHora(p.fechaPago)) + '</span></div>'
+      + '<div class="fw-600">' + esc(p.cliente || '—') + ' <span class="text-muted fw-normal small">Doc. ' + esc(p.documento || '—') + '</span></div></div>'
+      + '<div class="text-end"><div class="monto">' + S.money(p.monto) + '</div><div class="small text-muted">' + esc(S.concepto(p.concepto)) + '</div></div></div>'
+      + '<dl><div><dt>N° de operación</dt><dd><span class="nop">' + esc(p.numeroOperacion || '—') + '</span></dd></div>'
+      + '<div><dt>Celular que pagó</dt><dd>' + esc(p.celularOrigen || '—') + '</dd></div>'
+      + '<div><dt>Referencia</dt><dd>' + esc(p.referencia || '—') + '</dd></div>'
+      + '<div><dt>Detalle</dt><dd>' + esc(p.descripcion || '—') + '</dd></div></dl>'
+      + '<div class="d-flex flex-wrap gap-2 mt-3">'
+      + '<button class="btn btn-sm btn-success" data-ok="' + p.idPago + '"><i class="fa-solid fa-check me-1"></i>Confirmar pago</button>'
+      + '<button class="btn btn-sm btn-outline-danger" data-no="' + p.idPago + '"><i class="fa-solid fa-xmark me-1"></i>Rechazar</button>'
+      + (p.tieneConstancia ? '<button class="btn btn-sm btn-light" data-const="' + p.idPago + '"><i class="fa-solid fa-image me-1"></i>Ver constancia</button>' : '<span class="small text-muted align-self-center">Sin captura adjunta</span>')
+      + '</div></article>';
+  }
+  async function cargarPagos() {
+    try {
+      pagos = await API.get('/pagos');
+      var pend = pagos.filter(function (p) { return p.estado === 'POR_VERIFICAR'; });
+      $('listaPend').innerHTML = pend.length ? pend.map(tarjetaPendiente).join('')
+        : '<div class="card"><div class="sg-empty"><i class="fa-solid fa-circle-check"></i>No hay pagos por verificar. Los nuevos pagos del portal aparecen aquí automáticamente.</div></div>';
+      pintarHistorial();
+    } catch (e) {
+      $('listaPend').innerHTML = '<div class="alert alert-danger">No se pudo cargar: ' + esc(e.message) + '</div>';
+    }
+  }
+  $('listaPend').addEventListener('click', async function (ev) {
+    var b = ev.target.closest('button'); if (!b) return;
+    if (b.dataset.ok) {
+      var p = pagos.filter(function (x) { return String(x.idPago) === b.dataset.ok; })[0];
+      var ok = await S.confirmar('¿Encontraste en ' + S.etiqueta(p.metodo) + ' el abono de ' + S.money(p.monto) + ' con el N° de operación ' + (p.numeroOperacion || '—') + '?',
+        { titulo: 'Confirmar pago ' + p.codigo, ok: 'Sí, confirmar', variante: 'success' });
+      if (!ok) return;
+      b.disabled = true;
+      try {
+        var r = await API.put('/pagos/' + p.idPago + '/confirmar', {});
+        S.toast('Pago ' + r.codigo + ' confirmado. Comprobante ' + r.numeroComprobante + '.', 'ok');
+        refrescar();
+      } catch (e) { S.toast(e.message, 'err'); b.disabled = false; }
+    } else if (b.dataset.no) {
+      var motivo = await S.pedirTexto({ titulo: 'Rechazar pago', etiqueta: 'Motivo (lo verá el cliente)', placeholder: 'Ej.: no se encontró el abono con ese número de operación', ok: 'Rechazar', variante: 'danger' });
+      if (!motivo) return;
+      try {
+        await API.put('/pagos/' + b.dataset.no + '/rechazar', { motivo: motivo });
+        S.toast('Pago rechazado.', 'ok'); refrescar();
+      } catch (e) { S.toast(e.message, 'err'); }
+    } else if (b.dataset.const) {
+      verConstancia(b.dataset.const);
+    }
+  });
+  async function verConstancia(id) {
+    var m = bootstrap.Modal.getOrCreateInstance($('modalConst'));
+    $('constBody').textContent = 'Cargando…'; m.show();
+    try {
+      var r = await API.get('/pagos/' + id + '/constancia');
+      $('constBody').innerHTML = '';
+      if (r.imagen && /^data:image\//.test(r.imagen)) {
+        var img = new Image(); img.src = r.imagen; img.alt = 'Constancia del pago'; img.className = 'img-fluid rounded border';
+        $('constBody').appendChild(img);
+      } else $('constBody').textContent = 'El cliente no adjuntó captura.';
+    } catch (e) { $('constBody').textContent = e.message; }
+  }
+
+  // ---------------- Historial ----------------
+  var pagina = 1, POR_PAG = 25;
+  function filtrados() {
+    var est = $('fEstado').value, met = $('fMetodo').value, d = $('fDesde').value, h = $('fHasta').value, q = $('fBuscar').value.trim().toLowerCase();
+    return pagos.filter(function (p) {
+      var f = String(p.fechaPago || '').substring(0, 10);
+      if (est && p.estado !== est) return false;
+      if (met && p.metodo !== met) return false;
+      if (d && f < d) return false;
+      if (h && f > h) return false;
+      if (q && [p.codigo, p.cliente, p.documento, p.numeroOperacion, p.referencia, p.descripcion].join(' ').toLowerCase().indexOf(q) === -1) return false;
+      return true;
+    });
+  }
+  function pintarHistorial() {
+    var l = filtrados(), tb = $('tablaHist');
+    var conf = l.filter(function (p) { return p.estado === 'CONFIRMADO'; }).reduce(function (a, p) { return a + Number(p.monto); }, 0);
+    $('hResumen').innerHTML = S.num(l.length) + ' pagos · confirmado <b>' + S.money(conf) + '</b>';
+    var paginas = Math.max(1, Math.ceil(l.length / POR_PAG)); if (pagina > paginas) pagina = paginas;
+    var ini = (pagina - 1) * POR_PAG, fin = Math.min(l.length, ini + POR_PAG);
+    $('hRango').textContent = l.length ? 'Mostrando ' + (ini + 1) + '–' + fin + ' de ' + S.num(l.length) : 'Sin resultados';
+    tb.innerHTML = l.length ? l.slice(ini, fin).map(function (p) {
+      return '<tr><td class="fw-600">' + esc(p.codigo) + '<span class="sub">' + esc(p.origen === 'CAJA' ? 'Caja' : 'Portal') + '</span></td>'
+        + '<td class="text-nowrap">' + esc(S.fechaHora(p.fechaPago)) + '</td>'
+        + '<td>' + esc(p.cliente || '—') + '<span class="sub">' + esc(p.documento || '') + '</span></td>'
+        + '<td>' + esc(S.concepto(p.concepto)) + (p.idOperacion ? '<span class="sub">Trámite N° ' + p.idOperacion + '</span>' : '') + '</td>'
+        + '<td>' + S.wallet(p.metodo) + '</td><td><code>' + esc(p.numeroOperacion || '—') + '</code></td>'
+        + '<td class="num fw-600">' + S.money(p.monto) + '</td><td>' + S.badge(p.estado)
+        + (p.observacion ? '<span class="sub" title="' + esc(p.observacion) + '">' + esc(p.observacion.substring(0, 34)) + '</span>' : '') + '</td>'
+        + '<td class="text-end text-nowrap">' + (p.estado === 'CONFIRMADO'
+          ? '<button class="btn btn-sm btn-light" data-doc="' + p.idPago + '" title="Ver comprobante"><i class="fa-solid fa-receipt me-1"></i>' + esc(p.numeroComprobante) + '</button>'
+          : '') + (p.tieneConstancia ? ' <button class="btn btn-sm btn-light btn-icon" data-const="' + p.idPago + '" title="Ver constancia"><i class="fa-solid fa-image"></i></button>' : '') + '</td></tr>';
+    }).join('') : '<tr class="empty-row"><td colspan="9">No hay pagos con esos filtros.</td></tr>';
+    var ul = $('hPag'), h = '';
+    for (var i = Math.max(1, pagina - 2); i <= Math.min(paginas, Math.max(1, pagina - 2) + 4); i++) {
+      h += '<li class="page-item' + (i === pagina ? ' active' : '') + '"><button class="page-link" data-pg="' + i + '">' + i + '</button></li>';
+    }
+    ul.innerHTML = '<li class="page-item' + (pagina <= 1 ? ' disabled' : '') + '"><button class="page-link" data-pg="' + (pagina - 1) + '" aria-label="Anterior">‹</button></li>' + h
+      + '<li class="page-item' + (pagina >= paginas ? ' disabled' : '') + '"><button class="page-link" data-pg="' + (pagina + 1) + '" aria-label="Siguiente">›</button></li>';
+  }
+  $('hPag').addEventListener('click', function (e) { var b = e.target.closest('[data-pg]'); if (!b) return; pagina = parseInt(b.dataset.pg, 10) || 1; pintarHistorial(); });
+  ['fEstado', 'fMetodo', 'fDesde', 'fHasta'].forEach(function (id) { $(id).addEventListener('change', function () { pagina = 1; pintarHistorial(); }); });
+  $('fBuscar').addEventListener('input', S.debounce(function () { pagina = 1; pintarHistorial(); }));
+  $('tablaHist').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.doc) S.abrirDocumento('documento.html?tipo=pago&id=' + b.dataset.doc);
+    if (b.dataset.const) verConstancia(b.dataset.const);
+  });
+  document.querySelectorAll('[data-exp]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      API.descargar('/pagos/exportar?formato=' + b.dataset.exp).then(function () { S.toast('Descarga lista.', 'ok'); }).catch(function (e) { S.toast(e.message, 'err'); });
+    });
+  });
+  $('btnImprimir').addEventListener('click', function () {
+    var q = new URLSearchParams({ tipo: 'reporte-pagos', estado: $('fEstado').value, metodo: $('fMetodo').value, desde: $('fDesde').value, hasta: $('fHasta').value });
+    S.abrirDocumento('documento.html?' + q.toString());
+  });
+
+  // ---------------- Clientes (para caja y cotizaciones) ----------------
+  function textoCliente(c) { return ((c.nombres || '') + ' ' + (c.apellidos || '')).trim() + ' · ' + (c.documento || ''); }
+  async function cargarClientes() {
+    try {
+      clientes = await API.get('/clientes');
+      $('dlClientes').innerHTML = clientes.map(function (c) { return '<option value="' + esc(textoCliente(c)) + '">'; }).join('');
+    } catch (e) { /* sin permiso o sin datos */ }
+  }
+  function clienteDe(texto) {
+    return clientes.filter(function (c) { return textoCliente(c) === texto.trim(); })[0]
+      || clientes.filter(function (c) { return c.documento && texto.trim() === c.documento; })[0];
+  }
+
+  // ---------------- Caja ----------------
+  var clienteCaja = null;
+  async function alElegirCliente(forzar) {
+    var c = clienteDe($('cCliente').value), sel = $('cTramite');
+    $('cCliente').classList.toggle('is-invalid', !!$('cCliente').value && !c);
+    // El evento change se repite al salir del campo: si el cliente no cambió, no se recalcula (no pisa el monto escrito).
+    if (forzar !== true && c && clienteCaja === c.idCliente) return;
+    clienteCaja = c ? c.idCliente : null;
+    if (!c) { sel.innerHTML = '<option value="">Elige primero el cliente</option>'; $('cDeudas').innerHTML = '<li class="sg-empty">Elige un cliente para ver sus préstamos y empeños con saldo.</li>'; return; }
+    try {
+      deudasCaja = await API.get('/pagos/pagables/' + c.idCliente);
+      sel.innerHTML = deudasCaja.map(function (d, i) { return '<option value="' + i + '">' + esc(d.titulo) + '</option>'; }).join('') + '<option value="OTRO">Otro pago (comisión, adelanto…)</option>';
+      $('cDeudas').innerHTML = deudasCaja.length ? deudasCaja.map(function (d) {
+        return '<li><div class="who"><b>' + esc(d.titulo) + '</b><span>' + esc(d.detalle) + '</span></div><span class="amt">' + S.money(d.montoMaximo) + '</span></li>';
+      }).join('') : '<li class="sg-empty"><i class="fa-solid fa-circle-check"></i>Este cliente no tiene saldos pendientes.</li>';
+      alElegirTramite();
+    } catch (e) { S.toast(e.message, 'err'); }
+  }
+  function alElegirTramite() {
+    var v = $('cTramite').value, d = deudasCaja[parseInt(v, 10)];
+    $('cDescWrap').classList.toggle('d-none', v !== 'OTRO');
+    if (d) { $('cMonto').value = Number(d.montoSugerido).toFixed(2); $('cMax').textContent = 'Máximo ' + S.money(d.montoMaximo); }
+    else { $('cMax').textContent = ''; }
+  }
+  $('cCliente').addEventListener('change', function () { alElegirCliente(false); });
+  $('cTramite').addEventListener('change', alElegirTramite);
+  $('cMetodo').addEventListener('change', function () {
+    var w = ['YAPE', 'PLIN', 'TUNKI'].indexOf(this.value) !== -1;
+    $('cNumReq').classList.toggle('d-none', !w);
+    $('cNumero').placeholder = w ? 'El que muestra la app del cliente' : 'Opcional';
+  });
+  $('formCaja').addEventListener('reset', function () { setTimeout(function () { $('cMsg').innerHTML = ''; clienteCaja = null; alElegirCliente(true); }, 0); });
+  $('formCaja').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    var c = clienteDe($('cCliente').value);
+    if (!c) { $('cCliente').classList.add('is-invalid'); $('cCliente').focus(); return; }
+    var v = $('cTramite').value, d = deudasCaja[parseInt(v, 10)];
+    var datos = { idCliente: c.idCliente, monto: parseFloat($('cMonto').value), metodo: $('cMetodo').value, numeroOperacion: $('cNumero').value.trim() };
+    if (d) { datos.idOperacion = d.idOperacion; datos.concepto = d.concepto; }
+    else { datos.concepto = 'OTRO'; datos.descripcion = $('cDesc').value.trim(); }
+    $('cGuardar').disabled = true;
+    try {
+      var p = await API.post('/pagos', datos);
+      $('cMsg').innerHTML = '<div class="alert alert-success d-flex justify-content-between align-items-center mb-0"><span><i class="fa-solid fa-circle-check me-1"></i>Cobro registrado: '
+        + esc(p.codigo) + ' por ' + S.money(p.monto) + '.</span><button type="button" class="btn btn-sm btn-success" id="cVer">Imprimir comprobante</button></div>';
+      $('cVer').addEventListener('click', function () { S.abrirDocumento('documento.html?tipo=pago&id=' + p.idPago); });
+      S.toast('Cobro registrado.', 'ok');
+      $('cNumero').value = ''; $('cDesc').value = '';
+      alElegirCliente(true); refrescar();
+    } catch (e) { $('cMsg').innerHTML = '<div class="alert alert-danger mb-0">' + esc(e.message) + '</div>'; }
+    $('cGuardar').disabled = false;
+  });
+
+  // ---------------- Cotizaciones ----------------
+  function tipoCot() { return document.querySelector('input[name="qTipo"]:checked').value; }
+  document.querySelectorAll('input[name="qTipo"]').forEach(function (r) {
+    r.addEventListener('change', function () { document.querySelectorAll('[data-q]').forEach(function (x) { x.hidden = x.dataset.q !== tipoCot(); }); });
+  });
+  async function cargarTipos() {
+    try {
+      tipos = await API.get('/tipos-cambio');
+      $('qTc').innerHTML = tipos.filter(function (t) { return t.estado !== 'INACTIVO'; }).map(function (t) {
+        return '<option value="' + t.idTipoCambio + '">' + esc(t.monedaOrigen + ' → ' + t.monedaDestino + ' (' + t.venta + ')') + '</option>';
+      }).join('');
+    } catch (e) { }
+  }
+  async function cargarCotizaciones() {
+    try { cotizaciones = await API.get('/cotizaciones'); pintarCotizaciones(); }
+    catch (e) { $('tablaCot').innerHTML = '<tr class="empty-row"><td colspan="7" class="text-danger">' + esc(e.message) + '</td></tr>'; }
+  }
+  function pintarCotizaciones() {
+    var f = $('qFiltro').value, l = cotizaciones.filter(function (q) { return !f || q.estado === f; });
+    $('qTotal').textContent = S.num(l.length);
+    $('tablaCot').innerHTML = l.length ? l.slice(0, 200).map(function (q) {
+      var extra = q.tipo === 'PRESTAMO' ? S.money(q.cuota) + '<span class="sub">' + q.plazo + ' meses</span>'
+        : q.tipo === 'CAMBIO' ? S.money(q.montoRecibir, q.monedaRecibir) : S.money(q.totalPagar) + '<span class="sub">' + q.plazo + ' días</span>';
+      return '<tr><td class="fw-600 text-nowrap">' + esc(q.numero) + '<span class="sub">' + esc(S.fecha(q.fechaEmision)) + '</span></td><td>' + esc(q.cliente || '—')
+        + '<span class="sub">' + esc(q.documento || '') + '</span></td><td>' + esc(S.etiqueta(q.tipo)) + '</td><td class="num">' + S.money(q.monto, q.moneda) + '</td>'
+        + '<td class="num">' + extra + '</td><td>' + S.badge(q.estado) + '</td>'
+        + '<td class="text-end"><button class="btn btn-sm btn-light btn-icon" data-cot="' + q.idCotizacion + '" title="Ver e imprimir"><i class="fa-solid fa-print"></i></button></td></tr>';
+    }).join('') : '<tr class="empty-row"><td colspan="7">Aún no hay cotizaciones.</td></tr>';
+  }
+  $('qFiltro').addEventListener('change', pintarCotizaciones);
+  $('tablaCot').addEventListener('click', function (e) { var b = e.target.closest('[data-cot]'); if (b) S.abrirDocumento('documento.html?tipo=cotizacion&id=' + b.dataset.cot); });
+  document.querySelector('[data-expq]').addEventListener('click', function () { API.descargar('/cotizaciones/exportar?formato=xlsx').catch(function (e) { S.toast(e.message, 'err'); }); });
+  $('formCot').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    var c = clienteDe($('qCliente').value);
+    if (!c) { S.toast('Elige un cliente de la lista.', 'err'); $('qCliente').focus(); return; }
+    var t = tipoCot(), datos = { idCliente: c.idCliente, tipo: t, monto: parseFloat($('qMonto').value) };
+    if (t === 'PRESTAMO') datos.plazo = parseInt($('qPlazo').value, 10);
+    if (t === 'EMPENO') { datos.plazo = parseInt($('qDias').value, 10); datos.descripcion = $('qArt').value; datos.valorEstimado = parseFloat($('qValor').value) || null; }
+    if (t === 'CAMBIO') datos.idTipoCambio = parseInt($('qTc').value, 10);
+    try {
+      var q = await API.post('/cotizaciones', datos);
+      S.toast('Cotización ' + q.numero + ' generada.', 'ok');
+      S.abrirDocumento('documento.html?tipo=cotizacion&id=' + q.idCotizacion);
+      cargarCotizaciones();
+    } catch (e) { S.toast(e.message, 'err'); }
+  });
+
+  // ---------------- Billeteras ----------------
+  var COLOR = { YAPE: 'var(--sg-yape)', PLIN: 'var(--sg-plin)', TUNKI: 'var(--sg-tunki)' };
+  async function cargarBilleteras() {
+    try {
+      var lista = await API.get('/billeteras');
+      $('gridBil').innerHTML = lista.map(function (b) {
+        var dis = esAdmin ? '' : ' disabled';
+        return '<div class="col-lg-4"><form class="card h-100" data-bil="' + b.idBilletera + '">'
+          + '<div class="bil-head" style="background:' + COLOR[b.codigo] + '"><span class="fw-600">' + esc(b.nombre) + '</span>'
+          + '<div class="form-check form-switch m-0"><input class="form-check-input" type="checkbox" role="switch" name="activo" id="act' + b.idBilletera + '"' + (b.activo ? ' checked' : '') + dis + '>'
+          + '<label class="form-check-label small" for="act' + b.idBilletera + '">Activa</label></div></div>'
+          + '<div class="card-body">'
+          + '<div class="d-flex gap-3 mb-3"><div class="qr-prev" data-prev>' + (b.tieneQr ? '<img alt="QR de ' + esc(b.nombre) + '" src="' + esc(b.qrImagen) + '">' : '<span class="small text-muted text-center px-2">Sin QR subido</span>') + '</div>'
+          + '<div class="d-flex flex-column gap-2 justify-content-center">'
+          + '<label class="btn btn-sm btn-outline-primary mb-0' + (esAdmin ? '' : ' disabled') + '"><i class="fa-solid fa-upload me-1"></i>Subir QR<input type="file" accept="image/png,image/jpeg,image/webp" hidden data-file' + dis + '></label>'
+          + '<button type="button" class="btn btn-sm btn-light" data-quitar' + dis + '>Quitar QR</button></div></div>'
+          + '<div class="mb-2"><label class="form-label">Celular</label><input class="form-control" name="numeroCelular" maxlength="9" inputmode="numeric" value="' + esc(b.numeroCelular || '') + '"' + dis + '></div>'
+          + '<div class="mb-2"><label class="form-label">Titular que verá el cliente</label><input class="form-control" name="titular" maxlength="120" value="' + esc(b.titular || '') + '"' + dis + '></div>'
+          + '<div class="mb-3"><label class="form-label">Indicaciones</label><textarea class="form-control" name="instrucciones" rows="2" maxlength="300"' + dis + '>' + esc(b.instrucciones || '') + '</textarea></div>'
+          + (esAdmin ? '<button class="btn btn-primary w-100" type="submit"><i class="fa-solid fa-floppy-disk me-1"></i>Guardar ' + esc(b.nombre) + '</button>'
+            : '<div class="small text-muted">Solo el administrador puede modificar la billetera.</div>')
+          + '<div class="small text-muted mt-2">Actualizado: ' + esc(S.fechaHora(b.fechaActualizacion)) + '</div>'
+          + '</div></form></div>';
+      }).join('');
+    } catch (e) { $('gridBil').innerHTML = '<div class="alert alert-danger">' + esc(e.message) + '</div>'; }
+  }
+  var qrNuevo = {};
+  $('gridBil').addEventListener('change', async function (e) {
+    if (!e.target.matches('[data-file]')) return;
+    var form = e.target.closest('form'), id = form.dataset.bil, f = e.target.files[0];
+    if (!f) return;
+    try {
+      qrNuevo[id] = await S.imagenADataUrl(f, 700, 0.92, 'image/png');
+      form.querySelector('[data-prev]').innerHTML = '<img alt="Vista previa del QR" src="' + qrNuevo[id] + '">';
+      S.toast('QR listo. Presiona Guardar para publicarlo.', 'info');
+    } catch (err) { S.toast(err.message, 'err'); }
+  });
+  $('gridBil').addEventListener('click', function (e) {
+    if (!e.target.closest('[data-quitar]')) return;
+    var form = e.target.closest('form'); qrNuevo[form.dataset.bil] = '';
+    form.querySelector('[data-prev]').innerHTML = '<span class="small text-muted">Se quitará al guardar</span>';
+  });
+  $('gridBil').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var form = e.target, id = form.dataset.bil;
+    var datos = { numeroCelular: form.numeroCelular.value.trim(), titular: form.titular.value.trim(), instrucciones: form.instrucciones.value.trim(), activo: form.activo.checked };
+    if (id in qrNuevo) datos.qrImagen = qrNuevo[id];
+    try { await API.put('/billeteras/' + id, datos); delete qrNuevo[id]; S.toast('Billetera actualizada.', 'ok'); cargarBilleteras(); }
+    catch (err) { S.toast(err.message, 'err'); }
+  });
+
+  // ---------------- Inicio ----------------
+  function refrescar() { cargarResumen(); cargarPagos(); }
+  refrescar(); cargarClientes(); cargarTipos();
+  var guardada = null; try { guardada = sessionStorage.getItem('sigsf_tab_pagos'); } catch (e) { }
+  if (location.hash && document.querySelector('[data-tab="' + location.hash.slice(1) + '"]')) guardada = location.hash.slice(1);
+  if (guardada) mostrar(guardada);
+  setInterval(function () { if (!document.hidden) refrescar(); }, 15000);
+})();
+</script>
+</body>
+</html>

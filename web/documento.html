@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Documento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
+</head>
+<body>
+<div class="doc-bar">
+  <span class="small"><i class="fa-solid fa-file-lines me-1"></i>Vista para imprimir o guardar como PDF</span>
+  <div class="d-flex gap-2">
+    <span id="acciones"></span>
+    <button class="btn btn-sm btn-light" id="btnImprimir"><i class="fa-solid fa-print me-1"></i>Imprimir / PDF</button>
+    <button class="btn btn-sm btn-outline-light" id="btnCerrar">Cerrar</button>
+  </div>
+</div>
+<main class="doc-sheet" id="hoja"><div class="text-center text-muted py-5"><div class="spinner-border spinner-border-sm me-2"></div>Preparando documento…</div></main>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
+<script src="sigsf-documentos.js"></script>
+</body>
+</html>

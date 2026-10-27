@@ -19,7 +19,9 @@ rm -rf build/ci && mkdir -p build/ci/classes build/ci/test
 
 echo "== Compilando $(find src -name '*.java' | wc -l) clases..."
 javac -encoding UTF-8 --release 17 -cp "$CP" -d build/ci/classes $(find src -name '*.java')
-cp src/logback.xml build/ci/classes/
+# Recursos que no son .java (logback.xml, semilla_100.tsv...) al classpath, como hace NetBeans/Ant.
+(cd src && find . -type f ! -name '*.java' | while read -r f; do
+  mkdir -p "../build/ci/classes/$(dirname "$f")" && cp "$f" "../build/ci/classes/$f"; done)
 
 echo "== Compilando $(find test -name '*.java' | wc -l) clases de prueba..."
 javac -encoding UTF-8 --release 17 -cp "$CP:build/ci/classes:$JUNIT" -d build/ci/test $(find test -name '*.java')
