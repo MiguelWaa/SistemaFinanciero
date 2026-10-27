@@ -18,6 +18,7 @@ QUE NECESITAS INSTALADO
   4) Git (Git for Windows)  -> desde la v5.0 el proyecto es un
      repositorio Git y el sistema muestra su version con Git.
 
+
 ----------------------------------------------------------------
 PASO 1 · OBTENER EL PROYECTO
 ----------------------------------------------------------------
