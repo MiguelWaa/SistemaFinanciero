@@ -7,6 +7,7 @@
   Manual de usuario completo: docs/manual/SIGSF_Manual_Usuario_v2.pdf
 ================================================================
 
+
 QUE NECESITAS INSTALADO
 -----------------------
   1) JDK 17 o superior
