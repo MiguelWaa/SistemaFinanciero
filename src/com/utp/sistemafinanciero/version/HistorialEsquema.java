@@ -27,6 +27,8 @@ public final class HistorialEsquema {
                     "db/seguridad.sql", "auditoria"},
             {"5.0.0", "Control de versiones: historial de versiones del esquema (version_esquema)",
                     "db/version_esquema.sql", "version_esquema"},
+            {"5.2.0", "Pagos con QR (Yape, Plin, Tunki), billeteras y cotizaciones",
+                    "db/pagos_qr.sql", "pago"},
     };
 
     private HistorialEsquema() {

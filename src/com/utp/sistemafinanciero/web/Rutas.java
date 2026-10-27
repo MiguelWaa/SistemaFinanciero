@@ -35,7 +35,8 @@ public final class Rutas {
                 new ProduccionController(c.produccion),
                 new DireccionController(c.expedientes),
                 new SolicitudController(c.solicitudes),
-                new PortalController(c.portal),
+                new PortalController(c.portal, c.pagos, c.cotizaciones),
+                new PagoController(c.pagos, c.cotizaciones),
                 new RespaldoController(c.respaldos),
                 new VersionController(c.versiones),
                 // Importación / exportación de ficheros de todas las áreas (CSV, Excel, JSON)

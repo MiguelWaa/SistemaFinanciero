@@ -68,4 +68,10 @@ public class EmpenoDaoJdbc implements EmpenoDao {
     public int actualizarEstadoPorOperacion(int idOperacion, String estado) {
         return Db.update("UPDATE empeno SET estado = ? WHERE id_operacion = ?", estado, idOperacion);
     }
+
+    @Override
+    public Empeno buscarPorOperacion(int idOperacion) {
+        return Db.queryOne("SELECT " + COLS + " FROM empeno WHERE id_operacion = ? ORDER BY id_empeno DESC LIMIT 1",
+                MAPPER, idOperacion);
+    }
 }

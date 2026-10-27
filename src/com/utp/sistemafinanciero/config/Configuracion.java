@@ -102,6 +102,24 @@ public final class Configuracion {
     /** Máximo de filas por archivo importado (protección contra archivos enormes). */
     public static int importacionMaxFilas() { return getInt("importacion.max.filas", 2000); }
 
+    // --- Pagos con billeteras digitales (Yape, Plin, Tunki) ---
+    /**
+     * true = el pago que registra el cliente se confirma al instante (demostraciones).
+     * false (recomendado) = queda POR_VERIFICAR hasta que caja lo compare con su billetera.
+     */
+    public static boolean pagosConfirmacionAutomatica() {
+        return "true".equalsIgnoreCase(get("pagos.confirmacion.automatica", "false"));
+    }
+
+    /** Monto máximo (S/) que se acepta en un solo pago. */
+    public static java.math.BigDecimal pagosMontoMaximo() {
+        try {
+            return new java.math.BigDecimal(get("pagos.monto.maximo", "10000"));
+        } catch (NumberFormatException e) {
+            return new java.math.BigDecimal("10000");
+        }
+    }
+
     // --- Respaldos ---
     public static String backupDir()      { return get("backup.dir", "respaldos"); }
     /** Ruta de pg_dump; "auto" = buscar en el PATH y en las rutas típicas de Windows. */
