@@ -38,6 +38,7 @@
    - Edita el archivo  db.properties  (en la raiz del proyecto) con tu
      host, puerto, usuario y contrasena de PostgreSQL.
 
+
    Valores por defecto:
      db.host=localhost
      db.port=5432
