@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="sigsf-ui.css">
+<link rel="stylesheet" href="sigsf-anim.css">
 </head>
 <body>
 
@@ -36,8 +37,16 @@
 
   <!-- ====================== INICIO ====================== -->
   <section data-pane="inicio">
-    <h1 class="h4 mb-1">Hola, <span id="saludo">cliente</span></h1>
-    <p class="text-muted mb-3">Aquí ves lo que debes, lo que ya pagaste y el estado de tus solicitudes.</p>
+    <div class="sg-hero mb-3 d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div>
+        <h1 class="h3 mb-1">Hola, <span id="saludo">cliente</span></h1>
+        <p class="small-muted mb-0">Aquí ves lo que debes, lo que ya pagaste y el estado de tus solicitudes.</p>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-primary" data-ir="pagar"><i class="fa-solid fa-qrcode me-1"></i>Pagar con QR</button>
+        <button class="btn btn-light" data-ir="cotizar"><i class="fa-solid fa-calculator me-1"></i>Cotizar</button>
+      </div>
+    </div>
     <div class="sg-kpis">
       <div class="sg-kpi gold"><div class="l">Deuda vigente</div><div class="v" id="rDeuda">—</div><div class="d">préstamos y empeños activos</div></div>
       <div class="sg-kpi warn"><div class="l">Pagos por verificar</div><div class="v" id="rVerif">—</div><div class="d">caja los revisa en minutos</div></div>
@@ -272,6 +281,7 @@
 <script src="vendor/qrcode/qrcode.js"></script>
 <script src="api.js"></script>
 <script src="sigsf-ui.js"></script>
+<script src="sigsf-anim.js"></script>
 <script>
 (function () {
   'use strict';
@@ -471,7 +481,7 @@
     try {
       var r = await API.post(BASE + '/pagos', datos);
       var ok = r.estado === 'CONFIRMADO';
-      $('pagoListo').innerHTML = '<div class="display-6 mb-2 ' + (ok ? 'text-success' : 'text-warning') + '"><i class="fa-solid ' + (ok ? 'fa-circle-check' : 'fa-hourglass-half') + '"></i></div>'
+      $('pagoListo').innerHTML = (ok && S.checkAnimado ? S.checkAnimado() : '<div class="mb-2"><i class="fa-solid fa-hourglass-half sg-reloj"></i></div>')
         + '<h2 class="h4">' + (ok ? 'Pago confirmado' : 'Pago registrado') + '</h2>'
         + '<p class="text-muted mb-3">' + (ok ? 'Tu pago ya se aplicó. Puedes descargar tu comprobante.'
           : 'Caja verificará tu pago con ' + esc(S.etiqueta(r.metodo)) + ' y lo verás confirmado en “Mis pagos”. Te recomendamos guardar tu constancia.') + '</p>'
@@ -484,6 +494,7 @@
       $('otroPago').addEventListener('click', function () { reiniciarPago(); });
       paso(4);
       S.toast(ok ? 'Pago confirmado.' : 'Pago registrado. Queda por verificar.', 'ok');
+      if (S.celebrar) S.celebrar();
       cargarTodo();
     } catch (e) { errorPaso('p3Err', e.message); }
     btn.disabled = false;
