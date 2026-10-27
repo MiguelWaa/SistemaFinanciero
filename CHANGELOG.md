@@ -10,6 +10,8 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.2.0] - 2026-10-26 · Pagos con QR, cotizaciones e interfaz Bootstrap 5
+
 ### Agregado
 - **Pagos con Yape, Plin y Tunki desde el Portal del Cliente**: elegir trámite, monto y billetera; QR de cobro con monto, número, titular y referencia; registro del número de operación y de la captura de la constancia (`PagoService`, `PortalController`).
 - **Módulo interno Pagos y cobranzas** (`web/pagos.html`): bandeja *Por verificar* con confirmar/rechazar, historial con filtros, cobro en caja, cotizaciones y configuración de billeteras con subida del QR.
