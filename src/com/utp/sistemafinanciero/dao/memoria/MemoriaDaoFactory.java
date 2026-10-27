@@ -28,6 +28,9 @@ public class MemoriaDaoFactory implements DaoFactory {
     private final ExpedienteAprobacionDao expedientes = new ExpedienteAprobacionDaoMemoria();
     private final AuditoriaDao auditoria = new AuditoriaDaoMemoria();
     private final VersionEsquemaDao versionesEsquema = new VersionEsquemaDaoMemoria();
+    private final PagoDao pagos = new PagoDaoMemoria(this);
+    private final BilleteraDao billeteras = new BilleteraDaoMemoria();
+    private final CotizacionDao cotizaciones = new CotizacionDaoMemoria(this);
 
     @Override public String nombre() { return "Memoria (demostración)"; }
     @Override public RolDao roles() { return roles; }
@@ -50,4 +53,7 @@ public class MemoriaDaoFactory implements DaoFactory {
     @Override public ExpedienteAprobacionDao expedientes() { return expedientes; }
     @Override public AuditoriaDao auditoria() { return auditoria; }
     @Override public VersionEsquemaDao versionesEsquema() { return versionesEsquema; }
+    @Override public PagoDao pagos() { return pagos; }
+    @Override public BilleteraDao billeteras() { return billeteras; }
+    @Override public CotizacionDao cotizaciones() { return cotizaciones; }
 }

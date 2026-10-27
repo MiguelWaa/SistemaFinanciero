@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centro de ayuda · SIGSF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="sigsf.css">
+    <style>
+        /* Tema v5.2: mismos colores y tipografía que el resto del sistema */
+        :root { --primary-blue:#0f2340; --secondary-blue:#1a3358; --accent-blue:#0b6e79; --accent-blue-dark:#08555e; --text-main:#1a2433; --text-muted:#5b6779; --border-color:#dde3ea; }
+        * { font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
+        .chat-head { background: #0f2340 !important; }
+        .msg.user .bubble { background: #0b6e79 !important; }
+        .chip { background: #e3f2f3 !important; color: #08555e !important; border-color: #a9d4d8 !important; }
+        /* Dentro del panel principal no se repite la barra lateral ni el encabezado */
+        body.sigsf-embed .sidebar, body.sigsf-embed .top-navbar, body.sigsf-embed .main-footer { display: none !important; }
+        body.sigsf-embed .main-content { margin-left: 0 !important; width: 100% !important; }
+    </style>
+    <script>document.addEventListener('DOMContentLoaded', function () { if (window.top !== window.self) document.body.classList.add('sigsf-embed'); });</script>
     <script src="sigsf-voice.js"></script>
     <style>
         .help-layout { display: grid; grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: start; }
@@ -112,7 +125,7 @@
                         <div class="chips" id="chips">
                             <span class="chip" onclick="quick(this)">¿Cómo creo un usuario?</span>
                             <span class="chip" onclick="quick(this)">Generar un reporte</span>
-                            <span class="chip" onclick="quick(this)">Activar 2FA</span>
+                            <span class="chip" onclick="quick(this)">¿Cómo verifico un pago con Yape?</span>
                             <span class="chip" onclick="quick(this)">¿Qué módulos hay?</span>
                         </div>
                         <div class="chat-input">
@@ -125,10 +138,12 @@
                     <div>
                         <div class="panel">
                             <div class="panel-head"><h3>Preguntas frecuentes</h3></div>
-                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo cambio mi contraseña? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">Ve a <b>Configuración → Perfil</b> y actualiza tus datos. Por seguridad se te pedirá tu contraseña actual.</div></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo confirmo un pago con Yape, Plin o Tunki? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">En <b>Pagos y cobranzas</b>, pestaña <b>Por verificar</b>, compara el monto y el número de operación con la app de la empresa y pulsa <b>Confirmar pago</b>.</div></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Dónde subo el QR de cobro de la empresa? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">En <b>Pagos y cobranzas → Billeteras y QR</b> (solo administrador): número, titular, indicaciones e imagen del QR de cada billetera.</div></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo cambio mi contraseña? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">Pídeselo al administrador: la cambia desde <b>Usuarios</b>, editando tu cuenta.</div></div></div>
                             <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo asigno roles a un usuario? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">En <b>Usuarios</b>, crea o edita una cuenta y elige el rol. Los permisos de cada rol se ven en <b>Seguridad</b>.</div></div></div>
-                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Puedo exportar los reportes? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">Sí. En <b>Reportes</b> usa <b>Exportar</b> o descarga cada reporte en PDF o XLSX desde la tabla.</div></div></div>
-                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo activo los respaldos automáticos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">Entra a <b>Configuración → Sistema</b> y activa <b>Respaldos automáticos</b> (copia diaria a las 03:00).</div></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Puedo exportar los reportes? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">Sí. En <b>Reportes</b> generas el reporte de pagos imprimible y descargas cada módulo en Excel, CSV o JSON.</div></div></div>
+                            <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo activo los respaldos automáticos? <i class="fa-solid fa-chevron-down"></i></div><div class="faq-a"><div class="faq-a-inner">Ya vienen activos: el servidor hace un respaldo cada 24 horas. En <b>Respaldos y auditoría</b> puedes generar uno al instante.</div></div></div>
                         </div>
                         <div class="panel">
                             <div class="panel-head"><h3>Contactar soporte</h3></div>
@@ -192,14 +207,16 @@
 
         /* ---------- Base de conocimiento ---------- */
         var KB = [
-            { k:['usuario','crear usuario','nuevo usuario','registrar','cuenta','alta'], a:'Para crear un usuario ve a <a href="usuarios.html">Usuarios</a> y pulsa <b>“Nuevo usuario”</b>. Completa nombre, correo, rol y área, y guarda. Quedará como <b>Pendiente</b> hasta su primer acceso.' },
+            { k:['yape','plin','tunki','qr','verific','pago','pagos','cobr','billetera'], a:'Los pagos que el cliente hace con <b>Yape, Plin o Tunki</b> desde el portal llegan a <a href="pagos.html">Pagos y cobranzas</a> como <b>Por verificar</b>. Busca en la app de la empresa el abono con el mismo monto y número de operación y pulsa <b>Confirmar pago</b>: se descuenta el saldo y se emite el comprobante. Si no lo encuentras, pulsa <b>Rechazar</b> e indica el motivo.' },
+            { k:['cotiza','cotización','cotizacion','proforma','cronograma'], a:'Las cotizaciones se generan en el portal del cliente o en <a href="pagos.html#cotizaciones">Pagos y cobranzas → Cotizaciones</a>. Usan las mismas tasas del sistema, incluyen cronograma y se imprimen o guardan en PDF.' },
+            { k:['usuario','crear usuario','nuevo usuario','registrar','cuenta','alta'], a:'Para crear un usuario ve a <a href="usuarios.html">Usuarios</a>, completa nombre, correo, rol y estado, y pulsa <b>Guardar</b>. Si dejas la contraseña vacía se asigna una por defecto.' },
             { k:['rol','permiso','permisos','acceso'], a:'Los roles son Administrador, Supervisor, Analista y Cajero. Se asignan al crear o editar un usuario, y puedes revisar qué hace cada rol en <a href="seguridad.html">Seguridad</a>.' },
-            { k:['reporte','reportes','informe','exportar','descargar','pdf','excel'], a:'En <a href="reportes.html">Reportes</a> encuentras indicadores por área. Usa <b>“Exportar”</b> para todo el panel o descarga cada reporte en <b>PDF o XLSX</b> desde la tabla.' },
-            { k:['2fa','doble factor','dos pasos','autenticaci','verificaci'], a:'Activa la verificación en dos pasos desde <a href="seguridad.html">Seguridad</a>, en Políticas de acceso. Añade una capa extra al iniciar sesión.' },
-            { k:['seguridad','bloqueo','intentos','sesion','sesión'], a:'En <a href="seguridad.html">Seguridad</a> controlas 2FA, bloqueo por intentos fallidos, cierre de sesión automático y el registro de actividad con accesos e IPs.' },
-            { k:['configur','ajuste','preferencia','idioma','moneda','empresa'], a:'En <a href="configuracion.html">Configuración</a> ajustas datos de la empresa, tu perfil, notificaciones y opciones del sistema.' },
-            { k:['respaldo','backup','copia','mantenimiento'], a:'Los respaldos se gestionan en <a href="configuracion.html">Configuración</a>, pestaña Sistema. Activa respaldos automáticos (03:00) o pulsa <b>“Respaldar ahora”</b>.' },
-            { k:['contrase','clave','password','olvid'], a:'Cambia tu contraseña en <a href="configuracion.html">Configuración → Perfil</a>. Si la olvidaste, usa “¿Olvidaste tu contraseña?” en el inicio de sesión.' },
+            { k:['reporte','reportes','informe','exportar','descargar','pdf','excel'], a:'En <a href="reportes.html">Reportes</a> generas el reporte de pagos imprimible (o en PDF desde el navegador) y descargas en Excel, CSV o JSON los pagos, cotizaciones, ventas, clientes, operaciones, préstamos, empeños y productos.' },
+            { k:['2fa','doble factor','dos pasos','autenticaci'], a:'El sistema protege el acceso con contraseñas cifradas (PBKDF2), sesión que vence por inactividad y bloqueo tras 5 intentos fallidos. La verificación en dos pasos aún no está disponible.' },
+            { k:['seguridad','bloqueo','intentos','sesion','sesión'], a:'En <a href="seguridad.html">Seguridad</a> ves los roles y la matriz de permisos que aplica el servidor. La bitácora de accesos e IPs está en <a href="respaldos.html">Respaldos y auditoría</a>.' },
+            { k:['configur','ajuste','preferencia','tipo de cambio'], a:'En <a href="configuracion.html">Configuración</a> mantienes los tipos de cambio que usan Operaciones y el portal. Los números y QR de Yape, Plin y Tunki se configuran en <a href="pagos.html#billeteras">Pagos → Billeteras y QR</a>.' },
+            { k:['respaldo','backup','copia','mantenimiento'], a:'En <a href="respaldos.html">Respaldos y auditoría</a> pulsa <b>Generar respaldo ahora</b>. El sistema además hace un respaldo automático cada 24 horas.' },
+            { k:['contrase','clave','password','olvid'], a:'El administrador cambia contraseñas desde <a href="usuarios.html">Usuarios</a> (editar usuario). Los clientes del portal entran con su documento.' },
             { k:['modulo','módulo','modulos','menu','menú','secciones','que hay','qué hay'], a:'El sistema tiene módulos de Marketing y Ventas, Logística, Almacén, Producción, Operaciones, Dirección, Gerencia y Clientes y Servicios Financieros. Ábrelos desde el menú lateral izquierdo.' },
             { k:['marketing','campaña','campana'], a:'El módulo <b>Marketing y Ventas</b> gestiona campañas, clientes potenciales, ventas y servicios. Ábrelo desde el menú lateral.' },
             { k:['venta','vender'], a:'El módulo <b>Ventas</b> registra y da seguimiento a las ventas. Ábrelo desde el menú lateral.' },

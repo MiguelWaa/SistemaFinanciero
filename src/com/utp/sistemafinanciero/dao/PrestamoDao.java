@@ -16,4 +16,12 @@ public interface PrestamoDao extends CrudDao<Prestamo> {
 
     /** Cambia el estado del registro asociado a una operación. */
     int actualizarEstadoPorOperacion(int idOperacion, String estado);
+
+    /** Préstamo asociado a una operación; null si no hay. */
+    default Prestamo buscarPorOperacion(int idOperacion) {
+        for (Prestamo p : listar()) {
+            if (p.getIdOperacion() != null && p.getIdOperacion() == idOperacion) return p;
+        }
+        return null;
+    }
 }

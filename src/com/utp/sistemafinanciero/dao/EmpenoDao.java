@@ -13,4 +13,12 @@ import com.utp.sistemafinanciero.model.operaciones.Empeno;
 public interface EmpenoDao extends CrudDao<Empeno> {
     /** Cambia el estado del registro asociado a una operación. */
     int actualizarEstadoPorOperacion(int idOperacion, String estado);
+
+    /** Empeño asociado a una operación; null si no hay. */
+    default Empeno buscarPorOperacion(int idOperacion) {
+        for (Empeno e : listar()) {
+            if (e.getIdOperacion() != null && e.getIdOperacion() == idOperacion) return e;
+        }
+        return null;
+    }
 }

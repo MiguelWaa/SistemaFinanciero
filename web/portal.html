@@ -4,180 +4,116 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Portal del Cliente</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;color:#0f172a;
-       background:linear-gradient(-45deg,#0f172a,#1e3a8a,#0c4a6e,#1e40af);background-size:400% 400%;animation:fondo 16s ease infinite;overflow:hidden;position:relative;}
-  @keyframes fondo{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-  .burbuja{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:flotar 20s infinite ease-in-out;pointer-events:none;}
-  .burbuja:nth-of-type(1){width:180px;height:180px;left:7%;top:12%;}
-  .burbuja:nth-of-type(2){width:120px;height:120px;right:9%;top:20%;animation-delay:-5s;}
-  .burbuja:nth-of-type(3){width:210px;height:210px;right:14%;bottom:8%;animation-delay:-9s;}
-  .burbuja:nth-of-type(4){width:95px;height:95px;left:15%;bottom:14%;animation-delay:-13s;}
-  @keyframes flotar{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(24px,-32px) scale(1.08);}66%{transform:translate(-20px,20px) scale(.94);}}
-  .wrap{width:100%;max-width:440px;position:relative;z-index:2;animation:entrar .75s cubic-bezier(.22,1,.36,1) both;}
-  @keyframes entrar{from{opacity:0;transform:translateY(34px) scale(.96);}to{opacity:1;transform:none;}}
-  .brand{text-align:center;color:#fff;margin-bottom:18px;}
-  .brand .logo{width:66px;height:66px;border-radius:19px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 12px;box-shadow:0 12px 30px rgba(37,99,235,.55);animation:latir 3.2s ease-in-out infinite;}
-  @keyframes latir{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-8px) rotate(-3deg);}}
-  .brand h1{font-size:1.35rem;}
-  .brand p{opacity:.75;font-size:.88rem;margin-top:3px;}
-  .card{background:#fff;border-radius:18px;padding:26px;box-shadow:0 20px 45px rgba(2,6,23,.35);}
-  .tabs{display:flex;background:#f1f5f9;border-radius:10px;padding:4px;margin-bottom:20px;}
-  .tabs button{flex:1;padding:10px;border:none;background:transparent;border-radius:8px;font-weight:600;color:#64748b;cursor:pointer;font-size:.9rem;}
-  .tabs button{transition:.25s;}
-  .tabs button.on{background:#fff;color:#1d4ed8;box-shadow:0 3px 9px rgba(15,23,42,.13);transform:translateY(-1px);}
-  .f{margin-bottom:13px;}
-  .f label{display:block;font-size:.78rem;font-weight:600;color:#475569;margin-bottom:5px;}
-  .f input,.f select{width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:11px;font-size:.92rem;background:#f8fafc;color:#0f172a;transition:.25s;}
-  .f input:focus,.f select:focus{outline:none;border-color:#2563eb;background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.13);transform:translateY(-2px);}
-  .dos{display:flex;gap:10px;}
-  .dos .f{flex:1;}
-  .btn{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:700;font-size:.97rem;cursor:pointer;margin-top:6px;}
-  .btn{position:relative;overflow:hidden;transition:.25s;box-shadow:0 9px 22px rgba(37,99,235,.38);}
-  .btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(37,99,235,.5);}
-  .btn::after{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:brillo 3.4s infinite;}
-  @keyframes brillo{0%{left:-120%;}55%,100%{left:130%;}}
-  .btn:disabled{opacity:.6;cursor:not-allowed;}
-  .msg{display:none;padding:11px 13px;border-radius:9px;font-size:.85rem;margin-bottom:14px;}
-  .msg.err{display:block;background:#fee2e2;color:#b91c1c;animation:temblar .45s;}
-  @keyframes temblar{0%,100%{transform:translateX(0);}20%{transform:translateX(-9px);}40%{transform:translateX(9px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
-  .msg.ok{display:block;background:#dcfce7;color:#15803d;}
-  .hint{margin-top:16px;padding:11px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:9px;font-size:.78rem;color:#64748b;text-align:center;line-height:1.5;}
-  .links{text-align:center;margin-top:16px;}
-  .links a{color:#fff;opacity:.8;text-decoration:none;font-size:.85rem;}
-  .links a:hover{opacity:1;text-decoration:underline;}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 </head>
 <body>
-<div class="burbuja"></div><div class="burbuja"></div><div class="burbuja"></div><div class="burbuja"></div>
-
-<div class="wrap">
-  <div class="brand">
-    <div class="logo"><i class="fa-solid fa-user-shield"></i></div>
-    <h1>Portal del Cliente</h1>
-    <p>Realiza tus trámites en línea, sin ir a la agencia</p>
-  </div>
-
-  <div class="card">
-    <div class="tabs">
-      <button id="tabLogin" class="on" type="button">Iniciar sesión</button>
-      <button id="tabReg" type="button">Crear cuenta</button>
+<div class="auth">
+  <aside class="auth-side">
+    <div class="marca"><span><i class="fa-solid fa-landmark"></i></span>SIGSF · Portal del Cliente</div>
+    <div>
+      <h1>Paga, cotiza y sigue tus trámites desde tu celular</h1>
+      <p>Sin colas ni viajes a la agencia.</p>
+      <ul>
+        <li><i class="fa-solid fa-qrcode"></i><span>Paga tus cuotas y empeños con Yape, Plin o Tunki escaneando un QR.</span></li>
+        <li><i class="fa-solid fa-calculator"></i><span>Cotiza préstamos, empeños y cambio de moneda, e imprime tu cotización.</span></li>
+        <li><i class="fa-solid fa-receipt"></i><span>Descarga tus comprobantes y tu estado de cuenta cuando quieras.</span></li>
+      </ul>
     </div>
+    <div class="pie small">© 2026 SIGSF</div>
+  </aside>
 
-    <div class="msg" id="msg"></div>
+  <main class="auth-main">
+    <div class="auth-box">
+      <ul class="nav nav-underline mb-4" role="tablist">
+        <li class="nav-item"><button class="nav-link active" id="tabLogin" type="button" role="tab">Iniciar sesión</button></li>
+        <li class="nav-item"><button class="nav-link" id="tabReg" type="button" role="tab">Crear cuenta</button></li>
+      </ul>
+      <div class="alert d-none" id="msg" role="alert"></div>
 
-    <!-- LOGIN -->
-    <div id="paneLogin">
-      <div class="f">
-        <label>Número de documento</label>
-        <input id="liDoc" placeholder="Ej. 70000001" autocomplete="username">
-      </div>
-      <div class="f">
-        <label>Contraseña</label>
-        <input id="liPass" type="password" placeholder="Tu contraseña" autocomplete="current-password">
-      </div>
-      <button class="btn" id="btnLogin">Ingresar <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
-      <div class="hint">
-        Si ya eras cliente, tu contraseña inicial es tu <b>mismo número de documento</b>.
-      </div>
-    </div>
+      <form id="paneLogin" novalidate>
+        <h2 class="mb-1">Bienvenido</h2>
+        <p class="text-muted mb-4">Ingresa con tu número de documento.</p>
+        <div class="mb-3"><label class="form-label" for="liDoc">Número de documento</label>
+          <input class="form-control" id="liDoc" inputmode="numeric" placeholder="Ej.: 70000001" autocomplete="username" required></div>
+        <div class="mb-3"><label class="form-label" for="liPass">Contraseña</label>
+          <input class="form-control" id="liPass" type="password" autocomplete="current-password" required></div>
+        <button class="btn btn-primary btn-lg w-100" type="submit" id="btnLogin">Ingresar</button>
+        <p class="small text-muted mt-3 mb-0">Si ya eras cliente, tu contraseña inicial es tu mismo número de documento.</p>
+      </form>
 
-    <!-- REGISTRO -->
-    <div id="paneReg" style="display:none;">
-      <div class="dos">
-        <div class="f" style="max-width:110px;">
-          <label>Tipo</label>
-          <select id="rgTipo"><option>DNI</option><option>CE</option><option>PAS</option></select>
+      <form id="paneReg" hidden novalidate>
+        <h2 class="mb-1">Crea tu cuenta</h2>
+        <p class="text-muted mb-3">Te toma un minuto.</p>
+        <div class="row g-2">
+          <div class="col-4"><label class="form-label" for="rgTipo">Tipo</label><select class="form-select" id="rgTipo"><option>DNI</option><option>CE</option><option>PAS</option></select></div>
+          <div class="col-8"><label class="form-label" for="rgDoc">Número de documento <span class="req">*</span></label><input class="form-control" id="rgDoc" placeholder="70000000" required></div>
+          <div class="col-6"><label class="form-label" for="rgNombres">Nombres <span class="req">*</span></label><input class="form-control" id="rgNombres" required></div>
+          <div class="col-6"><label class="form-label" for="rgApellidos">Apellidos</label><input class="form-control" id="rgApellidos"></div>
+          <div class="col-6"><label class="form-label" for="rgTel">Celular</label><input class="form-control" id="rgTel" inputmode="numeric" placeholder="987654321"></div>
+          <div class="col-6"><label class="form-label" for="rgCorreo">Correo</label><input class="form-control" id="rgCorreo" type="email"></div>
+          <div class="col-12"><label class="form-label" for="rgDir">Dirección</label><input class="form-control" id="rgDir"></div>
+          <div class="col-12"><label class="form-label" for="rgPass">Crea tu contraseña <span class="req">*</span></label><input class="form-control" id="rgPass" type="password" minlength="6" autocomplete="new-password" required>
+            <div class="form-text">Mínimo 6 caracteres.</div></div>
         </div>
-        <div class="f">
-          <label>Número de documento</label>
-          <input id="rgDoc" placeholder="70000000">
-        </div>
-      </div>
-      <div class="dos">
-        <div class="f"><label>Nombres</label><input id="rgNombres" placeholder="Juan"></div>
-        <div class="f"><label>Apellidos</label><input id="rgApellidos" placeholder="Pérez"></div>
-      </div>
-      <div class="dos">
-        <div class="f"><label>Teléfono</label><input id="rgTel" placeholder="987654321"></div>
-        <div class="f"><label>Correo</label><input id="rgCorreo" type="email" placeholder="correo@ejemplo.com"></div>
-      </div>
-      <div class="f"><label>Dirección</label><input id="rgDir" placeholder="Av. Siempre Viva 123"></div>
-      <div class="f"><label>Crea tu contraseña</label><input id="rgPass" type="password" placeholder="Mínimo 6 caracteres" minlength="6"></div>
-      <button class="btn" id="btnReg">Crear mi cuenta <i class="fa-solid fa-user-plus"></i></button>
-    </div>
-  </div>
+        <button class="btn btn-primary btn-lg w-100 mt-3" type="submit" id="btnReg">Crear mi cuenta</button>
+      </form>
 
-  <div class="links">
-    <a href="welcome.html"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
-    &nbsp;·&nbsp;
-    <a href="login.html">Soy personal de la entidad</a>
-  </div>
+      <hr class="my-4">
+      <div class="d-flex justify-content-between small">
+        <a href="welcome.html" class="text-muted"><i class="fa-solid fa-arrow-left me-1"></i>Volver al inicio</a>
+        <a href="login.html">Soy personal de la entidad</a>
+      </div>
+    </div>
+  </main>
 </div>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
 <script>
-(function(){
-  var $ = function(id){ return document.getElementById(id); };
-  var msg = $('msg');
-
-  function mostrar(texto, tipo){
-    msg.className = 'msg ' + tipo;
-    msg.textContent = texto;
+(function () {
+  var $ = function (id) { return document.getElementById(id); }, msg = $('msg');
+  function mostrar(texto, tipo) { msg.className = 'alert ' + (tipo === 'ok' ? 'alert-success' : 'alert-danger'); msg.textContent = texto; }
+  function limpiar() { msg.className = 'alert d-none'; msg.textContent = ''; }
+  function tab(login) {
+    $('tabLogin').classList.toggle('active', login); $('tabReg').classList.toggle('active', !login);
+    $('paneLogin').hidden = !login; $('paneReg').hidden = login; limpiar();
+    (login ? $('liDoc') : $('rgDoc')).focus();
   }
-  function limpiar(){ msg.className = 'msg'; msg.textContent=''; }
+  $('tabLogin').addEventListener('click', function () { tab(true); });
+  $('tabReg').addEventListener('click', function () { tab(false); });
+  try {
+    var motivo = new URLSearchParams(location.search).get('motivo');
+    if (motivo === 'expirada') mostrar('Tu sesión expiró. Ingresa nuevamente.', 'err');
+    else if (motivo === 'sesion') mostrar('Inicia sesión para continuar.', 'err');
+  } catch (e) { }
 
-  $('tabLogin').addEventListener('click', function(){
-    $('tabLogin').classList.add('on'); $('tabReg').classList.remove('on');
-    $('paneLogin').style.display='block'; $('paneReg').style.display='none'; limpiar();
-  });
-  $('tabReg').addEventListener('click', function(){
-    $('tabReg').classList.add('on'); $('tabLogin').classList.remove('on');
-    $('paneReg').style.display='block'; $('paneLogin').style.display='none'; limpiar();
-  });
-
-  function entrar(cliente){
-    try{ sessionStorage.setItem('sigsf_cliente', JSON.stringify(cliente)); }catch(e){}
-    window.location.href = 'portal-inicio.html';
+  function entrar(cliente) {
+    try { sessionStorage.setItem('sigsf_cliente', JSON.stringify(cliente)); } catch (e) { }
+    location.href = 'portal-inicio.html';
   }
-
-  $('btnLogin').addEventListener('click', async function(){
-    var doc = $('liDoc').value.trim(), pass = $('liPass').value.trim();
-    if(!doc || !pass){ mostrar('Ingresa tu documento y contraseña.','err'); return; }
-    this.disabled = true; limpiar();
-    try{
-      var c = await API.post('/portal/login', { documento: doc, password: pass });
-      entrar(c);
-    }catch(e){ mostrar(e.message,'err'); this.disabled = false; }
+  $('paneLogin').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    var doc = $('liDoc').value.trim(), pass = $('liPass').value;
+    if (!doc || !pass) { mostrar('Ingresa tu documento y tu contraseña.', 'err'); return; }
+    var b = $('btnLogin'); b.disabled = true; limpiar();
+    try { entrar(await API.post('/portal/login', { documento: doc, password: pass })); }
+    catch (e) { mostrar(e.message, 'err'); b.disabled = false; }
   });
-
-  $('btnReg').addEventListener('click', async function(){
+  $('paneReg').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
     var datos = {
-      tipoDocumento: $('rgTipo').value,
-      documento: $('rgDoc').value.trim(),
-      nombres: $('rgNombres').value.trim(),
-      apellidos: $('rgApellidos').value.trim(),
-      telefono: $('rgTel').value.trim(),
-      correo: $('rgCorreo').value.trim(),
-      direccion: $('rgDir').value.trim(),
-      password: $('rgPass').value.trim()
+      tipoDocumento: $('rgTipo').value, documento: $('rgDoc').value.trim(), nombres: $('rgNombres').value.trim(),
+      apellidos: $('rgApellidos').value.trim(), telefono: $('rgTel').value.trim(), correo: $('rgCorreo').value.trim(),
+      direccion: $('rgDir').value.trim(), password: $('rgPass').value
     };
-    if(!datos.documento || !datos.nombres || !datos.password){
-      mostrar('Completa documento, nombres y contraseña.','err'); return;
-    }
-    this.disabled = true; limpiar();
-    try{
-      var c = await API.post('/portal/registro', datos);
-      mostrar('Cuenta creada. Ingresando…','ok');
-      setTimeout(function(){ entrar(c); }, 700);
-    }catch(e){ mostrar(e.message,'err'); this.disabled = false; }
-  });
-
-  // Enter para enviar
-  ['liDoc','liPass'].forEach(function(id){
-    $(id).addEventListener('keydown', function(ev){ if(ev.key==='Enter') $('btnLogin').click(); });
+    if (!datos.documento || !datos.nombres || !datos.password) { mostrar('Completa documento, nombres y contraseña.', 'err'); return; }
+    var b = $('btnReg'); b.disabled = true; limpiar();
+    try { var c = await API.post('/portal/registro', datos); mostrar('Cuenta creada. Ingresando…', 'ok'); setTimeout(function () { entrar(c); }, 600); }
+    catch (e) { mostrar(e.message, 'err'); b.disabled = false; }
   });
 })();
 </script>

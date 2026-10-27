@@ -6,7 +6,13 @@ import org.slf4j.LoggerFactory;
 import com.utp.sistemafinanciero.dao.DaoFactory;
 import com.utp.sistemafinanciero.dto.IndicadoresDTO;
 
+import com.utp.sistemafinanciero.model.pagos.Cotizacion;
+import com.utp.sistemafinanciero.model.pagos.Pago;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -39,7 +45,28 @@ public class DashboardService {
         calcular(bd.usuarios()::contar, d::setUsuariosTotales, 0);
         calcular(() -> bd.operaciones().solicitudes("PENDIENTE").size(), d::setSolicitudesPendientes, 0);
         calcular(() -> bd.ventas().listar().size(), d::setVentasTotales, 0);
+        // Pagos con billeteras digitales y cotizaciones
+        calcular(() -> bd.pagos().listarPorEstado(Pago.POR_VERIFICAR).size(), d::setPagosPorVerificar, 0);
+        calcular(() -> sumar(bd.pagos().listarPorEstado(Pago.POR_VERIFICAR), null), d::setMontoPorVerificar,
+                BigDecimal.ZERO);
+        calcular(() -> sumar(bd.pagos().listarPorEstado(Pago.CONFIRMADO), YearMonth.now()), d::setCobradoMes,
+                BigDecimal.ZERO);
+        calcular(() -> (int) bd.cotizaciones().listar().stream()
+                .filter(q -> Cotizacion.VIGENTE.equals(q.getEstado()) && q.getFechaVencimiento() != null
+                        && !q.getFechaVencimiento().isBefore(LocalDate.now())).count(),
+                d::setCotizacionesVigentes, 0);
         return d;
+    }
+
+    /** Suma los montos de los pagos (del mes indicado, o todos si es null). */
+    private static BigDecimal sumar(List<Pago> pagos, YearMonth mes) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (Pago p : pagos) {
+            if (p.getMonto() == null) continue;
+            if (mes != null && (p.getFechaPago() == null || !YearMonth.from(p.getFechaPago()).equals(mes))) continue;
+            total = total.add(p.getMonto());
+        }
+        return total;
     }
 
     /** Ejecuta un cálculo y, si falla, deja el valor por defecto. */

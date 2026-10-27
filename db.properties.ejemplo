@@ -54,3 +54,10 @@ backup.pgdump=auto
 backup.retener=10
 # Respaldo automático cada N horas (0 = desactivado)
 backup.automatico.horas=24
+
+# --- Pagos con Yape, Plin y Tunki (v5.2) ---
+# false (recomendado): el pago del portal queda POR_VERIFICAR hasta que caja lo confirma.
+# true: se confirma al registrarlo (solo para demostraciones).
+pagos.confirmacion.automatica=false
+# Monto máximo (S/) aceptado en un solo pago
+pagos.monto.maximo=10000
