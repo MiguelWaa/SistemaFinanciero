@@ -46,6 +46,8 @@
      db.user=postgres
      db.password=123456
 
+
+
 6) Usuarios de acceso al sistema (para el login):
      admin@sigsf.com        / admin123
      lucia.ramos@sigsf.com  / lucia123
