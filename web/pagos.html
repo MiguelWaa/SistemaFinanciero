@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="sigsf-ui.css">
+<link rel="stylesheet" href="sigsf-anim.css">
 <style>
   .pv { border: 1px solid var(--sg-line); border-left: 4px solid var(--sg-warning); border-radius: .6rem; background: #fff; padding: .9rem 1rem; }
   .pv + .pv { margin-top: .75rem; }
@@ -240,6 +241,7 @@
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
 <script src="sigsf-ui.js"></script>
+<script src="sigsf-anim.js"></script>
 <script>
 (function () {
   'use strict';
@@ -318,6 +320,7 @@
       try {
         var r = await API.put('/pagos/' + p.idPago + '/confirmar', {});
         S.toast('Pago ' + r.codigo + ' confirmado. Comprobante ' + r.numeroComprobante + '.', 'ok');
+        if (S.celebrar) S.celebrar();
         refrescar();
       } catch (e) { S.toast(e.message, 'err'); b.disabled = false; }
     } else if (b.dataset.no) {
@@ -462,6 +465,7 @@
         + esc(p.codigo) + ' por ' + S.money(p.monto) + '.</span><button type="button" class="btn btn-sm btn-success" id="cVer">Imprimir comprobante</button></div>';
       $('cVer').addEventListener('click', function () { S.abrirDocumento('documento.html?tipo=pago&id=' + p.idPago); });
       S.toast('Cobro registrado.', 'ok');
+      if (S.celebrar) S.celebrar();
       $('cNumero').value = ''; $('cDesc').value = '';
       alElegirCliente(true); refrescar();
     } catch (e) { $('cMsg').innerHTML = '<div class="alert alert-danger mb-0">' + esc(e.message) + '</div>'; }
