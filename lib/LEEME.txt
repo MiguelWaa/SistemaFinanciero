@@ -17,6 +17,7 @@ FORMA RÁPIDA (Windows, con internet)
   Doble clic en  scripts\descargar_librerias.bat
   (descarga los .jar desde Maven Central a esta carpeta)
 
+
 FORMA MANUAL
 ------------
   Descargue de https://repo1.maven.org/maven2/ :
