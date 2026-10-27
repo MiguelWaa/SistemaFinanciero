@@ -17,6 +17,7 @@
 -- ============================================================
 
 
+
 -- ---- Seguridad: roles (100) ----
 WITH v (n, nombre, descripcion) AS (VALUES
   (1, 'ADMIN', 'Administrador del sistema'),
