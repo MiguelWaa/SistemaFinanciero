@@ -10,6 +10,15 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+### Agregado
+- Capa visual animada `web/sigsf-anim.css` + `web/sigsf-anim.js`, cargada en todas las páginas sin cambiar su lógica:
+  fondo con auroras suaves, encabezados y barra lateral con degradado en movimiento, indicadores en tarjetas con ícono automático
+  y números que cuentan hasta su valor, entrada escalonada de tarjetas, filas y listas, botones con degradado, brillo y onda,
+  pestañas con indicador deslizante, gráficos que se dibujan, ticket de pago con línea de escaneo y confeti al confirmar o registrar un pago.
+- Banner de bienvenida animado en el panel y en el Portal del Cliente; íconos flotantes en las pantallas de ingreso y bienvenida.
+- Campana que suena al llegar un pago nuevo y transición suave al abrir un módulo.
+- Todo respeta la opción «reducir movimiento» del sistema operativo; los refrescos automáticos no repiten la animación si los datos no cambian.
+
 ## [5.2.0] - 2026-10-26 · Pagos con QR, cotizaciones e interfaz Bootstrap 5
 
 ### Agregado

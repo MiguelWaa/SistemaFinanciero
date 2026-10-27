@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="sigsf-ui.css">
+<link rel="stylesheet" href="sigsf-anim.css">
 </head>
 <body>
 <a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-light" href="#homeView">Saltar al contenido</a>
@@ -102,10 +103,11 @@
     <div class="sg-stage">
       <!-- ================= INICIO ================= -->
       <main id="homeView" tabindex="-1">
-        <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+        <div class="sg-hero d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
           <div>
-            <h2 class="h4 mb-0" id="saludo">Hola</h2>
-            <div class="small-muted" id="hoy"></div>
+            <div class="small-muted mb-1" id="hoy"></div>
+            <h2 class="h3 mb-1" id="saludo">Hola</h2>
+            <div class="small-muted">Este es el resumen de tu operación de hoy.</div>
           </div>
           <div class="d-flex gap-2">
             <button class="btn btn-primary" data-ir="pagos.html"><i class="fa-solid fa-qrcode me-1"></i>Verificar pagos</button>
@@ -217,6 +219,7 @@
 <script src="sigsf-voice.js"></script>
 <script src="api.js"></script>
 <script src="sigsf-ui.js"></script>
+<script src="sigsf-anim.js"></script>
 <script>
 (function () {
   'use strict';
@@ -270,7 +273,12 @@
     document.title = 'SIGSF · ' + titulo;
     if (!sinHistorial) history.replaceState(null, '', '#' + encodeURIComponent(target));
   }
-  frame.addEventListener('load', function () { if (frame.src.indexOf('about:blank') === -1) loader.classList.remove('show'); });
+  frame.addEventListener('load', function () {
+    if (frame.src.indexOf('about:blank') === -1) {
+      loader.classList.remove('show');
+      frameView.classList.remove('sg-entrando'); void frameView.offsetWidth; frameView.classList.add('sg-entrando');
+    }
+  });
   document.querySelectorAll('#sideMenu a[data-nav]').forEach(function (a) {
     a.addEventListener('click', function (e) { e.preventDefault(); abrir(a.getAttribute('data-nav'), a.getAttribute('data-title')); });
   });
@@ -324,6 +332,7 @@
       var masNuevo = n ? lista[0].idPago : 0;
       if (ultimoPendiente !== null && masNuevo > ultimoPendiente) {
         S.toast('Nuevo pago por verificar: ' + lista[0].cliente + ' · ' + S.money(lista[0].monto), 'info');
+        var c = $('btnCampana'); c.classList.remove('timbre'); void c.offsetWidth; c.classList.add('timbre');
       }
       ultimoPendiente = masNuevo;
     } catch (e) {
