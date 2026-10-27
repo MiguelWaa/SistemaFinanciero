@@ -9,6 +9,27 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 
 ---
 
+## 🆕 Versión 5.2 · Pagos con QR (Yape, Plin, Tunki), cotizaciones e interfaz Bootstrap 5
+
+| Tema | Qué se implementó | Dónde |
+|---|---|---|
+| **Pagar con QR desde el portal** | El cliente elige qué paga, ve el QR de cobro de la empresa (Yape, Plin o Tunki), paga en su app y registra el número de operación y, si quiere, la captura de la constancia | `web/portal-inicio.html` › *Pagar con QR* |
+| **El pago aparece en el sistema** | Queda **Por verificar** con aviso en el panel; caja lo confirma (baja el saldo del préstamo o empeño y emite el comprobante `RC-…`) o lo rechaza con motivo | `web/pagos.html`, `service/PagoService.java` |
+| **Cobro en caja y billeteras** | Registro de pagos en ventanilla; el ADMIN configura número, titular y **sube el QR** de cada billetera | `pagos.html` › *Cobrar en caja* / *Billeteras y QR* |
+| **Cotizaciones** | Préstamo (cuota y cronograma), empeño y cambio con número `COT-…`, vigencia de 7 días, impresión/PDF y conversión en solicitud | portal › *Cotizar*, `pagos.html` › *Cotizaciones* |
+| **Reportes** | Comprobante, cotización, estado de cuenta y reporte de pagos imprimibles; pagos y cotizaciones en Excel/CSV/JSON | `documento.html`, `portal-documento.html`, `reportes.html` |
+| **Interfaz empresarial** | Bootstrap 5.3.3 local (sin CDN), tema propio, tablas con orden y paginación, avisos y confirmaciones; panel con menú agrupado y adaptable a celular | `web/vendor/`, `sigsf-ui.css`, `sigsf-ui.js`, `sigsf-crud.js` |
+| **Rendimiento** | Caché y compresión gzip de archivos estáticos, más hilos de atención | `web/ApiServer.java` |
+| **Base de datos** | Esquema **5.2.0**: tablas `billetera`, `pago`, `cotizacion` (se crean solas al arrancar o con `db/pagos_qr.sql`) | `db/pagos_qr.sql` |
+| **Pruebas** | 126 → **151** (`PagoServiceTest`, `CotizacionServiceTest`, `PagosApiTest`); arreglado el script de CI que no copiaba `semilla_100.tsv` | `test/`, `scripts/compilar_y_probar.*` |
+
+**Probarlo en 1 minuto (sin PostgreSQL):** en `db.properties` poner `persistencia=memoria`, ejecutar y entrar a
+<http://localhost:8091/portal.html> con el documento `70000002` (clave `70000002`) → *Pagar con QR*. Luego, en
+<http://localhost:8091/login.html> con `lucia.ramos@sigsf.com` / `lucia123` → *Pagos y cobranzas* → *Confirmar pago*.
+Detalle en `docs/09_PAGOS_QR_Y_COTIZACIONES.md`.
+
+---
+
 ## 🆕 Versión 5.1 · Avance 3: 100 registros por módulo
 
 | Tema | Qué se implementó | Dónde |
@@ -75,6 +96,7 @@ automatizadas. Documentación detallada en la carpeta **`docs/`**:
 | `docs/05_PRUEBAS_TDD.md` | 99 pruebas JUnit 4 |
 | `docs/06_RECURSOS_DE_CODIGO_FUENTE.md` | Paquetes, librerías, dependencias, Logback, importación y exportación de ficheros por área |
 | `docs/07_CONTROL_DE_VERSIONES.md` | Git Flow, commits, merge, conflictos, rollback, etiquetas, remoto, CI, versionamiento de la BD |
+| `docs/09_PAGOS_QR_Y_COTIZACIONES.md` | Pagos con Yape/Plin/Tunki, verificación, cotizaciones, documentos imprimibles e interfaz Bootstrap 5 |
 
 **Qué cambió (resumen):**
 
@@ -211,6 +233,9 @@ Base: `http://localhost:8091/api`
 | GET/POST/PUT/DELETE | `/campanias` · `/prospectos` | Marketing                |
 | GET/POST/DELETE     | `/ventas`     | Ventas                               |
 | GET/POST/PUT/DELETE | `/expedientes`| Dirección / Gerencia                 |
+| GET/POST/PUT        | `/pagos` · `/pagos/{id}/confirmar` · `/pagos/{id}/rechazar` | Pagos con QR y caja (v5.2) |
+| GET/PUT             | `/billeteras` | Yape, Plin y Tunki de la empresa (v5.2) |
+| GET/POST            | `/cotizaciones` | Cotizaciones (v5.2)                 |
 
 Ejemplo de login con `curl`:
 

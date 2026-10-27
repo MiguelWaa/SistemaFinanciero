@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Configuración</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 <link rel="stylesheet" href="sigsf-modulo.css">
 </head>
 <body>
@@ -24,16 +28,18 @@
   <div id="moduloContenido"></div>
 </div>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
 <script src="sigsf-crud.js"></script>
 <script>
 
 SIGSF.modulo({
   kpis: async function(cont, secs){
-    var estado = 'Sin conexión';
-    try { var h = await API.get('/health'); estado = h.status === 'ok' ? 'Operativo' : 'Revisar'; } catch(e) {}
-    cont.innerHTML = SIGSF.kpi('Estado del servidor', estado, 'verde')
-                   + SIGSF.kpi('Base de datos', 'PostgreSQL', 'ambar')
+    var estado = 'Sin conexión', bd = '—';
+    try { var h = await API.get('/health'); estado = h.status === 'ok' ? 'Operativo' : 'Revisar'; bd = h.persistencia || bd; } catch(e) {}
+    cont.innerHTML = SIGSF.kpi('Estado del servidor', estado, estado === 'Operativo' ? 'verde' : 'rojo')
+                   + SIGSF.kpi('Base de datos', SIGSF.escapar(bd), 'ambar')
                    + SIGSF.kpi('Tipos de cambio', SIGSF.num((secs[0].datos||[]).length));
   },
   secciones: [

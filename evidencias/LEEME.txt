@@ -19,3 +19,16 @@ PostgreSQL antes de exponer.
 25    Importacion confirmada: 4 prospectos registrados (v4.0)
 26    Excel exportado de clientes (formato y ceros conservados) (v4.0)
 27    Barra de ficheros: exportar Excel/CSV/JSON, plantilla e importar (v4.0)
+
+v5.2.0 · Pagos con QR (Yape, Plin, Tunki), cotizaciones e interfaz Bootstrap 5
+(modo demostracion, persistencia=memoria)
+v52_01        Panel principal: menu agrupado, pagos por verificar, cobros de 14 dias
+v52_02-05     Portal del Cliente: elegir que pagar, QR de Yape, registrar N° de operacion, pago registrado
+v52_06-07     Pagos y cobranzas: bandeja Por verificar y confirmacion del pago
+v52_08        Historial de pagos con filtros y exportacion
+v52_09        Billeteras y QR (configuracion del ADMIN)
+v52_10        Portal: cotizador en linea
+v52_11-12     Comprobante de pago y cotizacion con cronograma (imprimibles / PDF)
+v52_13-14     Reportes y reporte de pagos imprimible
+v52_15        Modulo de gestion con el nuevo motor Bootstrap (orden y paginacion)
+v52_16        Portal del Cliente en celular

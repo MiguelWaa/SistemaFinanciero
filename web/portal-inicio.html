@@ -3,325 +3,631 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIGSF · Mis trámites</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#0f172a;min-height:100vh;}
-  header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:18px 26px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-  header .izq{display:flex;align-items:center;gap:12px;}
-  header .logo{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
-  header h1{font-size:1.05rem;}
-  header .sub{font-size:.78rem;opacity:.75;}
-  header .der{display:flex;align-items:center;gap:14px;}
-  .salir{background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 14px;border-radius:9px;cursor:pointer;font-size:.85rem;font-weight:600;}
-  .salir:hover{background:rgba(255,255,255,.25);}
-  main{max-width:1080px;margin:0 auto;padding:22px 18px 40px;}
-  .bienvenida{background:#fff;border-radius:14px;padding:20px 22px;margin-bottom:18px;box-shadow:0 4px 14px rgba(15,23,42,.06);}
-  .bienvenida h2{font-size:1.18rem;margin-bottom:4px;}
-  .bienvenida p{color:#64748b;font-size:.88rem;}
-  .tramites{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-bottom:18px;}
-  .t{background:#fff;border-radius:14px;padding:20px;box-shadow:0 4px 14px rgba(15,23,42,.06);border-top:4px solid #2563eb;}
-  .t.verde{border-top-color:#059669;} .t.ambar{border-top-color:#d97706;}
-  .t h3{font-size:1rem;margin-bottom:3px;display:flex;align-items:center;gap:8px;}
-  .t .desc{color:#64748b;font-size:.8rem;margin-bottom:14px;}
-  .f{margin-bottom:10px;}
-  .f label{display:block;font-size:.75rem;font-weight:600;color:#475569;margin-bottom:4px;}
-  .f input,.f select{width:100%;padding:9px 11px;border:1px solid #cbd5e1;border-radius:8px;font-size:.88rem;background:#fff;color:#0f172a;}
-  .btn{width:100%;padding:11px;border:none;border-radius:9px;background:#2563eb;color:#fff;font-weight:600;cursor:pointer;font-size:.88rem;}
-  .btn.verde{background:#059669;} .btn.ambar{background:#d97706;}
-  .btn:hover{filter:brightness(1.08);}
-  .r{font-size:.8rem;margin-top:9px;min-height:1.1em;line-height:1.45;}
-  .panel{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 4px 14px rgba(15,23,42,.06);margin-bottom:18px;}
-  .panel h3{font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-  table{width:100%;border-collapse:collapse;font-size:.83rem;}
-  th,td{padding:9px 10px;border-bottom:1px solid #eef2f7;text-align:left;}
-  th{background:#f8fafc;color:#64748b;font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.3px;}
-  .badge{padding:3px 9px;border-radius:999px;font-size:.72rem;font-weight:600;}
-  .b-pend{background:#fef3c7;color:#92400e;} .b-ok{background:#dcfce7;color:#15803d;} .b-otro{background:#e0e7ff;color:#3730a3;}
-  .fila-datos{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;}
-  .fila-datos .f{flex:1;min-width:160px;margin-bottom:0;}
-  .fila-datos .btn{width:auto;padding:10px 18px;}
-
-  /* ===== Mejoras visuales del portal ===== */
-  header{position:relative;overflow:hidden;}
-  header::after{content:'';position:absolute;inset:0;
-    background:radial-gradient(circle at 20% 120%,rgba(59,130,246,.35),transparent 55%),
-               radial-gradient(circle at 85% -20%,rgba(14,165,233,.3),transparent 50%);pointer-events:none;}
-  header .izq,header .der{position:relative;z-index:2;}
-  header .logo{animation:latir 3.4s ease-in-out infinite;}
-  @keyframes latir{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
-
-  .bienvenida{position:relative;overflow:hidden;background:linear-gradient(120deg,#fff 60%,#eff6ff);
-    animation:entrar .6s cubic-bezier(.22,1,.36,1) both;}
-  .bienvenida::before{content:'';position:absolute;right:-40px;top:-40px;width:190px;height:190px;border-radius:50%;
-    background:radial-gradient(circle,rgba(37,99,235,.13),transparent 70%);animation:flotar 12s ease-in-out infinite;}
-  @keyframes flotar{0%,100%{transform:translate(0,0);}50%{transform:translate(-18px,14px);}}
-  @keyframes entrar{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
-
-  .t{animation:entrar .6s cubic-bezier(.22,1,.36,1) both;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
-  .t:nth-child(1){animation-delay:.08s;} .t:nth-child(2){animation-delay:.18s;} .t:nth-child(3){animation-delay:.28s;}
-  .t:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(15,23,42,.14);}
-  .t h3 i{transition:transform .3s;}
-  .t:hover h3 i{transform:scale(1.2) rotate(-8deg);}
-
-  .f input,.f select{transition:.22s;}
-  .f input:focus,.f select:focus{outline:none;border-color:#2563eb;background:#fff;
-    box-shadow:0 0 0 4px rgba(37,99,235,.13);transform:translateY(-2px);}
-
-  .btn{position:relative;overflow:hidden;transition:.25s;}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(37,99,235,.32);}
-  .btn.verde:hover{box-shadow:0 10px 22px rgba(5,150,105,.32);}
-  .btn.ambar:hover{box-shadow:0 10px 22px rgba(217,119,6,.32);}
-  .btn::after{content:'';position:absolute;top:0;left:-120%;width:55%;height:100%;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);animation:brillo 3.6s infinite;}
-  @keyframes brillo{0%{left:-120%;}55%,100%{left:130%;}}
-
-  .panel{animation:entrar .6s cubic-bezier(.22,1,.36,1) both;animation-delay:.34s;}
-  tbody tr{transition:background .18s;}
-  tbody tr:hover{background:#f8fafc;}
-  .r{transition:.2s;}
-
-  /* Mini resumen del cliente */
-  .resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px;}
-  .rs{background:rgba(255,255,255,.75);border:1px solid #e2e8f0;border-radius:12px;padding:13px 15px;}
-  .rs .l{font-size:.7rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
-  .rs .v{font-size:1.28rem;font-weight:700;margin-top:3px;color:#0f172a;}
-  .rs.amb .v{color:#b45309;} .rs.ver .v{color:#047857;}
-</style>
+<title>SIGSF · Portal del Cliente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 </head>
 <body>
 
-<header>
-  <div class="izq">
-    <div class="logo"><i class="fa-solid fa-building-columns"></i></div>
-    <div>
-      <h1>SIGSF · Portal del Cliente</h1>
-      <div class="sub" id="hDoc">—</div>
-    </div>
-  </div>
-  <div class="der">
-    <span id="hNombre" style="font-weight:600;font-size:.9rem;">—</span>
-    <button class="salir" id="btnSalir"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+<header class="pt-top">
+  <div class="inner">
+    <span class="mark"><i class="fa-solid fa-landmark"></i></span>
+    <div class="me-auto"><b>Portal del Cliente</b><small>SIGSF · servicios financieros</small></div>
+    <div class="text-end d-none d-sm-block lh-sm"><div class="fw-600 small" id="hNombre">—</div><small id="hDoc">—</small></div>
+    <button class="btn btn-sm btn-outline-light" id="btnSalir"><i class="fa-solid fa-right-from-bracket me-1"></i>Salir</button>
   </div>
 </header>
 
-<main>
-  <div class="bienvenida">
-    <h2>Hola, <span id="saludo">cliente</span> 👋</h2>
-    <p>Desde aquí puedes solicitar tus trámites. Cada solicitud queda registrada y será evaluada por la entidad.</p>
-    <div class="resumen" id="resumen">
-      <div class="rs"><div class="l">Mis trámites</div><div class="v" id="rsTotal">—</div></div>
-      <div class="rs amb"><div class="l">En revisión</div><div class="v" id="rsPend">—</div></div>
-      <div class="rs ver"><div class="l">Aprobados</div><div class="v" id="rsOk">—</div></div>
-      <div class="rs"><div class="l">Monto solicitado</div><div class="v" id="rsMonto">—</div></div>
-    </div>
-  </div>
+<nav class="pt-tabs" aria-label="Secciones del portal">
+  <ul class="nav nav-underline" id="tabs">
+    <li class="nav-item"><button class="nav-link active" data-tab="inicio"><i class="fa-solid fa-house me-1"></i>Inicio</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="pagar"><i class="fa-solid fa-qrcode me-1"></i>Pagar con QR</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="cotizar"><i class="fa-solid fa-calculator me-1"></i>Cotizar</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="tramites"><i class="fa-solid fa-file-signature me-1"></i>Solicitar trámite</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="historial"><i class="fa-solid fa-clock-rotate-left me-1"></i>Mis pagos y trámites</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="datos"><i class="fa-solid fa-id-card me-1"></i>Mis datos</button></li>
+  </ul>
+</nav>
 
-  <div class="tramites">
-    <!-- CAMBIO DE MONEDA -->
-    <div class="t">
-      <h3><i class="fa-solid fa-right-left" style="color:#2563eb;"></i> Cambio de moneda</h3>
-      <div class="desc">Solicita el cambio al tipo vigente.</div>
-      <div class="f"><label>Tipo de cambio</label><select id="cbTipo"></select></div>
-      <div class="f"><label>Monto a cambiar</label><input type="number" id="cbMonto" step="0.01" min="0" placeholder="0.00"></div>
-      <button class="btn" id="cbBtn">Solicitar cambio</button>
-      <div class="r" id="cbMsg"></div>
-    </div>
+<main class="pt-wrap">
 
-    <!-- PRESTAMO -->
-    <div class="t verde">
-      <h3><i class="fa-solid fa-hand-holding-dollar" style="color:#059669;"></i> Préstamo personal</h3>
-      <div class="desc">Calculamos tu cuota mensual al instante.</div>
-      <div class="f"><label>Monto que necesitas (S/)</label><input type="number" id="prMonto" step="0.01" min="0" placeholder="5000.00"></div>
-      <div class="f"><label>Plazo</label>
-        <select id="prPlazo">
-          <option value="6">6 meses</option>
-          <option value="12" selected>12 meses</option>
-          <option value="18">18 meses</option>
-          <option value="24">24 meses</option>
-        </select>
+  <!-- ====================== INICIO ====================== -->
+  <section data-pane="inicio">
+    <h1 class="h4 mb-1">Hola, <span id="saludo">cliente</span></h1>
+    <p class="text-muted mb-3">Aquí ves lo que debes, lo que ya pagaste y el estado de tus solicitudes.</p>
+    <div class="sg-kpis">
+      <div class="sg-kpi gold"><div class="l">Deuda vigente</div><div class="v" id="rDeuda">—</div><div class="d">préstamos y empeños activos</div></div>
+      <div class="sg-kpi warn"><div class="l">Pagos por verificar</div><div class="v" id="rVerif">—</div><div class="d">caja los revisa en minutos</div></div>
+      <div class="sg-kpi ok"><div class="l">Total pagado</div><div class="v" id="rPagado">—</div><div class="d">pagos confirmados</div></div>
+      <div class="sg-kpi"><div class="l">Solicitudes en revisión</div><div class="v" id="rPend">—</div><div class="d" id="rTram">—</div></div>
+    </div>
+    <div class="row g-3">
+      <div class="col-lg-7">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div><h2>Puedes pagar ahora</h2><p class="card-sub">Con Yape, Plin o Tunki, desde tu celular.</p></div>
+            <button class="btn btn-sm btn-light" data-ir="historial">Estado de cuenta</button>
+          </div>
+          <ul class="sg-feed" id="inicioPagables"><li class="sg-empty">Cargando…</li></ul>
+        </div>
       </div>
-      <button class="btn verde" id="prBtn">Solicitar préstamo</button>
-      <div class="r" id="prMsg"></div>
+      <div class="col-lg-5">
+        <div class="card h-100">
+          <div class="card-header"><h2>Movimientos recientes</h2></div>
+          <ul class="sg-feed" id="inicioMov"><li class="sg-empty">Cargando…</li></ul>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- EMPENO -->
-    <div class="t ambar">
-      <h3><i class="fa-solid fa-gem" style="color:#d97706;"></i> Empeño de artículo</h3>
-      <div class="desc">Deja tu artículo en garantía.</div>
-      <div class="f"><label>¿Qué vas a empeñar?</label><input id="emDesc" placeholder="Ej. Laptop HP 14''"></div>
-      <div class="f"><label>Valor aproximado (S/)</label><input type="number" id="emValor" step="0.01" min="0" placeholder="1800.00"></div>
-      <div class="f"><label>Monto que solicitas (S/)</label><input type="number" id="emMonto" step="0.01" min="0" placeholder="800.00"></div>
-      <button class="btn ambar" id="emBtn">Solicitar empeño</button>
-      <div class="r" id="emMsg"></div>
+  <!-- ====================== PAGAR ====================== -->
+  <section data-pane="pagar" hidden>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-7">
+        <div class="steps" aria-hidden="true"><span data-paso="1" class="on">1. Qué pagas</span><span data-paso="2">2. Escanea y paga</span><span data-paso="3">3. Registra tu pago</span><span data-paso="4">4. Listo</span></div>
+
+        <!-- Paso 1 -->
+        <div class="card" data-step="1">
+          <div class="card-header"><h2>¿Qué vas a pagar?</h2><p class="card-sub">Elige el trámite, el monto y tu billetera.</p></div>
+          <div class="card-body">
+            <div id="listaPagables" role="radiogroup" aria-label="Trámite a pagar"><div class="sg-empty">Cargando…</div></div>
+            <div class="mt-3 d-none" id="otroWrap">
+              <label class="form-label" for="pDesc">¿Qué estás pagando? <span class="req">*</span></label>
+              <input class="form-control" id="pDesc" maxlength="200" placeholder="Ej.: adelanto de cuota, comisión de giro">
+            </div>
+            <div class="row g-3 mt-1">
+              <div class="col-sm-6">
+                <label class="form-label" for="pMonto">Monto a pagar <span class="req">*</span></label>
+                <div class="input-group input-group-lg"><span class="input-group-text">S/</span><input class="form-control" type="number" id="pMonto" min="0.01" step="0.01" inputmode="decimal"></div>
+                <div class="form-text" id="pMax"></div>
+              </div>
+            </div>
+            <label class="form-label mt-3">Paga con</label>
+            <div class="wallet-choice" id="billeteras"><div class="small text-muted">Cargando billeteras…</div></div>
+            <div class="alert alert-danger mt-3 mb-0 d-none" id="p1Err"></div>
+            <button class="btn btn-primary btn-lg w-100 mt-3" id="btnPaso2">Continuar <i class="fa-solid fa-arrow-right ms-1"></i></button>
+          </div>
+        </div>
+
+        <!-- Paso 2 -->
+        <div data-step="2" hidden>
+          <div class="pay-ticket" id="ticket"></div>
+          <div class="card mt-3"><div class="card-body small">
+            <ol class="mb-0 ps-3" id="instrucciones"></ol>
+            <p class="text-muted mt-2 mb-0" id="instrBil" hidden></p>
+          </div></div>
+          <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-light" data-volver="1"><i class="fa-solid fa-arrow-left me-1"></i>Cambiar</button>
+            <button class="btn btn-primary flex-fill" id="btnPaso3">Ya pagué, registrar mi pago</button>
+          </div>
+        </div>
+
+        <!-- Paso 3 -->
+        <form class="card" data-step="3" hidden id="formPago" novalidate>
+          <div class="card-header"><h2>Registra tu pago</h2><p class="card-sub">Copia el número de operación que te mostró tu app después de pagar.</p></div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center p-2 px-3 bg-light rounded mb-3 small" id="resumenPago"></div>
+            <div class="mb-3">
+              <label class="form-label" for="pNumero">Número de operación <span class="req">*</span></label>
+              <input class="form-control form-control-lg" id="pNumero" maxlength="30" autocomplete="off" placeholder="Ej.: 03564821" required>
+              <div class="invalid-feedback">Ingresa el número de operación (4 a 30 letras o números).</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="pCelular">Celular desde el que pagaste</label>
+              <input class="form-control" id="pCelular" maxlength="9" inputmode="numeric" placeholder="9XXXXXXXX">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="pFoto">Captura de la constancia <span class="text-muted fw-normal">(opcional, ayuda a verificar más rápido)</span></label>
+              <input class="form-control" type="file" id="pFoto" accept="image/*">
+              <div class="const-prev mt-2" id="pFotoPrev"></div>
+            </div>
+            <div class="alert alert-danger d-none" id="p3Err"></div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-light" type="button" data-volver="2"><i class="fa-solid fa-arrow-left me-1"></i>Ver QR</button>
+              <button class="btn btn-success flex-fill" type="submit" id="btnRegistrar"><i class="fa-solid fa-check me-1"></i>Registrar pago</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Paso 4 -->
+        <div class="card" data-step="4" hidden>
+          <div class="card-body text-center py-4" id="pagoListo"></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- MIS DATOS -->
-  <div class="panel">
-    <h3><i class="fa-solid fa-id-card" style="color:#2563eb;"></i> Mis datos de contacto</h3>
-    <div class="fila-datos">
-      <div class="f"><label>Teléfono</label><input id="mdTel" placeholder="987654321"></div>
-      <div class="f"><label>Correo</label><input id="mdCorreo" placeholder="correo@ejemplo.com"></div>
-      <div class="f"><label>Dirección</label><input id="mdDir" placeholder="Av. Siempre Viva 123"></div>
-      <button class="btn" id="mdBtn">Actualizar</button>
+  <!-- ====================== COTIZAR ====================== -->
+  <section data-pane="cotizar" hidden>
+    <div class="row g-3">
+      <div class="col-lg-5">
+        <form class="card" id="formCot" novalidate>
+          <div class="card-header"><h2>Cotiza en línea</h2><p class="card-sub">Calcula tu cuota sin compromiso. La cotización queda guardada 7 días.</p></div>
+          <div class="card-body">
+            <div class="btn-group w-100 mb-3" role="group" aria-label="Tipo de cotización">
+              <input type="radio" class="btn-check" name="qTipo" id="qT1" value="PRESTAMO" checked><label class="btn btn-outline-primary" for="qT1">Préstamo</label>
+              <input type="radio" class="btn-check" name="qTipo" id="qT2" value="EMPENO"><label class="btn btn-outline-primary" for="qT2">Empeño</label>
+              <input type="radio" class="btn-check" name="qTipo" id="qT3" value="CAMBIO"><label class="btn btn-outline-primary" for="qT3">Cambio</label>
+            </div>
+            <div class="row g-3">
+              <div class="col-6"><label class="form-label" for="qMonto" id="qMontoLbl">Monto que necesitas</label>
+                <div class="input-group"><span class="input-group-text" id="qMon">S/</span><input class="form-control" type="number" min="1" step="0.01" id="qMonto" placeholder="5000"></div></div>
+              <div class="col-6" data-q="PRESTAMO"><label class="form-label" for="qPlazo">Plazo</label>
+                <select class="form-select" id="qPlazo"><option value="3">3 meses</option><option value="6">6 meses</option><option value="12" selected>12 meses</option><option value="18">18 meses</option><option value="24">24 meses</option></select></div>
+              <div class="col-6" data-q="EMPENO" hidden><label class="form-label" for="qDias">Plazo</label>
+                <select class="form-select" id="qDias"><option value="15">15 días</option><option value="30" selected>30 días</option><option value="60">60 días</option><option value="90">90 días</option></select></div>
+              <div class="col-12" data-q="EMPENO" hidden><label class="form-label" for="qArt">¿Qué vas a empeñar?</label><input class="form-control" id="qArt" maxlength="200" placeholder="Ej.: laptop HP 14&quot;"></div>
+              <div class="col-12" data-q="EMPENO" hidden><label class="form-label" for="qValor">Valor aproximado del artículo</label>
+                <div class="input-group"><span class="input-group-text">S/</span><input class="form-control" type="number" min="0" step="0.01" id="qValor"></div></div>
+              <div class="col-6" data-q="CAMBIO" hidden><label class="form-label" for="qTc">Moneda</label><select class="form-select" id="qTc"></select></div>
+            </div>
+            <div class="est-calc mt-3" id="qEstimado" aria-live="polite"><span class="text-muted small">Ingresa un monto para ver el cálculo.</span></div>
+            <button class="btn btn-primary w-100 mt-3" type="submit"><i class="fa-solid fa-file-invoice-dollar me-1"></i>Generar cotización</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="card-header"><h2>Mis cotizaciones</h2><p class="card-sub">Imprímelas o envíalas como solicitud mientras estén vigentes.</p></div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead><tr><th>Número</th><th>Tipo</th><th class="num">Monto</th><th class="num">Resultado</th><th>Vigencia</th><th class="text-end">Acciones</th></tr></thead>
+              <tbody id="tablaCot"><tr class="empty-row"><td colspan="6">Cargando…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="r" id="mdMsg"></div>
-  </div>
+  </section>
 
-  <!-- HISTORIAL -->
-  <div class="panel">
-    <h3><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;"></i> Mis trámites</h3>
-    <table>
-      <thead><tr><th>N°</th><th>Trámite</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
-      <tbody id="histTabla"><tr><td colspan="5">Cargando…</td></tr></tbody>
-    </table>
-  </div>
+  <!-- ====================== TRÁMITES ====================== -->
+  <section data-pane="tramites" hidden>
+    <div class="row g-3">
+      <div class="col-lg-4">
+        <form class="card h-100" id="fCambio" novalidate>
+          <div class="card-header"><h2><i class="fa-solid fa-right-left text-primary me-2"></i>Cambio de moneda</h2><p class="card-sub">Al tipo de cambio vigente.</p></div>
+          <div class="card-body">
+            <div class="mb-3"><label class="form-label" for="cbTipo">Tipo de cambio</label><select class="form-select" id="cbTipo"></select></div>
+            <div class="mb-3"><label class="form-label" for="cbMonto">Monto a cambiar</label><input class="form-control" type="number" id="cbMonto" step="0.01" min="0" placeholder="0.00"></div>
+            <button class="btn btn-primary w-100" type="submit">Solicitar cambio</button>
+            <div class="mt-2 small" id="cbMsg" role="status"></div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-4">
+        <form class="card h-100" id="fPrestamo" novalidate>
+          <div class="card-header"><h2><i class="fa-solid fa-hand-holding-dollar text-primary me-2"></i>Préstamo personal</h2><p class="card-sub">Calculamos tu cuota al instante.</p></div>
+          <div class="card-body">
+            <div class="mb-3"><label class="form-label" for="prMonto">Monto que necesitas</label><div class="input-group"><span class="input-group-text">S/</span><input class="form-control" type="number" id="prMonto" step="0.01" min="0" placeholder="5000.00"></div></div>
+            <div class="mb-3"><label class="form-label" for="prPlazo">Plazo</label>
+              <select class="form-select" id="prPlazo"><option value="6">6 meses</option><option value="12" selected>12 meses</option><option value="18">18 meses</option><option value="24">24 meses</option></select></div>
+            <button class="btn btn-primary w-100" type="submit">Solicitar préstamo</button>
+            <div class="mt-2 small" id="prMsg" role="status"></div>
+          </div>
+        </form>
+      </div>
+      <div class="col-lg-4">
+        <form class="card h-100" id="fEmpeno" novalidate>
+          <div class="card-header"><h2><i class="fa-solid fa-gem text-primary me-2"></i>Empeño de artículo</h2><p class="card-sub">Deja tu artículo en garantía.</p></div>
+          <div class="card-body">
+            <div class="mb-3"><label class="form-label" for="emDesc">¿Qué vas a empeñar?</label><input class="form-control" id="emDesc" placeholder="Ej.: laptop HP 14&quot;"></div>
+            <div class="row g-2 mb-3">
+              <div class="col-6"><label class="form-label" for="emValor">Valor aprox.</label><input class="form-control" type="number" id="emValor" step="0.01" min="0" placeholder="1800"></div>
+              <div class="col-6"><label class="form-label" for="emMonto">Solicitas</label><input class="form-control" type="number" id="emMonto" step="0.01" min="0" placeholder="800"></div>
+            </div>
+            <button class="btn btn-primary w-100" type="submit">Solicitar empeño</button>
+            <div class="mt-2 small" id="emMsg" role="status"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== HISTORIAL ====================== -->
+  <section data-pane="historial" hidden>
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+      <h2 class="h5 mb-0">Mis pagos y trámites</h2>
+      <button class="btn btn-outline-primary" id="btnEstado"><i class="fa-solid fa-file-invoice me-1"></i>Descargar estado de cuenta</button>
+    </div>
+    <div class="card mb-3">
+      <div class="card-header"><h2>Mis pagos</h2></div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead><tr><th>Fecha</th><th>Concepto</th><th>Método</th><th>N° operación</th><th class="num">Monto</th><th>Estado</th><th class="text-end">Comprobante</th></tr></thead>
+          <tbody id="tablaPagos"><tr class="empty-row"><td colspan="7">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h2>Mis trámites</h2></div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead><tr><th>N°</th><th>Trámite</th><th class="num">Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
+          <tbody id="histTabla"><tr class="empty-row"><td colspan="5">Cargando…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== DATOS ====================== -->
+  <section data-pane="datos" hidden>
+    <form class="card" id="fDatos" style="max-width:720px">
+      <div class="card-header"><h2>Mis datos de contacto</h2><p class="card-sub">Los usamos para avisarte sobre tus pagos y solicitudes.</p></div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-4"><label class="form-label" for="mdTel">Teléfono</label><input class="form-control" id="mdTel" placeholder="987654321"></div>
+          <div class="col-md-8"><label class="form-label" for="mdCorreo">Correo</label><input class="form-control" type="email" id="mdCorreo" placeholder="correo@ejemplo.com"></div>
+          <div class="col-12"><label class="form-label" for="mdDir">Dirección</label><input class="form-control" id="mdDir" placeholder="Av. Siempre Viva 123"></div>
+        </div>
+        <button class="btn btn-primary mt-3" type="submit">Guardar cambios</button>
+      </div>
+    </form>
+  </section>
 </main>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/qrcode/qrcode.js"></script>
 <script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
 <script>
-(function(){
-  var $ = function(id){ return document.getElementById(id); };
-  var cliente = null, tipos = [];
+(function () {
+  'use strict';
+  var S = SIGSF, esc = S.escapar, $ = function (i) { return document.getElementById(i); };
+  var cliente = null, tipos = [], billeteras = [], pagables = [], operaciones = [], misPagos = [], cotizaciones = [];
+  var pago = { idx: null, metodo: null };
 
-  // --- Sesión ---
-  try { cliente = JSON.parse(sessionStorage.getItem('sigsf_cliente') || 'null'); } catch(e){}
-  if(!cliente || !cliente.idCliente){ window.location.href = 'portal.html'; return; }
+  try { cliente = JSON.parse(sessionStorage.getItem('sigsf_cliente') || 'null'); } catch (e) { }
+  if (!cliente || !cliente.idCliente) { location.href = 'portal.html'; return; }
+  var BASE = '/portal/' + cliente.idCliente;
 
-  var nombre = ((cliente.nombres||'') + ' ' + (cliente.apellidos||'')).trim();
-  $('hNombre').textContent = nombre || 'Cliente';
-  $('saludo').textContent = (cliente.nombres || 'cliente');
-  $('hDoc').textContent = (cliente.tipoDocumento||'') + ' ' + (cliente.documento||'');
-  $('mdTel').value = cliente.telefono || '';
-  $('mdCorreo').value = cliente.correo || '';
-  $('mdDir').value = cliente.direccion || '';
+  function pintarCabecera() {
+    var nombre = ((cliente.nombres || '') + ' ' + (cliente.apellidos || '')).trim();
+    $('hNombre').textContent = nombre || 'Cliente';
+    $('hDoc').textContent = (cliente.tipoDocumento || '') + ' ' + (cliente.documento || '');
+    $('saludo').textContent = cliente.nombres || 'cliente';
+    $('mdTel').value = cliente.telefono || ''; $('mdCorreo').value = cliente.correo || ''; $('mdDir').value = cliente.direccion || '';
+  }
+  pintarCabecera();
+  $('btnSalir').addEventListener('click', function () { API.logout(); });
 
-  $('btnSalir').addEventListener('click', function(){
-    API.logout();
+  // ---------------- Pestañas ----------------
+  function mostrar(tab) {
+    document.querySelectorAll('#tabs [data-tab]').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === tab); });
+    document.querySelectorAll('[data-pane]').forEach(function (p) { p.hidden = p.dataset.pane !== tab; });
+    history.replaceState(null, '', '#' + tab);
+    window.scrollTo({ top: 0 });
+  }
+  document.querySelectorAll('#tabs [data-tab]').forEach(function (b) { b.addEventListener('click', function () { mostrar(b.dataset.tab); }); });
+  document.addEventListener('click', function (e) { var b = e.target.closest('[data-ir]'); if (b) { e.preventDefault(); mostrar(b.dataset.ir); } });
+
+  // ---------------- Datos ----------------
+  async function cargarTodo() {
+    var r = await Promise.allSettled([API.get(BASE + '/pagables'), API.get(BASE + '/operaciones'), API.get(BASE + '/pagos'), API.get(BASE + '/estado-cuenta')]);
+    pagables = r[0].status === 'fulfilled' ? r[0].value : [];
+    operaciones = r[1].status === 'fulfilled' ? r[1].value : [];
+    misPagos = r[2].status === 'fulfilled' ? r[2].value : [];
+    if (r[3].status === 'fulfilled') {
+      var ec = r[3].value;
+      $('rDeuda').textContent = S.money(ec.deudaTotal);
+      $('rVerif').textContent = S.money(ec.porVerificar);
+      $('rPagado').textContent = S.money(ec.totalPagado);
+    }
+    var pend = operaciones.filter(function (o) { return o.estado === 'PENDIENTE'; }).length;
+    $('rPend').textContent = S.num(pend); $('rTram').textContent = S.num(operaciones.length) + ' trámites en total';
+    pintarInicio(); pintarPagos(); pintarTramites();
+    // No se repinta la lista mientras el cliente está en medio de un pago (no se pierde lo que escribió).
+    if (!primeraCarga || document.querySelector('[data-pane="pagar"]').hidden) pintarPagables();
+    primeraCarga = true;
+  }
+  var primeraCarga = false;
+
+  function pintarInicio() {
+    $('inicioPagables').innerHTML = pagables.length ? pagables.map(function (p, i) {
+      return '<li><div class="who"><b>' + esc(p.titulo) + '</b><span>' + esc(p.detalle) + '</span></div>'
+        + '<span class="amt">' + S.money(p.montoSugerido) + '</span><button class="btn btn-sm btn-primary" data-pagar="' + i + '">Pagar</button></li>';
+    }).join('') : '<li class="sg-empty"><i class="fa-solid fa-circle-check"></i>No tienes pagos pendientes. Si quieres pagar otro concepto, usa “Pagar con QR”.</li>';
+    var mov = misPagos.slice(0, 4).map(function (p) {
+      return '<li>' + S.wallet(p.metodo) + '<div class="who"><b>' + esc(S.concepto(p.concepto)) + '</b><span>' + esc(S.fechaHora(p.fechaPago)) + '</span></div>'
+        + '<div class="text-end"><div class="amt">' + S.money(p.monto) + '</div>' + S.badge(p.estado) + '</div></li>';
+    });
+    operaciones.slice(0, 6 - mov.length).forEach(function (o) {
+      mov.push('<li><span class="badge text-bg-light border">' + esc(S.etiqueta(o.tipoOperacion)) + '</span><div class="who"><b>Solicitud N° ' + o.idOperacion
+        + '</b><span>' + esc(S.fechaHora(o.fechaOperacion)) + '</span></div><div class="text-end"><div class="amt">' + S.money(o.monto) + '</div>' + S.badge(o.estado) + '</div></li>');
+    });
+    $('inicioMov').innerHTML = mov.join('') || '<li class="sg-empty">Aún no tienes movimientos.</li>';
+  }
+  $('inicioPagables').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-pagar]'); if (!b) return;
+    pago.idx = parseInt(b.dataset.pagar, 10); pintarPagables(); paso(1); mostrar('pagar');
   });
 
-  function money(n){ return 'S/ ' + Number(n||0).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-  function ok(el,t){ el.style.color='#059669'; el.textContent='✔ ' + t; }
-  function err(el,t){ el.style.color='#dc2626'; el.textContent=t; }
+  // ================= PAGAR CON QR =================
+  function paso(n) {
+    document.querySelectorAll('[data-step]').forEach(function (x) { x.hidden = String(n) !== x.dataset.step; });
+    document.querySelectorAll('[data-paso]').forEach(function (x) {
+      var k = parseInt(x.dataset.paso, 10); x.classList.toggle('on', k === n); x.classList.toggle('done', k < n);
+    });
+  }
+  document.querySelectorAll('[data-volver]').forEach(function (b) { b.addEventListener('click', function () { paso(parseInt(b.dataset.volver, 10)); }); });
 
-  // --- Tipos de cambio ---
-  async function cargarTipos(){
-    try{
+  function pintarPagables() {
+    var h = pagables.map(function (p, i) {
+      return '<label class="pagable' + (pago.idx === i ? ' sel' : '') + '"><input class="form-check-input" type="radio" name="pag" value="' + i + '"' + (pago.idx === i ? ' checked' : '') + '>'
+        + '<div><div class="t">' + esc(p.titulo) + '</div><div class="d">' + esc(p.detalle) + '</div></div><div class="m">' + S.money(p.montoSugerido) + '</div></label>';
+    }).join('');
+    h += '<label class="pagable' + (pago.idx === 'OTRO' ? ' sel' : '') + '"><input class="form-check-input" type="radio" name="pag" value="OTRO"' + (pago.idx === 'OTRO' ? ' checked' : '') + '>'
+      + '<div><div class="t">Otro pago</div><div class="d">Adelantos, comisiones u otros conceptos acordados con la entidad.</div></div></label>';
+    $('listaPagables').innerHTML = h;
+    if (pago.idx === null && pagables.length) elegir(0); else elegir(pago.idx);
+  }
+  function elegir(idx) {
+    pago.idx = idx;
+    document.querySelectorAll('.pagable').forEach(function (l) { var i = l.querySelector('input'); l.classList.toggle('sel', i.value === String(idx)); i.checked = i.value === String(idx); });
+    var p = pagables[idx];
+    $('otroWrap').classList.toggle('d-none', idx !== 'OTRO');
+    if (p) { $('pMonto').value = Number(p.montoSugerido).toFixed(2); $('pMonto').max = p.montoMaximo; $('pMax').textContent = 'Puedes pagar hasta ' + S.money(p.montoMaximo) + '.'; }
+    else { $('pMax').textContent = ''; $('pMonto').removeAttribute('max'); }
+  }
+  $('listaPagables').addEventListener('change', function (e) { if (e.target.name === 'pag') elegir(e.target.value === 'OTRO' ? 'OTRO' : parseInt(e.target.value, 10)); });
+
+  var INICIAL = { YAPE: 'Y', PLIN: 'P', TUNKI: 'T' };
+  async function cargarBilleteras() {
+    try {
+      billeteras = await API.get(BASE + '/billeteras');
+      var orden = ['YAPE', 'PLIN', 'TUNKI'];
+      $('billeteras').innerHTML = orden.map(function (c) {
+        var b = billeteras.filter(function (x) { return x.codigo === c; })[0];
+        return '<div><input type="radio" name="wal" id="w' + c + '" value="' + c + '"' + (b ? '' : ' disabled') + '><label for="w' + c + '">'
+          + '<span class="dot" style="background:var(--sg-' + c.toLowerCase() + ')">' + INICIAL[c] + '</span>' + S.etiqueta(c)
+          + (b ? '' : '<div class="small text-muted fw-normal">No disponible</div>') + '</label></div>';
+      }).join('');
+      var primera = document.querySelector('input[name="wal"]:not(:disabled)');
+      if (primera) { primera.checked = true; pago.metodo = primera.value; }
+      document.querySelectorAll('input[name="wal"]').forEach(function (r) { r.addEventListener('change', function () { pago.metodo = r.value; }); });
+    } catch (e) { $('billeteras').innerHTML = '<div class="text-danger small">' + esc(e.message) + '</div>'; }
+  }
+
+  function errorPaso(id, msg) { var e = $(id); e.textContent = msg || ''; e.classList.toggle('d-none', !msg); }
+
+  $('btnPaso2').addEventListener('click', function () {
+    var monto = parseFloat($('pMonto').value), p = pagables[pago.idx];
+    if (pago.idx === null || pago.idx === undefined) { errorPaso('p1Err', 'Elige qué vas a pagar.'); return; }
+    if (!(monto > 0)) { errorPaso('p1Err', 'Ingresa el monto a pagar.'); $('pMonto').focus(); return; }
+    if (p && monto > Number(p.montoMaximo) + 0.001) { errorPaso('p1Err', 'El monto supera lo pendiente (' + S.money(p.montoMaximo) + ').'); return; }
+    if (pago.idx === 'OTRO' && !$('pDesc').value.trim()) { errorPaso('p1Err', 'Cuéntanos qué estás pagando.'); $('pDesc').focus(); return; }
+    if (!pago.metodo) { errorPaso('p1Err', 'Elige con qué billetera pagarás.'); return; }
+    errorPaso('p1Err', '');
+    pago.monto = Math.round(monto * 100) / 100;
+    pago.sel = p || null;
+    pago.descripcion = $('pDesc').value.trim();
+    pago.referencia = 'C' + cliente.idCliente + (p ? '-OP' + p.idOperacion : '');
+    pintarTicket(); paso(2);
+  });
+
+  function pintarTicket() {
+    var b = billeteras.filter(function (x) { return x.codigo === pago.metodo; })[0] || {};
+    var t = $('ticket');
+    t.className = 'pay-ticket ' + pago.metodo;
+    t.innerHTML = '<div class="top"><span class="brand">' + esc(b.nombre || S.etiqueta(pago.metodo)) + '</span><span class="small">Pago a ' + esc(b.titular || 'SIGSF') + '</span></div>'
+      + '<div class="amount"><span class="cur">S/</span><span class="val">' + Number(pago.monto).toLocaleString('es-PE', { minimumFractionDigits: 2 }) + '</span>'
+      + '<div class="small text-muted mt-1">Paga el monto exacto</div></div>'
+      + '<div class="qr" id="qrBox"></div>'
+      + (b.tieneQr ? '' : '<div class="demo">QR de referencia con los datos del pago. Si tu app no lo reconoce, paga al número indicado.</div>')
+      + '<div class="perf"></div>'
+      + '<dl><dt>Número</dt><dd><span class="copiable">' + esc(b.numeroCelular || '—') + '<button type="button" data-copiar="' + esc(b.numeroCelular || '') + '" title="Copiar número" aria-label="Copiar número"><i class="fa-regular fa-copy"></i></button></span></dd>'
+      + '<dt>Titular</dt><dd>' + esc(b.titular || '—') + '</dd>'
+      + '<dt>Mensaje / referencia</dt><dd><span class="copiable"><span class="ref">' + esc(pago.referencia) + '</span><button type="button" data-copiar="' + esc(pago.referencia) + '" title="Copiar referencia" aria-label="Copiar referencia"><i class="fa-regular fa-copy"></i></button></span></dd>'
+      + '<dt>Concepto</dt><dd>' + esc(pago.sel ? pago.sel.titulo : pago.descripcion) + '</dd></dl>';
+    var box = $('qrBox');
+    if (b.tieneQr) { var img = new Image(); img.alt = 'QR de cobro de ' + (b.nombre || ''); img.src = b.qrImagen; box.appendChild(img); }
+    else S.qr(box, (b.nombre || pago.metodo) + ' ' + (b.numeroCelular || '') + ' | ' + (b.titular || 'SIGSF') + ' | S/ ' + pago.monto.toFixed(2) + ' | Ref ' + pago.referencia);
+    var pasos = [
+      'Abre <b>' + esc(b.nombre || pago.metodo) + '</b> en tu celular y elige pagar o escanear QR.',
+      'Escanea el código o paga al número <b>' + esc(b.numeroCelular || '') + '</b> a nombre de <b>' + esc(b.titular || '') + '</b>.',
+      'Ingresa exactamente <b>' + S.money(pago.monto) + '</b> y escribe <b>' + esc(pago.referencia) + '</b> en el mensaje.',
+      'Al terminar, anota el <b>número de operación</b> que te muestra la app y regístralo en el siguiente paso.'
+    ];
+    $('instrucciones').innerHTML = pasos.map(function (x) { return '<li class="mb-1">' + x + '</li>'; }).join('');
+    $('instrBil').textContent = b.instrucciones || '';
+    $('instrBil').hidden = !b.instrucciones;
+  }
+  $('ticket').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copiar]'); if (!b) return;
+    var txt = b.dataset.copiar;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () { S.toast('Copiado: ' + txt, 'info'); })
+      .catch(function () { S.toast('No se pudo copiar. Escríbelo manualmente: ' + txt, 'info'); });
+  });
+
+  $('btnPaso3').addEventListener('click', function () {
+    $('resumenPago').innerHTML = '<span>' + S.wallet(pago.metodo) + '</span><span class="fw-600">' + S.money(pago.monto) + '</span>';
+    if (!$('pCelular').value && cliente.telefono) $('pCelular').value = cliente.telefono;
+    paso(3); $('pNumero').focus();
+  });
+
+  var constancia = null;
+  $('pFoto').addEventListener('change', async function () {
+    constancia = null; $('pFotoPrev').innerHTML = '';
+    var f = this.files[0]; if (!f) return;
+    try {
+      constancia = await S.imagenADataUrl(f, 1100, 0.72);
+      $('pFotoPrev').innerHTML = '<img alt="Vista previa de la constancia" src="' + constancia + '">';
+    } catch (e) { S.toast(e.message, 'err'); this.value = ''; }
+  });
+
+  $('formPago').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    var num = $('pNumero').value.trim().replace(/\s/g, '');
+    var valido = /^[A-Za-z0-9-]{4,30}$/.test(num);
+    $('pNumero').classList.toggle('is-invalid', !valido);
+    if (!valido) { $('pNumero').focus(); return; }
+    var p = pago.sel;
+    var datos = { metodo: pago.metodo, monto: pago.monto, numeroOperacion: num, celularOrigen: $('pCelular').value.trim(), constancia: constancia };
+    if (p) { datos.idOperacion = p.idOperacion; datos.concepto = p.concepto; }
+    else { datos.concepto = 'OTRO'; datos.descripcion = pago.descripcion; }
+    var btn = $('btnRegistrar'); btn.disabled = true; errorPaso('p3Err', '');
+    try {
+      var r = await API.post(BASE + '/pagos', datos);
+      var ok = r.estado === 'CONFIRMADO';
+      $('pagoListo').innerHTML = '<div class="display-6 mb-2 ' + (ok ? 'text-success' : 'text-warning') + '"><i class="fa-solid ' + (ok ? 'fa-circle-check' : 'fa-hourglass-half') + '"></i></div>'
+        + '<h2 class="h4">' + (ok ? 'Pago confirmado' : 'Pago registrado') + '</h2>'
+        + '<p class="text-muted mb-3">' + (ok ? 'Tu pago ya se aplicó. Puedes descargar tu comprobante.'
+          : 'Caja verificará tu pago con ' + esc(S.etiqueta(r.metodo)) + ' y lo verás confirmado en “Mis pagos”. Te recomendamos guardar tu constancia.') + '</p>'
+        + '<div class="d-inline-grid text-start small mb-3" style="grid-template-columns:auto auto;gap:.25rem 1.25rem;display:inline-grid">'
+        + '<span class="text-muted">Código</span><b>' + esc(r.codigo) + '</b><span class="text-muted">Monto</span><b>' + S.money(r.monto) + '</b>'
+        + '<span class="text-muted">N° de operación</span><b>' + esc(r.numeroOperacion) + '</b><span class="text-muted">Estado</span><span>' + S.badge(r.estado) + '</span></div>'
+        + '<div class="d-flex flex-wrap gap-2 justify-content-center"><button class="btn btn-outline-primary" id="verConst"><i class="fa-solid fa-receipt me-1"></i>' + (ok ? 'Ver comprobante' : 'Ver constancia de registro') + '</button>'
+        + '<button class="btn btn-primary" id="otroPago">Hacer otro pago</button></div>';
+      $('verConst').addEventListener('click', function () { S.abrirDocumento('portal-documento.html?tipo=pago&id=' + r.idPago); });
+      $('otroPago').addEventListener('click', function () { reiniciarPago(); });
+      paso(4);
+      S.toast(ok ? 'Pago confirmado.' : 'Pago registrado. Queda por verificar.', 'ok');
+      cargarTodo();
+    } catch (e) { errorPaso('p3Err', e.message); }
+    btn.disabled = false;
+  });
+  function reiniciarPago() {
+    pago.idx = null; constancia = null;
+    $('formPago').reset(); $('pFotoPrev').innerHTML = ''; $('pDesc').value = '';
+    pintarPagables(); paso(1);
+  }
+
+  // ================= COTIZAR =================
+  // Mismas tasas que PortalService (15 % mensual préstamo, 10 % mensual empeño); el servidor hace el cálculo oficial.
+  var TASA_PRESTAMO = 15, TASA_EMPENO = 10;
+  function tipoCot() { return document.querySelector('input[name="qTipo"]:checked').value; }
+  function estimar() {
+    var t = tipoCot(), m = parseFloat($('qMonto').value), out = $('qEstimado');
+    document.querySelectorAll('[data-q]').forEach(function (x) { x.hidden = x.dataset.q !== t; });
+    $('qMontoLbl').textContent = t === 'CAMBIO' ? 'Monto a cambiar' : 'Monto que necesitas';
+    var tcSel = tipos.filter(function (x) { return String(x.idTipoCambio) === $('qTc').value; })[0];
+    $('qMon').textContent = t === 'CAMBIO' && tcSel ? tcSel.monedaOrigen : 'S/';
+    if (!(m > 0)) { out.innerHTML = '<span class="text-muted small">Ingresa un monto para ver el cálculo.</span>'; return; }
+    if (t === 'PRESTAMO') {
+      var n = parseInt($('qPlazo').value, 10), total = m * (1 + TASA_PRESTAMO / 100 * n);
+      out.innerHTML = '<div class="small text-muted">Cuota mensual estimada</div><div class="big">' + S.money(total / n) + '</div>'
+        + '<div class="small">Total ' + S.money(total) + ' en ' + n + ' cuotas · tasa ' + TASA_PRESTAMO + ' % mensual</div>';
+    } else if (t === 'EMPENO') {
+      var d = parseInt($('qDias').value, 10), interes = m * TASA_EMPENO / 100 * d / 30;
+      out.innerHTML = '<div class="small text-muted">Para recuperar tu artículo pagarías aprox.</div><div class="big">' + S.money(m + interes) + '</div>'
+        + '<div class="small">Interés ' + S.money(interes) + ' por ' + d + ' días</div>';
+    } else if (tcSel) {
+      out.innerHTML = '<div class="small text-muted">Recibirías aprox.</div><div class="big">' + S.money(m * Number(tcSel.venta), tcSel.monedaDestino) + '</div>'
+        + '<div class="small">Tipo de cambio ' + esc(tcSel.venta) + '</div>';
+    }
+  }
+  ['qMonto', 'qPlazo', 'qDias', 'qTc'].forEach(function (id) { $(id).addEventListener('input', estimar); $(id).addEventListener('change', estimar); });
+  document.querySelectorAll('input[name="qTipo"]').forEach(function (r) { r.addEventListener('change', estimar); });
+
+  $('formCot').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    var t = tipoCot(), datos = { tipo: t, monto: parseFloat($('qMonto').value) };
+    if (t === 'PRESTAMO') datos.plazo = parseInt($('qPlazo').value, 10);
+    if (t === 'EMPENO') { datos.plazo = parseInt($('qDias').value, 10); datos.descripcion = $('qArt').value.trim(); datos.valorEstimado = parseFloat($('qValor').value) || null; }
+    if (t === 'CAMBIO') datos.idTipoCambio = parseInt($('qTc').value, 10);
+    try {
+      var q = await API.post(BASE + '/cotizaciones', datos);
+      S.toast('Cotización ' + q.numero + ' generada.', 'ok');
+      S.abrirDocumento('portal-documento.html?tipo=cotizacion&id=' + q.idCotizacion);
+      cargarCotizaciones();
+    } catch (e) { S.toast(e.message, 'err'); }
+  });
+
+  async function cargarCotizaciones() {
+    try {
+      cotizaciones = await API.get(BASE + '/cotizaciones');
+      $('tablaCot').innerHTML = cotizaciones.length ? cotizaciones.map(function (q) {
+        var res = q.tipo === 'PRESTAMO' ? S.money(q.cuota) + '<span class="sub">cuota · ' + q.plazo + ' meses</span>'
+          : q.tipo === 'CAMBIO' ? S.money(q.montoRecibir, q.monedaRecibir) + '<span class="sub">recibes</span>' : S.money(q.totalPagar) + '<span class="sub">para recuperar</span>';
+        return '<tr><td class="fw-600 text-nowrap">' + esc(q.numero) + '</td><td>' + esc(S.etiqueta(q.tipo)) + '</td><td class="num">' + S.money(q.monto, q.moneda) + '</td><td class="num">' + res + '</td>'
+          + '<td>' + S.badge(q.estado) + '<span class="sub">hasta ' + esc(S.fecha(q.fechaVencimiento)) + '</span></td><td class="text-end text-nowrap">'
+          + '<button class="btn btn-sm btn-light btn-icon" data-ver="' + q.idCotizacion + '" title="Ver e imprimir" aria-label="Ver e imprimir"><i class="fa-solid fa-print"></i></button>'
+          + (q.estado === 'VIGENTE' ? ' <button class="btn btn-sm btn-outline-primary" data-sol="' + q.idCotizacion + '">Solicitar</button>' : '') + '</td></tr>';
+      }).join('') : '<tr class="empty-row"><td colspan="6">Aún no tienes cotizaciones. Genera la primera con el formulario.</td></tr>';
+    } catch (e) { $('tablaCot').innerHTML = '<tr class="empty-row"><td colspan="6" class="text-danger">' + esc(e.message) + '</td></tr>'; }
+  }
+  $('tablaCot').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.ver) S.abrirDocumento('portal-documento.html?tipo=cotizacion&id=' + b.dataset.ver);
+    if (b.dataset.sol) {
+      var ok = await S.confirmar('Enviaremos una solicitud con los datos de esta cotización para que la entidad la evalúe.', { titulo: 'Enviar solicitud', ok: 'Enviar solicitud' });
+      if (!ok) return;
+      try { var r = await API.post(BASE + '/cotizaciones/' + b.dataset.sol + '/solicitar', {}); S.toast(r.mensaje, 'ok'); cargarCotizaciones(); cargarTodo(); }
+      catch (err) { S.toast(err.message, 'err'); }
+    }
+  });
+
+  // ================= TRÁMITES =================
+  async function cargarTipos() {
+    try {
       tipos = await API.get('/tipos-cambio');
-      var s = $('cbTipo'); s.innerHTML='';
-      tipos.forEach(function(t){
-        var o=document.createElement('option');
-        o.value=t.idTipoCambio;
-        o.textContent = t.monedaOrigen + ' → ' + t.monedaDestino + '  (venta ' + t.venta + ')';
-        s.appendChild(o);
-      });
-    }catch(e){ err($('cbMsg'), 'No se pudieron cargar los tipos de cambio.'); }
+      var opts = tipos.filter(function (t) { return t.estado !== 'INACTIVO'; }).map(function (t) {
+        return '<option value="' + t.idTipoCambio + '">' + esc(t.monedaOrigen + ' → ' + t.monedaDestino + ' (venta ' + t.venta + ')') + '</option>';
+      }).join('');
+      $('cbTipo').innerHTML = opts; $('qTc').innerHTML = opts;
+    } catch (e) { }
   }
-
-  // --- Historial ---
-  function resumen(lista){
-    lista = lista || [];
-    var pend = lista.filter(function(o){ return (o.estado||'')==='PENDIENTE'; }).length;
-    var ok   = lista.filter(function(o){ var e=(o.estado||''); return e==='COMPLETADA'||e==='APROBADO'||e==='ACTIVO'; }).length;
-    var tot  = lista.reduce(function(a,o){ return a + Number(o.monto||0); }, 0);
-    $('rsTotal').textContent = lista.length;
-    $('rsPend').textContent  = pend;
-    $('rsOk').textContent    = ok;
-    $('rsMonto').textContent = money(tot);
+  function msg(id, ok, t) { var e = $(id); e.className = 'mt-2 small ' + (ok ? 'text-success' : 'text-danger'); e.textContent = t; }
+  function enviarTramite(form, msgId, fn) {
+    $(form).addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      var b = this.querySelector('button[type="submit"]'); b.disabled = true;
+      try { var t = await fn(); msg(msgId, true, t); this.reset(); cargarTodo(); }
+      catch (e) { msg(msgId, false, e.message); }
+      b.disabled = false;
+    });
   }
-
-  function badge(estado){
-    var e=(estado||'').toUpperCase(), c='b-otro';
-    if(e==='PENDIENTE') c='b-pend';
-    else if(e==='COMPLETADA'||e==='APROBADO'||e==='ACTIVO') c='b-ok';
-    return '<span class="badge '+c+'">'+(estado||'')+'</span>';
-  }
-  async function cargarHistorial(){
-    var tb=$('histTabla');
-    try{
-      var lista = await API.get('/portal/' + cliente.idCliente + '/operaciones');
-      tb.innerHTML='';
-      if(!lista.length){
-        tb.innerHTML='<tr><td colspan="5" style="text-align:center;color:#64748b;padding:18px;">Aún no tienes trámites registrados.</td></tr>';
-        resumen([]);
-        return;
-      }
-      lista.forEach(function(o){
-        var f = o.fechaOperacion ? String(o.fechaOperacion).replace('T',' ').substring(0,16) : '';
-        var tr=document.createElement('tr');
-        tr.innerHTML = '<td>'+o.idOperacion+'</td><td>'+(o.tipoOperacion||'')+'</td><td>'+money(o.monto)+'</td><td>'+badge(o.estado)+'</td><td>'+f+'</td>';
-        tb.appendChild(tr);
-      });
-      resumen(lista);
-    }catch(e){ tb.innerHTML='<tr><td colspan="5" style="color:#dc2626;">Error: '+e.message+'</td></tr>'; }
-  }
-
-  // --- Trámite: cambio ---
-  $('cbBtn').addEventListener('click', async function(){
-    var m=$('cbMsg'), monto=parseFloat($('cbMonto').value), idtc=parseInt($('cbTipo').value,10);
-    if(isNaN(monto)||monto<=0){ err(m,'Ingresa un monto válido.'); return; }
-    this.disabled=true;
-    try{
-      var o = await API.post('/portal/'+cliente.idCliente+'/cambio', { idTipoCambio: idtc, monto: monto });
-      ok(m,'Solicitud enviada. Recibirás ' + money(o.totalRecibir) + '.');
-      $('cbMonto').value=''; cargarHistorial();
-    }catch(e){ err(m, e.message); }
-    this.disabled=false;
+  enviarTramite('fCambio', 'cbMsg', async function () {
+    var m = parseFloat($('cbMonto').value); if (!(m > 0)) throw new Error('Ingresa un monto válido.');
+    var o = await API.post(BASE + '/cambio', { idTipoCambio: parseInt($('cbTipo').value, 10), monto: m });
+    return 'Solicitud enviada. Recibirás ' + S.money(o.totalRecibir, o.monedaDestino) + '.';
+  });
+  enviarTramite('fPrestamo', 'prMsg', async function () {
+    var m = parseFloat($('prMonto').value), n = parseInt($('prPlazo').value, 10); if (!(m > 0)) throw new Error('Ingresa el monto que necesitas.');
+    var r = await API.post(BASE + '/prestamo', { montoPrestamo: m, plazoMeses: n });
+    return 'Solicitud enviada. Cuota estimada: ' + S.money(r.prestamo ? r.prestamo.cuotaMensual : 0) + ' por ' + n + ' meses.';
+  });
+  enviarTramite('fEmpeno', 'emMsg', async function () {
+    var d = $('emDesc').value.trim(), v = parseFloat($('emValor').value), m = parseFloat($('emMonto').value);
+    if (!d) throw new Error('Describe el artículo.'); if (!(m > 0)) throw new Error('Ingresa el monto que solicitas.');
+    var r = await API.post(BASE + '/empeno', { descripcionArticulo: d, valorEstimado: isNaN(v) ? null : v, montoPrestamo: m, plazoDias: 30 });
+    return r.mensaje || 'Solicitud de empeño enviada.';
   });
 
-  // --- Trámite: préstamo ---
-  $('prBtn').addEventListener('click', async function(){
-    var m=$('prMsg'), monto=parseFloat($('prMonto').value), plazo=parseInt($('prPlazo').value,10);
-    if(isNaN(monto)||monto<=0){ err(m,'Ingresa el monto que necesitas.'); return; }
-    this.disabled=true;
-    try{
-      var r = await API.post('/portal/'+cliente.idCliente+'/prestamo', { montoPrestamo: monto, plazoMeses: plazo });
-      var cuota = r.prestamo ? r.prestamo.cuotaMensual : null;
-      ok(m,'Solicitud enviada. Cuota estimada: ' + money(cuota) + ' por ' + plazo + ' meses.');
-      $('prMonto').value=''; cargarHistorial();
-    }catch(e){ err(m, e.message); }
-    this.disabled=false;
+  // ================= HISTORIAL =================
+  function pintarPagos() {
+    $('tablaPagos').innerHTML = misPagos.length ? misPagos.map(function (p) {
+      return '<tr><td class="text-nowrap">' + esc(S.fechaHora(p.fechaPago)) + '</td><td>' + esc(S.concepto(p.concepto)) + '<span class="sub">' + esc(p.descripcion || '') + '</span></td>'
+        + '<td>' + S.wallet(p.metodo) + '</td><td><code>' + esc(p.numeroOperacion || '—') + '</code></td><td class="num fw-600">' + S.money(p.monto) + '</td>'
+        + '<td>' + S.badge(p.estado) + (p.observacion ? '<span class="sub">' + esc(p.observacion) + '</span>' : '') + '</td>'
+        + '<td class="text-end"><button class="btn btn-sm btn-light" data-doc="' + p.idPago + '"><i class="fa-solid fa-receipt me-1"></i>' + esc(p.numeroComprobante || 'Constancia') + '</button></td></tr>';
+    }).join('') : '<tr class="empty-row"><td colspan="7">Aún no registras pagos.</td></tr>';
+  }
+  $('tablaPagos').addEventListener('click', function (e) { var b = e.target.closest('[data-doc]'); if (b) S.abrirDocumento('portal-documento.html?tipo=pago&id=' + b.dataset.doc); });
+  $('btnEstado').addEventListener('click', function () { S.abrirDocumento('portal-documento.html?tipo=estado-cuenta'); });
+  function pintarTramites() {
+    $('histTabla').innerHTML = operaciones.length ? operaciones.map(function (o) {
+      return '<tr><td>' + o.idOperacion + '</td><td>' + esc(S.etiqueta(o.tipoOperacion)) + '</td><td class="num">' + S.money(o.monto) + '</td><td>' + S.badge(o.estado) + '</td><td>' + esc(S.fechaHora(o.fechaOperacion)) + '</td></tr>';
+    }).join('') : '<tr class="empty-row"><td colspan="5">Aún no tienes trámites.</td></tr>';
+  }
+
+  // ================= MIS DATOS =================
+  $('fDatos').addEventListener('submit', async function (ev) {
+    ev.preventDefault();
+    try {
+      cliente = await API.put(BASE + '/datos', { telefono: $('mdTel').value.trim(), correo: $('mdCorreo').value.trim(), direccion: $('mdDir').value.trim() });
+      try { sessionStorage.setItem('sigsf_cliente', JSON.stringify(cliente)); } catch (e) { }
+      pintarCabecera(); S.toast('Datos actualizados.', 'ok');
+    } catch (e) { S.toast(e.message, 'err'); }
   });
 
-  // --- Trámite: empeño ---
-  $('emBtn').addEventListener('click', async function(){
-    var m=$('emMsg'), desc=$('emDesc').value.trim(),
-        valor=parseFloat($('emValor').value), monto=parseFloat($('emMonto').value);
-    if(!desc){ err(m,'Describe el artículo.'); return; }
-    if(isNaN(monto)||monto<=0){ err(m,'Ingresa el monto que solicitas.'); return; }
-    this.disabled=true;
-    try{
-      var r = await API.post('/portal/'+cliente.idCliente+'/empeno', {
-        descripcionArticulo: desc, valorEstimado: isNaN(valor)?null:valor,
-        montoPrestamo: monto, plazoDias: 30
-      });
-      ok(m, r.mensaje || 'Solicitud de empeño enviada.');
-      $('emDesc').value=''; $('emValor').value=''; $('emMonto').value=''; cargarHistorial();
-    }catch(e){ err(m, e.message); }
-    this.disabled=false;
-  });
-
-  // --- Mis datos ---
-  $('mdBtn').addEventListener('click', async function(){
-    var m=$('mdMsg');
-    this.disabled=true;
-    try{
-      var c = await API.put('/portal/'+cliente.idCliente+'/datos', {
-        telefono: $('mdTel').value.trim(),
-        correo: $('mdCorreo').value.trim(),
-        direccion: $('mdDir').value.trim()
-      });
-      cliente = c;
-      try{ sessionStorage.setItem('sigsf_cliente', JSON.stringify(c)); }catch(e){}
-      ok(m,'Datos actualizados.');
-    }catch(e){ err(m, e.message); }
-    this.disabled=false;
-  });
-
-  cargarTipos();
-  cargarHistorial();
+  // ---------------- Inicio ----------------
+  cargarBilleteras(); cargarTipos().then(estimar); cargarCotizaciones(); cargarTodo();
+  var t0 = (location.hash || '').slice(1);
+  if (t0 && document.querySelector('[data-tab="' + t0 + '"]')) mostrar(t0);
+  setInterval(function () { if (!document.hidden) cargarTodo(); }, 30000);
 })();
 </script>
 </body>

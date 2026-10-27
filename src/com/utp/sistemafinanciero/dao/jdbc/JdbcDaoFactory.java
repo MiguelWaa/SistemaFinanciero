@@ -29,6 +29,9 @@ public class JdbcDaoFactory implements DaoFactory {
     private final ExpedienteAprobacionDao expedientes = new ExpedienteAprobacionDaoJdbc();
     private final AuditoriaDao auditoria = new AuditoriaDaoJdbc();
     private final VersionEsquemaDao versionesEsquema = new VersionEsquemaDaoJdbc();
+    private final PagoDao pagos = new PagoDaoJdbc();
+    private final BilleteraDao billeteras = new BilleteraDaoJdbc();
+    private final CotizacionDao cotizaciones = new CotizacionDaoJdbc();
 
     @Override public String nombre() { return "PostgreSQL (JDBC)"; }
     @Override public RolDao roles() { return roles; }
@@ -51,4 +54,7 @@ public class JdbcDaoFactory implements DaoFactory {
     @Override public ExpedienteAprobacionDao expedientes() { return expedientes; }
     @Override public AuditoriaDao auditoria() { return auditoria; }
     @Override public VersionEsquemaDao versionesEsquema() { return versionesEsquema; }
+    @Override public PagoDao pagos() { return pagos; }
+    @Override public BilleteraDao billeteras() { return billeteras; }
+    @Override public CotizacionDao cotizaciones() { return cotizaciones; }
 }

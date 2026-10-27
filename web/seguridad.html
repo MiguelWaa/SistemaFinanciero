@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Seguridad</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 <link rel="stylesheet" href="sigsf-modulo.css">
 </head>
 <body>
@@ -24,7 +28,9 @@
   <div id="moduloContenido"></div>
 </div>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
 <script src="sigsf-crud.js"></script>
 <script>
 
@@ -57,7 +63,7 @@ SIGSF.modulo({
 // ---- Matriz de permisos por rol (RBAC) que aplica el servidor ----
 (async function(){
   var cont = document.createElement('div');
-  cont.className = 'card';
+  cont.className = 'card sg-legacy';
   cont.innerHTML = '<h2><i class="fa-solid fa-table-cells" style="color:#2563eb;"></i> Matriz de permisos por rol (aplicada en el servidor)</h2>'
     + '<div class="sub">L = consultar · LE = consultar y modificar · — = sin acceso. Cada petición a la API se valida con esta matriz '
     + '(FiltroSeguridad + PoliticaAcceso). Las sesiones expiran por inactividad y la cuenta se bloquea tras 5 intentos fallidos.</div>'

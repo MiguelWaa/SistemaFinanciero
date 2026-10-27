@@ -40,4 +40,10 @@ public interface DaoFactory {
     AuditoriaDao auditoria();
     /** Historial de versiones del esquema de la base (tabla version_esquema). */
     VersionEsquemaDao versionesEsquema();
+    /** Pagos con billeteras digitales (Yape, Plin, Tunki) y en caja. */
+    PagoDao pagos();
+    /** Billeteras digitales de cobro de la entidad. */
+    BilleteraDao billeteras();
+    /** Cotizaciones de préstamos, empeños y cambio de moneda. */
+    CotizacionDao cotizaciones();
 }
