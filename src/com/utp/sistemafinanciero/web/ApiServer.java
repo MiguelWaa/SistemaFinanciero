@@ -75,8 +75,9 @@ public class ApiServer {
 
     private static final String CSP = "default-src 'self'; "
             + "script-src 'self' 'unsafe-inline'; "
-            + "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; "
-            + "font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; "
+            // Bootstrap y Font Awesome se sirven desde web/vendor (sin CDN): solo se permite Google Fonts.
+            + "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+            + "font-src 'self' data: https://fonts.gstatic.com; "
             + "img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'self'; "
             + "base-uri 'self'; form-action 'self'";
 
@@ -125,7 +126,7 @@ public class ApiServer {
     public int iniciar(int puerto) throws IOException {
         server = HttpServer.create(new InetSocketAddress(puerto), 0);
         server.createContext("/", this::despachar);
-        hilos = Executors.newFixedThreadPool(8);
+        hilos = Executors.newFixedThreadPool(Math.max(16, Runtime.getRuntime().availableProcessors() * 4));
         server.setExecutor(hilos);
         server.start();
         return server.getAddress().getPort();
@@ -320,13 +321,54 @@ public class ApiServer {
             responderTexto(ex, 404, "Archivo no encontrado: " + ruta);
             return;
         }
+        String tipo = tipoContenido(archivo);
+        var h = ex.getResponseHeaders();
+        h.set("Content-Type", tipo);
+        // Librerías de terceros (web/vendor) no cambian entre versiones: caché de 7 días.
+        // Las páginas y scripts propios se revalidan siempre (ETag por fecha y tamaño).
+        boolean vendor = relativa.startsWith("vendor/");
+        h.set("Cache-Control", vendor ? "public, max-age=604800" : "no-cache");
+        String etag = "\"" + Long.toHexString(Files.getLastModifiedTime(archivo).toMillis()) + "-"
+                + Long.toHexString(Files.size(archivo)) + "\"";
+        h.set("ETag", etag);
+        if (etag.equals(ex.getRequestHeaders().getFirst("If-None-Match"))) {
+            ex.sendResponseHeaders(304, -1);
+            return;
+        }
         byte[] datos = Files.readAllBytes(archivo);
-        ex.getResponseHeaders().set("Content-Type", tipoContenido(archivo));
-        ex.getResponseHeaders().set("Cache-Control", "no-cache");
+        String acepta = ex.getRequestHeaders().getFirst("Accept-Encoding");
+        boolean comprimible = datos.length > 1024 && (tipo.startsWith("text/") || tipo.contains("javascript")
+                || tipo.contains("json") || tipo.contains("svg"));
+        if (comprimible && acepta != null && acepta.contains("gzip")) {
+            datos = gzip(archivo, datos);
+            h.set("Content-Encoding", "gzip");
+            h.set("Vary", "Accept-Encoding");
+        }
+        if ("HEAD".equalsIgnoreCase(ex.getRequestMethod())) {
+            ex.sendResponseHeaders(200, -1);
+            return;
+        }
         ex.sendResponseHeaders(200, datos.length);
         try (OutputStream os = ex.getResponseBody()) {
             os.write(datos);
         }
+    }
+
+    /** Caché de archivos comprimidos (clave: ruta + fecha de modificación). */
+    private final Map<String, byte[]> gzipCache = new java.util.concurrent.ConcurrentHashMap<>();
+
+    private byte[] gzip(Path archivo, byte[] datos) throws IOException {
+        String clave = archivo + "@" + Files.getLastModifiedTime(archivo).toMillis();
+        byte[] listo = gzipCache.get(clave);
+        if (listo != null) return listo;
+        java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream(datos.length / 3);
+        try (java.util.zip.GZIPOutputStream gz = new java.util.zip.GZIPOutputStream(out)) {
+            gz.write(datos);
+        }
+        listo = out.toByteArray();
+        if (gzipCache.size() > 200) gzipCache.clear();
+        gzipCache.put(clave, listo);
+        return listo;
     }
 
     private void responderTexto(HttpExchange ex, int status, String msg) throws IOException {
@@ -351,6 +393,9 @@ public class ApiServer {
         if (n.endsWith(".ico"))  return "image/x-icon";
         if (n.endsWith(".woff")) return "font/woff";
         if (n.endsWith(".woff2")) return "font/woff2";
+        if (n.endsWith(".ttf"))  return "font/ttf";
+        if (n.endsWith(".webp")) return "image/webp";
+        if (n.endsWith(".map"))  return "application/json; charset=utf-8";
         if (n.endsWith(".txt"))  return "text/plain; charset=utf-8";
         return "application/octet-stream";
     }
