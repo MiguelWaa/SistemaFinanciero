@@ -7,6 +7,7 @@
    Todo se desactiva si el usuario pidió «reducir movimiento».
    ============================================================ */
 
+
 :root {
   --sg-grad-ink: linear-gradient(125deg, #0f2340 0%, #0b4552 38%, #18305a 70%, #0f2340 100%);
   --sg-grad-primary: linear-gradient(135deg, #0b6e79 0%, #12949f 100%);
