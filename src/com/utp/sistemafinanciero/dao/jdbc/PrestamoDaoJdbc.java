@@ -78,4 +78,10 @@ public class PrestamoDaoJdbc implements PrestamoDao {
     public int actualizarEstadoPorOperacion(int idOperacion, String estado) {
         return Db.update("UPDATE prestamo SET estado = ? WHERE id_operacion = ?", estado, idOperacion);
     }
+
+    @Override
+    public Prestamo buscarPorOperacion(int idOperacion) {
+        return Db.queryOne("SELECT " + COLS + " FROM prestamo WHERE id_operacion = ? ORDER BY id_prestamo DESC LIMIT 1",
+                MAPPER, idOperacion);
+    }
 }

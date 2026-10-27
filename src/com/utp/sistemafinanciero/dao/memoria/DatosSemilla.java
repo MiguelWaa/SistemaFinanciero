@@ -13,6 +13,7 @@ import com.utp.sistemafinanciero.model.operaciones.Empeno;
 import com.utp.sistemafinanciero.model.operaciones.Operacion;
 import com.utp.sistemafinanciero.model.operaciones.Prestamo;
 import com.utp.sistemafinanciero.model.operaciones.TipoCambio;
+import com.utp.sistemafinanciero.model.pagos.Billetera;
 import com.utp.sistemafinanciero.model.produccion.LineaProduccion;
 import com.utp.sistemafinanciero.model.produccion.OrdenProduccion;
 import com.utp.sistemafinanciero.model.seguridad.Rol;
@@ -114,5 +115,13 @@ public final class DatosSemilla {
         bd.expedientes().crear(new ExpedienteAprobacion(null, "EXP-001", "OPERACIONES", "Lucia Ramos", d("20000.00"), "ALTO", "Ampliacion de limite de caja para cambio", "PENDIENTE", ahora, null));
         bd.expedientes().crear(new ExpedienteAprobacion(null, "EXP-002", "MARKETING", "Jorge Torres", d("5000.00"), "MEDIO", "Presupuesto adicional para campania", "PENDIENTE", ahora, null));
         bd.expedientes().crear(new ExpedienteAprobacion(null, "EXP-003", "ALMACEN", "Miguel Machaca", d("3000.00"), "BAJO", "Compra de insumos de caja", "APROBADO", ahora, ahora));
+
+        // Billeteras de cobro (igual que db/pagos_qr.sql). El ADMIN sube el QR oficial desde Pagos > Billeteras.
+        bd.billeteras().crear(new Billetera(null, "YAPE", "Yape", "987654321", "SIGSF Servicios Financieros", null,
+                "Abre Yape > Escanear QR, paga el monto exacto y escribe el código de referencia en el mensaje.", true, ahora));
+        bd.billeteras().crear(new Billetera(null, "PLIN", "Plin", "987654322", "SIGSF Servicios Financieros", null,
+                "Desde la app de tu banco con Plin, escanea el QR o paga al número indicado.", true, ahora));
+        bd.billeteras().crear(new Billetera(null, "TUNKI", "Tunki", "987654323", "SIGSF Servicios Financieros", null,
+                "Abre Tunki > Pagar con QR, ingresa el monto exacto y confirma.", true, ahora));
     }
 }
