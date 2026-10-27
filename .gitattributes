@@ -4,6 +4,7 @@
 # ============================================================
 * text=auto
 
+
 # Código y texto: LF en el repositorio
 *.java  text diff=java
 *.sql   text
