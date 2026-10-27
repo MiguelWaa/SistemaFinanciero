@@ -10,6 +10,8 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.3.0] - 2026-10-26 · Interfaz animada
+
 ### Agregado
 - Capa visual animada `web/sigsf-anim.css` + `web/sigsf-anim.js`, cargada en todas las páginas sin cambiar su lógica:
   fondo con auroras suaves, encabezados y barra lateral con degradado en movimiento, indicadores en tarjetas con ícono automático
