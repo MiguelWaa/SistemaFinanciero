@@ -2,6 +2,7 @@
  SIGSF · Base de datos PostgreSQL — pasos en pgAdmin 4
 ========================================================
 
+
 1) Abre pgAdmin 4 y conectate a tu servidor PostgreSQL
    (usuario por defecto: postgres).
 
