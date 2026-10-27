@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="sigsf-ui.css">
+<link rel="stylesheet" href="sigsf-anim.css">
 <style>
   body { background: var(--sg-ink); min-height: 100vh; display: flex; align-items: center; justify-content: center; color: #fff; }
   .intro { text-align: center; animation: aparecer .7s ease-out both; }
@@ -31,5 +32,6 @@
     var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     setTimeout(function () { location.replace('welcome.html'); }, reducido ? 200 : 1600);
   </script>
+<script src="sigsf-anim.js"></script>
 </body>
 </html>
