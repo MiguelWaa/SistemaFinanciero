@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Control de versiones</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 <link rel="stylesheet" href="sigsf-modulo.css">
 <style>
   .b-ambar{background:#fef3c7;color:#b45309}.b-azul{background:#dbeafe;color:#1d4ed8}.b-gris{background:#e2e8f0;color:#475569}
@@ -62,12 +66,12 @@
 
   <!-- ====================== RESUMEN ====================== -->
   <div data-pane="res">
-    <div class="card">
+    <div class="card sg-legacy">
       <h2><i class="fa-solid fa-code-commit" style="color:#2563eb;"></i> Versión en ejecución</h2>
       <div class="sub">Datos tomados del repositorio Git del proyecto, de <code>version.properties</code> (generado al compilar) o del archivo <code>VERSION</code>.</div>
       <div class="info-grid" id="info"></div>
     </div>
-    <div class="card">
+    <div class="card sg-legacy">
       <h2><i class="fa-solid fa-flag-checkered" style="color:#2563eb;"></i> Lanzamientos (CHANGELOG.md)</h2>
       <div class="sub">Versiones publicadas con numeración SemVer <b>MAYOR.MENOR.PARCHE</b>.</div>
       <div class="timeline" id="lanzamientos"><div class="vacio">Cargando…</div></div>
@@ -76,7 +80,7 @@
 
   <!-- ====================== HISTORIAL ====================== -->
   <div data-pane="his" style="display:none;">
-    <div class="card">
+    <div class="card sg-legacy">
       <div class="tabla-top">
         <h2 style="margin:0;"><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;"></i> Últimos 40 commits (todas las ramas)</h2>
         <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarC" placeholder="Buscar autor, mensaje, hash…"></div>
@@ -91,7 +95,7 @@
 
   <!-- ====================== RED ====================== -->
   <div data-pane="red" style="display:none;">
-    <div class="card">
+    <div class="card sg-legacy">
       <h2><i class="fa-solid fa-diagram-project" style="color:#2563eb;"></i> Red de ramas (git log --all --graph)</h2>
       <div class="sub">Cada línea vertical es una rama; los puntos de unión son <i>merges</i>. Equivale a la vista «Network» de GitHub.</div>
       <div class="terminal" id="grafo">Cargando…</div>
@@ -100,14 +104,14 @@
 
   <!-- ====================== RAMAS ====================== -->
   <div data-pane="ram" style="display:none;">
-    <div class="card">
+    <div class="card sg-legacy">
       <h2><i class="fa-solid fa-code-branch" style="color:#2563eb;"></i> Ramas (locales y del remoto <i>origin</i>)</h2>
       <div class="tabla-scroll"><table>
         <thead><tr><th>Rama</th><th>Tipo</th><th>Último commit</th><th>Mensaje</th><th>Fecha</th></tr></thead>
         <tbody id="tablaR"><tr><td class="vacio" colspan="5">Cargando…</td></tr></tbody>
       </table></div>
     </div>
-    <div class="card">
+    <div class="card sg-legacy">
       <h2><i class="fa-solid fa-tags" style="color:#d97706;"></i> Etiquetas (versiones publicadas)</h2>
       <div class="tabla-scroll"><table>
         <thead><tr><th>Etiqueta</th><th>Commit</th><th>Descripción</th><th>Fecha</th></tr></thead>
@@ -118,7 +122,7 @@
 
   <!-- ====================== ESQUEMA BD ====================== -->
   <div data-pane="bd" style="display:none;">
-    <div class="card">
+    <div class="card sg-legacy">
       <h2><i class="fa-solid fa-database" style="color:#2563eb;"></i> Versiones del esquema de la base (tabla <code>version_esquema</code>)</h2>
       <div class="sub">Cada script SQL del proyecto registra aquí su versión. Así se sabe si la base de cada integrante está al día.</div>
       <div class="tabla-scroll"><table>
@@ -129,11 +133,13 @@
   </div>
 </div>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
 <script src="sigsf-crud.js"></script>
 <script>
 (function(){
-  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
+  SIGSF.embebido();
   var $ = function(id){ return document.getElementById(id); };
   var esc = SIGSF.escapar;
   var commits = [];
