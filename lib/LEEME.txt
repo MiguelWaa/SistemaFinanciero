@@ -31,7 +31,6 @@ PRUEBAS (JUnit)
   JUnit 4.13.2 y Hamcrest 1.3 vienen con NetBeans (Test Libraries).
   No hace falta copiarlos aquí.
 
-
 IMPORTANTE
 ----------
   Sin los 3 .jar de SLF4J/Logback el proyecto NO compila (el código usa
