@@ -16,20 +16,65 @@
   --sg-ease: cubic-bezier(.22, 1, .36, 1);
 }
 
-/* ---------- Fondo con auroras suaves ---------- */
-body::before {
-  content: ""; position: fixed; inset: -20vmax; z-index: -1; pointer-events: none;
+/* ---------- Fondo: degradado + auroras vivas + trama de billete + puntos ---------- */
+body {
   background:
-    radial-gradient(38vmax 38vmax at 12% 18%, rgba(18, 148, 159, .13), transparent 60%),
-    radial-gradient(34vmax 34vmax at 88% 12%, rgba(200, 150, 30, .11), transparent 60%),
-    radial-gradient(40vmax 40vmax at 70% 92%, rgba(116, 35, 132, .07), transparent 60%);
-  animation: sg-aurora 26s ease-in-out infinite alternate;
+    radial-gradient(rgba(15, 35, 64, .09) 1px, transparent 1.4px) 0 0 / 22px 22px,
+    radial-gradient(1100px 650px at 100% 0%, rgba(231, 184, 74, .38), transparent 60%),
+    radial-gradient(1000px 700px at 0% 100%, rgba(18, 148, 159, .40), transparent 62%),
+    radial-gradient(800px 500px at 55% 45%, rgba(116, 35, 132, .10), transparent 65%),
+    linear-gradient(155deg, #d9ecf1 0%, #eaf1f7 40%, #f6ecd8 100%);
+  background-attachment: fixed;
+  background-color: #e4eef3;
+}
+/* Auroras: manchas de color grandes que se mueven */
+body::before {
+  content: ""; position: fixed; inset: -25vmax; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(28vmax 28vmax at 16% 20%, rgba(18, 148, 159, .50), transparent 62%),
+    radial-gradient(24vmax 24vmax at 84% 14%, rgba(231, 184, 74, .52), transparent 62%),
+    radial-gradient(30vmax 30vmax at 74% 84%, rgba(116, 35, 132, .30), transparent 62%),
+    radial-gradient(22vmax 22vmax at 26% 84%, rgba(0, 161, 154, .40), transparent 62%),
+    radial-gradient(18vmax 18vmax at 52% 50%, rgba(228, 87, 46, .14), transparent 62%);
+  filter: blur(18px);
+  animation: sg-aurora 18s ease-in-out infinite alternate;
+  will-change: transform;
 }
 @keyframes sg-aurora {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  50% { transform: translate3d(3vmax, -2vmax, 0) rotate(6deg); }
-  100% { transform: translate3d(-2vmax, 3vmax, 0) rotate(-4deg); }
+  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate3d(6vmax, -4vmax, 0) rotate(10deg) scale(1.08); }
+  66% { transform: translate3d(-5vmax, 3vmax, 0) rotate(-8deg) scale(.95); }
+  100% { transform: translate3d(3vmax, 5vmax, 0) rotate(5deg) scale(1.06); }
 }
+/* Trama guilloché (como la seguridad de un billete) que se desliza en toda la página */
+body::after {
+  content: ""; position: fixed; top: 0; bottom: 0; left: 0; width: calc(100% + 640px); z-index: -1; pointer-events: none;
+  background: url("img/guilloche.svg") repeat;
+  opacity: .55;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .65) 50%, #000 100%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .65) 50%, #000 100%);
+  animation: sg-trama 45s linear infinite;
+  will-change: transform;
+}
+@keyframes sg-trama { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-640px, 0, 0); } }
+
+/* Las superficies dejan ver el fondo (efecto vidrio) */
+.card, .sg-kpi, .kpi, .sg-tile, .pv, .sol, .pagable {
+  background-color: rgba(255, 255, 255, .78) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%);
+  border-color: rgba(255, 255, 255, .7) !important;
+}
+.sg-kpi.gold { background: linear-gradient(135deg, rgba(255, 248, 230, .88), rgba(255, 255, 255, .78)) !important; }
+.doc-sheet { background-color: rgba(255, 255, 255, .95) !important; }
+.card-header { background: linear-gradient(180deg, rgba(255, 255, 255, .75), rgba(255, 255, 255, .35)) !important; border-bottom-color: rgba(221, 227, 234, .7) !important; }
+.table { --bs-table-bg: transparent; }
+.table > thead th { background: rgba(244, 248, 250, .85) !important; }
+.sg-foot, .sg-toolbar { background: transparent; }
+.sg-top { background: rgba(255, 255, 255, .62) !important; border-bottom-color: rgba(255, 255, 255, .6) !important; }
+.pt-tabs { background: rgba(255, 255, 255, .6) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom-color: rgba(255, 255, 255, .6) !important; }
+.alert-info { background: rgba(226, 239, 248, .85); }
+#moduleFrame { background: transparent !important; }
+.form-control, .form-select, .input-group-text { background-color: rgba(255, 255, 255, .92); }
 
 /* ---------- Entradas escalonadas (las activa sigsf-anim.js) ---------- */
 .sg-in { animation: sg-subir .55s var(--sg-ease) both; }
@@ -290,12 +335,13 @@ body:has(.w-main) { background: var(--sg-grad-ink) !important; background-size: 
 
 /* ---------- Accesibilidad: sin movimiento si el usuario lo pidió ---------- */
 @media (prefers-reduced-motion: reduce) {
-  body::before, .sg-page-head, .mod-header, .pt-top, .sg-hero, .auth-side, .sg-floaters, .pay-ticket .qr::after { animation: none !important; }
+  body::before, body::after, .sg-page-head, .mod-header, .pt-top, .sg-hero, .auth-side, .sg-floaters, .pay-ticket .qr::after { animation: none !important; }
   .sg-floaters { display: none; }
   .sg-in, .sg-chart rect, .sg-chart path, .sg-bar > span { animation: none !important; }
 }
 @media print {
-  body::before, .sg-floaters, .sg-confeti { display: none !important; }
+  body { background: #fff !important; }
+  body::before, body::after, .sg-floaters, .sg-confeti { display: none !important; }
   .doc-sheet, .doc-sello { animation: none !important; }
 }
 
