@@ -36,3 +36,6 @@ v52_16        Portal del Cliente en celular
 v5.3.0 · Interfaz animada
 v53_01-03     Panel, ingreso y portal con la capa animada
 v53_04        Confeti al registrar un pago en el portal
+
+v5.4.0 · Fondo animado
+v54_01-03     Portal, Pagos y panel con el fondo nuevo (degradado, auroras y trama tipo billete)
