@@ -32,3 +32,7 @@ v52_11-12     Comprobante de pago y cotizacion con cronograma (imprimibles / PDF
 v52_13-14     Reportes y reporte de pagos imprimible
 v52_15        Modulo de gestion con el nuevo motor Bootstrap (orden y paginacion)
 v52_16        Portal del Cliente en celular
+
+v5.3.0 · Interfaz animada
+v53_01-03     Panel, ingreso y portal con la capa animada
+v53_04        Confeti al registrar un pago en el portal

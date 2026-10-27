@@ -113,6 +113,14 @@ arrancar (`VerificadorEsquema.crearPagosSiFaltan`).
 - **Servidor**: caché de 7 días para `web/vendor`, `ETag` y compresión gzip para HTML/CSS/JS y más hilos
   de atención para soportar más usuarios a la vez.
 
+## 6b. Capa animada (v5.3.0)
+
+`sigsf-anim.css` y `sigsf-anim.js` se cargan después del tema en las 26 páginas. No requieren cambios en los módulos:
+`sigsf-anim.js` observa la página y anima solo lo nuevo (indicadores que cuentan, tarjetas y filas que entran escalonadas,
+ícono automático según el texto de cada indicador, onda al pulsar botones). Expone `SIGSF.celebrar()` (confeti) y
+`SIGSF.checkAnimado()` (marca dibujada), que usan la confirmación de pagos y el portal. Con «reducir movimiento» activado
+en Windows/macOS/Android/iOS las animaciones se desactivan.
+
 ## 7. Pruebas
 
 `PagoServiceTest` (14), `CotizacionServiceTest` (7) y `PagosApiTest` (4): **151 pruebas en total**.
