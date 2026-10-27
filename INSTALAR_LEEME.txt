@@ -48,6 +48,8 @@ PASO 3 · CARGAR LAS TABLAS Y LOS DATOS
          4. db/seguridad.sql        (auditoria, restricciones y rol seguro)
          5. db/version_esquema.sql  (version del esquema de la base, v5.0)
          6. db/datos_100_registros.sql  (OPCIONAL v5.1: 100 registros por modulo)
+         7. db/pagos_qr.sql         (v5.2: pagos con Yape/Plin/Tunki y cotizaciones;
+                                     si no lo ejecutas, el servidor crea esas tablas solo)
 
      Para abrir cada archivo usa el icono de carpeta del Query Tool.
 
