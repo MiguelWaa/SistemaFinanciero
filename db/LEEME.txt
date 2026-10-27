@@ -26,6 +26,13 @@
      varias veces: no duplica. No borra nada. Usuarios generados: <correo> / sigsf123.
      Clientes del portal generados: documento 71000001..71000100 (clave = documento).
 
+4c) (v5.2) Pagos con QR y cotizaciones:
+   - Ejecuta  db/pagos_qr.sql  (F5). Crea las tablas billetera, pago y cotizacion
+     y las billeteras Yape, Plin y Tunki. Es re-ejecutable y no borra nada.
+   - Si no lo ejecutas, el servidor crea esas tablas solo al arrancar.
+   - Luego, como ADMIN, entra a Pagos y cobranzas > Billeteras y QR para poner
+     el numero real de cada billetera y subir la imagen de su QR de cobro.
+
 5) Ajusta la conexion del backend si hace falta:
    - Edita el archivo  db.properties  (en la raiz del proyecto) con tu
      host, puerto, usuario y contrasena de PostgreSQL.

@@ -20,6 +20,10 @@ public class IndicadoresDTO {
     private int usuariosTotales;
     private int solicitudesPendientes;
     private int ventasTotales;
+    private int pagosPorVerificar;
+    private BigDecimal montoPorVerificar = BigDecimal.ZERO;
+    private BigDecimal cobradoMes = BigDecimal.ZERO;
+    private int cotizacionesVigentes;
 
     public BigDecimal getIngresosDelMes() { return ingresosDelMes; }
     public void setIngresosDelMes(BigDecimal v) { this.ingresosDelMes = v; }
@@ -43,4 +47,13 @@ public class IndicadoresDTO {
     public void setSolicitudesPendientes(int v) { this.solicitudesPendientes = v; }
     public int getVentasTotales() { return ventasTotales; }
     public void setVentasTotales(int v) { this.ventasTotales = v; }
+    public int getPagosPorVerificar() { return pagosPorVerificar; }
+    public void setPagosPorVerificar(int v) { this.pagosPorVerificar = v; }
+    public BigDecimal getMontoPorVerificar() { return montoPorVerificar; }
+    public void setMontoPorVerificar(BigDecimal v) { this.montoPorVerificar = v; }
+    /** Pagos confirmados (Yape, Plin, Tunki y caja) del mes en curso. */
+    public BigDecimal getCobradoMes() { return cobradoMes; }
+    public void setCobradoMes(BigDecimal v) { this.cobradoMes = v; }
+    public int getCotizacionesVigentes() { return cotizacionesVigentes; }
+    public void setCotizacionesVigentes(int v) { this.cotizacionesVigentes = v; }
 }

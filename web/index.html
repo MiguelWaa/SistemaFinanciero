@@ -1,633 +1,515 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGSF · Sistema Integral de Gestión de Servicios Financieros</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="sigsf.css">
-    <script src="sigsf-voice.js"></script>
-    <script src="api.js"></script>
-    <style>
-        .shell-main { flex-grow:1; display:flex; flex-direction:column; overflow:hidden; }
-        .frame-wrap { flex:1; position:relative; background:var(--bg-light); overflow:hidden; }
-        #moduleFrame { width:100%; height:100%; border:none; display:block; background:var(--bg-light); }
-        #homeView { position:absolute; inset:0; overflow-y:auto; padding:32px 40px; }
-        #frameView { position:absolute; inset:0; display:none; }
-        .frame-loader { position:absolute; inset:0; display:none; align-items:center; justify-content:center; flex-direction:column; gap:14px; background:rgba(244,246,249,.85); z-index:5; backdrop-filter:blur(2px); }
-        .frame-loader.show { display:flex; }
-        .spinner { width:44px; height:44px; border-radius:50%; border:4px solid #dbeafe; border-top-color:var(--accent-blue); animation:spin .8s linear infinite; }
-        @keyframes spin { to { transform:rotate(360deg); } }
-        .frame-loader p { color:var(--text-muted); font-size:.9rem; font-weight:500; }
-        /* Botón "volver al inicio" cuando hay un módulo abierto */
-        .back-home-bar { display:none; align-items:center; gap:10px; padding:10px 40px; background:#fff; border-bottom:1px solid var(--border-color); }
-        .back-home-bar.show { display:flex; }
-        .back-home-bar button { background:var(--bg-light); border:1px solid var(--border-color); color:var(--text-main); padding:8px 16px; border-radius:9px; font-weight:600; font-size:.85rem; cursor:pointer; display:inline-flex; align-items:center; gap:8px; }
-        .back-home-bar button:hover { background:#e9eef5; }
-        @media (max-width:768px){ .shell-main { overflow:auto; } .frame-wrap { min-height:80vh; } #homeView { position:relative; padding:20px; } .back-home-bar { padding:10px 20px; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIGSF · Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-icon"><i class="fa-solid fa-landmark"></i></div>
-                <div class="logo-text"><h2>SIGSF</h2><span>Bancos • Casas de Cambio • Empeño</span></div>
-            </div>
-            <ul class="sidebar-menu" id="sideMenu">
-                <li class="active" data-key="home"><a href="#" onclick="sigsfNavigate('home','Inicio','',this);return false;"><i class="fa-solid fa-house"></i> <span>Inicio</span></a></li>
-                <li class="menu-label">Gestión</li>
-                <li data-key="usr"><a href="#" onclick="sigsfNavigate('usuarios.html','Usuarios','Usuarios',this);return false;"><i class="fa-solid fa-users"></i> <span>Usuarios</span></a></li>
-                <li data-key="rep"><a href="#" onclick="sigsfNavigate('reportes.html','Reportes','Reportes',this);return false;"><i class="fa-solid fa-chart-column"></i> <span>Reportes</span></a></li>
-                <li data-key="cfg"><a href="#" onclick="sigsfNavigate('configuracion.html','Configuración','Configuración',this);return false;"><i class="fa-solid fa-gear"></i> <span>Configuración</span></a></li>
-                <li data-key="seg"><a href="#" onclick="sigsfNavigate('seguridad.html','Seguridad','Seguridad',this);return false;"><i class="fa-solid fa-shield-halved"></i> <span>Seguridad</span></a></li>
-                <li data-key="bkp"><a href="#" onclick="sigsfNavigate('respaldos.html','Respaldos y Auditoría','Respaldos',this);return false;"><i class="fa-solid fa-database"></i> <span>Respaldos y auditoría</span></a></li>
-                <li data-key="ver"><a href="#" onclick="sigsfNavigate('versiones.html','Control de versiones','Versiones',this);return false;"><i class="fa-solid fa-code-branch"></i> <span>Control de versiones</span></a></li>
-                <li class="menu-label">Soporte</li>
-                <li data-key="ayu"><a href="#" onclick="sigsfNavigate('ayuda.html','Centro de Ayuda','Ayuda',this);return false;"><i class="fa-solid fa-headset"></i> <span>Centro de ayuda</span></a></li>
-            </ul>
-            <div class="sidebar-footer">
-                <a href="login.html" class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> <span>Cerrar sesión</span></a>
-            </div>
-        </aside>
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-light" href="#homeView">Saltar al contenido</a>
+<div class="sg-shell">
 
-        <div class="shell-main">
-            <header class="top-navbar">
-                <div class="breadcrumb">
-                    <div class="crumbs" id="crumbs">Inicio</div>
-                    <h1 id="pageTitle">Bienvenido al Sistema</h1>
-                    <p id="pageSub">Seleccione el módulo al que desea ingresar</p>
-                </div>
-                <div class="user-profile">
-                    <div class="avatar"><i class="fa-solid fa-user"></i></div>
-                    <div class="user-info"><span class="role" id="navUser">Miguel Admin</span><span class="status">Administrador</span></div>
-                    <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-                </div>
-            </header>
-
-            <div class="back-home-bar" id="backBar">
-                <button onclick="sigsfNavigate('home','Inicio','',document.querySelector('[data-key=home] a'))"><i class="fa-solid fa-arrow-left"></i> Volver a Inicio</button>
-                <span style="color:var(--text-muted);font-size:.85rem;" id="openLabel"></span>
-            </div>
-
-            <div class="frame-wrap">
-                <!-- INICIO: cada módulo con su propia tarjeta de acceso, todos separados -->
-                <div id="homeView">
-                    <div class="kpi-row">
-                        <div class="kpi-card"><div class="kpi-icon" style="background:#d1fae5;color:#059669;"><i class="fa-solid fa-sack-dollar"></i></div><div><div class="kpi-label">Ingresos del mes</div><div class="kpi-value" id="kpiIngresos">S/ —</div><div class="kpi-trend" id="kpiVentas" style="color:#64748b;">— ventas registradas</div></div></div>
-                        <div class="kpi-card"><div class="kpi-icon" style="background:#dbeafe;color:#2563eb;"><i class="fa-solid fa-users"></i></div><div><div class="kpi-label">Clientes activos</div><div class="kpi-value" id="kpiClientes">—</div><div class="kpi-trend" id="kpiClientesTot" style="color:#64748b;">— en total</div></div></div>
-                        <div class="kpi-card"><div class="kpi-icon" style="background:#ffedd5;color:#ea580c;"><i class="fa-solid fa-right-left"></i></div><div><div class="kpi-label">Operaciones hoy</div><div class="kpi-value" id="kpiOperaciones">—</div><div class="kpi-trend" id="kpiSolic" style="color:#64748b;">— solicitudes pendientes</div></div></div>
-                        <div class="kpi-card"><div class="kpi-icon" style="background:#ede9fe;color:#7c3aed;"><i class="fa-solid fa-chart-line"></i></div><div><div class="kpi-label">Préstamos colocados</div><div class="kpi-value" id="kpiPrestamos">S/ —</div><div class="kpi-trend" id="kpiExpedientes" style="color:#64748b;">— expedientes pendientes</div></div></div>
-                    </div>
-
-                    <div class="section-heading"><section id="panelClientes" style="background:#fff;border-radius:14px;padding:20px 22px;margin-bottom:22px;box-shadow:0 4px 16px rgba(15,23,42,.07);">
-                          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
-                            <h3 style="font-size:1.02rem;display:flex;align-items:center;gap:9px;margin:0;color:#0f172a;">
-                              <i class="fa-solid fa-user-check" style="color:#2563eb;"></i> Últimos clientes registrados
-                              <span id="totalClientesBadge" style="background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:2px 10px;font-size:.74rem;font-weight:700;"></span>
-                            </h3>
-                            <a href="#" onclick="openMod('clientes y servicios financieros.html','Clientes y Servicios Financieros');return false;"
-                               style="color:#2563eb;font-weight:600;font-size:.85rem;text-decoration:none;">Ver todos <i class="fa-solid fa-arrow-right"></i></a>
-                          </div>
-                          <div style="overflow-x:auto;">
-                            <table style="width:100%;border-collapse:collapse;font-size:.86rem;">
-                              <thead>
-                                <tr style="background:#f8fafc;">
-                                  <th style="padding:9px 10px;text-align:left;color:#64748b;font-size:.73rem;text-transform:uppercase;letter-spacing:.4px;">Cliente</th>
-                                  <th style="padding:9px 10px;text-align:left;color:#64748b;font-size:.73rem;text-transform:uppercase;letter-spacing:.4px;">Documento</th>
-                                  <th style="padding:9px 10px;text-align:left;color:#64748b;font-size:.73rem;text-transform:uppercase;letter-spacing:.4px;">Contacto</th>
-                                  <th style="padding:9px 10px;text-align:left;color:#64748b;font-size:.73rem;text-transform:uppercase;letter-spacing:.4px;">Estado</th>
-                                  <th style="padding:9px 10px;text-align:left;color:#64748b;font-size:.73rem;text-transform:uppercase;letter-spacing:.4px;">Registrado</th>
-                                </tr>
-                              </thead>
-                              <tbody id="tablaClientesPanel">
-                                <tr><td colspan="5" style="padding:20px;text-align:center;color:#64748b;">Cargando…</td></tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </section>
-
-                        <h2>Módulos del sistema</h2><p>Cada módulo tiene su propio acceso</p></div>
-                    <div class="dashboard-grid" style="padding:0;">
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#d1fae5;color:#10b981;"><i class="fa-solid fa-bullhorn"></i></div>
-                            <div class="card-body"><h3>Marketing</h3><p>Gestione campañas, promociones y clientes potenciales.</p></div>
-                            <a href="#" class="card-btn" style="background:#10b981;" onclick="openMod('Marketing.html','Marketing');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card" id="cardSolicitudes" style="position:relative;">
-                            <div class="card-icon" style="background:#fee2e2;color:#dc2626;"><i class="fa-solid fa-inbox"></i></div>
-                            <div class="card-body"><h3>Solicitudes de clientes <span id="badgeSol" style="display:none;background:#dc2626;color:#fff;border-radius:999px;padding:2px 9px;font-size:.72rem;vertical-align:middle;"></span></h3><p>Revise y apruebe lo que los clientes piden desde el Portal.</p></div>
-                            <a href="#" class="card-btn" style="background:#dc2626;" onclick="openMod('solicitudes.html','Solicitudes de clientes');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#dbeafe;color:#2563eb;"><i class="fa-solid fa-cart-shopping"></i></div>
-                            <div class="card-body"><h3>Ventas</h3><p>Registre ventas, cotizaciones y seguimiento comercial.</p></div>
-                            <a href="#" class="card-btn" style="background:#2563eb;" onclick="openMod('Ventas.html','Ventas');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#e0f2fe;color:#0ea5e9;"><i class="fa-solid fa-truck-fast"></i></div>
-                            <div class="card-body"><h3>Logística</h3><p>Controle inventario, entradas y salidas de mercadería.</p></div>
-                            <a href="#" class="card-btn" style="background:#0284c7;" onclick="openMod('Logistica.html','Logística');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#ccfbf1;color:#0d9488;"><i class="fa-solid fa-warehouse"></i></div>
-                            <div class="card-body"><h3>Almacén</h3><p>Administre stock, stock bajo y bienes en garantía.</p></div>
-                            <a href="#" class="card-btn" style="background:#0d9488;" onclick="openMod('almacen.html','Almacén');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#fef3c7;color:#d97706;"><i class="fa-solid fa-industry"></i></div>
-                            <div class="card-body"><h3>Producción</h3><p>Gestione lotes, procesos en curso y eficiencia.</p></div>
-                            <a href="#" class="card-btn" style="background:#d97706;" onclick="openMod('produccion.html','Producción');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#ffedd5;color:#f97316;"><i class="fa-solid fa-right-left"></i></div>
-                            <div class="card-body"><h3>Operaciones Financieras</h3><p>Cambios de moneda, préstamos, empeños y pagos.</p></div>
-                            <a href="#" class="card-btn" style="background:#f97316;" onclick="openMod('operaciones financieras.html','Operaciones Financieras');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#ede9fe;color:#8b5cf6;"><i class="fa-solid fa-compass-drafting"></i></div>
-                            <div class="card-body"><h3>Dirección</h3><p>Indicadores y análisis para decisiones estratégicas.</p></div>
-                            <a href="#" class="card-btn" style="background:#8b5cf6;" onclick="openMod('direccion gerencia.html','Dirección');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#e0e7ff;color:#6366f1;"><i class="fa-solid fa-briefcase"></i></div>
-                            <div class="card-body"><h3>Gerencia General</h3><p>Resultados globales, KPIs y proyectos activos.</p></div>
-                            <a href="#" class="card-btn" style="background:#6366f1;" onclick="openMod('gerencia general y toma de  decisiones.html','Gerencia General');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#d1fae5;color:#059669;"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-                            <div class="card-body"><h3>Clientes y Servicios Financieros</h3><p>Administre clientes, servicios y su historial.</p></div>
-                            <a href="#" class="card-btn" style="background:#059669;" onclick="openMod('clientes y servicios financieros.html','Clientes y Servicios Financieros');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#e2e8f0;color:#334155;"><i class="fa-solid fa-database"></i></div>
-                            <div class="card-body"><h3>Respaldos y Auditoría</h3><p>Copias de seguridad de la base de datos y bitácora de actividad.</p></div>
-                            <a href="#" class="card-btn" style="background:#334155;" onclick="openMod('respaldos.html','Respaldos y Auditoría');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-
-                        <div class="module-card">
-                            <div class="card-icon" style="background:#ede9fe;color:#7c3aed;"><i class="fa-solid fa-code-branch"></i></div>
-                            <div class="card-body"><h3>Control de versiones</h3><p>Versión del sistema, commits, ramas, etiquetas y esquema de la base.</p></div>
-                            <a href="#" class="card-btn" style="background:#7c3aed;" onclick="openMod('versiones.html','Control de versiones');return false;"><span>Ingresar</span><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <footer class="main-footer" style="margin-top:32px;border-radius:14px;border:1px solid var(--border-color);">
-                        <p>&copy; 2026 Sistema Integral de Gestión de Servicios Financieros. Todos los derechos reservados.</p>
-                        <p id="pieVersion" style="font-size:.78rem;opacity:.75;margin-top:4px;"></p>
-                    </footer>
-                </div>
-
-                <div id="frameView"><iframe id="moduleFrame" title="Módulo" src="about:blank"></iframe></div>
-                <div class="frame-loader" id="frameLoader"><div class="spinner"></div><p>Cargando módulo…</p></div>
-            </div>
-        </div>
+  <!-- ================= Barra lateral ================= -->
+  <aside class="sg-side offcanvas-lg offcanvas-start" id="sgSide" tabindex="-1" aria-label="Menú principal">
+    <div class="offcanvas-header d-lg-none">
+      <span class="fw-600">Menú</span>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#sgSide" aria-label="Cerrar"></button>
     </div>
+    <div class="offcanvas-body">
+      <div class="sg-brand">
+        <span class="mark"><i class="fa-solid fa-landmark"></i></span>
+        <span><b>SIGSF</b><small>Bancos · casas de cambio · empeño</small></span>
+      </div>
+      <nav class="sg-nav" id="sideMenu">
+        <a href="#" class="active" data-nav="home" data-title="Inicio"><i class="ic fa-solid fa-house"></i>Inicio</a>
 
-    <script>
-        try { var u = sessionStorage.getItem('sigsf_user'); if (u) document.getElementById('navUser').textContent = u.split('@')[0]; } catch (e) {}
-        document.getElementById('logoutBtn').addEventListener('click', function(e){ e.preventDefault(); API.logout(); });
+        <div class="grupo">Atención y caja</div>
+        <a href="#" data-nav="pagos.html" data-title="Pagos y cobranzas"><i class="ic fa-solid fa-qrcode"></i>Pagos y cobranzas<span class="badge rounded-pill text-bg-warning d-none" id="navPagos"></span></a>
+        <a href="#" data-nav="solicitudes.html" data-title="Solicitudes de clientes"><i class="ic fa-solid fa-inbox"></i>Solicitudes<span class="badge rounded-pill text-bg-danger d-none" id="navSol"></span></a>
+        <a href="#" data-nav="clientes y servicios financieros.html" data-title="Clientes y servicios"><i class="ic fa-solid fa-user-group"></i>Clientes y servicios</a>
+        <a href="#" data-nav="operaciones financieras.html" data-title="Operaciones financieras"><i class="ic fa-solid fa-right-left"></i>Operaciones financieras</a>
+        <a href="#" data-nav="Ventas.html" data-title="Ventas"><i class="ic fa-solid fa-cart-shopping"></i>Ventas</a>
 
-        var homeView = document.getElementById('homeView');
-        var frameView = document.getElementById('frameView');
-        var frame = document.getElementById('moduleFrame');
-        var loader = document.getElementById('frameLoader');
-        var titleEl = document.getElementById('pageTitle');
-        var subEl = document.getElementById('pageSub');
-        var crumbsEl = document.getElementById('crumbs');
-        var backBar = document.getElementById('backBar');
-        var openLabel = document.getElementById('openLabel');
+        <div class="grupo">Gestión del negocio</div>
+        <a href="#" data-nav="Marketing.html" data-title="Marketing"><i class="ic fa-solid fa-bullhorn"></i>Marketing</a>
+        <a href="#" data-nav="Logistica.html" data-title="Logística"><i class="ic fa-solid fa-truck-fast"></i>Logística</a>
+        <a href="#" data-nav="almacen.html" data-title="Almacén"><i class="ic fa-solid fa-warehouse"></i>Almacén</a>
+        <a href="#" data-nav="produccion.html" data-title="Producción"><i class="ic fa-solid fa-industry"></i>Producción</a>
 
-        var SUBS = {
-            'home':'Seleccione el módulo al que desea ingresar',
-            'Usuarios':'Cuentas, roles y accesos',
-            'Reportes':'Indicadores y descargas por área',
-            'Configuración':'Preferencias del sistema y cuenta',
-            'Seguridad':'Accesos, permisos y actividad',
-            'Respaldos y Auditoría':'Copias de seguridad de la base de datos y bitácora',
-            'Centro de Ayuda':'Asistente IA con voz y guías'
-        };
+        <div class="grupo">Dirección</div>
+        <a href="#" data-nav="direccion gerencia.html" data-title="Dirección"><i class="ic fa-solid fa-compass-drafting"></i>Dirección</a>
+        <a href="#" data-nav="gerencia general y toma de  decisiones.html" data-title="Gerencia general"><i class="ic fa-solid fa-briefcase"></i>Gerencia general</a>
+        <a href="#" data-nav="reportes.html" data-title="Reportes"><i class="ic fa-solid fa-chart-column"></i>Reportes</a>
 
-        function setActive(el){
-            document.querySelectorAll('#sideMenu li').forEach(function(li){ li.classList.remove('active'); });
-            if (el){ var li = el.closest('li'); if (li) li.classList.add('active'); }
-        }
+        <div class="grupo">Administración</div>
+        <a href="#" data-nav="usuarios.html" data-title="Usuarios"><i class="ic fa-solid fa-users-gear"></i>Usuarios</a>
+        <a href="#" data-nav="seguridad.html" data-title="Seguridad"><i class="ic fa-solid fa-shield-halved"></i>Seguridad</a>
+        <a href="#" data-nav="configuracion.html" data-title="Configuración"><i class="ic fa-solid fa-gear"></i>Configuración</a>
+        <a href="#" data-nav="respaldos.html" data-title="Respaldos y auditoría"><i class="ic fa-solid fa-database"></i>Respaldos y auditoría</a>
+        <a href="#" data-nav="versiones.html" data-title="Control de versiones"><i class="ic fa-solid fa-code-branch"></i>Control de versiones</a>
 
-        // Navegación desde la barra lateral y desde "Volver a Inicio"
-        function sigsfNavigate(target, title, crumb, el){
-            setActive(el);
-            titleEl.textContent = title;
-            subEl.textContent = SUBS[title] || '';
-            if (target === 'home'){
-                crumbsEl.textContent = 'Inicio';
-                frameView.style.display = 'none';
-                homeView.style.display = 'block';
-                backBar.classList.remove('show');
-                loader.classList.remove('show');
-                frame.src = 'about:blank';
-                return;
-            }
-            crumbsEl.innerHTML = 'Inicio / ' + crumb;
-            homeView.style.display = 'none';
-            frameView.style.display = 'block';
-            backBar.classList.remove('show');
-            loader.classList.add('show');
-            frame.src = encodeURI(target);
-        }
-
-        // Abrir un módulo desde su tarjeta de Inicio (cada uno por separado)
-        function openMod(target, title){
-            setActive(null);
-            titleEl.textContent = title;
-            subEl.textContent = '';
-            crumbsEl.innerHTML = 'Inicio / ' + title;
-            openLabel.textContent = 'Módulo: ' + title;
-            homeView.style.display = 'none';
-            frameView.style.display = 'block';
-            backBar.classList.add('show');
-            loader.classList.add('show');
-            frame.src = encodeURI(target);
-        }
-
-        frame.addEventListener('load', function(){
-            if (frame.src.indexOf('about:blank') === -1) loader.classList.remove('show');
-        });
-        window.sigsfNavigate = sigsfNavigate;
-        window.openMod = openMod;
-    </script>
-
-    <!-- ============================================================
-         ASISTENTE POR VOZ · escucha y ejecuta comandos por todo el sistema
-         ============================================================ -->
-    <style>
-        .va-launcher {
-            position:fixed; right:22px; bottom:22px; z-index:9998;
-            display:inline-flex; align-items:center; gap:10px;
-            background:linear-gradient(135deg,#2563eb,#7c3aed); color:#fff; border:none; cursor:pointer;
-            padding:14px 20px; border-radius:32px; font-weight:700; font-size:.9rem; font-family:'Inter',sans-serif;
-            box-shadow:0 12px 30px rgba(37,99,235,.45); transition:transform .15s, filter .2s;
-        }
-        .va-launcher:hover { transform:translateY(-2px); filter:brightness(1.06); }
-        .va-launcher.listening { animation: vaPulse 1.3s infinite; }
-        @keyframes vaPulse { 0%,100%{ box-shadow:0 12px 30px rgba(37,99,235,.45);} 50%{ box-shadow:0 12px 40px rgba(124,58,237,.75);} }
-
-        .va-panel {
-            position:fixed; right:22px; bottom:22px; z-index:9999; width:360px; max-width:calc(100vw - 32px);
-            background:#fff; border:1px solid var(--border-color); border-radius:18px; overflow:hidden;
-            box-shadow:0 24px 60px rgba(15,23,42,.28); display:none; flex-direction:column; font-family:'Inter',sans-serif;
-        }
-        .va-panel.open { display:flex; }
-        .va-head { display:flex; align-items:center; gap:11px; padding:15px 18px; background:linear-gradient(135deg,#0b1f46,#4338ca); color:#fff; }
-        .va-head .ic { width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:1.05rem; }
-        .va-head h3 { font-size:.98rem; }
-        .va-head p { font-size:.72rem; color:#c7d2fe; }
-        .va-close { margin-left:auto; background:rgba(255,255,255,.14); border:none; color:#fff; width:32px;height:32px;border-radius:8px;cursor:pointer; }
-        .va-close:hover { background:rgba(255,255,255,.26); }
-        .va-body { padding:18px; background:#f8fafc; }
-        .va-mic-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; }
-        .va-mic {
-            width:78px; height:78px; border-radius:50%; border:none; cursor:pointer; font-size:1.7rem;
-            background:linear-gradient(135deg,#2563eb,#7c3aed); color:#fff; transition:filter .2s;
-            box-shadow:0 10px 26px rgba(37,99,235,.4);
-        }
-        .va-mic:hover { filter:brightness(1.06); }
-        .va-mic.listening { background:linear-gradient(135deg,#dc2626,#f97316); animation: vaMic 1.1s infinite; }
-        @keyframes vaMic { 0%,100%{ box-shadow:0 0 0 0 rgba(220,38,38,.5);} 50%{ box-shadow:0 0 0 14px rgba(220,38,38,0);} }
-        .va-status { font-size:.82rem; font-weight:600; color:var(--text-muted); text-align:center; }
-        .va-status.on { color:#dc2626; }
-        .va-heard { min-height:20px; font-size:.85rem; color:var(--text-main); text-align:center; font-style:italic; }
-        .va-heard span { color:#94a3b8; }
-
-        .va-log { margin-top:14px; background:#fff; border:1px solid var(--border-color); border-radius:12px; max-height:150px; overflow-y:auto; padding:6px; }
-        .va-log:empty::after { content:"Aún no hay acciones. Toca el micrófono y habla."; color:#94a3b8; font-size:.78rem; display:block; padding:12px; text-align:center; }
-        .va-log-item { display:flex; gap:9px; align-items:flex-start; padding:8px 9px; border-radius:9px; }
-        .va-log-item:hover { background:#f8fafc; }
-        .va-log-item .li { width:26px;height:26px;border-radius:7px;background:#ede9fe;color:#7c3aed;display:flex;align-items:center;justify-content:center;font-size:.72rem;flex-shrink:0; }
-        .va-log-item .lt { font-size:.8rem; line-height:1.35; }
-        .va-log-item .lt small { color:var(--text-muted); }
-
-        .va-help-toggle { margin-top:12px; font-size:.8rem; color:var(--accent-blue); font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; }
-        .va-help { display:none; margin-top:8px; background:#eef2ff; border:1px solid #e0e7ff; border-radius:10px; padding:10px 12px; font-size:.78rem; color:#3730a3; line-height:1.7; }
-        .va-help.open { display:block; }
-        .va-help b { color:#1e1b4b; }
-        .va-foot { display:flex; align-items:center; justify-content:space-between; padding:10px 18px; border-top:1px solid var(--border-color); background:#fff; }
-        .va-foot label { font-size:.78rem; color:var(--text-muted); display:flex; align-items:center; gap:7px; cursor:pointer; }
-        .va-note { font-size:.72rem; color:#94a3b8; padding:0 18px 12px; background:#fff; }
-    </style>
-
-    <button class="va-launcher" id="vaLauncher" title="Asistente por voz">
-        <i class="fa-solid fa-microphone-lines"></i><span>Asistente por voz</span>
-    </button>
-
-    <div class="va-panel" id="vaPanel">
-        <div class="va-head">
-            <div class="ic"><i class="fa-solid fa-robot"></i></div>
-            <div>
-                <h3>Asistente por voz</h3>
-                <p>Habla y yo te llevo a cada trámite</p>
-            </div>
-            <button class="va-close" id="vaClose"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="va-body">
-            <div class="va-mic-wrap">
-                <button class="va-mic" id="vaMic"><i class="fa-solid fa-microphone"></i></button>
-                <div class="va-status" id="vaStatus">Toca el micrófono y habla</div>
-                <div class="va-heard" id="vaHeard"><span>Ej.: “abre Marketing”, “ir a Reportes”, “nuevo usuario”…</span></div>
-            </div>
-            <div class="va-log" id="vaLog"></div>
-            <div class="va-help-toggle" id="vaHelpToggle"><i class="fa-solid fa-circle-question"></i> ¿Qué le puedo decir?</div>
-            <div class="va-help" id="vaHelp">
-                <b>Módulos:</b> “abre Marketing”, “Ventas”, “Logística”, “Almacén”, “Producción”, “Operaciones”, “Dirección”, “Gerencia”, “Clientes”.<br>
-                <b>Gestión:</b> “Usuarios”, “nuevo usuario”, “Reportes”, “Configuración”, “Seguridad”.<br>
-                <b>General:</b> “volver a Inicio”, “cerrar sesión”, “comandos”.
-            </div>
-        </div>
-        <div class="va-foot">
-            <label><input type="checkbox" id="vaSpeak" checked> Responder con voz</label>
-            <label><input type="checkbox" id="vaContinuous" checked> Escucha continua</label>
-        </div>
-        <div class="va-note" id="vaNote"></div>
+        <div class="grupo">Soporte</div>
+        <a href="#" data-nav="ayuda.html" data-title="Centro de ayuda"><i class="ic fa-solid fa-headset"></i>Centro de ayuda</a>
+      </nav>
+      <div class="sg-side-foot" id="pieVersion">SIGSF</div>
     </div>
+  </aside>
 
-    <script>
-    (function(){
-        var launcher = document.getElementById('vaLauncher');
-        var panel = document.getElementById('vaPanel');
-        var micBtn = document.getElementById('vaMic');
-        var statusEl = document.getElementById('vaStatus');
-        var heardEl = document.getElementById('vaHeard');
-        var logEl = document.getElementById('vaLog');
-        var noteEl = document.getElementById('vaNote');
-        var speakChk = document.getElementById('vaSpeak');
-        var contChk = document.getElementById('vaContinuous');
+  <!-- ================= Contenido ================= -->
+  <div class="sg-main">
+    <header class="sg-top">
+      <button class="btn btn-light btn-icon d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sgSide" aria-controls="sgSide" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+      <button class="btn btn-light btn-icon d-none" type="button" id="btnVolver" title="Volver a Inicio" aria-label="Volver a Inicio"><i class="fa-solid fa-arrow-left"></i></button>
+      <div class="min-w-0">
+        <div class="crumbs" id="crumbs">Panel</div>
+        <h1 id="pageTitle">Inicio</h1>
+      </div>
+      <div class="acciones">
+        <div class="dropdown">
+          <button class="btn btn-light position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Pagos por verificar" id="btnCampana">
+            <i class="fa-solid fa-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-warning d-none" id="campanaN"></span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end p-0" style="width:340px">
+            <div class="px-3 py-2 border-bottom d-flex justify-content-between align-items-center">
+              <span class="fw-600">Pagos por verificar</span>
+              <a href="#" class="small" data-ir="pagos.html">Ver todos</a>
+            </div>
+            <ul class="sg-feed" id="campanaLista"><li class="sg-empty">Sin pagos pendientes.</li></ul>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-light d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="sg-avatar" id="navIni">—</span>
+            <span class="d-none d-md-inline text-start lh-sm"><span class="d-block fw-600 small" id="navUser">Usuario</span><span class="d-block small text-muted" id="navRol">—</span></span>
+            <i class="fa-solid fa-chevron-down small text-muted"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#" data-ir="configuracion.html"><i class="fa-solid fa-gear me-2"></i>Configuración</a></li>
+            <li><a class="dropdown-item" href="#" data-ir="ayuda.html"><i class="fa-solid fa-headset me-2"></i>Centro de ayuda</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket me-2"></i>Cerrar sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
 
-        document.getElementById('vaHelpToggle').addEventListener('click', function(){ document.getElementById('vaHelp').classList.toggle('open'); });
-        function openPanel(){ panel.classList.add('open'); launcher.style.display='none'; }
-        function closePanel(){ panel.classList.remove('open'); launcher.style.display='inline-flex'; stopListening(); }
-        launcher.addEventListener('click', openPanel);
-        document.getElementById('vaClose').addEventListener('click', closePanel);
+    <div class="sg-stage">
+      <!-- ================= INICIO ================= -->
+      <main id="homeView" tabindex="-1">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-3">
+          <div>
+            <h2 class="h4 mb-0" id="saludo">Hola</h2>
+            <div class="small-muted" id="hoy"></div>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary" data-ir="pagos.html"><i class="fa-solid fa-qrcode me-1"></i>Verificar pagos</button>
+            <button class="btn btn-light" data-ir="reportes.html"><i class="fa-solid fa-chart-column me-1"></i>Reportes</button>
+          </div>
+        </div>
 
-        /* ---- Voz de salida (confirmaciones) ---- */
-        var synth = window.speechSynthesis || null;
-        var esVoice = null;
-        function pickVoice(){ if(!synth) return; esVoice = window.sigsfPickVoice(synth); }
-        if (synth){ pickVoice(); if (typeof synth.onvoiceschanged!=='undefined') synth.onvoiceschanged=pickVoice; }
-        function say(text){
-            if (!synth || !speakChk.checked) return;
-            try { synth.cancel(); } catch(e){}
-            var u = new SpeechSynthesisUtterance(text);
-            window.sigsfApplyVoice(u, esVoice);
-            synth.speak(u);
-        }
+        <div class="sg-kpis" id="kpis">
+          <div class="sg-kpi gold"><div class="l">Cobrado este mes</div><div class="v" id="kpiCobrado">—</div><div class="d">Yape, Plin, Tunki y caja</div></div>
+          <div class="sg-kpi warn"><div class="l">Pagos por verificar</div><div class="v" id="kpiPorVerificar">—</div><div class="d" id="kpiPorVerificarMonto">—</div></div>
+          <div class="sg-kpi"><div class="l">Ingresos por ventas del mes</div><div class="v" id="kpiIngresos">—</div><div class="d" id="kpiVentas">—</div></div>
+          <div class="sg-kpi"><div class="l">Clientes activos</div><div class="v" id="kpiClientes">—</div><div class="d" id="kpiClientesTot">—</div></div>
+          <div class="sg-kpi"><div class="l">Operaciones hoy</div><div class="v" id="kpiOperaciones">—</div><div class="d" id="kpiSolic">—</div></div>
+          <div class="sg-kpi"><div class="l">Préstamos colocados</div><div class="v" id="kpiPrestamos">—</div><div class="d" id="kpiExpedientes">—</div></div>
+        </div>
 
-        /* ---- Registro de acciones ---- */
-        function logAction(icon, html){
-            var t = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-            var d = document.createElement('div'); d.className='va-log-item';
-            d.innerHTML = '<div class="li"><i class="fa-solid '+icon+'"></i></div><div class="lt">'+html+' <small>· '+t+'</small></div>';
-            logEl.prepend(d);
-        }
+        <div class="row g-3 mb-3">
+          <div class="col-lg-7">
+            <section class="card h-100">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <div><h2>Pagos por verificar</h2><p class="card-sub">Compara cada pago con los movimientos de tu billetera antes de confirmarlo.</p></div>
+                <button class="btn btn-sm btn-outline-primary" data-ir="pagos.html">Abrir bandeja</button>
+              </div>
+              <ul class="sg-feed" id="feedPagos"><li class="sg-empty">Cargando…</li></ul>
+            </section>
+          </div>
+          <div class="col-lg-5">
+            <section class="card h-100">
+              <div class="card-header"><h2>Cobros de los últimos 14 días</h2><p class="card-sub">Pagos confirmados por día</p></div>
+              <div class="card-body">
+                <div id="graficoDias"></div>
+                <div class="mt-3" id="porMetodo"></div>
+              </div>
+            </section>
+          </div>
+        </div>
 
-        /* ---- Ejecutar comandos ---- */
-        function qs(key){ return document.querySelector('[data-key='+key+'] a'); }
-        var pendingMsg = null;
+        <div class="row g-3 mb-3">
+          <div class="col-lg-7">
+            <section class="card h-100">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <div><h2>Últimos clientes registrados</h2><p class="card-sub" id="totalClientesBadge">—</p></div>
+                <button class="btn btn-sm btn-light" data-ir="clientes y servicios financieros.html">Ver todos</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead><tr><th>Cliente</th><th>Documento</th><th>Teléfono</th><th>Estado</th><th>Registro</th></tr></thead>
+                  <tbody id="tablaClientesPanel"><tr class="empty-row"><td colspan="5">Cargando…</td></tr></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+          <div class="col-lg-5">
+            <section class="card h-100">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <div><h2>Solicitudes del portal</h2><p class="card-sub">Préstamos, empeños y cambios por aprobar</p></div>
+                <button class="btn btn-sm btn-light" data-ir="solicitudes.html">Bandeja</button>
+              </div>
+              <ul class="sg-feed" id="feedSol"><li class="sg-empty">Cargando…</li></ul>
+            </section>
+          </div>
+        </div>
 
-        function doHome(){ sigsfNavigate('home','Inicio','', qs('home')); }
-        function doNav(target,title,crumb,key,phrase){ sigsfNavigate(target,title,crumb, qs(key)); say(phrase); logAction('fa-arrow-right-to-bracket', phrase); }
-        function doMod(target,title,phrase){ openMod(target,title); say(phrase); logAction('fa-arrow-right-to-bracket', phrase); }
+        <h2 class="h6 text-muted mb-2">Accesos rápidos</h2>
+        <div class="sg-tiles mb-4">
+          <a class="sg-tile" href="#" data-ir="pagos.html"><i class="fa-solid fa-qrcode"></i><div><b>Pagos y cobranzas</b><span>Yape, Plin, Tunki, caja y cotizaciones</span></div></a>
+          <a class="sg-tile" href="#" data-ir="operaciones financieras.html"><i class="fa-solid fa-right-left"></i><div><b>Operaciones</b><span>Cambio, préstamos y empeños</span></div></a>
+          <a class="sg-tile" href="#" data-ir="clientes y servicios financieros.html"><i class="fa-solid fa-user-group"></i><div><b>Clientes</b><span>Padrón y servicios contratados</span></div></a>
+          <a class="sg-tile" href="#" data-ir="Ventas.html"><i class="fa-solid fa-cart-shopping"></i><div><b>Ventas</b><span>Registro y Excel automático</span></div></a>
+          <a class="sg-tile" href="#" data-ir="almacen.html"><i class="fa-solid fa-warehouse"></i><div><b>Almacén</b><span>Stock y alertas de mínimo</span></div></a>
+          <a class="sg-tile" href="#" data-ir="direccion gerencia.html"><i class="fa-solid fa-compass-drafting"></i><div><b>Dirección</b><span>Expedientes por aprobar</span></div></a>
+          <a class="sg-tile" href="#" data-ir="respaldos.html"><i class="fa-solid fa-database"></i><div><b>Respaldos</b><span>Copias y bitácora de auditoría</span></div></a>
+          <a class="sg-tile" href="#" data-ir="reportes.html"><i class="fa-solid fa-chart-column"></i><div><b>Reportes</b><span>Indicadores y descargas</span></div></a>
+        </div>
+        <p class="small-muted mb-0">© 2026 SIGSF · Sistema Integral de Gestión de Servicios Financieros</p>
+      </main>
 
-        function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim(); }
-        function has(wrapped, kw){ return wrapped.indexOf(' '+norm(kw)+' ') !== -1; }
-        function hasAny(wrapped, arr){ for (var i=0;i<arr.length;i++){ if (has(wrapped, arr[i])) return true; } return false; }
+      <div id="frameView" hidden><iframe id="moduleFrame" title="Módulo" src="about:blank"></iframe></div>
+      <div class="sg-loader" id="frameLoader"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando módulo…</span></div></div>
+    </div>
+  </div>
+</div>
 
-        function process(text){
-            var w = ' ' + norm(text) + ' ';
+<!-- ================= Asistente por voz ================= -->
+<button class="btn btn-primary va-launcher" id="vaLauncher" title="Asistente por voz"><i class="fa-solid fa-microphone-lines me-1"></i>Asistente</button>
+<div class="va-panel card" id="vaPanel" role="dialog" aria-label="Asistente por voz">
+  <div class="card-header d-flex align-items-center gap-2">
+    <i class="fa-solid fa-robot text-primary"></i>
+    <div class="me-auto"><div class="fw-600">Asistente por voz</div><div class="small text-muted">Dime a qué módulo quieres ir</div></div>
+    <button class="btn-close" id="vaClose" aria-label="Cerrar"></button>
+  </div>
+  <div class="card-body text-center">
+    <button class="btn btn-primary va-mic" id="vaMic" aria-label="Hablar"><i class="fa-solid fa-microphone"></i></button>
+    <div class="small fw-600 mt-2" id="vaStatus">Toca el micrófono y habla</div>
+    <div class="small fst-italic text-muted mt-1" id="vaHeard">Ej.: “abre pagos”, “ir a reportes”, “nuevo usuario”</div>
+    <div class="va-log list-group list-group-flush text-start mt-3 border rounded" id="vaLog"></div>
+    <details class="text-start small mt-2"><summary class="text-primary">¿Qué le puedo decir?</summary>
+      <div class="mt-1 text-muted">Módulos: “pagos”, “solicitudes”, “clientes”, “operaciones”, “ventas”, “marketing”, “logística”, “almacén”, “producción”, “dirección”, “gerencia”. Gestión: “usuarios”, “nuevo usuario”, “reportes”, “configuración”, “seguridad”. General: “volver a inicio”, “cerrar sesión”.</div>
+    </details>
+  </div>
+  <div class="card-footer d-flex justify-content-between small">
+    <label class="form-check-label"><input class="form-check-input me-1" type="checkbox" id="vaSpeak" checked>Responder con voz</label>
+    <label class="form-check-label"><input class="form-check-input me-1" type="checkbox" id="vaContinuous" checked>Escucha continua</label>
+  </div>
+  <div class="px-3 pb-2 small text-muted" id="vaNote"></div>
+</div>
 
-            if (hasAny(w, ['que puedes hacer','comandos','que puedo decir','opciones de voz','ayuda de voz'])){
-                var msg = 'Puedes decir: abre Marketing, ir a Ventas, muéstrame Reportes, nuevo usuario, activar Seguridad, volver a Inicio o cerrar sesión.';
-                say(msg); logAction('fa-circle-info', 'Comandos de voz'); return true;
-            }
-            if (hasAny(w, ['cerrar sesion','cerrar la sesion','logout','desconectar'])){
-                say('Cerrando sesión'); logAction('fa-right-from-bracket', 'Cerrando sesión');
-                setTimeout(function(){ API.logout(); }, 900); return true;
-            }
-            // Gestión
-            if (hasAny(w, ['usuarios','usuario'])){
-                if (hasAny(w, ['nuevo','nueva','crear','agregar','anadir','registrar','alta','registro'])){
-                    pendingMsg = 'sigsf:new-user';
-                    sigsfNavigate('usuarios.html','Usuarios','Usuarios', qs('usr'));
-                    say('Abriendo el registro de un nuevo usuario'); logAction('fa-user-plus','Nuevo usuario'); return true;
-                }
-                doNav('usuarios.html','Usuarios','Usuarios','usr','Abriendo Usuarios'); return true;
-            }
-            if (hasAny(w, ['reportes','reporte','informe','informes','estadisticas'])){ doNav('reportes.html','Reportes','Reportes','rep','Abriendo Reportes'); return true; }
-            if (hasAny(w, ['configuracion','ajustes','preferencias','opciones'])){ doNav('configuracion.html','Configuración','Configuración','cfg','Abriendo Configuración'); return true; }
-            if (hasAny(w, ['seguridad','permisos','2fa','dos pasos','dos factores','doble factor','accesos','contrasenas'])){ doNav('seguridad.html','Seguridad','Seguridad','seg','Abriendo Seguridad'); return true; }
-            if (hasAny(w, ['centro de ayuda','soporte','preguntas frecuentes','manual','faq','asistente de texto'])){ doNav('ayuda.html','Centro de Ayuda','Ayuda','ayu','Abriendo el Centro de ayuda'); return true; }
-            // Módulos
-            if (hasAny(w, ['marketing','campana','campanas','publicidad','promocion','promociones'])){ doMod('Marketing.html','Marketing','Abriendo Marketing'); return true; }
-            if (hasAny(w, ['ventas','venta','vender','cotizacion','comercial'])){ doMod('Ventas.html','Ventas','Abriendo Ventas'); return true; }
-            if (hasAny(w, ['logistica','inventario','entradas','salidas','mercaderia'])){ doMod('Logistica.html','Logística','Abriendo Logística'); return true; }
-            if (hasAny(w, ['almacen','stock','deposito','garantia','garantias'])){ doMod('almacen.html','Almacén','Abriendo Almacén'); return true; }
-            if (hasAny(w, ['produccion','lotes','proceso','procesos','fabricacion'])){ doMod('produccion.html','Producción','Abriendo Producción'); return true; }
-            if (hasAny(w, ['operaciones','operacion','moneda','prestamo','prestamos','empeno','empenos','pagos','pago','cambio de moneda'])){ doMod('operaciones financieras.html','Operaciones Financieras','Abriendo Operaciones Financieras'); return true; }
-            if (hasAny(w, ['direccion','indicadores','estrategica','estrategia','tablero'])){ doMod('direccion gerencia.html','Dirección','Abriendo Dirección'); return true; }
-            if (hasAny(w, ['gerencia','gerencial','resultados','proyectos'])){ doMod('gerencia general y toma de  decisiones.html','Gerencia General','Abriendo Gerencia General'); return true; }
-            if (hasAny(w, ['clientes','cliente','servicios financieros','servicio financiero','historial'])){ doMod('clientes y servicios financieros.html','Clientes y Servicios Financieros','Abriendo Clientes y Servicios Financieros'); return true; }
-            // Inicio (último, como respaldo)
-            if (hasAny(w, ['inicio','menu','principal','volver','regresar','atras','empezar','tablero'])){ doHome(); say('Volviendo al Inicio'); logAction('fa-house','Inicio'); return true; }
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="sigsf-voice.js"></script>
+<script src="api.js"></script>
+<script src="sigsf-ui.js"></script>
+<script>
+(function () {
+  'use strict';
+  var S = SIGSF, $ = function (i) { return document.getElementById(i); };
+  var homeView = $('homeView'), frameView = $('frameView'), frame = $('moduleFrame'), loader = $('frameLoader');
 
-            say('No te entendí. Puedes decir: abre Marketing, ir a Reportes, nuevo usuario, o pide "comandos".');
-            logAction('fa-circle-question', 'No reconocido: “'+ (text||'').replace(/</g,'&lt;') +'”');
-            return false;
-        }
+  // ---------- Usuario ----------
+  var usuario = null;
+  try { usuario = JSON.parse(sessionStorage.getItem('sigsf_usuario') || 'null'); } catch (e) { }
+  var nombre = usuario ? ((usuario.nombre || '') + ' ' + (usuario.apellido || '')).trim() : (sessionStorage.getItem('sigsf_user') || 'Usuario');
+  $('navUser').textContent = nombre || 'Usuario';
+  $('navRol').textContent = usuario && usuario.rol ? S.etiqueta(usuario.rol) : '—';
+  $('navIni').textContent = (nombre || 'U').split(/\s+/).map(function (w) { return w[0]; }).slice(0, 2).join('').toUpperCase();
+  var h = new Date().getHours();
+  $('saludo').textContent = (h < 12 ? 'Buenos días' : h < 19 ? 'Buenas tardes' : 'Buenas noches') + ', ' + (usuario && usuario.nombre ? usuario.nombre : 'bienvenido');
+  $('hoy').textContent = new Date().toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  $('logoutBtn').addEventListener('click', function (e) { e.preventDefault(); API.logout(); });
 
-        // Enviar acción al módulo cuando termina de cargar (p. ej. abrir formulario de nuevo usuario)
-        frame.addEventListener('load', function(){
-            if (pendingMsg && frame.src.indexOf('about:blank')===-1){
-                var m = pendingMsg; pendingMsg = null;
-                setTimeout(function(){ try { frame.contentWindow.postMessage(m,'*'); } catch(e){} }, 350);
-            }
-        });
+  // ---------- Navegación ----------
+  var titulos = {};
+  document.querySelectorAll('#sideMenu a[data-nav]').forEach(function (a) { titulos[a.getAttribute('data-nav')] = a.getAttribute('data-title'); });
 
-        /* ---- Reconocimiento de voz (entrada) ---- */
-        var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
-        var recog = null, active = false;
+  function marcar(target) {
+    document.querySelectorAll('#sideMenu a').forEach(function (a) { a.classList.toggle('active', a.getAttribute('data-nav') === target); });
+  }
+  function cerrarMenuMovil() {
+    var off = bootstrap.Offcanvas.getInstance($('sgSide'));
+    if (off) off.hide();
+  }
+  function abrir(target, titulo, sinHistorial) {
+    titulo = titulo || titulos[target] || target.replace('.html', '');
+    marcar(target);
+    $('pageTitle').textContent = titulo;
+    cerrarMenuMovil();
+    if (target === 'home') {
+      $('crumbs').textContent = 'Panel';
+      frameView.hidden = true; homeView.hidden = false;
+      $('btnVolver').classList.add('d-none');
+      loader.classList.remove('show');
+      frame.src = 'about:blank';
+      document.title = 'SIGSF · Panel';
+      if (!sinHistorial) history.replaceState(null, '', location.pathname);
+      cargarTodo();
+      return;
+    }
+    $('crumbs').textContent = 'Panel / ' + titulo;
+    homeView.hidden = true; frameView.hidden = false;
+    $('btnVolver').classList.remove('d-none');
+    loader.classList.add('show');
+    frame.src = encodeURI(target);
+    document.title = 'SIGSF · ' + titulo;
+    if (!sinHistorial) history.replaceState(null, '', '#' + encodeURIComponent(target));
+  }
+  frame.addEventListener('load', function () { if (frame.src.indexOf('about:blank') === -1) loader.classList.remove('show'); });
+  document.querySelectorAll('#sideMenu a[data-nav]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); abrir(a.getAttribute('data-nav'), a.getAttribute('data-title')); });
+  });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-ir]');
+    if (!b) return;
+    e.preventDefault();
+    abrir(b.getAttribute('data-ir'));
+  });
+  $('btnVolver').addEventListener('click', function () { abrir('home'); });
 
-        if (!SR){
-            noteEl.innerHTML = '⚠️ Tu navegador no permite el micrófono. Usa <b>Google Chrome</b> (y abre el sistema con permiso de micrófono) para hablarle al asistente.';
-            micBtn.style.opacity = '.5';
-        } else {
-            recog = new SR();
-            recog.lang = 'es-ES';
-            recog.interimResults = true;
-            recog.continuous = true;
-            recog.onresult = function(e){
-                var interim = '', finalTxt = '';
-                for (var i=e.resultIndex; i<e.results.length; i++){
-                    var r = e.results[i];
-                    if (r.isFinal) finalTxt += r[0].transcript; else interim += r[0].transcript;
-                }
-                if (interim) heardEl.textContent = '“' + interim + '”';
-                if (finalTxt.trim()){
-                    heardEl.textContent = '“' + finalTxt.trim() + '”';
-                    process(finalTxt.trim());
-                }
-            };
-            recog.onerror = function(ev){
-                if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed'){
-                    noteEl.innerHTML = '🎤 Permiso de micrófono denegado. Actívalo en el navegador para usar la voz.';
-                    stopListening();
-                }
-            };
-            recog.onend = function(){
-                // Reiniciar para mantener la escucha continua
-                if (active && contChk.checked){ try { recog.start(); } catch(e){} }
-                else { active = false; reflect(); }
-            };
-        }
+  // Compatibilidad con el asistente por voz y enlaces antiguos
+  window.sigsfNavigate = function (target, title) { abrir(target, title); };
+  window.openMod = function (target, title) { abrir(target, title); };
+  window.sigsfAbrir = abrir;
 
-        function reflect(){
-            micBtn.classList.toggle('listening', active);
-            launcher.classList.toggle('listening', active);
-            statusEl.classList.toggle('on', active);
-            statusEl.textContent = active ? '● Escuchando… habla ahora' : 'Toca el micrófono y habla';
-            if (!active) heardEl.innerHTML = '<span>Ej.: “abre Marketing”, “ir a Reportes”, “nuevo usuario”…</span>';
-        }
-        function startListening(){
-            if (!recog){ alert('El micrófono no está disponible en este navegador. Prueba con Google Chrome.'); return; }
-            try { recog.start(); active = true; reflect(); say('Te escucho'); }
-            catch(e){ /* ya iniciado */ }
-        }
-        function stopListening(){ active = false; if (recog){ try { recog.stop(); } catch(e){} } reflect(); }
-        function toggleListening(){ active ? stopListening() : startListening(); }
+  // ---------- Indicadores ----------
+  function set(id, v) { var e = $(id); if (e) e.textContent = v; }
+  async function cargarKPIs() {
+    try {
+      var d = await API.dashboard();
+      set('kpiCobrado', S.money(d.cobradoMes));
+      set('kpiPorVerificar', S.num(d.pagosPorVerificar));
+      set('kpiPorVerificarMonto', S.money(d.montoPorVerificar) + ' en espera');
+      set('kpiIngresos', S.money(d.ingresosDelMes));
+      set('kpiVentas', S.num(d.ventasTotales) + ' ventas registradas');
+      set('kpiClientes', S.num(d.clientesActivos));
+      set('kpiClientesTot', S.num(d.clientesTotales) + ' en total');
+      set('kpiOperaciones', S.num(d.operacionesHoy));
+      set('kpiSolic', S.num(d.solicitudesPendientes) + ' solicitudes pendientes');
+      set('kpiPrestamos', S.money(d.prestamosColocados));
+      set('kpiExpedientes', S.num(d.expedientesPendientes) + ' expedientes pendientes');
+    } catch (e) { console.warn('Indicadores no disponibles:', e.message); }
+  }
 
-        micBtn.addEventListener('click', toggleListening);
-    })();
-    </script>
+  // ---------- Pagos por verificar (campana + bandeja del inicio) ----------
+  var ultimoPendiente = null;
+  function filaPago(p) {
+    return '<li><span>' + S.wallet(p.metodo) + '</span><div class="who"><b>' + S.escapar(p.cliente || 'Cliente') + '</b>'
+      + '<span>' + S.escapar(S.concepto(p.concepto)) + ' · N° op. ' + S.escapar(p.numeroOperacion || '—') + ' · ' + S.escapar(S.fechaHora(p.fechaPago)) + '</span></div>'
+      + '<span class="amt">' + S.money(p.monto) + '</span></li>';
+  }
+  async function cargarPendientes() {
+    try {
+      var lista = await API.get('/pagos?estado=POR_VERIFICAR');
+      var n = lista.length;
+      ['navPagos', 'campanaN'].forEach(function (id) { var b = $(id); b.textContent = n; b.classList.toggle('d-none', !n); });
+      var vacio = '<li class="sg-empty"><i class="fa-solid fa-circle-check"></i>No hay pagos por verificar.</li>';
+      $('campanaLista').innerHTML = n ? lista.slice(0, 5).map(filaPago).join('') : vacio;
+      $('feedPagos').innerHTML = n ? lista.slice(0, 6).map(filaPago).join('') : vacio;
+      var masNuevo = n ? lista[0].idPago : 0;
+      if (ultimoPendiente !== null && masNuevo > ultimoPendiente) {
+        S.toast('Nuevo pago por verificar: ' + lista[0].cliente + ' · ' + S.money(lista[0].monto), 'info');
+      }
+      ultimoPendiente = masNuevo;
+    } catch (e) {
+      $('feedPagos').innerHTML = '<li class="sg-empty">' + S.escapar(e.message) + '</li>';
+    }
+  }
 
-    <script>
-      // Carga de indicadores reales desde el backend (PostgreSQL).
-      (function () {
-        function money(n) {
-          const v = Number(n || 0);
-          return 'S/ ' + v.toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function num(n) { return Number(n || 0).toLocaleString('es-PE'); }
-        function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+  async function cargarCobros() {
+    try {
+      var r = await API.get('/pagos/resumen');
+      S.graficoBarras($('graficoDias'), r.porDia.map(function (d) {
+        return { label: S.fecha(d.fecha).substring(0, 5), valor: Number(d.monto) };
+      }), { alto: 170, formato: S.money, titulo: 'Cobros por día' });
+      var total = r.porMetodo.reduce(function (a, m) { return a + Number(m.monto); }, 0) || 1;
+      $('porMetodo').innerHTML = r.porMetodo.filter(function (m) { return Number(m.monto) > 0; }).map(function (m) {
+        var pct = Math.round(100 * Number(m.monto) / total);
+        return '<div class="d-flex justify-content-between small mb-1"><span>' + S.wallet(m.metodo) + '</span><span class="fw-600">'
+          + S.money(m.monto) + ' <span class="text-muted fw-normal">· ' + pct + ' %</span></span></div>'
+          + '<div class="sg-bar mb-2"><span style="width:' + pct + '%;background:' + (S.COLOR_METODO[m.metodo] || '#5b6779') + '"></span></div>';
+      }).join('') || '<div class="small-muted">Aún no hay cobros confirmados.</div>';
+    } catch (e) { $('graficoDias').innerHTML = '<div class="small-muted">' + S.escapar(e.message) + '</div>'; }
+  }
 
-        // Nombre del usuario logueado en la barra superior.
-        try {
-          const u = JSON.parse(sessionStorage.getItem('sigsf_usuario') || 'null');
-          if (u) {
-            set('navUser', ((u.nombre || '') + ' ' + (u.apellido || '')).trim() || 'Usuario');
-            const st = document.querySelector('.user-info .status');
-            if (st && u.rol) st.textContent = u.rol;
-          }
-        } catch (_) {}
+  async function cargarSolicitudes() {
+    try {
+      var lista = await API.get('/solicitudes/pendientes');
+      var b = $('navSol'); b.textContent = lista.length; b.classList.toggle('d-none', !lista.length);
+      $('feedSol').innerHTML = lista.length ? lista.slice(0, 5).map(function (s) {
+        return '<li><span class="badge text-bg-light border">' + S.escapar(S.etiqueta(s.tipoOperacion)) + '</span><div class="who"><b>'
+          + S.escapar(s.cliente || '—') + '</b><span>Doc. ' + S.escapar(s.documento || '—') + ' · ' + S.escapar(S.fechaHora(s.fechaOperacion)) + '</span></div>'
+          + '<span class="amt">' + S.money(s.monto) + '</span></li>';
+      }).join('') : '<li class="sg-empty"><i class="fa-solid fa-inbox"></i>No hay solicitudes pendientes.</li>';
+    } catch (e) { $('feedSol').innerHTML = '<li class="sg-empty">' + S.escapar(e.message) + '</li>'; }
+  }
 
-        async function cargarKPIs() {
-          try {
-            const d = await API.dashboard();
-            set('kpiIngresos', money(d.ingresosDelMes));
-            set('kpiClientes', num(d.clientesActivos));
-            set('kpiOperaciones', num(d.operacionesHoy));
-            set('kpiPrestamos', money(d.prestamosColocados));
-            set('kpiExpedientes', num(d.expedientesPendientes) + ' expedientes pendientes');
-            set('kpiVentas', num(d.ventasTotales) + ' ventas registradas');
-            set('kpiClientesTot', num(d.clientesTotales) + ' en total');
-            set('kpiSolic', num(d.solicitudesPendientes) + ' solicitudes pendientes');
-          } catch (e) {
-            // Si el backend/BD no está disponible, se dejan los guiones.
-            console.warn('No se pudieron cargar los indicadores:', e.message);
-          }
-        }
-        if (document.readyState !== 'loading') cargarKPIs();
-        else document.addEventListener('DOMContentLoaded', cargarKPIs);
+  async function cargarClientes() {
+    var tb = $('tablaClientesPanel');
+    try {
+      var lista = await API.get('/clientes');
+      $('totalClientesBadge').textContent = S.num(lista.length) + (lista.length === 1 ? ' cliente registrado' : ' clientes registrados');
+      lista = lista.slice().sort(function (a, b) { return String(b.fechaRegistro || '').localeCompare(String(a.fechaRegistro || '')); });
+      tb.innerHTML = lista.length ? lista.slice(0, 6).map(function (c) {
+        var n = ((c.nombres || '') + ' ' + (c.apellidos || '')).trim();
+        return '<tr><td><span class="fw-600">' + S.escapar(n) + '</span><span class="sub">' + S.escapar(c.correo || '') + '</span></td>'
+          + '<td class="text-nowrap">' + S.escapar((c.tipoDocumento || '') + ' ' + (c.documento || '')) + '</td><td>' + S.escapar(c.telefono || '—') + '</td>'
+          + '<td>' + S.badge(c.estado) + '</td><td class="text-muted text-nowrap">' + S.escapar(S.fecha(c.fechaRegistro)) + '</td></tr>';
+      }).join('') : '<tr class="empty-row"><td colspan="5">Aún no hay clientes.</td></tr>';
+    } catch (e) { tb.innerHTML = '<tr class="empty-row"><td colspan="5" class="text-danger">' + S.escapar(e.message) + '</td></tr>'; }
+  }
 
-        // Pie con la versión en ejecución (GET /api/version).
-        API.get('/version').then(function (v) {
-          var t = 'SIGSF v' + v.version + (v.rama ? ' · rama ' + v.rama : '') + (v.commitCorto ? ' · commit ' + v.commitCorto : '')
-                + (v.versionEsquema ? ' · esquema BD v' + v.versionEsquema : '') + (v.cambiosSinCommit ? ' · cambios sin commit' : '');
-          set('pieVersion', t);
-        }).catch(function () { /* sin versión */ });
-      })();
-    </script>
+  function cargarTodo() { cargarKPIs(); cargarPendientes(); cargarCobros(); cargarSolicitudes(); cargarClientes(); }
 
-    <script>
-      // Contador de solicitudes pendientes en la tarjeta del panel.
-      (function(){
-        async function contarSolicitudes(){
-          try{
-            var lista = await API.get('/solicitudes/pendientes');
-            var b = document.getElementById('badgeSol');
-            if(b && lista.length){ b.textContent = lista.length + ' nueva' + (lista.length>1?'s':''); b.style.display='inline-block'; }
-            else if(b){ b.style.display='none'; }
-          }catch(e){}
-        }
-        if(document.readyState!=='loading') contarSolicitudes();
-        else document.addEventListener('DOMContentLoaded', contarSolicitudes);
-        setInterval(contarSolicitudes, 30000);
-      })();
-    </script>
+  API.get('/version').then(function (v) {
+    $('pieVersion').textContent = 'SIGSF v' + v.version + (v.versionEsquema ? ' · esquema ' + v.versionEsquema : '') + (v.commitCorto ? ' · ' + v.commitCorto : '');
+  }).catch(function () { });
 
-    <script>
-      // Últimos clientes registrados (se actualiza al entrar y cada 30 s).
-      (function(){
-        function esc(s){ return String(s===null||s===undefined?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-        function iniciales(n){ n=(n||'').trim(); if(!n) return '??';
-          return n.split(/\s+/).map(function(w){return w[0];}).slice(0,2).join('').toUpperCase(); }
+  // Apertura directa de un módulo (panel/#pagos.html) o inicio
+  var inicial = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+  if (inicial && titulos[inicial]) abrir(inicial, titulos[inicial], true); else cargarTodo();
 
-        async function cargarClientesPanel(){
-          var tb=document.getElementById('tablaClientesPanel');
-          if(!tb) return;
-          try{
-            var lista = await API.get('/clientes');
-            var badge=document.getElementById('totalClientesBadge');
-            if(badge) badge.textContent = lista.length + (lista.length===1?' cliente':' clientes');
-            tb.innerHTML='';
-            if(!lista.length){
-              tb.innerHTML='<tr><td colspan="5" style="padding:22px;text-align:center;color:#64748b;">Aún no hay clientes. Regístralos en el módulo Clientes.</td></tr>';
-              return;
-            }
-            lista.slice(0,6).forEach(function(c){
-              var nombre=((c.nombres||'')+' '+(c.apellidos||'')).trim();
-              var act=(c.estado||'')==='ACTIVO';
-              var reg=c.fechaRegistro?String(c.fechaRegistro).replace('T',' ').substring(0,16):'—';
-              var tr=document.createElement('tr');
-              tr.style.borderBottom='1px solid #eef2f7';
-              tr.innerHTML =
-                '<td style="padding:10px;"><div style="display:flex;align-items:center;gap:10px;">'
-                +'<div style="width:34px;height:34px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;">'+iniciales(nombre)+'</div>'
-                +'<div><div style="font-weight:600;color:#0f172a;">'+esc(nombre||'(sin nombre)')+'</div>'
-                +'<div style="font-size:.76rem;color:#94a3b8;">'+esc(c.correo||'')+'</div></div></div></td>'
-                +'<td style="padding:10px;">'+esc((c.tipoDocumento||'')+' '+(c.documento||''))+'</td>'
-                +'<td style="padding:10px;">'+esc(c.telefono||'—')+'</td>'
-                +'<td style="padding:10px;"><span style="padding:3px 10px;border-radius:999px;font-size:.72rem;font-weight:600;background:'
-                +(act?'#dcfce7;color:#15803d':'#e2e8f0;color:#475569')+';">'+esc(c.estado||'—')+'</span></td>'
-                +'<td style="padding:10px;color:#64748b;">'+esc(reg)+'</td>';
-              tb.appendChild(tr);
-            });
-          }catch(e){
-            tb.innerHTML='<tr><td colspan="5" style="padding:20px;text-align:center;color:#dc2626;">No se pudo cargar: '+esc(e.message)+'</td></tr>';
-          }
-        }
-        if(document.readyState!=='loading') cargarClientesPanel();
-        else document.addEventListener('DOMContentLoaded', cargarClientesPanel);
-        setInterval(cargarClientesPanel, 30000);
-      })();
-    </script>
+  // Avisos en vivo: pagos y solicitudes nuevos cada 20 s; el resto del inicio cada 60 s
+  setInterval(function () { cargarPendientes(); cargarSolicitudes(); }, 20000);
+  setInterval(function () { if (!homeView.hidden) { cargarKPIs(); cargarCobros(); cargarClientes(); } }, 60000);
+})();
+</script>
+
+<script>
+/* ================= Asistente por voz: escucha y abre módulos ================= */
+(function () {
+  var $ = function (i) { return document.getElementById(i); };
+  var launcher = $('vaLauncher'), panel = $('vaPanel'), micBtn = $('vaMic'), statusEl = $('vaStatus'),
+      heardEl = $('vaHeard'), logEl = $('vaLog'), noteEl = $('vaNote'), speakChk = $('vaSpeak'), contChk = $('vaContinuous');
+  var EJEMPLO = 'Ej.: “abre pagos”, “ir a reportes”, “nuevo usuario”';
+  function openPanel() { panel.classList.add('open'); launcher.hidden = true; }
+  function closePanel() { panel.classList.remove('open'); launcher.hidden = false; stopListening(); }
+  launcher.addEventListener('click', openPanel);
+  $('vaClose').addEventListener('click', closePanel);
+
+  var synth = window.speechSynthesis || null, esVoice = null;
+  function pickVoice() { if (synth && window.sigsfPickVoice) esVoice = window.sigsfPickVoice(synth); }
+  if (synth) { pickVoice(); if (typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = pickVoice; }
+  function say(text) {
+    if (!synth || !speakChk.checked) return;
+    try { synth.cancel(); } catch (e) { }
+    var u = new SpeechSynthesisUtterance(text);
+    if (window.sigsfApplyVoice) window.sigsfApplyVoice(u, esVoice);
+    synth.speak(u);
+  }
+  function logAction(icon, texto) {
+    var t = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    var d = document.createElement('div');
+    d.className = 'list-group-item small';
+    d.innerHTML = '<i class="fa-solid ' + icon + ' text-primary me-2"></i>' + SIGSF.escapar(texto) + ' <span class="text-muted">· ' + t + '</span>';
+    logEl.prepend(d);
+  }
+  var pendingMsg = null;
+  function ir(target, titulo, frase) { window.sigsfAbrir(target, titulo); say(frase); logAction('fa-arrow-right-to-bracket', frase); }
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function hasAny(w, arr) { for (var i = 0; i < arr.length; i++) { if (w.indexOf(' ' + norm(arr[i]) + ' ') !== -1) return true; } return false; }
+
+  var REGLAS = [
+    [['pagos', 'pago', 'cobranza', 'cobranzas', 'yape', 'plin', 'tunki', 'qr', 'cotizacion', 'cotizaciones', 'billetera'], 'pagos.html', 'Pagos y cobranzas'],
+    [['solicitudes', 'solicitud', 'bandeja'], 'solicitudes.html', 'Solicitudes de clientes'],
+    [['reportes', 'reporte', 'informe', 'informes', 'estadisticas'], 'reportes.html', 'Reportes'],
+    [['configuracion', 'ajustes', 'preferencias'], 'configuracion.html', 'Configuración'],
+    [['seguridad', 'permisos', 'accesos'], 'seguridad.html', 'Seguridad'],
+    [['respaldos', 'respaldo', 'auditoria', 'backup'], 'respaldos.html', 'Respaldos y auditoría'],
+    [['versiones', 'version', 'git'], 'versiones.html', 'Control de versiones'],
+    [['centro de ayuda', 'soporte', 'manual', 'preguntas frecuentes'], 'ayuda.html', 'Centro de ayuda'],
+    [['marketing', 'campana', 'campanas', 'publicidad', 'promocion'], 'Marketing.html', 'Marketing'],
+    [['ventas', 'venta', 'vender', 'comercial'], 'Ventas.html', 'Ventas'],
+    [['logistica', 'proveedores', 'mercaderia'], 'Logistica.html', 'Logística'],
+    [['almacen', 'stock', 'deposito', 'inventario'], 'almacen.html', 'Almacén'],
+    [['produccion', 'lotes', 'fabricacion'], 'produccion.html', 'Producción'],
+    [['operaciones', 'operacion', 'moneda', 'prestamo', 'prestamos', 'empeno', 'empenos', 'cambio de moneda'], 'operaciones financieras.html', 'Operaciones financieras'],
+    [['direccion', 'expedientes', 'estrategica'], 'direccion gerencia.html', 'Dirección'],
+    [['gerencia', 'gerencial', 'resultados'], 'gerencia general y toma de  decisiones.html', 'Gerencia general'],
+    [['clientes', 'cliente', 'servicios financieros'], 'clientes y servicios financieros.html', 'Clientes y servicios']
+  ];
+  function process(text) {
+    var w = ' ' + norm(text) + ' ';
+    if (hasAny(w, ['que puedes hacer', 'comandos', 'que puedo decir', 'ayuda de voz'])) {
+      say('Puedes decir: abre pagos, ir a ventas, muéstrame reportes, nuevo usuario, volver a inicio o cerrar sesión.');
+      logAction('fa-circle-info', 'Comandos de voz'); return;
+    }
+    if (hasAny(w, ['cerrar sesion', 'cerrar la sesion', 'logout'])) {
+      say('Cerrando sesión'); logAction('fa-right-from-bracket', 'Cerrando sesión');
+      setTimeout(function () { API.logout(); }, 900); return;
+    }
+    if (hasAny(w, ['usuarios', 'usuario'])) {
+      if (hasAny(w, ['nuevo', 'nueva', 'crear', 'agregar', 'registrar', 'alta'])) {
+        pendingMsg = 'sigsf:new-user';
+        ir('usuarios.html', 'Usuarios', 'Abriendo el registro de un nuevo usuario'); return;
+      }
+      ir('usuarios.html', 'Usuarios', 'Abriendo Usuarios'); return;
+    }
+    for (var i = 0; i < REGLAS.length; i++) {
+      if (hasAny(w, REGLAS[i][0])) { ir(REGLAS[i][1], REGLAS[i][2], 'Abriendo ' + REGLAS[i][2]); return; }
+    }
+    if (hasAny(w, ['inicio', 'menu', 'principal', 'volver', 'regresar', 'atras'])) {
+      window.sigsfAbrir('home'); say('Volviendo al inicio'); logAction('fa-house', 'Inicio'); return;
+    }
+    say('No te entendí. Puedes decir: abre pagos, ir a reportes o nuevo usuario.');
+    logAction('fa-circle-question', 'No reconocido: “' + text + '”');
+  }
+  var frame = document.getElementById('moduleFrame');
+  frame.addEventListener('load', function () {
+    if (pendingMsg && frame.src.indexOf('about:blank') === -1) {
+      var m = pendingMsg; pendingMsg = null;
+      setTimeout(function () { try { frame.contentWindow.postMessage(m, location.origin); } catch (e) { } }, 400);
+    }
+  });
+
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null, recog = null, active = false;
+  if (!SR) {
+    noteEl.textContent = 'Tu navegador no permite usar el micrófono aquí. Usa Google Chrome o Microsoft Edge.';
+    micBtn.disabled = true;
+  } else {
+    recog = new SR(); recog.lang = 'es-ES'; recog.interimResults = true; recog.continuous = true;
+    recog.onresult = function (e) {
+      var interim = '', finalTxt = '';
+      for (var i = e.resultIndex; i < e.results.length; i++) {
+        var r = e.results[i];
+        if (r.isFinal) finalTxt += r[0].transcript; else interim += r[0].transcript;
+      }
+      if (interim) heardEl.textContent = '“' + interim + '”';
+      if (finalTxt.trim()) { heardEl.textContent = '“' + finalTxt.trim() + '”'; process(finalTxt.trim()); }
+    };
+    recog.onerror = function (ev) {
+      if (ev.error === 'not-allowed' || ev.error === 'service-not-allowed') {
+        noteEl.textContent = 'Permiso de micrófono denegado. Actívalo en el navegador para usar la voz.';
+        stopListening();
+      }
+    };
+    recog.onend = function () { if (active && contChk.checked) { try { recog.start(); } catch (e) { } } else { active = false; reflect(); } };
+  }
+  function reflect() {
+    micBtn.classList.toggle('listening', active);
+    statusEl.textContent = active ? 'Escuchando… habla ahora' : 'Toca el micrófono y habla';
+    statusEl.classList.toggle('text-danger', active);
+    if (!active) heardEl.textContent = EJEMPLO;
+  }
+  function startListening() { if (!recog) return; try { recog.start(); active = true; reflect(); say('Te escucho'); } catch (e) { } }
+  function stopListening() { active = false; if (recog) { try { recog.stop(); } catch (e) { } } reflect(); }
+  micBtn.addEventListener('click', function () { active ? stopListening() : startListening(); });
+})();
+</script>
 </body>
 </html>

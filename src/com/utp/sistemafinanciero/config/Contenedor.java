@@ -8,6 +8,7 @@ import com.utp.sistemafinanciero.backup.RespaldoService;
 import com.utp.sistemafinanciero.dao.DaoFactory;
 import com.utp.sistemafinanciero.dao.jdbc.JdbcDaoFactory;
 import com.utp.sistemafinanciero.dao.memoria.DatosMasivos;
+import com.utp.sistemafinanciero.dao.memoria.DatosPagos;
 import com.utp.sistemafinanciero.dao.memoria.DatosSemilla;
 import com.utp.sistemafinanciero.dao.memoria.MemoriaDaoFactory;
 import com.utp.sistemafinanciero.security.GestorSesiones;
@@ -65,6 +66,10 @@ public class Contenedor {
     public final ProduccionService produccion;
     public final SolicitudService solicitudes;
     public final PortalService portal;
+    /** Pagos con Yape, Plin y Tunki (portal y caja) y billeteras de cobro. */
+    public final PagoService pagos;
+    /** Cotizaciones de préstamos, empeños y cambio de moneda. */
+    public final CotizacionService cotizaciones;
     public final AuditoriaService auditoria;
     /** Importación y exportación de ficheros (CSV, Excel, JSON) de todas las áreas. */
     public final ArchivoService archivos;
@@ -99,6 +104,10 @@ public class Contenedor {
         this.solicitudes = new SolicitudService(bd.operaciones(), bd.prestamos(), bd.empenos());
         this.portal = new PortalService(bd.clientes(), bd.accesosCliente(), bd.operaciones(),
                 bd.articulos(), bd.tiposCambio(), prestamos, empenos, hasher, sesiones, limitador);
+        this.pagos = new PagoService(bd.pagos(), bd.billeteras(), bd.clientes(), bd.operaciones(),
+                bd.prestamos(), bd.empenos(), Configuracion.pagosConfirmacionAutomatica(),
+                Configuracion.pagosMontoMaximo());
+        this.cotizaciones = new CotizacionService(bd.cotizaciones(), bd.clientes(), bd.tiposCambio(), portal);
         this.auditoria = new AuditoriaService(bd.auditoria());
         this.archivos = new ArchivoService(Configuracion.importacionMaxFilas());
         Path raiz = Paths.get("").toAbsolutePath();
@@ -116,11 +125,16 @@ public class Contenedor {
         if ("memoria".equals(Configuracion.persistencia())) {
             MemoriaDaoFactory bd = new MemoriaDaoFactory();
             DatosSemilla.cargar(bd, hasher);
-            if (!"false".equalsIgnoreCase(Configuracion.get("memoria.datos.masivos", "true"))) {
+            boolean masivos = !"false".equalsIgnoreCase(Configuracion.get("memoria.datos.masivos", "true"));
+            if (masivos) {
                 DatosMasivos.cargar(bd, hasher);   // 100 registros por módulo (solo modo demostración)
             }
-            return new Contenedor(bd, hasher, sesiones, limitador,
+            Contenedor c = new Contenedor(bd, hasher, sesiones, limitador,
                     List.of(new RespaldoMemoriaJson(bd)), carpeta, Configuracion.backupRetener());
+            if (masivos) {
+                DatosPagos.cargar(c, bd);          // pagos con QR y cotizaciones de demostración
+            }
+            return c;
         }
         DaoFactory bd = new JdbcDaoFactory();
         List<EstrategiaRespaldo> estrategias = List.of(

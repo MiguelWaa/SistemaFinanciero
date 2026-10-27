@@ -4,128 +4,155 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Reportes</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="sigsf-modulo.css">
-<style>
-  .descargas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
-  .d{border:1px solid #e2e8f0;border-radius:12px;padding:18px;text-align:center;transition:.15s;}
-  .d:hover{border-color:#bfdbfe;box-shadow:0 6px 16px rgba(37,99,235,.12);transform:translateY(-2px);}
-  .d i.big{font-size:1.9rem;color:#059669;margin-bottom:10px;display:block;}
-  .d h4{font-size:.95rem;margin-bottom:4px;}
-  .d p{font-size:.78rem;color:#64748b;margin-bottom:13px;line-height:1.45;}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 </head>
 <body>
-
-<header class="mod-header">
-  <div class="izq">
-    <div class="ico"><i class="fa-solid fa-chart-line"></i></div>
-    <div>
-      <h1>Reportes</h1>
-      <p>Indicadores en tiempo real y exportación de datos a Excel</p>
-    </div>
-  </div>
-  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+<header class="sg-page-head">
+  <div class="d-flex align-items-center"><span class="ico"><i class="fa-solid fa-chart-column"></i></span>
+    <div><h1>Reportes</h1><p>Indicadores en tiempo real, reportes imprimibles y descargas en Excel, CSV o JSON</p></div></div>
+  <a class="btn btn-sm btn-outline-light" href="index.html"><i class="fa-solid fa-arrow-left me-1"></i>Volver al panel</a>
 </header>
 
-<div class="mod-wrap">
-  <div class="kpis" id="kpis"></div>
+<div class="sg-wrap">
+  <div class="sg-kpis" id="kpis"></div>
 
-  <div class="card">
-    <h2><i class="fa-solid fa-file-excel" style="color:#059669;"></i> Exportar a Excel</h2>
-    <div class="sub">Los archivos se descargan con la información actual de la base de datos.</div>
-    <div class="descargas">
-      <div class="d">
-        <i class="fa-solid fa-cart-shopping big"></i>
-        <h4>Ventas</h4>
-        <p>Todas las ventas con cliente, servicio, fecha e importe.</p>
-        <button class="btn verde" data-url="/api/ventas/excel"><i class="fa-solid fa-download"></i> Descargar</button>
-      </div>
-      <div class="d">
-        <i class="fa-solid fa-users big"></i>
-        <h4>Clientes</h4>
-        <p>Padrón completo de clientes con sus datos de contacto.</p>
-        <button class="btn verde" data-url="/api/clientes/excel"><i class="fa-solid fa-download"></i> Descargar</button>
-      </div>
-      <div class="d">
-        <i class="fa-solid fa-right-left big"></i>
-        <h4>Operaciones</h4>
-        <p>Cambios, préstamos y empeños con sus montos y estados.</p>
-        <button class="btn verde" data-url="/api/operaciones/excel"><i class="fa-solid fa-download"></i> Descargar</button>
-      </div>
-      <div class="d">
-        <i class="fa-solid fa-boxes-stacked big"></i>
-        <h4>Almacén</h4>
-        <p>Inventario de productos con stock actual y mínimo.</p>
-        <button class="btn verde" data-url="/api/productos/excel"><i class="fa-solid fa-download"></i> Descargar</button>
+  <div class="row g-3 mb-3">
+    <div class="col-lg-5">
+      <form class="card h-100" id="formRep">
+        <div class="card-header"><h2><i class="fa-solid fa-print text-primary me-2"></i>Reporte de pagos y cobranzas</h2>
+          <p class="card-sub">Documento listo para imprimir o guardar en PDF, con totales por billetera y el detalle.</p></div>
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-6"><label class="form-label" for="rDesde">Desde</label><input class="form-control" type="date" id="rDesde"></div>
+            <div class="col-6"><label class="form-label" for="rHasta">Hasta</label><input class="form-control" type="date" id="rHasta"></div>
+            <div class="col-6"><label class="form-label" for="rEstado">Estado</label>
+              <select class="form-select" id="rEstado"><option value="CONFIRMADO">Confirmados</option><option value="">Todos</option><option value="POR_VERIFICAR">Por verificar</option><option value="RECHAZADO">Rechazados</option></select></div>
+            <div class="col-6"><label class="form-label" for="rMetodo">Método</label>
+              <select class="form-select" id="rMetodo"><option value="">Todos</option><option>YAPE</option><option>PLIN</option><option>TUNKI</option><option>EFECTIVO</option><option>TRANSFERENCIA</option></select></div>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mt-3">
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-file-lines me-1"></i>Generar reporte</button>
+            <button class="btn btn-light" type="button" data-rango="hoy">Hoy</button>
+            <button class="btn btn-light" type="button" data-rango="mes">Este mes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-7">
+      <div class="card h-100">
+        <div class="card-header"><h2>Cobros confirmados por concepto</h2><p class="card-sub">Histórico de pagos con billeteras y caja</p></div>
+        <div class="card-body" id="porConcepto"><div class="small-muted">Cargando…</div></div>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="tabla-top">
-      <h2 style="margin:0;"><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;"></i> Últimas operaciones</h2>
-      <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscar" placeholder="Buscar…"></div>
+  <div class="card mb-3">
+    <div class="card-header"><h2><i class="fa-solid fa-file-arrow-down text-success me-2"></i>Descargas</h2><p class="card-sub">Datos actuales de la base de datos.</p></div>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead><tr><th>Información</th><th>Contenido</th><th class="text-end">Formatos</th></tr></thead>
+        <tbody id="descargas"></tbody>
+      </table>
     </div>
-    <div class="tabla-scroll">
-      <table>
-        <thead><tr><th>N°</th><th>Tipo</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
-        <tbody id="tablaOps"><tr><td class="vacio" colspan="5">Cargando…</td></tr></tbody>
+  </div>
+
+  <div class="card">
+    <div class="sg-toolbar">
+      <h2 class="h6 mb-0">Últimas operaciones</h2>
+      <div class="input-group input-group-sm search"><span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span><input class="form-control" type="search" id="buscar" placeholder="Buscar…" aria-label="Buscar"></div>
+    </div>
+    <div class="table-wrap" style="max-height:480px">
+      <table class="table table-hover align-middle">
+        <thead><tr><th>N°</th><th>Tipo</th><th class="num">Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
+        <tbody id="tablaOps"><tr class="empty-row"><td colspan="5">Cargando…</td></tr></tbody>
       </table>
     </div>
   </div>
 </div>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
-<script src="sigsf-crud.js"></script>
+<script src="sigsf-ui.js"></script>
 <script>
-(function(){
-  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
-  var ops = [];
+(function () {
+  'use strict';
+  var S = SIGSF, esc = S.escapar, $ = function (i) { return document.getElementById(i); };
+  S.embebido();
 
-  document.querySelectorAll('[data-url]').forEach(function(b){
-    b.addEventListener('click', function(){
-      API.descargar(b.getAttribute('data-url').replace(/^\/api/, '')).catch(function(e){ alert('No se pudo descargar: ' + e.message); });
-    });
+  var DESCARGAS = [
+    ['fa-qrcode', 'Pagos y cobranzas', 'Pagos con Yape, Plin, Tunki y caja: cliente, N° de operación, estado y comprobante.', 'pagos'],
+    ['fa-file-invoice-dollar', 'Cotizaciones', 'Cotizaciones emitidas desde el portal y la ventanilla.', 'cotizaciones'],
+    ['fa-cart-shopping', 'Ventas', 'Ventas con cliente, servicio, fecha e importe.', 'ventas'],
+    ['fa-users', 'Clientes', 'Padrón de clientes con datos de contacto.', 'clientes'],
+    ['fa-right-left', 'Operaciones', 'Cambios, préstamos y empeños con montos y estados.', 'operaciones'],
+    ['fa-hand-holding-dollar', 'Préstamos', 'Cuotas, saldos y vencimientos.', 'prestamos'],
+    ['fa-gem', 'Empeños', 'Montos, plazos y saldos de los empeños.', 'empenos'],
+    ['fa-boxes-stacked', 'Almacén', 'Productos con stock actual y mínimo.', 'productos']
+  ];
+  $('descargas').innerHTML = DESCARGAS.map(function (d) {
+    return '<tr><td class="fw-600 text-nowrap"><i class="fa-solid ' + d[0] + ' text-primary me-2"></i>' + esc(d[1]) + '</td><td class="text-muted">' + esc(d[2]) + '</td>'
+      + '<td class="text-end text-nowrap"><div class="btn-group btn-group-sm">'
+      + ['xlsx', 'csv', 'json'].map(function (f) { return '<button class="btn btn-' + (f === 'xlsx' ? 'success' : 'outline-secondary') + '" data-rec="' + d[3] + '" data-f="' + f + '">' + (f === 'xlsx' ? 'Excel' : f.toUpperCase()) + '</button>'; }).join('')
+      + '</div></td></tr>';
+  }).join('');
+  $('descargas').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-rec]'); if (!b) return;
+    b.disabled = true;
+    API.descargar('/' + b.dataset.rec + '/exportar?formato=' + b.dataset.f).then(function () { S.toast('Descarga lista.', 'ok'); })
+      .catch(function (err) { S.toast('No se pudo descargar: ' + err.message, 'err'); }).finally(function () { b.disabled = false; });
   });
 
-  async function cargarKPIs(){
-    var c = document.getElementById('kpis');
-    try{
-      var d = await API.dashboard();
-      c.innerHTML = SIGSF.kpi('Ingresos del mes', SIGSF.money(d.ingresosDelMes), 'verde')
-                  + SIGSF.kpi('Clientes activos', SIGSF.num(d.clientesActivos))
-                  + SIGSF.kpi('Operaciones hoy', SIGSF.num(d.operacionesHoy), 'ambar')
-                  + SIGSF.kpi('Prestamos colocados', SIGSF.money(d.prestamosColocados), 'verde')
-                  + SIGSF.kpi('Productos con stock bajo', SIGSF.num(d.productosStockBajo), Number(d.productosStockBajo)>0 ? 'rojo' : 'verde')
-                  + SIGSF.kpi('Expedientes pendientes', SIGSF.num(d.expedientesPendientes), 'ambar');
-    }catch(e){
-      c.innerHTML = '<div class="kpi rojo"><div class="l">Indicadores</div><div class="v" style="font-size:.95rem;">No disponibles</div></div>';
-    }
-  }
-
-  function pintar(){
-    var tb = document.getElementById('tablaOps');
-    var q = (document.getElementById('buscar').value||'').toLowerCase();
-    var lista = q ? ops.filter(function(o){ return JSON.stringify(o).toLowerCase().indexOf(q)!==-1; }) : ops;
-    tb.innerHTML = '';
-    if(!lista.length){ tb.innerHTML='<tr><td class="vacio" colspan="5">Sin operaciones registradas.</td></tr>'; return; }
-    lista.slice(0,25).forEach(function(o){
-      var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+o.idOperacion+'</td><td>'+SIGSF.escapar(o.tipoOperacion||'')+'</td>'
-                 + '<td class="num">'+SIGSF.money(o.monto)+'</td><td>'+SIGSF.badge(o.estado)+'</td>'
-                 + '<td>'+SIGSF.escapar(SIGSF.fechaCorta(o.fechaOperacion))+'</td>';
-      tb.appendChild(tr);
+  function hoyISO() { var d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().substring(0, 10); }
+  document.querySelectorAll('[data-rango]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var h = hoyISO(); $('rHasta').value = h; $('rDesde').value = b.dataset.rango === 'hoy' ? h : h.substring(0, 8) + '01';
     });
+  });
+  $('formRep').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var q = new URLSearchParams({ tipo: 'reporte-pagos', estado: $('rEstado').value, metodo: $('rMetodo').value, desde: $('rDesde').value, hasta: $('rHasta').value });
+    S.abrirDocumento('documento.html?' + q.toString());
+  });
+
+  async function cargarKPIs() {
+    try {
+      var d = await API.dashboard();
+      $('kpis').innerHTML = S.kpi('Cobrado este mes', S.money(d.cobradoMes), 'gold', 'Yape, Plin, Tunki y caja')
+        + S.kpi('Pagos por verificar', S.num(d.pagosPorVerificar), d.pagosPorVerificar ? 'warn' : 'ok', S.money(d.montoPorVerificar))
+        + S.kpi('Ingresos por ventas del mes', S.money(d.ingresosDelMes))
+        + S.kpi('Préstamos colocados', S.money(d.prestamosColocados))
+        + S.kpi('Cotizaciones vigentes', S.num(d.cotizacionesVigentes))
+        + S.kpi('Productos con stock bajo', S.num(d.productosStockBajo), d.productosStockBajo ? 'bad' : 'ok');
+    } catch (e) { $('kpis').innerHTML = S.kpi('Indicadores', 'No disponibles', 'bad'); }
+  }
+  async function cargarConceptos() {
+    try {
+      var r = await API.get('/pagos/resumen'), total = r.porConcepto.reduce(function (a, c) { return a + Number(c.monto); }, 0) || 1;
+      $('porConcepto').innerHTML = r.porConcepto.length ? r.porConcepto.map(function (c) {
+        var pct = Math.round(100 * Number(c.monto) / total);
+        return '<div class="d-flex justify-content-between small mb-1"><span class="fw-600">' + esc(S.concepto(c.concepto)) + ' <span class="text-muted fw-normal">· ' + S.num(c.cantidad) + ' pagos</span></span>'
+          + '<span class="fw-600">' + S.money(c.monto) + '</span></div><div class="sg-bar mb-3"><span style="width:' + pct + '%;background:var(--sg-primary)"></span></div>';
+      }).join('') + '<div class="d-flex justify-content-between border-top pt-2"><span>Total cobrado</span><b>' + S.money(r.cobradoTotal) + '</b></div>'
+        : '<div class="small-muted">Aún no hay cobros confirmados.</div>';
+    } catch (e) { $('porConcepto').innerHTML = '<div class="small text-danger">' + esc(e.message) + '</div>'; }
   }
 
-  async function cargarOps(){
-    try{ ops = await API.get('/operaciones'); pintar(); }
-    catch(e){ document.getElementById('tablaOps').innerHTML='<tr><td class="error-fila" colspan="5">No se pudo cargar: '+SIGSF.escapar(e.message)+'</td></tr>'; }
+  var ops = [];
+  function pintar() {
+    var q = $('buscar').value.trim().toLowerCase();
+    var l = q ? ops.filter(function (o) { return JSON.stringify(o).toLowerCase().indexOf(q) !== -1; }) : ops;
+    $('tablaOps').innerHTML = l.length ? l.slice(0, 50).map(function (o) {
+      return '<tr><td>' + o.idOperacion + '</td><td>' + esc(S.etiqueta(o.tipoOperacion)) + '</td><td class="num">' + S.money(o.monto) + '</td><td>' + S.badge(o.estado) + '</td><td>' + esc(S.fechaHora(o.fechaOperacion)) + '</td></tr>';
+    }).join('') : '<tr class="empty-row"><td colspan="5">Sin operaciones.</td></tr>';
   }
-
-  document.getElementById('buscar').addEventListener('input', pintar);
-  cargarKPIs(); cargarOps();
+  $('buscar').addEventListener('input', S.debounce(pintar));
+  API.get('/operaciones').then(function (l) { ops = l; pintar(); })
+    .catch(function (e) { $('tablaOps').innerHTML = '<tr class="empty-row"><td colspan="5" class="text-danger">' + esc(e.message) + '</td></tr>'; });
+  cargarKPIs(); cargarConceptos();
 })();
 </script>
 </body>

@@ -4,232 +4,172 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Solicitudes de clientes</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="sigsf-modulo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="sigsf-ui.css">
 <style>
-  .sol{border:1px solid #e2e8f0;border-left:5px solid #d97706;border-radius:12px;padding:16px 18px;margin-bottom:12px;animation:aparecer .35s ease both;}
-  .sol.ok{border-left-color:#059669;} .sol.no{border-left-color:#dc2626;}
-  .sol-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;}
-  .sol .quien{font-weight:700;font-size:.97rem;}
-  .sol .doc{color:#64748b;font-size:.79rem;margin-top:2px;}
-  .sol .detalle{display:flex;flex-wrap:wrap;gap:18px;margin-top:12px;padding-top:12px;border-top:1px dashed #e2e8f0;}
-  .sol .dato .l{font-size:.68rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;font-weight:700;}
-  .sol .dato .v{font-size:.92rem;font-weight:600;margin-top:2px;}
-  .sol .btns{display:flex;gap:8px;}
-  .tipo{padding:4px 11px;border-radius:999px;font-size:.73rem;font-weight:700;}
-  .t-cambio{background:#dbeafe;color:#1d4ed8;} .t-prestamo{background:#dcfce7;color:#15803d;} .t-empeno{background:#fef3c7;color:#92400e;}
-  @keyframes aparecer{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-  .filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-  .filtros button{padding:9px 16px;border:1px solid #e2e8f0;background:#fff;border-radius:9px;font-weight:600;font-size:.85rem;color:#64748b;cursor:pointer;}
-  .filtros button.on{background:#2563eb;border-color:#2563eb;color:#fff;}
+  .sol { border: 1px solid var(--sg-line); border-left: 4px solid var(--sg-warning); border-radius: .6rem; background: #fff; padding: .9rem 1rem; }
+  .sol + .sol { margin-top: .6rem; }
+  .sol.COMPLETADA { border-left-color: var(--sg-success); }
+  .sol.ANULADA { border-left-color: var(--sg-danger); }
+  .sol dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: .4rem 1rem; margin: .7rem 0 0; padding-top: .7rem; border-top: 1px dashed var(--sg-line); }
+  .sol dt { font-size: .74rem; color: var(--sg-muted); font-weight: 400; }
+  .sol dd { margin: 0; font-weight: 600; font-size: .86rem; }
 </style>
 </head>
 <body>
-
-<header class="mod-header">
-  <div class="izq">
-    <div class="ico"><i class="fa-solid fa-inbox"></i></div>
-    <div>
-      <h1>Solicitudes de clientes</h1>
-      <p>Lo que los clientes piden desde el Portal · aprueba o rechaza y da permisos</p>
-    </div>
-  </div>
-  <a class="volver" href="index.html"><i class="fa-solid fa-arrow-left"></i> Volver al panel</a>
+<header class="sg-page-head">
+  <div class="d-flex align-items-center"><span class="ico"><i class="fa-solid fa-inbox"></i></span>
+    <div><h1>Solicitudes de clientes</h1><p>Lo que los clientes piden desde el portal: apruébalo o recházalo y administra sus accesos</p></div></div>
+  <a class="btn btn-sm btn-outline-light" href="index.html"><i class="fa-solid fa-arrow-left me-1"></i>Volver al panel</a>
 </header>
 
-<div class="mod-wrap">
-  <div class="kpis" id="kpis"></div>
+<div class="sg-wrap">
+  <div class="sg-kpis" id="kpis"></div>
+  <ul class="nav nav-underline" id="tabs">
+    <li class="nav-item"><button class="nav-link active" data-tab="sol" type="button"><i class="fa-solid fa-inbox me-1"></i>Solicitudes</button></li>
+    <li class="nav-item"><button class="nav-link" data-tab="cue" type="button"><i class="fa-solid fa-user-shield me-1"></i>Cuentas del portal</button></li>
+  </ul>
 
-  <div class="mod-tabs">
-    <button data-pane="sol" class="on"><i class="fa-solid fa-inbox"></i> Solicitudes</button>
-    <button data-pane="cue"><i class="fa-solid fa-user-shield"></i> Cuentas de clientes</button>
-  </div>
-
-  <!-- SOLICITUDES -->
-  <div id="paneSol">
-    <div class="card">
-      <div class="tabla-top">
-        <h2 style="margin:0;"><i class="fa-solid fa-clipboard-check" style="color:#2563eb;"></i> Bandeja de solicitudes</h2>
-        <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscar" placeholder="Buscar cliente, documento…"></div>
+  <section data-pane="sol">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+      <div class="btn-group" role="group" aria-label="Filtrar por estado" id="filtros">
+        <button class="btn btn-sm btn-outline-primary active" data-f="PENDIENTE">Pendientes</button>
+        <button class="btn btn-sm btn-outline-primary" data-f="COMPLETADA">Aprobadas</button>
+        <button class="btn btn-sm btn-outline-primary" data-f="ANULADA">Rechazadas</button>
+        <button class="btn btn-sm btn-outline-primary" data-f="">Todas</button>
       </div>
-      <div class="filtros">
-        <button data-f="PENDIENTE" class="on">Pendientes</button>
-        <button data-f="COMPLETADA">Aprobadas</button>
-        <button data-f="ANULADA">Rechazadas</button>
-        <button data-f="">Todas</button>
-      </div>
-      <div class="msg" id="msg"></div>
-      <div id="lista"><p class="vacio">Cargando…</p></div>
+      <div class="input-group input-group-sm" style="max-width:320px"><span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+        <input class="form-control" type="search" id="buscar" placeholder="Cliente, documento, N°…" aria-label="Buscar"></div>
     </div>
-  </div>
+    <div id="lista"><div class="sg-empty">Cargando…</div></div>
+    <div class="d-flex justify-content-center mt-3"><button class="btn btn-light d-none" id="masSol">Ver más</button></div>
+  </section>
 
-  <!-- CUENTAS -->
-  <div id="paneCue" style="display:none;">
+  <section data-pane="cue" hidden>
     <div class="card">
-      <div class="tabla-top">
-        <h2 style="margin:0;"><i class="fa-solid fa-user-shield" style="color:#2563eb;"></i> Permisos de acceso al portal</h2>
-        <div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="buscarC" placeholder="Buscar…"></div>
+      <div class="sg-toolbar">
+        <div><h2 class="h6 mb-0">Permisos de acceso al portal</h2><div class="small text-muted">Activa o bloquea la cuenta con la que cada cliente entra al portal.</div></div>
+        <div class="input-group input-group-sm search"><span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input class="form-control" type="search" id="buscarC" placeholder="Buscar…" aria-label="Buscar cliente"></div>
       </div>
-      <div class="sub">Activa o bloquea la cuenta con la que cada cliente entra al Portal del Cliente.</div>
-      <div class="msg" id="msgC"></div>
-      <div class="tabla-scroll">
-        <table>
-          <thead><tr><th>N°</th><th>Cliente</th><th>Documento</th><th>Teléfono</th><th>Estado</th><th style="text-align:right;">Acceso</th></tr></thead>
-          <tbody id="tablaC"><tr><td class="vacio" colspan="6">Cargando…</td></tr></tbody>
+      <div class="table-wrap">
+        <table class="table table-hover align-middle">
+          <thead><tr><th>N°</th><th>Cliente</th><th>Documento</th><th>Teléfono</th><th>Estado</th><th class="text-end">Acceso</th></tr></thead>
+          <tbody id="tablaC"><tr class="empty-row"><td colspan="6">Cargando…</td></tr></tbody>
         </table>
       </div>
     </div>
-  </div>
+  </section>
 </div>
 
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="api.js"></script>
-<script src="sigsf-crud.js"></script>
+<script src="sigsf-ui.js"></script>
 <script>
-(function(){
-  if (window.top !== window.self) document.body.classList.add('sigsf-embed');
-  var $=function(i){return document.getElementById(i);};
-  var todas=[], clientes=[], filtro='PENDIENTE';
+(function () {
+  'use strict';
+  var S = SIGSF, esc = S.escapar, $ = function (i) { return document.getElementById(i); };
+  S.embebido();
+  var todas = [], clientes = [], pagosPorOp = {}, filtro = 'PENDIENTE', limite = 30;
 
-  document.querySelectorAll('[data-pane]').forEach(function(b){
-    b.addEventListener('click', function(){
-      document.querySelectorAll('[data-pane]').forEach(function(x){x.classList.remove('on');});
-      b.classList.add('on');
-      var p=b.getAttribute('data-pane');
-      $('paneSol').style.display = p==='sol'?'block':'none';
-      $('paneCue').style.display = p==='cue'?'block':'none';
+  document.querySelectorAll('#tabs [data-tab]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('#tabs [data-tab]').forEach(function (x) { x.classList.toggle('active', x === b); });
+      document.querySelectorAll('[data-pane]').forEach(function (p) { p.hidden = p.dataset.pane !== b.dataset.tab; });
     });
   });
-  document.querySelectorAll('[data-f]').forEach(function(b){
-    b.addEventListener('click', function(){
-      document.querySelectorAll('[data-f]').forEach(function(x){x.classList.remove('on');});
-      b.classList.add('on'); filtro=b.getAttribute('data-f'); pintar();
+  document.querySelectorAll('#filtros [data-f]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('#filtros [data-f]').forEach(function (x) { x.classList.toggle('active', x === b); });
+      filtro = b.dataset.f; limite = 30; pintar();
     });
   });
 
-  function claseTipo(t){
-    t=(t||'').toUpperCase();
-    if(t.indexOf('PRESTAMO')>=0) return 't-prestamo';
-    if(t.indexOf('EMPENO')>=0) return 't-empeno';
-    return 't-cambio';
+  function dato(l, v) { return '<div><dt>' + esc(l) + '</dt><dd>' + v + '</dd></div>'; }
+  function pintar() {
+    var q = $('buscar').value.trim().toLowerCase();
+    var l = todas.filter(function (s) { return (!filtro || s.estado === filtro) && (!q || JSON.stringify(s).toLowerCase().indexOf(q) !== -1); });
+    $('masSol').classList.toggle('d-none', l.length <= limite);
+    if (!l.length) { $('lista').innerHTML = '<div class="card"><div class="sg-empty"><i class="fa-solid fa-inbox"></i>No hay solicitudes' + (filtro ? ' en este estado' : '') + '.</div></div>'; return; }
+    $('lista').innerHTML = l.slice(0, limite).map(function (s) {
+      var t = (s.tipoOperacion || '').toUpperCase(), pend = s.estado === 'PENDIENTE';
+      var det = dato('Monto', S.money(s.monto));
+      if (t.indexOf('PRESTAMO') >= 0) det += dato('Cuota mensual', S.money(s.cuotaMensual)) + dato('Plazo', (s.plazoMeses || 0) + ' meses');
+      else if (t.indexOf('EMPENO') >= 0) det += dato('Artículo', esc(s.articulo || '—')) + dato('Plazo', (s.plazoDias || 0) + ' días');
+      else det += dato('Recibe', S.money(s.totalRecibir, s.monedaDestino)) + dato('Moneda', esc((s.monedaOrigen || '') + ' → ' + (s.monedaDestino || '')));
+      det += dato('Fecha', esc(S.fechaHora(s.fechaOperacion)));
+      if (s.telefono) det += dato('Teléfono', esc(s.telefono));
+      var pg = pagosPorOp[s.idOperacion];
+      if (pg) det += dato('Pagos', S.money(pg.monto) + ' ' + S.badge(pg.estado));
+      return '<article class="sol ' + esc(s.estado) + '"><div class="d-flex flex-wrap justify-content-between gap-2 align-items-start"><div>'
+        + '<span class="badge text-bg-light border me-1">' + esc(S.etiqueta(t)) + '</span><span class="small text-muted">Solicitud N° ' + s.idOperacion + '</span>'
+        + '<div class="fw-600 mt-1">' + esc(s.cliente || '(sin nombre)') + '</div><div class="small text-muted">Doc. ' + esc(s.documento || '—') + (s.correo ? ' · ' + esc(s.correo) : '') + '</div></div>'
+        + '<div class="d-flex gap-2">' + (pend ? '<button class="btn btn-sm btn-success" data-ok="' + s.idOperacion + '"><i class="fa-solid fa-check me-1"></i>Aprobar</button>'
+          + '<button class="btn btn-sm btn-outline-danger" data-no="' + s.idOperacion + '"><i class="fa-solid fa-xmark me-1"></i>Rechazar</button>' : S.badge(s.estado)) + '</div></div>'
+        + '<dl>' + det + '</dl></article>';
+    }).join('');
   }
-  function dato(l,v){ return '<div class="dato"><div class="l">'+l+'</div><div class="v">'+v+'</div></div>'; }
+  $('masSol').addEventListener('click', function () { limite += 30; pintar(); });
+  $('buscar').addEventListener('input', S.debounce(pintar));
+  $('lista').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var id = b.dataset.ok || b.dataset.no, aprobar = !!b.dataset.ok;
+    var ok = await S.confirmar(aprobar ? 'Al aprobar, el préstamo o empeño queda ACTIVO y el cliente podrá pagarlo desde el portal.' : 'La solicitud quedará anulada.',
+      { titulo: (aprobar ? 'Aprobar' : 'Rechazar') + ' solicitud N° ' + id, ok: aprobar ? 'Aprobar' : 'Rechazar', variante: aprobar ? 'success' : 'danger' });
+    if (!ok) return;
+    b.disabled = true;
+    try { await API.put('/solicitudes/' + id + '/' + (aprobar ? 'aprobar' : 'rechazar'), {}); S.toast('Solicitud N° ' + id + (aprobar ? ' aprobada.' : ' rechazada.'), 'ok'); cargar(); }
+    catch (err) { S.toast(err.message, 'err'); b.disabled = false; }
+  });
 
-  function pintar(){
-    var cont=$('lista');
-    var q=($('buscar').value||'').toLowerCase();
-    var lista=todas.filter(function(s){
-      if(filtro && (s.estado||'')!==filtro) return false;
-      if(q && JSON.stringify(s).toLowerCase().indexOf(q)===-1) return false;
-      return true;
-    });
-    if(!lista.length){
-      cont.innerHTML='<p class="vacio">No hay solicitudes'+(filtro?' en este estado':'')+'.</p>';
-      return;
-    }
-    cont.innerHTML='';
-    lista.forEach(function(s){
-      var pend=(s.estado||'')==='PENDIENTE';
-      var d=document.createElement('div');
-      d.className='sol '+(pend?'':((s.estado==='COMPLETADA')?'ok':'no'));
-      var detalle = dato('Monto', SIGSF.money(s.monto));
-      if((s.tipoOperacion||'').toUpperCase().indexOf('PRESTAMO')>=0){
-        detalle += dato('Cuota mensual', SIGSF.money(s.cuotaMensual)) + dato('Plazo', (s.plazoMeses||0)+' meses');
-      } else if((s.tipoOperacion||'').toUpperCase().indexOf('EMPENO')>=0){
-        detalle += dato('Artículo', SIGSF.escapar(s.articulo||'—')) + dato('Plazo', (s.plazoDias||0)+' días');
-      } else {
-        detalle += dato('Recibe', SIGSF.money(s.totalRecibir)) + dato('Moneda', SIGSF.escapar((s.monedaOrigen||'')+' → '+(s.monedaDestino||'')));
-      }
-      detalle += dato('Fecha', SIGSF.escapar(SIGSF.fechaCorta(s.fechaOperacion)));
-      if(s.telefono) detalle += dato('Teléfono', SIGSF.escapar(s.telefono));
-
-      d.innerHTML =
-        '<div class="sol-top"><div>'
-        + '<span class="tipo '+claseTipo(s.tipoOperacion)+'">'+SIGSF.escapar(s.tipoOperacion||'')+'</span> '
-        + '<span style="color:#94a3b8;font-size:.78rem;">Solicitud N° '+s.idOperacion+'</span>'
-        + '<div class="quien" style="margin-top:6px;">'+SIGSF.escapar(s.cliente||'(sin nombre)')+'</div>'
-        + '<div class="doc">Doc. '+SIGSF.escapar(s.documento||'—')+(s.correo?(' · '+SIGSF.escapar(s.correo)):'')+'</div>'
-        + '</div><div class="btns">'
-        + (pend
-            ? '<button class="btn verde" data-ok="'+s.idOperacion+'"><i class="fa-solid fa-check"></i> Aprobar</button>'
-              +'<button class="btn rojo" data-no="'+s.idOperacion+'"><i class="fa-solid fa-xmark"></i> Rechazar</button>'
-            : SIGSF.badge(s.estado))
-        + '</div></div><div class="detalle">'+detalle+'</div>';
-      cont.appendChild(d);
-    });
-
-    cont.querySelectorAll('[data-ok]').forEach(function(b){
-      b.addEventListener('click', function(){ resolver(b.getAttribute('data-ok'), 'aprobar', b); });
-    });
-    cont.querySelectorAll('[data-no]').forEach(function(b){
-      b.addEventListener('click', function(){
-        if(confirm('¿Rechazar esta solicitud?')) resolver(b.getAttribute('data-no'), 'rechazar', b);
+  function kpis() {
+    var p = todas.filter(function (s) { return s.estado === 'PENDIENTE'; });
+    $('kpis').innerHTML = S.kpi('Por atender', S.num(p.length), p.length ? 'warn' : 'ok')
+      + S.kpi('Monto pendiente', S.money(p.reduce(function (a, s) { return a + Number(s.monto || 0); }, 0)))
+      + S.kpi('Aprobadas', S.num(todas.filter(function (s) { return s.estado === 'COMPLETADA'; }).length), 'ok')
+      + S.kpi('Cuentas del portal', S.num(clientes.length));
+  }
+  async function cargar() {
+    try {
+      var r = await Promise.all([API.get('/solicitudes'), API.get('/pagos').catch(function () { return []; })]);
+      todas = r[0]; pagosPorOp = {};
+      r[1].forEach(function (p) {
+        if (!p.idOperacion || p.estado === 'RECHAZADO') return;
+        var x = pagosPorOp[p.idOperacion] || { monto: 0, estado: 'CONFIRMADO' };
+        x.monto += Number(p.monto); if (p.estado === 'POR_VERIFICAR') x.estado = 'POR_VERIFICAR';
+        pagosPorOp[p.idOperacion] = x;
       });
-    });
+      pintar(); kpis();
+    } catch (e) { $('lista').innerHTML = '<div class="alert alert-danger">No se pudo cargar: ' + esc(e.message) + '</div>'; }
   }
 
-  async function resolver(id, accion, btn){
-    btn.disabled=true;
-    var m=$('msg');
-    try{
-      await API.put('/solicitudes/'+id+'/'+accion, {});
-      m.className='msg ok';
-      m.textContent = accion==='aprobar' ? '✔ Solicitud N° '+id+' aprobada. El trámite quedó activo.' : 'Solicitud N° '+id+' rechazada.';
-      await cargar();
-    }catch(e){ m.className='msg err'; m.textContent='No se pudo: '+e.message; btn.disabled=false; }
+  function pintarClientes() {
+    var q = $('buscarC').value.trim().toLowerCase();
+    var l = q ? clientes.filter(function (c) { return JSON.stringify(c).toLowerCase().indexOf(q) !== -1; }) : clientes;
+    $('tablaC').innerHTML = l.length ? l.map(function (c) {
+      var act = c.estado === 'ACTIVO';
+      return '<tr><td>' + c.idCliente + '</td><td class="fw-600">' + esc(((c.nombres || '') + ' ' + (c.apellidos || '')).trim()) + '</td><td>' + esc((c.tipoDocumento || '') + ' ' + (c.documento || ''))
+        + '</td><td>' + esc(c.telefono || '—') + '</td><td>' + S.badge(c.estado) + '</td><td class="text-end"><button class="btn btn-sm ' + (act ? 'btn-outline-danger' : 'btn-outline-success')
+        + '" data-cli="' + c.idCliente + '" data-est="' + (act ? 'INACTIVO' : 'ACTIVO') + '"><i class="fa-solid ' + (act ? 'fa-ban' : 'fa-check') + ' me-1"></i>' + (act ? 'Bloquear' : 'Activar') + '</button></td></tr>';
+    }).join('') : '<tr class="empty-row"><td colspan="6">Sin clientes.</td></tr>';
   }
-
-  function kpis(){
-    var p=todas.filter(function(s){return s.estado==='PENDIENTE';}).length;
-    var a=todas.filter(function(s){return s.estado==='COMPLETADA';}).length;
-    var monto=todas.filter(function(s){return s.estado==='PENDIENTE';}).reduce(function(x,s){return x+Number(s.monto||0);},0);
-    $('kpis').innerHTML = SIGSF.kpi('Por atender', SIGSF.num(p), p?'ambar':'verde')
-                        + SIGSF.kpi('Aprobadas', SIGSF.num(a), 'verde')
-                        + SIGSF.kpi('Monto pendiente', SIGSF.money(monto))
-                        + SIGSF.kpi('Cuentas de clientes', SIGSF.num(clientes.length));
+  $('tablaC').addEventListener('click', async function (e) {
+    var b = e.target.closest('[data-cli]'); if (!b) return;
+    b.disabled = true;
+    try { await API.put('/clientes/' + b.dataset.cli + '/estado', { estado: b.dataset.est }); S.toast('Acceso actualizado.', 'ok'); cargarClientes(); }
+    catch (err) { S.toast(err.message, 'err'); b.disabled = false; }
+  });
+  $('buscarC').addEventListener('input', S.debounce(pintarClientes));
+  async function cargarClientes() {
+    try { clientes = await API.get('/clientes'); pintarClientes(); kpis(); }
+    catch (e) { $('tablaC').innerHTML = '<tr class="empty-row"><td colspan="6" class="text-danger">' + esc(e.message) + '</td></tr>'; }
   }
-
-  async function cargar(){
-    try{ todas = await API.get('/solicitudes'); pintar(); kpis(); }
-    catch(e){ $('lista').innerHTML='<p class="error-fila">No se pudo cargar: '+SIGSF.escapar(e.message)+'</p>'; }
-  }
-
-  function pintarClientes(){
-    var tb=$('tablaC'); var q=($('buscarC').value||'').toLowerCase();
-    var lista=q?clientes.filter(function(c){return JSON.stringify(c).toLowerCase().indexOf(q)!==-1;}):clientes;
-    tb.innerHTML='';
-    if(!lista.length){ tb.innerHTML='<tr><td class="vacio" colspan="6">Sin clientes.</td></tr>'; return; }
-    lista.forEach(function(c){
-      var activo=(c.estado||'')==='ACTIVO';
-      var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+c.idCliente+'</td>'
-        +'<td>'+SIGSF.escapar(((c.nombres||'')+' '+(c.apellidos||'')).trim())+'</td>'
-        +'<td>'+SIGSF.escapar((c.tipoDocumento||'')+' '+(c.documento||''))+'</td>'
-        +'<td>'+SIGSF.escapar(c.telefono||'—')+'</td>'
-        +'<td>'+SIGSF.badge(c.estado)+'</td>'
-        +'<td style="text-align:right;"><button class="btn '+(activo?'rojo':'verde')+'" style="padding:7px 14px;font-size:.8rem;" data-cli="'+c.idCliente+'" data-est="'+(activo?'INACTIVO':'ACTIVO')+'">'
-        +'<i class="fa-solid '+(activo?'fa-ban':'fa-check')+'"></i> '+(activo?'Bloquear':'Activar')+'</button></td>';
-      tb.appendChild(tr);
-    });
-    tb.querySelectorAll('[data-cli]').forEach(function(b){
-      b.addEventListener('click', async function(){
-        b.disabled=true;
-        try{
-          await API.put('/clientes/'+b.getAttribute('data-cli')+'/estado', {estado:b.getAttribute('data-est')});
-          $('msgC').className='msg ok'; $('msgC').textContent='Permiso actualizado.';
-          await cargarClientes();
-        }catch(e){ $('msgC').className='msg err'; $('msgC').textContent='No se pudo: '+e.message; b.disabled=false; }
-      });
-    });
-  }
-
-  async function cargarClientes(){
-    try{ clientes = await API.get('/clientes'); pintarClientes(); kpis(); }
-    catch(e){ $('tablaC').innerHTML='<tr><td class="error-fila" colspan="6">Error: '+SIGSF.escapar(e.message)+'</td></tr>'; }
-  }
-
-  $('buscar').addEventListener('input', pintar);
-  $('buscarC').addEventListener('input', pintarClientes);
   cargar(); cargarClientes();
-  setInterval(cargar, 20000);   // se refresca solo cada 20 segundos
+  setInterval(function () { if (!document.hidden) cargar(); }, 20000);
 })();
-</script></body></html>
+</script>
+</body>
+</html>

@@ -45,18 +45,22 @@ public class PoliticaAcceso {
 
     public PoliticaAcceso() {
         // Operación de caja y atención al cliente
-        permitir("LE", "CAJERO", "clientes", "operaciones", "prestamos", "empenos", "ventas", "solicitudes");
-        permitir("L", "CAJERO", "servicios", "tipos-cambio", "productos", "dashboard", "roles", "version");
+        permitir("LE", "CAJERO", "clientes", "operaciones", "prestamos", "empenos", "ventas", "solicitudes",
+                "pagos", "cotizaciones");
+        permitir("L", "CAJERO", "servicios", "tipos-cambio", "productos", "dashboard", "roles", "version",
+                "billeteras");
         // Análisis, marketing, almacén, logística, producción y dirección
         permitir("LE", "ANALISTA", "campanias", "prospectos", "productos", "proveedores",
                 "lineas", "ordenes", "expedientes");
         permitir("L", "ANALISTA", "clientes", "servicios", "tipos-cambio", "operaciones", "prestamos",
-                "empenos", "ventas", "solicitudes", "dashboard", "roles", "version");
+                "empenos", "ventas", "solicitudes", "dashboard", "roles", "version", "pagos", "cotizaciones",
+                "billeteras");
         // Supervisión: puede resolver y aprobar
         permitir("LE", "SUPERVISOR", "solicitudes", "operaciones", "expedientes", "clientes",
-                "prestamos", "empenos");
+                "prestamos", "empenos", "pagos");
         permitir("L", "SUPERVISOR", "servicios", "tipos-cambio", "ventas", "productos", "proveedores",
-                "campanias", "prospectos", "lineas", "ordenes", "dashboard", "roles", "version");
+                "campanias", "prospectos", "lineas", "ordenes", "dashboard", "roles", "version",
+                "cotizaciones", "billeteras");
     }
 
     private void permitir(String nivel, String rol, String... modulos) {
