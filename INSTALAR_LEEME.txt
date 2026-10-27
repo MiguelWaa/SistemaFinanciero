@@ -19,6 +19,7 @@ QUE NECESITAS INSTALADO
      repositorio Git y el sistema muestra su version con Git.
 
 
+
 ----------------------------------------------------------------
 PASO 1 · OBTENER EL PROYECTO
 ----------------------------------------------------------------
