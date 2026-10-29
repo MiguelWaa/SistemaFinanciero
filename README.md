@@ -68,8 +68,8 @@ Tercera entrega del taller. El proyecto ahora es un **repositorio Git** gestiona
 | **Conflictos y rollback** | Conflicto real resuelto en `CHANGELOG.md`; `git revert -m 1` de un merge que rompía las pruebas | `docs/07` §6 y §7 |
 | **Seguridad del repositorio** | `db.properties` fuera de Git (plantilla `db.properties.ejemplo`); hook `pre-commit` contra credenciales y archivos generados | `.gitignore`, `.githooks/pre-commit` |
 | **Versión en la aplicación** | Pantalla **Control de versiones** (versión, commits, red de ramas, etiquetas, esquema BD) y versión en el pie del panel; `GET /api/version`, `GET /api/versiones` (ADMIN) | `web/versiones.html`, paquete `version/` |
-| **Versionamiento de la BD** | Tabla `version_esquema` (1.0.0 → 5.0.0) creada por `db/version_esquema.sql` o al arrancar | `db/version_esquema.sql` |
-| **Build e integración continua** | `version.properties` con el commit dentro del .jar; GitHub Actions compila y ejecuta **126 pruebas** | `build.xml`, `.github/workflows/ci.yml` |
+| **Versionamiento de la BD** | Tabla `version_esquema` (1.0.0 → 5.2.0) creada por `db/version_esquema.sql` o al arrancar | `db/version_esquema.sql` |
+| **Build e integración continua** | `version.properties` con el commit dentro del .jar; GitHub Actions compila y ejecuta **151 pruebas** | `build.xml`, `.github/workflows/ci.yml` |
 | **Documentación** | Inventario v5.0 (T-25…T-34 + inventario de artefactos), `CHANGELOG.md`, `CONTRIBUTING.md`, `VERSION` | `docs/02`, raíz |
 
 > **Al clonar:** `scripts\git\instalar_hooks.bat` y `copy db.properties.ejemplo db.properties`.
