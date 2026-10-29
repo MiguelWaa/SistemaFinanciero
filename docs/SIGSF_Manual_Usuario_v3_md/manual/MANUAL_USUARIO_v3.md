@@ -208,17 +208,49 @@ Como el portal no vende productos, esta sección equivale al historial de trámi
 
 ### 2.2.4. PAGOS.
 
-El portal no procesa pagos en línea (no existe pasarela de tarjetas ni cobros); en su lugar, calcula automáticamente los montos de cada trámite antes de enviarlo. **El servidor recalcula siempre estos valores**: cualquier total o tasa alterado desde el navegador es ignorado.
+Desde la versión 5.2 el Portal del Cliente permite **pagar con Yape, Plin o Tunki escaneando un código QR**. El sistema no usa una pasarela de tarjetas: el cliente paga desde su app y registra el número de operación, y la caja verifica el abono antes de confirmarlo (ver el apartado 3.2.6).
+
+**Cálculo automático de los trámites.** Antes de enviar una solicitud, el portal calcula los montos. **El servidor recalcula siempre estos valores**: cualquier total o tasa alterado desde el navegador es ignorado.
 
 - **Cambio de moneda:** total a recibir = monto ingresado × tipo de cambio de venta vigente.
 - **Préstamo (cuota mensual):** se calcula con interés simple sobre el plazo, con una tasa por defecto de 15 % cuando el cliente no la especifica. La cuota se redondea al centavo más cercano (el intento de truncarla fue revertido en la versión 5.0 porque descuadraba el saldo).
 - **Empeño:** el saldo pendiente inicial es igual al monto del préstamo solicitado, con una tasa por defecto de 10 % y un plazo por defecto de 30 días si el cliente no lo indica.
 
-El desembolso o cobro real del dinero se realiza de forma presencial en la agencia, una vez que el personal apruebe la solicitud desde el sistema interno.
-
 ![Figura 23. Cálculo automático mostrado al cliente.](img/v_portal_cuota.jpg)
 
 *Figura 24. Cálculo automático mostrado al cliente.*
+
+**Cómo pagar con QR.** En el menú del portal elija **Pagar con QR**. El asistente tiene cuatro pasos:
+
+1. **Qué pagas.** Elija el trámite (cuota de préstamo, rescate de empeño, cambio de moneda u otro pago), confirme el monto —no puede superar lo que se debe— y escoja la billetera: Yape, Plin o Tunki.
+2. **Escanea y paga.** El portal muestra el QR de cobro con el monto exacto, el número de la empresa, el titular y un código de referencia (por ejemplo C2-OP2) que conviene escribir en el mensaje del pago. Abra su app, escanee el QR o pague al número indicado.
+3. **Registra tu pago.** Escriba el **número de operación** que le muestra su app (de 4 a 30 letras, números o guiones), el celular desde el que pagó y, si desea, adjunte la captura de la constancia (PNG, JPG o WEBP de hasta 500 KB).
+4. **Listo.** El pago queda en estado **Por verificar** con un código `PG-000065`; el cliente puede ver su constancia o hacer otro pago.
+
+![Figura 25. Pagar con QR, paso 1: elegir qué pagar, el monto y la billetera.](img/v3_portal_pagar_paso1.jpg)
+
+*Figura 26. Pagar con QR, paso 1: elegir qué pagar, el monto y la billetera.*
+
+![Figura 27. Pagar con QR, paso 2: código QR con el monto, el titular y la referencia.](img/v3_portal_qr_yape.jpg)
+
+*Figura 28. Pagar con QR, paso 2: código QR con el monto, el titular y la referencia.*
+
+![Figura 29. Pagar con QR, paso 3: número de operación y constancia.](img/v3_portal_registrar_operacion.jpg)
+
+*Figura 30. Pagar con QR, paso 3: número de operación y constancia.*
+
+![Figura 31. Pago registrado: queda por verificar.](img/v3_portal_pago_registrado.jpg)
+
+*Figura 32. Pago registrado: queda por verificar.*
+
+**Estados de un pago.** *Por verificar* (esperando a la caja), *Confirmado* (se descontó de la deuda y se emitió el comprobante `RC-…`) y *Rechazado* (con el motivo, visible para el cliente en **Mis pagos**).
+
+**Reglas que aplica el sistema.**
+
+- Un número de operación no se puede repetir con la misma billetera: «Ese número de operación de YAPE ya fue registrado.»
+- No se puede pagar más de lo pendiente, descontando lo que ya está por verificar.
+- Solo se pagan trámites propios y activos.
+- Si la empresa aún no subió su QR real, el portal muestra un QR de referencia con los datos del pago; en ese caso el cliente paga al número indicado.
 
 ### 2.2.5. MAPAS, CHAT U OTROS.
 
@@ -234,25 +266,25 @@ En SIGSF, el “usuario administración” corresponde al personal interno que i
 
 Es la franja de indicadores (KPI) de la parte superior del panel principal (index.html): ingresos del mes, clientes activos, operaciones de hoy, préstamos colocados, expedientes pendientes y solicitudes pendientes, entre otros. Cada indicador se calcula de forma independiente (DashboardService), de modo que si una consulta falla, el resto de las tarjetas se sigue mostrando en vez de dejar todo el panel en blanco. Debajo de las tarjetas se muestra la sección “Últimos clientes registrados” con los clientes más recientes (avatar, documento, contacto, estado y fecha). En la esquina superior derecha aparece el nombre y el rol del usuario con sesión iniciada.
 
-![Figura 25. Panel principal del sistema interno con indicadores y últimos clientes.](img/panel.jpg)
+![Figura 33. Panel principal del sistema interno con indicadores y últimos clientes.](img/panel.jpg)
 
-*Figura 26. Panel principal del sistema interno con indicadores y últimos clientes.*
+*Figura 34. Panel principal del sistema interno con indicadores y últimos clientes.*
 
 ### 3.1.2. PANEL IZQUIERDO – PANEL DE TAREAS.
 
 Es el menú lateral de navegación, con acceso a: Inicio, Usuarios, Reportes, Configuración, Seguridad, Respaldos y auditoría, Control de versiones, Centro de ayuda y Cerrar sesión. Cada opción abre su propia pantalla de gestión. Las opciones administrativas (Usuarios, Respaldos y auditoría, Control de versiones) solo funcionan para el rol Administrador; los demás roles reciben un mensaje de acceso denegado.
 
-![Figura 27. Menú lateral del sistema interno.](img/sidebar.jpg)
+![Figura 35. Menú lateral del sistema interno.](img/sidebar.jpg)
 
-*Figura 28. Menú lateral del sistema interno.*
+*Figura 36. Menú lateral del sistema interno.*
 
 ### 3.1.3. PANEL INFERIOR.
 
 Debajo de los indicadores, la sección “Módulos del sistema” muestra una tarjeta por módulo, cada una con su botón “Ingresar”: Marketing, Solicitudes de clientes (con el contador de solicitudes pendientes), Ventas, Logística, Almacén, Producción, Operaciones Financieras, Dirección, Gerencia General, Clientes y Servicios Financieros y, desde la versión 5.0, **Respaldos y Auditoría** y **Control de versiones**. Al pie del panel se muestra la versión en ejecución (por ejemplo “SIGSF v5.0.1 · rama main · commit 7ff4ebb · esquema BD v5.0.0”).
 
-![Figura 29. Tarjetas de módulos y pie con la versión del sistema.](img/modulos.jpg)
+![Figura 37. Tarjetas de módulos y pie con la versión del sistema.](img/modulos.jpg)
 
-*Figura 30. Tarjetas de módulos y pie con la versión del sistema.*
+*Figura 38. Tarjetas de módulos y pie con la versión del sistema.*
 
 ## 3.2. FUNCIONALIDADES.
 
@@ -267,13 +299,13 @@ Pantalla Usuarios, sobre la tabla usuario (pestañas Usuarios y Roles):
 - **Estado inicial:** un usuario recién creado queda en estado PENDIENTE hasta que se activa; solo las cuentas ACTIVAS pueden iniciar sesión.
 - **Módulo Seguridad (complementario):** administra los Roles del sistema (ADMIN, SUPERVISOR, CAJERO y ANALISTA, entre otros) y su descripción, y muestra la **matriz de permisos** que determina qué puede hacer cada rol (ver apartado 3.3).
 
-![Figura 31. Módulo Usuarios: gestión del personal.](img/usuarios.jpg)
+![Figura 39. Módulo Usuarios: gestión del personal.](img/usuarios.jpg)
 
-*Figura 32. Módulo Usuarios: gestión del personal.*
+*Figura 40. Módulo Usuarios: gestión del personal.*
 
-![Figura 33. Módulo Seguridad: roles y matriz de permisos.](img/seguridad.jpg)
+![Figura 41. Módulo Seguridad: roles y matriz de permisos.](img/seguridad.jpg)
 
-*Figura 34. Módulo Seguridad: roles y matriz de permisos.*
+*Figura 42. Módulo Seguridad: roles y matriz de permisos.*
 
 ### 3.2.2. MANTENIMIENTO DE PRODUCTOS.
 
@@ -283,9 +315,9 @@ Pantalla Almacén, sobre la tabla producto (con apoyo de inventario y movimiento
 - **Alerta de stock bajo:** el sistema resalta en rojo el producto cuando su stock actual llega o baja del stock mínimo definido, y el indicador “Stock bajo” lo contabiliza.
 - **Operaciones disponibles:** listar, editar, eliminar y buscar productos; exportar el listado a Excel, CSV o JSON, e importar productos desde CSV o Excel (apartado 3.4).
 
-![Figura 35. Módulo Almacén: control de productos e inventario.](img/almacen.jpg)
+![Figura 43. Módulo Almacén: control de productos e inventario.](img/almacen.jpg)
 
-*Figura 36. Módulo Almacén: control de productos e inventario.*
+*Figura 44. Módulo Almacén: control de productos e inventario.*
 
 ### 3.2.3. MANTENIMIENTO DE PROVEEDORES.
 
@@ -294,9 +326,9 @@ Pantalla Logística, sobre la tabla proveedor (con apoyo de movimiento_logistica
 - **Datos del proveedor:** registra la razón social (obligatoria), RUC, persona de contacto, teléfono, correo, dirección y estado.
 - **Operaciones disponibles:** listar, crear, editar, eliminar y buscar proveedores, como apoyo a los módulos de Almacén y Producción. Solo los roles ANALISTA y ADMIN pueden registrarlos o importarlos; el Cajero tiene acceso denegado.
 
-![Figura 37. Módulo Logística: gestión de proveedores.](img/logistica.jpg)
+![Figura 45. Módulo Logística: gestión de proveedores.](img/logistica.jpg)
 
-*Figura 38. Módulo Logística: gestión de proveedores.*
+*Figura 46. Módulo Logística: gestión de proveedores.*
 
 ### 3.2.4. MANTENIMIENTO DE TRANSACCIONES.
 
@@ -309,15 +341,15 @@ Pantalla Operaciones Financieras, la más amplia del sistema, organizada en pest
 
 Los totales, cuotas y saldos **siempre los calcula el servidor**. Por seguridad, las operaciones de dinero (operaciones, ventas, préstamos, empeños y tipos de cambio) no pueden importarse masivamente; solo se exportan. La aprobación la realiza el Supervisor o el Administrador, no el Cajero que registra.
 
-![Figura 39. Módulo Operaciones Financieras.](img/operaciones.jpg)
+![Figura 47. Módulo Operaciones Financieras.](img/operaciones.jpg)
 
-*Figura 40. Módulo Operaciones Financieras.*
+*Figura 48. Módulo Operaciones Financieras.*
 
 Como complemento directo de este apartado, la pantalla Ventas (tabla venta) registra y lista las ventas de servicios financieros a los clientes, y permite descargar el detalle en Excel (botón “Descargar Excel” o /api/ventas/excel); cada venta nueva actualiza también el archivo reportes/ventas.xlsx dentro de la carpeta del proyecto. Las ventas no son editables y su fecha y hora las asigna el servidor.
 
-![Figura 41. Módulo Ventas y exportación a Excel.](img/ventas.jpg)
+![Figura 49. Módulo Ventas y exportación a Excel.](img/ventas.jpg)
 
-*Figura 42. Módulo Ventas y exportación a Excel.*
+*Figura 50. Módulo Ventas y exportación a Excel.*
 
 ### 3.2.5. MANTENIMIENTO DE MAPAS, CHAT U OTROS.
 
@@ -333,29 +365,29 @@ SIGSF no maneja mapas de agencias, pero sí un chat de ayuda y un asistente por 
 - **Centro de ayuda:** chat de preguntas frecuentes y contacto de soporte.
 - **Asistente por voz:** disponible en el panel principal (botón “Asistente por voz”); reconoce comandos hablados, por ejemplo “abre Marketing” o “ir a Reportes”, y responde con voz para llevar al usuario directamente al módulo que solicita.
 
-![Figura 43. Módulo Clientes y Servicios Financieros.](img/clientes.jpg)
+![Figura 51. Módulo Clientes y Servicios Financieros.](img/clientes.jpg)
 
-*Figura 44. Módulo Clientes y Servicios Financieros.*
+*Figura 52. Módulo Clientes y Servicios Financieros.*
 
-![Figura 45. Módulo Marketing: prospectos y campañas.](img/marketing.jpg)
+![Figura 53. Módulo Marketing: prospectos y campañas.](img/marketing.jpg)
 
-*Figura 46. Módulo Marketing: prospectos y campañas.*
+*Figura 54. Módulo Marketing: prospectos y campañas.*
 
-![Figura 47. Módulo Producción: líneas y órdenes.](img/produccion.jpg)
+![Figura 55. Módulo Producción: líneas y órdenes.](img/produccion.jpg)
 
-*Figura 48. Módulo Producción: líneas y órdenes.*
+*Figura 56. Módulo Producción: líneas y órdenes.*
 
-![Figura 49. Módulo Dirección: expedientes de aprobación.](img/direccion.jpg)
+![Figura 57. Módulo Dirección: expedientes de aprobación.](img/direccion.jpg)
 
-*Figura 50. Módulo Dirección: expedientes de aprobación.*
+*Figura 58. Módulo Dirección: expedientes de aprobación.*
 
-![Figura 51. Bandeja de solicitudes de clientes.](img/solicitudes.jpg)
+![Figura 59. Bandeja de solicitudes de clientes.](img/solicitudes.jpg)
 
-*Figura 52. Bandeja de solicitudes de clientes.*
+*Figura 60. Bandeja de solicitudes de clientes.*
 
-![Figura 53. Módulo Reportes: indicadores y descargas en Excel.](img/reportes.jpg)
+![Figura 61. Módulo Reportes: indicadores y descargas en Excel.](img/reportes.jpg)
 
-*Figura 54. Módulo Reportes: indicadores y descargas en Excel.*
+*Figura 62. Módulo Reportes: indicadores y descargas en Excel.*
 
 ## 3.3. PERMISOS POR ROL.
 
@@ -373,9 +405,9 @@ Desde la versión 4.0 cada ruta de la API exige una sesión válida y se comprue
 
 Un rol nuevo creado desde Seguridad, que no esté en la matriz, recibe únicamente consulta de los módulos no administrativos (principio de mínimo privilegio).
 
-![Figura 55. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
+![Figura 63. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
 
-*Figura 56. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
+*Figura 64. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
 
 ## 3.4. IMPORTACIÓN Y EXPORTACIÓN DE FICHEROS.
 
@@ -387,9 +419,9 @@ Quince recursos de las nueve áreas del negocio (entre ellos clientes, prospecto
 
 Reglas importantes: las columnas calculadas por el sistema (N°, fechas de registro, totales, estados de aprobación) se ignoran y se informan; las operaciones financieras y las ventas no se importan; importar exige permiso de escritura sobre el módulo y exportar exige permiso de lectura. Cada importación y exportación queda en la auditoría.
 
-![Figura 57. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
+![Figura 65. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
 
-*Figura 58. Vista previa de una importación de prospectos desde CSV.*
+*Figura 66. Vista previa de una importación de prospectos desde CSV.*
 
 ## 3.5. RESPALDOS Y AUDITORÍA.
 
@@ -399,13 +431,13 @@ Este módulo, exclusivo del Administrador, tiene dos pestañas y cuatro indicado
 - **Restauración:** ejecutar scripts\restaurar_bd.bat con la ruta del archivo, o abrir el .sql en el Query Tool de pgAdmin sobre la base SistemaFinanciero y ejecutarlo (F5). Si el respaldo es de tipo jdbc, ejecute antes db/schema.sql.
 - **Auditoría:** bitácora de los últimos 200 eventos con fecha, usuario, rol, acción, recurso, código HTTP e IP. Registra LOGIN_OK, LOGIN_FALLIDO, CREAR, ACTUALIZAR, ELIMINAR, IMPORTAR, EXPORTAR, RESPALDO y ACCESO_DENEGADO. Es inmutable (no se puede editar ni borrar), nunca guarda contraseñas, y se puede buscar y exportar a Excel, CSV o JSON.
 
-![Figura 59. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
+![Figura 67. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
 
-*Figura 60. Pestaña Respaldos: generación y lista de copias de seguridad.*
+*Figura 68. Pestaña Respaldos: generación y lista de copias de seguridad.*
 
-![Figura 61. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
+![Figura 69. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
 
-*Figura 62. Pestaña Auditoría: bitácora de eventos.*
+*Figura 70. Pestaña Auditoría: bitácora de eventos.*
 
 ## 3.6. CONTROL DE VERSIONES (PANTALLA DEL SISTEMA).
 
@@ -417,31 +449,31 @@ La opción **Control de versiones** del menú lateral muestra, solo para el Admi
 - **Ramas y etiquetas:** ramas locales y del remoto origin, y etiquetas v4.0.0, v5.0.0 y v5.0.1.
 - **Esquema BD:** historial de versiones de la base (tabla version_esquema): 1.0.0 esquema inicial, 1.1.0 portal del cliente, 2.0.0 seguridad y 5.0.0 control de versiones.
 
-![Figura 63. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
+![Figura 71. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
 
-*Figura 64. Control de versiones: pestaña Resumen.*
+*Figura 72. Control de versiones: pestaña Resumen.*
 
-![Figura 65. Control de versiones: historial de commits.](img/ver_historial.jpg)
+![Figura 73. Control de versiones: historial de commits.](img/ver_historial.jpg)
 
-*Figura 66. Control de versiones: historial de commits.*
+*Figura 74. Control de versiones: historial de commits.*
 
-![Figura 67. Control de versiones: red de ramas (network).](img/ver_red.jpg)
+![Figura 75. Control de versiones: red de ramas (network).](img/ver_red.jpg)
 
-*Figura 68. Control de versiones: red de ramas (network).*
+*Figura 76. Control de versiones: red de ramas (network).*
 
-![Figura 69. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
+![Figura 77. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
 
-*Figura 70. Control de versiones: ramas y etiquetas.*
+*Figura 78. Control de versiones: ramas y etiquetas.*
 
-![Figura 71. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
+![Figura 79. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
 
-*Figura 72. Control de versiones: versiones del esquema de la base de datos.*
+*Figura 80. Control de versiones: versiones del esquema de la base de datos.*
 
 Cuando entra un usuario que no es Administrador (por ejemplo un Cajero), solo ve la pestaña Resumen y el aviso “El historial del repositorio es visible solo para el Administrador”.
 
-![Figura 73. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
+![Figura 81. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
 
-*Figura 74. Vista del Control de versiones para un usuario con rol CAJERO.*
+*Figura 82. Vista del Control de versiones para un usuario con rol CAJERO.*
 
 # 4. CONTROL DE VERSIONES DEL PROYECTO (GIT Y GITHUB)
 
