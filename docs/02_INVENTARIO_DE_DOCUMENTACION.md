@@ -22,7 +22,7 @@ documento se consulta con `git log --follow <ruta>`.
 | T-10 | Arquitectura y patrones | `docs/01_ARQUITECTURA_Y_PATRONES.md` | Capas, MVC, DAO, DTO, SOLID, flujo de una petición | ✅ |
 | T-11 | Consideraciones de seguridad | `docs/03_CONSIDERACIONES_DE_SEGURIDAD.md` | Controles por área y transversales | ✅ |
 | T-12 | Respaldo y configuración de BD | `docs/04_RESPALDO_Y_CONFIGURACION_BD.md` · `scripts/` · `db/seguridad.sql` | Backup, restauración, rol de mínimo privilegio | ✅ |
-| T-13 | Plan y evidencia de pruebas (TDD) | `docs/05_PRUEBAS_TDD.md` · `test/` | 117 pruebas JUnit 4 (24 clases; 99 hasta v4.0) | ✅ |
+| T-13 | Plan y evidencia de pruebas (TDD) | `docs/05_PRUEBAS_TDD.md` · `test/` | 151 pruebas JUnit 4 (27 clases; 99 hasta v4.0) | ✅ |
 | T-14 | Manual de instalación | `INSTALAR_LEEME.txt` · `README.md` | Pasos en pgAdmin, NetBeans y configuración | ✅ |
 | T-15 | Manual de usuario / ayuda en línea | `web/ayuda.html` | Preguntas frecuentes y asistente por voz | ✅ |
 | T-16 | Evidencias (capturas) | `evidencias/` | Capturas de pantallas, pruebas, API y control de versiones | ✅ |
@@ -39,7 +39,7 @@ documento se consulta con `git log --follow <ruta>`.
 | T-27 | Versión de la aplicación | `VERSION` · `build.xml` (`-post-compile`) · `version.properties` | SemVer y datos del commit dentro del .jar | ✅ |
 | T-28 | Reglas del repositorio | `.gitignore` · `.gitattributes` · `db.properties.ejemplo` | Qué no se versiona, fin de línea, plantilla de configuración | ✅ |
 | T-29 | Hooks de Git | `.githooks/pre-commit` · `.githooks/commit-msg` · `scripts/git/instalar_hooks.*` | Bloqueo de credenciales y archivos generados; formato de commits | ✅ |
-| T-30 | Integración continua | `.github/workflows/ci.yml` · `scripts/compilar_y_probar.*` | Compilación y 117 pruebas en cada push / Pull Request | ✅ |
+| T-30 | Integración continua | `.github/workflows/ci.yml` · `scripts/compilar_y_probar.*` | Compilación y 151 pruebas en cada push / Pull Request | ✅ |
 | T-31 | Guía de contribución | `CONTRIBUTING.md` · `.github/pull_request_template.md` | Pasos para trabajar en equipo y lista de verificación de PR | ✅ |
 | T-32 | Versionamiento del esquema BD | `db/version_esquema.sql` · tabla `version_esquema` · `version/HistorialEsquema` | Versión de la base de cada equipo (1.0.0 → 5.0.0) | ✅ |
 | T-33 | Pantalla de control de versiones | `web/versiones.html` · `GET /api/version` · `GET /api/versiones` | Versión, commits, red de ramas, etiquetas y esquema BD | ✅ |
@@ -72,7 +72,7 @@ documento se consulta con `git log --follow <ruta>`.
 | · DTO | `dto/` | 9 |
 | · seguridad / respaldo / ficheros / config / util / web | `security/` `backup/` `archivos/` `config/` `util/` `web/` | 37 |
 | · control de versiones | `version/` | 5 |
-| Clases de prueba JUnit | `test/` | 24 (117 pruebas) |
+| Clases de prueba JUnit | `test/` | 27 (151 pruebas) |
 | Vistas (pantallas HTML) | `web/*.html` | 23 |
 | Hojas de estilo y scripts del frontend | `web/*.css`, `web/*.js` | 15 |
 | Scripts SQL | `db/*.sql` | 5 |
