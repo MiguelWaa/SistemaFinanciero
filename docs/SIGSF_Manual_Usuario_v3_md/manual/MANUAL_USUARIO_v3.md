@@ -30,6 +30,7 @@ Sistema Integral de Gestión de Servicios Financieros · Curso Integrador I Sist
   - [3.4. IMPORTACIÓN Y EXPORTACIÓN DE FICHEROS.](#34-importación-y-exportación-de-ficheros)
   - [3.5. RESPALDOS Y AUDITORÍA.](#35-respaldos-y-auditoría)
   - [3.6. CONTROL DE VERSIONES (PANTALLA DEL SISTEMA).](#36-control-de-versiones-pantalla-del-sistema)
+  - [3.7. APARIENCIA DEL SISTEMA (BOOTSTRAP Y ANIMACIONES).](#37-apariencia-del-sistema-bootstrap-y-animaciones)
 - [4. CONTROL DE VERSIONES DEL PROYECTO (GIT Y GITHUB)](#4-control-de-versiones-del-proyecto-git-y-github)
   - [4.1. RAMAS Y VERSIONES.](#41-ramas-y-versiones)
   - [4.2. FLUJO DE TRABAJO DIARIO.](#42-flujo-de-trabajo-diario)
@@ -484,6 +485,9 @@ Desde la versión 4.0 cada ruta de la API exige una sesión válida y se comprue
 | Almacén (productos)                                    | ✔     | consulta   | consulta | ✔        |
 | Expedientes (Dirección / Gerencia)                     | ✔     | ✔          | —        | ✔        |
 | Tipos de cambio y servicios                            | ✔     | consulta   | consulta | consulta |
+| Pagos y cobranzas (ver, cobrar, confirmar y rechazar)  | ✔     | ✔          | ✔        | consulta |
+| Billeteras y QR (editar)                               | ✔     | consulta   | consulta | consulta |
+| Cotizaciones                                           | ✔     | consulta   | ✔        | consulta |
 
 Un rol nuevo creado desde Seguridad, que no esté en la matriz, recibe únicamente consulta de los módulos no administrativos (principio de mínimo privilegio).
 
@@ -556,6 +560,32 @@ Cuando entra un usuario que no es Administrador (por ejemplo un Cajero), solo ve
 ![Figura 101. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
 
 *Figura 102. Vista del Control de versiones para un usuario con rol CAJERO.*
+
+## 3.7. APARIENCIA DEL SISTEMA (BOOTSTRAP Y ANIMACIONES).
+
+**Versión 5.2 · Interfaz Bootstrap 5.** Todas las pantallas se rediseñaron con Bootstrap 5.3.3, Font Awesome y el generador de QR, que viajan dentro del propio sistema (`web/vendor/`), por lo que **funciona sin conexión a internet**. Las tablas se pueden **ordenar por columna**, **paginar** (10, 25, 50 o 100 filas) y buscar; los formularios validan los datos y las eliminaciones piden confirmación en una ventana. El panel principal tiene un menú lateral agrupado (atención y caja, gestión, dirección y administración) que se convierte en menú desplegable en el celular, una **campana** con los pagos por verificar y apertura directa de cada módulo (`index.html#pagos.html`).
+
+![Figura 103. Panel principal con la interfaz Bootstrap 5.](img/v3_panel_bootstrap.jpg)
+
+*Figura 104. Panel principal con la interfaz Bootstrap 5.*
+
+**Versión 5.3 · Interfaz animada.** Los indicadores cuentan hasta su valor, las tarjetas y las filas entran de forma escalonada, los botones tienen brillo y onda al pulsarlos, los gráficos se dibujan y al confirmar o registrar un pago aparece confeti. El panel y el portal muestran un banner de bienvenida animado, y la campana suena cuando llega un pago nuevo.
+
+![Figura 105. Panel con indicadores y banner animados.](img/v3_panel_animado.jpg)
+
+*Figura 106. Panel con indicadores y banner animados.*
+
+![Figura 107. Confeti al confirmar un pago.](img/v3_confeti_pago.jpg)
+
+*Figura 108. Confeti al confirmar un pago.*
+
+**Versión 5.4 · Fondo animado.** Un degradado con auroras en movimiento, una rejilla de puntos y una trama ondulada tipo billete se deslizan detrás de las tarjetas, que tienen efecto vidrio. **Al imprimir, el fondo se quita** para que los documentos salgan limpios.
+
+![Figura 109. Panel con el fondo animado.](img/v3_fondo_panel.jpg)
+
+*Figura 110. Panel con el fondo animado.*
+
+**Accesibilidad.** Si el sistema operativo tiene activada la opción **«reducir movimiento»** (Windows, macOS, Android o iOS), todas las animaciones se desactivan automáticamente.
 
 # 4. CONTROL DE VERSIONES DEL PROYECTO (GIT Y GITHUB)
 
