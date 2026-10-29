@@ -256,6 +256,32 @@ Desde la versión 5.2 el Portal del Cliente permite **pagar con Yape, Plin o Tun
 
 El Portal del Cliente no incluye mapas de agencias ni un chat propio; esas funciones (asistente por voz y chat de ayuda) están disponibles únicamente en el sistema interno, y se describen en el apartado 3.2.5 de este manual.
 
+### 2.2.6. COTIZACIONES.
+
+La opción **Cotizar** del portal permite al cliente simular un trámite sin comprometerse. Hay tres tipos:
+
+- **Préstamo:** indique el monto y el plazo en meses; el portal muestra la cuota mensual estimada y el total a pagar con la misma fórmula y tasa del sistema.
+- **Empeño:** muestra el interés y el total para recuperar el artículo.
+- **Cambio de moneda:** muestra el monto que recibiría al tipo de cambio vigente.
+
+Al pulsar **Generar cotización** se guarda con un número (por ejemplo `COT-000001`) y una **vigencia de 7 días**. Desde **Mis cotizaciones** se puede imprimir o guardar en PDF, y **convertir en solicitud** para enviarla a la agencia.
+
+![Figura 33. Cotizar en línea: simulación de un préstamo.](img/v3_portal_cotizar.jpg)
+
+*Figura 34. Cotizar en línea: simulación de un préstamo.*
+
+![Figura 35. Cotización con cronograma lista para imprimir o guardar en PDF.](img/v3_cotizacion.jpg)
+
+*Figura 36. Cotización con cronograma lista para imprimir o guardar en PDF.*
+
+### 2.2.7. ESTADO DE CUENTA Y COMPROBANTES.
+
+La pantalla de inicio del portal resume lo que el cliente debe: deuda vigente, total pagado, pagos por verificar y solicitudes en revisión, y ofrece el botón **Pagar** junto a cada cuota o rescate pendiente. El botón **Estado de cuenta** abre un documento imprimible con las deudas, los pagos y los totales. Cada pago confirmado tiene un **comprobante** (`RC-000065`) que se puede imprimir o guardar en PDF desde el navegador.
+
+![Figura 37. Inicio del Portal del Cliente con deudas y pagos pendientes.](img/v3_portal_inicio.jpg)
+
+*Figura 38. Inicio del Portal del Cliente con deudas y pagos pendientes.*
+
 # 3. MÓDULO DE USUARIO ADMINISTRACIÓN
 
 En SIGSF, el “usuario administración” corresponde al personal interno que ingresa por login.html con su correo y contraseña, y accede al panel de index.html según su rol (Administrador, Supervisor, Cajero o Analista). Desde ese panel se gestionan todos los módulos operativos del sistema. Para ingresar: abra http://localhost:8091, pulse “Iniciar sesión”, escriba su correo y contraseña y pulse “Ingresar”. Si olvidó su contraseña, solicite al Administrador que la restablezca desde Usuarios.
@@ -266,25 +292,25 @@ En SIGSF, el “usuario administración” corresponde al personal interno que i
 
 Es la franja de indicadores (KPI) de la parte superior del panel principal (index.html): ingresos del mes, clientes activos, operaciones de hoy, préstamos colocados, expedientes pendientes y solicitudes pendientes, entre otros. Cada indicador se calcula de forma independiente (DashboardService), de modo que si una consulta falla, el resto de las tarjetas se sigue mostrando en vez de dejar todo el panel en blanco. Debajo de las tarjetas se muestra la sección “Últimos clientes registrados” con los clientes más recientes (avatar, documento, contacto, estado y fecha). En la esquina superior derecha aparece el nombre y el rol del usuario con sesión iniciada.
 
-![Figura 33. Panel principal del sistema interno con indicadores y últimos clientes.](img/panel.jpg)
+![Figura 39. Panel principal del sistema interno con indicadores y últimos clientes.](img/panel.jpg)
 
-*Figura 34. Panel principal del sistema interno con indicadores y últimos clientes.*
+*Figura 40. Panel principal del sistema interno con indicadores y últimos clientes.*
 
 ### 3.1.2. PANEL IZQUIERDO – PANEL DE TAREAS.
 
 Es el menú lateral de navegación, con acceso a: Inicio, Usuarios, Reportes, Configuración, Seguridad, Respaldos y auditoría, Control de versiones, Centro de ayuda y Cerrar sesión. Cada opción abre su propia pantalla de gestión. Las opciones administrativas (Usuarios, Respaldos y auditoría, Control de versiones) solo funcionan para el rol Administrador; los demás roles reciben un mensaje de acceso denegado.
 
-![Figura 35. Menú lateral del sistema interno.](img/sidebar.jpg)
+![Figura 41. Menú lateral del sistema interno.](img/sidebar.jpg)
 
-*Figura 36. Menú lateral del sistema interno.*
+*Figura 42. Menú lateral del sistema interno.*
 
 ### 3.1.3. PANEL INFERIOR.
 
 Debajo de los indicadores, la sección “Módulos del sistema” muestra una tarjeta por módulo, cada una con su botón “Ingresar”: Marketing, Solicitudes de clientes (con el contador de solicitudes pendientes), Ventas, Logística, Almacén, Producción, Operaciones Financieras, Dirección, Gerencia General, Clientes y Servicios Financieros y, desde la versión 5.0, **Respaldos y Auditoría** y **Control de versiones**. Al pie del panel se muestra la versión en ejecución (por ejemplo “SIGSF v5.0.1 · rama main · commit 7ff4ebb · esquema BD v5.0.0”).
 
-![Figura 37. Tarjetas de módulos y pie con la versión del sistema.](img/modulos.jpg)
+![Figura 43. Tarjetas de módulos y pie con la versión del sistema.](img/modulos.jpg)
 
-*Figura 38. Tarjetas de módulos y pie con la versión del sistema.*
+*Figura 44. Tarjetas de módulos y pie con la versión del sistema.*
 
 ## 3.2. FUNCIONALIDADES.
 
@@ -299,13 +325,13 @@ Pantalla Usuarios, sobre la tabla usuario (pestañas Usuarios y Roles):
 - **Estado inicial:** un usuario recién creado queda en estado PENDIENTE hasta que se activa; solo las cuentas ACTIVAS pueden iniciar sesión.
 - **Módulo Seguridad (complementario):** administra los Roles del sistema (ADMIN, SUPERVISOR, CAJERO y ANALISTA, entre otros) y su descripción, y muestra la **matriz de permisos** que determina qué puede hacer cada rol (ver apartado 3.3).
 
-![Figura 39. Módulo Usuarios: gestión del personal.](img/usuarios.jpg)
+![Figura 45. Módulo Usuarios: gestión del personal.](img/usuarios.jpg)
 
-*Figura 40. Módulo Usuarios: gestión del personal.*
+*Figura 46. Módulo Usuarios: gestión del personal.*
 
-![Figura 41. Módulo Seguridad: roles y matriz de permisos.](img/seguridad.jpg)
+![Figura 47. Módulo Seguridad: roles y matriz de permisos.](img/seguridad.jpg)
 
-*Figura 42. Módulo Seguridad: roles y matriz de permisos.*
+*Figura 48. Módulo Seguridad: roles y matriz de permisos.*
 
 ### 3.2.2. MANTENIMIENTO DE PRODUCTOS.
 
@@ -315,9 +341,9 @@ Pantalla Almacén, sobre la tabla producto (con apoyo de inventario y movimiento
 - **Alerta de stock bajo:** el sistema resalta en rojo el producto cuando su stock actual llega o baja del stock mínimo definido, y el indicador “Stock bajo” lo contabiliza.
 - **Operaciones disponibles:** listar, editar, eliminar y buscar productos; exportar el listado a Excel, CSV o JSON, e importar productos desde CSV o Excel (apartado 3.4).
 
-![Figura 43. Módulo Almacén: control de productos e inventario.](img/almacen.jpg)
+![Figura 49. Módulo Almacén: control de productos e inventario.](img/almacen.jpg)
 
-*Figura 44. Módulo Almacén: control de productos e inventario.*
+*Figura 50. Módulo Almacén: control de productos e inventario.*
 
 ### 3.2.3. MANTENIMIENTO DE PROVEEDORES.
 
@@ -326,9 +352,9 @@ Pantalla Logística, sobre la tabla proveedor (con apoyo de movimiento_logistica
 - **Datos del proveedor:** registra la razón social (obligatoria), RUC, persona de contacto, teléfono, correo, dirección y estado.
 - **Operaciones disponibles:** listar, crear, editar, eliminar y buscar proveedores, como apoyo a los módulos de Almacén y Producción. Solo los roles ANALISTA y ADMIN pueden registrarlos o importarlos; el Cajero tiene acceso denegado.
 
-![Figura 45. Módulo Logística: gestión de proveedores.](img/logistica.jpg)
+![Figura 51. Módulo Logística: gestión de proveedores.](img/logistica.jpg)
 
-*Figura 46. Módulo Logística: gestión de proveedores.*
+*Figura 52. Módulo Logística: gestión de proveedores.*
 
 ### 3.2.4. MANTENIMIENTO DE TRANSACCIONES.
 
@@ -341,15 +367,15 @@ Pantalla Operaciones Financieras, la más amplia del sistema, organizada en pest
 
 Los totales, cuotas y saldos **siempre los calcula el servidor**. Por seguridad, las operaciones de dinero (operaciones, ventas, préstamos, empeños y tipos de cambio) no pueden importarse masivamente; solo se exportan. La aprobación la realiza el Supervisor o el Administrador, no el Cajero que registra.
 
-![Figura 47. Módulo Operaciones Financieras.](img/operaciones.jpg)
+![Figura 53. Módulo Operaciones Financieras.](img/operaciones.jpg)
 
-*Figura 48. Módulo Operaciones Financieras.*
+*Figura 54. Módulo Operaciones Financieras.*
 
 Como complemento directo de este apartado, la pantalla Ventas (tabla venta) registra y lista las ventas de servicios financieros a los clientes, y permite descargar el detalle en Excel (botón “Descargar Excel” o /api/ventas/excel); cada venta nueva actualiza también el archivo reportes/ventas.xlsx dentro de la carpeta del proyecto. Las ventas no son editables y su fecha y hora las asigna el servidor.
 
-![Figura 49. Módulo Ventas y exportación a Excel.](img/ventas.jpg)
+![Figura 55. Módulo Ventas y exportación a Excel.](img/ventas.jpg)
 
-*Figura 50. Módulo Ventas y exportación a Excel.*
+*Figura 56. Módulo Ventas y exportación a Excel.*
 
 ### 3.2.5. MANTENIMIENTO DE MAPAS, CHAT U OTROS.
 
@@ -365,29 +391,29 @@ SIGSF no maneja mapas de agencias, pero sí un chat de ayuda y un asistente por 
 - **Centro de ayuda:** chat de preguntas frecuentes y contacto de soporte.
 - **Asistente por voz:** disponible en el panel principal (botón “Asistente por voz”); reconoce comandos hablados, por ejemplo “abre Marketing” o “ir a Reportes”, y responde con voz para llevar al usuario directamente al módulo que solicita.
 
-![Figura 51. Módulo Clientes y Servicios Financieros.](img/clientes.jpg)
+![Figura 57. Módulo Clientes y Servicios Financieros.](img/clientes.jpg)
 
-*Figura 52. Módulo Clientes y Servicios Financieros.*
+*Figura 58. Módulo Clientes y Servicios Financieros.*
 
-![Figura 53. Módulo Marketing: prospectos y campañas.](img/marketing.jpg)
+![Figura 59. Módulo Marketing: prospectos y campañas.](img/marketing.jpg)
 
-*Figura 54. Módulo Marketing: prospectos y campañas.*
+*Figura 60. Módulo Marketing: prospectos y campañas.*
 
-![Figura 55. Módulo Producción: líneas y órdenes.](img/produccion.jpg)
+![Figura 61. Módulo Producción: líneas y órdenes.](img/produccion.jpg)
 
-*Figura 56. Módulo Producción: líneas y órdenes.*
+*Figura 62. Módulo Producción: líneas y órdenes.*
 
-![Figura 57. Módulo Dirección: expedientes de aprobación.](img/direccion.jpg)
+![Figura 63. Módulo Dirección: expedientes de aprobación.](img/direccion.jpg)
 
-*Figura 58. Módulo Dirección: expedientes de aprobación.*
+*Figura 64. Módulo Dirección: expedientes de aprobación.*
 
-![Figura 59. Bandeja de solicitudes de clientes.](img/solicitudes.jpg)
+![Figura 65. Bandeja de solicitudes de clientes.](img/solicitudes.jpg)
 
-*Figura 60. Bandeja de solicitudes de clientes.*
+*Figura 66. Bandeja de solicitudes de clientes.*
 
-![Figura 61. Módulo Reportes: indicadores y descargas en Excel.](img/reportes.jpg)
+![Figura 67. Módulo Reportes: indicadores y descargas en Excel.](img/reportes.jpg)
 
-*Figura 62. Módulo Reportes: indicadores y descargas en Excel.*
+*Figura 68. Módulo Reportes: indicadores y descargas en Excel.*
 
 ## 3.3. PERMISOS POR ROL.
 
@@ -405,9 +431,9 @@ Desde la versión 4.0 cada ruta de la API exige una sesión válida y se comprue
 
 Un rol nuevo creado desde Seguridad, que no esté en la matriz, recibe únicamente consulta de los módulos no administrativos (principio de mínimo privilegio).
 
-![Figura 63. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
+![Figura 69. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
 
-*Figura 64. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
+*Figura 70. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
 
 ## 3.4. IMPORTACIÓN Y EXPORTACIÓN DE FICHEROS.
 
@@ -419,9 +445,9 @@ Quince recursos de las nueve áreas del negocio (entre ellos clientes, prospecto
 
 Reglas importantes: las columnas calculadas por el sistema (N°, fechas de registro, totales, estados de aprobación) se ignoran y se informan; las operaciones financieras y las ventas no se importan; importar exige permiso de escritura sobre el módulo y exportar exige permiso de lectura. Cada importación y exportación queda en la auditoría.
 
-![Figura 65. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
+![Figura 71. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
 
-*Figura 66. Vista previa de una importación de prospectos desde CSV.*
+*Figura 72. Vista previa de una importación de prospectos desde CSV.*
 
 ## 3.5. RESPALDOS Y AUDITORÍA.
 
@@ -431,13 +457,13 @@ Este módulo, exclusivo del Administrador, tiene dos pestañas y cuatro indicado
 - **Restauración:** ejecutar scripts\restaurar_bd.bat con la ruta del archivo, o abrir el .sql en el Query Tool de pgAdmin sobre la base SistemaFinanciero y ejecutarlo (F5). Si el respaldo es de tipo jdbc, ejecute antes db/schema.sql.
 - **Auditoría:** bitácora de los últimos 200 eventos con fecha, usuario, rol, acción, recurso, código HTTP e IP. Registra LOGIN_OK, LOGIN_FALLIDO, CREAR, ACTUALIZAR, ELIMINAR, IMPORTAR, EXPORTAR, RESPALDO y ACCESO_DENEGADO. Es inmutable (no se puede editar ni borrar), nunca guarda contraseñas, y se puede buscar y exportar a Excel, CSV o JSON.
 
-![Figura 67. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
+![Figura 73. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
 
-*Figura 68. Pestaña Respaldos: generación y lista de copias de seguridad.*
+*Figura 74. Pestaña Respaldos: generación y lista de copias de seguridad.*
 
-![Figura 69. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
+![Figura 75. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
 
-*Figura 70. Pestaña Auditoría: bitácora de eventos.*
+*Figura 76. Pestaña Auditoría: bitácora de eventos.*
 
 ## 3.6. CONTROL DE VERSIONES (PANTALLA DEL SISTEMA).
 
@@ -449,31 +475,31 @@ La opción **Control de versiones** del menú lateral muestra, solo para el Admi
 - **Ramas y etiquetas:** ramas locales y del remoto origin, y etiquetas v4.0.0, v5.0.0 y v5.0.1.
 - **Esquema BD:** historial de versiones de la base (tabla version_esquema): 1.0.0 esquema inicial, 1.1.0 portal del cliente, 2.0.0 seguridad y 5.0.0 control de versiones.
 
-![Figura 71. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
+![Figura 77. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
 
-*Figura 72. Control de versiones: pestaña Resumen.*
+*Figura 78. Control de versiones: pestaña Resumen.*
 
-![Figura 73. Control de versiones: historial de commits.](img/ver_historial.jpg)
+![Figura 79. Control de versiones: historial de commits.](img/ver_historial.jpg)
 
-*Figura 74. Control de versiones: historial de commits.*
+*Figura 80. Control de versiones: historial de commits.*
 
-![Figura 75. Control de versiones: red de ramas (network).](img/ver_red.jpg)
+![Figura 81. Control de versiones: red de ramas (network).](img/ver_red.jpg)
 
-*Figura 76. Control de versiones: red de ramas (network).*
+*Figura 82. Control de versiones: red de ramas (network).*
 
-![Figura 77. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
+![Figura 83. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
 
-*Figura 78. Control de versiones: ramas y etiquetas.*
+*Figura 84. Control de versiones: ramas y etiquetas.*
 
-![Figura 79. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
+![Figura 85. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
 
-*Figura 80. Control de versiones: versiones del esquema de la base de datos.*
+*Figura 86. Control de versiones: versiones del esquema de la base de datos.*
 
 Cuando entra un usuario que no es Administrador (por ejemplo un Cajero), solo ve la pestaña Resumen y el aviso “El historial del repositorio es visible solo para el Administrador”.
 
-![Figura 81. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
+![Figura 87. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
 
-*Figura 82. Vista del Control de versiones para un usuario con rol CAJERO.*
+*Figura 88. Vista del Control de versiones para un usuario con rol CAJERO.*
 
 # 4. CONTROL DE VERSIONES DEL PROYECTO (GIT Y GITHUB)
 
