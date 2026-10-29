@@ -1,6 +1,6 @@
 # SIGSF · Pruebas automatizadas (TDD)
 
-**Herramienta:** JUnit 4 (incluido en NetBeans). **Carpeta:** `test/`. **Resultado:** 126 pruebas en 25 clases (versión 5.1; eran 117 en 24 clases en la 5.0 y 99 en 21 en la 4.0).
+**Herramienta:** JUnit 4 (incluido en NetBeans). **Carpeta:** `test/`. **Resultado:** 151 pruebas en 27 clases (versión 5.4; eran 126 en 25 clases en la 5.1, 117 en 24 en la 5.0 y 99 en 21 en la 4.0).
 
 También sin NetBeans: `sh scripts/compilar_y_probar.sh` (o `.bat`); es lo que ejecuta la integración continua en cada push.
 
@@ -46,4 +46,7 @@ La inyección de dependencias (DIP) es lo que permite el TDD: el servicio recibe
 | VersionServiceTest | 12 | RF-VER-01…04: versión desde Git / version.properties / VERSION, esquema al día, tipos de commit, CHANGELOG, lista blanca de GitCli |
 | GitCliIntegracionTest | 3 | Repositorio Git real temporal: rama, etiqueta, merge y grafo (se omite si no hay git) |
 | VersionApiTest | 3 | `/api/version` para todo el personal, `/api/versiones` solo ADMIN, 401 sin sesión |
-| **Total** | **117** | |
+| PagoServiceTest | 14 | Pagos con Yape/Plin/Tunki: registro, confirmación, rechazo, descuento de saldo y comprobante (versión 5.2) |
+| CotizacionServiceTest | 7 | Cotizaciones de préstamo, empeño y cambio: cronograma, vigencia y conversión en solicitud (versión 5.2) |
+| PagosApiTest | 4 | API de pagos: permisos 401/403, bandeja por verificar y auditoría (versión 5.2) |
+| **Total** | **151** | |
