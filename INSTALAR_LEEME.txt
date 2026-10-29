@@ -4,7 +4,7 @@
 
   INSTRUCCIONES DE INSTALACION
   (leelo completo antes de empezar, toma unos 10-15 minutos)
-  Manual de usuario completo: docs/SIGSF_Manual_Usuario_v2_md/manual/MANUAL_USUARIO_v2.md
+  Manual de usuario completo: docs/SIGSF_Manual_Usuario_v3_md/manual/MANUAL_USUARIO_v3.md
 ================================================================
 
 
