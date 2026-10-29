@@ -415,6 +415,32 @@ SIGSF no maneja mapas de agencias, pero sí un chat de ayuda y un asistente por 
 
 *Figura 68. Módulo Reportes: indicadores y descargas en Excel.*
 
+### 3.2.6. PAGOS Y COBRANZAS.
+
+El módulo **Pagos y cobranzas** (menú lateral, grupo *Atención y caja*) concentra los pagos que llegan del portal y los cobros en ventanilla. Arriba muestra cuatro indicadores: **Por verificar**, **Cobrado hoy**, **Cobrado este mes** y **Pagos registrados**. Tiene cinco pestañas: *Por verificar*, *Historial y reporte*, *Cobrar en caja*, *Cotizaciones* y *Billeteras y QR*.
+
+**Verificar un pago del portal.** En cuanto un cliente registra un pago, el sistema avisa en el panel (contador en el menú lateral, campana con sonido y aviso emergente). En la pestaña **Por verificar** cada pago muestra el cliente, el monto, la billetera, el número de operación, el celular de origen y la referencia. El procedimiento es:
+
+1. Abrir la app de la billetera de la empresa y buscar el abono con el mismo **monto** y **número de operación**.
+2. Si coincide, pulsar **Confirmar pago** y aceptar la ventana de confirmación.
+3. Si no coincide, pulsar **Rechazar** e indicar el motivo (es obligatorio; el cliente lo verá).
+
+![Figura 69. Bandeja de pagos por verificar.](img/v3_pagos_por_verificar.jpg)
+
+*Figura 70. Bandeja de pagos por verificar.*
+
+![Figura 71. Confirmación de un pago.](img/v3_confirmar_pago.jpg)
+
+*Figura 72. Confirmación de un pago.*
+
+**Qué ocurre al confirmar.** Se descuenta el saldo del préstamo o del empeño; si llega a cero, el préstamo pasa a `CANCELADO` y el empeño a `RECUPERADO`. Se emite el comprobante `RC-000065` y el cliente ve el pago como *Confirmado*. Un pago solo se confirma o rechaza una vez y **los pagos nunca se eliminan**, para conservar la trazabilidad del dinero; todo queda en la auditoría.
+
+**Historial y reporte.** La pestaña **Historial y reporte** lista todos los pagos con filtros por estado, método y fechas, y un buscador por cliente, documento o número de operación. Desde allí se abre el comprobante de cada pago, se genera el **Reporte imprimible** y se **exporta** a Excel, CSV o JSON.
+
+![Figura 73. Historial de pagos con filtros y exportación.](img/v3_historial_pagos.jpg)
+
+*Figura 74. Historial de pagos con filtros y exportación.*
+
 ## 3.3. PERMISOS POR ROL.
 
 Desde la versión 4.0 cada ruta de la API exige una sesión válida y se comprueba el permiso del rol (control de acceso basado en roles). En la tabla, **✔** indica consulta y modificación, “consulta” solo lectura y “—” sin acceso. Cuando un usuario intenta una acción no permitida, el sistema responde con acceso denegado (403) y lo registra en la auditoría.
@@ -431,9 +457,9 @@ Desde la versión 4.0 cada ruta de la API exige una sesión válida y se comprue
 
 Un rol nuevo creado desde Seguridad, que no esté en la matriz, recibe únicamente consulta de los módulos no administrativos (principio de mínimo privilegio).
 
-![Figura 69. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
+![Figura 75. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
 
-*Figura 70. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
+*Figura 76. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
 
 ## 3.4. IMPORTACIÓN Y EXPORTACIÓN DE FICHEROS.
 
@@ -445,9 +471,9 @@ Quince recursos de las nueve áreas del negocio (entre ellos clientes, prospecto
 
 Reglas importantes: las columnas calculadas por el sistema (N°, fechas de registro, totales, estados de aprobación) se ignoran y se informan; las operaciones financieras y las ventas no se importan; importar exige permiso de escritura sobre el módulo y exportar exige permiso de lectura. Cada importación y exportación queda en la auditoría.
 
-![Figura 71. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
+![Figura 77. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
 
-*Figura 72. Vista previa de una importación de prospectos desde CSV.*
+*Figura 78. Vista previa de una importación de prospectos desde CSV.*
 
 ## 3.5. RESPALDOS Y AUDITORÍA.
 
@@ -457,13 +483,13 @@ Este módulo, exclusivo del Administrador, tiene dos pestañas y cuatro indicado
 - **Restauración:** ejecutar scripts\restaurar_bd.bat con la ruta del archivo, o abrir el .sql en el Query Tool de pgAdmin sobre la base SistemaFinanciero y ejecutarlo (F5). Si el respaldo es de tipo jdbc, ejecute antes db/schema.sql.
 - **Auditoría:** bitácora de los últimos 200 eventos con fecha, usuario, rol, acción, recurso, código HTTP e IP. Registra LOGIN_OK, LOGIN_FALLIDO, CREAR, ACTUALIZAR, ELIMINAR, IMPORTAR, EXPORTAR, RESPALDO y ACCESO_DENEGADO. Es inmutable (no se puede editar ni borrar), nunca guarda contraseñas, y se puede buscar y exportar a Excel, CSV o JSON.
 
-![Figura 73. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
+![Figura 79. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
 
-*Figura 74. Pestaña Respaldos: generación y lista de copias de seguridad.*
+*Figura 80. Pestaña Respaldos: generación y lista de copias de seguridad.*
 
-![Figura 75. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
+![Figura 81. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
 
-*Figura 76. Pestaña Auditoría: bitácora de eventos.*
+*Figura 82. Pestaña Auditoría: bitácora de eventos.*
 
 ## 3.6. CONTROL DE VERSIONES (PANTALLA DEL SISTEMA).
 
@@ -475,31 +501,31 @@ La opción **Control de versiones** del menú lateral muestra, solo para el Admi
 - **Ramas y etiquetas:** ramas locales y del remoto origin, y etiquetas v4.0.0, v5.0.0 y v5.0.1.
 - **Esquema BD:** historial de versiones de la base (tabla version_esquema): 1.0.0 esquema inicial, 1.1.0 portal del cliente, 2.0.0 seguridad y 5.0.0 control de versiones.
 
-![Figura 77. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
+![Figura 83. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
 
-*Figura 78. Control de versiones: pestaña Resumen.*
+*Figura 84. Control de versiones: pestaña Resumen.*
 
-![Figura 79. Control de versiones: historial de commits.](img/ver_historial.jpg)
+![Figura 85. Control de versiones: historial de commits.](img/ver_historial.jpg)
 
-*Figura 80. Control de versiones: historial de commits.*
+*Figura 86. Control de versiones: historial de commits.*
 
-![Figura 81. Control de versiones: red de ramas (network).](img/ver_red.jpg)
+![Figura 87. Control de versiones: red de ramas (network).](img/ver_red.jpg)
 
-*Figura 82. Control de versiones: red de ramas (network).*
+*Figura 88. Control de versiones: red de ramas (network).*
 
-![Figura 83. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
+![Figura 89. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
 
-*Figura 84. Control de versiones: ramas y etiquetas.*
+*Figura 90. Control de versiones: ramas y etiquetas.*
 
-![Figura 85. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
+![Figura 91. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
 
-*Figura 86. Control de versiones: versiones del esquema de la base de datos.*
+*Figura 92. Control de versiones: versiones del esquema de la base de datos.*
 
 Cuando entra un usuario que no es Administrador (por ejemplo un Cajero), solo ve la pestaña Resumen y el aviso “El historial del repositorio es visible solo para el Administrador”.
 
-![Figura 87. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
+![Figura 93. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
 
-*Figura 88. Vista del Control de versiones para un usuario con rol CAJERO.*
+*Figura 94. Vista del Control de versiones para un usuario con rol CAJERO.*
 
 # 4. CONTROL DE VERSIONES DEL PROYECTO (GIT Y GITHUB)
 
