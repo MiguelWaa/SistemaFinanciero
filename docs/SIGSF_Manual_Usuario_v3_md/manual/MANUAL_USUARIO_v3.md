@@ -527,13 +527,13 @@ Este módulo, exclusivo del Administrador, tiene dos pestañas y cuatro indicado
 
 ## 3.6. CONTROL DE VERSIONES (PANTALLA DEL SISTEMA).
 
-La opción **Control de versiones** del menú lateral muestra, solo para el Administrador, qué versión del sistema está en ejecución y si es compatible con la base de datos. En la parte superior se muestran cuatro indicadores: **Versión del sistema** (por ejemplo v5.0.1), **Rama**, **Commit** y **Esquema BD** (por ejemplo v5.0.0). Una franja verde confirma “Código y base de datos en versiones compatibles”; si el esquema de la base está atrasado se muestra una advertencia. Las pestañas son:
+La opción **Control de versiones** del menú lateral muestra, solo para el Administrador, qué versión del sistema está en ejecución y si es compatible con la base de datos. En la parte superior se muestran cuatro indicadores: **Versión del sistema** (por ejemplo v5.4.0), **Rama**, **Commit** y **Esquema BD** (por ejemplo v5.2.0). Una franja verde confirma “Código y base de datos en versiones compatibles”; si el esquema de la base está atrasado se muestra una advertencia. Las pestañas son:
 
 - **Resumen:** versión en ejecución, etiqueta Git más cercana, rama, commit, último mensaje, autor, fecha de compilación y los lanzamientos publicados en el CHANGELOG.
 - **Historial de commits:** los últimos commits de todas las ramas, con tipo (Merge, Corrección, Documentación, Rollback…), autor y fecha, y un buscador.
 - **Red (network):** gráfico de ramas equivalente a *git log --all --graph*.
-- **Ramas y etiquetas:** ramas locales y del remoto origin, y etiquetas v4.0.0, v5.0.0 y v5.0.1.
-- **Esquema BD:** historial de versiones de la base (tabla version_esquema): 1.0.0 esquema inicial, 1.1.0 portal del cliente, 2.0.0 seguridad y 5.0.0 control de versiones.
+- **Ramas y etiquetas:** ramas locales y del remoto origin, y etiquetas desde v4.0.0 hasta v5.4.0.
+- **Esquema BD:** historial de versiones de la base (tabla version_esquema): 1.0.0 esquema inicial, 1.1.0 portal del cliente, 2.0.0 seguridad, 5.0.0 control de versiones y 5.2.0 pagos con QR y cotizaciones.
 
 ![Figura 91. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
 
@@ -595,7 +595,7 @@ El proyecto es un repositorio Git gestionado con **Git Flow** y publicado en Git
 
 | Rama              | Uso                                                                                                                |
 |-------------------|--------------------------------------------------------------------------------------------------------------------|
-| main              | Producción: cada commit es una versión publicada y etiquetada (v4.0.0, v5.0.0, v5.0.1). Nadie hace commit directo. |
+| main              | Producción: cada commit es una versión publicada y etiquetada (v4.0.0 … v5.4.0). Nadie hace commit directo. |
 | develop           | Integración del trabajo del equipo; siempre debe compilar y pasar las pruebas.                                     |
 | feature/\<tema\>  | Una funcionalidad por rama; nace de develop y se fusiona con merge --no-ff.                                        |
 | release/\<x.y.z\> | Preparación de una entrega (número de versión, CHANGELOG).                                                         |
@@ -620,7 +620,7 @@ git push -u origin feature/mi-cambio     # y abrir un Pull Request hacia develop
 - **Mensajes de commit:** formato *tipo(ámbito): descripción* con los tipos feat, fix, docs, style, refactor, perf, test, build, ci, chore y revert. El hook commit-msg rechaza los mensajes que no cumplen.
 - **Seguridad del repositorio:** db.properties no se sube a Git; el hook pre-commit bloquea credenciales, archivos generados y archivos de más de 5 MB.
 - **Deshacer cambios:** en ramas compartidas se usa *git revert* (no reescribe el historial); *git reset* solo sobre commits locales sin publicar.
-- **Integración continua:** GitHub Actions compila y ejecuta las 117 pruebas en cada push y Pull Request.
+- **Integración continua:** GitHub Actions compila y ejecuta las 151 pruebas en cada push y Pull Request.
 
 # 5. SOLUCIÓN DE PROBLEMAS FRECUENTES
 
@@ -634,4 +634,10 @@ git push -u origin feature/mi-cambio     # y abrir un Pull Request hacia develop
 | “Su rol no tiene permisos…” (403)       | El rol no puede usar ese módulo.                         | Consultar la matriz del apartado 3.3 o pedir un cambio de rol al Administrador.                                 |
 | Respaldo con método JDBC y no pgdump    | pg_dump no está en el PATH.                              | Agregar la carpeta bin de PostgreSQL al PATH o indicar backup.pgdump.                                           |
 | El asistente por voz no responde        | Navegador sin Web Speech API o sin permiso de micrófono. | Usar Google Chrome y permitir el micrófono.                                                                     |
+| Un pago del portal dice «Ese número de operación … ya fue registrado» | El número de operación ya se usó con esa billetera. | Revisar el número en la app de la billetera; cada operación se registra una sola vez. |
+| «El monto supera lo pendiente de pago» | Se intenta pagar más de lo que se debe (o ya hay pagos por verificar). | Pagar solo el saldo pendiente o esperar la verificación de los pagos anteriores. |
+| El portal muestra un QR de referencia y no el de la empresa | El administrador no subió el QR real de la billetera. | Subir la imagen en Pagos y cobranzas › Billeteras y QR (PNG, JPG o WEBP, máximo 500 KB). |
+| Un pago sigue «Por verificar» | La caja aún no lo compara con la billetera. | Pedir a caja que lo confirme o rechace desde Pagos y cobranzas. |
+| Faltan las tablas `pago`, `billetera` o `cotizacion` | No se ejecutó `db/pagos_qr.sql`. | Ejecutarlo en pgAdmin; si no, el servidor las crea solo al iniciar. |
+| La pantalla se ve sin animaciones | Está activada la opción «reducir movimiento» del sistema operativo. | Es lo esperado; se puede desactivar en la configuración de accesibilidad. |
 | El commit es rechazado                  | No cumple el formato o incluye db.properties.            | Usar “tipo(ámbito): descripción”; quitar db.properties del commit.                                              |
