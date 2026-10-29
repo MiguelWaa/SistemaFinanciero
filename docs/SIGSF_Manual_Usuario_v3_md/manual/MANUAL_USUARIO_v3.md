@@ -441,6 +441,36 @@ El módulo **Pagos y cobranzas** (menú lateral, grupo *Atención y caja*) conce
 
 *Figura 74. Historial de pagos con filtros y exportación.*
 
+### 3.2.7. COBRO EN CAJA Y BILLETERAS QR.
+
+**Cobrar en caja.** Si el cliente paga en ventanilla, el cajero usa la pestaña **Cobrar en caja**: busca al cliente, elige la deuda pendiente (cuota de préstamo o rescate de empeño), el monto y el método (efectivo, transferencia o la billetera del cliente). Estos cobros quedan **confirmados** de inmediato y generan su comprobante. Pueden registrarlos ADMIN, SUPERVISOR y CAJERO.
+
+**Billeteras y QR (solo ADMIN).** En la pestaña **Billeteras y QR** el administrador registra, para Yape, Plin y Tunki, el **número de celular**, el **titular que verá el cliente** y las indicaciones de pago, y puede **subir la imagen del QR de cobro** que genera la app de la empresa (solo PNG, JPG o WEBP, máximo 500 KB). Cada billetera se puede activar o desactivar con el interruptor. Si no se sube el QR real, el portal muestra un QR de referencia.
+
+![Figura 75. Configuración de las billeteras y de sus códigos QR.](img/v3_billeteras_qr.jpg)
+
+*Figura 76. Configuración de las billeteras y de sus códigos QR.*
+
+**¿Por qué hay que verificar los pagos?** Yape, Plin y Tunki no ofrecen a un sistema propio una API pública para comprobar automáticamente que un abono llegó. Por eso el sistema registra el número de operación y la caja lo contrasta con los movimientos de la billetera de la empresa. Para una demostración se puede activar `pagos.confirmacion.automatica=true` en `db.properties` (el pago queda confirmado al registrarlo) y limitar el monto con `pagos.monto.maximo`.
+
+### 3.2.8. DOCUMENTOS IMPRIMIBLES Y REPORTES.
+
+Desde la versión 5.2 el sistema genera documentos A4 que se imprimen o se guardan como PDF desde el navegador (botón **Imprimir / PDF**): el **comprobante de pago**, la **cotización** con su cronograma, el **estado de cuenta** del cliente y el **reporte de pagos** con filtros por fechas, estado y método.
+
+![Figura 77. Comprobante de pago RC-000065.](img/v3_comprobante.jpg)
+
+*Figura 78. Comprobante de pago RC-000065.*
+
+![Figura 79. Reporte de pagos listo para imprimir.](img/v3_reporte_pagos.jpg)
+
+*Figura 80. Reporte de pagos listo para imprimir.*
+
+La pantalla **Reportes** muestra el cobrado por concepto y permite descargar en **Excel, CSV o JSON** los pagos, las cotizaciones, las ventas, los clientes y las operaciones. El panel principal incorpora los indicadores *Por verificar*, *Cobrado en el mes* y *Cotizaciones vigentes*, y un gráfico con los cobros de los últimos 14 días.
+
+![Figura 81. Reportes con descargas en Excel, CSV y JSON.](img/v3_reportes.jpg)
+
+*Figura 82. Reportes con descargas en Excel, CSV y JSON.*
+
 ## 3.3. PERMISOS POR ROL.
 
 Desde la versión 4.0 cada ruta de la API exige una sesión válida y se comprueba el permiso del rol (control de acceso basado en roles). En la tabla, **✔** indica consulta y modificación, “consulta” solo lectura y “—” sin acceso. Cuando un usuario intenta una acción no permitida, el sistema responde con acceso denegado (403) y lo registra en la auditoría.
@@ -457,9 +487,9 @@ Desde la versión 4.0 cada ruta de la API exige una sesión válida y se comprue
 
 Un rol nuevo creado desde Seguridad, que no esté en la matriz, recibe únicamente consulta de los módulos no administrativos (principio de mínimo privilegio).
 
-![Figura 75. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
+![Figura 83. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).](img/cajero_403.jpg)
 
-*Figura 76. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
+*Figura 84. Un usuario sin permiso recibe un mensaje claro (ejemplo: rol CAJERO en Usuarios).*
 
 ## 3.4. IMPORTACIÓN Y EXPORTACIÓN DE FICHEROS.
 
@@ -471,9 +501,9 @@ Quince recursos de las nueve áreas del negocio (entre ellos clientes, prospecto
 
 Reglas importantes: las columnas calculadas por el sistema (N°, fechas de registro, totales, estados de aprobación) se ignoran y se informan; las operaciones financieras y las ventas no se importan; importar exige permiso de escritura sobre el módulo y exportar exige permiso de lectura. Cada importación y exportación queda en la auditoría.
 
-![Figura 77. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
+![Figura 85. Vista previa de una importación de prospectos desde CSV.](img/importacion.jpg)
 
-*Figura 78. Vista previa de una importación de prospectos desde CSV.*
+*Figura 86. Vista previa de una importación de prospectos desde CSV.*
 
 ## 3.5. RESPALDOS Y AUDITORÍA.
 
@@ -483,13 +513,13 @@ Este módulo, exclusivo del Administrador, tiene dos pestañas y cuatro indicado
 - **Restauración:** ejecutar scripts\restaurar_bd.bat con la ruta del archivo, o abrir el .sql en el Query Tool de pgAdmin sobre la base SistemaFinanciero y ejecutarlo (F5). Si el respaldo es de tipo jdbc, ejecute antes db/schema.sql.
 - **Auditoría:** bitácora de los últimos 200 eventos con fecha, usuario, rol, acción, recurso, código HTTP e IP. Registra LOGIN_OK, LOGIN_FALLIDO, CREAR, ACTUALIZAR, ELIMINAR, IMPORTAR, EXPORTAR, RESPALDO y ACCESO_DENEGADO. Es inmutable (no se puede editar ni borrar), nunca guarda contraseñas, y se puede buscar y exportar a Excel, CSV o JSON.
 
-![Figura 79. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
+![Figura 87. Pestaña Respaldos: generación y lista de copias de seguridad.](img/respaldos.jpg)
 
-*Figura 80. Pestaña Respaldos: generación y lista de copias de seguridad.*
+*Figura 88. Pestaña Respaldos: generación y lista de copias de seguridad.*
 
-![Figura 81. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
+![Figura 89. Pestaña Auditoría: bitácora de eventos.](img/auditoria.jpg)
 
-*Figura 82. Pestaña Auditoría: bitácora de eventos.*
+*Figura 90. Pestaña Auditoría: bitácora de eventos.*
 
 ## 3.6. CONTROL DE VERSIONES (PANTALLA DEL SISTEMA).
 
@@ -501,31 +531,31 @@ La opción **Control de versiones** del menú lateral muestra, solo para el Admi
 - **Ramas y etiquetas:** ramas locales y del remoto origin, y etiquetas v4.0.0, v5.0.0 y v5.0.1.
 - **Esquema BD:** historial de versiones de la base (tabla version_esquema): 1.0.0 esquema inicial, 1.1.0 portal del cliente, 2.0.0 seguridad y 5.0.0 control de versiones.
 
-![Figura 83. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
+![Figura 91. Control de versiones: pestaña Resumen.](img/ver_resumen.jpg)
 
-*Figura 84. Control de versiones: pestaña Resumen.*
+*Figura 92. Control de versiones: pestaña Resumen.*
 
-![Figura 85. Control de versiones: historial de commits.](img/ver_historial.jpg)
+![Figura 93. Control de versiones: historial de commits.](img/ver_historial.jpg)
 
-*Figura 86. Control de versiones: historial de commits.*
+*Figura 94. Control de versiones: historial de commits.*
 
-![Figura 87. Control de versiones: red de ramas (network).](img/ver_red.jpg)
+![Figura 95. Control de versiones: red de ramas (network).](img/ver_red.jpg)
 
-*Figura 88. Control de versiones: red de ramas (network).*
+*Figura 96. Control de versiones: red de ramas (network).*
 
-![Figura 89. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
+![Figura 97. Control de versiones: ramas y etiquetas.](img/ver_ramas.jpg)
 
-*Figura 90. Control de versiones: ramas y etiquetas.*
+*Figura 98. Control de versiones: ramas y etiquetas.*
 
-![Figura 91. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
+![Figura 99. Control de versiones: versiones del esquema de la base de datos.](img/ver_esquema.jpg)
 
-*Figura 92. Control de versiones: versiones del esquema de la base de datos.*
+*Figura 100. Control de versiones: versiones del esquema de la base de datos.*
 
 Cuando entra un usuario que no es Administrador (por ejemplo un Cajero), solo ve la pestaña Resumen y el aviso “El historial del repositorio es visible solo para el Administrador”.
 
-![Figura 93. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
+![Figura 101. Vista del Control de versiones para un usuario con rol CAJERO.](img/ver_cajero.jpg)
 
-*Figura 94. Vista del Control de versiones para un usuario con rol CAJERO.*
+*Figura 102. Vista del Control de versiones para un usuario con rol CAJERO.*
 
 # 4. CONTROL DE VERSIONES DEL PROYECTO (GIT Y GITHUB)
 
