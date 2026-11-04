@@ -146,6 +146,7 @@ public class PortalService {
         if (monto == null || monto.signum() <= 0) {
             throw new ReglaNegocioException("Ingresa un monto mayor a cero.");
         }
+        ReglasMonto.exigirMonto(monto, new BigDecimal("0.01"), OperacionService.MONTO_MAXIMO, "El monto");
         if (idTipoCambio == null) {
             throw new ReglaNegocioException("Selecciona el tipo de cambio.");
         }
@@ -180,6 +181,16 @@ public class PortalService {
         if (plazoMeses == null || plazoMeses <= 0) {
             throw new ReglaNegocioException("Indica en cuántos meses lo pagarás.");
         }
+        // Se valida el préstamo ANTES de grabar la operación (antes quedaba una
+        // operación PENDIENTE sin préstamo si este se rechazaba: DEF-007).
+        Prestamo p = new Prestamo();
+        p.setMontoPrestamo(montoPrestamo);
+        p.setTasaInteres(tasaInteres == null ? new BigDecimal("15") : tasaInteres);
+        p.setPlazoMeses(plazoMeses);
+        p.setFechaInicio(LocalDate.now());
+        p.setEstado("PENDIENTE");
+        prestamoService.validar(p);
+
         Operacion o = new Operacion();
         o.setIdCliente(idCliente);
         o.setTipoOperacion("PRESTAMO");
@@ -191,13 +202,7 @@ public class PortalService {
         Integer idOperacion = operacionDao.crear(o);
         o.setIdOperacion(idOperacion);
 
-        Prestamo p = new Prestamo();
         p.setIdOperacion(idOperacion);
-        p.setMontoPrestamo(montoPrestamo);
-        p.setTasaInteres(tasaInteres == null ? new BigDecimal("15") : tasaInteres);
-        p.setPlazoMeses(plazoMeses);
-        p.setFechaInicio(LocalDate.now());
-        p.setEstado("PENDIENTE");
         Prestamo creado = prestamoService.crear(p);
 
         return Json.map(
@@ -221,6 +226,16 @@ public class PortalService {
             plazoDias = 30;
         }
 
+        // Validación previa del empeño: si se rechaza, no se graba ni el artículo
+        // ni la operación (DEF-007).
+        Empeno e = new Empeno();
+        e.setMontoPrestamo(montoPrestamo);
+        e.setTasaInteres(new BigDecimal("10"));
+        e.setPlazoDias(plazoDias);
+        e.setFechaEmpeno(LocalDate.now());
+        e.setEstado("PENDIENTE");
+        empenoService.validar(e);
+
         Articulo a = new Articulo();
         a.setIdCliente(idCliente);
         a.setDescripcion(descripcionArticulo);
@@ -243,14 +258,8 @@ public class PortalService {
         Integer idOperacion = operacionDao.crear(o);
         o.setIdOperacion(idOperacion);
 
-        Empeno e = new Empeno();
         e.setIdOperacion(idOperacion);
         e.setIdArticulo(idArticulo);
-        e.setMontoPrestamo(montoPrestamo);
-        e.setTasaInteres(new BigDecimal("10"));
-        e.setPlazoDias(plazoDias);
-        e.setFechaEmpeno(LocalDate.now());
-        e.setEstado("PENDIENTE");
         Empeno creado = empenoService.crear(e);
 
         return Json.map(

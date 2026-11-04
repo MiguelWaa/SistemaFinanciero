@@ -33,6 +33,7 @@ public class ProductoService implements ServicioCrud<Producto, Producto> {
         }
         if (p.getStockActual() == null) p.setStockActual(0);
         if (p.getStockMinimo() == null) p.setStockMinimo(0);
+        exigirStock(p);
         if (p.getEstado() == null || p.getEstado().isBlank()) {
             p.setEstado("ACTIVO");
         }
@@ -44,6 +45,7 @@ public class ProductoService implements ServicioCrud<Producto, Producto> {
         if (dao.buscar(id) == null) {
             throw new ReglaNegocioException("No existe el producto con id " + id + ".");
         }
+        exigirStock(p);
         p.setIdProducto(id);
         dao.actualizar(p);
         return p;
@@ -52,6 +54,14 @@ public class ProductoService implements ServicioCrud<Producto, Producto> {
     public void eliminar(int id) {
         if (dao.eliminar(id) == 0) {
             throw new ReglaNegocioException("No existe el producto con id " + id + ".");
+        }
+    }
+
+    /** Misma regla que el CHECK ck_producto_stock de la base (Plan de Pruebas, PU-CAT-03). */
+    private static void exigirStock(Producto p) {
+        if ((p.getStockActual() != null && p.getStockActual() < 0)
+                || (p.getStockMinimo() != null && p.getStockMinimo() < 0)) {
+            throw new ReglaNegocioException("El stock no puede ser negativo.");
         }
     }
 }
