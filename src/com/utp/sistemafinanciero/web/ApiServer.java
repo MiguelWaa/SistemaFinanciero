@@ -238,13 +238,21 @@ public class ApiServer {
         } else if (e instanceof AccesoDenegadoException) {
             ctx.error(403, e.getMessage());
         } else if (e instanceof NumberFormatException) {
-            ctx.error(400, "Identificador inválido.");
+            // Antes decía "Identificador inválido." también para montos mal escritos.
+            ctx.error(400, "Valor numérico inválido.");
         } else {
             SQLException sql = causaSql(e);
             if (sql != null && "23505".equals(sql.getSQLState())) {
                 ctx.error(409, "Ya existe un registro con esos datos (valor duplicado).");
-            } else if (sql != null && "23503".equals(sql.getSQLState())) {
+            } else if (sql != null && "23503".equals(sql.getSQLState()) && "DELETE".equals(ctx.metodo())) {
                 ctx.error(409, "La operación no es posible: hay registros relacionados.");
+            } else if (sql != null && "23503".equals(sql.getSQLState())) {
+                // Alta o cambio que apunta a un registro inexistente (p. ej. idCliente = 999999).
+                ctx.error(400, "Algún dato hace referencia a un registro que no existe (revise cliente, "
+                        + "operación o artículo).");
+            } else if (sql != null && "22003".equals(sql.getSQLState())) {
+                // Desborde numérico: defensa en profundidad si una validación faltara en el servicio.
+                ctx.error(400, "Un valor numérico excede el rango permitido.");
             } else if (sql != null && "23514".equals(sql.getSQLState())) {
                 ctx.error(400, "Algún valor no cumple las reglas de la base de datos.");
             } else if (sql != null && "42P01".equals(sql.getSQLState())) {

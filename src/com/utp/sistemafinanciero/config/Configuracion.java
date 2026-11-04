@@ -64,6 +64,12 @@ public final class Configuracion {
         if (env != null && !env.isBlank()) {
             return env.trim();
         }
+        // Propiedad del sistema -Dsigsf.<clave>=valor (la usan las pruebas de integración:
+        // NetBeans la pasa con test-sys-prop.sigsf.db.name en nbproject/project.properties).
+        String sys = System.getProperty("sigsf." + clave);
+        if (sys != null && !sys.isBlank()) {
+            return sys.trim();
+        }
         return PROPS.getProperty(clave, porDefecto).trim();
     }
 
