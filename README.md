@@ -296,6 +296,7 @@ curl http://localhost:8091/api/clientes -H "Authorization: Bearer <token>"
 
 ---
 
+
 ## Módulos operativos y Excel de ventas (nuevo)
 
 Ya son funcionales, conectados a la base de datos, estos módulos (cada uno
