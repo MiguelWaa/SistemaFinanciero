@@ -1,9 +1,12 @@
 # ============================================================
-#  SIGSF · Integración continua (GitHub Actions)
+#  SIGSF · Integración continua (GitHub Actions) · Plan de Pruebas v6.0.0
 #  En cada push a main/develop y en cada Pull Request:
-#    1. compila el backend (Java 17)
-#    2. ejecuta las pruebas JUnit
+#    1. junit:    compila, ejecuta las 216 pruebas JUnit (unitarias + integración
+#                 con PostgreSQL 16 real) y genera la cobertura JaCoCo.
+#    2. sistema:  levanta el servidor sobre la base de pruebas y ejecuta Newman (API),
+#                 Playwright (sistema y aceptación BDD) y JMeter (carga).
 #  Si una prueba falla, el PR queda en rojo y no debe fusionarse.
+#  Los reportes quedan como "Artifacts" de cada ejecución (pestaña Actions).
 # ============================================================
 name: CI SIGSF
 
@@ -12,10 +15,25 @@ on:
     branches: [ main, develop ]
   pull_request:
     branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  PGHOST: localhost
+  PGUSER: postgres
+  PGPASSWORD: "123456"
 
 jobs:
-  compilar-y-probar:
+  junit:
+    name: Unitarias e integración (JUnit + PostgreSQL)
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: "123456"
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
@@ -28,5 +46,65 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Compilar y ejecutar pruebas
-        run: sh scripts/compilar_y_probar.sh
+      - name: PE-01 · Preparar la base SistemaFinanciero_test
+        run: sh scripts/pruebas/preparar_bd_pruebas.sh
+
+      - name: PU + PI · Compilar, probar y medir cobertura
+        run: COBERTURA=1 BD_PRUEBAS=SistemaFinanciero_test sh scripts/compilar_y_probar.sh
+
+      - name: Publicar reportes JUnit y JaCoCo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes-junit-jacoco
+          path: build/reportes/
+
+  sistema:
+    name: API, sistema, aceptación y carga
+    needs: junit
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: "123456"
+        ports: [ "5432:5432" ]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar Playwright, pytest-bdd y Chromium
+        run: |
+          pip install -r pruebas/requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Instalar Apache JMeter 5.6.3
+        run: |
+          curl -sSfL https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.tgz | tar xz -C "$RUNNER_TEMP"
+          echo "JMETER=$RUNNER_TEMP/apache-jmeter-5.6.3/bin/jmeter" >> "$GITHUB_ENV"
+
+      - name: Ejecutar el plan de pruebas completo
+        run: DURACION=30 sh scripts/pruebas/ejecutar_plan_de_pruebas.sh
+
+      - name: Publicar reportes y capturas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes-sistema-aceptacion-carga
+          path: |
+            build/reportes/
+            evidencias/pruebas/e2e/
+            evidencias/pruebas/aceptacion/
