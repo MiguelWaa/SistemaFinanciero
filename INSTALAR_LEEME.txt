@@ -40,6 +40,7 @@ PASO 1 · OBTENER EL PROYECTO
   mensajes de commit que no tengan el formato  tipo(ambito): descripcion
 
 
+
 ----------------------------------------------------------------
 PASO 2 · CREAR LA BASE DE DATOS (pgAdmin)
 ----------------------------------------------------------------
