@@ -242,7 +242,9 @@ USUARIO CONTROL DE ADMINISTRACION
 
 Las contraseñas se guardan con **PBKDF2-HMAC-SHA256 y sal** (los hashes SHA-256 antiguos de `datos_ejemplo.sql` se convierten solos en el primer inicio de sesión).
 
+
 ---
+
 
 ## Endpoints principales de la API
 
