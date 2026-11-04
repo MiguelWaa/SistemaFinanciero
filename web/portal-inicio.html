@@ -35,6 +35,7 @@
   .panel{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 4px 14px rgba(15,23,42,.06);margin-bottom:18px;}
   .panel h3{font-size:1rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
   table{width:100%;border-collapse:collapse;font-size:.83rem;}
+  .tabla-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
   th,td{padding:9px 10px;border-bottom:1px solid #eef2f7;text-align:left;}
   th{background:#f8fafc;color:#64748b;font-weight:600;font-size:.76rem;text-transform:uppercase;letter-spacing:.3px;}
   .badge{padding:3px 9px;border-radius:999px;font-size:.72rem;font-weight:600;}
@@ -133,7 +134,7 @@
     <div class="t verde">
       <h3><i class="fa-solid fa-hand-holding-dollar" style="color:#059669;"></i> Préstamo personal</h3>
       <div class="desc">Calculamos tu cuota mensual al instante.</div>
-      <div class="f"><label>Monto que necesitas (S/)</label><input type="number" id="prMonto" step="0.01" min="0" placeholder="5000.00"></div>
+      <div class="f"><label>Monto que necesitas (S/ 100 a S/ 1 000 000)</label><input type="number" id="prMonto" step="0.01" min="100" max="1000000" placeholder="5000.00"></div>
       <div class="f"><label>Plazo</label>
         <select id="prPlazo">
           <option value="6">6 meses</option>
@@ -173,10 +174,13 @@
   <!-- HISTORIAL -->
   <div class="panel">
     <h3><i class="fa-solid fa-clock-rotate-left" style="color:#2563eb;"></i> Mis trámites</h3>
+    <!-- Contenedor con desplazamiento: en celulares la tabla se desbordaba 41 px (DEF-010, caso PS-13). -->
+    <div class="tabla-scroll">
     <table>
       <thead><tr><th>N°</th><th>Trámite</th><th>Monto</th><th>Estado</th><th>Fecha</th></tr></thead>
       <tbody id="histTabla"><tr><td colspan="5">Cargando…</td></tr></tbody>
     </table>
+    </div>
   </div>
 </main>
 
