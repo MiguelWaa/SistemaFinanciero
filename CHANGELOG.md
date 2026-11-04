@@ -10,6 +10,11 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.1.1] - 2026-11-03 · Parche
+
+### Corregido
+- DEF-001: `scripts/compilar_y_probar.*` no copiaba los recursos (`semilla_100.tsv`) y 9 pruebas fallaban en la integración continua.
+
 ## [5.1.0] - 2026-10-25 · Avance 3: datos de demostración
 
 ### Agregado
