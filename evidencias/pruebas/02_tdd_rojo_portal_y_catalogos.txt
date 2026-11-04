@@ -1,0 +1,80 @@
+EscrituraArchivosTest                  Unitaria       4 pruebas    4 ✔   0 ✘   0 omitidas  (56 ms)
+LectorCsvTest                          Unitaria       4 pruebas    4 ✔   0 ✘   0 omitidas  (3 ms)
+21:06:39 WARN  [SISTEMA] c.u.s.b.RespaldoService - La estrategia de respaldo pgdump falló: pg_dump falló
+RespaldoServiceTest                    Unitaria       5 pruebas    5 ✔   0 ✘   0 omitidas  (226 ms)
+LogbackConfigTest                      Unitaria       3 pruebas    3 ✔   0 ✘   0 omitidas  (26 ms)
+RepositorioMemoriaTest                 Unitaria       3 pruebas    3 ✔   0 ✘   0 omitidas  (5 ms)
+DatosMasivosTest                       Unitaria       9 pruebas    9 ✔   0 ✘   0 omitidas  (929 ms)
+ApiPostgresIntegracionTest             Integración    7 pruebas    0 ✔   0 ✘   7 omitidas  (132 ms)
+ClienteDaoJdbcContratoTest             Integración    5 pruebas    0 ✔   0 ✘   5 omitidas  (0 ms)
+ClienteDaoMemoriaContratoTest          Integración    5 pruebas    5 ✔   0 ✘   0 omitidas  (2 ms)
+PostgresIntegracionTest                Integración    8 pruebas    0 ✔   0 ✘   8 omitidas  (1 ms)
+GestorSesionesTest                     Unitaria       5 pruebas    5 ✔   0 ✘   0 omitidas  (6 ms)
+LimitadorIntentosTest                  Unitaria       3 pruebas    3 ✔   0 ✘   0 omitidas  (2 ms)
+Pbkdf2PasswordHasherTest               Unitaria       5 pruebas    5 ✔   0 ✘   0 omitidas  (244 ms)
+PoliticaAccesoTest                     Unitaria       7 pruebas    7 ✔   0 ✘   0 omitidas  (5 ms)
+ArchivoServiceTest                     Unitaria       7 pruebas    7 ✔   0 ✘   0 omitidas  (258 ms)
+AuthServiceMockitoTest                 Unitaria       5 pruebas    5 ✔   0 ✘   0 omitidas  (474 ms)
+AuthServiceTest                        Unitaria       6 pruebas    6 ✔   0 ✘   0 omitidas  (17 ms)
+  ✘ PU_CAT_02_tipoDeCambioValidaValoresPositivos(com.utp.sistemafinanciero.service.CatalogosServiceTest)
+      expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+  ✘ PU_CAT_03_productoConStockPorDefectoYSinNegativos(com.utp.sistemafinanciero.service.CatalogosServiceTest)
+      expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+CatalogosServiceTest                   Unitaria       7 pruebas    5 ✔   2 ✘   0 omitidas  (33 ms)
+ClienteServiceMockitoTest              Unitaria       7 pruebas    7 ✔   0 ✘   0 omitidas  (14 ms)
+ClienteServiceTest                     Unitaria       5 pruebas    5 ✔   0 ✘   0 omitidas  (2 ms)
+EmpenoValoresLimiteTest                Unitaria       8 pruebas    8 ✔   0 ✘   0 omitidas  (3 ms)
+OperacionParticionesTest               Unitaria      10 pruebas   10 ✔   0 ✘   0 omitidas  (3 ms)
+OperacionServiceTest                   Unitaria       4 pruebas    4 ✔   0 ✘   0 omitidas  (4 ms)
+  ✘ PU_POR_06_prestamoRechazadoNoDejaOperacionHuerfana(com.utp.sistemafinanciero.service.PortalServiceTest)
+      expected:<0> but was:<2>
+  ✘ PU_POR_09_cambioConMontoExcesivoSeRechaza(com.utp.sistemafinanciero.service.PortalServiceTest)
+      expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+  ✘ PU_POR_07_empenoRechazadoNoDejaArticuloNiOperacion(com.utp.sistemafinanciero.service.PortalServiceTest)
+      expected:<0> but was:<1>
+PortalServiceTest                      Unitaria       9 pruebas    6 ✔   3 ✘   0 omitidas  (68 ms)
+PrestamoServiceTest                    Unitaria       5 pruebas    5 ✔   0 ✘   0 omitidas  (2 ms)
+PrestamoValoresLimiteTest              Unitaria      19 pruebas   19 ✔   0 ✘   0 omitidas  (1 ms)
+ProduccionServiceTest                  Unitaria       6 pruebas    6 ✔   0 ✘   0 omitidas  (2 ms)
+SolicitudServiceTest                   Unitaria       4 pruebas    4 ✔   0 ✘   0 omitidas  (1 ms)
+UsuarioServiceTest                     Unitaria       6 pruebas    6 ✔   0 ✘   0 omitidas  (8 ms)
+VentaYEmpenoServiceTest                Unitaria       3 pruebas    3 ✔   0 ✘   0 omitidas  (0 ms)
+GitCliIntegracionTest                  Integración    3 pruebas    3 ✔   0 ✘   0 omitidas  (99 ms)
+VersionServiceTest                     Unitaria      12 pruebas   12 ✔   0 ✘   0 omitidas  (8 ms)
+21:06:41 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+21:06:41 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+21:06:41 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+21:06:41 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (3 ms)
+21:06:41 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+21:06:41 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+21:06:42 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/usuarios http=403
+21:06:42 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/usuarios -> 403 (0 ms)
+21:06:42 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/operaciones http=403
+21:06:42 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/operaciones -> 403 (1 ms)
+21:06:42 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/clientes -> 400 (1 ms)
+ApiIntegracionTest                     Integración   10 pruebas   10 ✔   0 ✘   0 omitidas  (869 ms)
+21:06:42 WARN  [LOGISTICA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=POST /api/proveedores/importar http=403
+21:06:42 WARN  [LOGISTICA] SIGSF.ACCESO - POST /api/proveedores/importar -> 403 (0 ms)
+21:06:42 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/auditoria/exportar http=403
+21:06:42 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/auditoria/exportar -> 403 (1 ms)
+21:06:42 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes/exportar http=401
+21:06:42 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes/exportar -> 401 (0 ms)
+21:06:42 WARN  [CLIENTES] SIGSF.SEGURIDAD - EXPORTAR usuario=admin@sigsf.com rol=ADMIN ip=127.0.0.1 recurso=GET /api/clientes/exportar http=400
+21:06:42 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes/exportar -> 400 (0 ms)
+21:06:42 WARN  [OPERACIONES] SIGSF.SEGURIDAD - IMPORTAR usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/operaciones/importar http=404
+21:06:42 WARN  [OPERACIONES] SIGSF.ACCESO - POST /api/operaciones/importar -> 404 (3 ms)
+ArchivosApiTest                        Integración    4 pruebas    4 ✔   0 ✘   0 omitidas  (471 ms)
+21:06:42 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/versiones http=403
+21:06:42 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 403 (0 ms)
+21:06:43 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=jorge.torres@sigsf.com rol=ANALISTA ip=127.0.0.1 recurso=GET /api/versiones http=403
+21:06:43 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 403 (0 ms)
+21:06:43 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/version http=401
+21:06:43 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/version -> 401 (0 ms)
+21:06:43 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/versiones http=401
+21:06:43 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 401 (0 ms)
+VersionApiTest                         Integración    3 pruebas    3 ✔   0 ✘   0 omitidas  (431 ms)
+------------------------------------------------------------------------
+Nivel	Total	Correctas	Fallidas	Omitidas
+Unitaria	171	166	5	0
+Integración	45	25	0	20
+TOTAL: 216 pruebas | 191 correctas | 5 fallidas | 20 omitidas | 4607 ms
