@@ -1,0 +1,245 @@
+== Compilando 200 clases...
+== Compilando 36 clases de prueba...
+== Ejecutando pruebas...
+JUnit version 4.13.2
+.............21:02:55 WARN  [SISTEMA] c.u.s.b.RespaldoService - La estrategia de respaldo pgdump falló: pg_dump falló
+................21:02:56 WARN  [OPERACIONES] SIGSF.ACCESO - POST /api/operaciones -> 409 (50 ms)
+E..21:02:57 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=admin@sigsf.com' OR '1'='1 rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+21:02:57 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (60 ms)
+.21:02:57 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/usuarios http=403
+21:02:57 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/usuarios -> 403 (22 ms)
+.21:02:57 ERROR [OPERACIONES] c.u.s.web.ApiServer - Error interno ref=0f2d6d05 en POST /api/prestamos
+java.lang.RuntimeException: Error al insertar: INSERT INTO prestamo (id_operacion, monto_prestamo, tasa_interes, plazo_meses, cuota_mensual, fecha_inicio, fecha_vencimiento, saldo_pendiente, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:110)
+	at com.utp.sistemafinanciero.dao.jdbc.PrestamoDaoJdbc.crear(PrestamoDaoJdbc.java:43)
+	at com.utp.sistemafinanciero.dao.jdbc.PrestamoDaoJdbc.crear(PrestamoDaoJdbc.java:13)
+	at com.utp.sistemafinanciero.service.PrestamoService.crear(PrestamoService.java:67)
+	at com.utp.sistemafinanciero.controller.OperacionController.lambda$registrar$9(OperacionController.java:53)
+	at com.utp.sistemafinanciero.web.ApiServer.atenderApi(ApiServer.java:201)
+	at com.utp.sistemafinanciero.web.ApiServer.despachar(ApiServer.java:152)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:932)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:908)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.postgresql.util.PSQLException: ERROR: numeric field overflow
+  Detail: A field with precision 6, scale 3 must round to an absolute value less than 10^3.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:155)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:102)
+	... 15 common frames omitted
+21:02:57 ERROR [OPERACIONES] SIGSF.ACCESO - POST /api/prestamos -> 500 (36 ms)
+21:02:57 ERROR [OPERACIONES] c.u.s.web.ApiServer - Error interno ref=44e7c30b en POST /api/operaciones
+java.lang.RuntimeException: Error al insertar: INSERT INTO operacion (id_cliente, id_tipo_cambio, tipo_operacion, moneda_origen, moneda_destino, monto, tipo_cambio, total_entregar, total_recibir, estado, fecha_operacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:110)
+	at com.utp.sistemafinanciero.dao.jdbc.OperacionDaoJdbc.crear(OperacionDaoJdbc.java:52)
+	at com.utp.sistemafinanciero.dao.jdbc.OperacionDaoJdbc.crear(OperacionDaoJdbc.java:14)
+	at com.utp.sistemafinanciero.service.OperacionService.crear(OperacionService.java:83)
+	at com.utp.sistemafinanciero.controller.OperacionController.lambda$registrar$4(OperacionController.java:40)
+	at com.utp.sistemafinanciero.web.ApiServer.atenderApi(ApiServer.java:201)
+	at com.utp.sistemafinanciero.web.ApiServer.despachar(ApiServer.java:152)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:932)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:908)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.postgresql.util.PSQLException: ERROR: numeric field overflow
+  Detail: A field with precision 14, scale 2 must round to an absolute value less than 10^12.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:155)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:102)
+	... 15 common frames omitted
+21:02:57 ERROR [OPERACIONES] SIGSF.ACCESO - POST /api/operaciones -> 500 (32 ms)
+E..21:02:57 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/clientes -> 400 (34 ms)
+..............E..E..E.........................................E............E.E.E...E......E.E..E.E...........E...E.E.E.E....E.E....E.....................................21:02:59 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+21:02:59 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+..21:02:59 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+21:02:59 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+21:02:59 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+21:02:59 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+.21:02:59 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/usuarios http=403
+21:02:59 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/usuarios -> 403 (0 ms)
+....21:02:59 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/operaciones http=403
+21:02:59 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/operaciones -> 403 (0 ms)
+.21:02:59 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/clientes -> 400 (0 ms)
+.21:02:59 WARN  [LOGISTICA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=POST /api/proveedores/importar http=403
+21:02:59 WARN  [LOGISTICA] SIGSF.ACCESO - POST /api/proveedores/importar -> 403 (1 ms)
+21:02:59 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/auditoria/exportar http=403
+21:02:59 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/auditoria/exportar -> 403 (0 ms)
+.21:02:59 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes/exportar http=401
+21:02:59 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes/exportar -> 401 (1 ms)
+21:02:59 WARN  [CLIENTES] SIGSF.SEGURIDAD - EXPORTAR usuario=admin@sigsf.com rol=ADMIN ip=127.0.0.1 recurso=GET /api/clientes/exportar http=400
+21:02:59 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes/exportar -> 400 (1 ms)
+.21:02:59 WARN  [OPERACIONES] SIGSF.SEGURIDAD - IMPORTAR usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/operaciones/importar http=404
+21:02:59 WARN  [OPERACIONES] SIGSF.ACCESO - POST /api/operaciones/importar -> 404 (0 ms)
+..21:03:00 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/versiones http=403
+21:03:00 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 403 (0 ms)
+21:03:00 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=jorge.torres@sigsf.com rol=ANALISTA ip=127.0.0.1 recurso=GET /api/versiones http=403
+21:03:00 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 403 (0 ms)
+.21:03:00 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/version http=401
+21:03:00 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/version -> 401 (0 ms)
+21:03:00 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/versiones http=401
+21:03:00 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 401 (10 ms)
+.
+Time: 5.704
+There were 22 failures:
+1) PI_API_05_clienteInexistenteDevuelveMensajeClaro(com.utp.sistemafinanciero.integracion.ApiPostgresIntegracionTest)
+java.lang.AssertionError: {"error":"La operaci?n no es posible: hay registros relacionados.","codigo":409} expected:<400> but was:<409>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at com.utp.sistemafinanciero.integracion.ApiPostgresIntegracionTest.PI_API_05_clienteInexistenteDevuelveMensajeClaro(ApiPostgresIntegracionTest.java:131)
+2) PI_API_04_valoresFueraDeRangoNoProducenError500(com.utp.sistemafinanciero.integracion.ApiPostgresIntegracionTest)
+java.lang.AssertionError: {"error":"Error interno del servidor (referencia 0f2d6d05).","codigo":500} expected:<400> but was:<500>
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.failNotEquals(Assert.java:835)
+	at org.junit.Assert.assertEquals(Assert.java:647)
+	at com.utp.sistemafinanciero.integracion.ApiPostgresIntegracionTest.PI_API_04_valoresFueraDeRangoNoProducenError500(ApiPostgresIntegracionTest.java:122)
+3) PI_BD_05_tasaFueraDelRangoNumericNoLlegaALaBase(com.utp.sistemafinanciero.integracion.PostgresIntegracionTest)
+java.lang.AssertionError: unexpected exception type thrown; expected:<com.utp.sistemafinanciero.service.ReglaNegocioException> but was:<java.lang.RuntimeException>
+	at org.junit.Assert.assertThrows(Assert.java:1020)
+	at org.junit.Assert.assertThrows(Assert.java:981)
+	at com.utp.sistemafinanciero.integracion.PostgresIntegracionTest.PI_BD_05_tasaFueraDelRangoNumericNoLlegaALaBase(PostgresIntegracionTest.java:115)
+	... 31 trimmed
+Caused by: java.lang.RuntimeException: Error al insertar: INSERT INTO prestamo (id_operacion, monto_prestamo, tasa_interes, plazo_meses, cuota_mensual, fecha_inicio, fecha_vencimiento, saldo_pendiente, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:110)
+	at com.utp.sistemafinanciero.dao.jdbc.PrestamoDaoJdbc.crear(PrestamoDaoJdbc.java:43)
+	at com.utp.sistemafinanciero.dao.jdbc.PrestamoDaoJdbc.crear(PrestamoDaoJdbc.java:13)
+	at com.utp.sistemafinanciero.service.PrestamoService.crear(PrestamoService.java:67)
+	at com.utp.sistemafinanciero.integracion.PostgresIntegracionTest.lambda$PI_BD_05_tasaFueraDelRangoNumericNoLlegaALaBase$1(PostgresIntegracionTest.java:115)
+	at org.junit.Assert.assertThrows(Assert.java:1001)
+	... 34 more
+Caused by: org.postgresql.util.PSQLException: ERROR: numeric field overflow
+  Detail: A field with precision 6, scale 3 must round to an absolute value less than 10^3.
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:155)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:102)
+	... 39 more
+4) PI_BD_04_tasaNegativaLaRechazaElServicioAntesQueLaBase(com.utp.sistemafinanciero.integracion.PostgresIntegracionTest)
+java.lang.AssertionError: unexpected exception type thrown; expected:<com.utp.sistemafinanciero.service.ReglaNegocioException> but was:<java.lang.RuntimeException>
+	at org.junit.Assert.assertThrows(Assert.java:1020)
+	at org.junit.Assert.assertThrows(Assert.java:981)
+	at com.utp.sistemafinanciero.integracion.PostgresIntegracionTest.PI_BD_04_tasaNegativaLaRechazaElServicioAntesQueLaBase(PostgresIntegracionTest.java:103)
+	... 31 trimmed
+Caused by: java.lang.RuntimeException: Error al insertar: INSERT INTO prestamo (id_operacion, monto_prestamo, tasa_interes, plazo_meses, cuota_mensual, fecha_inicio, fecha_vencimiento, saldo_pendiente, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:110)
+	at com.utp.sistemafinanciero.dao.jdbc.PrestamoDaoJdbc.crear(PrestamoDaoJdbc.java:43)
+	at com.utp.sistemafinanciero.dao.jdbc.PrestamoDaoJdbc.crear(PrestamoDaoJdbc.java:13)
+	at com.utp.sistemafinanciero.service.PrestamoService.crear(PrestamoService.java:67)
+	at com.utp.sistemafinanciero.integracion.PostgresIntegracionTest.lambda$PI_BD_04_tasaNegativaLaRechazaElServicioAntesQueLaBase$0(PostgresIntegracionTest.java:103)
+	at org.junit.Assert.assertThrows(Assert.java:1001)
+	... 34 more
+Caused by: org.postgresql.util.PSQLException: ERROR: new row for relation "prestamo" violates check constraint "ck_prestamo_valores"
+  Detail: Failing row contains (104, 1, 1000.00, -5.000, 12, 33.33, 2026-11-03, 2027-11-03, 400.00, ACTIVO).
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2725)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2412)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:371)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:502)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:419)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:194)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:155)
+	at com.utp.sistemafinanciero.util.Db.insert(Db.java:102)
+	... 39 more
+5) PI_BD_07_empenoConTasaNegativaSeRechazaEnElServicio(com.utp.sistemafinanciero.integracion.PostgresIntegracionTest)
+java.lang.AssertionError: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at org.junit.Assert.assertThrows(Assert.java:981)
+	at com.utp.sistemafinanciero.integracion.PostgresIntegracionTest.PI_BD_07_empenoConTasaNegativaSeRechazaEnElServicio(PostgresIntegracionTest.java:146)
+6) estadoInicialInventadoSeRechaza(com.utp.sistemafinanciero.service.ClienteServiceMockitoTest)
+java.lang.AssertionError: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at org.junit.Assert.assertThrows(Assert.java:981)
+	at com.utp.sistemafinanciero.service.ClienteServiceMockitoTest.estadoInicialInventadoSeRechaza(ClienteServiceMockitoTest.java:69)
+7) aplicaLaReglaDelPlan[PU-EMP-03: monto=1000000.01 tasa=5 dias=30 -> false](com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest)
+java.lang.AssertionError: PU-EMP-03: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest.aplicaLaReglaDelPlan(EmpenoValoresLimiteTest.java:58)
+8) aplicaLaReglaDelPlan[PU-EMP-04: monto=800 tasa=-1 dias=30 -> false](com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest)
+java.lang.AssertionError: PU-EMP-04: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest.aplicaLaReglaDelPlan(EmpenoValoresLimiteTest.java:58)
+9) aplicaLaReglaDelPlan[PU-EMP-05: monto=800 tasa=100.5 dias=30 -> false](com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest)
+java.lang.AssertionError: PU-EMP-05: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest.aplicaLaReglaDelPlan(EmpenoValoresLimiteTest.java:58)
+10) aplicaLaReglaDelPlan[PU-EMP-08: monto=800 tasa=5 dias=366 -> false](com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest)
+java.lang.AssertionError: PU-EMP-08: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at com.utp.sistemafinanciero.service.EmpenoValoresLimiteTest.aplicaLaReglaDelPlan(EmpenoValoresLimiteTest.java:58)
+11) aplicaLaReglaDelPlan[PU-OPE-06: cliente=1 monto=10000000.01 tc=3.7500 estado=null -> null](com.utp.sistemafinanciero.service.OperacionParticionesTest)
+java.lang.AssertionError: PU-OPE-06: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at com.utp.sistemafinanciero.service.OperacionParticionesTest.aplicaLaReglaDelPlan(OperacionParticionesTest.java:69)
+12) aplicaLaReglaDelPlan[PU-OPE-07: cliente=1 monto=1e20 tc=3.7500 estado=null -> null](com.utp.sistemafinanciero.service.OperacionParticionesTest)
+java.lang.AssertionError: PU-OPE-07: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at com.utp.sistemafinanciero.service.OperacionParticionesTest.aplicaLaReglaDelPlan(OperacionParticionesTest.java:69)
+13) aplicaLaReglaDelPlan[PU-OPE-09: cliente=1 monto=100 tc=3.7500 estado=pendiente -> 375.00](com.utp.sistemafinanciero.service.OperacionParticionesTest)
+java.lang.AssertionError: PU-OPE-09: estado normalizado
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.utp.sistemafinanciero.service.OperacionParticionesTest.aplicaLaReglaDelPlan(OperacionParticionesTest.java:67)
+14) aplicaLaReglaDelPlan[PU-OPE-10: cliente=1 monto=100 tc=3.7500 estado=HACKEADO -> null](com.utp.sistemafinanciero.service.OperacionParticionesTest)
+java.lang.AssertionError: PU-OPE-10: expected com.utp.sistemafinanciero.service.ReglaNegocioException to be thrown, but nothing was thrown
+	at org.junit.Assert.assertThrows(Assert.java:1028)
+	at com.utp.sistemafinanciero.service.OperacionParticionesTest.aplicaLaReglaDelPlan(OperacionParticionesTest.java:69)
+15) aplicaLaReglaDelPlan[PU-PRE-02: monto=0.01 tasa=2 plazo=12 -> true](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-02: la cuota debe ser positiva
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:77)
+16) aplicaLaReglaDelPlan[PU-PRE-05: monto=1000000.01 tasa=2 plazo=12 -> false](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-05: el servicio deb?a rechazar el pr?stamo
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:82)
+17) aplicaLaReglaDelPlan[PU-PRE-06: monto=999999999999999 tasa=2 plazo=12 -> false](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-06: el servicio deb?a rechazar el pr?stamo
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:82)
+18) aplicaLaReglaDelPlan[PU-PRE-07: monto=1000.555 tasa=2 plazo=12 -> false](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-07: el servicio deb?a rechazar el pr?stamo
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:82)
+19) aplicaLaReglaDelPlan[PU-PRE-08: monto=1000 tasa=-0.001 plazo=12 -> false](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-08: el servicio deb?a rechazar el pr?stamo
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:82)
+20) aplicaLaReglaDelPlan[PU-PRE-12: monto=1000 tasa=100.001 plazo=12 -> false](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-12: el servicio deb?a rechazar el pr?stamo
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:82)
+21) aplicaLaReglaDelPlan[PU-PRE-13: monto=1000 tasa=1500 plazo=12 -> false](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-13: el servicio deb?a rechazar el pr?stamo
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:82)
+22) aplicaLaReglaDelPlan[PU-PRE-17: monto=1000 tasa=2 plazo=361 -> false](com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest)
+java.lang.AssertionError: PU-PRE-17: el servicio deb?a rechazar el pr?stamo
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.utp.sistemafinanciero.service.PrestamoValoresLimiteTest.aplicaLaReglaDelPlan(PrestamoValoresLimiteTest.java:82)
+
+FAILURES!!!
+Tests run: 199,  Failures: 22
+
