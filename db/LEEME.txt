@@ -11,6 +11,7 @@ INSTRUCCIONES
    - Name: SistemaFinanciero
    - Save.
 
+
 3) Carga la estructura:
    - Selecciona la base "SistemaFinanciero".
    - Menu Tools > Query Tool.
