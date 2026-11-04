@@ -1,7 +1,7 @@
-# SIGSF · Inventario de documentación (v5.0)
+# SIGSF · Inventario de documentación (v6.0)
 
 Relación de los documentos y artefactos del proyecto, su ubicación y estado.
-Desde la versión 5.0 **todo el inventario vive en el repositorio Git**: la
+Desde la versión 5.0 **todo el inventario vive en el repositorio Git** (actualizado para la versión 6.0, Avance 4 · Plan de Pruebas): la
 columna *Ubicación* es la ruta dentro del repositorio y el historial de cada
 documento se consulta con `git log --follow <ruta>`.
 **Estados:** ✅ Completo · 🔄 En actualización · 📌 Pendiente.
@@ -22,7 +22,7 @@ documento se consulta con `git log --follow <ruta>`.
 | T-10 | Arquitectura y patrones | `docs/01_ARQUITECTURA_Y_PATRONES.md` | Capas, MVC, DAO, DTO, SOLID, flujo de una petición | ✅ |
 | T-11 | Consideraciones de seguridad | `docs/03_CONSIDERACIONES_DE_SEGURIDAD.md` | Controles por área y transversales | ✅ |
 | T-12 | Respaldo y configuración de BD | `docs/04_RESPALDO_Y_CONFIGURACION_BD.md` · `scripts/` · `db/seguridad.sql` | Backup, restauración, rol de mínimo privilegio | ✅ |
-| T-13 | Plan y evidencia de pruebas (TDD) | `docs/05_PRUEBAS_TDD.md` · `test/` | 117 pruebas JUnit 4 (24 clases; 99 hasta v4.0) | ✅ |
+| T-13 | Pruebas unitarias y TDD | `docs/05_PRUEBAS_TDD.md` · `test/` | 216 pruebas JUnit 4 + Mockito (35 clases) | ✅ |
 | T-14 | Manual de instalación | `INSTALAR_LEEME.txt` · `README.md` | Pasos en pgAdmin, NetBeans y configuración | ✅ |
 | T-15 | Manual de usuario / ayuda en línea | `web/ayuda.html` | Preguntas frecuentes y asistente por voz | ✅ |
 | T-16 | Evidencias (capturas) | `evidencias/` | Capturas de pantallas, pruebas, API y control de versiones | ✅ |
@@ -35,15 +35,34 @@ documento se consulta con `git log --follow <ruta>`.
 | T-23 | Gestión de dependencias | `lib/LEEME.txt` · `scripts/descargar_librerias.*` · `nbproject/project.properties` | Versiones, licencias, coordenadas Maven | ✅ |
 | T-24 | Registros de operación (logs) | `logs/` (se genera al ejecutar, no se versiona) | Acceso, seguridad, errores, por área | ✅ |
 | T-25 | **Sistema de control de versiones** | `docs/07_CONTROL_DE_VERSIONES.md` | Git Flow, convención de commits, SemVer, merge, conflictos, rollback, remoto, CI | ✅ |
-| T-26 | Registro de cambios | `CHANGELOG.md` | Cambios por versión (1.0.0 → 5.0.x) | ✅ |
+| T-26 | Registro de cambios | `CHANGELOG.md` | Cambios por versión (1.0.0 → 6.0.0) | ✅ |
 | T-27 | Versión de la aplicación | `VERSION` · `build.xml` (`-post-compile`) · `version.properties` | SemVer y datos del commit dentro del .jar | ✅ |
 | T-28 | Reglas del repositorio | `.gitignore` · `.gitattributes` · `db.properties.ejemplo` | Qué no se versiona, fin de línea, plantilla de configuración | ✅ |
 | T-29 | Hooks de Git | `.githooks/pre-commit` · `.githooks/commit-msg` · `scripts/git/instalar_hooks.*` | Bloqueo de credenciales y archivos generados; formato de commits | ✅ |
-| T-30 | Integración continua | `.github/workflows/ci.yml` · `scripts/compilar_y_probar.*` | Compilación y 117 pruebas en cada push / Pull Request | ✅ |
+| T-30 | Integración continua | `.github/workflows/ci.yml` · `scripts/compilar_y_probar.*` | 2 trabajos: JUnit + PostgreSQL y API/sistema/aceptación/carga, en cada push / Pull Request | ✅ |
 | T-31 | Guía de contribución | `CONTRIBUTING.md` · `.github/pull_request_template.md` | Pasos para trabajar en equipo y lista de verificación de PR | ✅ |
 | T-32 | Versionamiento del esquema BD | `db/version_esquema.sql` · tabla `version_esquema` · `version/HistorialEsquema` | Versión de la base de cada equipo (1.0.0 → 5.0.0) | ✅ |
 | T-33 | Pantalla de control de versiones | `web/versiones.html` · `GET /api/version` · `GET /api/versiones` | Versión, commits, red de ramas, etiquetas y esquema BD | ✅ |
-| T-34 | Repositorio empaquetado | `SIGSF.bundle` (entregable) | Copia completa del repositorio con todas las ramas y etiquetas | ✅ |
+| T-34 | Repositorio empaquetado | `SIGSF_v6.0.0.bundle` (entregable) | Copia completa del repositorio con todas las ramas y etiquetas | ✅ |
+
+## A2. Documentación de pruebas (Avance 4 · versión 6.0)
+
+| N° | Documento / artefacto | Ubicación | Contenido | Estado |
+|---|---|---|---|---|
+| P-01 | **Plan de Pruebas** | `docs/09_PLAN_DE_PRUEBAS.md` | Alcance, estrategia, técnicas, entorno, niveles, criterios, defectos, riesgos, trazabilidad | ✅ |
+| P-02 | **Herramientas, codificación y resultados** | `docs/10_HERRAMIENTAS_Y_RESULTADOS.md` | Herramientas elegidas, extractos de código, resultados por nivel, cobertura, carga, registro de defectos, rutas compartidas | ✅ |
+| P-03 | Preparación del entorno | `scripts/pruebas/preparar_bd_pruebas.*` | Base `SistemaFinanciero_test` desde cero (PE-01) | ✅ |
+| P-04 | Ejecución del plan completo | `scripts/pruebas/ejecutar_plan_de_pruebas.*` | PE → PU → PI → PS → PA → PR con reportes | ✅ |
+| P-05 | Casos unitarios e integración (JUnit) | `test/` · `test/.../integracion/` | 216 casos (171 unitarios, 45 de integración) | ✅ |
+| P-06 | Colección de API | `pruebas/postman/SIGSF_API.postman_collection.json` (+ entorno, generador) | 31 casos PI-NEW, 51 aserciones | ✅ |
+| P-07 | Pruebas de sistema | `pruebas/e2e/test_sistema_e2e.py` · `pruebas/conftest.py` | 13 casos PS con capturas | ✅ |
+| P-08 | Criterios de aceptación | `pruebas/aceptacion/features/*.feature` · `test_aceptacion.py` | 4 historias, 10 escenarios en Gherkin español | ✅ |
+| P-09 | Plan de carga | `pruebas/rendimiento/SIGSF_carga.jmx` · `cajeros.csv` · `analizar_jtl.py` | PR-01: 50 usuarios, 60 s, criterios | ✅ |
+| P-10 | Registros y reportes de ejecución | `evidencias/pruebas/reportes/` | JUnit, Newman (HTML), pytest (HTML), JMeter, JaCoCo (HTML y CSV), consola completa | ✅ |
+| P-11 | Capturas de pantalla | `evidencias/pruebas/e2e/` · `evidencias/pruebas/aceptacion/` | Una por caso de sistema / criterio | ✅ |
+| P-12 | Evidencia TDD (rojo) | `evidencias/pruebas/01_…txt` · `02_…txt` | 22 y 5 fallas antes de corregir | ✅ |
+| P-13 | Registro de defectos | `docs/10` §4 | 13 defectos: 11 corregidos, 2 diferidos (baja) | ✅ |
+| P-14 | Acta de aceptación (UAT) | `docs/09` §5.4 | Tabla de firmas por historia | 📌 firma del usuario |
 
 ## B. Documentación por área del negocio
 
@@ -72,12 +91,13 @@ documento se consulta con `git log --follow <ruta>`.
 | · DTO | `dto/` | 9 |
 | · seguridad / respaldo / ficheros / config / util / web | `security/` `backup/` `archivos/` `config/` `util/` `web/` | 37 |
 | · control de versiones | `version/` | 5 |
-| Clases de prueba JUnit | `test/` | 24 (117 pruebas) |
+| Clases de prueba JUnit | `test/` | 35 (216 pruebas) |
+| Pruebas de API, sistema, aceptación y carga | `pruebas/` | 31 + 13 + 10 casos · 1 plan JMeter |
 | Vistas (pantallas HTML) | `web/*.html` | 23 |
 | Hojas de estilo y scripts del frontend | `web/*.css`, `web/*.js` | 15 |
-| Scripts SQL | `db/*.sql` | 5 |
-| Scripts de operación | `scripts/` | 10 |
-| Documentos técnicos | `docs/` | 7 |
+| Scripts SQL | `db/*.sql` | 6 |
+| Scripts de operación y de pruebas | `scripts/` · `scripts/pruebas/` | 15 |
+| Documentos técnicos | `docs/` | 10 |
 | Librerías | `lib/*.jar` | 4 (+ JUnit para pruebas) |
 
 ## D. Control de versiones del documento

@@ -9,6 +9,24 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 
 ---
 
+## 🆕 Versión 6.0 · Avance 4: Plan de Pruebas de Software
+
+| Nivel | Herramienta | Casos | Resultado | Dónde |
+|---|---|---|---|---|
+| **PE** Preparación del entorno | PostgreSQL 16 · base `SistemaFinanciero_test` | 6 scripts | ✅ | `scripts/pruebas/preparar_bd_pruebas.*` |
+| **PU** Unitarias | JUnit 4 + **Mockito** + **JaCoCo** (valores límite, particiones) | 171 | ✅ 171/171 | `test/` |
+| **PI** Integración | JUnit + **PostgreSQL real** · **Postman/Newman** | 45 + 31 | ✅ 76/76 | `test/.../integracion/`, `pruebas/postman/` |
+| **PS** Sistema (E2E) | **Playwright** + pytest (Chromium) | 13 | ✅ 13/13 | `pruebas/e2e/` |
+| **PA** Aceptación | **pytest-bdd**, Gherkin en español | 10 | ✅ 10/10 | `pruebas/aceptacion/features/` |
+| **PR** Rendimiento | **Apache JMeter** · 50 usuarios, 60 s | 2 837 peticiones | ✅ p90 707 ms, 0 % errores | `pruebas/rendimiento/` |
+
+**270 casos automatizados**, cobertura de líneas 61 % → **75 %**, **13 defectos encontrados (11 corregidos,
+2 de severidad baja diferidos)**. Todo el plan se ejecuta con
+`PGPASSWORD=123456 sh scripts/pruebas/ejecutar_plan_de_pruebas.sh` (o `.bat`).
+Documentos: `docs/09_PLAN_DE_PRUEBAS.md` y `docs/10_HERRAMIENTAS_Y_RESULTADOS.md`. Evidencias: `evidencias/pruebas/`.
+
+---
+
 ## 🆕 Versión 5.1 · Avance 3: 100 registros por módulo
 
 | Tema | Qué se implementó | Dónde |
