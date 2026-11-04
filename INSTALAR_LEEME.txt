@@ -39,6 +39,7 @@ PASO 1 · OBTENER EL PROYECTO
   Los hooks bloquean subir db.properties (contrasenas) y rechazan
   mensajes de commit que no tengan el formato  tipo(ambito): descripcion
 
+
 ----------------------------------------------------------------
 PASO 2 · CREAR LA BASE DE DATOS (pgAdmin)
 ----------------------------------------------------------------
