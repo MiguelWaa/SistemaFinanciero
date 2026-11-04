@@ -200,6 +200,8 @@ problemas de CORS y todo funciona abriendo una sola URL.
 
 ---
 
+
+
 ## Puesta en marcha (3 pasos)
 
 ### 1) Base de datos (pgAdmin)
