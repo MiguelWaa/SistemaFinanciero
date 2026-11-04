@@ -9,21 +9,36 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 
 ---
 
-## 🆕 Versión 6.0 · Avance 4: Plan de Pruebas de Software
+## 🆕 Versión 5.4 · Fondo animado
 
-| Nivel | Herramienta | Casos | Resultado | Dónde |
-|---|---|---|---|---|
-| **PE** Preparación del entorno | PostgreSQL 16 · base `SistemaFinanciero_test` | 6 scripts | ✅ | `scripts/pruebas/preparar_bd_pruebas.*` |
-| **PU** Unitarias | JUnit 4 + **Mockito** + **JaCoCo** (valores límite, particiones) | 171 | ✅ 171/171 | `test/` |
-| **PI** Integración | JUnit + **PostgreSQL real** · **Postman/Newman** | 45 + 31 | ✅ 76/76 | `test/.../integracion/`, `pruebas/postman/` |
-| **PS** Sistema (E2E) | **Playwright** + pytest (Chromium) | 13 | ✅ 13/13 | `pruebas/e2e/` |
-| **PA** Aceptación | **pytest-bdd**, Gherkin en español | 10 | ✅ 10/10 | `pruebas/aceptacion/features/` |
-| **PR** Rendimiento | **Apache JMeter** · 50 usuarios, 60 s | 2 837 peticiones | ✅ p90 707 ms, 0 % errores | `pruebas/rendimiento/` |
+Fondo con degradado, auroras en movimiento, rejilla de puntos y trama tipo billete (`web/img/guilloche.svg`) en todas las páginas, con tarjetas tipo vidrio. Capturas: `evidencias/v54_*.png`.
 
-**270 casos automatizados**, cobertura de líneas 61 % → **75 %**, **13 defectos encontrados (11 corregidos,
-2 de severidad baja diferidos)**. Todo el plan se ejecuta con
-`PGPASSWORD=123456 sh scripts/pruebas/ejecutar_plan_de_pruebas.sh` (o `.bat`).
-Documentos: `docs/09_PLAN_DE_PRUEBAS.md` y `docs/10_HERRAMIENTAS_Y_RESULTADOS.md`. Evidencias: `evidencias/pruebas/`.
+---
+
+## 🆕 Versión 5.3 · Interfaz animada
+
+Capa visual `web/sigsf-anim.css` + `web/sigsf-anim.js` en todas las páginas: degradados en movimiento, indicadores con ícono y números que cuentan, entradas escalonadas, botones con brillo y onda, gráficos que se dibujan, ticket de pago con escaneo y confeti al confirmar un pago. Respeta «reducir movimiento». Capturas: `evidencias/v53_*.png`.
+
+---
+
+## 🆕 Versión 5.2 · Pagos con QR (Yape, Plin, Tunki), cotizaciones e interfaz Bootstrap 5
+
+| Tema | Qué se implementó | Dónde |
+|---|---|---|
+| **Pagar con QR desde el portal** | El cliente elige qué paga, ve el QR de cobro de la empresa (Yape, Plin o Tunki), paga en su app y registra el número de operación y, si quiere, la captura de la constancia | `web/portal-inicio.html` › *Pagar con QR* |
+| **El pago aparece en el sistema** | Queda **Por verificar** con aviso en el panel; caja lo confirma (baja el saldo del préstamo o empeño y emite el comprobante `RC-…`) o lo rechaza con motivo | `web/pagos.html`, `service/PagoService.java` |
+| **Cobro en caja y billeteras** | Registro de pagos en ventanilla; el ADMIN configura número, titular y **sube el QR** de cada billetera | `pagos.html` › *Cobrar en caja* / *Billeteras y QR* |
+| **Cotizaciones** | Préstamo (cuota y cronograma), empeño y cambio con número `COT-…`, vigencia de 7 días, impresión/PDF y conversión en solicitud | portal › *Cotizar*, `pagos.html` › *Cotizaciones* |
+| **Reportes** | Comprobante, cotización, estado de cuenta y reporte de pagos imprimibles; pagos y cotizaciones en Excel/CSV/JSON | `documento.html`, `portal-documento.html`, `reportes.html` |
+| **Interfaz empresarial** | Bootstrap 5.3.3 local (sin CDN), tema propio, tablas con orden y paginación, avisos y confirmaciones; panel con menú agrupado y adaptable a celular | `web/vendor/`, `sigsf-ui.css`, `sigsf-ui.js`, `sigsf-crud.js` |
+| **Rendimiento** | Caché y compresión gzip de archivos estáticos, más hilos de atención | `web/ApiServer.java` |
+| **Base de datos** | Esquema **5.2.0**: tablas `billetera`, `pago`, `cotizacion` (se crean solas al arrancar o con `db/pagos_qr.sql`) | `db/pagos_qr.sql` |
+| **Pruebas** | 126 → **151** (`PagoServiceTest`, `CotizacionServiceTest`, `PagosApiTest`); arreglado el script de CI que no copiaba `semilla_100.tsv` | `test/`, `scripts/compilar_y_probar.*` |
+
+**Probarlo en 1 minuto (sin PostgreSQL):** en `db.properties` poner `persistencia=memoria`, ejecutar y entrar a
+<http://localhost:8091/portal.html> con el documento `70000002` (clave `70000002`) → *Pagar con QR*. Luego, en
+<http://localhost:8091/login.html> con `lucia.ramos@sigsf.com` / `lucia123` → *Pagos y cobranzas* → *Confirmar pago*.
+Detalle en `docs/09_PAGOS_QR_Y_COTIZACIONES.md`.
 
 ---
 
@@ -53,8 +68,8 @@ Tercera entrega del taller. El proyecto ahora es un **repositorio Git** gestiona
 | **Conflictos y rollback** | Conflicto real resuelto en `CHANGELOG.md`; `git revert -m 1` de un merge que rompía las pruebas | `docs/07` §6 y §7 |
 | **Seguridad del repositorio** | `db.properties` fuera de Git (plantilla `db.properties.ejemplo`); hook `pre-commit` contra credenciales y archivos generados | `.gitignore`, `.githooks/pre-commit` |
 | **Versión en la aplicación** | Pantalla **Control de versiones** (versión, commits, red de ramas, etiquetas, esquema BD) y versión en el pie del panel; `GET /api/version`, `GET /api/versiones` (ADMIN) | `web/versiones.html`, paquete `version/` |
-| **Versionamiento de la BD** | Tabla `version_esquema` (1.0.0 → 5.0.0) creada por `db/version_esquema.sql` o al arrancar | `db/version_esquema.sql` |
-| **Build e integración continua** | `version.properties` con el commit dentro del .jar; GitHub Actions compila y ejecuta **126 pruebas** | `build.xml`, `.github/workflows/ci.yml` |
+| **Versionamiento de la BD** | Tabla `version_esquema` (1.0.0 → 5.2.0) creada por `db/version_esquema.sql` o al arrancar | `db/version_esquema.sql` |
+| **Build e integración continua** | `version.properties` con el commit dentro del .jar; GitHub Actions compila y ejecuta **151 pruebas** | `build.xml`, `.github/workflows/ci.yml` |
 | **Documentación** | Inventario v5.0 (T-25…T-34 + inventario de artefactos), `CHANGELOG.md`, `CONTRIBUTING.md`, `VERSION` | `docs/02`, raíz |
 
 > **Al clonar:** `scripts\git\instalar_hooks.bat` y `copy db.properties.ejemplo db.properties`.
@@ -93,6 +108,7 @@ automatizadas. Documentación detallada en la carpeta **`docs/`**:
 | `docs/05_PRUEBAS_TDD.md` | 99 pruebas JUnit 4 |
 | `docs/06_RECURSOS_DE_CODIGO_FUENTE.md` | Paquetes, librerías, dependencias, Logback, importación y exportación de ficheros por área |
 | `docs/07_CONTROL_DE_VERSIONES.md` | Git Flow, commits, merge, conflictos, rollback, etiquetas, remoto, CI, versionamiento de la BD |
+| `docs/09_PAGOS_QR_Y_COTIZACIONES.md` | Pagos con Yape/Plin/Tunki, verificación, cotizaciones, documentos imprimibles e interfaz Bootstrap 5 |
 
 **Qué cambió (resumen):**
 
@@ -229,6 +245,9 @@ Base: `http://localhost:8091/api`
 | GET/POST/PUT/DELETE | `/campanias` · `/prospectos` | Marketing                |
 | GET/POST/DELETE     | `/ventas`     | Ventas                               |
 | GET/POST/PUT/DELETE | `/expedientes`| Dirección / Gerencia                 |
+| GET/POST/PUT        | `/pagos` · `/pagos/{id}/confirmar` · `/pagos/{id}/rechazar` | Pagos con QR y caja (v5.2) |
+| GET/PUT             | `/billeteras` | Yape, Plin y Tunki de la empresa (v5.2) |
+| GET/POST            | `/cotizaciones` | Cotizaciones (v5.2)                 |
 
 Ejemplo de login con `curl`:
 

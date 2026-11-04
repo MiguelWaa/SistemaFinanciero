@@ -46,7 +46,6 @@ DROP TABLE IF EXISTS rol                     CASCADE;
 DROP TABLE IF EXISTS auditoria               CASCADE;
 
 -- =============================== SEGURIDAD ===============================
-
 CREATE TABLE rol (
     id_rol       SERIAL PRIMARY KEY,
     nombre       VARCHAR(50)  NOT NULL,

@@ -15,6 +15,8 @@ import com.utp.sistemafinanciero.model.operaciones.Empeno;
 import com.utp.sistemafinanciero.model.operaciones.Operacion;
 import com.utp.sistemafinanciero.model.operaciones.Prestamo;
 import com.utp.sistemafinanciero.model.operaciones.TipoCambio;
+import com.utp.sistemafinanciero.model.pagos.Cotizacion;
+import com.utp.sistemafinanciero.model.pagos.Pago;
 import com.utp.sistemafinanciero.model.produccion.LineaProduccion;
 import com.utp.sistemafinanciero.model.produccion.OrdenProduccion;
 import com.utp.sistemafinanciero.model.seguridad.Auditoria;
@@ -200,6 +202,49 @@ public final class CatalogoArchivos {
                 salida("saldoPendiente", "Saldo pendiente", NUMERO, Empeno::getSaldoPendiente),
                 salida("estado", "Estado", TEXTO, Empeno::getEstado)),
                 c.empenos::listar));
+
+        // ---------------- Pagos con Yape, Plin, Tunki y caja (solo exportar: dinero) ----------------
+        agregar(m, DefinicionArchivo.<Pago>soloExportar("pagos", OPERACIONES, "Pagos", List.of(
+                salida("codigo", "Código", TEXTO, Pago::getCodigo),
+                salida("fechaPago", "Fecha", TEXTO, Pago::getFechaPago),
+                salida("cliente", "Cliente", TEXTO, Pago::getCliente),
+                salida("documento", "Documento", TEXTO, Pago::getDocumento),
+                salida("concepto", "Concepto", TEXTO, Pago::getConcepto),
+                salida("descripcion", "Descripción", TEXTO, Pago::getDescripcion),
+                salida("idOperacion", "Trámite (N°)", NUMERO, Pago::getIdOperacion),
+                salida("metodo", "Método", TEXTO, Pago::getMetodo),
+                salida("numeroOperacion", "N° de operación", TEXTO, Pago::getNumeroOperacion),
+                salida("celularOrigen", "Celular", TEXTO, Pago::getCelularOrigen),
+                salida("referencia", "Referencia", TEXTO, Pago::getReferencia),
+                salida("monto", "Monto (S/)", NUMERO, Pago::getMonto),
+                salida("origen", "Origen", TEXTO, Pago::getOrigen),
+                salida("estado", "Estado", TEXTO, Pago::getEstado),
+                salida("numeroComprobante", "Comprobante", TEXTO, Pago::getNumeroComprobante),
+                salida("verificadoPor", "Verificado por", TEXTO, Pago::getVerificadoPor),
+                salida("fechaVerificacion", "Fecha de verificación", TEXTO, Pago::getFechaVerificacion),
+                salida("observacion", "Observación", TEXTO, Pago::getObservacion)),
+                () -> c.pagos.listar(null)));
+
+        agregar(m, DefinicionArchivo.<Cotizacion>soloExportar("cotizaciones", OPERACIONES, "Cotizaciones", List.of(
+                salida("numero", "Número", TEXTO, Cotizacion::getNumero),
+                salida("fechaEmision", "Emitida", TEXTO, Cotizacion::getFechaEmision),
+                salida("fechaVencimiento", "Vigente hasta", TEXTO, Cotizacion::getFechaVencimiento),
+                salida("cliente", "Cliente", TEXTO, Cotizacion::getCliente),
+                salida("documento", "Documento", TEXTO, Cotizacion::getDocumento),
+                salida("tipo", "Tipo", TEXTO, Cotizacion::getTipo),
+                salida("monto", "Monto", NUMERO, Cotizacion::getMonto),
+                salida("moneda", "Moneda", TEXTO, Cotizacion::getMoneda),
+                salida("plazo", "Plazo", NUMERO, Cotizacion::getPlazo),
+                salida("unidadPlazo", "Unidad", TEXTO, Cotizacion::getUnidadPlazo),
+                salida("tasa", "Tasa (%)", NUMERO, Cotizacion::getTasa),
+                salida("cuota", "Cuota", NUMERO, Cotizacion::getCuota),
+                salida("totalInteres", "Interés", NUMERO, Cotizacion::getTotalInteres),
+                salida("totalPagar", "Total a pagar", NUMERO, Cotizacion::getTotalPagar),
+                salida("montoRecibir", "Recibe (cambio)", NUMERO, Cotizacion::getMontoRecibir),
+                salida("estado", "Estado", TEXTO, Cotizacion::getEstado),
+                salida("idOperacion", "Solicitud (N°)", NUMERO, Cotizacion::getIdOperacion),
+                salida("origen", "Origen", TEXTO, Cotizacion::getOrigen)),
+                c.cotizaciones::listar));
 
         // ---------------- Dirección y Gerencia ----------------
         // El estado NO se importa: todo expediente importado entra PENDIENTE y se resuelve en el sistema.

@@ -1,62 +1,85 @@
+
 #!/bin/sh
 # ============================================================
-#  SIGSF · Compila y ejecuta las pruebas JUnit sin NetBeans
-#  Uso:  sh scripts/compilar_y_probar.sh            (unitarias + integración en memoria)
-#        COBERTURA=1 sh scripts/compilar_y_probar.sh (además, informe JaCoCo)
-#        BD_PRUEBAS=SistemaFinanciero_test sh scripts/compilar_y_probar.sh
-#              (además, pruebas de integración con PostgreSQL real; ver
-#               scripts/pruebas/preparar_bd_pruebas.sh)
-#  Lo usa también la integración continua (GitHub Actions).
-#  Requiere JDK 17+. Descarga a lib/test/ (carpeta ignorada por Git) la
-#  primera vez: JUnit 4.13.2, Hamcrest 1.3, Mockito 5, Byte Buddy,
-#  Objenesis y JaCoCo 0.8.12.
+# SIGSF - Compila y ejecuta las pruebas JUnit sin NetBeans
+# Uso: sh scripts/compilar_y_probar.sh
+# Requiere JDK 17+ y curl.
+# Compatible con Windows Git Bash y GitHub Actions (Ubuntu).
 # ============================================================
+
 set -e
+
 cd "$(dirname "$0")/.."
-MAVEN=https://repo1.maven.org/maven2
+
+MAVEN="https://repo1.maven.org/maven2"
+
+# Descargar JUnit y Hamcrest si no existen
 mkdir -p lib/test
-bajar() { [ -f "lib/test/$1" ] || curl -sSfL -o "lib/test/$1" "$MAVEN/$2"; }
-bajar junit-4.13.2.jar       junit/junit/4.13.2/junit-4.13.2.jar
-bajar hamcrest-core-1.3.jar  org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
-bajar mockito-core.jar       org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar
-bajar byte-buddy.jar         net/bytebuddy/byte-buddy/1.15.10/byte-buddy-1.15.10.jar
-bajar byte-buddy-agent.jar   net/bytebuddy/byte-buddy-agent/1.15.10/byte-buddy-agent-1.15.10.jar
-bajar objenesis.jar          org/objenesis/objenesis/3.3/objenesis-3.3.jar
-if [ -n "$COBERTURA" ]; then
-  bajar jacocoagent.jar      org/jacoco/org.jacoco.agent/0.8.12/org.jacoco.agent-0.8.12-runtime.jar
-  bajar jacococli.jar        org/jacoco/org.jacoco.cli/0.8.12/org.jacoco.cli-0.8.12-nodeps.jar
-fi
 
-CP="lib/postgresql.jar:lib/slf4j-api-2.0.16.jar:lib/logback-core-1.5.12.jar:lib/logback-classic-1.5.12.jar"
-JUNIT="lib/test/junit-4.13.2.jar:lib/test/hamcrest-core-1.3.jar:lib/test/mockito-core.jar:lib/test/byte-buddy.jar:lib/test/byte-buddy-agent.jar:lib/test/objenesis.jar"
-rm -rf build/ci && mkdir -p build/ci/classes build/ci/test build/reportes
+[ -f lib/test/junit-4.13.2.jar ] || \
+  curl -sSfL -o lib/test/junit-4.13.2.jar \
+  "$MAVEN/junit/junit/4.13.2/junit-4.13.2.jar"
 
-echo "== Compilando $(find src -name '*.java' | wc -l) clases..."
-javac -encoding UTF-8 --release 17 -cp "$CP" -d build/ci/classes $(find src -name '*.java')
-# Recursos que no son .java (logback.xml, semilla_100.tsv, ...). Antes solo se copiaba
-# logback.xml y DatosMasivosTest fallaba en la integración continua (defecto DEF-001).
-(cd src && find . -type f ! -name '*.java' -exec cp --parents {} ../build/ci/classes/ \;)
+[ -f lib/test/hamcrest-core-1.3.jar ] || \
+  curl -sSfL -o lib/test/hamcrest-core-1.3.jar \
+  "$MAVEN/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"
 
-echo "== Compilando $(find test -name '*.java' | wc -l) clases de prueba..."
-javac -encoding UTF-8 --release 17 -cp "$CP:build/ci/classes:$JUNIT" -d build/ci/test $(find test -name '*.java')
+# Separador de classpath según el sistema operativo
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*) SEP=';' ;;
+  *) SEP=':' ;;
+esac
+
+# Bibliotecas de la aplicación
+CP="lib/postgresql.jar${SEP}lib/slf4j-api-2.0.16.jar${SEP}lib/logback-core-1.5.12.jar${SEP}lib/logback-classic-1.5.12.jar"
+
+# Bibliotecas de pruebas
+JUNIT="lib/test/junit-4.13.2.jar${SEP}lib/test/hamcrest-core-1.3.jar"
+
+# Preparar las carpetas de compilación
+rm -rf build/ci
+mkdir -p build/ci/classes build/ci/test
+
+# Compilar las clases de la aplicación
+echo "== Compilando clases de la aplicación =="
+
+javac -encoding UTF-8 --release 17 \
+  -cp "$CP" \
+  -d build/ci/classes \
+  $(find src -name '*.java')
+
+# Copiar recursos necesarios de la aplicación
+cp src/logback.xml build/ci/classes/
+
+mkdir -p build/ci/classes/com/utp/sistemafinanciero/dao/memoria
+
+cp src/com/utp/sistemafinanciero/dao/memoria/semilla_100.tsv \
+  build/ci/classes/com/utp/sistemafinanciero/dao/memoria/
+
+# Compilar las clases de prueba
+echo "== Compilando clases de prueba =="
+
+javac -encoding UTF-8 --release 17 \
+  -cp "$CP${SEP}build/ci/classes${SEP}$JUNIT" \
+  -d build/ci/test \
+  $(find test -name '*.java')
+
+# Copiar la configuración de Logback para las pruebas
 cp test/logback-test.xml build/ci/test/
 
-PRUEBAS=$(cd test && find . -name '*Test.java' | sed 's|^\./||;s|\.java$||;s|/|.|g' | sort | tr '\n' ' ')
-JVM="-Dstdout.encoding=UTF-8 -Dsigsf.db.name=${BD_PRUEBAS:-sin_base_de_pruebas} -Dsigsf.db.password=${PGPASSWORD:-123456}"
-[ -n "$COBERTURA" ] && JVM="$JVM -javaagent:lib/test/jacocoagent.jar=destfile=build/reportes/jacoco.exec"
+# Obtener los nombres completos de las clases de prueba
+PRUEBAS=$(cd test && find . -name '*Test.java' |
+  sed 's|^\./||;s|\.java$||;s|/|.|g' |
+  sort | tr '\n' ' ')
 
-echo "== Ejecutando pruebas..."
-set +e
-# EjecutorPlanDePruebas = JUnitCore + resumen por nivel y CSV por caso (build/reportes/)
-java $JVM -cp "$CP:build/ci/test:build/ci/classes:$JUNIT" com.utp.sistemafinanciero.EjecutorPlanDePruebas $PRUEBAS > build/reportes/junit.txt 2>&1
-RESULTADO=$?
-grep -v "^Picked up" build/reportes/junit.txt
-set -e
-
-if [ -n "$COBERTURA" ]; then
-  echo "== Informe de cobertura JaCoCo en build/reportes/cobertura/index.html"
-  java -jar lib/test/jacococli.jar report build/reportes/jacoco.exec \
-       --classfiles build/ci/classes --sourcefiles src \
-       --html build/reportes/cobertura --csv build/reportes/cobertura.csv --xml build/reportes/cobertura.xml
+if [ -z "$PRUEBAS" ]; then
+  echo "ERROR: No se encontraron clases de prueba." >&2
+  exit 1
 fi
-exit $RESULTADO
+
+# Ejecutar JUnit
+echo "== Ejecutando pruebas =="
+
+java -cp "$CP${SEP}build/ci/test${SEP}build/ci/classes${SEP}$JUNIT" \
+  org.junit.runner.JUnitCore $PRUEBAS
+

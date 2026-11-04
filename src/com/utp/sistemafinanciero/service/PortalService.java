@@ -38,6 +38,11 @@ public class PortalService {
 
     private static final String CREDENCIALES_INVALIDAS = "Documento o contraseña incorrectos.";
 
+    /** Tasa mensual (%) que la entidad aplica a los préstamos pedidos desde el portal. */
+    public static final BigDecimal TASA_PRESTAMO = new BigDecimal("15");
+    /** Tasa mensual (%) que la entidad aplica a los empeños pedidos desde el portal. */
+    public static final BigDecimal TASA_EMPENO = new BigDecimal("10");
+
     private final ClienteDao clienteDao;
     private final AccesoClienteDao accesoDao;
     private final OperacionDao operacionDao;
@@ -185,7 +190,7 @@ public class PortalService {
         // operación PENDIENTE sin préstamo si este se rechazaba: DEF-007).
         Prestamo p = new Prestamo();
         p.setMontoPrestamo(montoPrestamo);
-        p.setTasaInteres(tasaInteres == null ? new BigDecimal("15") : tasaInteres);
+        p.setTasaInteres(tasaInteres == null ? TASA_PRESTAMO : tasaInteres);
         p.setPlazoMeses(plazoMeses);
         p.setFechaInicio(LocalDate.now());
         p.setEstado("PENDIENTE");

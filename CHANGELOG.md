@@ -10,39 +10,52 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
-## [6.0.0] - 2026-11-03 · Avance 4: Plan de Pruebas de Software
+## [5.4.0] - 2026-10-26 · Fondo animado
 
-Versión MAYOR: cambian reglas de negocio visibles para el usuario (límites de monto,
-tasa y plazo; estados iniciales validados) y el contrato de la API (códigos 400 donde
-antes había 500 o 409).
+### Cambiado
+- Fondo nuevo en todo el sistema: degradado de color, auroras más vivas en movimiento, rejilla de puntos y una trama
+  ondulada tipo billete (`web/img/guilloche.svg`) que se desliza lentamente. Tarjetas, indicadores y barras con efecto
+  vidrio para que el fondo se vea detrás. Al imprimir, el fondo se quita.
+
+## [5.3.0] - 2026-10-26 · Interfaz animada
 
 ### Agregado
-- **Plan de pruebas** `docs/09_PLAN_DE_PRUEBAS.md` (IEEE 829 / ISO 29119-3) y **resultados** `docs/10_HERRAMIENTAS_Y_RESULTADOS.md`.
-- Pruebas unitarias parametrizadas (valores límite y particiones): `PrestamoValoresLimiteTest`, `OperacionParticionesTest`, `EmpenoValoresLimiteTest`; `PortalServiceTest`, `CatalogosServiceTest`.
-- Pruebas con **Mockito**: `ClienteServiceMockitoTest`, `AuthServiceMockitoTest`.
-- Integración con **PostgreSQL real**: `PostgresIntegracionTest`, `ApiPostgresIntegracionTest`, contrato DAO memoria ↔ JDBC (`ContratoClienteDao`); guardia `BdPruebas` (solo bases `_test`).
-- Colección **Postman/Newman** (31 casos), pruebas de sistema con **Playwright** (13), aceptación **BDD en español** (4 historias, 10 escenarios) y plan de carga **JMeter**.
-- `EjecutorPlanDePruebas` (resumen por nivel y CSV por caso), cobertura **JaCoCo** (`COBERTURA=1`).
-- `scripts/pruebas/preparar_bd_pruebas.*` y `scripts/pruebas/ejecutar_plan_de_pruebas.*`.
-- CI con dos trabajos: JUnit + PostgreSQL de servicio, y API/sistema/aceptación/carga.
-- `Configuracion` acepta propiedades `-Dsigsf.<clave>` (NetBeans: `test-sys-prop.sigsf.db.name`).
+- Capa visual animada `web/sigsf-anim.css` + `web/sigsf-anim.js`, cargada en todas las páginas sin cambiar su lógica:
+  fondo con auroras suaves, encabezados y barra lateral con degradado en movimiento, indicadores en tarjetas con ícono automático
+  y números que cuentan hasta su valor, entrada escalonada de tarjetas, filas y listas, botones con degradado, brillo y onda,
+  pestañas con indicador deslizante, gráficos que se dibujan, ticket de pago con línea de escaneo y confeti al confirmar o registrar un pago.
+- Banner de bienvenida animado en el panel y en el Portal del Cliente; íconos flotantes en las pantallas de ingreso y bienvenida.
+- Campana que suena al llegar un pago nuevo y transición suave al abrir un módulo.
+- Todo respeta la opción «reducir movimiento» del sistema operativo; los refrescos automáticos no repiten la animación si los datos no cambian.
+
+## [5.2.0] - 2026-10-26 · Pagos con QR, cotizaciones e interfaz Bootstrap 5
+
+### Agregado
+- **Pagos con Yape, Plin y Tunki desde el Portal del Cliente**: elegir trámite, monto y billetera; QR de cobro con monto, número, titular y referencia; registro del número de operación y de la captura de la constancia (`PagoService`, `PortalController`).
+- **Módulo interno Pagos y cobranzas** (`web/pagos.html`): bandeja *Por verificar* con confirmar/rechazar, historial con filtros, cobro en caja, cotizaciones y configuración de billeteras con subida del QR.
+- Al confirmar un pago se descuenta el saldo del préstamo o empeño (pasa a `CANCELADO` / `RECUPERADO` en cero) y se emite el comprobante `RC-000001`.
+- **Cotizaciones** de préstamo (con cronograma), empeño y cambio de moneda, con número, vigencia de 7 días y conversión en solicitud (`CotizacionService`).
+- Documentos imprimibles / PDF: comprobante de pago, cotización, estado de cuenta y reporte de pagos (`documento.html`, `portal-documento.html`, `sigsf-documentos.js`).
+- Exportación de pagos y cotizaciones a Excel, CSV y JSON; nuevos indicadores en `GET /api/dashboard` (`pagosPorVerificar`, `montoPorVerificar`, `cobradoMes`, `cotizacionesVigentes`).
+- Esquema de BD **5.2.0**: `db/pagos_qr.sql` (tablas `billetera`, `pago`, `cotizacion`); el servidor las crea solo si faltan.
+- Configuración `pagos.confirmacion.automatica` y `pagos.monto.maximo` en `db.properties`.
+- Pruebas: `PagoServiceTest`, `CotizacionServiceTest`, `PagosApiTest` (126 → 151).
+- `docs/09_PAGOS_QR_Y_COTIZACIONES.md` y capturas `evidencias/v52_*.png`.
+
+### Cambiado
+- **Toda la interfaz migrada a Bootstrap 5.3.3** servido desde `web/vendor/` (también Font Awesome y el generador de QR): funciona sin internet.
+- Nuevo tema `sigsf-ui.css` + utilidades `sigsf-ui.js`; el motor `sigsf-crud.js` ahora ordena por columna, pagina, valida y confirma con ventanas modales, manteniendo la misma configuración de cada módulo.
+- Panel principal con menú lateral agrupado (adaptable a celular), campana de pagos por verificar, gráfico de cobros de 14 días y apertura directa de módulos (`index.html#pagos.html`).
+- Portal del Cliente, ingreso del personal, bienvenida, solicitudes y reportes rediseñados.
+- Servidor de archivos: caché de 7 días para `web/vendor`, `ETag`, compresión gzip y más hilos; CSP sin CDN.
+- Centro de ayuda: respuestas corregidas según lo que el sistema hace realmente y nuevas preguntas sobre pagos.
 
 ### Corregido
-- DEF-002/011: reglas de la base (tasa ≥ 0, compra/venta > 0, stock ≥ 0) replicadas en los servicios (`ReglasMonto`).
-- DEF-003: montos y tasas fuera de rango ya no producen HTTP 500; `22003` → 400.
-- DEF-004/006: límites de préstamo (S/ 100 a S/ 1 000 000, tasa 0–100 %, 1–360 meses) y de empeño (1–365 días).
-- DEF-005: estado inicial validado en operaciones y clientes.
-- DEF-007: el Portal valida el préstamo/empeño **antes** de grabar la operación (no más operaciones huérfanas).
-- DEF-008: mensajes "Valor numérico inválido" y "registro que no existe" (400) en lugar de mensajes engañosos.
-- DEF-009: títulos de tabla "Registros de registrar …"; DEF-010: historial del portal desbordado en celulares.
+- `scripts/compilar_y_probar.*` no copiaba `semilla_100.tsv` al classpath: 9 pruebas fallaban en GitHub Actions.
+- Configuración mostraba «PostgreSQL» aun en modo memoria.
 
-### Pruebas
-- JUnit 126 → **216**; total del plan **270 casos**; cobertura de líneas 61.2 % → 70.3 % (JUnit) y 75.4 % (con sistema).
-
-## [5.1.1] - 2026-11-03 · Parche
-
-### Corregido
-- DEF-001: `scripts/compilar_y_probar.*` no copiaba los recursos (`semilla_100.tsv`) y 9 pruebas fallaban en la integración continua.
+### Eliminado
+- Hojas de estilo antiguas que ninguna página usaba (`styles*.css`, `almacen.css`, `logistica.css`…); siguen en el historial de Git (`v5.1.0`).
 
 ## [5.1.0] - 2026-10-25 · Avance 3: datos de demostración
 

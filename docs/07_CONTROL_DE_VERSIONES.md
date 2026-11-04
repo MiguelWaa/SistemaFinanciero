@@ -162,7 +162,7 @@ git revert -m 1 <hash-del-merge>     # -m 1: conservar el lado de develop
 ```
 
 Resultado: un commit `Revert "Merge branch 'feature/prestamos-redondeo'…"`,
-las 117 pruebas en verde y el error visible en el historial como evidencia.
+las pruebas en verde y el error visible en el historial como evidencia.
 
 ## 8. Archivos que no se versionan y seguridad del repositorio
 
@@ -179,7 +179,7 @@ las 117 pruebas en verde y el error visible en el historial como evidencia.
 # Publicar el repositorio por primera vez (repositorio privado vacío creado en GitHub)
 git remote add origin https://github.com/<usuario>/SistemaFinanciero.git   # o: git remote set-url origin …
 git push -u origin --all          # todas las ramas
-git push origin --tags            # todas las etiquetas (v4.0.0, v5.0.0, v5.0.1)
+git push origin --tags            # todas las etiquetas (v4.0.0 … v5.4.0)
 ```
 
 * **Network:** *Insights › Network* muestra el mismo grafo que `git log --all --graph`.
@@ -197,6 +197,7 @@ registra en la tabla `version_esquema` (script `db/version_esquema.sql`).
 | 1.1.0 | `db/portal_cliente.sql` | Portal del cliente (`cliente_acceso`) |
 | 2.0.0 | `db/seguridad.sql` | Auditoría inmutable, CHECK, índices, rol `sigsf_app` |
 | 5.0.0 | `db/version_esquema.sql` | Tabla `version_esquema` |
+| 5.2.0 | `db/pagos_qr.sql` | Pagos con QR: tablas `billetera`, `pago` y `cotizacion` |
 
 Al arrancar, `VerificadorEsquema` crea la tabla si falta, registra las versiones
 detectadas y avisa en el log si la base está atrasada. La pantalla **Control de
@@ -206,7 +207,7 @@ SQL nuevo termina con su `INSERT INTO version_esquema`**.
 ## 11. Integración continua
 
 `.github/workflows/ci.yml` se ejecuta en cada `push` a `main`/`develop` y en cada
-Pull Request: instala JDK 17, compila y ejecuta las **117 pruebas** con
+Pull Request: instala JDK 17, compila y ejecuta las **151 pruebas** con
 `scripts/compilar_y_probar.sh`. Un Pull Request con pruebas en rojo no se
 fusiona (eso habría detenido el caso del §7 antes de llegar a `develop`).
 

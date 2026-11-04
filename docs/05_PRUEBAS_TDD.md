@@ -1,8 +1,6 @@
 # SIGSF · Pruebas automatizadas (TDD)
 
-**Herramienta:** JUnit 4 (incluido en NetBeans) + Mockito 5. **Carpeta:** `test/`. **Resultado:** **216 pruebas en 35 clases** (versión 6.0; eran 126 en la 5.1, 117 en la 5.0 y 99 en la 4.0).
-
-> Desde la versión 6.0 este documento es el detalle del nivel unitario/TDD. El plan completo (entorno, integración, sistema, aceptación y rendimiento) está en `docs/09_PLAN_DE_PRUEBAS.md` y los resultados en `docs/10_HERRAMIENTAS_Y_RESULTADOS.md`.
+**Herramienta:** JUnit 4 (incluido en NetBeans). **Carpeta:** `test/`. **Resultado:** 151 pruebas en 27 clases (versión 5.4; eran 126 en 25 clases en la 5.1, 117 en 24 en la 5.0 y 99 en 21 en la 4.0).
 
 También sin NetBeans: `sh scripts/compilar_y_probar.sh` (o `.bat`); es lo que ejecuta la integración continua en cada push.
 
@@ -48,12 +46,7 @@ La inyección de dependencias (DIP) es lo que permite el TDD: el servicio recibe
 | VersionServiceTest | 12 | RF-VER-01…04: versión desde Git / version.properties / VERSION, esquema al día, tipos de commit, CHANGELOG, lista blanca de GitCli |
 | GitCliIntegracionTest | 3 | Repositorio Git real temporal: rama, etiqueta, merge y grafo (se omite si no hay git) |
 | VersionApiTest | 3 | `/api/version` para todo el personal, `/api/versiones` solo ADMIN, 401 sin sesión |
-| PrestamoValoresLimiteTest | 19 | RF-OPE-05 · valores límite de monto, tasa y plazo (versión 6.0) |
-| OperacionParticionesTest | 10 | RF-OPE-01/02 · particiones y estado inicial (6.0) |
-| EmpenoValoresLimiteTest | 8 | RF-OPE-06 · valores límite (6.0) |
-| PortalServiceTest | 9 | RF-POR-01…05 · sin operaciones huérfanas (6.0) |
-| CatalogosServiceTest | 7 | Servicios de catálogo y panel (6.0) |
-| ClienteServiceMockitoTest / AuthServiceMockitoTest | 7 / 5 | Interacción con Mockito (6.0) |
-| ContratoClienteDao (memoria + JDBC) | 5 + 5 | Contrato del patrón DAO (6.0) |
-| PostgresIntegracionTest / ApiPostgresIntegracionTest | 8 / 7 | Integración con PostgreSQL real (6.0) |
-| **Total** | **216** | |
+| PagoServiceTest | 14 | Pagos con Yape/Plin/Tunki: registro, confirmación, rechazo, descuento de saldo y comprobante (versión 5.2) |
+| CotizacionServiceTest | 7 | Cotizaciones de préstamo, empeño y cambio: cronograma, vigencia y conversión en solicitud (versión 5.2) |
+| PagosApiTest | 4 | API de pagos: permisos 401/403, bandeja por verificar y auditoría (versión 5.2) |
+| **Total** | **151** | |
