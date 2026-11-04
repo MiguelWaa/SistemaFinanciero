@@ -69,6 +69,9 @@ Detalle en `docs/08_DATOS_DE_DEMOSTRACION.md`.
 
 ---
 
+
+
+
 ## 🆕 Versión 5.0 · Sistema de control de versiones (Git)
 
 Tercera entrega del taller. El proyecto ahora es un **repositorio Git** gestionado con **Git Flow**.
