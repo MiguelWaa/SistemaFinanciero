@@ -10,6 +10,35 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [6.0.0] - 2026-11-03 · Avance 4: Plan de Pruebas de Software
+
+Versión MAYOR: cambian reglas de negocio visibles para el usuario (límites de monto,
+tasa y plazo; estados iniciales validados) y el contrato de la API (códigos 400 donde
+antes había 500 o 409).
+
+### Agregado
+- **Plan de pruebas** `docs/09_PLAN_DE_PRUEBAS.md` (IEEE 829 / ISO 29119-3) y **resultados** `docs/10_HERRAMIENTAS_Y_RESULTADOS.md`.
+- Pruebas unitarias parametrizadas (valores límite y particiones): `PrestamoValoresLimiteTest`, `OperacionParticionesTest`, `EmpenoValoresLimiteTest`; `PortalServiceTest`, `CatalogosServiceTest`.
+- Pruebas con **Mockito**: `ClienteServiceMockitoTest`, `AuthServiceMockitoTest`.
+- Integración con **PostgreSQL real**: `PostgresIntegracionTest`, `ApiPostgresIntegracionTest`, contrato DAO memoria ↔ JDBC (`ContratoClienteDao`); guardia `BdPruebas` (solo bases `_test`).
+- Colección **Postman/Newman** (31 casos), pruebas de sistema con **Playwright** (13), aceptación **BDD en español** (4 historias, 10 escenarios) y plan de carga **JMeter**.
+- `EjecutorPlanDePruebas` (resumen por nivel y CSV por caso), cobertura **JaCoCo** (`COBERTURA=1`).
+- `scripts/pruebas/preparar_bd_pruebas.*` y `scripts/pruebas/ejecutar_plan_de_pruebas.*`.
+- CI con dos trabajos: JUnit + PostgreSQL de servicio, y API/sistema/aceptación/carga.
+- `Configuracion` acepta propiedades `-Dsigsf.<clave>` (NetBeans: `test-sys-prop.sigsf.db.name`).
+
+### Corregido
+- DEF-002/011: reglas de la base (tasa ≥ 0, compra/venta > 0, stock ≥ 0) replicadas en los servicios (`ReglasMonto`).
+- DEF-003: montos y tasas fuera de rango ya no producen HTTP 500; `22003` → 400.
+- DEF-004/006: límites de préstamo (S/ 100 a S/ 1 000 000, tasa 0–100 %, 1–360 meses) y de empeño (1–365 días).
+- DEF-005: estado inicial validado en operaciones y clientes.
+- DEF-007: el Portal valida el préstamo/empeño **antes** de grabar la operación (no más operaciones huérfanas).
+- DEF-008: mensajes "Valor numérico inválido" y "registro que no existe" (400) en lugar de mensajes engañosos.
+- DEF-009: títulos de tabla "Registros de registrar …"; DEF-010: historial del portal desbordado en celulares.
+
+### Pruebas
+- JUnit 126 → **216**; total del plan **270 casos**; cobertura de líneas 61.2 % → 70.3 % (JUnit) y 75.4 % (con sistema).
+
 ## [5.1.1] - 2026-11-03 · Parche
 
 ### Corregido
