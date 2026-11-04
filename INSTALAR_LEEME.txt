@@ -47,6 +47,7 @@ PASO 2 · CREAR LA BASE DE DATOS (pgAdmin)
   b) Clic derecho en "Databases" > Create > Database...
   c) En el campo Database escribe EXACTAMENTE:
 
+
          SistemaFinanciero
 
      (con S y F mayusculas, sin espacios ni guiones)
