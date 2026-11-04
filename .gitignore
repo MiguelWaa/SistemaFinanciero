@@ -26,5 +26,11 @@ desktop.ini
 # --- Configuración local con credenciales (usar db.properties.ejemplo) ---
 db.properties
 
-# --- JUnit descargado por scripts/compilar_y_probar.sh ---
+# --- Librerías de prueba descargadas (JUnit, Mockito, JaCoCo) ---
 lib/test/
+
+# --- Herramientas de pruebas de sistema (Python / Node) ---
+__pycache__/
+.pytest_cache/
+node_modules/
+test-results/
