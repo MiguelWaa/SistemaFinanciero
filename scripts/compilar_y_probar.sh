@@ -14,6 +14,7 @@ cd "$(dirname "$0")/.."
 MAVEN="https://repo1.maven.org/maven2"
 
 # Descargar JUnit y Hamcrest si no existen
+
 mkdir -p lib/test
 
 [ -f lib/test/junit-4.13.2.jar ] || \
@@ -30,11 +31,29 @@ case "$(uname -s)" in
   *) SEP=':' ;;
 esac
 
+# Descargar Mockito y sus dependencias
+[ -f lib/test/mockito-core-5.14.2.jar ] || \
+curl -fsSL -o lib/test/mockito-core-5.14.2.jar \
+"$MAVEN/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar"
+
+[ -f lib/test/byte-buddy-1.15.4.jar ] || \
+curl -fsSL -o lib/test/byte-buddy-1.15.4.jar \
+"$MAVEN/net/bytebuddy/byte-buddy/1.15.4/byte-buddy-1.15.4.jar"
+
+[ -f lib/test/byte-buddy-agent-1.15.4.jar ] || \
+curl -fsSL -o lib/test/byte-buddy-agent-1.15.4.jar \
+"$MAVEN/net/bytebuddy/byte-buddy-agent/1.15.4/byte-buddy-agent-1.15.4.jar"
+
+[ -f lib/test/objenesis-3.3.jar ] || \
+curl -fsSL -o lib/test/objenesis-3.3.jar \
+"$MAVEN/org/objenesis/objenesis/3.3/objenesis-3.3.jar"
+
+
 # Bibliotecas de la aplicación
 CP="lib/postgresql.jar${SEP}lib/slf4j-api-2.0.16.jar${SEP}lib/logback-core-1.5.12.jar${SEP}lib/logback-classic-1.5.12.jar"
 
 # Bibliotecas de pruebas
-JUNIT="lib/test/junit-4.13.2.jar${SEP}lib/test/hamcrest-core-1.3.jar"
+JUNIT="lib/test/junit-4.13.2.jar${SEP}lib/test/hamcrest-core-1.3.jar${SEP}lib/test/mockito-core-5.14.2.jar${SEP}lib/test/byte-buddy-1.15.4.jar${SEP}lib/test/byte-buddy-agent-1.15.4.jar${SEP}lib/test/objenesis-3.3.jar"
 
 # Preparar las carpetas de compilación
 rm -rf build/ci
