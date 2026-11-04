@@ -231,7 +231,7 @@ Se ejecuta `com.utp.sistemafinanciero.ServerMain`, que:
 Abre esa URL en el navegador: verás la pantalla de inicio (splash) → login.
 
 ---
-
+USUARIO CONTROL DE ADMINISTRACION 
 ## Usuarios de acceso
 
 | Correo                   | Contraseña | Rol       |
