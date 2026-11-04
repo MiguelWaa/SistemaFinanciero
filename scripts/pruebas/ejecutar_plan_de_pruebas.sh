@@ -50,12 +50,14 @@ echo "==================== PI · API con Postman / Newman ===================="
 npx --yes -p newman -p newman-reporter-htmlextra newman run pruebas/postman/SIGSF_API.postman_collection.json \
     -e pruebas/postman/SIGSF_local.postman_environment.json --env-var "base=http://localhost:$PUERTO" \
     -r cli,htmlextra,junit --reporter-htmlextra-export "$REP/newman/newman_sigsf.html" \
-    --reporter-junit-export "$REP/newman/newman_junit.xml" --color off | tee "$REP/newman/consola_newman.txt" || ESTADO=1
+    --reporter-junit-export "$REP/newman/newman_junit.xml" --color off > "$REP/newman/consola_newman.txt" 2>&1 || ESTADO=1
+cat "$REP/newman/consola_newman.txt"   # (sin tubería: "| tee" ocultaba el código de salida)
 
 echo "==================== PS + PA · Playwright (sistema y aceptación) ===================="
 (cd pruebas && SIGSF_URL="http://localhost:$PUERTO" python -m pytest -v \
     --junitxml="../$REP/pytest/pytest_junit.xml" --html="../$REP/pytest/reporte_e2e_aceptacion.html" \
-    --self-contained-html) | tee "$REP/pytest/consola_pytest.txt" || ESTADO=1
+    --self-contained-html) > "$REP/pytest/consola_pytest.txt" 2>&1 || ESTADO=1
+cat "$REP/pytest/consola_pytest.txt"
 
 echo "==================== PR · Rendimiento con JMeter ===================="
 JMETER="${JMETER:-jmeter}"
@@ -65,7 +67,8 @@ if command -v "$JMETER" > /dev/null 2>&1; then
       -j "../../$REP/jmeter/jmeter.log" -Jport="$PUERTO" -Jusuarios="${USUARIOS:-50}" -Jduracion="${DURACION:-60}" \
       -Jjmeter.save.saveservice.output_format=csv -Jjmeter.save.saveservice.print_field_names=true) \
       | tee "$REP/jmeter/consola_jmeter.txt"
-  python pruebas/rendimiento/analizar_jtl.py "$REP/jmeter/resultados.jtl" | tee "$REP/jmeter/criterios.txt" || ESTADO=1
+  python pruebas/rendimiento/analizar_jtl.py "$REP/jmeter/resultados.jtl" > "$REP/jmeter/criterios.txt" || ESTADO=1
+  cat "$REP/jmeter/criterios.txt"
 else
   echo "JMeter no está instalado: se omite PR-01 (descárguelo de https://jmeter.apache.org)."
 fi

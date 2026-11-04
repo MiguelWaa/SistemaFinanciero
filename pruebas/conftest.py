@@ -71,13 +71,49 @@ def ingresar_portal(page, documento="71000004"):
     page.fill("#liPass", documento)
     page.click("#btnLogin")
     page.wait_for_url(re.compile(r".*/portal-inicio\.html"))
-    # Esperar a que el historial termine de cargar antes de contar trámites.
-    page.locator("#histTabla").filter(has_not_text="Cargando").wait_for()
+    # Esperar a que el historial termine de cargar (puede estar en una pestaña oculta).
+    page.locator("#histTabla").filter(has_not_text="Cargando").wait_for(state="attached")
+    page.wait_for_function("!document.querySelector('#histTabla').innerText.includes('Cargando')")
 
 
 def tramites(page):
-    """Filas reales del historial del portal (excluye 'Aún no tienes trámites')."""
-    return page.locator("#histTabla tr:has(td:nth-child(2))")
+    """Filas reales del historial del portal (excluye la fila vacía o de carga)."""
+    return page.locator("#histTabla tr:not(.empty-row):has(td:nth-child(2))")
+
+
+def pestana_portal(page, nombre):
+    """Portal v5.2+: las secciones son pestañas (inicio, pagar, cotizar, tramites, historial, datos)."""
+    page.click(f'#tabs [data-tab="{nombre}"]')
+
+
+def solicitar_prestamo(page, monto, plazo="12"):
+    pestana_portal(page, "tramites")
+    page.fill("#prMonto", str(monto))
+    page.select_option("#prPlazo", str(plazo))
+    page.click("#fPrestamo button[type=submit]")
+
+
+def confirmar(page, boton):
+    """v5.2+: las acciones delicadas piden confirmación en una ventana modal de Bootstrap."""
+    modal = page.locator(".modal.show")
+    modal.wait_for()
+    page.wait_for_timeout(300)                     # termina la animación de entrada (fade)
+    modal.get_by_role("button", name=boton, exact=True).click()
+    modal.wait_for(state="detached")
+
+
+def aprobar_solicitud(page, numero):
+    """Aprueba una solicitud de la bandeja y espera la respuesta del servidor (PUT …/aprobar)."""
+    with page.expect_response(lambda r: f"/solicitudes/{numero}/aprobar" in r.url) as resp:
+        page.locator(f'#lista [data-ok="{numero}"]').click()
+        confirmar(page, "Aprobar")
+    assert resp.value.ok, resp.value.text()
+
+
+def cerrar_sesion(page):
+    """El cierre de sesión está en el menú del usuario (barra superior)."""
+    page.locator("#navUser").click()
+    page.click("#logoutBtn")
 
 
 def evidencia(page, nombre, completa=False):

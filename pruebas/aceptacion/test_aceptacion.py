@@ -16,7 +16,7 @@ import pytest
 from playwright.sync_api import expect
 from pytest_bdd import given, parsers, scenarios, then, when
 
-from conftest import URL, USUARIOS, evidencia, ingresar_portal, iniciar_sesion, ir, tramites
+from conftest import URL, USUARIOS, aprobar_solicitud, evidencia, ingresar_portal, iniciar_sesion, ir, pestana_portal, solicitar_prestamo, tramites
 
 scenarios("HU01_cambio_de_moneda.feature", "HU02_prestamo_desde_el_portal.feature",
           "HU03_control_de_acceso.feature", "HU04_bandeja_de_solicitudes.feature")
@@ -102,6 +102,7 @@ def registrar_cambio(pagina, monto, moneda, ctx):
     ctx["venta"] = Decimal(re.search(r"venta ([0-9.]+)", opcion.inner_text()).group(1))
     ctx["monto"] = Decimal(monto)
     combo.select_option(value=opcion.get_attribute("value"))
+    pagina.select_option("#sec0_idCliente", index=1)   # v5.2+: la primera opción es "Selecciona…"
     pagina.fill("#sec0_monto", monto)
     pagina.click("#sec0_guardar")
 
@@ -115,10 +116,8 @@ def cambio_manipulado(pagina, token):
 
 
 @when(parsers.parse('solicito un préstamo de "{monto}" a "{plazo}" meses'))
-def solicitar_prestamo(pagina, monto, plazo):
-    pagina.fill("#prMonto", monto)
-    pagina.select_option("#prPlazo", plazo)
-    pagina.click("#prBtn")
+def solicitar(pagina, monto, plazo):
+    solicitar_prestamo(pagina, monto, plazo)
 
 
 @when("escribo una contraseña incorrecta 5 veces")
@@ -137,10 +136,10 @@ def tramites_ajenos(pagina, sesion_portal):
 @when("apruebo su solicitud en la bandeja")
 def aprobar(pagina, ctx):
     ir(pagina, "solicitudes.html")
-    boton = pagina.locator(f'[data-ok="{ctx["operacion"]}"]')
-    expect(boton).to_be_visible()
-    boton.click()
-    expect(pagina.get_by_text(f"Solicitud N° {ctx['operacion']} aprobada")).to_be_visible()
+    pagina.wait_for_load_state("networkidle")
+    expect(pagina.locator(f'#lista [data-ok="{ctx["operacion"]}"]')).to_be_visible()
+    aprobar_solicitud(pagina, ctx["operacion"])
+    expect(pagina.locator(f'#lista [data-ok="{ctx["operacion"]}"]')).to_have_count(0)
     evidencia(pagina, "aceptacion/CA-04.1_aprobada.png")
 
 
@@ -168,7 +167,8 @@ def mensaje(pagina, mensaje, ctx):
 @then("mi historial muestra el préstamo")
 def historial_con_prestamo(pagina, ctx):
     expect(tramites(pagina)).to_have_count(ctx["filas"] + 1)
-    expect(pagina.locator("#histTabla")).to_contain_text("PRESTAMO")
+    pestana_portal(pagina, "historial")
+    expect(pagina.locator("#histTabla")).to_contain_text(re.compile("pr[eé]stamo", re.I))
 
 
 @then("mi historial no cambia")

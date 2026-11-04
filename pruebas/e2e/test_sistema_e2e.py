@@ -15,7 +15,8 @@ from decimal import Decimal, ROUND_HALF_UP
 import pytest
 from playwright.sync_api import expect
 
-from conftest import URL, evidencia, ingresar_portal, iniciar_sesion, ir, tramites
+from conftest import (URL, aprobar_solicitud, cerrar_sesion, evidencia, ingresar_portal, iniciar_sesion, ir, pestana_portal,
+                      solicitar_prestamo, tramites)
 
 
 def test_PS_01_login_fallido_muestra_mensaje_generico(pagina):
@@ -23,16 +24,17 @@ def test_PS_01_login_fallido_muestra_mensaje_generico(pagina):
     pagina.fill("#user", "admin@sigsf.com")
     pagina.fill("#pass", "clave-incorrecta")
     pagina.click("#btnEntrar")
-    expect(pagina.locator("#avisoTxt")).to_contain_text("incorrectos")
+    expect(pagina.locator("#aviso")).to_contain_text("incorrectos")
     expect(pagina).to_have_url(re.compile(r".*/login\.html"))
     evidencia(pagina, "e2e/PS-01_login_fallido.png")
 
 
 def test_PS_02_login_admin_muestra_panel_con_indicadores(pagina):
     iniciar_sesion(pagina, "ADMIN")
-    expect(pagina.get_by_text("Bienvenido al Sistema")).to_be_visible()
+    expect(pagina.locator("#saludo")).to_be_visible()
     expect(pagina.get_by_text("Clientes activos")).to_be_visible()
-    expect(pagina.get_by_text("ADMIN", exact=True).first).to_be_visible()
+    expect(pagina.locator("#kpiClientes")).not_to_have_text("—")
+    expect(pagina.locator("#navRol")).to_contain_text("Admin")
     evidencia(pagina, "e2e/PS-02_panel_admin.png")
 
 
@@ -65,6 +67,7 @@ def test_PS_05_cambio_de_moneda_calcula_el_total_en_el_servidor(pagina):
     texto = opcion.inner_text()
     venta = Decimal(re.search(r"venta ([0-9.]+)", texto).group(1))
     combo.select_option(value=opcion.get_attribute("value"))
+    pagina.select_option("#sec0_idCliente", index=1)   # v5.2+: la primera opción es "Selecciona…"
     pagina.fill("#sec0_monto", "250")
     pagina.click("#sec0_guardar")
     esperado = (Decimal("250") * venta).quantize(Decimal("0.01"), ROUND_HALF_UP)
@@ -79,7 +82,7 @@ def test_PS_06_titulos_de_tabla_sin_texto_duplicado(pagina):
     iniciar_sesion(pagina)
     for modulo in ["operaciones financieras.html", "clientes y servicios financieros.html", "almacen.html"]:
         ir(pagina, modulo)
-        titulo = pagina.locator("h2", has_text="Registros de").first
+        titulo = pagina.locator("h2", has_text="Registros").first
         expect(titulo).to_be_visible()
         assert "registrar" not in titulo.inner_text().lower(), titulo.inner_text()
     evidencia(pagina, "e2e/PS-06_titulo_tabla.png")
@@ -88,11 +91,13 @@ def test_PS_06_titulos_de_tabla_sin_texto_duplicado(pagina):
 def test_PS_07_aprobar_solicitud_pendiente(pagina):
     iniciar_sesion(pagina, "ADMIN")
     ir(pagina, "solicitudes.html")
-    boton = pagina.locator("[data-ok]").first
+    pagina.wait_for_load_state("networkidle")          # la bandeja termina de cargar antes de actuar
+    boton = pagina.locator("#lista [data-ok]").first
     expect(boton).to_be_visible()
     numero = boton.get_attribute("data-ok")
-    boton.click()
-    expect(pagina.get_by_text(f"Solicitud N° {numero} aprobada")).to_be_visible()
+    aprobar_solicitud(pagina, numero)
+    # Resultado verificable: la solicitud sale de la bandeja de pendientes.
+    expect(pagina.locator(f'#lista [data-ok="{numero}"]')).to_have_count(0)
     evidencia(pagina, "e2e/PS-07_solicitud_aprobada.png")
 
 
@@ -106,20 +111,18 @@ def test_PS_08_cajero_no_puede_ver_usuarios(pagina):
 
 def test_PS_09_portal_solicita_prestamo_y_ve_su_cuota(pagina):
     ingresar_portal(pagina, "71000006")
-    pagina.fill("#prMonto", "3000")
-    pagina.select_option("#prPlazo", "12")
-    pagina.click("#prBtn")
+    solicitar_prestamo(pagina, 3000, 12)
     # 3000 × (1 + 0.15 × 12) / 12 = 700.00
     expect(pagina.locator("#prMsg")).to_contain_text("700.00")
-    expect(pagina.locator("#histTabla")).to_contain_text("PRESTAMO")
+    pestana_portal(pagina, "historial")
+    expect(pagina.locator("#histTabla")).to_contain_text(re.compile("pr[eé]stamo", re.I))
     evidencia(pagina, "e2e/PS-09_portal_prestamo.png", completa=True)
 
 
 def test_PS_10_portal_rechaza_prestamo_menor_al_minimo(pagina):
     ingresar_portal(pagina, "71000004")
     filas_antes = tramites(pagina).count()
-    pagina.fill("#prMonto", "50")
-    pagina.click("#prBtn")
+    solicitar_prestamo(pagina, 50)
     expect(pagina.locator("#prMsg")).to_contain_text("mínimo")
     pagina.wait_for_timeout(500)
     assert tramites(pagina).count() == filas_antes, "no debe quedar una operación huérfana"
@@ -129,6 +132,7 @@ def test_PS_10_portal_rechaza_prestamo_menor_al_minimo(pagina):
 def test_PS_11_exportar_operaciones_a_excel(pagina):
     iniciar_sesion(pagina)
     ir(pagina, "operaciones financieras.html")
+    pagina.get_by_role("button", name="Exportar").first.click()
     with pagina.expect_download() as descarga:
         pagina.get_by_role("button", name="Excel").first.click()
     archivo = descarga.value.path()
@@ -142,7 +146,7 @@ def test_PS_12_cerrar_sesion_revoca_el_token(pagina):
     iniciar_sesion(pagina)
     token = pagina.evaluate("sessionStorage.getItem('sigsf_token') || localStorage.getItem('sigsf_token')")
     assert token
-    pagina.get_by_role("link", name=re.compile("Cerrar sesión")).click()
+    cerrar_sesion(pagina)
     pagina.wait_for_url(re.compile(r".*/login\.html.*"))
     respuesta = pagina.request.get(URL + "/api/clientes", headers={"Authorization": "Bearer " + token})
     assert respuesta.status == 401
@@ -155,5 +159,6 @@ def test_PS_13_portal_usable_en_celular(pagina, ancho):
     ingresar_portal(pagina, "71000007")
     desborde = pagina.evaluate("document.documentElement.scrollWidth - window.innerWidth")
     assert desborde <= 1, f"la página se desborda {desborde}px en horizontal"
-    expect(pagina.locator("#prBtn")).to_be_visible()
+    pestana_portal(pagina, "tramites")
+    expect(pagina.locator("#fPrestamo button[type=submit]")).to_be_visible()
     evidencia(pagina, "e2e/PS-13_portal_movil.png")

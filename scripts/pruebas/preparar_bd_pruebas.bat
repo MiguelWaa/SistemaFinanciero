@@ -15,7 +15,7 @@ set BD=SistemaFinanciero_test
 echo == Recreando la base %BD%
 psql -q -v ON_ERROR_STOP=1 -d postgres -c "DROP DATABASE IF EXISTS \"%BD%\" WITH (FORCE);" || goto :error
 psql -q -v ON_ERROR_STOP=1 -d postgres -c "CREATE DATABASE \"%BD%\" ENCODING 'UTF8' TEMPLATE template0;" || goto :error
-for %%f in (schema.sql datos_ejemplo.sql portal_cliente.sql seguridad.sql version_esquema.sql datos_100_registros.sql) do (
+for %%f in (schema.sql datos_ejemplo.sql portal_cliente.sql seguridad.sql version_esquema.sql datos_100_registros.sql pagos_qr.sql) do (
   echo    - db\%%f
   psql -q -v ON_ERROR_STOP=1 -d %BD% -f db\%%f >nul || goto :error
 )
