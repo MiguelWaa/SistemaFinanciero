@@ -86,7 +86,7 @@ window.SIGSF = (function () {
     // Tabla
     h += '<div class="card">';
     h += '<div class="tabla-top">';
-    h += '<h2 style="margin:0;"><i class="fa-solid fa-table-list" style="color:#2563eb;"></i> ' + escapar(c.tituloTabla || ('Registros de ' + c.titulo.toLowerCase())) + '</h2>';
+    h += '<h2 style="margin:0;"><i class="fa-solid fa-table-list" style="color:#2563eb;"></i> ' + escapar(c.tituloTabla || ('Registros de ' + c.titulo.replace(/^registrar\s+/i, '').toLowerCase())) + '</h2>';
     h += '<div class="buscador"><i class="fa-solid fa-magnifying-glass"></i><input id="' + p + 'buscar" placeholder="Buscar…"></div>';
     h += '</div>';
     if (c.archivos) {
