@@ -15,6 +15,11 @@ import java.util.List;
  */
 public class PrestamoService {
 
+    /** Límites del préstamo (Plan de Pruebas, casos PU-PRE-01…19). */
+    public static final BigDecimal MONTO_MINIMO = new BigDecimal("100.00");
+    public static final BigDecimal MONTO_MAXIMO = new BigDecimal("1000000.00");
+    public static final int PLAZO_MAXIMO_MESES = 360;
+
     private final PrestamoDao dao;
 
     /** El DAO se recibe por constructor (inyección de dependencias, DIP). */
@@ -34,16 +39,19 @@ public class PrestamoService {
         return p;
     }
 
+    /**
+     * Valida monto, plazo y tasa sin guardar nada. La usa también el Portal
+     * del Cliente ANTES de grabar la operación, para no dejar operaciones
+     * huérfanas si el préstamo se rechaza (DEF-007).
+     */
+    public void validar(Prestamo p) {
+        ReglasMonto.exigirMonto(p.getMontoPrestamo(), MONTO_MINIMO, MONTO_MAXIMO, "El monto del préstamo");
+        ReglasMonto.exigirPlazo(p.getPlazoMeses(), PLAZO_MAXIMO_MESES, "meses");
+        p.setTasaInteres(ReglasMonto.exigirTasa(p.getTasaInteres()));
+    }
+
     public Prestamo crear(Prestamo p) {
-        if (p.getMontoPrestamo() == null || p.getMontoPrestamo().signum() <= 0) {
-            throw new ReglaNegocioException("El monto del prestamo debe ser mayor que cero.");
-        }
-        if (p.getPlazoMeses() == null || p.getPlazoMeses() <= 0) {
-            throw new ReglaNegocioException("El plazo en meses debe ser mayor que cero.");
-        }
-        if (p.getTasaInteres() == null) {
-            p.setTasaInteres(BigDecimal.ZERO);
-        }
+        validar(p);
 
         // Interes simple: total = monto * (1 + tasa%/100 * plazoMeses).
         BigDecimal tasaFraccion = p.getTasaInteres()
