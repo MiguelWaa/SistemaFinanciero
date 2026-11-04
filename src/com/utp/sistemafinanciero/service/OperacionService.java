@@ -19,6 +19,8 @@ import java.util.List;
 public class OperacionService {
 
     private static final java.util.Set<String> ESTADOS = java.util.Set.of("COMPLETADA", "ANULADA", "PENDIENTE");
+    /** Monto máximo por operación (Plan de Pruebas, casos PU-OPE-05…07). */
+    public static final java.math.BigDecimal MONTO_MAXIMO = new java.math.BigDecimal("10000000.00");
 
     private final OperacionDao dao;
     private final TipoCambioDao tipoCambioDao;
@@ -49,8 +51,13 @@ public class OperacionService {
         if (o.getIdCliente() == null) {
             throw new ReglaNegocioException("La operacion debe estar asociada a un cliente.");
         }
-        if (o.getMonto() == null || o.getMonto().signum() <= 0) {
-            throw new ReglaNegocioException("El monto debe ser mayor que cero.");
+        ReglasMonto.exigirMonto(o.getMonto(), new java.math.BigDecimal("0.01"), MONTO_MAXIMO, "El monto");
+        // El estado inicial también se valida (antes solo al cambiarlo: caso PU-OPE-10).
+        if (o.getEstado() != null && !o.getEstado().isBlank()) {
+            if (!ESTADOS.contains(o.getEstado().trim().toUpperCase())) {
+                throw new ReglaNegocioException("Estado no válido. Use COMPLETADA, ANULADA o PENDIENTE.");
+            }
+            o.setEstado(o.getEstado().trim().toUpperCase());
         }
         if (o.getTipoOperacion() == null || o.getTipoOperacion().isBlank()) {
             o.setTipoOperacion("CAMBIO");
