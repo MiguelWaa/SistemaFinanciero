@@ -420,6 +420,7 @@ vibración, mostrar/ocultar contraseña y opción "Recordarme".
 
 ---
 
+
 ## Panel con clientes en vivo y portal del cliente mejorado
 
 **Panel del administrador (`index.html`):**
