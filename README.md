@@ -19,6 +19,7 @@ Etiqueta remota	Actualizada
 Commit de la etiqueta	Coincide
 Versión declarada	6.0.0
 Pruebas automatizadas	241 aprobadas
+INTEGRACION DE PRUEBAS AUTOMATIZADAS 
 
 ## 🆕 Versión 5.4 · Fondo animado
 
