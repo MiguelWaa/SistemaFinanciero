@@ -141,11 +141,20 @@ PASO 7 · USAR EL SISTEMA
        tambien se puede crear una cuenta nueva desde "Crear cuenta")
 
 ----------------------------------------------------------------
-PASO 8 · PRUEBAS AUTOMATICAS (TDD)
+PASO 8 · PRUEBAS AUTOMATICAS (PLAN DE PRUEBAS, version 6.0)
 ----------------------------------------------------------------
-  En NetBeans: clic derecho en "Test Libraries" > Add Library >
-  "JUnit 4.13.2" y "Hamcrest 1.3". Luego Run > Test Project (Alt+F6).
-  Deben salir 77 pruebas correctas. No necesitan PostgreSQL.
+  a) scripts\descargar_librerias.bat  (deja JUnit, Mockito y JaCoCo en lib\test)
+  b) En NetBeans: "Test Libraries" > Add Library > "JUnit 4.13.2" y
+     "Hamcrest 1.3". Luego Run > Test Project (Alt+F6).
+     Salen 216 pruebas. Las 20 de PostgreSQL usan la base de PRUEBAS
+     SistemaFinanciero_test; si no existe, se OMITEN (no fallan).
+  c) Base de pruebas:  set PGPASSWORD=123456
+                       scripts\pruebas\preparar_bd_pruebas.bat
+  d) Plan completo (JUnit + Newman + Playwright + JMeter):
+       pip install -r pruebas\requirements.txt
+       python -m playwright install chromium
+       scripts\pruebas\ejecutar_plan_de_pruebas.bat
+     Detalle: docs\09_PLAN_DE_PRUEBAS.md y docs\10_HERRAMIENTAS_Y_RESULTADOS.md
 
 ----------------------------------------------------------------
 PASO 9 · RESPALDOS

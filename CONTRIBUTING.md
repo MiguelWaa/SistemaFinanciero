@@ -24,6 +24,9 @@ ramas, commits y diferencias.
 5. Si cambia la base: script nuevo en `db/` que termine con `INSERT INTO version_esquema …`
    y agregar la versión en `version/HistorialEsquema.java`.
 6. `sh scripts/compilar_y_probar.sh` (o Alt+F6 en NetBeans): todo en verde.
+   Si el cambio toca reglas, pantallas o la API, ejecutar el plan completo
+   (`scripts/pruebas/ejecutar_plan_de_pruebas.*`) y, si se corrige un defecto,
+   **escribir primero la prueba que lo reproduce (rojo)** y registrarlo en `docs/10` §4.
 7. `git push -u origin feature/<tema>` y abrir un **Pull Request hacia `develop`**.
    Otro integrante revisa; se fusiona con *merge commit* (`--no-ff`) cuando la CI está en verde.
 

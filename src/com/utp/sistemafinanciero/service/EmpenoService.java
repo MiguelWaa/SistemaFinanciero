@@ -13,6 +13,10 @@ import java.util.List;
  */
 public class EmpenoService {
 
+    /** Límites del empeño (Plan de Pruebas, casos PU-EMP-01…08). */
+    public static final java.math.BigDecimal MONTO_MAXIMO = new java.math.BigDecimal("1000000.00");
+    public static final int PLAZO_MAXIMO_DIAS = 365;
+
     private final EmpenoDao dao;
 
     /** El DAO se recibe por constructor (inyección de dependencias, DIP). */
@@ -32,13 +36,18 @@ public class EmpenoService {
         return e;
     }
 
+    /** Valida monto, plazo y tasa sin guardar nada (la usa también el Portal, DEF-007). */
+    public void validar(Empeno e) {
+        ReglasMonto.exigirMonto(e.getMontoPrestamo(), new java.math.BigDecimal("0.01"), MONTO_MAXIMO,
+                "El monto del empeño");
+        ReglasMonto.exigirPlazo(e.getPlazoDias(), PLAZO_MAXIMO_DIAS, "días");
+        if (e.getTasaInteres() != null) {
+            ReglasMonto.exigirTasa(e.getTasaInteres());
+        }
+    }
+
     public Empeno crear(Empeno e) {
-        if (e.getMontoPrestamo() == null || e.getMontoPrestamo().signum() <= 0) {
-            throw new ReglaNegocioException("El monto del empeno debe ser mayor que cero.");
-        }
-        if (e.getPlazoDias() == null || e.getPlazoDias() <= 0) {
-            throw new ReglaNegocioException("El plazo en dias debe ser mayor que cero.");
-        }
+        validar(e);
         if (e.getFechaEmpeno() == null) {
             e.setFechaEmpeno(LocalDate.now());
         }

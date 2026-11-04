@@ -9,6 +9,8 @@ import java.util.List;
 /** Reglas de negocio para la gestion de clientes. */
 public class ClienteService implements ServicioCrud<Cliente, Cliente> {
 
+    private static final java.util.Set<String> ESTADOS = java.util.Set.of("ACTIVO", "BLOQUEADO", "INACTIVO");
+
     private final ClienteDao dao;
 
     /** El DAO se recibe por constructor (inyección de dependencias, DIP). */
@@ -35,6 +37,11 @@ public class ClienteService implements ServicioCrud<Cliente, Cliente> {
         }
         if (c.getEstado() == null || c.getEstado().isBlank()) {
             c.setEstado("ACTIVO");
+        } else if (!ESTADOS.contains(c.getEstado().trim().toUpperCase())) {
+            // Plan de Pruebas, PU-CLI-M: antes se guardaba cualquier texto como estado.
+            throw new ReglaNegocioException("Estado de cliente no válido. Use ACTIVO, BLOQUEADO o INACTIVO.");
+        } else {
+            c.setEstado(c.getEstado().trim().toUpperCase());
         }
         c.setFechaRegistro(LocalDateTime.now());
         c.setIdCliente(dao.crear(c));
@@ -72,7 +79,7 @@ public class ClienteService implements ServicioCrud<Cliente, Cliente> {
 
     /** Activa o bloquea la cuenta de un cliente. */
     public Cliente cambiarEstado(int id, String estado) {
-        if (estado == null || !java.util.Set.of("ACTIVO", "BLOQUEADO", "INACTIVO").contains(estado.toUpperCase())) {
+        if (estado == null || !ESTADOS.contains(estado.toUpperCase())) {
             throw new ReglaNegocioException("Estado de cliente no válido. Use ACTIVO, BLOQUEADO o INACTIVO.");
         }
         estado = estado.toUpperCase();

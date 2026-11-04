@@ -35,6 +35,10 @@ public class TipoCambioService implements ServicioCrud<TipoCambio, TipoCambio> {
         if (t.getCompra() == null || t.getVenta() == null) {
             throw new ReglaNegocioException("Debe indicar los valores de compra y venta.");
         }
+        // Misma regla que el CHECK ck_tipo_cambio_valores de la base (Plan de Pruebas, PU-CAT-02).
+        if (t.getCompra().signum() <= 0 || t.getVenta().signum() <= 0) {
+            throw new ReglaNegocioException("Los valores de compra y venta deben ser mayores que cero.");
+        }
         if (t.getFechaInicio() == null) {
             t.setFechaInicio(LocalDate.now());
         }
