@@ -52,3 +52,6 @@
      admin@sigsf.com        / admin123
      lucia.ramos@sigsf.com  / lucia123
      jorge.torres@sigsf.com / jorge123
+USUARIO EXTRA : AÑADIR SU CUENTA EN REGISTRAR CUENTA 
+DNI : 
+CONTRASEÑA (OPCIONAL EL MISMO DNI )
