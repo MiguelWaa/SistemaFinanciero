@@ -7,7 +7,18 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 - **Integrantes:** Miguel Ángel Machaca Machaca · Ricardo Gabriel Cervantes Tejada · Cesar Huaripaucar Huaman
 - **Docente:** Rene Alonso Nieto Valencia
 
----
+---SIGSF 6.0.0
+VALIDADA
+
+RELEASE 6.0.0
+Comprobación	Resultado
+Rama main	Correcta
+Commit de cierre	4264701
+Etiqueta local	Correcta
+Etiqueta remota	Actualizada
+Commit de la etiqueta	Coincide
+Versión declarada	6.0.0
+Pruebas automatizadas	241 aprobadas
 
 ## 🆕 Versión 5.4 · Fondo animado
 
