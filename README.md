@@ -8,7 +8,7 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 - **Docente:** Rene Alonso Nieto Valencia
 
 ---SIGSF 6.0.0
-VALIDADA
+VALIDADA - VERSION ACTUALIZADA 05/11/2026
 
 RELEASE 6.0.0
 Comprobación	Resultado
