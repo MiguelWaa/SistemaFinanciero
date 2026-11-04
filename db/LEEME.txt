@@ -39,6 +39,7 @@ INSTRUCCIONES
      host, puerto, usuario y contrasena de PostgreSQL.
 
 
+
    Valores por defecto:
      db.host=localhost
      db.port=5432
