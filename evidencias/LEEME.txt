@@ -39,3 +39,14 @@ v53_04        Confeti al registrar un pago en el portal
 
 v5.4.0 · Fondo animado
 v54_01-03     Portal, Pagos y panel con el fondo nuevo (degradado, auroras y trama tipo billete)
+
+v5.5.0 · Plan de pruebas de software
+v55_01        Consola JUnit: OK (192 tests) y resumen por nivel
+v55_02        Newman (Postman): 26 peticiones, 63 aserciones, 0 fallas
+v55_03        Reporte HTML de Playwright: 13 de 13 pruebas de sistema en navegador
+v55_04-05     E2E: panel del administrador y login fallido
+v55_06-08     E2E: QR de Yape en el portal, pago registrado y bandeja Por verificar de caja
+v55_09        E2E: un nombre con codigo HTML se muestra como texto (sin XSS)
+v55_10        E2E: Portal del Cliente en celular (Pixel 7)
+v55_11        E2E: cajero sin acceso a Usuarios
+resultado_plan_pruebas_v55.txt   Resumen en texto de la ejecucion del plan

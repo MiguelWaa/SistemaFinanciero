@@ -10,6 +10,14 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+### Agregado
+- Plan de pruebas de software (`docs/10_PLAN_DE_PRUEBAS.md`) y documento de herramientas, codificación y resultados (`docs/11`).
+- Pruebas JUnit del plan en `test/.../plan/`: sistema (7), aceptación HU-01…HU-10 (10), seguridad OWASP (10) y rendimiento (2),
+  con el entorno reutilizable `ServidorDePrueba`; unitarias de `ProductoService`, `TipoCambioService` y `ExpedienteService` (151 → 192).
+- Colección Postman (26 peticiones, 63 aserciones) y pruebas E2E con Playwright (13) en `pruebas/`.
+- `pruebas/ejecutar_plan_pruebas.sh` / `.bat` y flujo de GitHub Actions `plan-pruebas.yml`.
+- Inventario T-35…T-42 y evidencias `evidencias/v55_*`.
+
 ## [5.4.0] - 2026-10-26 · Fondo animado
 
 ### Cambiado

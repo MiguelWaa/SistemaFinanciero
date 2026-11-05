@@ -9,6 +9,22 @@ con frontend, backend en Java y persistencia en **PostgreSQL**.
 
 ---
 
+## 🆕 Versión 5.5 · Plan de pruebas de software
+
+| Tema | Qué se implementó | Dónde |
+|---|---|---|
+| **Plan de pruebas** | Alcance, estrategia (pirámide), preparación del entorno, niveles unitarias · integración · sistema · aceptación · no funcionales, trazabilidad, criterios, defectos, roles y cronograma | `docs/10_PLAN_DE_PRUEBAS.md` |
+| **Herramientas y resultados** | JUnit 4, Postman/Newman, Playwright y GitHub Actions; codificación propuesta y resultados: **231 casos, 100 % aprobados** | `docs/11_HERRAMIENTAS_Y_RESULTADOS_DE_PRUEBAS.md` |
+| **JUnit** | 151 → **192 pruebas**: sistema de extremo a extremo, aceptación HU-01…HU-10 (Dado/Cuando/Entonces), seguridad OWASP y rendimiento (20 usuarios concurrentes) | `test/.../plan/`, `test/.../service/` |
+| **API** | Colección Postman de 26 peticiones y 63 aserciones, ejecutable con Newman | `pruebas/postman/` |
+| **Navegador** | 13 pruebas Playwright (escritorio y celular) con capturas | `pruebas/e2e/` |
+| **Un solo comando** | `pruebas\ejecutar_plan_pruebas.bat` (o `.sh`) corre los tres bloques y deja reportes HTML | `pruebas/` |
+| **CI** | Flujo *Plan de pruebas SIGSF* con los reportes como artefacto | `.github/workflows/plan-pruebas.yml` |
+
+Evidencias: `evidencias/v55_*.png`. El código de la aplicación, los estilos y la base de datos no cambian en esta versión.
+
+---
+
 ## 🆕 Versión 5.4 · Fondo animado
 
 Fondo con degradado, auroras en movimiento, rejilla de puntos y trama tipo billete (`web/img/guilloche.svg`) en todas las páginas, con tarjetas tipo vidrio. Capturas: `evidencias/v54_*.png`.
@@ -109,6 +125,8 @@ automatizadas. Documentación detallada en la carpeta **`docs/`**:
 | `docs/06_RECURSOS_DE_CODIGO_FUENTE.md` | Paquetes, librerías, dependencias, Logback, importación y exportación de ficheros por área |
 | `docs/07_CONTROL_DE_VERSIONES.md` | Git Flow, commits, merge, conflictos, rollback, etiquetas, remoto, CI, versionamiento de la BD |
 | `docs/09_PAGOS_QR_Y_COTIZACIONES.md` | Pagos con Yape/Plin/Tunki, verificación, cotizaciones, documentos imprimibles e interfaz Bootstrap 5 |
+| `docs/10_PLAN_DE_PRUEBAS.md` | Plan de pruebas: entorno, unitarias, integración, sistema, aceptación, no funcionales, trazabilidad |
+| `docs/11_HERRAMIENTAS_Y_RESULTADOS_DE_PRUEBAS.md` | Herramientas (JUnit, Postman/Newman, Playwright, CI), codificación, resultados e inventario de pruebas |
 
 **Qué cambió (resumen):**
 
