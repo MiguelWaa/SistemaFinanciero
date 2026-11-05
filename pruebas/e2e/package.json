@@ -1,0 +1,16 @@
+{
+  "name": "sigsf-pruebas",
+  "version": "5.5.0",
+  "private": true,
+  "description": "SIGSF · Plan de pruebas: pruebas de API (Postman/Newman) y de sistema en navegador (Playwright)",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:api": "newman run ../postman/SIGSF_API.postman_collection.json -e ../postman/SIGSF_local.postman_environment.json -r cli,htmlextra,junit --reporter-htmlextra-export ../reportes/newman/reporte-api.html --reporter-junit-export ../reportes/newman/junit-api.xml --reporter-htmlextra-title \"SIGSF · Pruebas de API\"",
+    "reporte": "playwright show-report ../reportes/playwright"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "newman": "6.2.1",
+    "newman-reporter-htmlextra": "1.23.1"
+  }
+}
