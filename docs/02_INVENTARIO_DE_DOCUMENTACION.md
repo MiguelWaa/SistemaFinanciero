@@ -44,6 +44,14 @@ documento se consulta con `git log --follow <ruta>`.
 | T-32 | Versionamiento del esquema BD | `db/version_esquema.sql` · tabla `version_esquema` · `version/HistorialEsquema` | Versión de la base de cada equipo (1.0.0 → 5.0.0) | ✅ |
 | T-33 | Pantalla de control de versiones | `web/versiones.html` · `GET /api/version` · `GET /api/versiones` | Versión, commits, red de ramas, etiquetas y esquema BD | ✅ |
 | T-34 | Repositorio empaquetado | `SIGSF.bundle` (entregable) | Copia completa del repositorio con todas las ramas y etiquetas | ✅ |
+| T-35 | **Plan de pruebas de software** (v5.5) | `docs/10_PLAN_DE_PRUEBAS.md` | Alcance, estrategia, entorno, niveles (unitarias, integración, sistema, aceptación, no funcionales), trazabilidad, criterios, defectos, roles | ✅ |
+| T-36 | Herramientas, codificación y resultados de pruebas | `docs/11_HERRAMIENTAS_Y_RESULTADOS_DE_PRUEBAS.md` | JUnit, Postman/Newman, Playwright, GitHub Actions; 231 casos, 100 % aprobados | ✅ |
+| T-37 | Pruebas del plan (sistema, aceptación, seguridad, rendimiento) | `test/com/utp/sistemafinanciero/plan/` | 29 pruebas JUnit nuevas + entorno `ServidorDePrueba` | ✅ |
+| T-38 | Colección y entorno Postman | `pruebas/postman/` | 26 peticiones, 63 aserciones (CP-API-01…26) | ✅ |
+| T-39 | Pruebas de sistema en navegador | `pruebas/e2e/` (Playwright) | 13 casos E2E con capturas, escritorio y móvil | ✅ |
+| T-40 | Scripts del plan de pruebas | `pruebas/ejecutar_plan_pruebas.sh` · `.bat` | Ejecuta los tres bloques y genera el resumen | ✅ |
+| T-41 | CI del plan de pruebas | `.github/workflows/plan-pruebas.yml` | Plan completo en cada push / PR con reportes como artefacto | ✅ |
+| T-42 | Evidencias del plan de pruebas | `evidencias/v55_*` · `evidencias/resultado_plan_pruebas_v55.txt` | Consola JUnit, Newman, Playwright y capturas E2E | ✅ |
 
 ## B. Documentación por área del negocio
 
@@ -89,3 +97,4 @@ documento se consulta con `git log --follow <ruta>`.
 | 3.0 | Documentación del proyecto | Requisitos y estado por área (PDF del proyecto) |
 | 4.0 | Taller: recursos de código | Recursos de código fuente (T-19), Logback (T-20), importación/exportación (T-21, T-22), dependencias (T-23), logs (T-24), seguridad Java; 99 pruebas |
 | 5.0 | Taller: control de versiones | Repositorio Git con Git Flow (T-25), CHANGELOG (T-26), VERSION (T-27), reglas del repositorio (T-28), hooks (T-29), CI (T-30), contribución (T-31), versionamiento del esquema (T-32), pantalla de versiones (T-33), bundle (T-34), inventario de artefactos (§C); 117 pruebas |
+| 5.5 | Plan de pruebas de software | Plan de pruebas (T-35), herramientas y resultados (T-36), pruebas del plan (T-37…T-39), scripts (T-40), CI (T-41), evidencias (T-42); 192 pruebas JUnit + 26 Postman + 13 Playwright |

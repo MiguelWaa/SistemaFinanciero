@@ -1,0 +1,4 @@
+# SIGSF · Plan de pruebas · archivos generados que no se versionan
+node_modules/
+reportes/
+*.pid

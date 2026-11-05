@@ -1,0 +1,54 @@
+# ============================================================
+#  SIGSF · Plan de pruebas completo (v5.5)
+#  1. JUnit: unitarias, integración, sistema, aceptación, seguridad, rendimiento
+#  2. Postman / Newman: pruebas de API contra el servidor en marcha
+#  3. Playwright: pruebas de sistema en el navegador (escritorio y móvil)
+#  Se ejecuta en cada push a main/develop, en cada Pull Request y a mano
+#  (Actions → "Plan de pruebas SIGSF" → Run workflow). Los reportes HTML
+#  quedan como artefacto descargable de la ejecución.
+# ============================================================
+name: Plan de pruebas SIGSF
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  plan-de-pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Instalar JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Instalar Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Dependencias de pruebas (Newman y Playwright)
+        working-directory: pruebas/e2e
+        run: |
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Ejecutar el plan de pruebas
+        run: sh pruebas/ejecutar_plan_pruebas.sh
+
+      - name: Publicar reportes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes-plan-de-pruebas
+          path: pruebas/reportes/
+          retention-days: 30
