@@ -10,6 +10,8 @@ y numeración [SemVer](https://semver.org/lang/es/): `MAYOR.MENOR.PARCHE`.
 
 ## [Sin publicar]
 
+## [5.5.0] - 2026-11-04 · Plan de pruebas de software
+
 ### Agregado
 - Plan de pruebas de software (`docs/10_PLAN_DE_PRUEBAS.md`) y documento de herramientas, codificación y resultados (`docs/11`).
 - Pruebas JUnit del plan en `test/.../plan/`: sistema (7), aceptación HU-01…HU-10 (10), seguridad OWASP (10) y rendimiento (2),
