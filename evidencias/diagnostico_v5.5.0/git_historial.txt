@@ -1,0 +1,20 @@
+bae0966 Merge branch 'release/5.5.0'
+e25afd6 chore(release): preparar la versión 5.5.0
+dbd67b9 Merge branch 'feature/plan-de-pruebas' into develop
+bae503a docs(pruebas): plan de pruebas, herramientas y resultados, inventario y evidencias v5.5
+bdb0259 ci(pruebas): flujo Plan de pruebas SIGSF con reportes como artefacto
+87a9d35 test(api): coleccion Postman/Newman, pruebas E2E con Playwright y script del plan
+bb7eb7e test(plan): pruebas de sistema, aceptacion, seguridad OWASP y rendimiento (163 -> 192)
+7ab4eab test(unitarias): productos, tipos de cambio y expedientes (151 -> 163)
+1d5ffc3 Merge branch 'release/5.4.0'
+667252b Merge branch 'main' into develop (v5.4.0)
+699c96b chore(release): preparar la versión 5.4.0
+134b163 Merge branch 'feature/fondo-animado' into develop
+a9f549e docs(ui): fondo animado en README, changelog y evidencias v5.4
+7d4fb4c style(ui): fondo animado con degradado, auroras y trama tipo billete
+6d1def1 Merge branch 'release/5.3.0'
+270981e Merge branch 'main' into develop (v5.3.0)
+3eb613f chore(release): preparar la versión 5.3.0
+369e94b Merge branch 'feature/ui-animada' into develop
+4e77ce9 docs(ui): capa animada en README, changelog, documento 09 y evidencias v5.3
+b03fc2a feat(ui): capa animada en todo el sistema

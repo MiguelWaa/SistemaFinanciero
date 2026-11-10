@@ -1,0 +1,6 @@
+{
+  "herramienta": "PostgreSQL + JDBC + JUnit",
+  "estado": "BLOQUEADO",
+  "pasos": [],
+  "motivo": "No está instalado psql"
+}

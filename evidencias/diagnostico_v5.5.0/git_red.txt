@@ -1,0 +1,74 @@
+*   15d84b6 Merge branch 'main' into develop (v5.5.0)
+|\  
+| *   bae0966 Merge branch 'release/5.5.0'
+| |\  
+| | * e25afd6 chore(release): preparar la versión 5.5.0
+| |/  
+|/|   
+* |   dbd67b9 Merge branch 'feature/plan-de-pruebas' into develop
+|\ \  
+| * | bae503a docs(pruebas): plan de pruebas, herramientas y resultados, inventario y evidencias v5.5
+| * | bdb0259 ci(pruebas): flujo Plan de pruebas SIGSF con reportes como artefacto
+| * | 87a9d35 test(api): coleccion Postman/Newman, pruebas E2E con Playwright y script del plan
+| * | bb7eb7e test(plan): pruebas de sistema, aceptacion, seguridad OWASP y rendimiento (163 -> 192)
+| * | 7ab4eab test(unitarias): productos, tipos de cambio y expedientes (151 -> 163)
+|/ /  
+* | 667252b Merge branch 'main' into develop (v5.4.0)
+|\| 
+| *   1d5ffc3 Merge branch 'release/5.4.0'
+| |\  
+| | * 699c96b chore(release): preparar la versión 5.4.0
+| |/  
+|/|   
+* |   134b163 Merge branch 'feature/fondo-animado' into develop
+|\ \  
+| * | a9f549e docs(ui): fondo animado en README, changelog y evidencias v5.4
+| * | 7d4fb4c style(ui): fondo animado con degradado, auroras y trama tipo billete
+|/ /  
+* | 270981e Merge branch 'main' into develop (v5.3.0)
+|\| 
+| *   6d1def1 Merge branch 'release/5.3.0'
+| |\  
+| | * 3eb613f chore(release): preparar la versión 5.3.0
+| |/  
+|/|   
+* |   369e94b Merge branch 'feature/ui-animada' into develop
+|\ \  
+| * | 4e77ce9 docs(ui): capa animada en README, changelog, documento 09 y evidencias v5.3
+| * | b03fc2a feat(ui): capa animada en todo el sistema
+|/ /  
+* | 15ddb05 Merge branch 'main' into develop (v5.2.0)
+|\| 
+| *   3ca2760 Merge branch 'release/5.2.0'
+| |\  
+| | * 115382a chore(release): preparar la versión 5.2.0
+| |/  
+|/|   
+* |   7069f4f Merge branch 'feature/pagos-qr-bootstrap' into develop
+|\ \  
+| * | c601164 docs(pagos): documento 09, README, guias de instalacion, changelog y evidencias v5.2
+| * | e8990b9 chore(web): eliminar hojas de estilo que ninguna pagina usaba
+| * | ad73b13 feat(pagos): modulo Pagos y cobranzas, avisos en el panel y reportes de pagos
+| * | eeb7ffb feat(portal): pagar con QR, cotizar, comprobantes y estado de cuenta
+| * | bf9ab16 feat(ui): interfaz empresarial con Bootstrap 5.3 local en todo el sistema
+| * | 748d02d perf(web): cache, ETag y gzip para archivos estaticos y CSP sin CDN
+| * | e59c61e test(pagos): pruebas de pagos, cotizaciones y API (126 -> 151)
+| * | 6b140a4 feat(pagos): pagos con QR de Yape, Plin y Tunki, billeteras y cotizaciones
+| * | 24fa734 fix(ci): copiar los recursos de src al classpath en el script de pruebas
+|/ /  
+| | * a9d68a7 fix(pruebas): adaptar el plan de pruebas a la interfaz Bootstrap 5.2+ y a la base con pagos
+| | * 11674f1 Update INSTALAR_LEEME.txt
+| | * dadc77b Update INSTALAR_LEEME.txt
+| | * d50d42a Update INSTALAR_LEEME.txt
+| | * 3c9a2e4 Update instructions for database creation step
+| | * 3b89bcd Update INSTALAR_LEEME.txt
+| | * aabc270 Update INSTALAR_LEEME.txt
+| | * 932166a Update INSTALAR_LEEME.txt
+| | * 246f7f4 Update README.md
+| | * 8888b5a Update README with API base URL information
+| | * 8c51b5a Update README.md
+| | * d61c0de Add user control section to README
+| | * 9eda861 Add FAQ section to ayuda.html
+| | * 8e78f0a Update almacen.html
+| | * c8d6cd5 Update Ventas.html
+| | * e5c097a Update Marketing.html

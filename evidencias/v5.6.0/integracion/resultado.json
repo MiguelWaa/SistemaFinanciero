@@ -1,0 +1,60 @@
+{
+  "version": "5.6.0",
+  "fecha_utc": "2026-11-10T23:08:28.881786+00:00",
+  "alcance": "localhost; datos de prueba; DAO en memoria",
+  "compilacion": "-source 17 -target 17",
+  "etapas": [
+    {
+      "nombre": "compilar_fuentes",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "compilar_fuentes.txt"
+    },
+    {
+      "nombre": "compilar_pruebas",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "compilar_pruebas.txt"
+    },
+    {
+      "nombre": "junit",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "junit.txt"
+    },
+    {
+      "nombre": "frontend_sintaxis",
+      "estado": "APROBADO",
+      "registro": "frontend_sintaxis.txt"
+    },
+    {
+      "nombre": "newman",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "newman.txt"
+    },
+    {
+      "nombre": "entradas_seguridad",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "entradas_seguridad.txt"
+    },
+    {
+      "nombre": "playwright",
+      "estado": "NO EJECUTADO",
+      "motivo": "Omitido expresamente; se requiere Chromium compatible"
+    }
+  ],
+  "pendientes": [
+    "PostgreSQL (scripts/probar_postgresql.py)",
+    "ZAP (scripts/escanear_zap.py)",
+    "SCA (scripts/escanear_dependencias.py)"
+  ],
+  "commit": "614f35bdfb469bb551b54a337e88261b4525c9bf",
+  "cambios_locales": false,
+  "sha256_fuentes": "fc1a31385392c19d4783d46f86ca90c0857eda771e8cdd051f2dbb4e8c24a8bb",
+  "junit_casos_aprobados": 214,
+  "url_prueba": "http://127.0.0.1:37657",
+  "seleccion_aprobada": true,
+  "evaluacion_integral_completa": false
+}

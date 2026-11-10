@@ -1,0 +1,7 @@
+{
+  "fecha_utc": "2026-11-10T23:03:38.163113+00:00",
+  "modalidad": "pasivo",
+  "estado": "BLOQUEADO",
+  "alcance": "instancia local; una cuenta; verificar cobertura de rutas y roles en el informe",
+  "motivo": "Docker no está instalado"
+}

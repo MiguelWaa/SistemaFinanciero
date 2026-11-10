@@ -1,0 +1,56 @@
+1. Plan de pruebas de seguridad
+20 segundos. Presentamos la integración de seguridad de SIGSF 5.6.0. El paquete contiene aplicación, pruebas, documentación y presentación. Las mejoras se aplicaron al código y se verificaron con pruebas repetibles. Integrantes tomados del README original.
+
+2. Alcance y entorno de evaluación
+35 segundos. El sistema separa interfaz, API Java y persistencia. La revisión se concentra en autenticación, permisos, entradas y pagos. Compilamos 216 clases y 36 archivos de prueba. Los DAO en memoria permiten repetir los ensayos sin alterar información real. La integración JDBC necesita una prueba adicional con PostgreSQL. Fuentes: src/, db/, compilación actual.
+
+3. Plan de pruebas de seguridad
+50 segundos. El plan incluye controles de acceso, entradas, deserialización y configuración. Integramos JSON estricto, rechazo de tipos de contenido y CSP para scripts externos. El fuzzing usa 20 entradas pequeñas. Los ejecutores JDBC y ZAP están implementados pero sus herramientas faltan aquí. El análisis npm en línea necesita autorización para enviar dependencias. Referencias: https://wstg.owasp.org/ y https://www.rfc-editor.org/info/rfc8259/ .
+
+4. Herramientas elegidas
+40 segundos. JUnit y Newman comprueban backend y API. Python coordina la ejecución y registra resultados sin confundir pendientes con aprobados. Playwright conserva el flujo de interfaz y añade una prueba de ayuda con CSP. PostgreSQL, ZAP y análisis de dependencias tienen ejecutores dentro de scripts/. Sus informes actuales reflejan los bloqueos. Enlaces en el anexo 12.
+
+5. Resultados obtenidos
+55 segundos. Las 214 pruebas JUnit aprobaron, incluyendo 22 nuevas. La colección API completó 26 peticiones y 63 aserciones sin fallos. Las 24 comprobaciones adicionales aprobaron después de las correcciones. El navegador no se reejecutó por la restricción conocida del entorno. Las 13 aprobadas del archivo recibido son evidencia histórica. PostgreSQL, ZAP y SCA requieren completar ejecución en un entorno habilitado.
+
+6. Evidencia de interfaz y código
+55 segundos. La pantalla es evidencia histórica de XSS como texto. La mejora actual está en Json.parseCompleto, que ahora exige consumir todo el documento. La prueba SeguridadEntradasApiTest envía credenciales válidas con texto sobrante y obtiene 400 sin token. Ctx también valida Content-Type y UTF-8; el tipo text/plain devuelve 415. El código y los registros están integrados en el proyecto.
+
+7. Controles integrados y validación pendiente
+45 segundos. La entrega implementa las correcciones en la aplicación. El lector JSON aplica reglas de formato y límite de anidación. Los endpoints rechazan tipos de contenido no admitidos. El frontend usa 26 scripts externos y la CSP bloquea scripts inline. La aplicación, la documentación y los reportes se entregan en un solo ZIP. La validación integral mantiene pendientes PostgreSQL, navegador, DAST y SCA en línea.
+
+8. Anexo 1. Proceso de pago
+Anexo de consulta. Métodos PagoService.registrarDesdePortal, confirmar, rechazar y aplicarEfectos. El QR no implica conciliación bancaria automática. El proceso termina con la decisión auditada. Ver modelos/Proceso_pago.mmd.
+
+9. Anexo 2. MVC, DTO, DAO y SOLID
+SOLID son principios, no patrones de diseño. La existencia de interfaces respalda el diseño; no demuestra por sí sola que todas las implementaciones cumplan el mismo contrato. Fuente: docs/01 y código actual. Ese documento conserva algunos conteos antiguos; el conteo actual es 216 archivos Java de producción.
+
+10. Anexo 3. Modelo de clases de pagos
+Modelo UML simplificado. Relación Controller-Service y Service-DAO: asociación por referencia inyectada, no composición UML demostrada. Los DAO implementan PagoDao. PagoService usa Pago. Fuente: controller/PagoController.java, service/PagoService.java, dao/PagoDao.java, model/pagos/Pago.java. Ver modelos/Clases_pagos.mmd.
+
+11. Anexo 4. Modelo lógico y físico
+Cardinalidades según nulabilidad y unicidad del DDL. operacion.id_cliente admite NULL; pago.id_cliente es obligatorio. pago.id_operacion admite NULL y ON DELETE SET NULL. El vínculo prestamo.id_operacion no tiene UNIQUE en el DDL entregado, por lo que no debe dibujarse como 1:1 garantizado. Modelo completo y cardinalidades en los archivos adjuntos.
+
+12. Anexo 5. Diccionario de datos
+Extracto del diccionario físico. Las reglas adicionales de aplicación se documentan por separado: no confundir el máximo de pago del servicio con un CHECK de la tabla. El CSV transcribe definiciones SQL; las restricciones de tabla están en un JSON complementario y en DDL_revisado.sql.
+
+13. Anexo 6. Prototipos UX/UI implementados
+Modelo navegable implementado: portal de cliente y bandeja de caja. El portal registra y consulta pagos. Caja confirma o rechaza con una decisión visible. Los botones restringidos por rol deben complementarse con autorización de API. Pantallas de evidencia heredada v55_08 y v55_10. La adaptación móvil no se revalidó por el bloqueo del navegador.
+
+14. Anexo 7. Reportes y denominación
+La máscara %06d representa un entero con al menos seis posiciones. El comprobante RC se calcula a partir del id del pago confirmado. No se afirma una integración de comprobantes electrónicos tributarios. Fuentes: modelos de pagos, web/documento.html, portal-documento.html, reportes.html y CatalogoArchivos.
+
+15. Anexo 8. Recursos del código fuente
+El inventario cuenta 216 archivos .java de producción. No se concluye que una versión incluida esté libre de CVE. LectorExcel limita entradas y tamaño descomprimido. Logback: acceso 20 MB por segmento y 30 días; seguridad 90 días. Importar operaciones de dinero está deshabilitado en el catálogo. Fuente: src/, lib/, docs/06 y pruebas de archivos.
+
+16. Anexo 9. Repositorio y versionamiento
+Se creó feature/integracion-seguridad-5.6.0, con commits locales para correcciones y documentación, y se integró mediante merge en release/5.6.0. La etiqueta v5.6.0 identifica la entrega. Se conservan main, develop y el historial recibido. No se publicó en GitHub. El rollback mostrado es una instrucción propuesta, no una reversión ejecutada.
+
+17. Anexo 10. Pruebas de software y entorno
+El registro junit.txt contiene la medición local de 500 peticiones. No extrapolar a producción ni a PostgreSQL. En este runtime se usó -source 17 -target 17; el ejecutor normal y CI usan --release 17 con JDK completo. El ejecutor PostgreSQL crea una base sigsf_test_ nueva y no elimina bases existentes.
+
+18. Anexo 11. Inventario y trazabilidad
+La raíz contiene DOCUMENTACION_INTEGRAL.html. docs/modelos incluye el catálogo Java completo por tipo superior, atributos, métodos y herencia, junto con modelos de procesos y la base de datos. evidencia/v5.6.0 contiene resultados de la integración. El inventario CSV permite ubicar cada documento y la presentación incorpora guion.
+
+19. Anexo 12. Rutas compartidas y fuentes
+Fuentes oficiales consultadas el 10/11/2026. ZAP Baseline es rastreo y análisis pasivo; no sustituye penetración activa autenticada. Dependency-Check es SCA. JUnit 4 está en mantenimiento y la documentación actual de Postman recomienda migrar Newman a Postman CLI. Se reutilizan aquí las versiones del proyecto para reproducibilidad. URL de deserialización: https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/07-Injection/23-Insecure_Deserialization/ .

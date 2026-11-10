@@ -1,0 +1,105 @@
+Intento 10/11/2026: 11 fallos de arranque y 2 no ejecutadas. No son defectos funcionales confirmados.
+
+
+Running 13 tests using 1 worker
+
+(node:122) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 [escritorio-chromium] › tests/01-acceso.spec.js:6:3 › Acceso al sistema (RF-SEG-01) › E2E-01 · el administrador ingresa y ve el panel con indicadores (1ms)
+(node:156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 [escritorio-chromium] › tests/01-acceso.spec.js:14:3 › Acceso al sistema (RF-SEG-01) › E2E-02 · una clave incorrecta muestra un aviso y no entra (2ms)
+(node:191) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   3 [escritorio-chromium] › tests/01-acceso.spec.js:25:3 › Acceso al sistema (RF-SEG-01) › E2E-03 · sin sesión, el panel redirige al login (1ms)
+(node:226) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   4 [escritorio-chromium] › tests/01-acceso.spec.js:31:3 › Acceso al sistema (RF-SEG-01) › E2E-04 · cerrar sesión devuelve al login y el token deja de servir (1ms)
+(node:261) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 [escritorio-chromium] › tests/02-modulos.spec.js:24:3 › Módulos del panel (MVC · vistas) › E2E-05 · el administrador abre los 15 módulos sin errores de JavaScript (1ms)
+(node:296) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 [escritorio-chromium] › tests/02-modulos.spec.js:40:3 › Módulos del panel (MVC · vistas) › E2E-06 · la tabla de clientes carga datos reales desde la API (1ms)
+(node:331) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 [escritorio-chromium] › tests/02-modulos.spec.js:49:3 › Módulos del panel (MVC · vistas) › E2E-07 · el cajero no tiene acceso a Usuarios (RBAC en la interfaz y en la API) (1ms)
+(node:366) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 [escritorio-chromium] › tests/03-portal-pago.spec.js:8:3 › Portal del Cliente y pagos con QR (RF-PAG) › E2E-08 · el cliente ingresa con su documento (1ms)
+  -   9 [escritorio-chromium] › tests/03-portal-pago.spec.js:20:3 › Portal del Cliente y pagos con QR (RF-PAG) › E2E-09 · paga una cuota con Yape y queda por verificar
+  -  10 [escritorio-chromium] › tests/03-portal-pago.spec.js:46:3 › Portal del Cliente y pagos con QR (RF-PAG) › E2E-10 · caja ve el pago en la bandeja "Por verificar" y lo confirma
+(node:401) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  11 [escritorio-chromium] › tests/04-seguridad.spec.js:5:1 › E2E-11 · un nombre con código HTML se muestra como texto (sin XSS) (1ms)
+(node:436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  12 [escritorio-chromium] › tests/04-seguridad.spec.js:29:1 › E2E-12 · las páginas llegan con CSP y anti-clickjacking (1ms)
+(node:471) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  13 [movil-chromium] › tests/05-responsive.spec.js:4:1 › E2E-13 · el portal se usa en celular sin desplazamiento horizontal (1ms)
+
+
+  1) [escritorio-chromium] › tests/01-acceso.spec.js:6:3 › Acceso al sistema (RF-SEG-01) › E2E-01 · el administrador ingresa y ve el panel con indicadores 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-raYM4O --remote-debugging-pipe --no-startup-window
+    <launched> pid=134
+    [pid=134][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator
+    [pid=134][err] [134:134:1110/172839.478844:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)
+    [pid=134][err] [1110/172839.479595:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-raYM4O --remote-debugging-pipe --no-startup-window
+      - <launched> pid=134
+      - [pid=134][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator
+      - [pid=134][err] [134:134:1110/172839.478844:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)
+      - [pid=134][err] [1110/172839.479595:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)
+      - [pid=134] <gracefully close start>
+      - [pid=134] <kill>
+      - [pid=134] <will force kill>
+      - [pid=134] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=134] starting temporary directories cleanup
+      - [pid=134] finished temporary directories cleanup
+      - [pid=134] <gracefully close end>
+
+
+    Error Context: ../../../../../../review/playwright-results/01-acceso-Acceso-al-sistem-746b5-ve-el-panel-con-indicadores-escritorio-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../../../../../review/playwright-results/01-acceso-Acceso-al-sistem-746b5-ve-el-panel-con-indicadores-escritorio-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../../../../../review/playwright-results/01-acceso-Acceso-al-sistem-746b5-ve-el-panel-con-indicadores-escritorio-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [escritorio-chromium] › tests/01-acceso.spec.js:14:3 › Acceso al sistema (RF-SEG-01) › E2E-02 · una clave incorrecta muestra un aviso y no entra 
+
+    Error: browserType.launch: Target page, context or browser has been closed
+    Browser logs:
+
+    <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-BTit2X --remote-debugging-pipe --no-startup-window
+    <launched> pid=168
+    [pid=168][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator
+    [pid=168][err] [168:168:1110/172839.900589:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)
+    [pid=168][err] [1110/172839.900751:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)
+    Call log:
+      - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --user-data-dir=/tmp/playwright_chromiumdev_profile-BTit2X --remote-debugging-pipe --no-startup-window
+      - <launched> pid=168
+      - [pid=168][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator
+      - [pid=168][err] [168:168:1110/172839.900589:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)
+      - [pid=168][err] [1110/172839.900751:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)
+      - [pid=168] <gracefully close start>
+      - [pid=168] <kill>
+      - [pid=168] <will force kill>
+      - [pid=168] <process did exit: exitCode=null, signal=SIGABRT>
+      - [pid=168] starting temporary directories cleanup
+      - [pid=168] finished temporary directories cleanup
+      - [pid=168] <gracefully close end>
+
+
+    Error Context: ../../../../../../review/playwright-results/01-acceso-Acceso-al-sistem-82f6f-muestra-un-aviso-y-no-entra-escritorio-chromium/error-context.md
+
+    attachment #2: trace (application/zip) ──────────────────────────────────────────────────────
