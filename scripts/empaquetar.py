@@ -8,7 +8,7 @@ def git(*args):
  try:return subprocess.check_output(['git',*args],cwd=ROOT,text=True,stderr=subprocess.DEVNULL).strip()
  except Exception:return 'no-disponible'
 version=(ROOT/'VERSION').read_text().strip()
-(classes/'version.properties').write_text('version='+version+'\ncommit='+git('rev-parse','HEAD')+'\nrama='+git('branch','--show-current')+'\nfecha='+datetime.datetime.now(datetime.timezone.utc).isoformat()+'\n',encoding='utf8')
+(classes/'version.properties').write_text('version='+version+'\ncommit='+git('rev-parse','HEAD')+'\nrama='+git('branch','--show-current')+'\nfecha.compilacion='+datetime.datetime.now(datetime.timezone.utc).isoformat()+'\netiqueta='+git('describe','--tags','--always')+'\nfecha.commit='+git('show','-s','--format=%cI','HEAD')+'\nautor='+git('show','-s','--format=%an','HEAD')+'\nmensaje='+git('show','-s','--format=%s','HEAD')+'\n',encoding='utf8')
 manifest=ROOT/'build/integrado/MANIFEST.MF'
 manifest.write_text('Manifest-Version: 1.0\nMain-Class: com.utp.sistemafinanciero.ServerMain\nClass-Path: ../lib/postgresql.jar ../lib/slf4j-api-2.0.16.jar ../lib/logback-core-1.5.12.jar ../lib/logback-classic-1.5.12.jar\n\n')
 (ROOT/'dist').mkdir(exist_ok=True)
