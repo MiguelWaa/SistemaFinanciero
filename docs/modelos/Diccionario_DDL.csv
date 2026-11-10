@@ -1,0 +1,288 @@
+﻿tabla,atributo,tipo,permite_null,pk,unico,defecto,referencia,definicion,fuente
+rol,id_rol,SERIAL,NO,SI,SI,,,id_rol SERIAL PRIMARY KEY,db/schema.sql
+rol,nombre,VARCHAR(50),NO,NO,NO,,,nombre VARCHAR(50) NOT NULL,db/schema.sql
+rol,descripcion,VARCHAR(200),SI,NO,NO,,,descripcion VARCHAR(200),db/schema.sql
+permiso,id_permiso,SERIAL,NO,SI,SI,,,id_permiso SERIAL PRIMARY KEY,db/schema.sql
+permiso,nombre,VARCHAR(80),NO,NO,NO,,,nombre VARCHAR(80) NOT NULL,db/schema.sql
+permiso,descripcion,VARCHAR(200),SI,NO,NO,,,descripcion VARCHAR(200),db/schema.sql
+rol_permiso,id_rol,INTEGER,NO,SI,NO (PK compuesta),,rol.id_rol,id_rol INTEGER NOT NULL REFERENCES rol(id_rol) ON DELETE CASCADE,db/schema.sql
+rol_permiso,id_permiso,INTEGER,NO,SI,NO (PK compuesta),,permiso.id_permiso,id_permiso INTEGER NOT NULL REFERENCES permiso(id_permiso) ON DELETE CASCADE,db/schema.sql
+usuario,id_usuario,SERIAL,NO,SI,SI,,,id_usuario SERIAL PRIMARY KEY,db/schema.sql
+usuario,nombre,VARCHAR(80),NO,NO,NO,,,nombre VARCHAR(80) NOT NULL,db/schema.sql
+usuario,apellido,VARCHAR(80),SI,NO,NO,,,apellido VARCHAR(80),db/schema.sql
+usuario,email,VARCHAR(120),NO,NO,SI,,,email VARCHAR(120) NOT NULL UNIQUE,db/schema.sql
+usuario,password,VARCHAR(200),NO,NO,NO,,,password VARCHAR(200) NOT NULL,db/schema.sql
+usuario,id_rol,INTEGER,SI,NO,NO,,rol.id_rol,id_rol INTEGER REFERENCES rol(id_rol),db/schema.sql
+usuario,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+usuario,fecha_registro,TIMESTAMP,SI,NO,NO,now(),,fecha_registro TIMESTAMP DEFAULT now(),db/schema.sql
+servicio_financiero,id_servicio,SERIAL,NO,SI,SI,,,id_servicio SERIAL PRIMARY KEY,db/schema.sql
+servicio_financiero,nombre,VARCHAR(120),NO,NO,NO,,,nombre VARCHAR(120) NOT NULL,db/schema.sql
+servicio_financiero,tipo_servicio,VARCHAR(60),SI,NO,NO,,,tipo_servicio VARCHAR(60),db/schema.sql
+servicio_financiero,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+servicio_financiero,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+cliente,id_cliente,SERIAL,NO,SI,SI,,,id_cliente SERIAL PRIMARY KEY,db/schema.sql
+cliente,tipo_documento,VARCHAR(20),SI,NO,NO,,,tipo_documento VARCHAR(20),db/schema.sql
+cliente,documento,VARCHAR(20),SI,NO,SI,,,documento VARCHAR(20) UNIQUE,db/schema.sql
+cliente,nombres,VARCHAR(120),NO,NO,NO,,,nombres VARCHAR(120) NOT NULL,db/schema.sql
+cliente,apellidos,VARCHAR(120),SI,NO,NO,,,apellidos VARCHAR(120),db/schema.sql
+cliente,fecha_nacimiento,DATE,SI,NO,NO,,,fecha_nacimiento DATE,db/schema.sql
+cliente,telefono,VARCHAR(30),SI,NO,NO,,,telefono VARCHAR(30),db/schema.sql
+cliente,correo,VARCHAR(120),SI,NO,NO,,,correo VARCHAR(120),db/schema.sql
+cliente,direccion,VARCHAR(200),SI,NO,NO,,,direccion VARCHAR(200),db/schema.sql
+cliente,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+cliente,fecha_registro,TIMESTAMP,SI,NO,NO,now(),,fecha_registro TIMESTAMP DEFAULT now(),db/schema.sql
+cliente_servicio,id_cliente_servicio,SERIAL,NO,SI,SI,,,id_cliente_servicio SERIAL PRIMARY KEY,db/schema.sql
+cliente_servicio,id_cliente,INTEGER,NO,NO,NO,,cliente.id_cliente,id_cliente INTEGER NOT NULL REFERENCES cliente(id_cliente) ON DELETE CASCADE,db/schema.sql
+cliente_servicio,id_servicio,INTEGER,NO,NO,NO,,servicio_financiero.id_servicio,id_servicio INTEGER NOT NULL REFERENCES servicio_financiero(id_servicio),db/schema.sql
+cliente_servicio,fecha_inicio,DATE,SI,NO,NO,,,fecha_inicio DATE,db/schema.sql
+cliente_servicio,fecha_fin,DATE,SI,NO,NO,,,fecha_fin DATE,db/schema.sql
+cliente_servicio,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+tipo_cambio,id_tipo_cambio,SERIAL,NO,SI,SI,,,id_tipo_cambio SERIAL PRIMARY KEY,db/schema.sql
+tipo_cambio,moneda_origen,VARCHAR(10),NO,NO,NO,,,moneda_origen VARCHAR(10) NOT NULL,db/schema.sql
+tipo_cambio,moneda_destino,VARCHAR(10),NO,NO,NO,,,moneda_destino VARCHAR(10) NOT NULL,db/schema.sql
+tipo_cambio,compra,"NUMERIC(12,4)",NO,NO,NO,,,"compra NUMERIC(12,4) NOT NULL",db/schema.sql
+tipo_cambio,venta,"NUMERIC(12,4)",NO,NO,NO,,,"venta NUMERIC(12,4) NOT NULL",db/schema.sql
+tipo_cambio,fecha_inicio,DATE,SI,NO,NO,CURRENT_DATE,,fecha_inicio DATE DEFAULT CURRENT_DATE,db/schema.sql
+tipo_cambio,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+operacion,id_operacion,SERIAL,NO,SI,SI,,,id_operacion SERIAL PRIMARY KEY,db/schema.sql
+operacion,id_cliente,INTEGER,SI,NO,NO,,cliente.id_cliente,id_cliente INTEGER REFERENCES cliente(id_cliente),db/schema.sql
+operacion,id_tipo_cambio,INTEGER,SI,NO,NO,,tipo_cambio.id_tipo_cambio,id_tipo_cambio INTEGER REFERENCES tipo_cambio(id_tipo_cambio),db/schema.sql
+operacion,tipo_operacion,VARCHAR(30),SI,NO,NO,,,tipo_operacion VARCHAR(30),db/schema.sql
+operacion,moneda_origen,VARCHAR(10),SI,NO,NO,,,moneda_origen VARCHAR(10),db/schema.sql
+operacion,moneda_destino,VARCHAR(10),SI,NO,NO,,,moneda_destino VARCHAR(10),db/schema.sql
+operacion,monto,"NUMERIC(14,2)",SI,NO,NO,,,"monto NUMERIC(14,2)",db/schema.sql
+operacion,tipo_cambio,"NUMERIC(12,4)",SI,NO,NO,,,"tipo_cambio NUMERIC(12,4)",db/schema.sql
+operacion,total_entregar,"NUMERIC(14,2)",SI,NO,NO,,,"total_entregar NUMERIC(14,2)",db/schema.sql
+operacion,total_recibir,"NUMERIC(14,2)",SI,NO,NO,,,"total_recibir NUMERIC(14,2)",db/schema.sql
+operacion,estado,VARCHAR(20),SI,NO,NO,'COMPLETADA',,estado VARCHAR(20) DEFAULT 'COMPLETADA',db/schema.sql
+operacion,fecha_operacion,TIMESTAMP,SI,NO,NO,now(),,fecha_operacion TIMESTAMP DEFAULT now(),db/schema.sql
+prestamo,id_prestamo,SERIAL,NO,SI,SI,,,id_prestamo SERIAL PRIMARY KEY,db/schema.sql
+prestamo,id_operacion,INTEGER,SI,NO,NO,,operacion.id_operacion,id_operacion INTEGER REFERENCES operacion(id_operacion) ON DELETE CASCADE,db/schema.sql
+prestamo,monto_prestamo,"NUMERIC(14,2)",NO,NO,NO,,,"monto_prestamo NUMERIC(14,2) NOT NULL",db/schema.sql
+prestamo,tasa_interes,"NUMERIC(6,3)",SI,NO,NO,,,"tasa_interes NUMERIC(6,3)",db/schema.sql
+prestamo,plazo_meses,INTEGER,SI,NO,NO,,,plazo_meses INTEGER,db/schema.sql
+prestamo,cuota_mensual,"NUMERIC(14,2)",SI,NO,NO,,,"cuota_mensual NUMERIC(14,2)",db/schema.sql
+prestamo,fecha_inicio,DATE,SI,NO,NO,,,fecha_inicio DATE,db/schema.sql
+prestamo,fecha_vencimiento,DATE,SI,NO,NO,,,fecha_vencimiento DATE,db/schema.sql
+prestamo,saldo_pendiente,"NUMERIC(14,2)",SI,NO,NO,,,"saldo_pendiente NUMERIC(14,2)",db/schema.sql
+prestamo,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+articulo,id_articulo,SERIAL,NO,SI,SI,,,id_articulo SERIAL PRIMARY KEY,db/schema.sql
+articulo,id_cliente,INTEGER,SI,NO,NO,,cliente.id_cliente,id_cliente INTEGER REFERENCES cliente(id_cliente),db/schema.sql
+articulo,descripcion,VARCHAR(200),SI,NO,NO,,,descripcion VARCHAR(200),db/schema.sql
+articulo,categoria,VARCHAR(60),SI,NO,NO,,,categoria VARCHAR(60),db/schema.sql
+articulo,marca,VARCHAR(60),SI,NO,NO,,,marca VARCHAR(60),db/schema.sql
+articulo,modelo,VARCHAR(60),SI,NO,NO,,,modelo VARCHAR(60),db/schema.sql
+articulo,numero_serie,VARCHAR(80),SI,NO,NO,,,numero_serie VARCHAR(80),db/schema.sql
+articulo,estado_fisico,VARCHAR(60),SI,NO,NO,,,estado_fisico VARCHAR(60),db/schema.sql
+articulo,valor_estimado,"NUMERIC(14,2)",SI,NO,NO,,,"valor_estimado NUMERIC(14,2)",db/schema.sql
+articulo,fecha_registro,DATE,SI,NO,NO,CURRENT_DATE,,fecha_registro DATE DEFAULT CURRENT_DATE,db/schema.sql
+articulo,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+empeno,id_empeno,SERIAL,NO,SI,SI,,,id_empeno SERIAL PRIMARY KEY,db/schema.sql
+empeno,id_operacion,INTEGER,SI,NO,NO,,operacion.id_operacion,id_operacion INTEGER REFERENCES operacion(id_operacion) ON DELETE CASCADE,db/schema.sql
+empeno,id_articulo,INTEGER,SI,NO,NO,,articulo.id_articulo,id_articulo INTEGER REFERENCES articulo(id_articulo),db/schema.sql
+empeno,monto_prestamo,"NUMERIC(14,2)",NO,NO,NO,,,"monto_prestamo NUMERIC(14,2) NOT NULL",db/schema.sql
+empeno,tasa_interes,"NUMERIC(6,3)",SI,NO,NO,,,"tasa_interes NUMERIC(6,3)",db/schema.sql
+empeno,plazo_dias,INTEGER,SI,NO,NO,,,plazo_dias INTEGER,db/schema.sql
+empeno,fecha_empeno,DATE,SI,NO,NO,,,fecha_empeno DATE,db/schema.sql
+empeno,fecha_vencimiento,DATE,SI,NO,NO,,,fecha_vencimiento DATE,db/schema.sql
+empeno,saldo_pendiente,"NUMERIC(14,2)",SI,NO,NO,,,"saldo_pendiente NUMERIC(14,2)",db/schema.sql
+empeno,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+comprobante,id_comprobante,SERIAL,NO,SI,SI,,,id_comprobante SERIAL PRIMARY KEY,db/schema.sql
+comprobante,id_operacion,INTEGER,SI,NO,NO,,operacion.id_operacion,id_operacion INTEGER REFERENCES operacion(id_operacion) ON DELETE CASCADE,db/schema.sql
+comprobante,numero_comprobante,VARCHAR(40),SI,NO,NO,,,numero_comprobante VARCHAR(40),db/schema.sql
+comprobante,tipo_comprobante,VARCHAR(30),SI,NO,NO,,,tipo_comprobante VARCHAR(30),db/schema.sql
+comprobante,fecha_emision,TIMESTAMP,SI,NO,NO,now(),,fecha_emision TIMESTAMP DEFAULT now(),db/schema.sql
+comprobante,monto_total,"NUMERIC(14,2)",SI,NO,NO,,,"monto_total NUMERIC(14,2)",db/schema.sql
+comprobante,estado,VARCHAR(20),SI,NO,NO,'EMITIDO',,estado VARCHAR(20) DEFAULT 'EMITIDO',db/schema.sql
+venta,id_venta,SERIAL,NO,SI,SI,,,id_venta SERIAL PRIMARY KEY,db/schema.sql
+venta,id_cliente,INTEGER,SI,NO,NO,,cliente.id_cliente,id_cliente INTEGER REFERENCES cliente(id_cliente),db/schema.sql
+venta,id_servicio,INTEGER,SI,NO,NO,,servicio_financiero.id_servicio,id_servicio INTEGER REFERENCES servicio_financiero(id_servicio),db/schema.sql
+venta,fecha_venta,TIMESTAMP,SI,NO,NO,now(),,fecha_venta TIMESTAMP DEFAULT now(),db/schema.sql
+venta,monto,"NUMERIC(14,2)",SI,NO,NO,,,"monto NUMERIC(14,2)",db/schema.sql
+venta,importe,"NUMERIC(14,2)",SI,NO,NO,,,"importe NUMERIC(14,2)",db/schema.sql
+venta,estado,VARCHAR(20),SI,NO,NO,'REGISTRADA',,estado VARCHAR(20) DEFAULT 'REGISTRADA',db/schema.sql
+detalle_venta,id_detalle,SERIAL,NO,SI,SI,,,id_detalle SERIAL PRIMARY KEY,db/schema.sql
+detalle_venta,id_venta,INTEGER,NO,NO,NO,,venta.id_venta,id_venta INTEGER NOT NULL REFERENCES venta(id_venta) ON DELETE CASCADE,db/schema.sql
+detalle_venta,descripcion,VARCHAR(200),SI,NO,NO,,,descripcion VARCHAR(200),db/schema.sql
+detalle_venta,cantidad,INTEGER,SI,NO,NO,,,cantidad INTEGER,db/schema.sql
+detalle_venta,precio_unitario,"NUMERIC(14,2)",SI,NO,NO,,,"precio_unitario NUMERIC(14,2)",db/schema.sql
+detalle_venta,subtotal,"NUMERIC(14,2)",SI,NO,NO,,,"subtotal NUMERIC(14,2)",db/schema.sql
+producto,id_producto,SERIAL,NO,SI,SI,,,id_producto SERIAL PRIMARY KEY,db/schema.sql
+producto,codigo,VARCHAR(40),SI,NO,NO,,,codigo VARCHAR(40),db/schema.sql
+producto,nombre,VARCHAR(120),NO,NO,NO,,,nombre VARCHAR(120) NOT NULL,db/schema.sql
+producto,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+producto,categoria,VARCHAR(60),SI,NO,NO,,,categoria VARCHAR(60),db/schema.sql
+producto,unidad_medida,VARCHAR(30),SI,NO,NO,,,unidad_medida VARCHAR(30),db/schema.sql
+producto,stock_actual,INTEGER,SI,NO,NO,0,,stock_actual INTEGER DEFAULT 0,db/schema.sql
+producto,stock_minimo,INTEGER,SI,NO,NO,0,,stock_minimo INTEGER DEFAULT 0,db/schema.sql
+producto,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+inventario,id_inventario,SERIAL,NO,SI,SI,,,id_inventario SERIAL PRIMARY KEY,db/schema.sql
+inventario,id_producto,INTEGER,NO,NO,NO,,producto.id_producto,id_producto INTEGER NOT NULL REFERENCES producto(id_producto) ON DELETE CASCADE,db/schema.sql
+inventario,ubicacion,VARCHAR(80),SI,NO,NO,,,ubicacion VARCHAR(80),db/schema.sql
+inventario,cantidad,INTEGER,SI,NO,NO,,,cantidad INTEGER,db/schema.sql
+inventario,fecha_actualizacion,TIMESTAMP,SI,NO,NO,now(),,fecha_actualizacion TIMESTAMP DEFAULT now(),db/schema.sql
+movimiento_inventario,id_movimiento,SERIAL,NO,SI,SI,,,id_movimiento SERIAL PRIMARY KEY,db/schema.sql
+movimiento_inventario,id_producto,INTEGER,NO,NO,NO,,producto.id_producto,id_producto INTEGER NOT NULL REFERENCES producto(id_producto) ON DELETE CASCADE,db/schema.sql
+movimiento_inventario,tipo_movimiento,VARCHAR(20),SI,NO,NO,,,tipo_movimiento VARCHAR(20),db/schema.sql
+movimiento_inventario,cantidad,INTEGER,SI,NO,NO,,,cantidad INTEGER,db/schema.sql
+movimiento_inventario,motivo,VARCHAR(200),SI,NO,NO,,,motivo VARCHAR(200),db/schema.sql
+movimiento_inventario,fecha_movimiento,TIMESTAMP,SI,NO,NO,now(),,fecha_movimiento TIMESTAMP DEFAULT now(),db/schema.sql
+prospecto,id_prospecto,SERIAL,NO,SI,SI,,,id_prospecto SERIAL PRIMARY KEY,db/schema.sql
+prospecto,nombres,VARCHAR(120),NO,NO,NO,,,nombres VARCHAR(120) NOT NULL,db/schema.sql
+prospecto,apellidos,VARCHAR(120),SI,NO,NO,,,apellidos VARCHAR(120),db/schema.sql
+prospecto,documento,VARCHAR(20),SI,NO,NO,,,documento VARCHAR(20),db/schema.sql
+prospecto,telefono,VARCHAR(30),SI,NO,NO,,,telefono VARCHAR(30),db/schema.sql
+prospecto,correo,VARCHAR(120),SI,NO,NO,,,correo VARCHAR(120),db/schema.sql
+prospecto,origen,VARCHAR(60),SI,NO,NO,,,origen VARCHAR(60),db/schema.sql
+prospecto,estado,VARCHAR(20),SI,NO,NO,'NUEVO',,estado VARCHAR(20) DEFAULT 'NUEVO',db/schema.sql
+prospecto,fecha_registro,TIMESTAMP,SI,NO,NO,now(),,fecha_registro TIMESTAMP DEFAULT now(),db/schema.sql
+campania,id_campania,SERIAL,NO,SI,SI,,,id_campania SERIAL PRIMARY KEY,db/schema.sql
+campania,nombre,VARCHAR(120),NO,NO,NO,,,nombre VARCHAR(120) NOT NULL,db/schema.sql
+campania,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+campania,fecha_inicio,DATE,SI,NO,NO,,,fecha_inicio DATE,db/schema.sql
+campania,fecha_fin,DATE,SI,NO,NO,,,fecha_fin DATE,db/schema.sql
+campania,presupuesto,"NUMERIC(14,2)",SI,NO,NO,,,"presupuesto NUMERIC(14,2)",db/schema.sql
+campania,canal,VARCHAR(60),SI,NO,NO,,,canal VARCHAR(60),db/schema.sql
+campania,estado,VARCHAR(20),SI,NO,NO,'ACTIVA',,estado VARCHAR(20) DEFAULT 'ACTIVA',db/schema.sql
+campania_prospecto,id_campania_prospecto,SERIAL,NO,SI,SI,,,id_campania_prospecto SERIAL PRIMARY KEY,db/schema.sql
+campania_prospecto,id_campania,INTEGER,NO,NO,NO,,campania.id_campania,id_campania INTEGER NOT NULL REFERENCES campania(id_campania) ON DELETE CASCADE,db/schema.sql
+campania_prospecto,id_prospecto,INTEGER,NO,NO,NO,,prospecto.id_prospecto,id_prospecto INTEGER NOT NULL REFERENCES prospecto(id_prospecto) ON DELETE CASCADE,db/schema.sql
+campania_prospecto,fecha_contacto,DATE,SI,NO,NO,,,fecha_contacto DATE,db/schema.sql
+campania_prospecto,resultado,VARCHAR(120),SI,NO,NO,,,resultado VARCHAR(120),db/schema.sql
+campania_prospecto,estado,VARCHAR(20),SI,NO,NO,'PENDIENTE',,estado VARCHAR(20) DEFAULT 'PENDIENTE',db/schema.sql
+actividad_marketing,id_actividad,SERIAL,NO,SI,SI,,,id_actividad SERIAL PRIMARY KEY,db/schema.sql
+actividad_marketing,id_prospecto,INTEGER,SI,NO,NO,,prospecto.id_prospecto,id_prospecto INTEGER REFERENCES prospecto(id_prospecto) ON DELETE CASCADE,db/schema.sql
+actividad_marketing,id_campania,INTEGER,SI,NO,NO,,campania.id_campania,id_campania INTEGER REFERENCES campania(id_campania) ON DELETE CASCADE,db/schema.sql
+actividad_marketing,tipo_actividad,VARCHAR(60),SI,NO,NO,,,tipo_actividad VARCHAR(60),db/schema.sql
+actividad_marketing,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+actividad_marketing,fecha_actividad,TIMESTAMP,SI,NO,NO,now(),,fecha_actividad TIMESTAMP DEFAULT now(),db/schema.sql
+proveedor,id_proveedor,SERIAL,NO,SI,SI,,,id_proveedor SERIAL PRIMARY KEY,db/schema.sql
+proveedor,razon_social,VARCHAR(150),NO,NO,NO,,,razon_social VARCHAR(150) NOT NULL,db/schema.sql
+proveedor,ruc,VARCHAR(20),SI,NO,NO,,,ruc VARCHAR(20),db/schema.sql
+proveedor,contacto,VARCHAR(120),SI,NO,NO,,,contacto VARCHAR(120),db/schema.sql
+proveedor,telefono,VARCHAR(30),SI,NO,NO,,,telefono VARCHAR(30),db/schema.sql
+proveedor,correo,VARCHAR(120),SI,NO,NO,,,correo VARCHAR(120),db/schema.sql
+proveedor,direccion,VARCHAR(200),SI,NO,NO,,,direccion VARCHAR(200),db/schema.sql
+proveedor,estado,VARCHAR(20),SI,NO,NO,'ACTIVO',,estado VARCHAR(20) DEFAULT 'ACTIVO',db/schema.sql
+movimiento_logistica,id_movimiento_logistica,SERIAL,NO,SI,SI,,,id_movimiento_logistica SERIAL PRIMARY KEY,db/schema.sql
+movimiento_logistica,id_proveedor,INTEGER,SI,NO,NO,,proveedor.id_proveedor,id_proveedor INTEGER REFERENCES proveedor(id_proveedor) ON DELETE CASCADE,db/schema.sql
+movimiento_logistica,tipo_movimiento,VARCHAR(30),SI,NO,NO,,,tipo_movimiento VARCHAR(30),db/schema.sql
+movimiento_logistica,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+movimiento_logistica,cantidad,INTEGER,SI,NO,NO,,,cantidad INTEGER,db/schema.sql
+movimiento_logistica,fecha_movimiento,TIMESTAMP,SI,NO,NO,now(),,fecha_movimiento TIMESTAMP DEFAULT now(),db/schema.sql
+movimiento_logistica,estado,VARCHAR(20),SI,NO,NO,'REGISTRADO',,estado VARCHAR(20) DEFAULT 'REGISTRADO',db/schema.sql
+linea_produccion,id_linea,SERIAL,NO,SI,SI,,,id_linea SERIAL PRIMARY KEY,db/schema.sql
+linea_produccion,codigo,VARCHAR(40),SI,NO,NO,,,codigo VARCHAR(40),db/schema.sql
+linea_produccion,nombre,VARCHAR(120),NO,NO,NO,,,nombre VARCHAR(120) NOT NULL,db/schema.sql
+linea_produccion,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+linea_produccion,estado,VARCHAR(20),SI,NO,NO,'ACTIVA',,estado VARCHAR(20) DEFAULT 'ACTIVA',db/schema.sql
+orden_produccion,id_orden,SERIAL,NO,SI,SI,,,id_orden SERIAL PRIMARY KEY,db/schema.sql
+orden_produccion,id_producto,INTEGER,SI,NO,NO,,producto.id_producto,id_producto INTEGER REFERENCES producto(id_producto),db/schema.sql
+orden_produccion,id_linea,INTEGER,SI,NO,NO,,linea_produccion.id_linea,id_linea INTEGER REFERENCES linea_produccion(id_linea),db/schema.sql
+orden_produccion,cantidad,INTEGER,SI,NO,NO,,,cantidad INTEGER,db/schema.sql
+orden_produccion,fecha_inicio,DATE,SI,NO,NO,,,fecha_inicio DATE,db/schema.sql
+orden_produccion,fecha_fin_estimada,DATE,SI,NO,NO,,,fecha_fin_estimada DATE,db/schema.sql
+orden_produccion,fecha_fin_real,DATE,SI,NO,NO,,,fecha_fin_real DATE,db/schema.sql
+orden_produccion,avance,"NUMERIC(5,2)",SI,NO,NO,0,,"avance NUMERIC(5,2) DEFAULT 0",db/schema.sql
+orden_produccion,estado,VARCHAR(20),SI,NO,NO,'PENDIENTE',,estado VARCHAR(20) DEFAULT 'PENDIENTE',db/schema.sql
+orden_produccion,observaciones,TEXT,SI,NO,NO,,,observaciones TEXT,db/schema.sql
+expediente_aprobacion,id_expediente,SERIAL,NO,SI,SI,,,id_expediente SERIAL PRIMARY KEY,db/schema.sql
+expediente_aprobacion,codigo,VARCHAR(40),SI,NO,NO,,,codigo VARCHAR(40),db/schema.sql
+expediente_aprobacion,area,VARCHAR(80),SI,NO,NO,,,area VARCHAR(80),db/schema.sql
+expediente_aprobacion,solicitante,VARCHAR(120),SI,NO,NO,,,solicitante VARCHAR(120),db/schema.sql
+expediente_aprobacion,monto,"NUMERIC(14,2)",SI,NO,NO,,,"monto NUMERIC(14,2)",db/schema.sql
+expediente_aprobacion,impacto,VARCHAR(60),SI,NO,NO,,,impacto VARCHAR(60),db/schema.sql
+expediente_aprobacion,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+expediente_aprobacion,estado,VARCHAR(20),SI,NO,NO,'PENDIENTE',,estado VARCHAR(20) DEFAULT 'PENDIENTE',db/schema.sql
+expediente_aprobacion,fecha_solicitud,TIMESTAMP,SI,NO,NO,now(),,fecha_solicitud TIMESTAMP DEFAULT now(),db/schema.sql
+expediente_aprobacion,fecha_resolucion,TIMESTAMP,SI,NO,NO,,,fecha_resolucion TIMESTAMP,db/schema.sql
+decision_direccion,id_decision,SERIAL,NO,SI,SI,,,id_decision SERIAL PRIMARY KEY,db/schema.sql
+decision_direccion,id_expediente,INTEGER,SI,NO,NO,,expediente_aprobacion.id_expediente,id_expediente INTEGER REFERENCES expediente_aprobacion(id_expediente) ON DELETE CASCADE,db/schema.sql
+decision_direccion,tipo_decision,VARCHAR(40),SI,NO,NO,,,tipo_decision VARCHAR(40),db/schema.sql
+decision_direccion,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+decision_direccion,fecha_decision,TIMESTAMP,SI,NO,NO,now(),,fecha_decision TIMESTAMP DEFAULT now(),db/schema.sql
+decision_direccion,estado,VARCHAR(20),SI,NO,NO,'VIGENTE',,estado VARCHAR(20) DEFAULT 'VIGENTE',db/schema.sql
+reporte_direccion,id_reporte,SERIAL,NO,SI,SI,,,id_reporte SERIAL PRIMARY KEY,db/schema.sql
+reporte_direccion,tipo_reporte,VARCHAR(60),SI,NO,NO,,,tipo_reporte VARCHAR(60),db/schema.sql
+reporte_direccion,modulo,VARCHAR(60),SI,NO,NO,,,modulo VARCHAR(60),db/schema.sql
+reporte_direccion,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+reporte_direccion,fecha_generacion,TIMESTAMP,SI,NO,NO,now(),,fecha_generacion TIMESTAMP DEFAULT now(),db/schema.sql
+decision_gerencia,id_decision_gerencia,SERIAL,NO,SI,SI,,,id_decision_gerencia SERIAL PRIMARY KEY,db/schema.sql
+decision_gerencia,id_expediente,INTEGER,SI,NO,NO,,expediente_aprobacion.id_expediente,id_expediente INTEGER REFERENCES expediente_aprobacion(id_expediente) ON DELETE CASCADE,db/schema.sql
+decision_gerencia,tipo_decision,VARCHAR(40),SI,NO,NO,,,tipo_decision VARCHAR(40),db/schema.sql
+decision_gerencia,descripcion,TEXT,SI,NO,NO,,,descripcion TEXT,db/schema.sql
+decision_gerencia,fecha_decision,TIMESTAMP,SI,NO,NO,now(),,fecha_decision TIMESTAMP DEFAULT now(),db/schema.sql
+decision_gerencia,estado,VARCHAR(20),SI,NO,NO,'VIGENTE',,estado VARCHAR(20) DEFAULT 'VIGENTE',db/schema.sql
+resolucion_gerencial,id_resolucion,SERIAL,NO,SI,SI,,,id_resolucion SERIAL PRIMARY KEY,db/schema.sql
+resolucion_gerencial,id_decision_gerencia,INTEGER,SI,NO,NO,,decision_gerencia.id_decision_gerencia,id_decision_gerencia INTEGER REFERENCES decision_gerencia(id_decision_gerencia) ON DELETE CASCADE,db/schema.sql
+resolucion_gerencial,numero_resolucion,VARCHAR(40),SI,NO,NO,,,numero_resolucion VARCHAR(40),db/schema.sql
+resolucion_gerencial,titulo,VARCHAR(150),SI,NO,NO,,,titulo VARCHAR(150),db/schema.sql
+resolucion_gerencial,contenido,TEXT,SI,NO,NO,,,contenido TEXT,db/schema.sql
+resolucion_gerencial,fecha_emision,DATE,SI,NO,NO,CURRENT_DATE,,fecha_emision DATE DEFAULT CURRENT_DATE,db/schema.sql
+resolucion_gerencial,estado,VARCHAR(20),SI,NO,NO,'VIGENTE',,estado VARCHAR(20) DEFAULT 'VIGENTE',db/schema.sql
+auditoria,id_auditoria,SERIAL,NO,SI,SI,,,id_auditoria SERIAL PRIMARY KEY,db/schema.sql
+auditoria,fecha,TIMESTAMP,NO,NO,NO,now(),,fecha TIMESTAMP NOT NULL DEFAULT now(),db/schema.sql
+auditoria,usuario,VARCHAR(120),NO,NO,NO,,,usuario VARCHAR(120) NOT NULL,db/schema.sql
+auditoria,rol,VARCHAR(50),SI,NO,NO,,,rol VARCHAR(50),db/schema.sql
+auditoria,ip,VARCHAR(60),SI,NO,NO,,,ip VARCHAR(60),db/schema.sql
+auditoria,accion,VARCHAR(40),NO,NO,NO,,,accion VARCHAR(40) NOT NULL,db/schema.sql
+auditoria,recurso,VARCHAR(200),SI,NO,NO,,,recurso VARCHAR(200),db/schema.sql
+auditoria,estado_http,INTEGER,SI,NO,NO,,,estado_http INTEGER,db/schema.sql
+auditoria,detalle,VARCHAR(300),SI,NO,NO,,,detalle VARCHAR(300),db/schema.sql
+cliente_acceso,id_cliente,INTEGER,NO,SI,SI,,cliente.id_cliente,id_cliente INTEGER PRIMARY KEY REFERENCES cliente(id_cliente) ON DELETE CASCADE,db/portal_cliente.sql
+cliente_acceso,password,VARCHAR(200),NO,NO,NO,,,password VARCHAR(200) NOT NULL,db/portal_cliente.sql
+version_esquema,id_version,SERIAL,NO,SI,SI,,,id_version SERIAL PRIMARY KEY,db/version_esquema.sql
+version_esquema,version,VARCHAR(20),NO,NO,SI,,,version VARCHAR(20) NOT NULL UNIQUE,db/version_esquema.sql
+version_esquema,descripcion,VARCHAR(200),NO,NO,NO,,,descripcion VARCHAR(200) NOT NULL,db/version_esquema.sql
+version_esquema,script,VARCHAR(120),NO,NO,NO,,,script VARCHAR(120) NOT NULL,db/version_esquema.sql
+version_esquema,aplicado_en,TIMESTAMP,NO,NO,NO,now(),,aplicado_en TIMESTAMP NOT NULL DEFAULT now(),db/version_esquema.sql
+version_esquema,aplicado_por,VARCHAR(60),NO,NO,NO,current_user,,aplicado_por VARCHAR(60) NOT NULL DEFAULT current_user,db/version_esquema.sql
+billetera,id_billetera,SERIAL,NO,SI,SI,,,id_billetera SERIAL PRIMARY KEY,db/pagos_qr.sql
+billetera,codigo,VARCHAR(10),NO,NO,SI,,,codigo VARCHAR(10) NOT NULL UNIQUE,db/pagos_qr.sql
+billetera,nombre,VARCHAR(40),NO,NO,NO,,,nombre VARCHAR(40) NOT NULL,db/pagos_qr.sql
+billetera,numero_celular,VARCHAR(15),SI,NO,NO,,,numero_celular VARCHAR(15),db/pagos_qr.sql
+billetera,titular,VARCHAR(120),SI,NO,NO,,,titular VARCHAR(120),db/pagos_qr.sql
+billetera,qr_imagen,TEXT,SI,NO,NO,,,qr_imagen TEXT,db/pagos_qr.sql
+billetera,instrucciones,VARCHAR(300),SI,NO,NO,,,instrucciones VARCHAR(300),db/pagos_qr.sql
+billetera,activo,BOOLEAN,NO,NO,NO,TRUE,,activo BOOLEAN NOT NULL DEFAULT TRUE,db/pagos_qr.sql
+billetera,fecha_actualizacion,TIMESTAMP,NO,NO,NO,now(),,fecha_actualizacion TIMESTAMP NOT NULL DEFAULT now(),db/pagos_qr.sql
+pago,id_pago,SERIAL,NO,SI,SI,,,id_pago SERIAL PRIMARY KEY,db/pagos_qr.sql
+pago,id_cliente,INTEGER,NO,NO,NO,,cliente.id_cliente,id_cliente INTEGER NOT NULL REFERENCES cliente(id_cliente),db/pagos_qr.sql
+pago,id_operacion,INTEGER,SI,NO,NO,,operacion.id_operacion,id_operacion INTEGER REFERENCES operacion(id_operacion) ON DELETE SET NULL,db/pagos_qr.sql
+pago,concepto,VARCHAR(20),NO,NO,NO,,,concepto VARCHAR(20) NOT NULL,db/pagos_qr.sql
+pago,descripcion,VARCHAR(200),SI,NO,NO,,,descripcion VARCHAR(200),db/pagos_qr.sql
+pago,metodo,VARCHAR(15),NO,NO,NO,,,metodo VARCHAR(15) NOT NULL,db/pagos_qr.sql
+pago,monto,"NUMERIC(12,2)",NO,NO,NO,,,"monto NUMERIC(12,2) NOT NULL",db/pagos_qr.sql
+pago,moneda,VARCHAR(3),NO,NO,NO,'PEN',,moneda VARCHAR(3) NOT NULL DEFAULT 'PEN',db/pagos_qr.sql
+pago,numero_operacion,VARCHAR(30),SI,NO,NO,,,numero_operacion VARCHAR(30),db/pagos_qr.sql
+pago,celular_origen,VARCHAR(15),SI,NO,NO,,,celular_origen VARCHAR(15),db/pagos_qr.sql
+pago,referencia,VARCHAR(40),SI,NO,NO,,,referencia VARCHAR(40),db/pagos_qr.sql
+pago,origen,VARCHAR(10),NO,NO,NO,'PORTAL',,origen VARCHAR(10) NOT NULL DEFAULT 'PORTAL',db/pagos_qr.sql
+pago,estado,VARCHAR(15),NO,NO,NO,'POR_VERIFICAR',,estado VARCHAR(15) NOT NULL DEFAULT 'POR_VERIFICAR',db/pagos_qr.sql
+pago,fecha_pago,TIMESTAMP,NO,NO,NO,now(),,fecha_pago TIMESTAMP NOT NULL DEFAULT now(),db/pagos_qr.sql
+pago,fecha_verificacion,TIMESTAMP,SI,NO,NO,,,fecha_verificacion TIMESTAMP,db/pagos_qr.sql
+pago,verificado_por,VARCHAR(120),SI,NO,NO,,,verificado_por VARCHAR(120),db/pagos_qr.sql
+pago,observacion,VARCHAR(200),SI,NO,NO,,,observacion VARCHAR(200),db/pagos_qr.sql
+pago,constancia,TEXT,SI,NO,NO,,,constancia TEXT,db/pagos_qr.sql
+cotizacion,id_cotizacion,SERIAL,NO,SI,SI,,,id_cotizacion SERIAL PRIMARY KEY,db/pagos_qr.sql
+cotizacion,id_cliente,INTEGER,NO,NO,NO,,cliente.id_cliente,id_cliente INTEGER NOT NULL REFERENCES cliente(id_cliente) ON DELETE CASCADE,db/pagos_qr.sql
+cotizacion,tipo,VARCHAR(10),NO,NO,NO,,,tipo VARCHAR(10) NOT NULL,db/pagos_qr.sql
+cotizacion,monto,"NUMERIC(14,2)",NO,NO,NO,,,"monto NUMERIC(14,2) NOT NULL",db/pagos_qr.sql
+cotizacion,moneda,VARCHAR(3),SI,NO,NO,,,moneda VARCHAR(3),db/pagos_qr.sql
+cotizacion,plazo,INTEGER,SI,NO,NO,,,plazo INTEGER,db/pagos_qr.sql
+cotizacion,unidad_plazo,VARCHAR(5),SI,NO,NO,,,unidad_plazo VARCHAR(5),db/pagos_qr.sql
+cotizacion,tasa,"NUMERIC(6,2)",SI,NO,NO,,,"tasa NUMERIC(6,2)",db/pagos_qr.sql
+cotizacion,cuota,"NUMERIC(14,2)",SI,NO,NO,,,"cuota NUMERIC(14,2)",db/pagos_qr.sql
+cotizacion,total_interes,"NUMERIC(14,2)",SI,NO,NO,,,"total_interes NUMERIC(14,2)",db/pagos_qr.sql
+cotizacion,total_pagar,"NUMERIC(14,2)",SI,NO,NO,,,"total_pagar NUMERIC(14,2)",db/pagos_qr.sql
+cotizacion,id_tipo_cambio,INTEGER,SI,NO,NO,,tipo_cambio.id_tipo_cambio,id_tipo_cambio INTEGER REFERENCES tipo_cambio(id_tipo_cambio) ON DELETE SET NULL,db/pagos_qr.sql
+cotizacion,tipo_cambio,"NUMERIC(10,4)",SI,NO,NO,,,"tipo_cambio NUMERIC(10,4)",db/pagos_qr.sql
+cotizacion,monto_recibir,"NUMERIC(14,2)",SI,NO,NO,,,"monto_recibir NUMERIC(14,2)",db/pagos_qr.sql
+cotizacion,moneda_recibir,VARCHAR(3),SI,NO,NO,,,moneda_recibir VARCHAR(3),db/pagos_qr.sql
+cotizacion,descripcion,VARCHAR(200),SI,NO,NO,,,descripcion VARCHAR(200),db/pagos_qr.sql
+cotizacion,valor_estimado,"NUMERIC(14,2)",SI,NO,NO,,,"valor_estimado NUMERIC(14,2)",db/pagos_qr.sql
+cotizacion,estado,VARCHAR(12),NO,NO,NO,'VIGENTE',,estado VARCHAR(12) NOT NULL DEFAULT 'VIGENTE',db/pagos_qr.sql
+cotizacion,fecha_emision,TIMESTAMP,NO,NO,NO,now(),,fecha_emision TIMESTAMP NOT NULL DEFAULT now(),db/pagos_qr.sql
+cotizacion,fecha_vencimiento,DATE,NO,NO,NO,,,fecha_vencimiento DATE NOT NULL,db/pagos_qr.sql
+cotizacion,id_operacion,INTEGER,SI,NO,NO,,operacion.id_operacion,id_operacion INTEGER REFERENCES operacion(id_operacion) ON DELETE SET NULL,db/pagos_qr.sql
+cotizacion,origen,VARCHAR(10),NO,NO,NO,'PORTAL',,origen VARCHAR(10) NOT NULL DEFAULT 'PORTAL',db/pagos_qr.sql

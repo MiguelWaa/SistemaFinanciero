@@ -1,0 +1,52 @@
+[
+  {
+    "tabla": "rol_permiso",
+    "restriccion": "PRIMARY KEY (id_rol, id_permiso)",
+    "fuente": "db/schema.sql"
+  },
+  {
+    "tabla": "version_esquema",
+    "restriccion": "CONSTRAINT ck_version_semver CHECK (version ~ '^[0-9]+\\.[0-9]+\\.[0-9]+$')",
+    "fuente": "db/version_esquema.sql"
+  },
+  {
+    "tabla": "billetera",
+    "restriccion": "CONSTRAINT ck_billetera_codigo CHECK (codigo IN ('YAPE', 'PLIN', 'TUNKI'))",
+    "fuente": "db/pagos_qr.sql"
+  },
+  {
+    "tabla": "pago",
+    "restriccion": "CONSTRAINT ck_pago_monto    CHECK (monto > 0)",
+    "fuente": "db/pagos_qr.sql"
+  },
+  {
+    "tabla": "pago",
+    "restriccion": "CONSTRAINT ck_pago_estado   CHECK (estado IN ('POR_VERIFICAR', 'CONFIRMADO', 'RECHAZADO'))",
+    "fuente": "db/pagos_qr.sql"
+  },
+  {
+    "tabla": "pago",
+    "restriccion": "CONSTRAINT ck_pago_metodo   CHECK (metodo IN ('YAPE', 'PLIN', 'TUNKI', 'EFECTIVO', 'TRANSFERENCIA'))",
+    "fuente": "db/pagos_qr.sql"
+  },
+  {
+    "tabla": "pago",
+    "restriccion": "CONSTRAINT ck_pago_concepto CHECK (concepto IN ('CUOTA_PRESTAMO', 'RESCATE_EMPENO', 'CAMBIO_MONEDA', 'OTRO'))",
+    "fuente": "db/pagos_qr.sql"
+  },
+  {
+    "tabla": "cotizacion",
+    "restriccion": "CONSTRAINT ck_cotizacion_tipo   CHECK (tipo IN ('PRESTAMO', 'EMPENO', 'CAMBIO'))",
+    "fuente": "db/pagos_qr.sql"
+  },
+  {
+    "tabla": "cotizacion",
+    "restriccion": "CONSTRAINT ck_cotizacion_estado CHECK (estado IN ('VIGENTE', 'CONVERTIDA', 'VENCIDA'))",
+    "fuente": "db/pagos_qr.sql"
+  },
+  {
+    "tabla": "cotizacion",
+    "restriccion": "CONSTRAINT ck_cotizacion_monto  CHECK (monto > 0)",
+    "fuente": "db/pagos_qr.sql"
+  }
+]

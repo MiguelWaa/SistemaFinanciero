@@ -28,3 +28,9 @@ db.properties
 
 # --- JUnit descargado por scripts/compilar_y_probar.sh ---
 lib/test/
+
+# Integración v5.6
+node_modules/
+__pycache__/
+*.pyc
+pruebas/reportes/

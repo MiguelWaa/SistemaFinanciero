@@ -1,0 +1,26 @@
+classDiagram
+  class Pago {
+    -Integer idPago
+    -Integer idCliente
+    -BigDecimal monto
+    -String estado
+    +getCodigo() String
+    +getNumeroComprobante() String
+  }
+  class PagoService {
+    -PagoDao dao
+    +registrarDesdePortal(int, Map) Pago
+    +confirmar(int, String) Pago
+    +rechazar(int, String, String) Pago
+  }
+  class PagoDao {
+    <<interface>>
+    +crear(Pago) Integer
+    +actualizar(Pago) int
+    +listarPorCliente(int) List
+  }
+  PagoController --> PagoService : usa
+  PagoService --> PagoDao : dependencia
+  PagoService --> Pago : crea y valida
+  PagoDaoJdbc ..|> PagoDao
+  PagoDaoMemoria ..|> PagoDao

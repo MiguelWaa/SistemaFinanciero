@@ -1,0 +1,101 @@
+(function () {
+  'use strict';
+  var S = SIGSF, esc = S.escapar, $ = function (i) { return document.getElementById(i); };
+  S.embebido();
+  var todas = [], clientes = [], pagosPorOp = {}, filtro = 'PENDIENTE', limite = 30;
+
+  document.querySelectorAll('#tabs [data-tab]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('#tabs [data-tab]').forEach(function (x) { x.classList.toggle('active', x === b); });
+      document.querySelectorAll('[data-pane]').forEach(function (p) { p.hidden = p.dataset.pane !== b.dataset.tab; });
+    });
+  });
+  document.querySelectorAll('#filtros [data-f]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('#filtros [data-f]').forEach(function (x) { x.classList.toggle('active', x === b); });
+      filtro = b.dataset.f; limite = 30; pintar();
+    });
+  });
+
+  function dato(l, v) { return '<div><dt>' + esc(l) + '</dt><dd>' + v + '</dd></div>'; }
+  function pintar() {
+    var q = $('buscar').value.trim().toLowerCase();
+    var l = todas.filter(function (s) { return (!filtro || s.estado === filtro) && (!q || JSON.stringify(s).toLowerCase().indexOf(q) !== -1); });
+    $('masSol').classList.toggle('d-none', l.length <= limite);
+    if (!l.length) { $('lista').innerHTML = '<div class="card"><div class="sg-empty"><i class="fa-solid fa-inbox"></i>No hay solicitudes' + (filtro ? ' en este estado' : '') + '.</div></div>'; return; }
+    $('lista').innerHTML = l.slice(0, limite).map(function (s) {
+      var t = (s.tipoOperacion || '').toUpperCase(), pend = s.estado === 'PENDIENTE';
+      var det = dato('Monto', S.money(s.monto));
+      if (t.indexOf('PRESTAMO') >= 0) det += dato('Cuota mensual', S.money(s.cuotaMensual)) + dato('Plazo', (s.plazoMeses || 0) + ' meses');
+      else if (t.indexOf('EMPENO') >= 0) det += dato('Artículo', esc(s.articulo || '—')) + dato('Plazo', (s.plazoDias || 0) + ' días');
+      else det += dato('Recibe', S.money(s.totalRecibir, s.monedaDestino)) + dato('Moneda', esc((s.monedaOrigen || '') + ' → ' + (s.monedaDestino || '')));
+      det += dato('Fecha', esc(S.fechaHora(s.fechaOperacion)));
+      if (s.telefono) det += dato('Teléfono', esc(s.telefono));
+      var pg = pagosPorOp[s.idOperacion];
+      if (pg) det += dato('Pagos', S.money(pg.monto) + ' ' + S.badge(pg.estado));
+      return '<article class="sol ' + esc(s.estado) + '"><div class="d-flex flex-wrap justify-content-between gap-2 align-items-start"><div>'
+        + '<span class="badge text-bg-light border me-1">' + esc(S.etiqueta(t)) + '</span><span class="small text-muted">Solicitud N° ' + s.idOperacion + '</span>'
+        + '<div class="fw-600 mt-1">' + esc(s.cliente || '(sin nombre)') + '</div><div class="small text-muted">Doc. ' + esc(s.documento || '—') + (s.correo ? ' · ' + esc(s.correo) : '') + '</div></div>'
+        + '<div class="d-flex gap-2">' + (pend ? '<button class="btn btn-sm btn-success" data-ok="' + s.idOperacion + '"><i class="fa-solid fa-check me-1"></i>Aprobar</button>'
+          + '<button class="btn btn-sm btn-outline-danger" data-no="' + s.idOperacion + '"><i class="fa-solid fa-xmark me-1"></i>Rechazar</button>' : S.badge(s.estado)) + '</div></div>'
+        + '<dl>' + det + '</dl></article>';
+    }).join('');
+  }
+  $('masSol').addEventListener('click', function () { limite += 30; pintar(); });
+  $('buscar').addEventListener('input', S.debounce(pintar));
+  $('lista').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var id = b.dataset.ok || b.dataset.no, aprobar = !!b.dataset.ok;
+    var ok = await S.confirmar(aprobar ? 'Al aprobar, el préstamo o empeño queda ACTIVO y el cliente podrá pagarlo desde el portal.' : 'La solicitud quedará anulada.',
+      { titulo: (aprobar ? 'Aprobar' : 'Rechazar') + ' solicitud N° ' + id, ok: aprobar ? 'Aprobar' : 'Rechazar', variante: aprobar ? 'success' : 'danger' });
+    if (!ok) return;
+    b.disabled = true;
+    try { await API.put('/solicitudes/' + id + '/' + (aprobar ? 'aprobar' : 'rechazar'), {}); S.toast('Solicitud N° ' + id + (aprobar ? ' aprobada.' : ' rechazada.'), 'ok'); cargar(); }
+    catch (err) { S.toast(err.message, 'err'); b.disabled = false; }
+  });
+
+  function kpis() {
+    var p = todas.filter(function (s) { return s.estado === 'PENDIENTE'; });
+    $('kpis').innerHTML = S.kpi('Por atender', S.num(p.length), p.length ? 'warn' : 'ok')
+      + S.kpi('Monto pendiente', S.money(p.reduce(function (a, s) { return a + Number(s.monto || 0); }, 0)))
+      + S.kpi('Aprobadas', S.num(todas.filter(function (s) { return s.estado === 'COMPLETADA'; }).length), 'ok')
+      + S.kpi('Cuentas del portal', S.num(clientes.length));
+  }
+  async function cargar() {
+    try {
+      var r = await Promise.all([API.get('/solicitudes'), API.get('/pagos').catch(function () { return []; })]);
+      todas = r[0]; pagosPorOp = {};
+      r[1].forEach(function (p) {
+        if (!p.idOperacion || p.estado === 'RECHAZADO') return;
+        var x = pagosPorOp[p.idOperacion] || { monto: 0, estado: 'CONFIRMADO' };
+        x.monto += Number(p.monto); if (p.estado === 'POR_VERIFICAR') x.estado = 'POR_VERIFICAR';
+        pagosPorOp[p.idOperacion] = x;
+      });
+      pintar(); kpis();
+    } catch (e) { $('lista').innerHTML = '<div class="alert alert-danger">No se pudo cargar: ' + esc(e.message) + '</div>'; }
+  }
+
+  function pintarClientes() {
+    var q = $('buscarC').value.trim().toLowerCase();
+    var l = q ? clientes.filter(function (c) { return JSON.stringify(c).toLowerCase().indexOf(q) !== -1; }) : clientes;
+    $('tablaC').innerHTML = l.length ? l.map(function (c) {
+      var act = c.estado === 'ACTIVO';
+      return '<tr><td>' + c.idCliente + '</td><td class="fw-600">' + esc(((c.nombres || '') + ' ' + (c.apellidos || '')).trim()) + '</td><td>' + esc((c.tipoDocumento || '') + ' ' + (c.documento || ''))
+        + '</td><td>' + esc(c.telefono || '—') + '</td><td>' + S.badge(c.estado) + '</td><td class="text-end"><button class="btn btn-sm ' + (act ? 'btn-outline-danger' : 'btn-outline-success')
+        + '" data-cli="' + c.idCliente + '" data-est="' + (act ? 'INACTIVO' : 'ACTIVO') + '"><i class="fa-solid ' + (act ? 'fa-ban' : 'fa-check') + ' me-1"></i>' + (act ? 'Bloquear' : 'Activar') + '</button></td></tr>';
+    }).join('') : '<tr class="empty-row"><td colspan="6">Sin clientes.</td></tr>';
+  }
+  $('tablaC').addEventListener('click', async function (e) {
+    var b = e.target.closest('[data-cli]'); if (!b) return;
+    b.disabled = true;
+    try { await API.put('/clientes/' + b.dataset.cli + '/estado', { estado: b.dataset.est }); S.toast('Acceso actualizado.', 'ok'); cargarClientes(); }
+    catch (err) { S.toast(err.message, 'err'); b.disabled = false; }
+  });
+  $('buscarC').addEventListener('input', S.debounce(pintarClientes));
+  async function cargarClientes() {
+    try { clientes = await API.get('/clientes'); pintarClientes(); kpis(); }
+    catch (e) { $('tablaC').innerHTML = '<tr class="empty-row"><td colspan="6" class="text-danger">' + esc(e.message) + '</td></tr>'; }
+  }
+  cargar(); cargarClientes();
+  setInterval(function () { if (!document.hidden) cargar(); }, 20000);
+})();
