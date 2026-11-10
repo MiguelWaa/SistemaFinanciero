@@ -1,0 +1,10 @@
+SIGSF 5.6.0
+Fuentes SHA256: fc1a31385392c19d4783d46f86ca90c0857eda771e8cdd051f2dbb4e8c24a8bb
+compilar_fuentes: APROBADO
+compilar_pruebas: APROBADO
+junit: APROBADO
+frontend_sintaxis: APROBADO
+newman: APROBADO
+entradas_seguridad: APROBADO
+playwright: NO EJECUTADO
+Pendientes: PostgreSQL (scripts/probar_postgresql.py), ZAP (scripts/escanear_zap.py), SCA (scripts/escanear_dependencias.py)

@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CodingErrorAction;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,20 +109,36 @@ public class Ctx {
                     }
                     out.write(buf, 0, n);
                 }
-                bodyCache = out.toString(StandardCharsets.UTF_8);
+                try {
+                    bodyCache = StandardCharsets.UTF_8.newDecoder()
+                            .onMalformedInput(CodingErrorAction.REPORT)
+                            .onUnmappableCharacter(CodingErrorAction.REPORT)
+                            .decode(ByteBuffer.wrap(out.toByteArray())).toString();
+                } catch (CharacterCodingException e) {
+                    throw new ReglaNegocioException("El cuerpo debe usar UTF-8 válido.");
+                }
             }
         }
         return bodyCache;
     }
 
     /** Cuerpo de la petición parseado como objeto JSON (Map). */
+    @SuppressWarnings("unchecked")
     public Map<String, Object> bodyMap() throws IOException {
+        String tipo = header("Content-Type");
+        if (tipo != null && (!tipo.matches("(?i)\\s*application/json\\s*(;\\s*charset\\s*=\\s*(utf-8|\"utf-8\")\\s*)?")
+                || ex.getRequestHeaders().get("Content-Type").size() != 1)) {
+            throw new TipoContenidoNoSoportadoException();
+        }
         String b = body();
         if (b == null || b.isBlank()) {
             return new HashMap<>();
         }
+        if (tipo == null) throw new TipoContenidoNoSoportadoException();
         try {
-            return Json.parseObject(b);
+            Object objeto = Json.parse(b);
+            if (!(objeto instanceof Map)) throw new IllegalArgumentException("Se requiere un objeto");
+            return (Map<String, Object>) objeto;
         } catch (RuntimeException e) {
             throw new ReglaNegocioException("El cuerpo de la petición no es un JSON válido.");
         }

@@ -29,4 +29,6 @@ jobs:
           java-version: '17'
 
       - name: Compilar y ejecutar pruebas
-        run: sh scripts/compilar_y_probar.sh
+        run: |
+          python3 scripts/preparar_dependencias.py
+          python3 scripts/validar_proyecto.py --solo-junit

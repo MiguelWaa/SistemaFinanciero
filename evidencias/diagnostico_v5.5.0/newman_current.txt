@@ -1,0 +1,174 @@
+(node:36) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+SIGSF · Pruebas de API (v5.5)
+
+❏ 00 · Disponibilidad
+↳ CP-API-01 Health check público
+  GET http://127.0.0.1:18091/api/health [200 OK, 687B, 22ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  status ok
+
+❏ 01 · Autenticación
+↳ CP-API-02 Login ADMIN correcto
+  POST http://127.0.0.1:18091/api/auth/login [200 OK, 806B, 77ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Devuelve token
+
+↳ CP-API-03 Login CAJERO correcto
+  POST http://127.0.0.1:18091/api/auth/login [200 OK, 810B, 77ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+
+↳ CP-API-04 Login con clave incorrecta
+  POST http://127.0.0.1:18091/api/auth/login [400 Bad Request, 676B, 75ms]
+  ✓  HTTP 400
+  ✓  Mensaje genérico (no revela si el usuario existe)
+
+↳ CP-API-05 Sesión actual
+  GET http://127.0.0.1:18091/api/auth/sesion [200 OK, 712B, 45ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Rol ADMIN
+
+❏ 02 · Clientes
+↳ CP-API-06 Listar clientes
+  GET http://127.0.0.1:18091/api/clientes [200 OK, 31.67kB, 50ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Es una lista con datos
+
+↳ CP-API-07 Registrar cliente
+  POST http://127.0.0.1:18091/api/clientes [200 OK, 862B, 50ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Queda ACTIVO
+
+↳ CP-API-08 Documento repetido → 400
+  POST http://127.0.0.1:18091/api/clientes [400 Bad Request, 689B, 47ms]
+  ✓  HTTP 400
+  ✓  Mensaje de negocio
+
+❏ 03 · Operaciones
+↳ CP-API-09 Cambio de moneda con TC del servidor
+  POST http://127.0.0.1:18091/api/operaciones [200 OK, 878B, 46ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  El servidor ignora el TC enviado (1.00) y usa el vigente
+  ✓  totalRecibir = monto × TC
+
+↳ CP-API-10 Monto cero → 400
+  POST http://127.0.0.1:18091/api/operaciones [400 Bad Request, 675B, 46ms]
+  ✓  HTTP 400
+
+❏ 04 · Portal, solicitudes y pagos QR
+↳ CP-API-11 Registro en el portal
+  POST http://127.0.0.1:18091/api/portal/registro [200 OK, 831B, 74ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+
+↳ CP-API-12 Solicitar préstamo (tasa no manipulable)
+  POST http://127.0.0.1:18091/api/portal/102/prestamo [200 OK, 1.2kB, 47ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Tasa fijada por la entidad (15 %)
+
+↳ CP-API-13 Aprobar solicitud
+  PUT http://127.0.0.1:18091/api/solicitudes/302/aprobar [200 OK, 659B, 47ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  COMPLETADA
+
+↳ CP-API-14 Cliente paga cuota con Yape
+  POST http://127.0.0.1:18091/api/portal/102/pagos [200 OK, 1.15kB, 47ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  POR_VERIFICAR
+
+↳ CP-API-15 Caja confirma el pago
+  PUT http://127.0.0.1:18091/api/pagos/65/confirmar [200 OK, 1.2kB, 43ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  CONFIRMADO con comprobante RC-
+
+↳ CP-API-16 Saldo del préstamo disminuye
+  GET http://127.0.0.1:18091/api/prestamos/101 [200 OK, 824B, 45ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Saldo = 3200 − 800
+
+❏ 05 · Seguridad (casos negativos)
+↳ CP-API-17 Sin token → 401
+  GET http://127.0.0.1:18091/api/clientes [401 Unauthorized, 700B, 43ms]
+  ✓  HTTP 401
+
+↳ CP-API-18 Token inventado → 401
+  GET http://127.0.0.1:18091/api/clientes [401 Unauthorized, 700B, 45ms]
+  ✓  HTTP 401
+
+↳ CP-API-19 Cajero en usuarios → 403
+  GET http://127.0.0.1:18091/api/usuarios [403 Forbidden, 716B, 45ms]
+  ✓  HTTP 403
+
+↳ CP-API-20 Cliente consulta a otro cliente → 403
+  GET http://127.0.0.1:18091/api/portal/1/estado-cuenta [403 Forbidden, 714B, 45ms]
+  ✓  HTTP 403
+
+↳ CP-API-21 Usuarios sin contraseñas expuestas
+  GET http://127.0.0.1:18091/api/usuarios [200 OK, 17.99kB, 48ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Ningún campo password ni hash
+  ✓  Cabecera nosniff
+
+❏ 06 · Reportes y exportación
+↳ CP-API-22 Panel de indicadores
+  GET http://127.0.0.1:18091/api/dashboard [200 OK, 981B, 66ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Indicadores clave
+
+↳ CP-API-23 Exportar clientes a CSV
+  GET http://127.0.0.1:18091/api/clientes/exportar?formato=csv [200 OK, 15.08kB, 46ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Es CSV
+
+↳ CP-API-24 Exportar ventas a JSON
+  GET http://127.0.0.1:18091/api/ventas/exportar?formato=json [200 OK, 18.71kB, 46ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+  ✓  Trae datos
+
+❏ 07 · Cierre de sesión
+↳ CP-API-25 Logout invalida el token
+  POST http://127.0.0.1:18091/api/auth/logout [200 OK, 619B, 43ms]
+  ✓  HTTP 200
+  ✓  Responde en menos de 1 s
+
+↳ CP-API-26 Token cerrado → 401
+  GET http://127.0.0.1:18091/api/operaciones [401 Unauthorized, 700B, 45ms]
+  ✓  HTTP 401
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                26 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                26 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 3 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                63 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 1694ms                                     │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 85.19kB (approx)                          │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 50ms [min: 22ms, max: 77ms, s.d.: 12ms] │
+└────────────────────────────────────────────────────────────────┘

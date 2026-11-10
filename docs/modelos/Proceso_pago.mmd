@@ -1,0 +1,10 @@
+flowchart TD
+  A[Cliente registra pago] --> B[Validar sesión y propiedad]
+  B --> C[Validar importe y referencia]
+  C --> D[Pago POR_VERIFICAR]
+  D --> E{Caja verifica depósito}
+  E -->|Coincide| F[CONFIRMADO]
+  E -->|No coincide| G[RECHAZADO]
+  F --> H[Actualizar saldo y emitir RC]
+  F --> I[Auditar decisión]
+  G --> I

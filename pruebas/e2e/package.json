@@ -1,6 +1,6 @@
 {
   "name": "sigsf-pruebas",
-  "version": "5.5.0",
+  "version": "5.6.0",
   "private": true,
   "description": "SIGSF · Plan de pruebas: pruebas de API (Postman/Newman) y de sistema en navegador (Playwright)",
   "scripts": {

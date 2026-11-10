@@ -1,0 +1,78 @@
+diff --git a/pruebas/ejecutar_plan_pruebas.sh b/pruebas/ejecutar_plan_pruebas.sh
+index 6b6f424..5b55aeb 100755
+--- a/pruebas/ejecutar_plan_pruebas.sh
++++ b/pruebas/ejecutar_plan_pruebas.sh
+@@ -19,22 +19,65 @@ echo "Versión: $(cat VERSION) · commit $(git rev-parse --short HEAD 2>/dev/nul
+ echo "Java: $(java -version 2>&1 | grep -i version | head -1)" >> "$RESUMEN"
+ echo "" >> "$RESUMEN"
+ 
++# Separador del classpath: ":" en Linux/Mac, ";" en Windows (Git Bash usa Java de Windows)
++SEP=":"
++case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) SEP=";";; esac
++LIBS="lib/postgresql.jar${SEP}lib/slf4j-api-2.0.16.jar${SEP}lib/logback-core-1.5.12.jar${SEP}lib/logback-classic-1.5.12.jar"
++JUNIT="lib/test/junit-4.13.2.jar${SEP}lib/test/hamcrest-core-1.3.jar"
++
+ echo "== [1/3] JUnit: unitarias, integración, sistema, aceptación, seguridad y rendimiento"
+-sh scripts/compilar_y_probar.sh > "$REP/junit/salida_junit.txt" 2>&1
++(
++  set -e
++  MAVEN=https://repo1.maven.org/maven2
++  mkdir -p lib/test
++  [ -f lib/test/junit-4.13.2.jar ]      || curl -sSfL -o lib/test/junit-4.13.2.jar      $MAVEN/junit/junit/4.13.2/junit-4.13.2.jar
++  [ -f lib/test/hamcrest-core-1.3.jar ] || curl -sSfL -o lib/test/hamcrest-core-1.3.jar $MAVEN/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
++  rm -rf build/ci && mkdir -p build/ci/classes build/ci/test
++  find src -name '*.java' > build/ci/fuentes.txt
++  find test -name '*.java' > build/ci/pruebas.txt
++  echo "== Compilando $(wc -l < build/ci/fuentes.txt) clases..."
++  javac -encoding UTF-8 --release 17 -cp "$LIBS" -d build/ci/classes @build/ci/fuentes.txt
++  (cd src && find . -type f ! -name '*.java' | while read -r f; do
++    mkdir -p "../build/ci/classes/$(dirname "$f")" && cp "$f" "../build/ci/classes/$f"; done)
++  echo "== Compilando $(wc -l < build/ci/pruebas.txt) clases de prueba..."
++  javac -encoding UTF-8 --release 17 -cp "$LIBS${SEP}build/ci/classes${SEP}$JUNIT" -d build/ci/test @build/ci/pruebas.txt
++  cp test/logback-test.xml build/ci/test/
++  PRUEBAS=$(cd test && find . -name '*Test.java' | sed 's|^\./||;s|\.java$||;s|/|.|g' | sort | tr '\n' ' ')
++  echo "== Ejecutando pruebas..."
++  java -cp "$LIBS${SEP}build/ci/test${SEP}build/ci/classes${SEP}$JUNIT" org.junit.runner.JUnitCore $PRUEBAS
++) > "$REP/junit/salida_junit.txt" 2>&1
+ J=$?
+-grep -E "^OK \(|^Tests run|RENDIMIENTO" "$REP/junit/salida_junit.txt" | sed 's/^/  /' | tee -a "$RESUMEN"
++grep -E "^OK \(|^Tests run|RENDIMIENTO|error:" "$REP/junit/salida_junit.txt" | head -8 | sed 's/^/  /' | tee -a "$RESUMEN"
+ [ $J -eq 0 ] && echo "  JUnit: CORRECTO" | tee -a "$RESUMEN" || echo "  JUnit: CON FALLAS (ver junit/salida_junit.txt)" | tee -a "$RESUMEN"
++if [ ! -f build/ci/classes/com/utp/sistemafinanciero/ServerMain.class ]; then
++  echo "  No se pudo compilar el sistema: revise pruebas/reportes/junit/salida_junit.txt" | tee -a "$RESUMEN"
++  exit 1
++fi
+ 
+ echo "== Levantando el SIGSF en modo memoria (puerto $PUERTO)"
+-CP="lib/postgresql.jar:lib/slf4j-api-2.0.16.jar:lib/logback-core-1.5.12.jar:lib/logback-classic-1.5.12.jar:build/ci/classes"
+-SIGSF_PERSISTENCIA=memoria SIGSF_SERVER_PORT=$PUERTO SIGSF_BACKUP_AUTOMATICO_HORAS=0 SIGSF_BACKUP_DIR="$REP/respaldos" \
+-  java -cp "$CP" com.utp.sistemafinanciero.ServerMain > "$REP/servidor.log" 2>&1 &
++if curl -sf "http://localhost:$PUERTO/api/health" > /dev/null 2>&1; then
++  echo "  El puerto $PUERTO ya está en uso: detenga el SIGSF de NetBeans y vuelva a ejecutar." | tee -a "$RESUMEN"
++  exit 1
++fi
++SIGSF_PERSISTENCIA=memoria SIGSF_SERVER_PORT=$PUERTO SIGSF_BACKUP_AUTOMATICO_HORAS=0 SIGSF_BACKUP_DIR=pruebas/reportes/respaldos \
++  java -cp "$LIBS${SEP}build/ci/classes" com.utp.sistemafinanciero.ServerMain > "$REP/servidor.log" 2>&1 &
+ PID=$!
+-trap 'kill $PID 2>/dev/null' EXIT
+-for i in $(seq 1 60); do
+-  curl -sf "http://localhost:$PUERTO/api/health" > /dev/null 2>&1 && break
++detener() {
++  if [ -r "/proc/$PID/winpid" ]; then taskkill //F //T //PID "$(cat /proc/$PID/winpid)" > /dev/null 2>&1; fi
++  kill $PID 2>/dev/null
++}
++trap detener EXIT
++LISTO=0
++for i in $(seq 1 90); do
++  if curl -sf "http://localhost:$PUERTO/api/health" > /dev/null 2>&1; then LISTO=1; break; fi
+   sleep 1
+ done
++if [ $LISTO -ne 1 ]; then
++  echo "  El servidor no arrancó. Últimas líneas de pruebas/reportes/servidor.log:" | tee -a "$RESUMEN"
++  tail -15 "$REP/servidor.log" | sed 's/^/    /' | tee -a "$RESUMEN"
++  exit 1
++fi
++echo "  Servidor listo en http://localhost:$PUERTO"
+ 
+ echo "== [2/3] Postman / Newman: pruebas de API"
+ cd pruebas/e2e

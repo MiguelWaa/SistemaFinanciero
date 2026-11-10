@@ -1,54 +1,80 @@
-# ============================================================
-#  SIGSF · Plan de pruebas completo (v5.5)
-#  1. JUnit: unitarias, integración, sistema, aceptación, seguridad, rendimiento
-#  2. Postman / Newman: pruebas de API contra el servidor en marcha
-#  3. Playwright: pruebas de sistema en el navegador (escritorio y móvil)
-#  Se ejecuta en cada push a main/develop, en cada Pull Request y a mano
-#  (Actions → "Plan de pruebas SIGSF" → Run workflow). Los reportes HTML
-#  quedan como artefacto descargable de la ejecución.
-# ============================================================
-name: Plan de pruebas SIGSF
-
+name: Plan integrado SIGSF
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
   workflow_dispatch:
-
+permissions:
+  contents: read
 jobs:
-  plan-de-pruebas:
+  memoria-api-navegador:
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar el código
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Instalar JDK 17
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Instalar Node.js 20
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Dependencias de pruebas (Newman y Playwright)
-        working-directory: pruebas/e2e
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Preparar dependencias
         run: |
+          python scripts/preparar_dependencias.py
+          cd pruebas/e2e
           npm ci --no-audit --no-fund
           npx playwright install --with-deps chromium
-
-      - name: Ejecutar el plan de pruebas
-        run: sh pruebas/ejecutar_plan_pruebas.sh
-
-      - name: Publicar reportes
+      - name: Ejecutar JUnit, API, seguridad, sintaxis y E2E
+        run: python scripts/validar_proyecto.py
+      - name: Conservar evidencia incluso si hay errores
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: reportes-plan-de-pruebas
+          name: evidencia-memoria-api-e2e
           path: pruebas/reportes/
           retention-days: 30
+  integracion-postgresql:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: sigsf_ci_temporal
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    env:
+      SIGSF_DB_HOST: 127.0.0.1
+      SIGSF_DB_PORT: '5432'
+      SIGSF_DB_USER: postgres
+      SIGSF_DB_PASSWORD: sigsf_ci_temporal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Preparar y compilar
+        run: |
+          python scripts/preparar_dependencias.py
+          python scripts/validar_proyecto.py --solo-junit
+      - name: Instalar cliente de PostgreSQL
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Nueva BD aislada y siete pruebas JDBC
+        run: python scripts/probar_postgresql.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencia-postgresql
+          path: pruebas/reportes/postgresql/

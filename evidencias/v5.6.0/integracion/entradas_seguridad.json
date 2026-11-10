@@ -1,0 +1,154 @@
+{
+  "scope": "local, memoria, credenciales de demostracion",
+  "pass": 24,
+  "total": 24,
+  "tests": [
+    {
+      "id": "FZ-01",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-02",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-03",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-04",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-05",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-06",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-07",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-08",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-09",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-10",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-11",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-12",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-13",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-14",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-15",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-16",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-17",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-18",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-19",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "FZ-20",
+      "http": 400,
+      "expected": "4xx y sin token",
+      "passed": true
+    },
+    {
+      "id": "JSON-SUF",
+      "http": 400,
+      "expected": 400,
+      "passed": true,
+      "token_present": false
+    },
+    {
+      "id": "DES-JAVA",
+      "http": 415,
+      "expected": 415,
+      "passed": true,
+      "token_present": false
+    },
+    {
+      "id": "CFG-TYPE",
+      "http": 415,
+      "expected": 415,
+      "passed": true,
+      "token_present": false
+    },
+    {
+      "id": "DES-META",
+      "http": 200,
+      "expected": "200; revisar tambien que el parser solo crea Map/List",
+      "passed": true
+    }
+  ]
+}

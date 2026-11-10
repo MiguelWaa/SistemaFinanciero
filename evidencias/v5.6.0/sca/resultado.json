@@ -1,0 +1,5 @@
+{
+  "estado": "INVENTARIO LOCAL GENERADO",
+  "vulnerabilidades": "NO EVALUADAS",
+  "motivo": "El modo predeterminado no envía datos. El escaneo en línea requiere autorización explícita."
+}

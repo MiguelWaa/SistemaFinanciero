@@ -1,0 +1,157 @@
+{
+  "date": "2026-11-10",
+  "scope": "localhost; datos de demostracion; persistencia memoria",
+  "tests": [
+    {
+      "id": "FZ-01",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-02",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-03",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-04",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-05",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-06",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-07",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-08",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-09",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-10",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-11",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-12",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-13",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-14",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-15",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-16",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-17",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-18",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-19",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "FZ-20",
+      "expected": "4xx y sin token",
+      "http": 400,
+      "passed": true
+    },
+    {
+      "id": "JSON-SUF",
+      "expected": 400,
+      "http": 200,
+      "passed": false,
+      "token_present": true
+    },
+    {
+      "id": "DES-JAVA",
+      "expected": 400,
+      "http": 400,
+      "passed": true,
+      "token_present": false
+    },
+    {
+      "id": "CFG-TYPE",
+      "expected": 415,
+      "http": 200,
+      "passed": false,
+      "token_present": true
+    },
+    {
+      "id": "DES-META",
+      "expected": "200 y @class sin instanciacion (revision codigo)",
+      "http": 200,
+      "passed": true
+    }
+  ],
+  "pass": 22,
+  "total": 24,
+  "csp": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'",
+  "health_after": 200
+}

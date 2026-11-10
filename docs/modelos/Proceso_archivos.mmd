@@ -1,0 +1,13 @@
+flowchart TD
+    A[Usuario autenticado] --> B{Permiso del recurso}
+    B -->|No| X[Rechazar acceso]
+    B -->|Sí| C{Operación}
+    C -->|Importar| D[Leer CSV o XLSX con límites]
+    D --> E[Vista previa y validación por fila]
+    E --> F[Confirmar importación]
+    F --> G[Aplicar reglas y persistir]
+    C -->|Exportar| H[Consultar recurso autorizado]
+    H --> I[Generar XLSX, CSV o JSON]
+    I --> J[Descargar archivo]
+    G --> K[Registrar auditoría]
+    J --> K

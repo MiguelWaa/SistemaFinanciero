@@ -160,15 +160,19 @@ public final class Json {
     }
 
     private static final class Parser {
+        private static final int MAX_PROFUNDIDAD = 64;
         private final String s;
         private int i;
+        private int profundidad;
 
         Parser(String s) { this.s = s == null ? "" : s; }
 
         Object parseCompleto() {
             skipWs();
-            if (i >= s.length()) return null;
+            if (i >= s.length()) throw error("Documento vacio");
             Object v = parseValue();
+            skipWs();
+            if (i != s.length()) throw error("Contenido sobrante despues del valor JSON");
             return v;
         }
 
@@ -176,8 +180,10 @@ public final class Json {
             skipWs();
             char c = peek();
             switch (c) {
-                case '{': return parseObject();
-                case '[': return parseArray();
+                case '{': case '[':
+                    if (++profundidad > MAX_PROFUNDIDAD) throw error("Demasiados niveles de anidacion");
+                    try { return c == '{' ? parseObject() : parseArray(); }
+                    finally { profundidad--; }
                 case '"': return parseString();
                 case 't': case 'f': return parseBoolean();
                 case 'n': parseLiteral("null"); return null;
@@ -193,6 +199,7 @@ public final class Json {
             while (true) {
                 skipWs();
                 String clave = parseString();
+                if (map.containsKey(clave)) throw error("Clave duplicada");
                 skipWs();
                 expect(':');
                 Object valor = parseValue();
@@ -240,13 +247,16 @@ public final class Json {
                         case 'b':  sb.append('\b'); break;
                         case 'f':  sb.append('\f'); break;
                         case 'u':
+                            if (i + 4 > s.length()) throw error("Escape Unicode incompleto");
                             String hex = s.substring(i, i + 4);
+                            if (!hex.matches("[0-9a-fA-F]{4}")) throw error("Escape Unicode invalido");
                             i += 4;
                             sb.append((char) Integer.parseInt(hex, 16));
                             break;
                         default: throw error("Escape invalido: \\" + e);
                     }
                 } else {
+                    if (c < 0x20) throw error("Caracter de control sin escapar");
                     sb.append(c);
                 }
             }
@@ -259,8 +269,12 @@ public final class Json {
                 i++;
             }
             String num = s.substring(inicio, i);
-            if (num.isEmpty()) throw error("Numero invalido");
-            return Double.parseDouble(num);
+            if (!num.matches("-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?")) {
+                throw error("Numero invalido");
+            }
+            double valor = Double.parseDouble(num);
+            if (!Double.isFinite(valor)) throw error("Numero fuera de rango");
+            return valor;
         }
 
         private Boolean parseBoolean() {
@@ -275,7 +289,7 @@ public final class Json {
         }
 
         private void skipWs() {
-            while (i < s.length() && Character.isWhitespace(s.charAt(i))) i++;
+            while (i < s.length() && " \t\r\n".indexOf(s.charAt(i)) >= 0) i++;
         }
 
         private char peek() {

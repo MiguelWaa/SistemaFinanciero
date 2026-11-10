@@ -1,0 +1,13 @@
+flowchart TD
+    A[Credenciales del usuario] --> B[Validación de Content-Type y JSON]
+    B --> C{Entrada válida}
+    C -->|No| X[Respuesta 400 o 415]
+    C -->|Sí| D[AuthService y bloqueo de intentos]
+    D --> F{Credenciales correctas}
+    F -->|No| G[Registrar fallo y rechazar]
+    F -->|Sí| H[Crear sesión y devolver DTO]
+    H --> I[Solicitudes con token Bearer]
+    I --> J{Permiso por rol y recurso}
+    J -->|Sí| K[Controlador y servicio]
+    J -->|No| L[Respuesta 401 o 403]
+    K --> M[Auditoría y respuesta]

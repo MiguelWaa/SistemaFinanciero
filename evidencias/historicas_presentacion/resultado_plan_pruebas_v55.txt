@@ -1,0 +1,57 @@
+SIGSF · Resultado del plan de pruebas · 2026-11-04 19:13
+Versión: 5.5.0 · commit dbd67b9
+Java: openjdk version "21.0.12.1" 2026-08-18
+
+  [RENDIMIENTO] peticiones=500 errores=0 p50=45ms p95=53ms max=69ms total=1205ms rps=414.9
+  OK (192 tests)
+  JUnit: CORRECTO
+  |                requests |                26 |                0 |
+  |              assertions |                63 |                0 |
+  Newman: CORRECTO
+    13 passed (43.3s)
+  Playwright: CORRECTO
+
+== Playwright (detalle)
+OK    1 [escritorio-chromium] › tests/01-acceso.spec.js:6:3 › Acceso al sistema (RF-SEG-01) › E2E-01 · el administrador ingresa y ve el panel con indicadores (2.4s)
+OK    2 [escritorio-chromium] › tests/01-acceso.spec.js:14:3 › Acceso al sistema (RF-SEG-01) › E2E-02 · una clave incorrecta muestra un aviso y no entra (1.3s)
+OK    3 [escritorio-chromium] › tests/01-acceso.spec.js:25:3 › Acceso al sistema (RF-SEG-01) › E2E-03 · sin sesión, el panel redirige al login (1.2s)
+OK    4 [escritorio-chromium] › tests/01-acceso.spec.js:31:3 › Acceso al sistema (RF-SEG-01) › E2E-04 · cerrar sesión devuelve al login y el token deja de servir (2.2s)
+OK    5 [escritorio-chromium] › tests/02-modulos.spec.js:24:3 › Módulos del panel (MVC · vistas) › E2E-05 · el administrador abre los 15 módulos sin errores de JavaScript (10.1s)
+OK    6 [escritorio-chromium] › tests/02-modulos.spec.js:40:3 › Módulos del panel (MVC · vistas) › E2E-06 · la tabla de clientes carga datos reales desde la API (2.9s)
+OK    7 [escritorio-chromium] › tests/02-modulos.spec.js:49:3 › Módulos del panel (MVC · vistas) › E2E-07 · el cajero no tiene acceso a Usuarios (RBAC en la interfaz y en la API) (2.1s)
+OK    8 [escritorio-chromium] › tests/03-portal-pago.spec.js:8:3 › Portal del Cliente y pagos con QR (RF-PAG) › E2E-08 · el cliente ingresa con su documento (3.1s)
+OK    9 [escritorio-chromium] › tests/03-portal-pago.spec.js:20:3 › Portal del Cliente y pagos con QR (RF-PAG) › E2E-09 · paga una cuota con Yape y queda por verificar (5.5s)
+OK   10 [escritorio-chromium] › tests/03-portal-pago.spec.js:46:3 › Portal del Cliente y pagos con QR (RF-PAG) › E2E-10 · caja ve el pago en la bandeja "Por verificar" y lo confirma (3.5s)
+OK   11 [escritorio-chromium] › tests/04-seguridad.spec.js:5:1 › E2E-11 · un nombre con código HTML se muestra como texto (sin XSS) (3.0s)
+OK   12 [escritorio-chromium] › tests/04-seguridad.spec.js:29:1 › E2E-12 · las páginas llegan con CSP y anti-clickjacking (813ms)
+OK   13 [movil-chromium] › tests/05-responsive.spec.js:4:1 › E2E-13 · el portal se usa en celular sin desplazamiento horizontal (3.8s)
+
+== Newman (detalle)
+ - CP-API-01 Health check público
+ - CP-API-02 Login ADMIN correcto
+ - CP-API-03 Login CAJERO correcto
+ - CP-API-04 Login con clave incorrecta
+ - CP-API-05 Sesión actual
+ - CP-API-06 Listar clientes
+ - CP-API-07 Registrar cliente
+ - CP-API-08 Documento repetido → 400
+ - CP-API-09 Cambio de moneda con TC del servidor
+ - CP-API-10 Monto cero → 400
+ - CP-API-11 Registro en el portal
+ - CP-API-12 Solicitar préstamo (tasa no manipulable)
+ - CP-API-13 Aprobar solicitud
+ - CP-API-14 Cliente paga cuota con Yape
+ - CP-API-15 Caja confirma el pago
+ - CP-API-16 Saldo del préstamo disminuye
+ - CP-API-17 Sin token → 401
+ - CP-API-18 Token inventado → 401
+ - CP-API-19 Cajero en usuarios → 403
+ - CP-API-20 Cliente consulta a otro cliente → 403
+ - CP-API-21 Usuarios sin contraseñas expuestas
+ - CP-API-22 Panel de indicadores
+ - CP-API-23 Exportar clientes a CSV
+ - CP-API-24 Exportar ventas a JSON
+ - CP-API-25 Logout invalida el token
+ - CP-API-26 Token cerrado → 401
+
+Total: 192 JUnit + 26 Postman/Newman + 13 Playwright = 231 casos, 231 aprobados (100 %)

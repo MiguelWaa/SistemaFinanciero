@@ -30,6 +30,23 @@ test('E2E-12 · las páginas llegan con CSP y anti-clickjacking', async ({ page 
   const resp = await page.goto('/login.html');
   const h = resp.headers();
   expect(h['content-security-policy']).toContain("default-src 'self'");
+  expect(h['content-security-policy']).toContain("script-src 'self';");
+  expect(h['content-security-policy']).toContain("script-src-attr 'none'");
   expect(h['x-frame-options']).toBe('SAMEORIGIN');
   expect(h['x-content-type-options']).toBe('nosniff');
+});
+
+// Regresión de la externalización de eventos: ayuda conserva interacciones con CSP.
+test('E2E-14 · ayuda y login funcionan con scripts externos', async ({ page }) => {
+  const errores = [];
+  page.on('pageerror', e => errores.push(e.message));
+  await ingresar(page, 'admin');
+  await page.goto('/ayuda.html');
+  await page.locator('[data-help-action="faq"]').first().click();
+  await expect(page.locator('.faq-item').first()).toHaveClass(/open/);
+  await page.fill('#chatInput', 'que modulos hay');
+  await page.press('#chatInput', 'Enter');
+  await expect(page.locator('.msg.user').last()).toContainText('que modulos hay');
+  await expect(page.locator('.msg.bot').last()).toContainText('Marketing');
+  expect(errores).toEqual([]);
 });

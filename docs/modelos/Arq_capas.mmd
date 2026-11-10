@@ -1,0 +1,10 @@
+flowchart TD
+    V[HTML y JavaScript] --> A[ApiServer y Ctx]
+    A --> F[FiltroSeguridad]
+    F --> C[Controladores y DTO]
+    C --> S[Servicios de negocio]
+    S --> I[Interfaces DAO]
+    I --> J[DAO JDBC]
+    I --> M[DAO en memoria]
+    J --> P[PostgreSQL]
+    S --> U[Auditoría y Logback]

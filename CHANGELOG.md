@@ -1,3 +1,15 @@
+# Cambios de la versión integrada
+
+## [5.6.0] - 2026-11-10
+
+- Validación JSON y Content-Type/UTF-8 estrictos; 22 regresiones JUnit nuevas.
+- CSP de scripts externos; 26 bloques migrados y prueba E2E de Ayuda.
+- Ejecutor único, inventario local, scripts JDBC/ZAP/SCA y workflow PostgreSQL.
+- 214 JUnit, 63 aserciones API y 24 comprobaciones adicionales aprobadas en memoria.
+- Catálogo de 217 tipos Java, modelos completos, diccionario e índice de documentación.
+- Ejecutable de demostración, presentación y evidencia agrupados en la entrega.
+- E2E, JDBC, DAST y SCA online conservan validaciones pendientes.
+
 # Registro de cambios · SIGSF
 
 Todos los cambios importantes del proyecto se anotan aquí.

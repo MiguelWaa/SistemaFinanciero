@@ -74,7 +74,7 @@ public class ApiServer {
     }
 
     private static final String CSP = "default-src 'self'; "
-            + "script-src 'self' 'unsafe-inline'; "
+            + "script-src 'self'; script-src-attr 'none'; object-src 'none'; "
             // Bootstrap y Font Awesome se sirven desde web/vendor (sin CDN): solo se permite Google Fonts.
             + "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
             + "font-src 'self' data: https://fonts.gstatic.com; "
@@ -232,7 +232,9 @@ public class ApiServer {
 
     /** Traduce excepciones a códigos HTTP sin exponer detalles internos. */
     private void responderError(Ctx ctx, Exception e) throws IOException {
-        if (e instanceof ReglaNegocioException) {
+        if (e instanceof TipoContenidoNoSoportadoException) {
+            ctx.error(415, e.getMessage());
+        } else if (e instanceof ReglaNegocioException) {
             ctx.error(400, e.getMessage());
         } else if (e instanceof NoAutenticadoException) {
             ctx.error(401, e.getMessage());
