@@ -244,3 +244,17 @@ body:has(.bank-intro:not([hidden])) #bankLanding .bank-rain>span,body:has(.bank-
 @media(max-height:720px) and (min-width:577px){.bank-intro-content{padding:18px}.bank-intro-building{width:300px;margin:-20px auto -25px}.bank-intro h1{font-size:34px;margin:8px 0}.bank-intro-copy{font-size:12px;margin-bottom:14px}.bank-intro-status{margin-top:10px;min-height:20px}}
 @media(prefers-reduced-motion:reduce){.bank-rain{display:none}.bank-building,.bank-art-label,.bank-intro-building,.bank-intro h1{animation:none!important}.bank-intro,.bank-access-card,.sg-tile,.btn{transition:none!important}}
 @media print{.bank-intro,.bank-rain,.bank-header nav,.bank-media,.sg-welcome-audio,.sg-side,.sg-top,.va-launcher,.va-panel{display:none!important}body{background:#fff!important}.doc-sheet{box-shadow:none;border:0}.bank-building,.bank-art-label{animation:none;transform:none}}
+
+/* Entrada cinematográfica: ocupa toda la ventana, sin tarjeta ni encabezado. */
+.bank-intro-cinema{display:block;overflow:hidden;background:#02080f}
+.bank-intro-cinema .bank-intro-content{position:absolute;inset:0;width:100%;height:100%;max-width:none;margin:0;padding:0}
+.bank-intro-cinema .bank-intro-video{position:absolute;inset:0;width:100%;height:100%;min-height:0;max-height:none;aspect-ratio:auto;object-fit:cover;transform:scale(1.24);border:0;border-radius:0;box-shadow:none}
+.bank-intro-overlay{position:absolute;inset:auto 0 0;padding:70px 24px 24px;background:linear-gradient(transparent,#02080fe6);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s}
+.bank-intro-cinema.show-controls .bank-intro-overlay,.bank-intro-cinema.needs-action .bank-intro-overlay,.bank-intro-cinema:has(button:focus-visible) .bank-intro-overlay{opacity:1;visibility:visible;pointer-events:auto}
+.bank-intro-cinema .bank-intro-actions{margin:0;flex-direction:row;flex-wrap:wrap}
+.bank-intro-cinema .bank-intro-actions .btn{min-width:0;min-height:42px;padding:10px 16px;font-size:12px}
+.bank-intro-cinema .bank-intro-status{max-width:680px;margin:10px auto 0;color:#e1edfa;font-size:11px}
+/* En vertical se conserva el logotipo completo; el fondo sigue cubriendo la ventana. */
+@media(max-aspect-ratio:1/1){.bank-intro-cinema .bank-intro-video{object-fit:contain;transform:none}}
+@media(max-width:576px){.bank-intro-overlay{padding:60px 14px 18px}.bank-intro-cinema .bank-intro-actions .btn{font-size:11px;padding:10px 12px}}
+@media(prefers-reduced-motion:reduce){.bank-intro-overlay{transition:none}}

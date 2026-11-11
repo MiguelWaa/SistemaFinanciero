@@ -1,3 +1,11 @@
+## [5.10.0] - 2026-11-10 Lima · Entrada automática
+
+- Video a toda la ventana, encuadre central y controles que aparecen con interacción.
+- INICIAR_DEMO.bat inicia Java y abre Chrome a pantalla completa con autoplay audible y perfil propio.
+- Comprobación de puerto, espera del servidor y cierre del proceso de demostración.
+- 31 pruebas de flujo, 11 JUnit selectivas y sintaxis aprobadas. Backend sin cambios.
+- Arranque Windows y reproducción real pendientes de comprobación en ese equipo.
+
 ## [5.9.0] - 2026-11-10 Lima · Presentación en video
 
 - Video 121221.mp4 original al iniciar, conservando imagen, proporción y sonido.

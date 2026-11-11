@@ -1,0 +1,40 @@
+{
+  "version": "5.10.0",
+  "fecha_utc": "2026-11-11T04:19:03.154668+00:00",
+  "commit": "f5026259f4d0dfd6698a60124e88bea5b846a35a",
+  "cambios_locales": false,
+  "sha256_fuentes": "a6bbc2a4b8b6d5f30914a070a271d9343cdeb716e52d01fdfb8e7150eca8b5cf",
+  "alcance": "31 pruebas de flujo DOM simulado; 11 JUnit de CSP y recursos multimedia HTTP; backend sin cambios respecto a v5.9.0",
+  "etapas": [
+    {
+      "nombre": "frontend_audio",
+      "estado": "APROBADO",
+      "registro": "frontend_audio.txt"
+    },
+    {
+      "nombre": "sintaxis_welcome-1.js",
+      "estado": "APROBADO",
+      "registro": "sintaxis_welcome-1.js.txt"
+    },
+    {
+      "nombre": "sintaxis_sigsf-bienvenida.js",
+      "estado": "APROBADO",
+      "registro": "sintaxis_sigsf-bienvenida.js.txt"
+    },
+    {
+      "nombre": "junit_selectivo",
+      "estado": "APROBADO",
+      "registro": "junit_selectivo.txt"
+    }
+  ],
+  "junit_casos_aprobados": 11,
+  "frontend_casos_aprobados": 31,
+  "seleccion_aprobada": true,
+  "evaluacion_integral_completa": false,
+  "antecedente_regresion": "evidencias/v5.9.0/resultado.json (224 JUnit, API y entradas; no reejecutadas en su totalidad)",
+  "pendientes": [
+    "Iniciador Windows PowerShell 5.1 y Chrome en equipo del usuario",
+    "Reproduccion visual y escucha real en navegador",
+    "E2E, PostgreSQL, ZAP y hallazgos SCA previos"
+  ]
+}

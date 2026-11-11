@@ -9,12 +9,20 @@
   if (!intro || !landing || !video) return;
   var status = document.getElementById('introStatus');
   var start = document.getElementById('introStart');
-  var timer = null, salida = null, intentoId = 0;
+  var timer = null, salida = null, controlesTimer = null, intentoId = 0;
   var media = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   var reducido = media.matches, pausaAnimacion = reducido;
   var controles = document.querySelectorAll('[data-bank-motion]');
   function activo() { return !intro.hidden && salida === null; }
   function cancelarTiempo() { if (timer !== null) { clearTimeout(timer); timer = null; } }
+  function ocultarControles() {
+    if (controlesTimer !== null) { clearTimeout(controlesTimer); controlesTimer = null; }
+    intro.classList.remove('show-controls');
+  }
+  function mostrarControles() {
+    ocultarControles(); intro.classList.add('show-controls');
+    controlesTimer = setTimeout(ocultarControles, 2200);
+  }
   function actualizarAnimacion() {
     document.body.classList.toggle('bank-paused', pausaAnimacion);
     controles.forEach(function (b) {
@@ -34,9 +42,10 @@
     var sinSonido = video.muted || video.volume === 0;
     start.querySelector('span').textContent = sinSonido ? 'Activar sonido desde el inicio' : (video.paused ? 'Reproducir con sonido' : 'Pausar presentación');
     start.querySelector('i').className = 'fa-solid ' + (sinSonido ? 'fa-volume-high' : (video.paused ? 'fa-play' : 'fa-pause'));
+    intro.classList.toggle('needs-action', video.paused || sinSonido);
   }
   function mostrarPortada() {
-    cancelarTiempo();
+    cancelarTiempo(); ocultarControles();
     if (!activo()) return;
     intentoId++;
     intro.classList.add('is-leaving');
@@ -57,7 +66,7 @@
         video.muted = true; actualizarBoton(); reproducir(false);
       } else {
         actualizarBoton();
-        status.textContent = 'Pulsa «Reproducir con sonido» o usa los controles del video. También puedes entrar directamente.';
+        status.textContent = 'El navegador bloqueó el inicio. Usa INICIAR_DEMO.bat para la entrada automática, o pulsa «Reproducir con sonido».';
       }
     }
     try {
@@ -71,7 +80,8 @@
     if (audio) audio.pause();
     video.currentTime = 0; video.muted = false; video.volume = 1;
     intro.classList.remove('is-leaving'); intro.hidden = false; landing.inert = true;
-    actualizarBoton(); start.focus({ preventScroll: true });
+    actualizarBoton(); ocultarControles();
+    intro.setAttribute('tabindex', '-1'); intro.focus({ preventScroll: true });
     if (reducido) status.textContent = 'Movimiento reducido. Pulsa «Reproducir con sonido» para ver la presentación.';
     else { status.textContent = 'Cargando presentación. Al terminar se abrirá la portada.'; reproducir(true); }
   }
@@ -85,7 +95,12 @@
   });
   document.getElementById('introSkip').addEventListener('click', mostrarPortada);
   document.getElementById('replayIntro').addEventListener('click', presentar);
-  intro.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.preventDefault(); mostrarPortada(); } });
+  intro.addEventListener('pointermove', mostrarControles);
+  intro.addEventListener('pointerdown', mostrarControles);
+  intro.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { e.preventDefault(); mostrarPortada(); }
+    else mostrarControles();
+  });
   video.addEventListener('playing', function () {
     if (!activo()) { video.pause(); return; }
     if (audio) audio.pause();
@@ -109,7 +124,7 @@
   });
   if (audio) audio.addEventListener('playing', function () { if (activo()) audio.pause(); });
   window.addEventListener('pagehide', function () {
-    intentoId++; cancelarTiempo(); if (salida !== null) clearTimeout(salida);
+    intentoId++; cancelarTiempo(); ocultarControles(); if (salida !== null) clearTimeout(salida);
     intro.hidden = true; landing.inert = false; salida = null; video.pause(); if (audio) audio.pause();
   });
   presentar();

@@ -1,0 +1,10 @@
+{
+  "windows_chrome": "PENDIENTE: este entorno no incluye Windows PowerShell ni permite la revisión del servidor en navegador.",
+  "revisado": [
+    "Controlador JS mediante 31 pruebas con DOM simulado",
+    "11 pruebas JUnit de CSP, audio y video HTTP",
+    "Código del iniciador: rutas con espacios, puerto ocupado, espera del servidor y perfil separado"
+  ],
+  "alcance": "No se afirma haber escuchado el sonido ni haber ejecutado el iniciador en Windows.",
+  "base": "Backend sin cambios desde v5.9.0; regresión completa de esa versión conservada."
+}
