@@ -11,18 +11,19 @@
 <link rel="stylesheet" href="sigsf-banco.css">
 </head>
 <body class="bank-public">
-<section class="bank-intro bank-video-intro" id="bankIntro" role="dialog" aria-modal="true" aria-labelledby="introTitle" hidden>
+<section class="bank-intro bank-video-intro bank-intro-cinema" id="bankIntro" role="dialog" aria-modal="true" aria-label="Presentación de bienvenida SIGSF" hidden>
   <div class="bank-intro-content">
-    <div class="bank-video-heading"><h1 id="introTitle">Bienvenido a SIGSF</h1><span>Tu gestión financiera, conectada</span></div>
-    <video id="sigsfVideoIntro" class="bank-intro-video" controls playsinline preload="auto" poster="video/presentacion-sigsf.jpg" width="1280" height="720" aria-label="Presentación animada de SIGSF" aria-describedby="introStatus">
+    <video id="sigsfVideoIntro" class="bank-intro-video" playsinline preload="auto" poster="video/presentacion-sigsf.jpg" width="1280" height="720" aria-label="Presentación animada de SIGSF" aria-describedby="introStatus">
       <source src="video/presentacion-sigsf.mp4" type="video/mp4">
       Tu navegador no admite este video. Puedes entrar a la portada o <a href="video/presentacion-sigsf.mp4">abrir la presentación</a>.
     </video>
+    <div class="bank-intro-overlay">
     <div class="bank-intro-actions">
       <button class="btn btn-primary btn-lg" id="introStart" type="button" aria-controls="sigsfVideoIntro"><i class="fa-solid fa-volume-high" aria-hidden="true"></i><span>Reproducir con sonido</span></button>
       <button class="btn btn-outline-primary btn-lg" id="introSkip" type="button">Entrar a la portada <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
     </div>
     <p class="bank-intro-status" id="introStatus" role="status">Presentación de 10 segundos. Al terminar se abrirá la portada.</p>
+    </div>
   </div>
 </section>
 <div id="bankLanding">
@@ -57,7 +58,7 @@
       <button class="bank-motion-toggle" type="button" data-bank-motion aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i><span>Pausar animación</span></button>
     </section>
   </main>
-  <footer class="bank-footer"><span>© 2026 SIGSF</span><span>Sistema Integral de Gestión de Servicios Financieros</span><span class="bank-version">Interfaz bancaria · 5.9.0</span></footer>
+  <footer class="bank-footer"><span>© 2026 SIGSF</span><span>Sistema Integral de Gestión de Servicios Financieros</span><span class="bank-version">Interfaz bancaria · 5.10.0</span></footer>
 </div>
 <script src="sigsf-bienvenida.js"></script>
 <script src="pages/welcome-1.js"></script>
