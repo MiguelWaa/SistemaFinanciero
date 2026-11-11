@@ -1,0 +1,107 @@
+{
+  "base": "v5.7.0",
+  "paginas_funcionales": [
+    {
+      "pagina": "Logistica.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "Marketing.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "Ventas.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "almacen.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "ayuda.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "clientes y servicios financieros.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "configuracion.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "direccion gerencia.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "documento.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "gerencia general y toma de  decisiones.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "index.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "login.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "operaciones financieras.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "pagos.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "portal-documento.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "portal-inicio.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "portal.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "produccion.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "reportes.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "respaldos.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "seguridad.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "solicitudes.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "usuarios.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    },
+    {
+      "pagina": "versiones.html",
+      "formularios_enlaces_identificadores": "CONSERVADOS"
+    }
+  ],
+  "paginas_redisenadas": [
+    "welcome.html",
+    "splash.html"
+  ],
+  "mp3_sha256": "a2f86d6848d0f73315dd152a168c6f537066f4ea77872dc8ee046183b953882d",
+  "svg_xml": "VALIDO"
+}

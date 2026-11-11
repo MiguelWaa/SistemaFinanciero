@@ -1,0 +1,66 @@
+{
+  "version": "5.8.0",
+  "fecha_utc": "2026-11-11T03:51:46.350989+00:00",
+  "alcance": "localhost; datos de prueba; DAO en memoria",
+  "compilacion": "-source 17 -target 17",
+  "etapas": [
+    {
+      "nombre": "compilar_fuentes",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "compilar_fuentes.txt"
+    },
+    {
+      "nombre": "compilar_pruebas",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "compilar_pruebas.txt"
+    },
+    {
+      "nombre": "junit",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "junit.txt"
+    },
+    {
+      "nombre": "frontend_sintaxis",
+      "estado": "APROBADO",
+      "registro": "frontend_sintaxis.txt"
+    },
+    {
+      "nombre": "frontend_audio",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "frontend_audio.txt"
+    },
+    {
+      "nombre": "newman",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "newman.txt"
+    },
+    {
+      "nombre": "entradas_seguridad",
+      "estado": "APROBADO",
+      "salida": 0,
+      "registro": "entradas_seguridad.txt"
+    },
+    {
+      "nombre": "playwright",
+      "estado": "NO EJECUTADO",
+      "motivo": "Omitido expresamente; se requiere Chromium compatible"
+    }
+  ],
+  "pendientes": [
+    "PostgreSQL (scripts/probar_postgresql.py)",
+    "ZAP (scripts/escanear_zap.py)",
+    "SCA (scripts/escanear_dependencias.py)"
+  ],
+  "commit": "6a4d58360a50ce84d4ddc8aad758ff7cc7798f71",
+  "cambios_locales": false,
+  "sha256_fuentes": "1d2f8e03fa9a32a60bc27775a6cb61404412485b6e9a6d800a7fc61bedb1a6d2",
+  "junit_casos_aprobados": 216,
+  "url_prueba": "http://127.0.0.1:60277",
+  "seleccion_aprobada": true,
+  "evaluacion_integral_completa": false
+}

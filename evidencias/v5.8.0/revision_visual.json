@@ -1,0 +1,15 @@
+{
+  "estado_navegador": "PENDIENTE",
+  "motivo": "La revisión del servidor local quedó bloqueada por el entorno de navegador. No se reintentó mediante vías alternativas.",
+  "verificado": [
+    "Ilustración SVG renderizada localmente e inspeccionada",
+    "24 contratos de páginas funcionales conservados",
+    "MP3 decodificado y con señal",
+    "19 pruebas de flujo con DOM y audio simulados"
+  ],
+  "pendiente": [
+    "Portada y módulos renderizados en navegador real, escritorio y móvil",
+    "Escucha del saludo en el equipo del usuario",
+    "E2E Playwright"
+  ]
+}
