@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="620" viewBox="0 0 760 620" fill="none">
+  <defs>
+    <linearGradient id="roof" x1="160" y1="150" x2="610" y2="280" gradientUnits="userSpaceOnUse"><stop stop-color="#3374ef"/><stop offset="1" stop-color="#123c8d"/></linearGradient>
+    <linearGradient id="marble" x1="290" y1="240" x2="360" y2="490" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#dce9ff"/></linearGradient>
+    <linearGradient id="gold" x1="130" y1="410" x2="220" y2="500" gradientUnits="userSpaceOnUse"><stop stop-color="#ffe5a1"/><stop offset="1" stop-color="#d49a27"/></linearGradient>
+  </defs>
+  <ellipse cx="384" cy="536" rx="290" ry="35" fill="#173d7a" opacity=".09"/>
+  <circle cx="382" cy="298" r="232" fill="#e8f1ff"/>
+  <circle cx="382" cy="298" r="194" stroke="#c8dbf9" stroke-dasharray="5 12"/>
+  <path d="M144 256 380 98l236 158v22H144z" fill="#10316a"/>
+  <path d="M158 249 380 113l222 136H158z" fill="url(#roof)"/>
+  <path d="m196 236 184-111 184 111" stroke="#7db0ff" stroke-width="2"/>
+  <text x="380" y="220" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-size="45" font-weight="700" letter-spacing="7">SIGSF</text>
+  <rect x="156" y="267" width="448" height="32" rx="4" fill="#fff"/>
+  <rect x="167" y="299" width="426" height="180" fill="#2855a1"/>
+  <rect x="170" y="299" width="420" height="8" fill="#0d2d67" opacity=".3"/>
+  <rect x="333" y="328" width="95" height="151" rx="46" fill="#122f63"/>
+  <rect x="343" y="340" width="75" height="139" rx="37" fill="#6a9bdd"/>
+  <path d="M380 341v138" stroke="#d5e5fd" stroke-width="3"/>
+  <circle cx="368" cy="421" r="3" fill="#fff"/><circle cx="393" cy="421" r="3" fill="#fff"/>
+  <g fill="url(#marble)" stroke="#cadcf6" stroke-width="1.5">
+    <path d="M190 306h51l-5 158h-41z"/><path d="M271 306h51l-5 158h-41z"/>
+    <path d="M439 306h51l-5 158h-41z"/><path d="M520 306h51l-5 158h-41z"/>
+  </g>
+  <g fill="#fff"><rect x="184" y="299" width="63" height="12" rx="3"/><rect x="265" y="299" width="63" height="12" rx="3"/><rect x="433" y="299" width="63" height="12" rx="3"/><rect x="514" y="299" width="63" height="12" rx="3"/></g>
+  <g stroke="#c5d8f6" stroke-width="3"><path d="M208 322v132m15-132v132M289 322v132m15-132v132M457 322v132m15-132v132M538 322v132m15-132v132"/></g>
+  <g fill="#f0f6ff"><rect x="184" y="462" width="63" height="16" rx="3"/><rect x="265" y="462" width="63" height="16" rx="3"/><rect x="433" y="462" width="63" height="16" rx="3"/><rect x="514" y="462" width="63" height="16" rx="3"/></g>
+  <rect x="151" y="478" width="458" height="19" rx="3" fill="#d3e4ff"/><rect x="132" y="496" width="496" height="18" rx="3" fill="#edf4ff"/>
+  <rect x="111" y="513" width="538" height="17" rx="4" fill="#bcd3f6"/>
+  <g transform="translate(76 378) rotate(-12 72 48)"><rect width="145" height="92" rx="14" fill="#fff" stroke="#a8c8f5" stroke-width="2"/><rect x="12" y="13" width="121" height="66" rx="8" fill="#e7f5ef" stroke="#83bea4"/><circle cx="72" cy="46" r="24" fill="#d1ebdf"/><text x="72" y="57" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="33" fill="#32826a">$</text><path d="M25 32v28m94-28v28" stroke="#83bea4" stroke-width="4"/></g>
+  <g transform="translate(558 356) rotate(10 63 72)"><rect width="127" height="161" rx="20" fill="#fff" stroke="#a8c8f5" stroke-width="2"/><rect x="11" y="13" width="105" height="133" rx="12" fill="#eaf2ff"/><rect x="36" y="24" width="55" height="5" rx="2" fill="#b4c9e8"/><circle cx="63" cy="78" r="31" fill="#2563eb"/><path d="m48 78 10 10 22-24" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M33 126h61" stroke="#b4c9e8" stroke-width="5" stroke-linecap="round"/></g>
+  <g><circle cx="219" cy="493" r="31" fill="url(#gold)" stroke="#b98017" stroke-width="2"/><circle cx="219" cy="493" r="24" stroke="#fff0c4" stroke-width="2"/><text x="219" y="504" text-anchor="middle" fill="#946411" font-size="31" font-family="Arial,sans-serif">$</text><circle cx="563" cy="535" r="24" fill="url(#gold)" stroke="#b98017" stroke-width="2"/><text x="563" y="544" text-anchor="middle" fill="#946411" font-size="26" font-family="Arial,sans-serif">$</text></g>
+  <g fill="#e4ad43"><path d="M127 188h18m-9-9v18M615 170h18m-9-9v18" stroke="#e4ad43" stroke-width="3" stroke-linecap="round"/><circle cx="652" cy="300" r="5"/><circle cx="110" cy="306" r="4"/></g>
+</svg>

@@ -1,50 +1,66 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="dark" data-sigsf-theme="grafito">
+<html lang="es" data-bs-theme="light" data-sigsf-theme="banco">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SIGSF · Bienvenido</title>
+<meta name="theme-color" content="#174cba">
+<title>SIGSF · Servicios financieros</title>
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="sigsf-ui.css">
-<style>
-  body { background: var(--sg-ink); color: #c9d3e1; min-height: 100vh; display: flex; flex-direction: column; }
-  .w-top { max-width: 1120px; width: 100%; margin: 0 auto; padding: 1.25rem; display: flex; align-items: center; gap: .7rem; color: #fff; font-weight: 600; letter-spacing: .04em; }
-  .w-top span { width: 2.4rem; height: 2.4rem; border-radius: .5rem; background: var(--sg-gold); color: var(--sg-ink); display: flex; align-items: center; justify-content: center; }
-  .w-main { flex: 1; max-width: 1120px; width: 100%; margin: 0 auto; padding: 2rem 1.25rem 3rem; display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
-  .w-main h1 { color: #fff; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 1rem; }
-  .w-main p.lead { color: #aebbd0; max-width: 32rem; }
-  .puerta { display: flex; gap: 1rem; align-items: center; background: #fff; color: var(--sg-text); border-radius: .75rem; padding: 1.25rem 1.4rem; text-decoration: none; border: 2px solid transparent; }
-  .puerta + .puerta { margin-top: .9rem; }
-  .puerta:hover { border-color: var(--sg-gold); color: var(--sg-text); }
-  .puerta i.ic { width: 3rem; height: 3rem; border-radius: .6rem; background: var(--sg-primary-soft); color: var(--sg-primary); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-  .puerta b { display: block; font-size: 1.05rem; color: var(--sg-ink); }
-  .puerta span { font-size: .86rem; color: var(--sg-muted); }
-  .puerta .fa-arrow-right { margin-left: auto; color: var(--sg-muted); }
-  .w-billeteras { display: flex; gap: .5rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .w-billeteras .wallet { color: #fff; background: rgba(255,255,255,.06); padding: .35rem .6rem .35rem .35rem; border-radius: 999px; }
-  footer { text-align: center; font-size: .78rem; color: #7f91ab; padding: 1rem; }
-  @media (max-width: 860px) { .w-main { grid-template-columns: 1fr; gap: 1.5rem; padding-top: .5rem; } }
-</style>
-<link rel="stylesheet" href="sigsf-grafito.css">
+<link rel="stylesheet" href="sigsf-banco.css?v=5.8.0">
 </head>
-<body>
-<header class="w-top"><span><i class="fa-solid fa-landmark"></i></span>SIGSF</header>
-<main class="w-main">
-  <div>
-    <h1>Servicios financieros, sin papeleo</h1>
-    <p class="lead">Cambio de moneda, préstamos y empeños en un solo sistema: el personal gestiona y verifica, y el cliente cotiza y paga desde su celular.</p>
-    <div class="w-billeteras" aria-label="Billeteras aceptadas">
-      <span class="wallet wallet-YAPE"><i>Y</i>Yape</span><span class="wallet wallet-PLIN"><i>P</i>Plin</span><span class="wallet wallet-TUNKI"><i>T</i>Tunki</span>
+<body class="bank-public">
+<section class="bank-intro" id="bankIntro" role="dialog" aria-modal="true" aria-labelledby="introTitle" hidden>
+  <div class="bank-rain" aria-hidden="true"><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span></div>
+  <div class="bank-intro-content">
+    <p class="bank-eyebrow">BIENVENIDO A SIGSF</p>
+    <img class="bank-intro-building" src="img/banco-sigsf.svg" width="760" height="620" alt="">
+    <h1 id="introTitle">Tu mundo financiero.<br><span>Más cerca de ti.</span></h1>
+    <p class="bank-intro-copy">Cambio de moneda, préstamos y empeños.<br>Todo conectado en un solo sistema.</p>
+    <div class="bank-intro-actions">
+      <button class="btn btn-primary btn-lg" id="introStart" data-bienvenida-play type="button" aria-controls="sigsfAudioBienvenida"><i class="fa-solid fa-volume-high" aria-hidden="true"></i><span data-audio-label>Iniciar con sonido</span></button>
+      <button class="btn btn-outline-primary btn-lg" id="introSkip" type="button">Entrar a la portada <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
     </div>
+    <p class="bank-intro-status" id="introStatus" role="status">Presentación breve · Activa el sonido para escuchar el saludo.</p>
+    <button class="bank-motion-toggle" type="button" data-bank-motion aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i><span>Pausar animación</span></button>
   </div>
-  <div>
-    <a class="puerta" href="portal.html"><i class="ic fa-solid fa-user"></i><div><b>Soy cliente</b><span>Paga con QR, cotiza y revisa tus trámites</span></div><i class="fa-solid fa-arrow-right"></i></a>
-    <a class="puerta" href="login.html"><i class="ic fa-solid fa-briefcase"></i><div><b>Soy personal de la entidad</b><span>Ingresa al panel de gestión</span></div><i class="fa-solid fa-arrow-right"></i></a>
-  </div>
-</main>
-<footer>© 2026 SIGSF · Sistema Integral de Gestión de Servicios Financieros</footer>
-<script src="sigsf-anim.js"></script>
-<script src="sigsf-bienvenida.js"></script>
+</section>
+<div id="bankLanding">
+  <header class="bank-header">
+    <a class="bank-brand" href="welcome.html" aria-label="SIGSF, inicio"><span class="bank-brand-mark"><i class="fa-solid fa-landmark" aria-hidden="true"></i></span><span><b>SIGSF</b><small>Servicios financieros</small></span></a>
+    <nav aria-label="Accesos principales"><button class="bank-replay" type="button" id="replayIntro"><i class="fa-solid fa-circle-play" aria-hidden="true"></i> Ver presentación</button><a class="btn btn-outline-primary" href="login.html">Acceso del personal <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></nav>
+  </header>
+  <main>
+    <section class="bank-hero">
+      <div class="bank-rain bank-rain-home" aria-hidden="true"><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span><span>$</span></div>
+      <div class="bank-hero-copy">
+        <p class="bank-eyebrow"><span></span> TU GESTIÓN FINANCIERA, CONECTADA</p>
+        <h1 id="landingTitle" tabindex="-1">Tu próximo paso,<br><em>en un solo lugar.</em></h1>
+        <p class="bank-description">Cotiza, paga y consulta tus trámites. Gestiona cambio de moneda, préstamos y empeños desde una misma plataforma.</p>
+        <a class="btn btn-primary btn-lg bank-main-cta" href="portal.html">Entrar como cliente <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        <div class="bank-services"><span><i class="fa-solid fa-right-left" aria-hidden="true"></i>Cambio de moneda</span><span><i class="fa-solid fa-hand-holding-dollar" aria-hidden="true"></i>Préstamos</span><span><i class="fa-solid fa-gem" aria-hidden="true"></i>Empeños</span></div>
+      </div>
+      <div class="bank-hero-art">
+        <span class="bank-art-orbit" aria-hidden="true"></span>
+        <img class="bank-building" src="img/banco-sigsf.svg" width="760" height="620" alt="Ilustración de una entidad financiera SIGSF con un billete y un pago digital">
+        <div class="bank-art-label"><i class="fa-solid fa-qrcode" aria-hidden="true"></i><span>Pagos digitales<small>Yape · Plin · Tunki</small></span><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+      </div>
+    </section>
+    <section class="bank-access" aria-label="Elige tu acceso">
+      <a class="bank-access-card" href="portal.html"><span class="bank-access-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></span><span><small>PORTAL DEL CLIENTE</small><h2>Tus trámites, a un clic</h2><p>Paga con QR, cotiza y revisa tus solicitudes.</p></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+      <a class="bank-access-card bank-access-staff" href="login.html"><span class="bank-access-icon"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></span><span><small>PERSONAL DE LA ENTIDAD</small><h2>Todo listo para gestionar</h2><p>Ingresa al panel de operaciones y administración.</p></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    </section>
+    <section class="bank-media" aria-label="Bienvenida en audio">
+      <div><span class="bank-media-icon"><i class="fa-solid fa-headphones" aria-hidden="true"></i></span><span><b>Escucha nuestra bienvenida</b><small id="bankAudioStatus" role="status">Tu presentación de SIGSF, con sonido.</small></span></div>
+      <audio id="sigsfAudioBienvenida" controls preload="auto" src="audio/bienvenida.mp3">Tu navegador no admite audio. <a href="audio/bienvenida.mp3">Abrir el saludo MP3</a>.</audio>
+      <a class="bank-replay" href="audio/bienvenida.mp3" target="_blank" rel="noopener">Abrir MP3</a>
+      <button class="bank-motion-toggle" type="button" data-bank-motion aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i><span>Pausar animación</span></button>
+    </section>
+  </main>
+  <footer class="bank-footer"><span>© 2026 SIGSF</span><span>Sistema Integral de Gestión de Servicios Financieros</span><span class="bank-version">Interfaz bancaria · 5.8.0</span></footer>
+</div>
+<script src="sigsf-bienvenida.js?v=5.8.0"></script>
+<script src="pages/welcome-1.js?v=5.8.0"></script>
 </body>
 </html>

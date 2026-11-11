@@ -311,7 +311,7 @@ public class ApiServer {
     // --- Servir archivos estáticos del frontend (la Vista) ---
     private void servirArchivo(HttpExchange ex, String ruta) throws IOException {
         if (ruta.equals("/") || ruta.isEmpty()) {
-            ruta = "/splash.html";
+            ruta = "/welcome.html";
         }
         String relativa = URLDecoder.decode(ruta.substring(1), StandardCharsets.UTF_8);
         if (relativa.contains("..") || relativa.startsWith("_respaldo")) {

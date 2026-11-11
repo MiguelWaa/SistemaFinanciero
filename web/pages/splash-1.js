@@ -1,2 +1,3 @@
-var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    setTimeout(function () { location.replace('welcome.html'); }, reducido ? 200 : 1600);
+// Compatibilidad con enlaces antiguos. La presentación y el audio viven juntos
+// en welcome.html; ya no hay una redirección que corte el saludo.
+location.replace('welcome.html');
