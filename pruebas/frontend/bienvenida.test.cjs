@@ -7,7 +7,7 @@ const {resolve}=require('node:path');
 const {runInNewContext}=require('node:vm');
 const source=readFileSync(resolve(__dirname,'../../web/sigsf-bienvenida.js'),'utf8');
 const presentation=readFileSync(resolve(__dirname,'../../web/pages/welcome-1.js'),'utf8');
-function entorno({publicPage=false,denied=false,iframe=false,reduced=false,deferred=false}={}) {
+function entorno({publicPage=false,denied=false,iframe=false,reduced=false,deferred=false,soundDenied=false,pending=false}={}) {
  const elements=[];let clock=0,next=1;const timers=new Map();
  class Element {
   constructor(tag){this.tag=tag;this.children=[];this.events={};this.attrs={};this.paused=true;this.ended=false;this.currentTime=0;this.plays=0;this.hidden=false;this.denied=denied;this.classes=new Set();this.classList={add:c=>this.classes.add(c),remove:c=>this.classes.delete(c),toggle:(c,v)=>v?this.classes.add(c):this.classes.delete(c),contains:c=>this.classes.has(c)};elements.push(this);}
@@ -21,13 +21,13 @@ function entorno({publicPage=false,denied=false,iframe=false,reduced=false,defer
   remove(){this.removed=true;}
   focus(){this.focused=true;}
   pause(){this.paused=true;this.emit('pause');}
-  play(){this.plays++;if(this.denied)return Promise.reject(Object.assign(Error('Gesture required'),{name:'NotAllowedError'}));this.paused=false;this.ended=false;this.emit('playing');return Promise.resolve();}
+  play(){this.plays++;if(this.tag==='video'&&pending)return new Promise((ok,fail)=>{this.resolvePlay=ok;this.rejectPlay=fail;});if(this.denied||(this.tag==='video'&&soundDenied&&!this.muted))return Promise.reject(Object.assign(Error('Gesture required'),{name:'NotAllowedError'}));this.paused=false;this.ended=false;this.emit('playing');return Promise.resolve();}
  }
  const body=new Element('body');
  const add=(tag,id,parent=body)=>{const e=new Element(tag);e.id=id;parent.appendChild(e);return e;};
  if(publicPage){
-  const intro=add('section','bankIntro');intro.hidden=true;
-  const start=add('button','introStart',intro);start.setAttribute('data-bienvenida-play','');const label=add('span','',start);label.setAttribute('data-audio-label','');label.textContent='Iniciar con sonido';add('i','',start);
+  const intro=add('section','bankIntro');intro.hidden=true;add('video','sigsfVideoIntro',intro);
+  const start=add('button','introStart',intro);const label=add('span','',start);label.setAttribute('data-audio-label','');label.textContent='Iniciar con sonido';add('i','',start);
   add('button','introSkip',intro);add('p','introStatus',intro);
   const motion=add('button','motion',intro);motion.setAttribute('data-bank-motion','');add('span','',motion);add('i','',motion);
   const landing=add('div','bankLanding');add('h1','landingTitle',landing);add('button','replayIntro',landing);add('small','bankAudioStatus',landing);
@@ -35,7 +35,7 @@ function entorno({publicPage=false,denied=false,iframe=false,reduced=false,defer
  }
  const domEvents={};
  const document={readyState:deferred?'loading':'complete',addEventListener(k,fn){domEvents[k]=fn;},body,createElement:t=>new Element(t),getElementById:id=>elements.find(e=>e.id===id&&!e.removed),querySelectorAll:s=>body.querySelectorAll(s)};
- const window={addEventListener(){},matchMedia:()=>({matches:reduced,addEventListener(){}})};window.self=window;window.top=iframe?{}:window;
+ const windowEvents={};const window={addEventListener(k,fn){windowEvents[k]=fn;},emit(k){windowEvents[k]?.();},matchMedia:()=>({matches:reduced,addEventListener(){}})};window.self=window;window.top=iframe?{}:window;
  const ctx={document,window,setTimeout(fn,ms){const id=next++;timers.set(id,{fn,at:clock+ms});return id;},clearTimeout(id){timers.delete(id);}};
  runInNewContext(source,ctx);
  if(publicPage)runInNewContext(presentation,ctx);
@@ -53,13 +53,19 @@ test('inicialización duplicada reutiliza el reproductor',()=>{const e=entorno()
 test('cerrar el control detiene el audio',()=>{const e=entorno();e.buttons[0].emit('click');e.get('sigsfBienvenida').children[3].emit('click');assert.equal(e.audio.paused,true);assert.equal(e.get('sigsfBienvenida'),undefined);});
 test('un error del archivo muestra una alternativa',()=>{const e=entorno();e.audio.error={code:4};e.audio.emit('error');assert.match(e.get('sigsfAudioEstado').textContent,/Abrir MP3/);});
 test('la portada reutiliza su audio nativo, sin duplicarlo',()=>{const e=entorno({publicPage:true});assert.equal(e.elements.filter(x=>x.tag==='audio').length,1);assert.equal(e.get('sigsfBienvenida'),undefined);});
-test('autoplay bloqueado avanza a portada y libera sus accesos',async()=>{const e=entorno({publicPage:true,denied:true});await flush();assert.equal(e.get('bankLanding').inert,true);assert.match(e.get('introStatus').textContent,/Iniciar con sonido/);e.advance(9400);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('bankLanding').inert,false);});
-test('el audio activo no se corta al cumplirse el tiempo visual; ended muestra portada',()=>{const e=entorno({publicPage:true});e.advance(9500);assert.equal(e.get('bankIntro').hidden,false);assert.equal(e.audio.paused,false);e.audio.ended=true;e.audio.paused=true;e.audio.emit('ended');e.advance(400);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('bankLanding').inert,false);});
-test('saltar la presentación detiene sonido y permite entrar',()=>{const e=entorno({publicPage:true});e.get('introSkip').emit('click');e.advance(400);assert.equal(e.audio.paused,true);assert.equal(e.get('bankIntro').hidden,true);});
-test('repetir presentación usa el mismo audio y recupera el inicio',()=>{const e=entorno({publicPage:true});e.get('introSkip').emit('click');e.advance(400);e.audio.currentTime=5;e.get('replayIntro').emit('click');assert.equal(e.get('bankIntro').hidden,false);assert.equal(e.audio.currentTime,0);assert.equal(e.audio.paused,false);assert.equal(e.elements.filter(x=>x.tag==='audio').length,1);});
-test('se puede pausar la animación sin detener el saludo',()=>{const e=entorno({publicPage:true});e.get('motion').emit('click');assert.equal(e.document.body.classList.contains('bank-paused'),true);assert.equal(e.audio.paused,false);});
-test('movimiento reducido desactiva el control de animación',()=>{const e=entorno({publicPage:true,reduced:true});assert.equal(e.get('motion').disabled,true);assert.equal(e.document.body.classList.contains('bank-paused'),true);});
-test('Escape abre la portada y detiene el saludo',()=>{const e=entorno({publicPage:true});e.get('bankIntro').emit('keydown',{key:'Escape',preventDefault(){}});e.advance(400);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.audio.paused,true);});
-test('fallo de audio en presentación no impide llegar a la portada',()=>{const e=entorno({publicPage:true});e.audio.error={code:4};e.audio.emit('error');e.advance(4000);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('bankLanding').inert,false);});
-
-test('el control refleja audio iniciado antes de DOMContentLoaded',()=>{const e=entorno({publicPage:true,deferred:true});assert.equal(e.audio.paused,false);assert.equal(e.get('introStart').querySelector('span').textContent,'Pausar saludo');assert.equal(e.elements.filter(x=>x.tag==='audio').length,1);});
+test('el inicio reproduce el video original y no el saludo MP3',()=>{const e=entorno({publicPage:true});assert.equal(e.get('sigsfVideoIntro').paused,false);assert.equal(e.audio.plays,0);assert.equal(e.get('bankLanding').inert,true);});
+test('autoplay audible bloqueado intenta silencio y permite activar sonido desde cero',async()=>{const e=entorno({publicPage:true,soundDenied:true});await flush();const v=e.get('sigsfVideoIntro');assert.equal(v.muted,true);assert.equal(v.paused,false);assert.match(e.get('introStart').querySelector('span').textContent,/Activar sonido/);v.currentTime=4;v.play=function(){this.plays++;this.paused=false;this.emit('playing');return Promise.resolve();};e.get('introStart').emit('click');assert.equal(v.currentTime,0);assert.equal(v.muted,false);assert.equal(v.volume,1);assert.equal(e.audio.plays,0);});
+test('bloqueo de toda reproducción mantiene el botón y permite omitir',async()=>{const e=entorno({publicPage:true,denied:true});await flush();assert.match(e.get('introStatus').textContent,/Reproducir con sonido/);e.get('introSkip').emit('click');e.advance(400);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('bankLanding').inert,false);});
+test('el final del video revela la portada y devuelve el foco',()=>{const e=entorno({publicPage:true});e.get('sigsfVideoIntro').emit('ended');e.advance(400);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('bankLanding').inert,false);assert.equal(e.get('landingTitle').focused,true);});
+test('saltar detiene el video y no arranca otro audio',()=>{const e=entorno({publicPage:true});e.get('introSkip').emit('click');e.advance(400);assert.equal(e.get('sigsfVideoIntro').paused,true);assert.equal(e.audio.plays,0);assert.equal(e.get('bankIntro').hidden,true);});
+test('repetir pausa el MP3 y reinicia el video en el mismo documento',()=>{const e=entorno({publicPage:true});e.get('introSkip').emit('click');e.advance(400);e.audio.play();e.get('sigsfVideoIntro').currentTime=5;e.get('replayIntro').emit('click');assert.equal(e.audio.paused,true);assert.equal(e.get('sigsfVideoIntro').currentTime,0);assert.equal(e.get('sigsfVideoIntro').paused,false);assert.equal(e.elements.filter(x=>x.tag==='video').length,1);});
+test('pausar espera al usuario y continuar mantiene el instante',()=>{const e=entorno({publicPage:true});const v=e.get('sigsfVideoIntro');v.currentTime=3;e.get('introStart').emit('click');e.advance(20000);assert.equal(v.paused,true);assert.equal(e.get('bankIntro').hidden,false);e.get('introStart').emit('click');assert.equal(v.currentTime,3);assert.equal(v.paused,false);});
+test('movimiento reducido muestra el poster sin autoplay y permite clic explícito',()=>{const e=entorno({publicPage:true,reduced:true});const v=e.get('sigsfVideoIntro');assert.equal(v.plays,0);assert.equal(e.get('motion').disabled,true);e.advance(20000);assert.equal(e.get('bankIntro').hidden,false);e.get('introStart').emit('click');assert.equal(v.paused,false);v.emit('ended');e.advance(1);assert.equal(e.get('bankLanding').inert,false);});
+test('Escape libera la portada y detiene el video',()=>{const e=entorno({publicPage:true});e.get('bankIntro').emit('keydown',{key:'Escape',preventDefault(){}});e.advance(400);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('sigsfVideoIntro').paused,true);});
+test('error del video no impide entrar al sistema',()=>{const e=entorno({publicPage:true});e.get('sigsfVideoIntro').emit('error');assert.match(e.get('introStatus').textContent,/No se pudo/);e.advance(3000);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('bankLanding').inert,false);});
+test('carga detenida tiene salida automática y detiene el video',()=>{const e=entorno({publicPage:true});e.get('sigsfVideoIntro').emit('stalled');e.advance(16000);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('sigsfVideoIntro').paused,true);});
+test('una reproducción tardía después de omitir no vuelve a sonar',async()=>{const e=entorno({publicPage:true,pending:true});const v=e.get('sigsfVideoIntro');e.get('introSkip').emit('click');e.advance(400);v.paused=false;v.resolvePlay();await flush();assert.equal(v.paused,true);assert.equal(e.get('bankIntro').hidden,true);});
+test('un rechazo tardío después de omitir no intenta autoplay silencioso',async()=>{const e=entorno({publicPage:true,pending:true});const v=e.get('sigsfVideoIntro');e.get('introSkip').emit('click');e.advance(400);v.rejectPlay(Object.assign(Error('blocked'),{name:'NotAllowedError'}));await flush();assert.equal(v.plays,1);assert.equal(e.get('bankIntro').hidden,true);});
+test('no se superponen el video y el MP3',()=>{const e=entorno({publicPage:true});e.audio.play();assert.equal(e.audio.paused,true);assert.equal(e.get('sigsfVideoIntro').paused,false);});
+test('salir de la página cancela la presentación y sus temporizadores',()=>{const e=entorno({publicPage:true});e.window.emit('pagehide');e.advance(20000);assert.equal(e.get('sigsfVideoIntro').paused,true);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.audio.paused,true);});
+test('DOMContentLoaded no duplica audio ni cambia el estado del video',()=>{const e=entorno({publicPage:true,deferred:true});assert.equal(e.audio.paused,true);assert.equal(e.get('introStart').querySelector('span').textContent,'Pausar presentación');assert.equal(e.elements.filter(x=>x.tag==='audio').length,1);});

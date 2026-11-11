@@ -333,8 +333,13 @@ public class ApiServer {
         String etag = "\"" + Long.toHexString(Files.getLastModifiedTime(archivo).toMillis()) + "-"
                 + Long.toHexString(Files.size(archivo)) + "\"";
         h.set("ETag", etag);
+        if (tipo.equals("video/mp4")) h.set("Accept-Ranges", "bytes");
         if (etag.equals(ex.getRequestHeaders().getFirst("If-None-Match"))) {
             ex.sendResponseHeaders(304, -1);
+            return;
+        }
+        if (tipo.equals("video/mp4")) {
+            servirVideo(ex, archivo, etag);
             return;
         }
         byte[] datos = Files.readAllBytes(archivo);
@@ -353,6 +358,57 @@ public class ApiServer {
         ex.sendResponseHeaders(200, datos.length);
         try (OutputStream os = ex.getResponseBody()) {
             os.write(datos);
+        }
+    }
+
+    /** Entrega el MP4 por bloques, incluido un rango simple para pausa y búsqueda. */
+    private void servirVideo(HttpExchange ex, Path archivo, String etag) throws IOException {
+        long total = Files.size(archivo), inicio = 0, fin = total - 1;
+        var h = ex.getResponseHeaders();
+        if ("HEAD".equalsIgnoreCase(ex.getRequestMethod())) {
+            h.set("Content-Length", Long.toString(total));
+            ex.sendResponseHeaders(200, -1);
+            return;
+        }
+        String rango = ex.getRequestHeaders().getFirst("Range");
+        String condicion = ex.getRequestHeaders().getFirst("If-Range");
+        boolean parcial = false;
+        // Rangos múltiples o no reconocidos se ignoran: respuesta completa 200.
+        if (rango != null && rango.matches("bytes=\\d*-\\d*")
+                && !rango.equals("bytes=-") && (condicion == null || etag.equals(condicion))) {
+            String[] limites = rango.substring(6).split("-", -1);
+            try {
+                if (limites[0].isEmpty()) {
+                    long sufijo = Long.parseLong(limites[1]);
+                    inicio = Math.max(0, total - sufijo);
+                } else {
+                    inicio = Long.parseLong(limites[0]);
+                    if (!limites[1].isEmpty()) fin = Math.min(fin, Long.parseLong(limites[1]));
+                }
+                parcial = true;
+            } catch (NumberFormatException ignorado) {
+                inicio = 0; fin = total - 1;
+            }
+        }
+        if (parcial && (inicio >= total || fin < inicio)) {
+            h.set("Content-Range", "bytes */" + total);
+            ex.sendResponseHeaders(416, -1);
+            return;
+        }
+        long longitud = total == 0 ? 0 : fin - inicio + 1;
+        if (parcial) h.set("Content-Range", "bytes " + inicio + "-" + fin + "/" + total);
+        h.set("Content-Length", Long.toString(longitud));
+        ex.sendResponseHeaders(parcial ? 206 : 200, longitud == 0 ? -1 : longitud);
+        if (longitud == 0) return;
+        try (var in = Files.newInputStream(archivo); OutputStream out = ex.getResponseBody()) {
+            in.skipNBytes(inicio);
+            byte[] bloque = new byte[16384];
+            for (long restantes = longitud; restantes > 0;) {
+                int leidos = in.read(bloque, 0, (int) Math.min(bloque.length, restantes));
+                if (leidos < 0) break;
+                out.write(bloque, 0, leidos);
+                restantes -= leidos;
+            }
         }
     }
 
@@ -389,6 +445,7 @@ public class ApiServer {
         if (n.endsWith(".js"))   return "application/javascript; charset=utf-8";
         if (n.endsWith(".json")) return "application/json; charset=utf-8";
         if (n.endsWith(".mp3"))  return "audio/mpeg";
+        if (n.endsWith(".mp4"))  return "video/mp4";
         if (n.endsWith(".png"))  return "image/png";
         if (n.endsWith(".jpg") || n.endsWith(".jpeg")) return "image/jpeg";
         if (n.endsWith(".gif"))  return "image/gif";
