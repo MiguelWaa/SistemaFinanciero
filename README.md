@@ -1,17 +1,17 @@
-# SIGSF 5.9.0 - Proyecto integrado
+# SIGSF 5.10.0 - Proyecto integrado
 
 Sistema Integral de Gestión de Servicios Financieros. Curso Integrador I Sistemas - Software, UTP.
 
 Integrantes: Miguel Ángel Machaca Machaca; Ricardo Gabriel Cervantes Tejada; Cesar Huaripaucar Huaman.
 Docente: Rene Alonso Nieto Valencia.
 
-## Presentación en video 5.9.0
+## Entrada automática 5.10.0
 
-Al iniciar se muestra el video original **121221.mp4**, con la animación SIGSF y su audio. Al finalizar continúa la portada bancaria clara. Puede omitirse, pausarse o repetirse; el saludo MP3 anterior queda disponible manualmente.
+El video de SIGSF ocupa toda la ventana, sin recuadro ni botones permanentes. Al terminar aparece la portada bancaria.
 
-Cierre la demostración anterior, abra **INICIAR_DEMO.bat** desde esta carpeta nueva y visite **http://localhost:8091/**. La consola debe indicar **SIGSF 5.9.0 - PRESENTACION EN VIDEO SIGSF**. Si el navegador inicia el video en silencio, pulse **Activar sonido desde el inicio**. Si está pausado, pulse **Reproducir con sonido**.
+En Windows, cierre la consola anterior y haga doble clic en **INICIAR_DEMO.bat**: inicia Java y abre Chrome a pantalla completa con sonido automático habilitado en un perfil separado de demostración. Requiere Java 17+ y Google Chrome. **F11** sale de pantalla completa; al terminar, cierre esa ventana y pulse Enter en la consola.
 
-Guía: [docs/17_PRESENTACION_VIDEO.md](docs/17_PRESENTACION_VIDEO.md). Video original y fotogramas comprobados; revisión visual y escucha real en navegador pendientes por restricciones del entorno.
+Guía: [docs/18_ENTRADA_AUTOMATICA.md](docs/18_ENTRADA_AUTOMATICA.md). La ejecución del iniciador en Windows y la escucha real están pendientes de validación en ese equipo; aquí se verificaron el flujo simulado y los recursos servidos.
 
 ## Abrir primero
 
@@ -22,7 +22,7 @@ Guía: [docs/17_PRESENTACION_VIDEO.md](docs/17_PRESENTACION_VIDEO.md). Video ori
 ## Ejecutar la aplicación
 
 Instale Java 17 o superior. Descomprima todo el proyecto y ejecute el iniciador desde esa carpeta.
-Abra http://localhost:8091/. Cuenta de demostración: admin@sigsf.com / admin123.
+El iniciador Windows abre Chrome automáticamente; la dirección es http://localhost:8091/. Cuenta de demostración: admin@sigsf.com / admin123.
 Los datos de la demostración se pierden al cerrar. Para desarrollar, abra el proyecto en NetBeans.
 La configuración PostgreSQL usa `db.properties.ejemplo` y `db.properties`; el iniciador demo fuerza memoria sin editarlos.
 
@@ -55,10 +55,9 @@ Empaquetar después de validar: `python scripts/empaquetar.py`.
 
 ## Resultados de esta entrega
 
-224/224 JUnit; 26/26 pruebas del audio, video y la presentación; 26 peticiones Newman y 63 aserciones sin fallos; 24/24 comprobaciones adicionales.
-Los informes actuales de regresión están en `evidencias/v5.9.0/`; los de seguridad anteriores se conservan en `evidencias/v5.6.0/`. Compilación local con Java 21.0.13,
--source 17 -target 17 porque el runtime no dispone del soporte --release 17.
-El modo normal y CI requieren JDK completo y usan --release 17.
+5.10.0: 31/31 pruebas del flujo con DOM simulado, 11/11 JUnit selectivas de CSP y recursos multimedia, y sintaxis de scripts aprobadas. Informes: `evidencias/v5.10.0/`. Iniciador Windows y escucha en navegador real pendientes de ejecución en Windows.
+
+Se conserva como antecedente la regresión completa de 5.9.0: 224 JUnit, 63 aserciones API y 24 comprobaciones adicionales. El backend no cambió. Sus clases fueron compiladas con Java 21.0.13 y -source 17 -target 17; el modo normal y CI usan --release 17 con JDK completo.
 
 Pendientes: 14 E2E en Chromium, 7 pruebas JDBC, ZAP, análisis de JAR/frontend y corrección de las alertas npm.
 No se atribuyen los 13 E2E históricos a esta versión. El inventario local de dependencias no calcula CVE.
@@ -81,5 +80,6 @@ feature/integracion-seguridad-5.6.0, merge en release/5.6.0 y etiqueta v5.6.0.
 Actualización de interfaz en feature/interfaz-grafito-audio, integrada en release/5.7.0 y etiqueta v5.7.0.
 Portada bancaria integrada en release/5.8.0 y etiqueta v5.8.0.
 Presentación audiovisual integrada en release/5.9.0 y etiqueta v5.9.0.
+Entrada automática integrada en release/5.10.0 y etiqueta v5.10.0.
 No se publica en GitHub. Para activar los hooks tras clonar: scripts/git/instalar_hooks.sh o .bat.
 Los documentos originales se conservan como histórico donde corresponde.

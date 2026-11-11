@@ -1,0 +1,39 @@
+✔ las páginas internas no reproducen audio sin petición (2.622557ms)
+✔ el clic inicia el MP3 sin mute y con volumen normal (0.809922ms)
+✔ pausar y continuar conserva el punto del saludo (0.792856ms)
+✔ al finalizar se puede repetir desde cero (0.687767ms)
+✔ un bloqueo de audio deja un aviso y un nuevo intento por clic (5.361058ms)
+✔ los iframe no crean otro reproductor (0.652905ms)
+✔ inicialización duplicada reutiliza el reproductor (0.66894ms)
+✔ cerrar el control detiene el audio (0.666085ms)
+✔ un error del archivo muestra una alternativa (0.653596ms)
+✔ la portada reutiliza su audio nativo, sin duplicarlo (1.251589ms)
+✔ el inicio reproduce el video original y no el saludo MP3 (0.667958ms)
+✔ autoplay audible bloqueado intenta silencio y permite activar sonido desde cero (2.851813ms)
+✔ bloqueo de toda reproducción mantiene el botón y permite omitir (1.157176ms)
+✔ el final del video revela la portada y devuelve el foco (0.661939ms)
+✔ saltar detiene el video y no arranca otro audio (0.605784ms)
+✔ repetir pausa el MP3 y reinicia el video en el mismo documento (0.713807ms)
+✔ pausar espera al usuario y continuar mantiene el instante (0.591122ms)
+✔ movimiento reducido muestra el poster sin autoplay y permite clic explícito (0.644713ms)
+✔ Escape libera la portada y detiene el video (0.634718ms)
+✔ error del video no impide entrar al sistema (0.575438ms)
+✔ carga detenida tiene salida automática y detiene el video (0.631743ms)
+✔ una reproducción tardía después de omitir no vuelve a sonar (1.963111ms)
+✔ un rechazo tardío después de omitir no intenta autoplay silencioso (0.835831ms)
+✔ no se superponen el video y el MP3 (0.648698ms)
+✔ salir de la página cancela la presentación y sus temporizadores (0.626195ms)
+✔ DOMContentLoaded no duplica audio ni cambia el estado del video (0.674257ms)
+✔ inicio audible autorizado no requiere clic y oculta controles (0.619524ms)
+✔ mover el mouse muestra controles temporalmente sin interrumpir video (0.601157ms)
+✔ teclado y toque permiten descubrir controles (0.718614ms)
+✔ pausa o silencio conservan controles disponibles (2.187471ms)
+✔ omitir limpia la visibilidad temporal de controles (0.731113ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.90786

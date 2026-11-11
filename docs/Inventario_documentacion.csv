@@ -114,3 +114,11 @@ evidencias/v5.9.0/newman.xml,.xml,Incluido
 evidencias/v5.9.0/resultado.json,.json,Incluido
 evidencias/v5.9.0/revision_visual.json,.json,Incluido
 evidencias/v5.9.0/video_original.json,.json,Incluido
+docs/18_ENTRADA_AUTOMATICA.md,.md,Incluido
+scripts/iniciar_demo_windows.ps1,.ps1,Incluido
+evidencias/v5.10.0/frontend_audio.txt,.txt,Incluido
+evidencias/v5.10.0/junit_selectivo.txt,.txt,Incluido
+evidencias/v5.10.0/resultado.json,.json,Incluido
+evidencias/v5.10.0/revision_pendiente.json,.json,Incluido
+evidencias/v5.10.0/sintaxis_sigsf-bienvenida.js.txt,.txt,Incluido
+evidencias/v5.10.0/sintaxis_welcome-1.js.txt,.txt,Incluido
