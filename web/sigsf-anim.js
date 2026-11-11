@@ -14,7 +14,9 @@
 (function (S) {
   'use strict';
   S = window.SIGSF = window.SIGSF || {};
-  var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // El tema grafito mantiene los iconos y las confirmaciones sin decoración animada.
+  var reducido = document.documentElement.dataset.sigsfTheme === 'grafito'
+    || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   // ---------------- Íconos de los indicadores ----------------
   var ICONOS = [
