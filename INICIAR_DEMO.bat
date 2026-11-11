@@ -3,7 +3,7 @@ cd /d "%~dp0"
 set SIGSF_PERSISTENCIA=memoria
 set SIGSF_SERVER_PORT=8091
 set SIGSF_BACKUP_AUTOMATICO_HORAS=0
-echo SIGSF 5.8.0 - PORTADA BANCARIA ANIMADA
+echo SIGSF 5.9.0 - PRESENTACION EN VIDEO SIGSF
 echo Cierre la demostracion anterior antes de continuar.
 echo Abrir http://localhost:8091/ - Ctrl+C para detener.
 java -jar dist\SIGSF.jar

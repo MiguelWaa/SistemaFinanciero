@@ -1,0 +1,38 @@
+{
+  "programs": [],
+  "stream_groups": [],
+  "streams": [
+    {
+      "index": 0,
+      "codec_name": "h264",
+      "codec_type": "video",
+      "width": 1280,
+      "height": 720,
+      "duration": "10.000000"
+    },
+    {
+      "index": 1,
+      "codec_name": "aac",
+      "codec_type": "audio",
+      "sample_rate": "48000",
+      "channels": 2,
+      "duration": "10.026667"
+    }
+  ],
+  "format": {
+    "duration": "10.026667",
+    "size": "2916840"
+  },
+  "archivo_original": "121221.mp4",
+  "archivo_integrado": "web/video/presentacion-sigsf.mp4",
+  "bytes_originales_conservados": true,
+  "sha256": "d590511c38d70889908f0357b3a6c2a04d738f6a76a4eb9656c6d80339d44e8e",
+  "decodificacion_completa": "APROBADA con FFmpeg",
+  "audio": {
+    "media_dbfs": -19.3,
+    "pico_dbfs": -2.7,
+    "metodo": "ffmpeg volumedetect",
+    "escucha_en_navegador": "PENDIENTE"
+  },
+  "revision": "Fotogramas y poster inspeccionados; no es una captura del sistema renderizado."
+}

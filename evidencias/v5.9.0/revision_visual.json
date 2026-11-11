@@ -1,0 +1,16 @@
+{
+  "estado_navegador": "PENDIENTE",
+  "motivo": "El entorno bloqueó la revisión del servidor local en navegador. No se reintentó por vías alternativas.",
+  "comprobado": [
+    "Video original preservado",
+    "Fotogramas y poster inspeccionados",
+    "Video y audio decodificados",
+    "26 pruebas con DOM/reproductores simulados",
+    "224 pruebas JUnit, incluidas 8 de streaming HTTP real"
+  ],
+  "pendiente": [
+    "Reproducción visual y escucha real en navegador del equipo de exposición",
+    "Revisión responsive y controles nativos",
+    "Playwright E2E"
+  ]
+}

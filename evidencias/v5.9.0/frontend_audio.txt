@@ -1,0 +1,34 @@
+✔ las páginas internas no reproducen audio sin petición (2.459918ms)
+✔ el clic inicia el MP3 sin mute y con volumen normal (0.778183ms)
+✔ pausar y continuar conserva el punto del saludo (0.679744ms)
+✔ al finalizar se puede repetir desde cero (0.649859ms)
+✔ un bloqueo de audio deja un aviso y un nuevo intento por clic (5.122171ms)
+✔ los iframe no crean otro reproductor (0.655559ms)
+✔ inicialización duplicada reutiliza el reproductor (0.710882ms)
+✔ cerrar el control detiene el audio (0.643711ms)
+✔ un error del archivo muestra una alternativa (0.649779ms)
+✔ la portada reutiliza su audio nativo, sin duplicarlo (1.27327ms)
+✔ el inicio reproduce el video original y no el saludo MP3 (0.686044ms)
+✔ autoplay audible bloqueado intenta silencio y permite activar sonido desde cero (2.848454ms)
+✔ bloqueo de toda reproducción mantiene el botón y permite omitir (1.06782ms)
+✔ el final del video revela la portada y devuelve el foco (0.708709ms)
+✔ saltar detiene el video y no arranca otro audio (0.63666ms)
+✔ repetir pausa el MP3 y reinicia el video en el mismo documento (0.647126ms)
+✔ pausar espera al usuario y continuar mantiene el instante (0.584621ms)
+✔ movimiento reducido muestra el poster sin autoplay y permite clic explícito (0.596469ms)
+✔ Escape libera la portada y detiene el video (0.584091ms)
+✔ error del video no impide entrar al sistema (0.659614ms)
+✔ carga detenida tiene salida automática y detiene el video (0.629359ms)
+✔ una reproducción tardía después de omitir no vuelve a sonar (1.802767ms)
+✔ un rechazo tardío después de omitir no intenta autoplay silencioso (0.832655ms)
+✔ no se superponen el video y el MP3 (0.652804ms)
+✔ salir de la página cancela la presentación y sus temporizadores (0.720556ms)
+✔ DOMContentLoaded no duplica audio ni cambia el estado del video (0.635288ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 99.605721

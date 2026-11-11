@@ -25,7 +25,7 @@
     }
     audio._sigsfBound = true;
     var botones = Array.prototype.slice.call(document.querySelectorAll('[data-bienvenida-play]'));
-    var estados = Array.prototype.slice.call(document.querySelectorAll('#bankAudioStatus, #introStatus, #sigsfAudioEstado'));
+    var estados = Array.prototype.slice.call(document.querySelectorAll('#bankAudioStatus, #sigsfAudioEstado'));
     botones.forEach(function (boton) { boton._sigsfIdle = boton.querySelector('[data-audio-label]').textContent; });
     function estado(texto) { estados.forEach(function (e) { e.textContent = texto; }); }
     function actualizar() {

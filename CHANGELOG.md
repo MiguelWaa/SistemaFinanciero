@@ -1,3 +1,12 @@
+## [5.9.0] - 2026-11-10 Lima · Presentación en video
+
+- Video 121221.mp4 original al iniciar, conservando imagen, proporción y sonido.
+- Transición a la portada al terminar, activación de sonido, pausa, salto y repetición.
+- MP3 independiente, sin reproducción simultánea; movimiento reducido y manejo de errores.
+- Entrega MP4 desde Java con MIME correcto, rangos simples, HEAD y ETag.
+- 224 JUnit, 26 pruebas de audio/video, 63 aserciones API y 24 controles adicionales aprobados.
+- Revisión visual y escucha en navegador real pendientes por restricciones del entorno.
+
 ## [5.8.0] - 2026-11-10 Lima · Portada bancaria animada
 
 - Introducción con banco SVG grande y dólares simbólicos en movimiento; portada rediseñada en azul y blanco.
