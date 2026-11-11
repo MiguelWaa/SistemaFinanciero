@@ -1,9 +1,16 @@
-# SIGSF 5.6.0 - Proyecto integrado
+# SIGSF 5.7.0 - Proyecto integrado
 
 Sistema Integral de Gestión de Servicios Financieros. Curso Integrador I Sistemas - Software, UTP.
 
 Integrantes: Miguel Ángel Machaca Machaca; Ricardo Gabriel Cervantes Tejada; Cesar Huaripaucar Huaman.
 Docente: Rene Alonso Nieto Valencia.
+
+## Interfaz y audio 5.7.0
+
+Tema grafito aplicado a las 26 páginas y bienvenida con el MP3 original. Bootstrap conserva su funcionamiento.
+Si no se oye al iniciar, pulse **Escuchar bienvenida**; puede pausar, repetir o cerrar el control.
+Guía y alcance de validación: [docs/15_INTERFAZ_GRAFITO_Y_AUDIO.md](docs/15_INTERFAZ_GRAFITO_Y_AUDIO.md).
+Revisión visual y escucha real en navegador: pendientes por restricción del entorno.
 
 ## Abrir primero
 
@@ -47,8 +54,8 @@ Empaquetar después de validar: `python scripts/empaquetar.py`.
 
 ## Resultados de esta entrega
 
-214/214 JUnit; 26 peticiones Newman y 63 aserciones sin fallos; 24/24 comprobaciones adicionales.
-Los informes actuales están en `evidencias/v5.6.0/`. Compilación local con Java 21.0.13,
+216/216 JUnit; 8/8 pruebas del control de audio; 26 peticiones Newman y 63 aserciones sin fallos; 24/24 comprobaciones adicionales.
+Los informes actuales de regresión están en `evidencias/v5.7.0/`; los de seguridad anteriores se conservan en `evidencias/v5.6.0/`. Compilación local con Java 21.0.13,
 -source 17 -target 17 porque el runtime no dispone del soporte --release 17.
 El modo normal y CI requieren JDK completo y usan --release 17.
 
@@ -70,5 +77,6 @@ No ejecuta cambios sobre una base existente.
 
 La copia conserva el historial, ramas y remoto declarado. Integración local en
 feature/integracion-seguridad-5.6.0, merge en release/5.6.0 y etiqueta v5.6.0.
+Actualización de interfaz en feature/interfaz-grafito-audio, integrada en release/5.7.0 y etiqueta v5.7.0.
 No se publica en GitHub. Para activar los hooks tras clonar: scripts/git/instalar_hooks.sh o .bat.
 Los documentos originales se conservan como histórico donde corresponde.
