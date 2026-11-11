@@ -30,3 +30,7 @@
 # NetBeans guarda un CRC de build-impl.xml en genfiles.properties:
 # se versionan byte a byte para que el IDE no pida regenerarlos.
 nbproject/** -text
+
+# Medios de bienvenida: conservar bytes originales
+*.mp3 binary
+*.mp4 binary

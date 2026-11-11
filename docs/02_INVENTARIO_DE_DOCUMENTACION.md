@@ -1,4 +1,4 @@
-# Inventario y trazabilidad 5.8.0
+# Inventario y trazabilidad 5.9.0
 
 Entrada general: ../DOCUMENTACION_INTEGRAL.html. El inventario completo está en Inventario_documentacion.csv.
 
@@ -9,7 +9,7 @@ Entrada general: ../DOCUMENTACION_INTEGRAL.html. El inventario completo está en
 | 3. Clases, atributos, métodos y relaciones | modelos/Catalogo_clases.html, Atributos_y_metodos.csv, Clases_pagos.mmd |
 | 4. Modelo lógico y físico | modelos/Modelo_logico_completo.mmd, Modelo_fisico_completo.mmd, DDL_revisado.sql |
 | 5. Diccionario | modelos/Diccionario_DDL.csv y Relaciones_cardinalidad.csv |
-| 6. UX/UI | web/, 16_PORTADA_BANCARIA_Y_SONIDO.md, evidencias/v5.8.0/ y capturas históricas identificadas |
+| 6. UX/UI | web/, 17_PRESENTACION_VIDEO.md, evidencias/v5.9.0/ y capturas históricas identificadas |
 | 7. Reportes | documentación integral, model/pagos/ y exportadores |
 | 8. Recursos, dependencias, logback y ficheros | 06_RECURSOS_DE_CODIGO_FUENTE.md, inventario local de dependencias |
 | 9. Seguridad Java y SCV | 12_PLAN_SEGURIDAD.md, 13_IMPLEMENTACION_Y_RETEST.md, .git y workflows |
@@ -17,6 +17,6 @@ Entrada general: ../DOCUMENTACION_INTEGRAL.html. El inventario completo está en
 | Plan de seguridad | Matriz PS-01 a PS-18, pruebas/seguridad/ y test/ |
 | Herramientas / código / resultados | scripts/, test/, reportes actuales y presentación |
 
-Los documentos conservados de versiones anteriores sirven como antecedentes. La regresión actual está en evidencias/v5.8.0/; la auditoría npm y análisis anteriores siguen en evidencias/v5.6.0/.
+Los documentos conservados de versiones anteriores sirven como antecedentes. La regresión actual está en evidencias/v5.9.0/; la auditoría npm y análisis anteriores siguen en evidencias/v5.6.0/.
 
 Actualización autorizada: 14_AUDITORIA_NPM.md y evidencias/v5.6.0/sca/npm_autorizado/ contienen el resultado actual del análisis npm.

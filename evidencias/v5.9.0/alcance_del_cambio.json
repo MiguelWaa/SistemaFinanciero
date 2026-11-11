@@ -1,0 +1,15 @@
+{
+  "base": "v5.8.0",
+  "commit_probado": "97af192fea2977784d3ae4f08df62a4ac9416ecb",
+  "archivos_modificados_src_web": [
+    "src/com/utp/sistemafinanciero/web/ApiServer.java",
+    "web/pages/welcome-1.js",
+    "web/sigsf-banco.css",
+    "web/sigsf-bienvenida.js",
+    "web/video/presentacion-sigsf.jpg",
+    "web/video/presentacion-sigsf.mp4",
+    "web/welcome.html"
+  ],
+  "html_funcionales_24": "Sin cambios byte a byte en Git",
+  "backend": "Solo entrega estática de MP4; DAO, DTO, modelos, controladores, cálculos y esquema sin cambios"
+}

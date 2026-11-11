@@ -1,17 +1,17 @@
-# SIGSF 5.8.0 - Proyecto integrado
+# SIGSF 5.9.0 - Proyecto integrado
 
 Sistema Integral de Gestión de Servicios Financieros. Curso Integrador I Sistemas - Software, UTP.
 
 Integrantes: Miguel Ángel Machaca Machaca; Ricardo Gabriel Cervantes Tejada; Cesar Huaripaucar Huaman.
 Docente: Rene Alonso Nieto Valencia.
 
-## Portada bancaria animada 5.8.0
+## Presentación en video 5.9.0
 
-Introducción con banco ilustrado, dólares simbólicos en movimiento y saludo MP3; después aparece la portada clara azul/blanco. El estilo se extiende a las 26 páginas, conservando los componentes y la lógica del sistema.
+Al iniciar se muestra el video original **121221.mp4**, con la animación SIGSF y su audio. Al finalizar continúa la portada bancaria clara. Puede omitirse, pausarse o repetirse; el saludo MP3 anterior queda disponible manualmente.
 
-Cierre la demostración anterior, abra **INICIAR_DEMO.bat** desde esta carpeta nueva y visite **http://localhost:8091/**. La consola debe decir **SIGSF 5.8.0 - PORTADA BANCARIA ANIMADA**. En la introducción, pulse **Iniciar con sonido**. Puede saltar, repetir o pausar; la portada incorpora reproductor con volumen y enlace **Abrir MP3**.
+Cierre la demostración anterior, abra **INICIAR_DEMO.bat** desde esta carpeta nueva y visite **http://localhost:8091/**. La consola debe indicar **SIGSF 5.9.0 - PRESENTACION EN VIDEO SIGSF**. Si el navegador inicia el video en silencio, pulse **Activar sonido desde el inicio**. Si está pausado, pulse **Reproducir con sonido**.
 
-Guía: [docs/16_PORTADA_BANCARIA_Y_SONIDO.md](docs/16_PORTADA_BANCARIA_Y_SONIDO.md). Revisión visual y escucha real en navegador pendientes por restricción del entorno; la ilustración sí se renderizó e inspeccionó localmente.
+Guía: [docs/17_PRESENTACION_VIDEO.md](docs/17_PRESENTACION_VIDEO.md). Video original y fotogramas comprobados; revisión visual y escucha real en navegador pendientes por restricciones del entorno.
 
 ## Abrir primero
 
@@ -55,8 +55,8 @@ Empaquetar después de validar: `python scripts/empaquetar.py`.
 
 ## Resultados de esta entrega
 
-216/216 JUnit; 19/19 pruebas del audio y la presentación; 26 peticiones Newman y 63 aserciones sin fallos; 24/24 comprobaciones adicionales.
-Los informes actuales de regresión están en `evidencias/v5.8.0/`; los de seguridad anteriores se conservan en `evidencias/v5.6.0/`. Compilación local con Java 21.0.13,
+224/224 JUnit; 26/26 pruebas del audio, video y la presentación; 26 peticiones Newman y 63 aserciones sin fallos; 24/24 comprobaciones adicionales.
+Los informes actuales de regresión están en `evidencias/v5.9.0/`; los de seguridad anteriores se conservan en `evidencias/v5.6.0/`. Compilación local con Java 21.0.13,
 -source 17 -target 17 porque el runtime no dispone del soporte --release 17.
 El modo normal y CI requieren JDK completo y usan --release 17.
 
@@ -80,5 +80,6 @@ La copia conserva el historial, ramas y remoto declarado. Integración local en
 feature/integracion-seguridad-5.6.0, merge en release/5.6.0 y etiqueta v5.6.0.
 Actualización de interfaz en feature/interfaz-grafito-audio, integrada en release/5.7.0 y etiqueta v5.7.0.
 Portada bancaria integrada en release/5.8.0 y etiqueta v5.8.0.
+Presentación audiovisual integrada en release/5.9.0 y etiqueta v5.9.0.
 No se publica en GitHub. Para activar los hooks tras clonar: scripts/git/instalar_hooks.sh o .bat.
 Los documentos originales se conservan como histórico donde corresponde.

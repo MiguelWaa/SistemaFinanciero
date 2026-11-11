@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="SIGSF · Pruebas de API (v5.5)" tests="26" time="1.287">
+  <testsuite name="00 · Disponibilidad / CP-API-01 Health check público" id="f653bd6f-f690-401b-813d-7412703c28a8" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.019">
+    <testcase name="HTTP 200" time="0.019" classname="00DisponibilidadCpApi01HealthCheckPublico"/>
+    <testcase name="Responde en menos de 1 s" time="0.019" classname="00DisponibilidadCpApi01HealthCheckPublico"/>
+    <testcase name="status ok" time="0.019" classname="00DisponibilidadCpApi01HealthCheckPublico"/>
+  </testsuite>
+  <testsuite name="01 · Autenticación / CP-API-02 Login ADMIN correcto" id="f3852aff-dac5-4b07-9eb9-8bea4af7608f" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.076">
+    <testcase name="HTTP 200" time="0.076" classname="01AutenticacionCpApi02LoginAdminCorrecto"/>
+    <testcase name="Responde en menos de 1 s" time="0.076" classname="01AutenticacionCpApi02LoginAdminCorrecto"/>
+    <testcase name="Devuelve token" time="0.076" classname="01AutenticacionCpApi02LoginAdminCorrecto"/>
+  </testsuite>
+  <testsuite name="01 · Autenticación / CP-API-03 Login CAJERO correcto" id="5648c63d-7f06-43e6-b942-1db3d459e458" timestamp="2026-11-11T04:04:47.360Z" tests="2" failures="0" errors="0" time="0.073">
+    <testcase name="HTTP 200" time="0.073" classname="01AutenticacionCpApi03LoginCajeroCorrecto"/>
+    <testcase name="Responde en menos de 1 s" time="0.073" classname="01AutenticacionCpApi03LoginCajeroCorrecto"/>
+  </testsuite>
+  <testsuite name="01 · Autenticación / CP-API-04 Login con clave incorrecta" id="cf9a87a8-56ef-410e-8405-978e8e16adf0" timestamp="2026-11-11T04:04:47.360Z" tests="2" failures="0" errors="0" time="0.070">
+    <testcase name="HTTP 400" time="0.070" classname="01AutenticacionCpApi04LoginConClaveIncorrecta"/>
+    <testcase name="Mensaje genérico (no revela si el usuario existe)" time="0.070" classname="01AutenticacionCpApi04LoginConClaveIncorrecta"/>
+  </testsuite>
+  <testsuite name="01 · Autenticación / CP-API-05 Sesión actual" id="3f3c29a0-b917-40b9-99f0-583330bd283b" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.044">
+    <testcase name="HTTP 200" time="0.044" classname="01AutenticacionCpApi05SesionActual"/>
+    <testcase name="Responde en menos de 1 s" time="0.044" classname="01AutenticacionCpApi05SesionActual"/>
+    <testcase name="Rol ADMIN" time="0.044" classname="01AutenticacionCpApi05SesionActual"/>
+  </testsuite>
+  <testsuite name="02 · Clientes / CP-API-06 Listar clientes" id="88b90484-70e2-4b23-8cd1-42ea1e8d9901" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.048">
+    <testcase name="HTTP 200" time="0.048" classname="02ClientesCpApi06ListarClientes"/>
+    <testcase name="Responde en menos de 1 s" time="0.048" classname="02ClientesCpApi06ListarClientes"/>
+    <testcase name="Es una lista con datos" time="0.048" classname="02ClientesCpApi06ListarClientes"/>
+  </testsuite>
+  <testsuite name="02 · Clientes / CP-API-07 Registrar cliente" id="5e613f48-1c0e-4856-bb1b-8a9ee4cb2452" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.046">
+    <testcase name="HTTP 200" time="0.046" classname="02ClientesCpApi07RegistrarCliente"/>
+    <testcase name="Responde en menos de 1 s" time="0.046" classname="02ClientesCpApi07RegistrarCliente"/>
+    <testcase name="Queda ACTIVO" time="0.046" classname="02ClientesCpApi07RegistrarCliente"/>
+  </testsuite>
+  <testsuite name="02 · Clientes / CP-API-08 Documento repetido → 400" id="ab501345-c29b-412b-beb4-4c0d0d888eff" timestamp="2026-11-11T04:04:47.360Z" tests="2" failures="0" errors="0" time="0.047">
+    <testcase name="HTTP 400" time="0.047" classname="02ClientesCpApi08DocumentoRepetido400"/>
+    <testcase name="Mensaje de negocio" time="0.047" classname="02ClientesCpApi08DocumentoRepetido400"/>
+  </testsuite>
+  <testsuite name="03 · Operaciones / CP-API-09 Cambio de moneda con TC del servidor" id="a85130fa-593f-4352-9ce6-790ac7343707" timestamp="2026-11-11T04:04:47.360Z" tests="4" failures="0" errors="0" time="0.048">
+    <testcase name="HTTP 200" time="0.048" classname="03OperacionesCpApi09CambioDeMonedaConTcDelServidor"/>
+    <testcase name="Responde en menos de 1 s" time="0.048" classname="03OperacionesCpApi09CambioDeMonedaConTcDelServidor"/>
+    <testcase name="El servidor ignora el TC enviado (1.00) y usa el vigente" time="0.048" classname="03OperacionesCpApi09CambioDeMonedaConTcDelServidor"/>
+    <testcase name="totalRecibir = monto × TC" time="0.048" classname="03OperacionesCpApi09CambioDeMonedaConTcDelServidor"/>
+  </testsuite>
+  <testsuite name="03 · Operaciones / CP-API-10 Monto cero → 400" id="1c991ede-6135-4707-b28e-163d68dc815f" timestamp="2026-11-11T04:04:47.360Z" tests="1" failures="0" errors="0" time="0.042">
+    <testcase name="HTTP 400" time="0.042" classname="03OperacionesCpApi10MontoCero400"/>
+  </testsuite>
+  <testsuite name="04 · Portal, solicitudes y pagos QR / CP-API-11 Registro en el portal" id="853c1757-9190-40b1-abb4-e8fe5e5ae880" timestamp="2026-11-11T04:04:47.360Z" tests="2" failures="0" errors="0" time="0.070">
+    <testcase name="HTTP 200" time="0.070" classname="04PortalSolicitudesYPagosQrCpApi11RegistroEnElPortal"/>
+    <testcase name="Responde en menos de 1 s" time="0.070" classname="04PortalSolicitudesYPagosQrCpApi11RegistroEnElPortal"/>
+  </testsuite>
+  <testsuite name="04 · Portal, solicitudes y pagos QR / CP-API-12 Solicitar préstamo (tasa no manipulable)" id="11e10205-cfed-4788-8dbe-8f357747a4d1" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.047">
+    <testcase name="HTTP 200" time="0.047" classname="04PortalSolicitudesYPagosQrCpApi12SolicitarPrestamoTasaNoManipulable"/>
+    <testcase name="Responde en menos de 1 s" time="0.047" classname="04PortalSolicitudesYPagosQrCpApi12SolicitarPrestamoTasaNoManipulable"/>
+    <testcase name="Tasa fijada por la entidad (15 %)" time="0.047" classname="04PortalSolicitudesYPagosQrCpApi12SolicitarPrestamoTasaNoManipulable"/>
+  </testsuite>
+  <testsuite name="04 · Portal, solicitudes y pagos QR / CP-API-13 Aprobar solicitud" id="3b83db56-3904-4e85-9c98-18c7e23dafd6" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.044">
+    <testcase name="HTTP 200" time="0.044" classname="04PortalSolicitudesYPagosQrCpApi13AprobarSolicitud"/>
+    <testcase name="Responde en menos de 1 s" time="0.044" classname="04PortalSolicitudesYPagosQrCpApi13AprobarSolicitud"/>
+    <testcase name="COMPLETADA" time="0.044" classname="04PortalSolicitudesYPagosQrCpApi13AprobarSolicitud"/>
+  </testsuite>
+  <testsuite name="04 · Portal, solicitudes y pagos QR / CP-API-14 Cliente paga cuota con Yape" id="53bb13e5-2b67-4635-a901-ea8baa852472" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.047">
+    <testcase name="HTTP 200" time="0.047" classname="04PortalSolicitudesYPagosQrCpApi14ClientePagaCuotaConYape"/>
+    <testcase name="Responde en menos de 1 s" time="0.047" classname="04PortalSolicitudesYPagosQrCpApi14ClientePagaCuotaConYape"/>
+    <testcase name="POR_VERIFICAR" time="0.047" classname="04PortalSolicitudesYPagosQrCpApi14ClientePagaCuotaConYape"/>
+  </testsuite>
+  <testsuite name="04 · Portal, solicitudes y pagos QR / CP-API-15 Caja confirma el pago" id="4bfc37f1-2f45-4d5e-8cdb-454dd9a697d8" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.045">
+    <testcase name="HTTP 200" time="0.045" classname="04PortalSolicitudesYPagosQrCpApi15CajaConfirmaElPago"/>
+    <testcase name="Responde en menos de 1 s" time="0.045" classname="04PortalSolicitudesYPagosQrCpApi15CajaConfirmaElPago"/>
+    <testcase name="CONFIRMADO con comprobante RC-" time="0.045" classname="04PortalSolicitudesYPagosQrCpApi15CajaConfirmaElPago"/>
+  </testsuite>
+  <testsuite name="04 · Portal, solicitudes y pagos QR / CP-API-16 Saldo del préstamo disminuye" id="6a80af8e-c7fe-43ee-a780-7d9b02dc8ed5" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.045">
+    <testcase name="HTTP 200" time="0.045" classname="04PortalSolicitudesYPagosQrCpApi16SaldoDelPrestamoDisminuye"/>
+    <testcase name="Responde en menos de 1 s" time="0.045" classname="04PortalSolicitudesYPagosQrCpApi16SaldoDelPrestamoDisminuye"/>
+    <testcase name="Saldo = 3200 − 800" time="0.045" classname="04PortalSolicitudesYPagosQrCpApi16SaldoDelPrestamoDisminuye"/>
+  </testsuite>
+  <testsuite name="05 · Seguridad (casos negativos) / CP-API-17 Sin token → 401" id="995a9ccd-7c09-44dd-8f11-8ba662c0edce" timestamp="2026-11-11T04:04:47.360Z" tests="1" failures="0" errors="0" time="0.045">
+    <testcase name="HTTP 401" time="0.045" classname="05SeguridadCasosNegativosCpApi17SinToken401"/>
+  </testsuite>
+  <testsuite name="05 · Seguridad (casos negativos) / CP-API-18 Token inventado → 401" id="c6bc27fd-8a00-4ddd-8b7f-ab9f49ff43a6" timestamp="2026-11-11T04:04:47.360Z" tests="1" failures="0" errors="0" time="0.045">
+    <testcase name="HTTP 401" time="0.045" classname="05SeguridadCasosNegativosCpApi18TokenInventado401"/>
+  </testsuite>
+  <testsuite name="05 · Seguridad (casos negativos) / CP-API-19 Cajero en usuarios → 403" id="855096cf-ac03-4386-98e5-ddee209abac3" timestamp="2026-11-11T04:04:47.360Z" tests="1" failures="0" errors="0" time="0.045">
+    <testcase name="HTTP 403" time="0.045" classname="05SeguridadCasosNegativosCpApi19CajeroEnUsuarios403"/>
+  </testsuite>
+  <testsuite name="05 · Seguridad (casos negativos) / CP-API-20 Cliente consulta a otro cliente → 403" id="862529da-bc23-4d81-a50f-aec2c8931ec9" timestamp="2026-11-11T04:04:47.360Z" tests="1" failures="0" errors="0" time="0.045">
+    <testcase name="HTTP 403" time="0.045" classname="05SeguridadCasosNegativosCpApi20ClienteConsultaAOtroCliente403"/>
+  </testsuite>
+  <testsuite name="05 · Seguridad (casos negativos) / CP-API-21 Usuarios sin contraseñas expuestas" id="240bb10e-7174-407e-81b6-bede495cecbb" timestamp="2026-11-11T04:04:47.360Z" tests="4" failures="0" errors="0" time="0.046">
+    <testcase name="HTTP 200" time="0.046" classname="05SeguridadCasosNegativosCpApi21UsuariosSinContrasenasExpuestas"/>
+    <testcase name="Responde en menos de 1 s" time="0.046" classname="05SeguridadCasosNegativosCpApi21UsuariosSinContrasenasExpuestas"/>
+    <testcase name="Ningún campo password ni hash" time="0.046" classname="05SeguridadCasosNegativosCpApi21UsuariosSinContrasenasExpuestas"/>
+    <testcase name="Cabecera nosniff" time="0.046" classname="05SeguridadCasosNegativosCpApi21UsuariosSinContrasenasExpuestas"/>
+  </testsuite>
+  <testsuite name="06 · Reportes y exportación / CP-API-22 Panel de indicadores" id="c54c0430-87fb-48b4-8fe6-781341c40480" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.062">
+    <testcase name="HTTP 200" time="0.062" classname="06ReportesYExportacionCpApi22PanelDeIndicadores"/>
+    <testcase name="Responde en menos de 1 s" time="0.062" classname="06ReportesYExportacionCpApi22PanelDeIndicadores"/>
+    <testcase name="Indicadores clave" time="0.062" classname="06ReportesYExportacionCpApi22PanelDeIndicadores"/>
+  </testsuite>
+  <testsuite name="06 · Reportes y exportación / CP-API-23 Exportar clientes a CSV" id="23ad4ddb-ffe2-468a-9d7d-da907f4a0f6f" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.047">
+    <testcase name="HTTP 200" time="0.047" classname="06ReportesYExportacionCpApi23ExportarClientesACsv"/>
+    <testcase name="Responde en menos de 1 s" time="0.047" classname="06ReportesYExportacionCpApi23ExportarClientesACsv"/>
+    <testcase name="Es CSV" time="0.047" classname="06ReportesYExportacionCpApi23ExportarClientesACsv"/>
+  </testsuite>
+  <testsuite name="06 · Reportes y exportación / CP-API-24 Exportar ventas a JSON" id="72e14e7a-3d53-4676-be5c-2b018411c0b4" timestamp="2026-11-11T04:04:47.360Z" tests="3" failures="0" errors="0" time="0.050">
+    <testcase name="HTTP 200" time="0.050" classname="06ReportesYExportacionCpApi24ExportarVentasAJson"/>
+    <testcase name="Responde en menos de 1 s" time="0.050" classname="06ReportesYExportacionCpApi24ExportarVentasAJson"/>
+    <testcase name="Trae datos" time="0.050" classname="06ReportesYExportacionCpApi24ExportarVentasAJson"/>
+  </testsuite>
+  <testsuite name="07 · Cierre de sesión / CP-API-25 Logout invalida el token" id="5648132a-849a-4912-8b21-a1f67c7b0e26" timestamp="2026-11-11T04:04:47.360Z" tests="2" failures="0" errors="0" time="0.042">
+    <testcase name="HTTP 200" time="0.042" classname="07CierreDeSesionCpApi25LogoutInvalidaElToken"/>
+    <testcase name="Responde en menos de 1 s" time="0.042" classname="07CierreDeSesionCpApi25LogoutInvalidaElToken"/>
+  </testsuite>
+  <testsuite name="07 · Cierre de sesión / CP-API-26 Token cerrado → 401" id="728fcda2-b423-43fe-a376-6c6a2279ca3b" timestamp="2026-11-11T04:04:47.360Z" tests="1" failures="0" errors="0" time="0.049">
+    <testcase name="HTTP 401" time="0.049" classname="07CierreDeSesionCpApi26TokenCerrado401"/>
+  </testsuite>
+</testsuites>

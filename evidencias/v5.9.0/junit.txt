@@ -1,0 +1,123 @@
+JUnit version 4.13.2
+.............23:04:31 WARN  [SISTEMA] c.u.s.b.RespaldoService - La estrategia de respaldo pgdump falló: pg_dump falló
+................23:04:31 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/usuarios http=403
+23:04:31 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/usuarios -> 403 (1 ms)
+23:04:31 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/respaldos http=403
+23:04:31 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/respaldos -> 403 (0 ms)
+23:04:31 WARN  [OPERACIONES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=jorge.torres@sigsf.com rol=ANALISTA ip=127.0.0.1 recurso=PUT /api/pagos/1/confirmar http=403
+23:04:31 WARN  [OPERACIONES] SIGSF.ACCESO - PUT /api/pagos/1/confirmar -> 403 (0 ms)
+.23:04:32 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/portal/1/cotizaciones/1/solicitar -> 400 (0 ms)
+...23:04:32 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/estado-cuenta http=403
+23:04:32 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/estado-cuenta -> 403 (0 ms)
+.23:04:32 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/portal/registro -> 400 (0 ms)
+.23:04:32 WARN  [OPERACIONES] SIGSF.ACCESO - POST /api/operaciones -> 400 (0 ms)
+...23:04:33 WARN  [OPERACIONES] SIGSF.ACCESO - PUT /api/solicitudes/5/aprobar -> 400 (0 ms)
+...
+[RENDIMIENTO] peticiones=500 errores=0 p50=44ms p95=48ms max=68ms total=1131ms rps=442.1
+.23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+.23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 415 (0 ms)
+.23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 415 (0 ms)
+.23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+..23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+.23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+.23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+.23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 415 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 415 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 415 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 415 (0 ms)
+..23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (2 ms)
+..23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/usuarios http=401
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/usuarios -> 401 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/usuarios http=401
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/usuarios -> 401 (2 ms)
+...23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=jorge.torres@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (1 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=jorge.torres@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=jorge.torres@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (1 ms)
+23:04:34 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=jorge.torres@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:34 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+23:04:35 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=jorge.torres@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:35 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+23:04:35 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=jorge.torres@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:35 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+.23:04:35 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/portal/1/pagos -> 400 (0 ms)
+23:04:35 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/pagos http=403
+23:04:35 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/pagos -> 403 (0 ms)
+23:04:35 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/operaciones http=403
+23:04:35 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/operaciones -> 403 (0 ms)
+..23:04:35 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=admin@sigsf.com' OR '1'='1 rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:35 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+.23:04:35 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/portal/2/pagos -> 400 (1 ms)
+23:04:35 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/portal/2/pagos -> 400 (0 ms)
+..23:04:35 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/auth/sesion http=401
+23:04:35 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/auth/sesion -> 401 (0 ms)
+23:04:35 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+23:04:35 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+.....23:04:37 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=admin@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+23:04:37 WARN  [SEGURIDAD] SIGSF.ACCESO - POST /api/auth/login -> 400 (0 ms)
+...............................................................................................................................23:04:37 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+23:04:37 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+..23:04:38 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+23:04:38 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes http=401
+23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes -> 401 (0 ms)
+.23:04:38 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/usuarios http=403
+23:04:38 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/usuarios -> 403 (0 ms)
+....23:04:38 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/operaciones http=403
+23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/operaciones -> 403 (0 ms)
+.23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - POST /api/clientes -> 400 (0 ms)
+.23:04:38 WARN  [LOGISTICA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=POST /api/proveedores/importar http=403
+23:04:38 WARN  [LOGISTICA] SIGSF.ACCESO - POST /api/proveedores/importar -> 403 (8 ms)
+23:04:38 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/auditoria/exportar http=403
+23:04:38 WARN  [SEGURIDAD] SIGSF.ACCESO - GET /api/auditoria/exportar -> 403 (1 ms)
+.23:04:38 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/clientes/exportar http=401
+23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes/exportar -> 401 (0 ms)
+23:04:38 WARN  [CLIENTES] SIGSF.SEGURIDAD - EXPORTAR usuario=admin@sigsf.com rol=ADMIN ip=127.0.0.1 recurso=GET /api/clientes/exportar http=400
+23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/clientes/exportar -> 400 (0 ms)
+.23:04:38 WARN  [OPERACIONES] SIGSF.SEGURIDAD - IMPORTAR usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/operaciones/importar http=404
+23:04:38 WARN  [OPERACIONES] SIGSF.ACCESO - POST /api/operaciones/importar -> 404 (0 ms)
+....23:04:38 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/pagos http=403
+23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/pagos -> 403 (0 ms)
+23:04:38 WARN  [CLIENTES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/portal/2/estado-cuenta http=403
+23:04:38 WARN  [CLIENTES] SIGSF.ACCESO - GET /api/portal/2/estado-cuenta -> 403 (0 ms)
+23:04:39 WARN  [OPERACIONES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=70000001 rol=CLIENTE ip=127.0.0.1 recurso=GET /api/pagos http=403
+23:04:39 WARN  [OPERACIONES] SIGSF.ACCESO - GET /api/pagos -> 403 (0 ms)
+..23:04:39 WARN  [OPERACIONES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=jorge.torres@sigsf.com rol=ANALISTA ip=127.0.0.1 recurso=PUT /api/pagos/1/confirmar http=403
+23:04:39 WARN  [OPERACIONES] SIGSF.ACCESO - PUT /api/pagos/1/confirmar -> 403 (0 ms)
+23:04:39 WARN  [OPERACIONES] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=PUT /api/billeteras/1 http=403
+23:04:39 WARN  [OPERACIONES] SIGSF.ACCESO - PUT /api/billeteras/1 -> 403 (0 ms)
+..23:04:39 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=lucia.ramos@sigsf.com rol=CAJERO ip=127.0.0.1 recurso=GET /api/versiones http=403
+23:04:39 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 403 (0 ms)
+23:04:40 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=jorge.torres@sigsf.com rol=ANALISTA ip=127.0.0.1 recurso=GET /api/versiones http=403
+23:04:40 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 403 (0 ms)
+.23:04:40 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/version http=401
+23:04:40 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/version -> 401 (0 ms)
+23:04:40 WARN  [SISTEMA] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/versiones http=401
+23:04:40 WARN  [SISTEMA] SIGSF.ACCESO - GET /api/versiones -> 401 (0 ms)
+.........
+Time: 9.686
+
+OK (224 tests)
+
