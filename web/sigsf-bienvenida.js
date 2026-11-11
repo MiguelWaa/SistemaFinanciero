@@ -1,99 +1,62 @@
-/* Bienvenida con el MP3 original. No modifica autenticación ni navegación.
-   Un intento automático por página hasta que se reproduce; una reproducción
-   automática por pestaña/sesión. Si el navegador exige un gesto, el botón queda
-   disponible. No se interceptan clics generales ni se cambia la política CSP. */
+/* Reproductor compartido del MP3 original. Las páginas internas solo lo
+   reproducen por petición explícita. La portada administra su presentación.
+   No guarda una marca de sesión que pueda dejar el saludo en silencio. */
 (function () {
   'use strict';
   if (window.self !== window.top) return;
-  var KEY = 'sigsf_bienvenida_reproducida_v1';
-  function recordar() {
-    try { sessionStorage.setItem(KEY, '1'); } catch (_) { /* Almacenamiento opcional. */ }
-  }
-  function escuchada() {
-    try { return sessionStorage.getItem(KEY) === '1'; } catch (_) { return false; }
-  }
   function iniciar() {
-    if (document.getElementById('sigsfBienvenida')) return;
-    var panel = document.createElement('aside');
-    panel.id = 'sigsfBienvenida';
-    panel.className = 'sg-welcome-audio';
-    panel.setAttribute('aria-label', 'Audio de bienvenida');
-    var audio = document.createElement('audio');
-    audio.id = 'sigsfAudioBienvenida';
-    audio.src = 'audio/bienvenida.mp3';
-    audio.preload = 'metadata';
-    var boton = document.createElement('button');
-    boton.type = 'button';
-    boton.setAttribute('aria-controls', audio.id);
-    var icono = document.createElement('i');
-    icono.className = 'fa-solid fa-volume-high';
-    icono.setAttribute('aria-hidden', 'true');
-    var texto = document.createElement('span');
-    texto.textContent = 'Escuchar bienvenida';
-    boton.appendChild(icono);
-    boton.appendChild(texto);
-    var estado = document.createElement('small');
-    estado.setAttribute('role', 'status');
-    estado.textContent = 'SIGSF';
-    var cerrar = document.createElement('button');
-    cerrar.type = 'button';
-    cerrar.textContent = '×';
-    cerrar.setAttribute('aria-label', 'Cerrar audio de bienvenida');
-    panel.appendChild(audio);
-    panel.appendChild(boton);
-    panel.appendChild(estado);
-    panel.appendChild(cerrar);
-    document.body.appendChild(panel);
-
-    function mostrarPausa() {
-      texto.textContent = audio.ended ? 'Repetir bienvenida' : 'Escuchar bienvenida';
-      icono.className = 'fa-solid fa-volume-high';
+    var audio = document.getElementById('sigsfAudioBienvenida');
+    if (audio && audio._sigsfBound) return;
+    if (!audio) {
+      var panel = document.createElement('aside');
+      panel.id = 'sigsfBienvenida'; panel.className = 'sg-welcome-audio';
+      panel.setAttribute('aria-label', 'Audio de bienvenida');
+      audio = document.createElement('audio');
+      audio.id = 'sigsfAudioBienvenida'; audio.src = 'audio/bienvenida.mp3'; audio.preload = 'metadata';
+      var boton = document.createElement('button'); boton.type = 'button';
+      boton.setAttribute('data-bienvenida-play', ''); boton.setAttribute('aria-controls', audio.id);
+      var icono = document.createElement('i'); icono.className = 'fa-solid fa-volume-high'; icono.setAttribute('aria-hidden', 'true');
+      var label = document.createElement('span'); label.setAttribute('data-audio-label', ''); label.textContent = 'Escuchar bienvenida';
+      boton.appendChild(icono); boton.appendChild(label);
+      var aviso = document.createElement('small'); aviso.id = 'sigsfAudioEstado'; aviso.setAttribute('role', 'status'); aviso.textContent = 'Activa el sonido';
+      var cerrar = document.createElement('button'); cerrar.type = 'button'; cerrar.textContent = '×'; cerrar.setAttribute('aria-label', 'Cerrar audio de bienvenida');
+      cerrar.addEventListener('click', function () { audio.pause(); panel.remove(); });
+      panel.appendChild(audio); panel.appendChild(boton); panel.appendChild(aviso); panel.appendChild(cerrar); document.body.appendChild(panel);
+    }
+    audio._sigsfBound = true;
+    var botones = Array.prototype.slice.call(document.querySelectorAll('[data-bienvenida-play]'));
+    var estados = Array.prototype.slice.call(document.querySelectorAll('#bankAudioStatus, #introStatus, #sigsfAudioEstado'));
+    botones.forEach(function (boton) { boton._sigsfIdle = boton.querySelector('[data-audio-label]').textContent; });
+    function estado(texto) { estados.forEach(function (e) { e.textContent = texto; }); }
+    function actualizar() {
+      botones.forEach(function (boton) {
+        boton.querySelector('[data-audio-label]').textContent = !audio.paused ? 'Pausar saludo' : audio.ended ? 'Repetir saludo' : audio.currentTime > 0 ? 'Continuar saludo' : boton._sigsfIdle;
+        var ic = boton.querySelector('i'); if (ic) ic.className = 'fa-solid ' + (audio.paused ? 'fa-volume-high' : 'fa-pause');
+      });
     }
     function fallo(error) {
-      mostrarPausa();
-      if (error && error.name === 'NotAllowedError') {
-        estado.textContent = 'Pulsa para escuchar';
-      } else if (!audio.error && error && error.name === 'AbortError') {
-        estado.textContent = 'En pausa';
-      } else {
-        estado.textContent = 'Audio no disponible';
-      }
+      actualizar();
+      estado(error && error.name === 'NotAllowedError' ? 'Pulsa el botón de sonido para escuchar el saludo.' : 'No se pudo reproducir. Puedes usar el reproductor o el enlace Abrir MP3.');
     }
-    function reproducir() {
-      try {
+    botones.forEach(function (boton) {
+      boton.addEventListener('click', function () {
+        if (!audio.paused) { audio.pause(); return; }
+        // play() permanece dentro del gesto de clic. Sin fetch, retrasos ni navegación.
+        audio.muted = false; audio.volume = 1;
         if (audio.ended) audio.currentTime = 0;
-        var intento = audio.play();
-        if (intento && typeof intento.catch === 'function') intento.catch(fallo);
-      } catch (error) { fallo(error); }
-    }
-    boton.addEventListener('click', function () {
-      if (audio.paused) reproducir();
-      else { recordar(); audio.pause(); }
+        estado('Preparando el saludo…');
+        try { var promesa = audio.play(); if (promesa && promesa.catch) promesa.catch(fallo); }
+        catch (error) { fallo(error); }
+      });
     });
-    cerrar.addEventListener('click', function () {
-      recordar();
-      audio.pause();
-      panel.remove();
-    });
-    audio.addEventListener('playing', function () {
-      recordar();
-      texto.textContent = 'Pausar bienvenida';
-      icono.className = 'fa-solid fa-pause';
-      estado.textContent = 'Reproduciendo';
-    });
-    audio.addEventListener('pause', function () {
-      mostrarPausa();
-      estado.textContent = audio.ended ? 'Bienvenido a SIGSF' : 'En pausa';
-    });
-    audio.addEventListener('ended', function () {
-      recordar();
-      mostrarPausa();
-      estado.textContent = 'Bienvenido a SIGSF';
-    });
+    audio.addEventListener('playing', function () { actualizar(); estado('Reproduciendo la bienvenida de SIGSF.'); });
+    audio.addEventListener('pause', function () { actualizar(); if (!audio.ended) estado('Saludo en pausa. Puedes continuar cuando quieras.'); });
+    audio.addEventListener('ended', function () { actualizar(); estado('Bienvenido a SIGSF. Puedes repetir el saludo.'); });
     audio.addEventListener('error', function () { fallo(audio.error); });
     window.addEventListener('pagehide', function () { audio.pause(); });
-    if (!escuchada()) reproducir();
+    // Sincroniza también si el MP3 empezó antes de DOMContentLoaded.
+    actualizar();
+    if (!audio.paused) estado('Reproduciendo la bienvenida de SIGSF.');
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar);
-  else iniciar();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();

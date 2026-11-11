@@ -1,0 +1,12 @@
+{
+  "archivo": "web/audio/bienvenida.mp3",
+  "duracion_segundos": 8.28,
+  "frecuencia_hz": 48000,
+  "canales": 1,
+  "media_dbfs": -22.3,
+  "pico_dbfs": -5.2,
+  "metodo": "ffmpeg volumedetect; decodificación del archivo local",
+  "bytes_originales_conservados": true,
+  "escucha_en_navegador": "PENDIENTE",
+  "nota": "Las mediciones prueban que el archivo contiene señal de audio; no verifican altavoces ni permisos del navegador del usuario."
+}

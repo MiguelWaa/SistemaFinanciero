@@ -1,3 +1,12 @@
+## [5.8.0] - 2026-11-10 Lima · Portada bancaria animada
+
+- Introducción con banco SVG grande y dólares simbólicos en movimiento; portada rediseñada en azul y blanco.
+- Tema Banca Azul en las 26 páginas, con lógica financiera y contratos de formularios conservados.
+- Presentación y portada comparten el MP3; control por clic, reproducción nativa y acceso alternativo al audio.
+- Pausa de animaciones, movimiento reducido, salto y repetición de presentación.
+- 216 JUnit, 19 pruebas de audio/presentación, 63 aserciones API y 24 controles adicionales aprobados.
+- Revisión visual y escucha real en navegador pendientes por restricción del entorno.
+
 ## [5.7.0] - 2026-11-11 UTC · Interfaz grafito y audio
 
 - Tema local sobre 26 páginas, controles, tablas, diálogos, Ayuda y portal.

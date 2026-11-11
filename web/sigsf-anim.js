@@ -15,7 +15,7 @@
   'use strict';
   S = window.SIGSF = window.SIGSF || {};
   // El tema grafito mantiene los iconos y las confirmaciones sin decoración animada.
-  var reducido = document.documentElement.dataset.sigsfTheme === 'grafito'
+  var reducido = ['grafito', 'banco'].indexOf(document.documentElement.dataset.sigsfTheme) !== -1
     || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   // ---------------- Íconos de los indicadores ----------------

@@ -1,0 +1,27 @@
+✔ las páginas internas no reproducen audio sin petición (2.591639ms)
+✔ el clic inicia el MP3 sin mute y con volumen normal (0.836502ms)
+✔ pausar y continuar conserva el punto del saludo (0.675198ms)
+✔ al finalizar se puede repetir desde cero (0.652665ms)
+✔ un bloqueo de audio deja un aviso y un nuevo intento por clic (9.200914ms)
+✔ los iframe no crean otro reproductor (0.688638ms)
+✔ inicialización duplicada reutiliza el reproductor (0.760277ms)
+✔ cerrar el control detiene el audio (0.68347ms)
+✔ un error del archivo muestra una alternativa (0.770322ms)
+✔ la portada reutiliza su audio nativo, sin duplicarlo (1.171817ms)
+✔ autoplay bloqueado avanza a portada y libera sus accesos (3.588132ms)
+✔ el audio activo no se corta al cumplirse el tiempo visual; ended muestra portada (0.92174ms)
+✔ saltar la presentación detiene sonido y permite entrar (0.664723ms)
+✔ repetir presentación usa el mismo audio y recupera el inicio (0.69586ms)
+✔ se puede pausar la animación sin detener el saludo (0.670561ms)
+✔ movimiento reducido desactiva el control de animación (0.694397ms)
+✔ Escape abre la portada y detiene el saludo (0.679795ms)
+✔ fallo de audio en presentación no impide llegar a la portada (0.632484ms)
+✔ el control refleja audio iniciado antes de DOMContentLoaded (0.59006ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 101.96767
