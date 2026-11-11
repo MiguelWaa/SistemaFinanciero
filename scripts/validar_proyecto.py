@@ -72,6 +72,7 @@ def main():
     r=subprocess.run([node,'--check',str(f)],stdout=log,stderr=subprocess.STDOUT,timeout=15);syntax &= r.returncode==0
   except (OSError,subprocess.TimeoutExpired) as e:log.write(str(e));syntax=False
  summary['etapas'].append({'nombre':'frontend_sintaxis','estado':'APROBADO' if syntax else 'FALLIDO','registro':'frontend_sintaxis.txt'})
+ etapa('frontend_audio',[node,'--test',ROOT/'pruebas/frontend/bienvenida.test.cjs'],30)
  with socket.socket() as reserve:reserve.bind(('127.0.0.1',0));port=reserve.getsockname()[1]
  url=f'http://127.0.0.1:{port}';summary['url_prueba']=url
  env=os.environ.copy();env.update(SIGSF_PERSISTENCIA='memoria',SIGSF_SERVER_PORT=str(port),SIGSF_BACKUP_AUTOMATICO_HORAS='0',SIGSF_BACKUP_DIR=str(out/'respaldos'),SIGSF_URL=url)

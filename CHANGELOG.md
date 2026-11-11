@@ -1,3 +1,12 @@
+## [5.7.0] - 2026-11-11 UTC · Interfaz grafito y audio
+
+- Tema local sobre 26 páginas, controles, tablas, diálogos, Ayuda y portal.
+- Audio original con intento automático, alternativa por clic, pausa, repetición y cierre.
+- Bootstrap y lógica del sistema conservados; MIME audio/mpeg en el servidor estático.
+- 216 JUnit, 8 pruebas de audio, 63 aserciones API y 24 controles adicionales aprobados.
+- Revisión visual y escucha real en navegador pendientes por restricción del entorno.
+- Guía y resultados nuevos en docs/15_INTERFAZ_GRAFITO_Y_AUDIO.md y evidencias/v5.7.0/.
+
 ## Actualización de auditoría npm - 2026-11-10
 
 - Auditoría autorizada completada: 21 paquetes señalados, 1 crítico, 13 altos y 7 moderados.

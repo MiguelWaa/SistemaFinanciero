@@ -1,0 +1,14 @@
+{
+  "estado": "PENDIENTE",
+  "motivo": "El navegador de revisión no pudo acceder al servidor local y posteriormente bloqueó la observación de la pestaña por su política de URL. No se eludió la restricción.",
+  "no_verificado": [
+    "Aspecto renderizado en escritorio y móvil",
+    "Escucha real del MP3 desde navegador",
+    "E2E de navegación, Ayuda y portal"
+  ],
+  "verificado_por_otras_pruebas": [
+    "Bytes originales y respuesta HTTP audio/mpeg",
+    "8 pruebas unitarias del control de reproducción con DOM simulado",
+    "Conservación de campos, identificadores y enlaces en 26 HTML"
+  ]
+}

@@ -1,0 +1,16 @@
+✔ bloqueo automático conserva botón y permite iniciar con un clic (4.845379ms)
+✔ pausa, reanudación y repetición explícita del MP3 (1.118808ms)
+✔ una sesión escuchada no reinicia automáticamente; permite repetir (0.673796ms)
+✔ funciona si el almacenamiento del navegador está deshabilitado (1.281603ms)
+✔ cerrar detiene el audio y evita el inicio automático en la sesión (0.736632ms)
+✔ archivo no disponible muestra aviso y mantiene el control independiente (0.772165ms)
+✔ los módulos embebidos no crean otro reproductor (0.558572ms)
+✔ inicialización repetida no duplica controles ni reproducción (0.602328ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.170438

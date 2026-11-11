@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="dark" data-sigsf-theme="grafito">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SIGSF · Bienvenido</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 <link rel="stylesheet" href="sigsf-ui.css">
-<link rel="stylesheet" href="sigsf-anim.css">
 <style>
   body { background: var(--sg-ink); color: #c9d3e1; min-height: 100vh; display: flex; flex-direction: column; }
   .w-top { max-width: 1120px; width: 100%; margin: 0 auto; padding: 1.25rem; display: flex; align-items: center; gap: .7rem; color: #fff; font-weight: 600; letter-spacing: .04em; }
@@ -29,6 +26,7 @@
   footer { text-align: center; font-size: .78rem; color: #7f91ab; padding: 1rem; }
   @media (max-width: 860px) { .w-main { grid-template-columns: 1fr; gap: 1.5rem; padding-top: .5rem; } }
 </style>
+<link rel="stylesheet" href="sigsf-grafito.css">
 </head>
 <body>
 <header class="w-top"><span><i class="fa-solid fa-landmark"></i></span>SIGSF</header>
@@ -47,5 +45,6 @@
 </main>
 <footer>© 2026 SIGSF · Sistema Integral de Gestión de Servicios Financieros</footer>
 <script src="sigsf-anim.js"></script>
+<script src="sigsf-bienvenida.js"></script>
 </body>
 </html>

@@ -388,6 +388,7 @@ public class ApiServer {
         if (n.endsWith(".css"))  return "text/css; charset=utf-8";
         if (n.endsWith(".js"))   return "application/javascript; charset=utf-8";
         if (n.endsWith(".json")) return "application/json; charset=utf-8";
+        if (n.endsWith(".mp3"))  return "audio/mpeg";
         if (n.endsWith(".png"))  return "image/png";
         if (n.endsWith(".jpg") || n.endsWith(".jpeg")) return "image/jpeg";
         if (n.endsWith(".gif"))  return "image/gif";
