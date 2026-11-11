@@ -54,6 +54,9 @@
     audio.addEventListener('ended', function () { actualizar(); estado('Bienvenido a SIGSF. Puedes repetir el saludo.'); });
     audio.addEventListener('error', function () { fallo(audio.error); });
     window.addEventListener('pagehide', function () { audio.pause(); });
+    // Sincroniza también si el MP3 empezó antes de DOMContentLoaded.
+    actualizar();
+    if (!audio.paused) estado('Reproduciendo la bienvenida de SIGSF.');
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();

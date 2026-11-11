@@ -7,7 +7,7 @@ const {resolve}=require('node:path');
 const {runInNewContext}=require('node:vm');
 const source=readFileSync(resolve(__dirname,'../../web/sigsf-bienvenida.js'),'utf8');
 const presentation=readFileSync(resolve(__dirname,'../../web/pages/welcome-1.js'),'utf8');
-function entorno({publicPage=false,denied=false,iframe=false,reduced=false}={}) {
+function entorno({publicPage=false,denied=false,iframe=false,reduced=false,deferred=false}={}) {
  const elements=[];let clock=0,next=1;const timers=new Map();
  class Element {
   constructor(tag){this.tag=tag;this.children=[];this.events={};this.attrs={};this.paused=true;this.ended=false;this.currentTime=0;this.plays=0;this.hidden=false;this.denied=denied;this.classes=new Set();this.classList={add:c=>this.classes.add(c),remove:c=>this.classes.delete(c),toggle:(c,v)=>v?this.classes.add(c):this.classes.delete(c),contains:c=>this.classes.has(c)};elements.push(this);}
@@ -33,11 +33,13 @@ function entorno({publicPage=false,denied=false,iframe=false,reduced=false}={}) 
   const landing=add('div','bankLanding');add('h1','landingTitle',landing);add('button','replayIntro',landing);add('small','bankAudioStatus',landing);
   const audio=add('audio','sigsfAudioBienvenida',landing);audio.src='audio/bienvenida.mp3';
  }
- const document={readyState:'complete',body,createElement:t=>new Element(t),getElementById:id=>elements.find(e=>e.id===id&&!e.removed),querySelectorAll:s=>body.querySelectorAll(s)};
+ const domEvents={};
+ const document={readyState:deferred?'loading':'complete',addEventListener(k,fn){domEvents[k]=fn;},body,createElement:t=>new Element(t),getElementById:id=>elements.find(e=>e.id===id&&!e.removed),querySelectorAll:s=>body.querySelectorAll(s)};
  const window={addEventListener(){},matchMedia:()=>({matches:reduced,addEventListener(){}})};window.self=window;window.top=iframe?{}:window;
  const ctx={document,window,setTimeout(fn,ms){const id=next++;timers.set(id,{fn,at:clock+ms});return id;},clearTimeout(id){timers.delete(id);}};
  runInNewContext(source,ctx);
  if(publicPage)runInNewContext(presentation,ctx);
+ if(deferred && domEvents.DOMContentLoaded)domEvents.DOMContentLoaded();
  return {document,window,elements,get:id=>document.getElementById(id),audio:document.getElementById('sigsfAudioBienvenida'),buttons:document.querySelectorAll('[data-bienvenida-play]'),again:()=>runInNewContext(source,ctx),advance(ms){const end=clock+ms;while(true){const pending=[...timers].filter(([,t])=>t.at<=end).sort((a,b)=>a[1].at-b[1].at)[0];if(!pending)break;clock=pending[1].at;timers.delete(pending[0]);pending[1].fn();}clock=end;}};
 }
 const flush=()=>new Promise(r=>setImmediate(r));
@@ -59,3 +61,5 @@ test('se puede pausar la animación sin detener el saludo',()=>{const e=entorno(
 test('movimiento reducido desactiva el control de animación',()=>{const e=entorno({publicPage:true,reduced:true});assert.equal(e.get('motion').disabled,true);assert.equal(e.document.body.classList.contains('bank-paused'),true);});
 test('Escape abre la portada y detiene el saludo',()=>{const e=entorno({publicPage:true});e.get('bankIntro').emit('keydown',{key:'Escape',preventDefault(){}});e.advance(400);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.audio.paused,true);});
 test('fallo de audio en presentación no impide llegar a la portada',()=>{const e=entorno({publicPage:true});e.audio.error={code:4};e.audio.emit('error');e.advance(4000);assert.equal(e.get('bankIntro').hidden,true);assert.equal(e.get('bankLanding').inert,false);});
+
+test('el control refleja audio iniciado antes de DOMContentLoaded',()=>{const e=entorno({publicPage:true,deferred:true});assert.equal(e.audio.paused,false);assert.equal(e.get('introStart').querySelector('span').textContent,'Pausar saludo');assert.equal(e.elements.filter(x=>x.tag==='audio').length,1);});
