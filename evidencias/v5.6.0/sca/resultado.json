@@ -1,5 +1,17 @@
 {
-  "estado": "INVENTARIO LOCAL GENERADO",
-  "vulnerabilidades": "NO EVALUADAS",
-  "motivo": "El modo predeterminado no envía datos. El escaneo en línea requiere autorización explícita."
+  "estado": "AUDITORIA NPM EJECUTADA CON HALLAZGOS",
+  "fecha_utc": "2026-11-11T01:41:13.641095+00:00",
+  "npm": {
+    "paquetes_senalados": 21,
+    "critical": 1,
+    "high": 13,
+    "moderate": 7,
+    "umbral_high": "NO CUMPLE",
+    "informe": "npm_autorizado/npm-audit.json",
+    "lock_sha256": "465a889d51368ac064802209b12758488dd7acb3d860cbb735d1a351f6c1e62b"
+  },
+  "java": "NO EVALUADO: Dependency-Check pendiente",
+  "frontend_vendor": "NO EVALUADO",
+  "correcciones": "PENDIENTES",
+  "inventario_local": "inventario_local.json"
 }

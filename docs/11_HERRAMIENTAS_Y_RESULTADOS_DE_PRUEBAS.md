@@ -8,7 +8,7 @@
 | Playwright 1.63.0 | pruebas/e2e/tests/ | 14 casos definidos, sin nueva ejecución de navegador |
 | PostgreSQL / JDBC | scripts/probar_postgresql.py y PostgresqlSeguridadIT.java | 7 casos compilados, pendientes de ejecución |
 | ZAP | scripts/escanear_zap.py | Bloqueado: falta Docker |
-| Dependency-Check / npm audit | scripts/escanear_dependencias.py | Inventario local; análisis en línea no ejecutado |
+| Dependency-Check / npm audit | scripts/escanear_dependencias.py | npm: 21 paquetes señalados; Dependency-Check pendiente |
 | Git / GitHub Actions | .git, .githooks y .github/workflows/ | Historial y cambios locales; CI remoto no verificado |
 
 Codificación aplicada: Json.java, Ctx.java, TipoContenidoNoSoportadoException.java, ApiServer.java y web/pages/.

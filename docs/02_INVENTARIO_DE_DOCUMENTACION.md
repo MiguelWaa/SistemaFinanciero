@@ -18,3 +18,5 @@ Entrada general: ../DOCUMENTACION_INTEGRAL.html. El inventario completo está en
 | Herramientas / código / resultados | scripts/, test/, reportes actuales y presentación |
 
 Los documentos conservados de versiones anteriores sirven como antecedentes. Los resultados vigentes son los de evidencias/v5.6.0/.
+
+Actualización autorizada: 14_AUDITORIA_NPM.md y evidencias/v5.6.0/sca/npm_autorizado/ contienen el resultado actual del análisis npm.

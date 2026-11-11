@@ -1,0 +1,51 @@
+﻿ID npm,Paquete,Titulo del aviso,Severidad,Rango afectado,URL
+1115538,handlebars,Handlebars.js has JavaScript Injection via AST Type Confusion by tampering @partial-block,high,>=4.0.0 <=4.7.8,https://github.com/advisories/GHSA-3mfm-83xf-c92r
+1115539,handlebars,Handlebars.js has JavaScript Injection via AST Type Confusion,critical,>=4.0.0 <=4.7.8,https://github.com/advisories/GHSA-2w6w-674q-4c4q
+1115544,handlebars,Handlebars.js has Prototype Pollution Leading to XSS through Partial Template Injection,moderate,>=4.0.0 <4.7.9,https://github.com/advisories/GHSA-2qvq-rjwj-gvw9
+1115588,handlebars,Handlebars.js has a Prototype Method Access Control Gap via Missing __lookupSetter__ Blocklist Entry,moderate,>=4.6.0 <=4.7.8,https://github.com/advisories/GHSA-7rx3-28cr-v5wh
+1115589,handlebars,Handlebars.js has a Property Access Validation Bypass in container.lookup,low,>=4.0.0 <=4.7.8,https://github.com/advisories/GHSA-442j-39wm-28r2
+1115693,handlebars,Handlebars.js has JavaScript Injection via AST Type Confusion when passing an object as dynamic partial,high,>=4.0.0 <=4.7.8,https://github.com/advisories/GHSA-xhpv-hc6g-r9c6
+1115694,handlebars,Handlebars.js has Denial of Service via Malformed Decorator Syntax in Template Compilation,high,>=4.0.0 <=4.7.8,https://github.com/advisories/GHSA-9cx6-37pm-9jff
+1117465,handlebars,Handlebars.js has JavaScript Injection in CLI Precompiler via Unescaped Names and Options,high,>=4.0.0 <=4.7.8,https://github.com/advisories/GHSA-xjpj-3mr7-gcpf
+1241676,handlebars,Handlebars: JavaScript Injection via Unsafe Inline Embedding of Precompiled Templates,moderate,>=4.0.0 <=4.7.9,https://github.com/advisories/GHSA-xw65-4hp5-5hc7
+1241677,handlebars,Handlebars: JavaScript Injection via AST Type Confusion in compile (bypass of CVE-2026-33937),critical,>=4.0.0 <=4.7.9,https://github.com/advisories/GHSA-8r5x-fm3f-whwj
+1242173,handlebars,Handlebars: JavaScript Injection via Own Property Check Bypass,critical,>=3.0.0 <=4.7.9,https://github.com/advisories/GHSA-p8wg-vrv2-v86f
+1158500,@faker-js/faker,Faker: helpers.fake exploitable into arbritary code execution,high,<=10.4.0,https://github.com/advisories/GHSA-qxc2-j82w-r537
+1114526,flatted,flatted vulnerable to unbounded recursion DoS in parse() revive phase,high,<3.4.0,https://github.com/advisories/GHSA-25h7-pfq9-p65f
+1241196,flatted,Prototype Pollution via parse() in NodeJS flatted,high,<=3.4.1,https://github.com/advisories/GHSA-rf6f-7fwh-wjgh
+1115806,lodash,lodash vulnerable to Code Injection via `_.template` imports key names,high,>=4.0.0 <=4.17.23,https://github.com/advisories/GHSA-r5fr-rjxr-66jc
+1244531,lodash,"Lodash has Prototype Pollution Vulnerability in `_.unset`, `_.omit`, and `_.pullAt` functions",moderate,>=4.0.0 <=4.17.22,https://github.com/advisories/GHSA-xxjr-mmjv-4gpg
+1110996,node-forge,node-forge has ASN.1 Unbounded Recursion,high,<1.3.2,https://github.com/advisories/GHSA-554w-wpv2-vw27
+1110998,node-forge,node-forge has an Interpretation Conflict vulnerability via its ASN.1 Validator Desynchronization,high,<1.3.2,https://github.com/advisories/GHSA-5gfm-wpxj-wjgq
+1111068,node-forge,node-forge is vulnerable to ASN.1 OID Integer Truncation,moderate,<1.3.2,https://github.com/advisories/GHSA-65ch-62r8-g69g
+1115545,node-forge,Forge has a basicConstraints bypass in its certificate chain verification (RFC 5280 violation),high,<=1.3.3,https://github.com/advisories/GHSA-2328-f5f3-gj25
+1115546,node-forge,Forge has signature forgery in Ed25519 due to missing S > L check,high,<1.4.0,https://github.com/advisories/GHSA-q67f-28xg-22rw
+1115548,node-forge,Forge has Denial of Service via Infinite Loop in BigInteger.modInverse() with Zero Input,high,<1.4.0,https://github.com/advisories/GHSA-5m6q-g25r-mvwx
+1115612,node-forge,Forge has signature forgery in RSA-PKCS due to ASN.1 extra field  ,high,<1.4.0,https://github.com/advisories/GHSA-ppp5-5v6c-4jwp
+1240912,node-forge,node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements,high,<=1.4.0,https://github.com/advisories/GHSA-86w9-cpqp-85rv
+1244014,node-forge,Forge: ASN.1 OID first arc truncation in asn1.oidToDer,low,<=1.4.0,https://github.com/advisories/GHSA-4642-5mcj-2rqw
+1244015,node-forge,Forge: Prototype Pollution in forge.http cookie handling via a malicious Set-Cookie,moderate,<=1.4.0,https://github.com/advisories/GHSA-6wvx-3r32-xmcg
+1244016,node-forge,Forge: TLS client crash when the server sends no certificate,moderate,<=1.4.0,https://github.com/advisories/GHSA-525v-9gp9-w22h
+1244017,node-forge,Forge: Regular expression denial of service in PEM decoding (pem.decode),high,<=1.4.0,https://github.com/advisories/GHSA-7wch-p9px-956x
+1244018,node-forge,Forge: Denial of Service via infinite loop in BigInteger.modInverse() with negative input (incomplete fix of CVE-2026-33891),low,<=1.4.0,https://github.com/advisories/GHSA-h6cr-wjv9-3cpp
+1244019,node-forge,Forge: verifyCertificateChain() removes trusted CA certificates with the same subject from the CA store,low,<=1.4.0,https://github.com/advisories/GHSA-4487-j8r4-4g2f
+1244020,node-forge,Forge: AES-GCM authentication bypass via unvalidated tagLength option,moderate,<=1.4.0,https://github.com/advisories/GHSA-5cwg-6vw7-rj6p
+1244021,node-forge,Forge: PKCS#12 MAC forgery and constant-key PBE via zero iteration count,high,<=1.4.0,https://github.com/advisories/GHSA-jc66-7q78-782g
+1244022,node-forge,Forge: Denial of service in TLS record processing via a record interleaved with a fragmented handshake message,high,<=1.4.0,https://github.com/advisories/GHSA-8hrf-8g6f-7xwp
+1244023,node-forge,Forge: Denial of service in TLS record processing via call stack exhaustion,high,<=1.4.0,https://github.com/advisories/GHSA-hqq3-7jhf-c5jx
+1244024,node-forge,Forge: X.509 basicConstraints bypass in verifyCertificateChain() via deprecated extension OIDs 2.5.29.10 and 2.5.29.13,high,<=1.4.0,https://github.com/advisories/GHSA-5x38-2vff-x55p
+1245925,node-forge,Forge: Certificate signature verified with the issuer's RSA signature scheme,low,<=1.4.0,https://github.com/advisories/GHSA-9wg5-mj3p-v49q
+1245926,node-forge,Forge: Incomplete PKCS#7 padding validation in AES/DES CBC and ECB decryption,low,<=1.4.0,https://github.com/advisories/GHSA-2vgq-wchc-25w7
+1245927,node-forge,Forge: X.509 pathLenConstraint not enforced by verifyCertificateChain() for CA certificates without keyUsage,moderate,<=1.4.0,https://github.com/advisories/GHSA-h46v-rmh6-fq4f
+1245928,node-forge,Forge: ASN.1 resource exhaustion via BIT STRING decoding in asn1.fromDer,high,<=1.4.0,https://github.com/advisories/GHSA-rhr8-3pm8-cq29
+1245929,node-forge,Forge: RSA PKCS#1 v1.5 signature forgery via non-canonical DigestInfo encoding,high,<=1.4.0,https://github.com/advisories/GHSA-6qrw-m8cv-hcxf
+1246031,node-forge,Forge: Ed25519 signature verification accepts small-order public keys,low,<=1.4.2,https://github.com/advisories/GHSA-6889-vf6x-f3g5
+1246032,node-forge,Forge: TLS client crash on an unsupported ServerHello compression method,moderate,<=1.4.2,https://github.com/advisories/GHSA-w4xr-hqv8-ch44
+1246033,node-forge,Forge: ReDoS in forge.http response header and cookie trimming,moderate,>=0.1.2 <=1.4.2,https://github.com/advisories/GHSA-6cv4-p8m7-4r25
+1246034,node-forge,Forge: TLS client crash on a handshake record received without a session,moderate,<=1.4.2,https://github.com/advisories/GHSA-j8rw-jp99-435v
+1117689,underscore,"Underscore has unlimited recursion in _.flatten and _.isEqual, potential for DoS attack",high,<=1.13.7,https://github.com/advisories/GHSA-qpx9-hpmf-5gmw
+1193670,csv-parse,node-csv: Prototype replacement still reachable via columns path,moderate,<7.0.2,https://github.com/advisories/GHSA-8cw4-87c7-c6xx
+1096835,jose,jose vulnerable to resource exhaustion via specifically crafted JWE with compressed plaintext,moderate,>=3.0.0 <=4.15.4,https://github.com/advisories/GHSA-hhhv-q57g-882q
+1113719,qs,qs's arrayLimit bypass in its bracket notation allows DoS via memory exhaustion,moderate,<6.14.1,https://github.com/advisories/GHSA-6rw7-vpxm-498p
+1158507,qs,qs: Denial of Service via Attacker Controlled isBuffer,moderate,>=2.2.5 <6.16.0,https://github.com/advisories/GHSA-4mjr-xmp4-gh2g
+1119441,uuid,uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided,moderate,<11.1.1,https://github.com/advisories/GHSA-w5hq-g745-h8pq

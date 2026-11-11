@@ -25,4 +25,4 @@ La entrega actual registra exactamente esa excepción; no certifica APIs Java 17
 - SCA local: `python scripts/escanear_dependencias.py` inventaría versiones y SHA256 sin enviar datos.
 - SCA online: `--online` requiere autorización del propietario, Dependency-Check instalado y acceso al registro npm; envía el árbol de paquetes para la auditoría.
 
-No se ejecutaron los análisis externos ni se emitió una aprobación para producción.
+Actualización: npm audit se ejecutó con autorización y señaló 21 paquetes (1 crítico, 13 altos y 7 moderados). Correcciones pendientes; consultar 14_AUDITORIA_NPM.md. Los demás análisis ampliados continúan pendientes. No se emitió una aprobación para producción.

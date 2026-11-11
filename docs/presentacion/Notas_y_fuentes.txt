@@ -1,23 +1,24 @@
-1. Plan de pruebas de seguridad
+1. Plan de pruebas
+de seguridad
 20 segundos. Presentamos la integración de seguridad de SIGSF 5.6.0. El paquete contiene aplicación, pruebas, documentación y presentación. Las mejoras se aplicaron al código y se verificaron con pruebas repetibles. Integrantes tomados del README original.
 
 2. Alcance y entorno de evaluación
 35 segundos. El sistema separa interfaz, API Java y persistencia. La revisión se concentra en autenticación, permisos, entradas y pagos. Compilamos 216 clases y 36 archivos de prueba. Los DAO en memoria permiten repetir los ensayos sin alterar información real. La integración JDBC necesita una prueba adicional con PostgreSQL. Fuentes: src/, db/, compilación actual.
 
 3. Plan de pruebas de seguridad
-50 segundos. El plan incluye controles de acceso, entradas, deserialización y configuración. Integramos JSON estricto, rechazo de tipos de contenido y CSP para scripts externos. El fuzzing usa 20 entradas pequeñas. Los ejecutores JDBC y ZAP están implementados pero sus herramientas faltan aquí. El análisis npm en línea necesita autorización para enviar dependencias. Referencias: https://wstg.owasp.org/ y https://www.rfc-editor.org/info/rfc8259/ .
+50 segundos. El plan incluye controles de acceso, entradas, deserialización y configuración. Integramos JSON estricto, rechazo de tipos de contenido y CSP para scripts externos. El fuzzing usa 20 entradas pequeñas. Los ejecutores JDBC y ZAP están implementados pero sus herramientas faltan aquí. La auditoría npm fue autorizada y encontró 21 paquetes señalados; sus correcciones siguen pendientes. Referencias: https://wstg.owasp.org/ y https://www.rfc-editor.org/info/rfc8259/ .
 
 4. Herramientas elegidas
-40 segundos. JUnit y Newman comprueban backend y API. Python coordina la ejecución y registra resultados sin confundir pendientes con aprobados. Playwright conserva el flujo de interfaz y añade una prueba de ayuda con CSP. PostgreSQL, ZAP y análisis de dependencias tienen ejecutores dentro de scripts/. Sus informes actuales reflejan los bloqueos. Enlaces en el anexo 12.
+40 segundos. JUnit y Newman comprueban backend y API. Python coordina la ejecución y registra resultados sin confundir pendientes con aprobados. Playwright conserva el flujo de interfaz y añade una prueba de ayuda con CSP. PostgreSQL, ZAP y análisis de dependencias tienen ejecutores dentro de scripts/. Sus informes actuales reflejan los bloqueos. Enlaces en el anexo 12. npm audit terminó con hallazgos. Dependency-Check para JAR y ZAP siguen pendientes. Evidencia: evidencias/v5.6.0/sca/npm_autorizado/npm-audit.json.
 
 5. Resultados obtenidos
-55 segundos. Las 214 pruebas JUnit aprobaron, incluyendo 22 nuevas. La colección API completó 26 peticiones y 63 aserciones sin fallos. Las 24 comprobaciones adicionales aprobaron después de las correcciones. El navegador no se reejecutó por la restricción conocida del entorno. Las 13 aprobadas del archivo recibido son evidencia histórica. PostgreSQL, ZAP y SCA requieren completar ejecución en un entorno habilitado.
+55 segundos. Se mantienen 214 JUnit, 63 aserciones API y 24 comprobaciones adicionales aprobadas. La auditoría npm autorizada señaló 21 paquetes: uno crítico, trece altos y siete moderados. El criterio high no se cumple. Son dependencias de herramientas de pruebas; no se probó explotación en Java. Las correcciones están pendientes. Los 14 casos de navegador no se reejecutaron; los 13 históricos siguen como antecedente. Evidencia: evidencias/v5.6.0/sca/npm_autorizado/. Interpretación de metavulnerabilidades: https://docs.npmjs.com/cli/v11/commands/npm-audit/ .
 
 6. Evidencia de interfaz y código
 55 segundos. La pantalla es evidencia histórica de XSS como texto. La mejora actual está en Json.parseCompleto, que ahora exige consumir todo el documento. La prueba SeguridadEntradasApiTest envía credenciales válidas con texto sobrante y obtiene 400 sin token. Ctx también valida Content-Type y UTF-8; el tipo text/plain devuelve 415. El código y los registros están integrados en el proyecto.
 
 7. Controles integrados y validación pendiente
-45 segundos. La entrega implementa las correcciones en la aplicación. El lector JSON aplica reglas de formato y límite de anidación. Los endpoints rechazan tipos de contenido no admitidos. El frontend usa 26 scripts externos y la CSP bloquea scripts inline. La aplicación, la documentación y los reportes se entregan en un solo ZIP. La validación integral mantiene pendientes PostgreSQL, navegador, DAST y SCA en línea.
+45 segundos. La entrega implementa las correcciones en la aplicación. El lector JSON aplica reglas de formato y límite de anidación. Los endpoints rechazan tipos de contenido no admitidos. El frontend usa 26 scripts externos y la CSP bloquea scripts inline. La aplicación, la documentación y los reportes se entregan en un solo ZIP. La auditoría npm concluyó con hallazgos pendientes de corrección. PostgreSQL, navegador, DAST y análisis de JAR siguen pendientes.
 
 8. Anexo 1. Proceso de pago
 Anexo de consulta. Métodos PagoService.registrarDesdePortal, confirmar, rechazar y aplicarEfectos. El QR no implica conciliación bancaria automática. El proceso termina con la decisión auditada. Ver modelos/Proceso_pago.mmd.
@@ -50,7 +51,7 @@ Se creó feature/integracion-seguridad-5.6.0, con commits locales para correccio
 El registro junit.txt contiene la medición local de 500 peticiones. No extrapolar a producción ni a PostgreSQL. En este runtime se usó -source 17 -target 17; el ejecutor normal y CI usan --release 17 con JDK completo. El ejecutor PostgreSQL crea una base sigsf_test_ nueva y no elimina bases existentes.
 
 18. Anexo 11. Inventario y trazabilidad
-La raíz contiene DOCUMENTACION_INTEGRAL.html. docs/modelos incluye el catálogo Java completo por tipo superior, atributos, métodos y herencia, junto con modelos de procesos y la base de datos. evidencia/v5.6.0 contiene resultados de la integración. El inventario CSV permite ubicar cada documento y la presentación incorpora guion.
+La raíz contiene DOCUMENTACION_INTEGRAL.html. docs/modelos incluye el catálogo Java completo por tipo superior, atributos, métodos y herencia, junto con modelos de procesos y la base de datos. evidencias/v5.6.0 contiene resultados de la integración. El inventario CSV permite ubicar cada documento y la presentación incorpora guion.
 
 19. Anexo 12. Rutas compartidas y fuentes
 Fuentes oficiales consultadas el 10/11/2026. ZAP Baseline es rastreo y análisis pasivo; no sustituye penetración activa autenticada. Dependency-Check es SCA. JUnit 4 está en mantenimiento y la documentación actual de Postman recomienda migrar Newman a Postman CLI. Se reutilizan aquí las versiones del proyecto para reproducibilidad. URL de deserialización: https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/07-Injection/23-Insecure_Deserialization/ .

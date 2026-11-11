@@ -21,7 +21,7 @@ Alcance ejecutado: HTTP local, datos de demostración y DAO en memoria. La valid
 | PS-13 | Content-Type / UTF-8 | text/plain, charset no permitido y bytes inválidos | 415 para tipo/charset, 400 para UTF-8 inválido | SeguridadEntradasApiTest | Corregido y aprobado |
 | PS-14 | CSP / cabeceras | Scripts externos, eventos y cabeceras | Scripts solo del propio origen | FrontendCspTest / API | Estructura aprobada; navegador pendiente |
 | PS-15 | Importación / exportación | XLSX/DTD, ZIP y fórmulas CSV | Rechazar o neutralizar según control | Suites archivos/ | Incluido en JUnit aprobado |
-| PS-16 | Vulnerabilidades de componentes | CVE aplicables en JAR y npm | Informe actualizado y triage | Dependency-Check / npm audit | Inventario local; escaneo pendiente de autorización/herramientas |
+| PS-16 | Vulnerabilidades de componentes | CVE aplicables en JAR y npm | Informe actualizado y triage | Dependency-Check / npm audit | npm: 21 paquetes señalados; corrección y JAR pendientes |
 | PS-17 | Penetración ampliada | ZAP pasivo y activo autenticado | Informe, cobertura, hallazgos y retest | escanear_zap.py | Implementado; Docker no disponible |
 | PS-18 | Configuración y persistencia | FK, CHECK, unicidad, rollback y permisos | Restricciones y mínimo privilegio | PostgresqlSeguridadIT | 7 casos compilados; ejecución pendiente |
 

@@ -12,6 +12,7 @@ docs/10_PLAN_DE_PRUEBAS.md,.md,Incluido
 docs/11_HERRAMIENTAS_Y_RESULTADOS_DE_PRUEBAS.md,.md,Incluido
 docs/12_PLAN_SEGURIDAD.md,.md,Incluido
 docs/13_IMPLEMENTACION_Y_RETEST.md,.md,Incluido
+docs/14_AUDITORIA_NPM.md,.md,Incluido
 docs/historico/cambio_recibido_v5.5.0.patch,.patch,Historico
 docs/historico/v5.5.0_02_INVENTARIO_DE_DOCUMENTACION.md,.md,Historico
 docs/historico/v5.5.0_10_PLAN_DE_PRUEBAS.md,.md,Historico
@@ -51,6 +52,11 @@ evidencias/v5.6.0/integracion/servidor.txt,.txt,Incluido
 evidencias/v5.6.0/postgresql/resultado.json,.json,Incluido
 evidencias/v5.6.0/sca/inventario_local.json,.json,Incluido
 evidencias/v5.6.0/sca/npm-audit.txt,.txt,Incluido
+evidencias/v5.6.0/sca/npm_autorizado/avisos_originales.csv,.csv,Incluido
+evidencias/v5.6.0/sca/npm_autorizado/npm-audit.json,.json,Incluido
+evidencias/v5.6.0/sca/npm_autorizado/npm-audit.stderr.txt,.txt,Incluido
+evidencias/v5.6.0/sca/npm_autorizado/paquetes_senalados.csv,.csv,Incluido
+evidencias/v5.6.0/sca/npm_autorizado/resultado.json,.json,Incluido
 evidencias/v5.6.0/sca/resultado.json,.json,Incluido
 evidencias/v5.6.0/zap/resultado.json,.json,Incluido
 pruebas/seguridad/comprobar_entradas.py,.py,Incluido

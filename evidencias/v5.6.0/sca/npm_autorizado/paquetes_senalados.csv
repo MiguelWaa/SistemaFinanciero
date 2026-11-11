@@ -1,0 +1,22 @@
+﻿Paquete,Versiones en lock,Severidad npm,Dependencia,Origen de alerta,Propuesta automática npm (no aplicada),Estado
+handlebars,"4.7.7, 4.7.8",Crítica,Transitiva,"GHSA-3mfm-83xf-c92r, GHSA-2w6w-674q-4c4q, GHSA-2qvq-rjwj-gvw9, GHSA-7rx3-28cr-v5wh, GHSA-442j-39wm-28r2, GHSA-xhpv-hc6g-r9c6, GHSA-9cx6-37pm-9jff, GHSA-xjpj-3mr7-gcpf, GHSA-xw65-4hp5-5hc7, GHSA-8r5x-fm3f-whwj, GHSA-p8wg-vrv2-v86f",newman-reporter-htmlextra 1.22.5; cambio fuera del rango actual,Pendiente de corrección y retest
+@faker-js/faker,5.5.3,Alta,Transitiva,GHSA-qxc2-j82w-r537,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+flatted,3.2.6,Alta,Transitiva,"GHSA-25h7-pfq9-p65f, GHSA-rf6f-7fwh-wjgh",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+httpntlm,1.8.13,Alta,Transitiva,underscore,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+lodash,4.17.21,Alta,Transitiva,"GHSA-r5fr-rjxr-66jc, GHSA-xxjr-mmjv-4gpg",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+newman,6.2.1,Alta,Directa,"csv-parse, lodash, postman-collection, postman-collection-transformer, postman-request, postman-runtime, serialised-error",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+newman-reporter-htmlextra,1.23.1,Alta,Directa,"@budibase/handlebars-helpers, handlebars, lodash, newman",newman-reporter-htmlextra 1.22.5; cambio fuera del rango actual,Pendiente de corrección y retest
+node-forge,1.3.1,Alta,Transitiva,"GHSA-554w-wpv2-vw27, GHSA-5gfm-wpxj-wjgq, GHSA-65ch-62r8-g69g, GHSA-2328-f5f3-gj25, GHSA-q67f-28xg-22rw, GHSA-5m6q-g25r-mvwx, GHSA-ppp5-5v6c-4jwp, GHSA-86w9-cpqp-85rv, GHSA-4642-5mcj-2rqw, GHSA-6wvx-3r32-xmcg, GHSA-525v-9gp9-w22h, GHSA-7wch-p9px-956x, GHSA-h6cr-wjv9-3cpp, GHSA-4487-j8r4-4g2f, GHSA-5cwg-6vw7-rj6p, GHSA-jc66-7q78-782g, GHSA-8hrf-8g6f-7xwp, GHSA-hqq3-7jhf-c5jx, GHSA-5x38-2vff-x55p, GHSA-9wg5-mj3p-v49q, GHSA-2vgq-wchc-25w7, GHSA-h46v-rmh6-fq4f, GHSA-rhr8-3pm8-cq29, GHSA-6qrw-m8cv-hcxf, GHSA-6889-vf6x-f3g5, GHSA-w4xr-hqv8-ch44, GHSA-6cv4-p8m7-4r25, GHSA-j8rw-jp99-435v",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+postman-collection,4.4.0,Alta,Transitiva,"@faker-js/faker, lodash, uuid",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+postman-collection-transformer,4.1.8,Alta,Transitiva,lodash,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+postman-runtime,7.39.1,Alta,Transitiva,"handlebars, httpntlm, jose, lodash, node-forge, postman-collection, postman-request, postman-sandbox, serialised-error, uuid",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+postman-sandbox,4.7.1,Alta,Transitiva,"lodash, postman-collection, uvm",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+underscore,1.12.1,Alta,Transitiva,GHSA-qpx9-hpmf-5gmw,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+uvm,2.1.1,Alta,Transitiva,flatted,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+@budibase/handlebars-helpers,0.13.1,Moderada,Transitiva,uuid,newman-reporter-htmlextra 1.22.5; cambio fuera del rango actual,Pendiente de corrección y retest
+csv-parse,4.16.3,Moderada,Transitiva,GHSA-8cw4-87c7-c6xx,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+jose,4.14.4,Moderada,Transitiva,GHSA-hhhv-q57g-882q,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+postman-request,2.88.1-postman.34,Moderada,Transitiva,"qs, uuid",newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+qs,6.5.5,Moderada,Transitiva,"GHSA-6rw7-vpxm-498p, GHSA-4mjr-xmp4-gh2g",Disponible según npm,Pendiente de corrección y retest
+serialised-error,1.1.3,Moderada,Transitiva,uuid,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest
+uuid,"3.4.0, 8.3.2, 9.0.1",Moderada,Transitiva,GHSA-w5hq-g745-h8pq,newman 4.6.1; cambio fuera del rango actual,Pendiente de corrección y retest

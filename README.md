@@ -52,9 +52,11 @@ Los informes actuales están en `evidencias/v5.6.0/`. Compilación local con Jav
 -source 17 -target 17 porque el runtime no dispone del soporte --release 17.
 El modo normal y CI requieren JDK completo y usan --release 17.
 
-Pendientes: 14 E2E en Chromium, 7 pruebas JDBC, ZAP y análisis de vulnerabilidades de dependencias.
+Pendientes: 14 E2E en Chromium, 7 pruebas JDBC, ZAP, análisis de JAR/frontend y corrección de las alertas npm.
 No se atribuyen los 13 E2E históricos a esta versión. El inventario local de dependencias no calcula CVE.
-El análisis npm en línea requiere autorización explícita para enviar el árbol de paquetes al registro.
+Auditoría npm autorizada y ejecutada: **21 paquetes señalados (1 crítico, 13 altos y 7 moderados)**.
+Umbral high: NO CUMPLE. Son dependencias de herramientas de pruebas; la explotación en SIGSF no está demostrada.
+Informe y plan de corrección: `docs/14_AUDITORIA_NPM.md`. No se modificó el lock.
 
 ## Base de datos
 

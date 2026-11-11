@@ -1,3 +1,9 @@
+## Actualización de auditoría npm - 2026-11-10
+
+- Auditoría autorizada completada: 21 paquetes señalados, 1 crítico, 13 altos y 7 moderados.
+- Incorporados informe original, inventario de hallazgos y plan de corrección; umbral high no cumplido.
+- Documentación y presentación actualizadas; dependencias y código de aplicación sin cambios.
+
 # Cambios de la versión integrada
 
 ## [5.6.0] - 2026-11-10
