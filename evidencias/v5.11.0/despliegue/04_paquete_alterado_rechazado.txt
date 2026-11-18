@@ -1,0 +1,3 @@
+sha256sum: WARNING: 1 computed checksum did NOT match
+2026-11-18 00:54:42 [desplegar] SHA-256 NO coincide: paquete alterado
+exit=3

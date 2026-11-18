@@ -30,7 +30,7 @@ try {
     $env:SIGSF_PERSISTENCIA = 'memoria'
     $env:SIGSF_SERVER_PORT = '8091'
     $env:SIGSF_BACKUP_AUTOMATICO_HORAS = '0'
-    Write-Host 'SIGSF 5.10.0 - ENTRADA AUTOMATICA CON SONIDO'
+    Write-Host 'SIGSF 5.11.0 - ENTRADA AUTOMATICA CON SONIDO'
     Write-Host 'Iniciando servidor de demostracion...'
     $server = Start-Process -FilePath $java.Source -ArgumentList @('-jar', 'dist\SIGSF.jar') -WorkingDirectory $root -NoNewWindow -PassThru
     $ready = $false

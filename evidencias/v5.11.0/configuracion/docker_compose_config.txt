@@ -1,0 +1,107 @@
+name: sigsf
+services:
+  app:
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    environment:
+      SIGSF_BACKUP_AUTOMATICO_HORAS: "0"
+      SIGSF_DB_HOST: db
+      SIGSF_DB_NAME: SistemaFinanciero
+      SIGSF_DB_PASSWORD: ejemplo
+      SIGSF_DB_PORT: "5432"
+      SIGSF_DB_USER: postgres
+      SIGSF_PERSISTENCIA: postgresql
+      SIGSF_SESION_MINUTOS: "30"
+    image: ghcr.io/miguelwaa/sigsf:5.11.0
+    networks:
+      interna: null
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    volumes:
+      - type: volume
+        source: logs
+        target: /app/logs
+        volume: {}
+      - type: volume
+        source: respaldos
+        target: /app/respaldos
+        volume: {}
+    build:
+      context: /home/claude/src/proj/SistemaFinanciero
+      dockerfile: Dockerfile
+      args:
+        VERSION: 5.11.0
+    depends_on:
+      db:
+        condition: service_healthy
+        required: true
+    ports:
+      - mode: ingress
+        target: 8091
+        published: "8091"
+        protocol: tcp
+  db:
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: SistemaFinanciero
+      POSTGRES_PASSWORD: ejemplo
+      POSTGRES_USER: postgres
+    image: postgres:16-alpine
+    networks:
+      interna: null
+    volumes:
+      - type: volume
+        source: pgdata
+        target: /var/lib/postgresql/data
+        volume: {}
+      - type: bind
+        source: /home/claude/src/proj/SistemaFinanciero/db/schema.sql
+        target: /docker-entrypoint-initdb.d/01_schema.sql
+        read_only: true
+        bind: {}
+      - type: bind
+        source: /home/claude/src/proj/SistemaFinanciero/db/datos_ejemplo.sql
+        target: /docker-entrypoint-initdb.d/02_datos_ejemplo.sql
+        read_only: true
+        bind: {}
+      - type: bind
+        source: /home/claude/src/proj/SistemaFinanciero/db/portal_cliente.sql
+        target: /docker-entrypoint-initdb.d/03_portal_cliente.sql
+        read_only: true
+        bind: {}
+      - type: bind
+        source: /home/claude/src/proj/SistemaFinanciero/db/seguridad.sql
+        target: /docker-entrypoint-initdb.d/04_seguridad.sql
+        read_only: true
+        bind: {}
+      - type: bind
+        source: /home/claude/src/proj/SistemaFinanciero/db/version_esquema.sql
+        target: /docker-entrypoint-initdb.d/05_version_esquema.sql
+        read_only: true
+        bind: {}
+      - type: bind
+        source: /home/claude/src/proj/SistemaFinanciero/db/pagos_qr.sql
+        target: /docker-entrypoint-initdb.d/06_pagos_qr.sql
+        read_only: true
+        bind: {}
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}
+      timeout: 5s
+      interval: 5s
+      retries: 10
+networks:
+  interna:
+    name: sigsf_interna
+volumes:
+  logs:
+    name: sigsf_logs
+  pgdata:
+    name: sigsf_pgdata
+  respaldos:
+    name: sigsf_respaldos

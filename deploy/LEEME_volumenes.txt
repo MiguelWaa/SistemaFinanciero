@@ -1,0 +1,4 @@
+SIGSF · Carpetas de escritura del contenedor (/app/logs y /app/respaldos).
+Este archivo se copia con --chown=10001:10001 para que Docker cree ambas
+carpetas con el dueño del proceso (no root). Así los volúmenes con nombre
+heredan ese dueño y Logback puede escribir sigsf.log.

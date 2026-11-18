@@ -1,0 +1,5 @@
+.github/workflows/cd.yml YAML válido; jobs/servicios: ['build-test', 'imagen', 'publicar', 'desplegar']
+.github/workflows/ci.yml YAML válido; jobs/servicios: ['compilar-y-probar']
+.github/workflows/plan-pruebas.yml YAML válido; jobs/servicios: ['memoria-api-navegador', 'integracion-postgresql']
+docker-compose.yml YAML válido; jobs/servicios: ['db', 'app']
+sintaxis sh OK

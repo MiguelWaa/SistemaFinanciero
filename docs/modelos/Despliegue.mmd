@@ -1,0 +1,21 @@
+%% SIGSF 5.11.0 · Diagrama de despliegue y flujo CI/CD
+flowchart LR
+  dev[Desarrollador<br/>rama feature/*] -->|git push / PR| gh[(GitHub<br/>MiguelWaa/SistemaFinanciero)]
+  gh -->|push main/develop, PR| ci[CI SIGSF<br/>ci.yml: JDK 17 + 229 JUnit]
+  gh -->|push main/develop| plan[Plan integrado<br/>plan-pruebas.yml: API, E2E, PostgreSQL]
+  gh -->|tag vX.Y.Z| cd[CD SIGSF<br/>cd.yml]
+  subgraph cd_etapas[CD SIGSF]
+    b1[1 Compilar, JUnit,<br/>empaquetar, smoke JAR] --> b2[2 Imagen Docker<br/>smoke + healthcheck]
+    b2 --> b3[3 GitHub Release<br/>.tar.gz .zip SHA256SUMS]
+    b3 --> b4[4 Desplegar por SSH<br/>aprobación manual]
+  end
+  cd --> b1
+  b2 -->|push| ghcr[(GHCR<br/>ghcr.io/miguelwaa/sigsf)]
+  b4 --> srv
+  subgraph srv[Servidor Linux]
+    ngx[Nginx 443 TLS] --> app[SIGSF.jar :8091<br/>systemd o contenedor]
+    app --> pg[(PostgreSQL 16)]
+    app --> sh[/opt/sigsf/shared<br/>logs, respaldos, sigsf.env/]
+    cur[/opt/sigsf/current/] -.enlace.-> rel[/opt/sigsf/releases/versión-fecha/]
+  end
+  usuario[Usuario / Cliente<br/>navegador] -->|HTTPS| ngx

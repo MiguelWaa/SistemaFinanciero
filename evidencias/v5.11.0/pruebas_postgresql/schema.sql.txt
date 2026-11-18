@@ -1,0 +1,102 @@
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:14: NOTICE:  table "resolucion_gerencial" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:15: NOTICE:  table "decision_gerencia" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:16: NOTICE:  table "decision_direccion" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:17: NOTICE:  table "reporte_direccion" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:18: NOTICE:  table "expediente_aprobacion" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:19: NOTICE:  table "orden_produccion" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:20: NOTICE:  table "linea_produccion" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:21: NOTICE:  table "movimiento_logistica" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:22: NOTICE:  table "proveedor" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:23: NOTICE:  table "actividad_marketing" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:24: NOTICE:  table "campania_prospecto" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:25: NOTICE:  table "campania" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:26: NOTICE:  table "prospecto" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:27: NOTICE:  table "movimiento_inventario" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:28: NOTICE:  table "inventario" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:29: NOTICE:  table "producto" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:30: NOTICE:  table "detalle_venta" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:31: NOTICE:  table "venta" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:32: NOTICE:  table "comprobante" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:33: NOTICE:  table "empeno" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:34: NOTICE:  table "articulo" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:35: NOTICE:  table "prestamo" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:36: NOTICE:  table "operacion" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:37: NOTICE:  table "tipo_cambio" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:38: NOTICE:  table "cliente_servicio" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:39: NOTICE:  table "cliente" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:40: NOTICE:  table "servicio_financiero" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:41: NOTICE:  table "usuario" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:42: NOTICE:  table "rol_permiso" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:43: NOTICE:  table "permiso" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:44: NOTICE:  table "rol" does not exist, skipping
+DROP TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/schema.sql:46: NOTICE:  table "auditoria" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX

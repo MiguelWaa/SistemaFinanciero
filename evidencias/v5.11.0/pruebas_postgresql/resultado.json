@@ -1,0 +1,40 @@
+{
+  "herramienta": "PostgreSQL + JDBC + JUnit",
+  "estado": "APROBADO",
+  "pasos": [
+    {
+      "nombre": "crear_base",
+      "salida": 0
+    },
+    {
+      "nombre": "schema.sql",
+      "salida": 0
+    },
+    {
+      "nombre": "datos_ejemplo.sql",
+      "salida": 0
+    },
+    {
+      "nombre": "portal_cliente.sql",
+      "salida": 0
+    },
+    {
+      "nombre": "seguridad.sql",
+      "salida": 0
+    },
+    {
+      "nombre": "version_esquema.sql",
+      "salida": 0
+    },
+    {
+      "nombre": "pagos_qr.sql",
+      "salida": 0
+    },
+    {
+      "nombre": "junit_jdbc",
+      "salida": 0
+    }
+  ],
+  "base_datos": "sigsf_test_20261118055301733505",
+  "nota": "La BD se conserva para inspección; este script no la elimina."
+}

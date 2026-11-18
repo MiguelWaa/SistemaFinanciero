@@ -1,3 +1,14 @@
+## [5.11.0] - 2026-11-18 Lima · Plan de despliegue y CI/CD
+
+- Plan de despliegue (docs/19_PLAN_DE_DESPLIEGUE.md) y diagrama docs/modelos/Despliegue.mmd.
+- Dockerfile no root con HEALTHCHECK Java (SondaSalud), .dockerignore y docker-compose app + PostgreSQL 16.
+- Paquete release/sigsf-<versión>.tar.gz/.zip con SHA-256 y MANIFIESTO.json (scripts/empaquetar_release.py).
+- Despliegue por versiones con enlace current, smoke test de 9 puntos y reversión automática (desplegar.sh, rollback.sh, smoke_test.py).
+- Workflow CD (.github/workflows/cd.yml): JAR, imagen GHCR, GitHub Release y despliegue SSH con aprobación; pipeline_local.py con las mismas etapas.
+- systemd endurecido, Nginx HTTPS y plantilla de variables SIGSF_*.
+- 229 JUnit (5 nuevas), 7 JDBC sobre PostgreSQL 16.15 real, smoke 9/9 en contenedor y staging, rollback automático y manual comprobados.
+- Corregido: volumen /app/logs creado como root impedía escribir a Logback en el contenedor.
+
 ## [5.10.0] - 2026-11-10 Lima · Entrada automática
 
 - Video a toda la ventana, encuadre central y controles que aparecen con interacción.

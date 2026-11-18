@@ -1,0 +1,12 @@
+CREATE TABLE
+COMMENT
+INSERT 0 4
+DO
+ version |                                 descripcion                                  |                script                |        aplicado_en         
+---------+------------------------------------------------------------------------------+--------------------------------------+----------------------------
+ 1.0.0   | Esquema inicial: 31 tablas de las 9 áreas y datos de ejemplo                 | db/schema.sql + db/datos_ejemplo.sql | 2026-11-18 00:53:02.306536
+ 1.1.0   | Portal del cliente: accesos de clientes (cliente_acceso)                     | db/portal_cliente.sql                | 2026-11-18 00:53:02.306536
+ 2.0.0   | Seguridad: auditoría inmutable, restricciones CHECK, índices y rol sigsf_app | db/seguridad.sql                     | 2026-11-18 00:53:02.306536
+ 5.0.0   | Control de versiones: historial de versiones del esquema (version_esquema)   | db/version_esquema.sql               | 2026-11-18 00:53:02.306536
+(4 rows)
+

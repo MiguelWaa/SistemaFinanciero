@@ -1,0 +1,18 @@
+$ sh scripts/desplegar.sh /home/claude/src/proj/SistemaFinanciero/release/sigsf-5.11.0.tar.gz --destino /tmp/sigsf-staging --login admin@sigsf.com:admin123
+
+2026-11-18 00:53:10 [desplegar] SHA-256 verificado: 90056b8aa0ab0f56...
+2026-11-18 00:53:11 [desplegar] Versión 5.11.0 extraída en /tmp/sigsf-staging/releases/5.11.0-20261118005310
+2026-11-18 00:53:13 [desplegar] Proceso anterior detenido (PID 8518)
+2026-11-18 00:53:13 [desplegar] current -> /tmp/sigsf-staging/releases/5.11.0-20261118005310
+2026-11-18 00:53:13 [desplegar] Iniciado PID 9888
+[OK]    GET /api/health - HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 6.1s
+[OK]    Frontend /login.html - HTTP 200, 3535 bytes
+[OK]    Cabecera CSP - default-src 'self'; script-src 'self'; script-src-attr 'none'; object-src 'none'; style-sr
+[OK]    Cabecera X-Content-Type-Options - nosniff
+[OK]    API protegida sin token - GET /api/usuarios -> HTTP 401
+[OK]    Content-Type no admitido - POST text/plain -> HTTP 415
+[OK]    Login de demostración - HTTP 200, token emitido
+[OK]    Versión desplegada (/api/version) - HTTP 200 esperada=5.11.0 recibida=5.11.0 etiqueta=v5.10.0-5-gc4762b7
+[OK]    Dashboard autenticado - HTTP 200, 371 bytes
+Resultado: APROBADO (9/9)
+2026-11-18 00:53:19 [desplegar] DESPLIEGUE CORRECTO: 5.11.0 en http://127.0.0.1:8095/

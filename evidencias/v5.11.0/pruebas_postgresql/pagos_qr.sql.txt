@@ -1,0 +1,24 @@
+CREATE TABLE
+COMMENT
+CREATE TABLE
+COMMENT
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE TABLE
+COMMENT
+CREATE INDEX
+INSERT 0 3
+DO
+ codigo | numero_celular |           titular           | activo 
+--------+----------------+-----------------------------+--------
+ YAPE   | 987654321      | SIGSF Servicios Financieros | t
+ PLIN   | 987654322      | SIGSF Servicios Financieros | t
+ TUNKI  | 987654323      | SIGSF Servicios Financieros | t
+(3 rows)
+
+ estado | pagos | total 
+--------+-------+-------
+(0 rows)
+

@@ -1,0 +1,42 @@
+# ============================================================
+#  SIGSF 5.11.0 · Servicio systemd (servidor Linux sin contenedores)
+#
+#  Instalación (la hace scripts/desplegar.sh --systemd):
+#     sudo cp deploy/sigsf.service /etc/systemd/system/sigsf.service
+#     sudo systemctl daemon-reload && sudo systemctl enable --now sigsf
+#  Estructura esperada:
+#     /opt/sigsf/releases/<versión>/   (dist/, lib/, web/, db/)
+#     /opt/sigsf/current -> releases/<versión>   (enlace que cambia el despliegue)
+#     /opt/sigsf/shared/{logs,respaldos}
+# ============================================================
+[Unit]
+Description=SIGSF - Sistema Integral de Gestion de Servicios Financieros
+Documentation=file:///opt/sigsf/current/docs/19_PLAN_DE_DESPLIEGUE.md
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sigsf
+Group=sigsf
+WorkingDirectory=/opt/sigsf/current
+EnvironmentFile=/etc/sigsf/sigsf.env
+Environment=SIGSF_WEB_DIR=/opt/sigsf/current/web
+Environment=SIGSF_BACKUP_DIR=/opt/sigsf/shared/respaldos
+ExecStart=/usr/bin/java -XX:MaxRAMPercentage=60 -Dfile.encoding=UTF-8 -Dsigsf.log.dir=/opt/sigsf/shared/logs -jar /opt/sigsf/current/dist/SIGSF.jar
+ExecStartPost=/bin/sh -c 'for i in $(seq 1 30); do /usr/bin/java -cp /opt/sigsf/current/dist/SIGSF.jar com.utp.sistemafinanciero.despliegue.SondaSalud && exit 0; sleep 2; done; exit 1'
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=143
+
+# Endurecimiento del servicio
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/sigsf/shared
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

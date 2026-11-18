@@ -1,0 +1,26 @@
+2026-11-18 00:54:19 [desplegar] SHA-256 verificado: 3d86dff428738cf9...
+2026-11-18 00:54:19 [desplegar] Versión 5.11.1 extraída en /tmp/sigsf-staging/releases/5.11.1-20261118005419
+2026-11-18 00:54:21 [desplegar] Proceso anterior detenido (PID 9888)
+2026-11-18 00:54:21 [desplegar] current -> /tmp/sigsf-staging/releases/5.11.1-20261118005419
+2026-11-18 00:54:21 [desplegar] Iniciado PID 10808
+[OK]    GET /api/health - HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 6.1s
+[FALLO] Frontend /login.html - HTTP 404, 34 bytes
+[OK]    Cabecera CSP - default-src 'self'; script-src 'self'; script-src-attr 'none'; object-src 'none'; style-sr
+[OK]    Cabecera X-Content-Type-Options - nosniff
+[OK]    API protegida sin token - GET /api/usuarios -> HTTP 401
+[OK]    Content-Type no admitido - POST text/plain -> HTTP 415
+[OK]    Login de demostración - HTTP 200, token emitido
+[FALLO] Versión desplegada (/api/version) - HTTP 200 esperada=5.11.1 recibida=5.11.0 etiqueta=v5.10.0-5-gc4762b7
+[OK]    Dashboard autenticado - HTTP 200, 371 bytes
+Resultado: FALLIDO (7/9)
+2026-11-18 00:54:27 [desplegar] PRUEBA DE HUMO FALLIDA: revirtiendo
+2026-11-18 00:54:29 [desplegar] Proceso anterior detenido (PID 10808)
+2026-11-18 00:54:29 [desplegar] Iniciado PID 10900
+[OK]    GET /api/health - HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 6.1s
+[OK]    Frontend /login.html - HTTP 200, 3535 bytes
+[OK]    Cabecera CSP - default-src 'self'; script-src 'self'; script-src-attr 'none'; object-src 'none'; style-sr
+[OK]    Cabecera X-Content-Type-Options - nosniff
+[OK]    API protegida sin token - GET /api/usuarios -> HTTP 401
+[OK]    Content-Type no admitido - POST text/plain -> HTTP 415
+Resultado: APROBADO (6/6)
+2026-11-18 00:54:36 [desplegar] Reversión completada: current -> /tmp/sigsf-staging/releases/5.11.0-20261118005310
