@@ -1,0 +1,178 @@
+# ============================================================
+#  SIGSF 5.11.0 · Entrega y despliegue continuos (CD)
+#
+#  Se dispara al publicar una etiqueta vX.Y.Z (git push origin v5.11.0)
+#  o manualmente (workflow_dispatch). Etapas:
+#    1. build-test   compila con JDK 17, 229 JUnit, empaqueta JAR y release
+#    2. imagen       construye la imagen Docker, la prueba (smoke) y la publica en GHCR
+#    3. publicar     crea el GitHub Release con .tar.gz, .zip y SHA256SUMS
+#    4. desplegar    copia el paquete al servidor por SSH y ejecuta desplegar.sh
+#                   (entorno "produccion" con aprobación manual; se omite sin secretos)
+# ============================================================
+name: CD SIGSF
+
+on:
+  push:
+    tags: ['v*.*.*']
+  workflow_dispatch:
+    inputs:
+      desplegar:
+        description: '¿Desplegar en el servidor después de publicar?'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cd-sigsf-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  IMAGEN: ghcr.io/${{ github.repository_owner }}/sigsf
+
+jobs:
+  build-test:
+    name: 1 · Compilar, probar y empaquetar
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.ver.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - id: ver
+        name: Leer versión y validar etiqueta
+        run: |
+          V=$(tr -d '\r\n ' < VERSION)
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME}" != "v$V" ]; then
+            echo "::error::La etiqueta ${GITHUB_REF_NAME} no coincide con VERSION ($V)"; exit 1
+          fi
+      - name: Compilar y ejecutar JUnit
+        run: |
+          python scripts/preparar_dependencias.py
+          python scripts/validar_proyecto.py --solo-junit
+      - name: Empaquetar JAR y paquete de despliegue
+        run: |
+          python scripts/empaquetar.py
+          python scripts/empaquetar_release.py
+      - name: Prueba de humo del JAR (modo memoria)
+        run: |
+          SIGSF_PERSISTENCIA=memoria SIGSF_BACKUP_AUTOMATICO_HORAS=0 java -jar dist/SIGSF.jar > servidor.log 2>&1 &
+          python scripts/smoke_test.py --version "${{ steps.ver.outputs.version }}" \
+            --login admin@sigsf.com:admin123 --salida release/smoke_jar.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sigsf-release-${{ steps.ver.outputs.version }}
+          path: |
+            release/
+            dist/SIGSF.jar
+          retention-days: 90
+
+  imagen:
+    name: 2 · Imagen Docker (GHCR)
+    needs: build-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: sigsf-release-${{ needs.build-test.outputs.version }}
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Construir imagen local
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: sigsf:prueba
+          build-args: |
+            VERSION=${{ needs.build-test.outputs.version }}
+            COMMIT=${{ github.sha }}
+      - name: Prueba de humo del contenedor
+        run: |
+          docker run -d --name sigsf -p 8091:8091 -e SIGSF_PERSISTENCIA=memoria sigsf:prueba
+          python3 scripts/smoke_test.py --version "${{ needs.build-test.outputs.version }}" \
+            --login admin@sigsf.com:admin123 --salida smoke_contenedor.json
+          for i in $(seq 1 20); do
+            [ "$(docker inspect -f '{{.State.Health.Status}}' sigsf)" = healthy ] && break; sleep 3; done
+          docker inspect -f '{{.State.Health.Status}}' sigsf | grep -qx healthy
+      - name: Publicar imagen
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGEN }}:${{ needs.build-test.outputs.version }}
+            ${{ env.IMAGEN }}:latest
+          build-args: |
+            VERSION=${{ needs.build-test.outputs.version }}
+            COMMIT=${{ github.sha }}
+
+  publicar:
+    name: 3 · GitHub Release
+    needs: [build-test, imagen]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: sigsf-release-${{ needs.build-test.outputs.version }}
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: SIGSF ${{ needs.build-test.outputs.version }}
+          generate_release_notes: true
+          files: |
+            release/sigsf-*.tar.gz
+            release/sigsf-*.zip
+            release/*.sha256
+            release/SHA256SUMS
+            release/MANIFIESTO.json
+
+  desplegar:
+    name: 4 · Desplegar en servidor
+    needs: [build-test, publicar]
+    if: github.ref_type == 'tag' || inputs.desplegar
+    runs-on: ubuntu-latest
+    environment:
+      name: produccion
+      url: ${{ vars.SIGSF_URL_PUBLICA }}
+    env:
+      SSH_HOST: ${{ secrets.SIGSF_SSH_HOST }}
+    steps:
+      - uses: actions/download-artifact@v4
+        if: env.SSH_HOST != ''
+        with:
+          name: sigsf-release-${{ needs.build-test.outputs.version }}
+      - name: Copiar y desplegar por SSH
+        if: env.SSH_HOST != ''
+        env:
+          SSH_USER: ${{ secrets.SIGSF_SSH_USER }}
+          SSH_KEY: ${{ secrets.SIGSF_SSH_KEY }}
+          V: ${{ needs.build-test.outputs.version }}
+        run: |
+          install -m 600 /dev/null ~/.ssh_sigsf && printf '%s\n' "$SSH_KEY" > ~/.ssh_sigsf
+          OPC="-i $HOME/.ssh_sigsf -o StrictHostKeyChecking=accept-new"
+          scp $OPC release/sigsf-$V.tar.gz release/sigsf-$V.tar.gz.sha256 "$SSH_USER@$SSH_HOST:/tmp/"
+          ssh $OPC "$SSH_USER@$SSH_HOST" "cd /tmp && tar -xzf sigsf-$V.tar.gz ./scripts/desplegar.sh && \
+            sudo sh ./scripts/desplegar.sh /tmp/sigsf-$V.tar.gz --destino /opt/sigsf --systemd"
+      - name: Sin servidor configurado
+        if: env.SSH_HOST == ''
+        run: echo "::notice::Defina los secretos SIGSF_SSH_HOST, SIGSF_SSH_USER y SIGSF_SSH_KEY para desplegar."
