@@ -1,3 +1,3 @@
 $ docker run -d --name sigsf-pipeline --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges:true -p 8096:8091 -e SIGSF_PERSISTENCIA=memoria -v sigsf-pipeline-logs:/app/logs sigsf:5.11.0
 
-ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5
+f194c263b0683cac6ee019166570d950176d3b0841d31676e45033ce196795b3

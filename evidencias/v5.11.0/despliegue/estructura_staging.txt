@@ -1,10 +1,10 @@
 .
 ./current
 ./releases
-./releases/5.11.0-20261118005310
 ./releases/5.11.0-20261118005516
 ./releases/5.11.0-20261118005542
 ./releases/5.11.0-20261118005903
+./releases/5.11.0-20261118011945
 ./releases/5.11.1-20261118005419
 ./shared
 ./shared/despliegues
@@ -14,4 +14,4 @@
 ./shared/sigsf.env
 ./shared/sigsf.pid
 
-current -> /tmp/sigsf-staging/releases/5.11.0-20261118005903
+current -> /tmp/sigsf-staging/releases/5.11.0-20261118011945

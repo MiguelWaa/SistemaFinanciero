@@ -3,4 +3,4 @@ $ /usr/local/bin/python3 scripts/validar_proyecto.py --solo-junit
 Ejecutando compilar_fuentes
 Ejecutando compilar_pruebas
 Ejecutando junit
-Resultado: /home/claude/src/proj/SistemaFinanciero/pruebas/reportes/20261118T055828Z/resultado.json
+Resultado: /home/claude/src/proj/SistemaFinanciero/pruebas/reportes/20261118T061910Z/resultado.json

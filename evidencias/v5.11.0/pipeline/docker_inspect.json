@@ -1,7 +1,7 @@
 [
     {
-        "Id": "ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5",
-        "Created": "2026-11-18T05:58:50.322775489Z",
+        "Id": "f194c263b0683cac6ee019166570d950176d3b0841d31676e45033ce196795b3",
+        "Created": "2026-11-18T06:19:33.494379752Z",
         "Path": "sh",
         "Args": [
             "-c",
@@ -14,35 +14,35 @@
             "Restarting": false,
             "OOMKilled": false,
             "Dead": false,
-            "Pid": 14551,
+            "Pid": 2562,
             "ExitCode": 0,
             "Error": "",
-            "StartedAt": "2026-11-18T05:58:50.363977475Z",
+            "StartedAt": "2026-11-18T06:19:33.536164775Z",
             "FinishedAt": "0001-01-01T00:00:00Z",
             "Health": {
                 "Status": "healthy",
                 "FailingStreak": 0,
                 "Log": [
                     {
-                        "Start": "2026-11-18T00:58:55.496628365-05:00",
-                        "End": "2026-11-18T00:58:55.904424705-05:00",
+                        "Start": "2026-11-18T01:19:38.786210863-05:00",
+                        "End": "2026-11-18T01:19:39.200469192-05:00",
                         "ExitCode": 1,
                         "Output": "SIN RESPUESTA: ConnectException Connection refused (connect failed)\n"
                     },
                     {
-                        "Start": "2026-11-18T00:59:00.905709182-05:00",
-                        "End": "2026-11-18T00:59:01.163629031-05:00",
+                        "Start": "2026-11-18T01:19:44.201164131-05:00",
+                        "End": "2026-11-18T01:19:44.522112277-05:00",
                         "ExitCode": 0,
                         "Output": "SANO 200 {\"status\":\"ok\",\"servicio\":\"SIGSF API\",\"persistencia\":\"Memoria (demostraci?n)\"}\n"
                     }
                 ]
             }
         },
-        "Image": "sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8",
-        "ResolvConfPath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/resolv.conf",
-        "HostnamePath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/hostname",
-        "HostsPath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/hosts",
-        "LogPath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5-json.log",
+        "Image": "sha256:d1e75f4058f91043d5b4475ed1c32a0c64efb9ae92b02d845be2aede491b0ad4",
+        "ResolvConfPath": "/var/lib/docker/containers/f194c263b0683cac6ee019166570d950176d3b0841d31676e45033ce196795b3/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/f194c263b0683cac6ee019166570d950176d3b0841d31676e45033ce196795b3/hostname",
+        "HostsPath": "/var/lib/docker/containers/f194c263b0683cac6ee019166570d950176d3b0841d31676e45033ce196795b3/hosts",
+        "LogPath": "/var/lib/docker/containers/f194c263b0683cac6ee019166570d950176d3b0841d31676e45033ce196795b3/f194c263b0683cac6ee019166570d950176d3b0841d31676e45033ce196795b3-json.log",
         "Name": "/sigsf-pipeline",
         "RestartCount": 0,
         "Driver": "overlayfs",
@@ -180,8 +180,8 @@
             },
             {
                 "Type": "volume",
-                "Name": "d0ef2fae668fb95a8d4ced01969c116c498f3061b09b7a658c6d3a4350bf9e57",
-                "Source": "/var/lib/docker/volumes/d0ef2fae668fb95a8d4ced01969c116c498f3061b09b7a658c6d3a4350bf9e57/_data",
+                "Name": "c1cbb548546c927bdf475d23aafd8da4067b165c68e51e2b22a3c102ad0262ac",
+                "Source": "/var/lib/docker/volumes/c1cbb548546c927bdf475d23aafd8da4067b165c68e51e2b22a3c102ad0262ac/_data",
                 "Destination": "/app/respaldos",
                 "Driver": "local",
                 "Mode": "",
@@ -190,7 +190,7 @@
             }
         ],
         "Config": {
-            "Hostname": "ea53e5dcd888",
+            "Hostname": "f194c263b068",
             "Domainname": "",
             "User": "10001:10001",
             "AttachStdin": false,
@@ -242,15 +242,15 @@
             "Labels": {
                 "org.opencontainers.image.description": "Sistema Integral de Gestión de Servicios Financieros - UTP",
                 "org.opencontainers.image.licenses": "UNLICENSED",
-                "org.opencontainers.image.revision": "f8f3c52",
+                "org.opencontainers.image.revision": "664e49e",
                 "org.opencontainers.image.source": "https://github.com/MiguelWaa/SistemaFinanciero",
                 "org.opencontainers.image.title": "SIGSF",
                 "org.opencontainers.image.version": "5.11.0"
             }
         },
         "NetworkSettings": {
-            "SandboxID": "e1993af42fe4694fd9247fbf05b60c22b9ca1f3639b9a05110107104d07c021f",
-            "SandboxKey": "/var/run/docker/netns/e1993af42fe4",
+            "SandboxID": "bb7dfd5d8a466bbaa383d2431edecc407f6b6c510618b2a64a14d4b41d483dee",
+            "SandboxKey": "/var/run/docker/netns/bb7dfd5d8a46",
             "Ports": {
                 "8091/tcp": [
                     {
@@ -266,11 +266,11 @@
                     "Aliases": null,
                     "DriverOpts": null,
                     "GwPriority": 0,
-                    "NetworkID": "4301a0ae69f39de9c65fecf3b573d5462d25ebe32fb9f8b277a8d3895a8c76fd",
-                    "EndpointID": "c32535ac837107fc9f3e1a779fe2bf8d2d06f3931930507633a4bfc123c3e23d",
+                    "NetworkID": "e45cbdc91b6fa97f592fddbec2ec19b35b537aa24eb98c19b31870a1df64fc7f",
+                    "EndpointID": "4182b9a3ce06993c0f0bcf7224437fca7c12da94b777f13df7e9510808e90185",
                     "Gateway": "172.17.0.1",
                     "IPAddress": "172.17.0.2",
-                    "MacAddress": "e6:bf:09:41:58:7b",
+                    "MacAddress": "e2:0e:49:ee:ac:36",
                     "IPPrefixLen": 16,
                     "IPv6Gateway": "",
                     "GlobalIPv6Address": "",
@@ -281,7 +281,7 @@
         },
         "ImageManifestDescriptor": {
             "mediaType": "application/vnd.oci.image.manifest.v1+json",
-            "digest": "sha256:f3065cab108c4e4d735ac620a317ba9ed38260d151e75ee8d3753c4baef569d3",
+            "digest": "sha256:0261f52ce362d040e3071ff55a6d42d623af28dd73dd106ba9d44ef9ec27a8b7",
             "size": 2376,
             "platform": {
                 "architecture": "amd64",

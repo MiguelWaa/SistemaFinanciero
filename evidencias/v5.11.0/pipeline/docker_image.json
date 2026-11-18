@@ -1,14 +1,14 @@
 [
     {
-        "Id": "sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8",
+        "Id": "sha256:d1e75f4058f91043d5b4475ed1c32a0c64efb9ae92b02d845be2aede491b0ad4",
         "RepoTags": [
             "sigsf:5.11.0"
         ],
         "RepoDigests": [
-            "sigsf@sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8"
+            "sigsf@sha256:d1e75f4058f91043d5b4475ed1c32a0c64efb9ae92b02d845be2aede491b0ad4"
         ],
         "Comment": "buildkit.dockerfile.v0",
-        "Created": "2026-11-18T00:58:49.737763566-05:00",
+        "Created": "2026-11-18T01:19:32.901475864-05:00",
         "Config": {
             "User": "10001:10001",
             "ExposedPorts": {
@@ -39,7 +39,7 @@
             "Labels": {
                 "org.opencontainers.image.description": "Sistema Integral de Gestión de Servicios Financieros - UTP",
                 "org.opencontainers.image.licenses": "UNLICENSED",
-                "org.opencontainers.image.revision": "f8f3c52",
+                "org.opencontainers.image.revision": "664e49e",
                 "org.opencontainers.image.source": "https://github.com/MiguelWaa/SistemaFinanciero",
                 "org.opencontainers.image.title": "SIGSF",
                 "org.opencontainers.image.version": "5.11.0"
@@ -60,36 +60,36 @@
         },
         "Architecture": "amd64",
         "Os": "linux",
-        "Size": 132895873,
+        "Size": 132895865,
         "RootFS": {
             "Type": "layers",
             "Layers": [
                 "sha256:7fc1c3c7b1a5b10affbd0077d94779a5efb24d28e53e7c44aa48be6d8db4ee58",
                 "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
-                "sha256:840c940a3d058544c6992f4aef5c836e9c9a915ec76f4a4e096e8da80d135133",
-                "sha256:240c4d28d51c9e062096235d55dfb213a5c7c4b231b9ec98a7472d47ea3755b6",
-                "sha256:9a70fdaf6916b701e5b4bfc391a6d81215e93309dc9b343913ecba6f6c09ed55",
-                "sha256:455b292df07df3a7841725ee4e7faf80347e5e3b347c4d8b5460ef50a1b3c012",
-                "sha256:a216e70993c0ade52315d1064b0186f91257a8e984358c1468b71b33b74b6643",
-                "sha256:bf4d690266c760f9f12a6d4bcb198e19e904b83a2cc6f7f2519cd94624009405",
-                "sha256:5ad1ec615a39c133df03e0fb7ebd86650323f9229835969f934e959c1c45560d",
-                "sha256:ebc604634388dcd8afa8b7bfc59a7068e20066b28f63f7306319a061ea0b61c7",
-                "sha256:b3ef88127dfd9c64915665d719a623c052049353080b170d9713b7c5952394b6"
+                "sha256:5f3485b14a17034132355e4a245ea600e319328754e80d72f2e739a2853099b2",
+                "sha256:0ced989324ad4d137940bf4673ae81a085ef0cc3ae10cd227938879831caa3b6",
+                "sha256:bea6c249ffc8aad0929fbd32396f20f17bc67b0eb49f5dbdc1523a5542bbba36",
+                "sha256:839700d576478c918367794456da9a5a91160f2339a74e701fbac4e7389640ce",
+                "sha256:6ca0b98835a74256736d9aaf3c5a02d9ebe31e87cacb249f353c9e51ae2c4f93",
+                "sha256:ff953043543ee003b03a5285ccd4f51b34a5871b2395aeb01e2bf2664a3df94f",
+                "sha256:dbbba2a31b61513198e242201899a065e84bdc039fd1ea748928e50a7fb1ea63",
+                "sha256:bbaabd5207fc62cc8b617b67070f268319adc3b3b4ac7d07ffd90cbc73d2c203",
+                "sha256:23cd9d3acedba3ebe2b0b0f7e8e9272783b05b6686757bd4d5c6e33ac97e4525"
             ]
         },
         "Metadata": {
-            "LastTagTime": "2026-11-18T05:58:50.020228207Z"
+            "LastTagTime": "2026-11-18T06:19:33.201646336Z"
         },
         "Descriptor": {
             "mediaType": "application/vnd.oci.image.index.v1+json",
-            "digest": "sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8",
+            "digest": "sha256:d1e75f4058f91043d5b4475ed1c32a0c64efb9ae92b02d845be2aede491b0ad4",
             "size": 856
         },
         "Identity": {
             "Build": [
                 {
-                    "Ref": "rfay38eiyg7lidmb5jsgaj4ft",
-                    "CreatedAt": "2026-11-18T00:58:50.132226121-05:00"
+                    "Ref": "m6y1zbmjch9ti8gzbgceeahet",
+                    "CreatedAt": "2026-11-18T01:19:33.307876389-05:00"
                 }
             ]
         }
