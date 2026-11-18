@@ -3,7 +3,7 @@ $ /usr/local/bin/python3 scripts/empaquetar_release.py
 {
   "paquete": "release/sigsf-5.11.0.tar.gz",
   "zip": "release/sigsf-5.11.0.zip",
-  "archivos": 113,
+  "archivos": 115,
   "tamano_mb": 5.41,
-  "sha256": "90056b8aa0ab0f56830b3f6fe3caf1fd847aa0dfcd8b22d35ba520aa051dc800"
+  "sha256": "f107d3c7c2d866a3df98d25a7c85281b8f0031378de5eb8877bb564030a751a7"
 }

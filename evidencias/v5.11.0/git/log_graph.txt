@@ -1,0 +1,21 @@
+*   f8f3c52 (HEAD -> release/5.11.0, tag: v5.11.0) Merge branch 'feature/despliegue-5.11.0' into release/5.11.0
+|\  
+| * 2b4be27 (feature/despliegue-5.11.0) docs(inventario): registrar artefactos y evidencias de despliegue 5.11.0
+| * 9e916d5 docs(evidencia): pipeline, despliegues, rollback, Docker+PostgreSQL y capturas 5.11.0
+| * dcc9780 docs(despliegue): plan de despliegue 5.11.0, diagrama, changelog e índice
+| * 460e04d test(evidencia): capturas de la aplicación desplegada con Playwright y Chrome
+| * 59342f2 feat(despliegue): rollback con verificación de versión e inclusión de CHANGELOG en el paquete
+| * 48f7de4 fix(docker): crear /app/logs y /app/respaldos con dueño 10001 antes de VOLUME
+| * c4762b7 chore(version): preparar 5.11.0
+| * 3937bd5 ci(cd): workflow de entrega continua (JAR, GHCR, Release, SSH) y pipeline local equivalente
+| * d9ab81e feat(despliegue): paquete con SHA-256, despliegue por versiones, smoke test y rollback
+| * 212dea8 build(docker): imagen no root con HEALTHCHECK, compose app+PostgreSQL y base local sin Internet
+| * b677dea feat(despliegue): sonda de salud SondaSalud y 5 pruebas JUnit
+|/  
+*   73ce5bb (tag: v5.10.0, release/5.10.0) feat: integrar entrada automatica a pantalla completa 5.10.0
+|\  
+| * ca42730 (feature/inicio-automatico-5.10) docs: documentar entrada automatica y validacion selectiva 5.10
+| * f502625 feat: abrir entrada a pantalla completa con sonido automatico en Windows
+|/  
+*   b7b4ee5 (tag: v5.9.0, release/5.9.0) feat: integrar presentacion audiovisual SIGSF 5.9.0
+|\  

@@ -1,18 +1,21 @@
-IMAGE          CREATED         CREATED BY                                      SIZE      COMMENT
-8ee074fefbf8   6 seconds ago   ENTRYPOINT ["sh" "-c" "exec java $JAVA_OPTS …   0B        buildkit.dockerfile.v0
-<missing>      6 seconds ago   HEALTHCHECK {Test:[CMD java -cp /app/dist/SI…   0B        buildkit.dockerfile.v0
-<missing>      6 seconds ago   EXPOSE 8091/tcp                                 0B        buildkit.dockerfile.v0
-<missing>      6 seconds ago   VOLUME [/app/logs /app/respaldos]               0B        buildkit.dockerfile.v0
-<missing>      6 seconds ago   USER 10001:10001                                0B        buildkit.dockerfile.v0
-<missing>      6 seconds ago   ENV SIGSF_PERSISTENCIA=postgresql SIGSF_SERV…   0B        buildkit.dockerfile.v0
-<missing>      6 seconds ago   COPY --chown=10001:10001 VERSION /app/VERSIO…   12.3kB    buildkit.dockerfile.v0
-<missing>      6 seconds ago   COPY --chown=10001:10001 db.properties.ejemp…   12.3kB    buildkit.dockerfile.v0
-<missing>      6 seconds ago   COPY --chown=10001:10001 db/ /app/db/ # buil…   549kB     buildkit.dockerfile.v0
-<missing>      6 seconds ago   COPY --chown=10001:10001 web/ /app/web/ # bu…   5.42MB    buildkit.dockerfile.v0
-<missing>      6 seconds ago   COPY --chown=10001:10001 lib/*.jar /app/lib/…   2.09MB    buildkit.dockerfile.v0
-<missing>      6 seconds ago   COPY --chown=10001:10001 dist/SIGSF.jar /app…   459kB     buildkit.dockerfile.v0
-<missing>      3 minutes ago   WORKDIR /app                                    4.1kB     buildkit.dockerfile.v0
-<missing>      3 minutes ago   LABEL org.opencontainers.image.title=SIGSF o…   0B        buildkit.dockerfile.v0
-<missing>      3 minutes ago   ARG COMMIT=c4762b7                              0B        buildkit.dockerfile.v0
-<missing>      3 minutes ago   ARG VERSION=5.11.0                              0B        buildkit.dockerfile.v0
-<missing>      4 minutes ago                                                   73.9MB    Imported from -
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+12d544466b61   14 seconds ago   ENTRYPOINT ["sh" "-c" "exec java $JAVA_OPTS …   0B        buildkit.dockerfile.v0
+<missing>      14 seconds ago   HEALTHCHECK {Test:[CMD java -cp /app/dist/SI…   0B        buildkit.dockerfile.v0
+<missing>      14 seconds ago   EXPOSE 8091/tcp                                 0B        buildkit.dockerfile.v0
+<missing>      14 seconds ago   VOLUME [/app/logs /app/respaldos]               0B        buildkit.dockerfile.v0
+<missing>      14 seconds ago   USER 10001:10001                                0B        buildkit.dockerfile.v0
+<missing>      14 seconds ago   ENV SIGSF_PERSISTENCIA=postgresql SIGSF_SERV…   0B        buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 deploy/LEEME_volume…   16.4kB    buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 deploy/LEEME_volume…   16.4kB    buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 CHANGELOG.md /app/C…   24.6kB    buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 VERSION /app/VERSIO…   12.3kB    buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 db.properties.ejemp…   12.3kB    buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 db/ /app/db/ # buil…   549kB     buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 web/ /app/web/ # bu…   5.42MB    buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 lib/*.jar /app/lib/…   2.09MB    buildkit.dockerfile.v0
+<missing>      14 seconds ago   COPY --chown=10001:10001 dist/SIGSF.jar /app…   459kB     buildkit.dockerfile.v0
+<missing>      9 minutes ago    WORKDIR /app                                    4.1kB     buildkit.dockerfile.v0
+<missing>      9 minutes ago    LABEL org.opencontainers.image.title=SIGSF o…   0B        buildkit.dockerfile.v0
+<missing>      9 minutes ago    ARG COMMIT=f8f3c52                              0B        buildkit.dockerfile.v0
+<missing>      9 minutes ago    ARG VERSION=5.11.0                              0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago                                                   73.9MB    Imported from -

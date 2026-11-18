@@ -1,14 +1,14 @@
 [
     {
-        "Id": "sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903",
+        "Id": "sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8",
         "RepoTags": [
             "sigsf:5.11.0"
         ],
         "RepoDigests": [
-            "sigsf@sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903"
+            "sigsf@sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8"
         ],
         "Comment": "buildkit.dockerfile.v0",
-        "Created": "2026-11-18T00:53:04.508706302-05:00",
+        "Created": "2026-11-18T00:58:49.737763566-05:00",
         "Config": {
             "User": "10001:10001",
             "ExposedPorts": {
@@ -39,7 +39,7 @@
             "Labels": {
                 "org.opencontainers.image.description": "Sistema Integral de Gestión de Servicios Financieros - UTP",
                 "org.opencontainers.image.licenses": "UNLICENSED",
-                "org.opencontainers.image.revision": "c4762b7",
+                "org.opencontainers.image.revision": "f8f3c52",
                 "org.opencontainers.image.source": "https://github.com/MiguelWaa/SistemaFinanciero",
                 "org.opencontainers.image.title": "SIGSF",
                 "org.opencontainers.image.version": "5.11.0"
@@ -60,33 +60,36 @@
         },
         "Architecture": "amd64",
         "Os": "linux",
-        "Size": 132830478,
+        "Size": 132895873,
         "RootFS": {
             "Type": "layers",
             "Layers": [
                 "sha256:7fc1c3c7b1a5b10affbd0077d94779a5efb24d28e53e7c44aa48be6d8db4ee58",
                 "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
-                "sha256:b48608750a9154b0492bd7ad2ca2b96cc81053184e176657f5eb7d52a5b0d0a0",
-                "sha256:fe817c270e1dfc50f7413e70d045b71ca5dfe45ebadf05091e077d8ccbe1c4b0",
-                "sha256:e776ed9341bce5e7573c0bac5599832ba3e7eb4d07d167cd8d820828cdb3cac3",
-                "sha256:261629706cb76a6dba4cbe8bcfacb19b936c26d485c199332c6cb1e218ee75f5",
-                "sha256:fb0edc10ccd7cb9c0c0a2ee6f133d0711707bafba8c4d6a1de133a5f8b81c58e",
-                "sha256:c6517c094392285275d614f61e943479f46a9007be3c1276d69ad93ad1db5048"
+                "sha256:840c940a3d058544c6992f4aef5c836e9c9a915ec76f4a4e096e8da80d135133",
+                "sha256:240c4d28d51c9e062096235d55dfb213a5c7c4b231b9ec98a7472d47ea3755b6",
+                "sha256:9a70fdaf6916b701e5b4bfc391a6d81215e93309dc9b343913ecba6f6c09ed55",
+                "sha256:455b292df07df3a7841725ee4e7faf80347e5e3b347c4d8b5460ef50a1b3c012",
+                "sha256:a216e70993c0ade52315d1064b0186f91257a8e984358c1468b71b33b74b6643",
+                "sha256:bf4d690266c760f9f12a6d4bcb198e19e904b83a2cc6f7f2519cd94624009405",
+                "sha256:5ad1ec615a39c133df03e0fb7ebd86650323f9229835969f934e959c1c45560d",
+                "sha256:ebc604634388dcd8afa8b7bfc59a7068e20066b28f63f7306319a061ea0b61c7",
+                "sha256:b3ef88127dfd9c64915665d719a623c052049353080b170d9713b7c5952394b6"
             ]
         },
         "Metadata": {
-            "LastTagTime": "2026-11-18T05:53:04.791862823Z"
+            "LastTagTime": "2026-11-18T05:58:50.020228207Z"
         },
         "Descriptor": {
             "mediaType": "application/vnd.oci.image.index.v1+json",
-            "digest": "sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903",
+            "digest": "sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8",
             "size": 856
         },
         "Identity": {
             "Build": [
                 {
-                    "Ref": "jtfcg2ur3h2br15dajdzeu6td",
-                    "CreatedAt": "2026-11-18T00:53:04.890616639-05:00"
+                    "Ref": "rfay38eiyg7lidmb5jsgaj4ft",
+                    "CreatedAt": "2026-11-18T00:58:50.132226121-05:00"
                 }
             ]
         }

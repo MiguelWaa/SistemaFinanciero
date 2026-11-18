@@ -1,0 +1,3 @@
+$ docker exec sigsf-pipeline sh -c test -s /app/logs/sigsf.log && echo "sigsf.log escrito por el usuario 10001"
+
+sigsf.log escrito por el usuario 10001

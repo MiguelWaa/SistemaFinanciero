@@ -1,0 +1,6 @@
+v5.5.0          SIGSF 5.5.0 · Plan de pruebas de software (231 casos, 100 % aprobados)
+v5.6.0          Entrega integrada SIGSF 5.6.0; validaciones pendientes documentadas
+v5.7.0          SIGSF 5.7.0: interfaz grafito y bienvenida MP3
+v5.8.0          SIGSF 5.8.0: portada bancaria animada y saludo MP3
+v5.9.0          SIGSF 5.9.0: video original al iniciar y controles de presentacion
+v6.0.0          Release 6.0.0

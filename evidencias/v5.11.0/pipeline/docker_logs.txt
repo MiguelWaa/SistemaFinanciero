@@ -1,366 +1,238 @@
-05:53:05,426 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.5.12
-05:53:05,428 |-INFO in ch.qos.logback.classic.util.ContextInitializer@37654521 - No custom configurators were discovered as a service.
-05:53:05,428 |-INFO in ch.qos.logback.classic.util.ContextInitializer@37654521 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
-05:53:05,431 |-INFO in ch.qos.logback.classic.util.ContextInitializer@37654521 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
-05:53:05,441 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
-05:53:05,441 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
-05:53:05,450 |-INFO in ch.qos.logback.classic.util.ContextInitializer@37654521 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 10 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
-05:53:05,450 |-INFO in ch.qos.logback.classic.util.ContextInitializer@37654521 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
-05:53:05,451 |-INFO in ch.qos.logback.classic.util.ContextInitializer@37654521 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
-05:53:05,451 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
-05:53:05,455 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/app/dist/SIGSF.jar!/logback.xml]
-05:53:05,460 |-INFO in ConfigurationWatchList(mainURL=jar:file:/app/dist/SIGSF.jar!/logback.xml, fileWatchList={}, urlWatchList=[}) - URL [jar:file:/app/dist/SIGSF.jar!/logback.xml] is not of type file
-05:53:05,580 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs" substituted for "${sigsf.log.dir:-logs}"
-05:53:05,585 |-WARN in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Missing watchable .xml or .properties files.
-05:53:05,585 |-WARN in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Watching .xml files requires that the main configuration file is reachable as a URL
-05:53:05,586 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLA]
-05:53:05,587 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
-05:53:05,593 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-05:53:05,595 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "%d{HH:mm:ss} %-5level [%X{area:-SISTEMA}] %logger{20} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON_CONSOLA}"
-05:53:05,630 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ARCHIVO]
-05:53:05,630 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
-05:53:05,632 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/sigsf.log" substituted for "${LOG_DIR}/sigsf.log"
-05:53:05,634 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/historial/sigsf.%d{yyyy-MM-dd}.%i.log.gz" substituted for "${LOG_DIR}/historial/sigsf.%d{yyyy-MM-dd}.%i.log.gz"
-05:53:05,640 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@2051120548 - setting totalSizeCap to 1 GB
-05:53:05,642 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@2051120548 - Archive files will be limited to [10 MB] each.
-05:53:05,644 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@2051120548 - Will use gz compression
-05:53:05,645 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@2051120548 - Will use the pattern /app/logs/historial/sigsf.%d{yyyy-MM-dd}.%i.log for the active file
-05:53:05,659 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@14555e0a - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf.%d{yyyy-MM-dd}.%i.log.gz'.
-05:53:05,659 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@14555e0a - Roll-over at midnight.
-05:53:05,667 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@14555e0a - Setting initial period to 2026-11-18T05:53:05.667Z
-05:53:05,668 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-05:53:05,668 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON}"
-05:53:05,672 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ARCHIVO] - Active log file name: /app/logs/sigsf.log
-05:53:05,672 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ARCHIVO] - File property is set to [/app/logs/sigsf.log]
-05:53:05,675 |-ERROR in ch.qos.logback.core.rolling.RollingFileAppender[ARCHIVO] - openFile(/app/logs/sigsf.log,true) call failed. java.io.FileNotFoundException: /app/logs/sigsf.log (Permission denied)
-	at java.io.FileNotFoundException: /app/logs/sigsf.log (Permission denied)
-	at 	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at 	at java.base/java.io.FileOutputStream.open(Unknown Source)
-	at 	at java.base/java.io.FileOutputStream.<init>(Unknown Source)
-	at 	at ch.qos.logback.core.recovery.ResilientFileOutputStream.<init>(ResilientFileOutputStream.java:26)
-	at 	at ch.qos.logback.core.FileAppender.openFile(FileAppender.java:206)
-	at 	at ch.qos.logback.core.FileAppender.start(FileAppender.java:126)
-	at 	at ch.qos.logback.core.rolling.RollingFileAppender.start(RollingFileAppender.java:104)
-	at 	at ch.qos.logback.core.model.processor.AppenderModelHandler.postHandle(AppenderModelHandler.java:84)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:257)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.traversalLoop(DefaultProcessor.java:90)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.process(DefaultProcessor.java:106)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.processModel(GenericXMLConfigurator.java:222)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:178)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:123)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:66)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configureByResource(DefaultJoranConfigurator.java:68)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configure(DefaultJoranConfigurator.java:35)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.invokeConfigure(ContextInitializer.java:128)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:103)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:66)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initializeLoggerContext(LogbackServiceProvider.java:52)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initialize(LogbackServiceProvider.java:41)
-	at 	at org.slf4j.LoggerFactory.bind(LoggerFactory.java:199)
-	at 	at org.slf4j.LoggerFactory.performInitialization(LoggerFactory.java:186)
-	at 	at org.slf4j.LoggerFactory.getProvider(LoggerFactory.java:496)
-	at 	at org.slf4j.LoggerFactory.getILoggerFactory(LoggerFactory.java:482)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:431)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:457)
-	at 	at com.utp.sistemafinanciero.ServerMain.<clinit>(ServerMain.java:30)
-05:53:05,675 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ARCHIVO_ASYNC]
-05:53:05,675 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
-05:53:05,678 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ARCHIVO] to ch.qos.logback.classic.AsyncAppender[ARCHIVO_ASYNC]
-05:53:05,678 |-INFO in ch.qos.logback.classic.AsyncAppender[ARCHIVO_ASYNC] - Attaching appender named [ARCHIVO] to AsyncAppender.
-05:53:05,679 |-INFO in ch.qos.logback.classic.AsyncAppender[ARCHIVO_ASYNC] - Setting discardingThreshold to 0
-05:53:05,679 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ERRORES]
-05:53:05,679 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
-05:53:05,679 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/sigsf-errores.log" substituted for "${LOG_DIR}/sigsf-errores.log"
-05:53:05,681 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log.gz" substituted for "${LOG_DIR}/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log.gz"
-05:53:05,681 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1237825806 - setting totalSizeCap to 500 MB
-05:53:05,682 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1237825806 - Archive files will be limited to [10 MB] each.
-05:53:05,682 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1237825806 - Will use gz compression
-05:53:05,682 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1237825806 - Will use the pattern /app/logs/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log for the active file
-05:53:05,682 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@10d307f1 - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log.gz'.
-05:53:05,682 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@10d307f1 - Roll-over at midnight.
-05:53:05,682 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@10d307f1 - Setting initial period to 2026-11-18T05:53:05.682Z
-05:53:05,683 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-05:53:05,683 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n%ex" substituted for "${PATRON}%ex"
-05:53:05,683 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ERRORES] - Active log file name: /app/logs/sigsf-errores.log
-05:53:05,683 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ERRORES] - File property is set to [/app/logs/sigsf-errores.log]
-05:53:05,683 |-ERROR in ch.qos.logback.core.rolling.RollingFileAppender[ERRORES] - openFile(/app/logs/sigsf-errores.log,true) call failed. java.io.FileNotFoundException: /app/logs/sigsf-errores.log (Permission denied)
-	at java.io.FileNotFoundException: /app/logs/sigsf-errores.log (Permission denied)
-	at 	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at 	at java.base/java.io.FileOutputStream.open(Unknown Source)
-	at 	at java.base/java.io.FileOutputStream.<init>(Unknown Source)
-	at 	at ch.qos.logback.core.recovery.ResilientFileOutputStream.<init>(ResilientFileOutputStream.java:26)
-	at 	at ch.qos.logback.core.FileAppender.openFile(FileAppender.java:206)
-	at 	at ch.qos.logback.core.FileAppender.start(FileAppender.java:126)
-	at 	at ch.qos.logback.core.rolling.RollingFileAppender.start(RollingFileAppender.java:104)
-	at 	at ch.qos.logback.core.model.processor.AppenderModelHandler.postHandle(AppenderModelHandler.java:84)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:257)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.traversalLoop(DefaultProcessor.java:90)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.process(DefaultProcessor.java:106)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.processModel(GenericXMLConfigurator.java:222)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:178)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:123)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:66)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configureByResource(DefaultJoranConfigurator.java:68)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configure(DefaultJoranConfigurator.java:35)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.invokeConfigure(ContextInitializer.java:128)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:103)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:66)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initializeLoggerContext(LogbackServiceProvider.java:52)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initialize(LogbackServiceProvider.java:41)
-	at 	at org.slf4j.LoggerFactory.bind(LoggerFactory.java:199)
-	at 	at org.slf4j.LoggerFactory.performInitialization(LoggerFactory.java:186)
-	at 	at org.slf4j.LoggerFactory.getProvider(LoggerFactory.java:496)
-	at 	at org.slf4j.LoggerFactory.getILoggerFactory(LoggerFactory.java:482)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:431)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:457)
-	at 	at com.utp.sistemafinanciero.ServerMain.<clinit>(ServerMain.java:30)
-05:53:05,684 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ACCESO]
-05:53:05,684 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
-05:53:05,684 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/sigsf-acceso.log" substituted for "${LOG_DIR}/sigsf-acceso.log"
-05:53:05,684 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log.gz" substituted for "${LOG_DIR}/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log.gz"
-05:53:05,684 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1297836716 - setting totalSizeCap to 1 GB
-05:53:05,684 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1297836716 - Archive files will be limited to [20 MB] each.
-05:53:05,684 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1297836716 - Will use gz compression
-05:53:05,684 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1297836716 - Will use the pattern /app/logs/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log for the active file
-05:53:05,685 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@3e84448c - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log.gz'.
-05:53:05,685 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@3e84448c - Roll-over at midnight.
-05:53:05,685 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@3e84448c - Setting initial period to 2026-11-18T05:53:05.685Z
-05:53:05,685 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-05:53:05,685 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON}"
-05:53:05,686 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ACCESO] - Active log file name: /app/logs/sigsf-acceso.log
-05:53:05,686 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ACCESO] - File property is set to [/app/logs/sigsf-acceso.log]
-05:53:05,686 |-ERROR in ch.qos.logback.core.rolling.RollingFileAppender[ACCESO] - openFile(/app/logs/sigsf-acceso.log,true) call failed. java.io.FileNotFoundException: /app/logs/sigsf-acceso.log (Permission denied)
-	at java.io.FileNotFoundException: /app/logs/sigsf-acceso.log (Permission denied)
-	at 	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at 	at java.base/java.io.FileOutputStream.open(Unknown Source)
-	at 	at java.base/java.io.FileOutputStream.<init>(Unknown Source)
-	at 	at ch.qos.logback.core.recovery.ResilientFileOutputStream.<init>(ResilientFileOutputStream.java:26)
-	at 	at ch.qos.logback.core.FileAppender.openFile(FileAppender.java:206)
-	at 	at ch.qos.logback.core.FileAppender.start(FileAppender.java:126)
-	at 	at ch.qos.logback.core.rolling.RollingFileAppender.start(RollingFileAppender.java:104)
-	at 	at ch.qos.logback.core.model.processor.AppenderModelHandler.postHandle(AppenderModelHandler.java:84)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:257)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.traversalLoop(DefaultProcessor.java:90)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.process(DefaultProcessor.java:106)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.processModel(GenericXMLConfigurator.java:222)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:178)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:123)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:66)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configureByResource(DefaultJoranConfigurator.java:68)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configure(DefaultJoranConfigurator.java:35)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.invokeConfigure(ContextInitializer.java:128)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:103)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:66)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initializeLoggerContext(LogbackServiceProvider.java:52)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initialize(LogbackServiceProvider.java:41)
-	at 	at org.slf4j.LoggerFactory.bind(LoggerFactory.java:199)
-	at 	at org.slf4j.LoggerFactory.performInitialization(LoggerFactory.java:186)
-	at 	at org.slf4j.LoggerFactory.getProvider(LoggerFactory.java:496)
-	at 	at org.slf4j.LoggerFactory.getILoggerFactory(LoggerFactory.java:482)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:431)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:457)
-	at 	at com.utp.sistemafinanciero.ServerMain.<clinit>(ServerMain.java:30)
-05:53:05,686 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ACCESO_ASYNC]
-05:53:05,686 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
-05:53:05,686 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ACCESO] to ch.qos.logback.classic.AsyncAppender[ACCESO_ASYNC]
-05:53:05,686 |-INFO in ch.qos.logback.classic.AsyncAppender[ACCESO_ASYNC] - Attaching appender named [ACCESO] to AsyncAppender.
-05:53:05,686 |-INFO in ch.qos.logback.classic.AsyncAppender[ACCESO_ASYNC] - Setting discardingThreshold to 0
-05:53:05,686 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [SEGURIDAD]
-05:53:05,686 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
-05:53:05,686 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/sigsf-seguridad.log" substituted for "${LOG_DIR}/sigsf-seguridad.log"
-05:53:05,686 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "/app/logs/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log.gz" substituted for "${LOG_DIR}/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log.gz"
-05:53:05,687 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1249875355 - setting totalSizeCap to 1 GB
-05:53:05,687 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1249875355 - Will use gz compression
-05:53:05,687 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@1249875355 - Will use the pattern /app/logs/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log for the active file
-05:53:05,687 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log.gz'.
-05:53:05,687 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Roll-over at midnight.
-05:53:05,688 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Setting initial period to 2026-11-18T05:53:05.688Z
-05:53:05,688 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
-05:53:05,688 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@2053d869 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON}"
-05:53:05,688 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[SEGURIDAD] - Active log file name: /app/logs/sigsf-seguridad.log
-05:53:05,688 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[SEGURIDAD] - File property is set to [/app/logs/sigsf-seguridad.log]
-05:53:05,688 |-ERROR in ch.qos.logback.core.rolling.RollingFileAppender[SEGURIDAD] - openFile(/app/logs/sigsf-seguridad.log,true) call failed. java.io.FileNotFoundException: /app/logs/sigsf-seguridad.log (Permission denied)
-	at java.io.FileNotFoundException: /app/logs/sigsf-seguridad.log (Permission denied)
-	at 	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at 	at java.base/java.io.FileOutputStream.open(Unknown Source)
-	at 	at java.base/java.io.FileOutputStream.<init>(Unknown Source)
-	at 	at ch.qos.logback.core.recovery.ResilientFileOutputStream.<init>(ResilientFileOutputStream.java:26)
-	at 	at ch.qos.logback.core.FileAppender.openFile(FileAppender.java:206)
-	at 	at ch.qos.logback.core.FileAppender.start(FileAppender.java:126)
-	at 	at ch.qos.logback.core.rolling.RollingFileAppender.start(RollingFileAppender.java:104)
-	at 	at ch.qos.logback.core.model.processor.AppenderModelHandler.postHandle(AppenderModelHandler.java:84)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:257)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.secondPhaseTraverse(DefaultProcessor.java:253)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.traversalLoop(DefaultProcessor.java:90)
-	at 	at ch.qos.logback.core.model.processor.DefaultProcessor.process(DefaultProcessor.java:106)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.processModel(GenericXMLConfigurator.java:222)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:178)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:123)
-	at 	at ch.qos.logback.core.joran.GenericXMLConfigurator.doConfigure(GenericXMLConfigurator.java:66)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configureByResource(DefaultJoranConfigurator.java:68)
-	at 	at ch.qos.logback.classic.util.DefaultJoranConfigurator.configure(DefaultJoranConfigurator.java:35)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.invokeConfigure(ContextInitializer.java:128)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:103)
-	at 	at ch.qos.logback.classic.util.ContextInitializer.autoConfig(ContextInitializer.java:66)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initializeLoggerContext(LogbackServiceProvider.java:52)
-	at 	at ch.qos.logback.classic.spi.LogbackServiceProvider.initialize(LogbackServiceProvider.java:41)
-	at 	at org.slf4j.LoggerFactory.bind(LoggerFactory.java:199)
-	at 	at org.slf4j.LoggerFactory.performInitialization(LoggerFactory.java:186)
-	at 	at org.slf4j.LoggerFactory.getProvider(LoggerFactory.java:496)
-	at 	at org.slf4j.LoggerFactory.getILoggerFactory(LoggerFactory.java:482)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:431)
-	at 	at org.slf4j.LoggerFactory.getLogger(LoggerFactory.java:457)
-	at 	at com.utp.sistemafinanciero.ServerMain.<clinit>(ServerMain.java:30)
-05:53:05,688 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [AREAS]
-05:53:05,688 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.sift.SiftingAppender]
-05:53:05,692 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.sift.MDCBasedDiscriminator] for [discriminator] property
-05:53:05,694 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [SIGSF.ACCESO] to INFO
-05:53:05,694 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting additivity of logger [SIGSF.ACCESO] to false
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ACCESO_ASYNC] to Logger[SIGSF.ACCESO]
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [AREAS] to Logger[SIGSF.ACCESO]
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ERRORES] to Logger[SIGSF.ACCESO]
-05:53:05,695 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [SIGSF.SEGURIDAD] to INFO
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [SEGURIDAD] to Logger[SIGSF.SEGURIDAD]
-05:53:05,695 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [com.utp.sistemafinanciero] to INFO
-05:53:05,695 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [com.utp.sistemafinanciero.dao] to WARN
-05:53:05,695 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.postgresql] to WARN
-05:53:05,695 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLA] to Logger[ROOT]
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ARCHIVO_ASYNC] to Logger[ROOT]
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ERRORES] to Logger[ROOT]
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [AREAS] to Logger[ROOT]
-05:53:05,695 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@429bffaa - End of configuration.
-05:53:05,696 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@5403f35f - Registering current configuration as safe fallback point
-05:53:05,696 |-INFO in ch.qos.logback.classic.util.ContextInitializer@37654521 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 245 milliseconds. ExecutionStatus=DO_NOT_INVOKE_NEXT_IF_ANY
+05:58:50,716 |-INFO in ch.qos.logback.classic.LoggerContext[default] - This is logback-classic version 1.5.12
+05:58:50,717 |-INFO in ch.qos.logback.classic.util.ContextInitializer@3514a4c0 - No custom configurators were discovered as a service.
+05:58:50,717 |-INFO in ch.qos.logback.classic.util.ContextInitializer@3514a4c0 - Trying to configure with ch.qos.logback.classic.joran.SerializedModelConfigurator
+05:58:50,718 |-INFO in ch.qos.logback.classic.util.ContextInitializer@3514a4c0 - Constructed configurator of type class ch.qos.logback.classic.joran.SerializedModelConfigurator
+05:58:50,724 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.scmo]
+05:58:50,724 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback.scmo]
+05:58:50,733 |-INFO in ch.qos.logback.classic.util.ContextInitializer@3514a4c0 - ch.qos.logback.classic.joran.SerializedModelConfigurator.configure() call lasted 6 milliseconds. ExecutionStatus=INVOKE_NEXT_IF_ANY
+05:58:50,733 |-INFO in ch.qos.logback.classic.util.ContextInitializer@3514a4c0 - Trying to configure with ch.qos.logback.classic.util.DefaultJoranConfigurator
+05:58:50,734 |-INFO in ch.qos.logback.classic.util.ContextInitializer@3514a4c0 - Constructed configurator of type class ch.qos.logback.classic.util.DefaultJoranConfigurator
+05:58:50,734 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Could NOT find resource [logback-test.xml]
+05:58:50,739 |-INFO in ch.qos.logback.classic.LoggerContext[default] - Found resource [logback.xml] at [jar:file:/app/dist/SIGSF.jar!/logback.xml]
+05:58:50,745 |-INFO in ConfigurationWatchList(mainURL=jar:file:/app/dist/SIGSF.jar!/logback.xml, fileWatchList={}, urlWatchList=[}) - URL [jar:file:/app/dist/SIGSF.jar!/logback.xml] is not of type file
+05:58:50,895 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs" substituted for "${sigsf.log.dir:-logs}"
+05:58:50,901 |-WARN in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Missing watchable .xml or .properties files.
+05:58:50,901 |-WARN in ch.qos.logback.classic.model.processor.ConfigurationModelHandlerFull - Watching .xml files requires that the main configuration file is reachable as a URL
+05:58:50,902 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [CONSOLA]
+05:58:50,902 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.ConsoleAppender]
+05:58:50,909 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+05:58:50,912 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "%d{HH:mm:ss} %-5level [%X{area:-SISTEMA}] %logger{20} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON_CONSOLA}"
+05:58:50,966 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ARCHIVO]
+05:58:50,966 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+05:58:50,969 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/sigsf.log" substituted for "${LOG_DIR}/sigsf.log"
+05:58:50,972 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/historial/sigsf.%d{yyyy-MM-dd}.%i.log.gz" substituted for "${LOG_DIR}/historial/sigsf.%d{yyyy-MM-dd}.%i.log.gz"
+05:58:50,980 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1068586139 - setting totalSizeCap to 1 GB
+05:58:50,983 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1068586139 - Archive files will be limited to [10 MB] each.
+05:58:50,984 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1068586139 - Will use gz compression
+05:58:50,985 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1068586139 - Will use the pattern /app/logs/historial/sigsf.%d{yyyy-MM-dd}.%i.log for the active file
+05:58:51,001 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@ea6147e - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf.%d{yyyy-MM-dd}.%i.log.gz'.
+05:58:51,001 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@ea6147e - Roll-over at midnight.
+05:58:51,010 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@ea6147e - Setting initial period to 2026-11-18T05:58:51.010Z
+05:58:51,011 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+05:58:51,011 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON}"
+05:58:51,015 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ARCHIVO] - Active log file name: /app/logs/sigsf.log
+05:58:51,016 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ARCHIVO] - File property is set to [/app/logs/sigsf.log]
+05:58:51,016 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ARCHIVO_ASYNC]
+05:58:51,016 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+05:58:51,018 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ARCHIVO] to ch.qos.logback.classic.AsyncAppender[ARCHIVO_ASYNC]
+05:58:51,019 |-INFO in ch.qos.logback.classic.AsyncAppender[ARCHIVO_ASYNC] - Attaching appender named [ARCHIVO] to AsyncAppender.
+05:58:51,019 |-INFO in ch.qos.logback.classic.AsyncAppender[ARCHIVO_ASYNC] - Setting discardingThreshold to 0
+05:58:51,019 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ERRORES]
+05:58:51,019 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+05:58:51,019 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/sigsf-errores.log" substituted for "${LOG_DIR}/sigsf-errores.log"
+05:58:51,021 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log.gz" substituted for "${LOG_DIR}/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log.gz"
+05:58:51,021 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1292040526 - setting totalSizeCap to 500 MB
+05:58:51,021 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1292040526 - Archive files will be limited to [10 MB] each.
+05:58:51,021 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1292040526 - Will use gz compression
+05:58:51,021 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@1292040526 - Will use the pattern /app/logs/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log for the active file
+05:58:51,022 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@2b48a640 - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf-errores.%d{yyyy-MM-dd}.%i.log.gz'.
+05:58:51,022 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@2b48a640 - Roll-over at midnight.
+05:58:51,022 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@2b48a640 - Setting initial period to 2026-11-18T05:58:51.022Z
+05:58:51,022 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+05:58:51,023 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n%ex" substituted for "${PATRON}%ex"
+05:58:51,023 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ERRORES] - Active log file name: /app/logs/sigsf-errores.log
+05:58:51,023 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ERRORES] - File property is set to [/app/logs/sigsf-errores.log]
+05:58:51,024 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ACCESO]
+05:58:51,024 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+05:58:51,024 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/sigsf-acceso.log" substituted for "${LOG_DIR}/sigsf-acceso.log"
+05:58:51,024 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log.gz" substituted for "${LOG_DIR}/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log.gz"
+05:58:51,024 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@510147134 - setting totalSizeCap to 1 GB
+05:58:51,024 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@510147134 - Archive files will be limited to [20 MB] each.
+05:58:51,024 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@510147134 - Will use gz compression
+05:58:51,024 |-INFO in c.q.l.core.rolling.SizeAndTimeBasedRollingPolicy@510147134 - Will use the pattern /app/logs/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log for the active file
+05:58:51,026 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@2053d869 - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf-acceso.%d{yyyy-MM-dd}.%i.log.gz'.
+05:58:51,026 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@2053d869 - Roll-over at midnight.
+05:58:51,026 |-INFO in ch.qos.logback.core.rolling.SizeAndTimeBasedFileNamingAndTriggeringPolicy@2053d869 - Setting initial period to 2026-11-18T05:58:51.026Z
+05:58:51,027 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+05:58:51,027 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON}"
+05:58:51,027 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ACCESO] - Active log file name: /app/logs/sigsf-acceso.log
+05:58:51,027 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[ACCESO] - File property is set to [/app/logs/sigsf-acceso.log]
+05:58:51,027 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [ACCESO_ASYNC]
+05:58:51,027 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.AsyncAppender]
+05:58:51,028 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ACCESO] to ch.qos.logback.classic.AsyncAppender[ACCESO_ASYNC]
+05:58:51,028 |-INFO in ch.qos.logback.classic.AsyncAppender[ACCESO_ASYNC] - Attaching appender named [ACCESO] to AsyncAppender.
+05:58:51,028 |-INFO in ch.qos.logback.classic.AsyncAppender[ACCESO_ASYNC] - Setting discardingThreshold to 0
+05:58:51,029 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [SEGURIDAD]
+05:58:51,029 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.core.rolling.RollingFileAppender]
+05:58:51,029 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/sigsf-seguridad.log" substituted for "${LOG_DIR}/sigsf-seguridad.log"
+05:58:51,029 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "/app/logs/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log.gz" substituted for "${LOG_DIR}/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log.gz"
+05:58:51,029 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@2051120548 - setting totalSizeCap to 1 GB
+05:58:51,030 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@2051120548 - Will use gz compression
+05:58:51,030 |-INFO in c.q.l.core.rolling.TimeBasedRollingPolicy@2051120548 - Will use the pattern /app/logs/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log for the active file
+05:58:51,030 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - The date pattern is 'yyyy-MM-dd' from file name pattern '/app/logs/historial/sigsf-seguridad.%d{yyyy-MM-dd}.log.gz'.
+05:58:51,030 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Roll-over at midnight.
+05:58:51,034 |-INFO in c.q.l.core.rolling.DefaultTimeBasedFileNamingAndTriggeringPolicy - Setting initial period to 2026-11-18T05:58:51.034Z
+05:58:51,034 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.encoder.PatternLayoutEncoder] for [encoder] property
+05:58:51,035 |-INFO in ch.qos.logback.core.model.processor.ModelInterpretationContext@10feca44 - value "%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] [%X{area:-SISTEMA}] [%X{usuario:--}@%X{ip:--}] [%X{peticion:--}] %logger{36} - %replace(%msg){'[\r\n]+', ' | '}%n" substituted for "${PATRON}"
+05:58:51,035 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[SEGURIDAD] - Active log file name: /app/logs/sigsf-seguridad.log
+05:58:51,035 |-INFO in ch.qos.logback.core.rolling.RollingFileAppender[SEGURIDAD] - File property is set to [/app/logs/sigsf-seguridad.log]
+05:58:51,035 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - Processing appender named [AREAS]
+05:58:51,035 |-INFO in ch.qos.logback.core.model.processor.AppenderModelHandler - About to instantiate appender of type [ch.qos.logback.classic.sift.SiftingAppender]
+05:58:51,043 |-INFO in ch.qos.logback.core.model.processor.ImplicitModelHandler - Assuming default type [ch.qos.logback.classic.sift.MDCBasedDiscriminator] for [discriminator] property
+05:58:51,045 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [SIGSF.ACCESO] to INFO
+05:58:51,053 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting additivity of logger [SIGSF.ACCESO] to false
+05:58:51,054 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ACCESO_ASYNC] to Logger[SIGSF.ACCESO]
+05:58:51,054 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [AREAS] to Logger[SIGSF.ACCESO]
+05:58:51,054 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ERRORES] to Logger[SIGSF.ACCESO]
+05:58:51,055 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [SIGSF.SEGURIDAD] to INFO
+05:58:51,055 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [SEGURIDAD] to Logger[SIGSF.SEGURIDAD]
+05:58:51,055 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [com.utp.sistemafinanciero] to INFO
+05:58:51,055 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [com.utp.sistemafinanciero.dao] to WARN
+05:58:51,055 |-INFO in ch.qos.logback.classic.model.processor.LoggerModelHandler - Setting level of logger [org.postgresql] to WARN
+05:58:51,056 |-INFO in ch.qos.logback.classic.model.processor.RootLoggerModelHandler - Setting level of ROOT logger to INFO
+05:58:51,056 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [CONSOLA] to Logger[ROOT]
+05:58:51,056 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ARCHIVO_ASYNC] to Logger[ROOT]
+05:58:51,056 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [ERRORES] to Logger[ROOT]
+05:58:51,056 |-INFO in ch.qos.logback.core.model.processor.AppenderRefModelHandler - Attaching appender named [AREAS] to Logger[ROOT]
+05:58:51,056 |-INFO in ch.qos.logback.core.model.processor.DefaultProcessor@14555e0a - End of configuration.
+05:58:51,057 |-INFO in ch.qos.logback.classic.joran.JoranConfigurator@4bb33f74 - Registering current configuration as safe fallback point
+05:58:51,057 |-INFO in ch.qos.logback.classic.util.ContextInitializer@3514a4c0 - ch.qos.logback.classic.util.DefaultJoranConfigurator.configure() call lasted 323 milliseconds. ExecutionStatus=DO_NOT_INVOKE_NEXT_IF_ANY
 
-05:53:05 INFO  [SISTEMA] c.u.s.ServerMain - Iniciando SIGSF...
-05:53:05 WARN  [SISTEMA] c.u.s.ServerMain - [MODO DEMOSTRACIÓN] Persistencia en memoria: los datos se pierden al cerrar.
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000001 registrado en caja por lucia.ramos@sigsf.com: cliente=5 metodo=EFECTIVO monto=766.69
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000002 registrado desde el portal: cliente=5 metodo=YAPE monto=105.59 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000002 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000003 registrado en caja por lucia.ramos@sigsf.com: cliente=7 metodo=EFECTIVO monto=1000.05
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000004 registrado desde el portal: cliente=7 metodo=YAPE monto=2500.83 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000004 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000005 registrado desde el portal: cliente=8 metodo=YAPE monto=524.49 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000006 registrado desde el portal: cliente=12 metodo=YAPE monto=1846.73 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000006 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000007 registrado en caja por lucia.ramos@sigsf.com: cliente=14 metodo=EFECTIVO monto=1200.37
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000008 registrado desde el portal: cliente=15 metodo=YAPE monto=300.84 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000009 registrado desde el portal: cliente=15 metodo=YAPE monto=300.31 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000009 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000010 registrado desde el portal: cliente=21 metodo=PLIN monto=147.56 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000010 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000011 registrado desde el portal: cliente=21 metodo=PLIN monto=54.23 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000012 registrado desde el portal: cliente=25 metodo=YAPE monto=1200.08 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000012 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000013 registrado desde el portal: cliente=25 metodo=TUNKI monto=300.62 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000013 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000014 registrado desde el portal: cliente=26 metodo=YAPE monto=147.16 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000014 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000015 registrado desde el portal: cliente=30 metodo=YAPE monto=95.92 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000015 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000016 registrado desde el portal: cliente=32 metodo=YAPE monto=113.34 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000016 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000017 registrado desde el portal: cliente=33 metodo=PLIN monto=500.46 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000017 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000018 registrado desde el portal: cliente=34 metodo=YAPE monto=1200.82 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000018 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000019 registrado desde el portal: cliente=36 metodo=PLIN monto=933.49 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000019 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000020 registrado desde el portal: cliente=38 metodo=TUNKI monto=71.67 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000020 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000021 registrado desde el portal: cliente=40 metodo=YAPE monto=300.25 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000021 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000022 registrado desde el portal: cliente=40 metodo=YAPE monto=500.23 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000022 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000023 registrado desde el portal: cliente=41 metodo=TUNKI monto=2500.28 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000023 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000024 registrado desde el portal: cliente=41 metodo=YAPE monto=101.34 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000024 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000025 registrado en caja por lucia.ramos@sigsf.com: cliente=44 metodo=EFECTIVO monto=800.22
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000026 registrado desde el portal: cliente=44 metodo=TUNKI monto=98.51 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000026 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000027 registrado desde el portal: cliente=44 metodo=PLIN monto=850.05 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000027 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000028 registrado desde el portal: cliente=46 metodo=YAPE monto=500.37 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000028 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000029 registrado desde el portal: cliente=47 metodo=PLIN monto=500.72 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000029 confirmado por lucia.ramos@sigsf.com
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000030 registrado desde el portal: cliente=48 metodo=YAPE monto=1000.49 estado=POR_VERIFICAR
-05:53:09 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000030 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000031 registrado desde el portal: cliente=48 metodo=TUNKI monto=40.32 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000032 registrado desde el portal: cliente=49 metodo=PLIN monto=1533.35 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000032 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000033 registrado desde el portal: cliente=50 metodo=PLIN monto=131.14 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000034 registrado en caja por lucia.ramos@sigsf.com: cliente=50 metodo=EFECTIVO monto=277.01
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000035 registrado desde el portal: cliente=51 metodo=TUNKI monto=1800.01 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000036 registrado desde el portal: cliente=52 metodo=TUNKI monto=800.85 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000036 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000037 registrado desde el portal: cliente=52 metodo=YAPE monto=277.02 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000037 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000038 registrado desde el portal: cliente=52 metodo=PLIN monto=1520.04 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000039 registrado desde el portal: cliente=53 metodo=PLIN monto=196.74 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000039 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000040 registrado desde el portal: cliente=54 metodo=PLIN monto=1800.56 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000040 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000041 registrado desde el portal: cliente=55 metodo=YAPE monto=226.67 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000041 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000042 registrado desde el portal: cliente=55 metodo=TUNKI monto=566.75 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000042 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000043 registrado desde el portal: cliente=55 metodo=YAPE monto=71.67 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000044 registrado desde el portal: cliente=58 metodo=YAPE monto=202.73 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000045 registrado desde el portal: cliente=59 metodo=TUNKI monto=3500.13 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000045 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000046 registrado desde el portal: cliente=60 metodo=YAPE monto=300.29 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000046 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000047 registrado desde el portal: cliente=61 metodo=TUNKI monto=286.01 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000048 registrado desde el portal: cliente=62 metodo=PLIN monto=457.80 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000048 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000049 registrado desde el portal: cliente=63 metodo=YAPE monto=68.53 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000049 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000050 registrado desde el portal: cliente=64 metodo=YAPE monto=129.13 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000050 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000051 registrado desde el portal: cliente=65 metodo=TUNKI monto=36.67 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000052 registrado desde el portal: cliente=66 metodo=YAPE monto=268.14 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000052 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000053 registrado desde el portal: cliente=67 metodo=YAPE monto=3500.95 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000053 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000054 registrado desde el portal: cliente=67 metodo=YAPE monto=153.34 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000054 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000055 registrado desde el portal: cliente=69 metodo=TUNKI monto=295.07 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000055 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000056 registrado desde el portal: cliente=74 metodo=YAPE monto=300.18 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000056 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000057 registrado desde el portal: cliente=75 metodo=YAPE monto=3500.05 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000057 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000058 registrado desde el portal: cliente=76 metodo=TUNKI monto=86.71 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000058 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000059 registrado desde el portal: cliente=80 metodo=PLIN monto=119.38 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000059 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000060 registrado desde el portal: cliente=81 metodo=TUNKI monto=113.37 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000060 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000061 registrado desde el portal: cliente=82 metodo=PLIN monto=1083.38 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000061 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000062 registrado desde el portal: cliente=83 metodo=YAPE monto=462.26 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000062 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000063 registrado desde el portal: cliente=86 metodo=PLIN monto=300.21 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000063 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000064 registrado desde el portal: cliente=90 metodo=TUNKI monto=70.62 estado=POR_VERIFICAR
-05:53:10 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000064 confirmado por lucia.ramos@sigsf.com
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   SIGSF - Servidor iniciado
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   Frontend:      http://localhost:8091/
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   API:           http://localhost:8091/api/health
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   Persistencia:  Memoria (demostración)
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   Seguridad:     PBKDF2 + sesiones con token (30 min) + roles
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   Respaldos:     /app/respaldos (automático desactivado)
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   Logs:          carpeta logs/ (sigsf.log, sigsf-acceso.log, sigsf-seguridad.log, sigsf-errores.log)
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain -   (Ctrl+C para detener)
-05:53:10 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
-05:53:10 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=172.17.0.1 recurso=GET /api/usuarios http=401
-05:53:10 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=172.17.0.1 recurso=POST /api/auth/login http=415
-05:53:10 INFO  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_OK usuario=admin@sigsf.com rol=null ip=172.17.0.1 recurso=POST /api/auth/login http=200
-05:53:10 INFO  [SISTEMA] c.u.s.version.GitCli - Sin repositorio Git en /app: la versión se toma de version.properties o VERSION.
+05:58:51 INFO  [SISTEMA] c.u.s.ServerMain - Iniciando SIGSF...
+05:58:51 WARN  [SISTEMA] c.u.s.ServerMain - [MODO DEMOSTRACIÓN] Persistencia en memoria: los datos se pierden al cerrar.
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000001 registrado en caja por lucia.ramos@sigsf.com: cliente=5 metodo=EFECTIVO monto=766.69
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000002 registrado desde el portal: cliente=5 metodo=YAPE monto=105.59 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000002 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000003 registrado en caja por lucia.ramos@sigsf.com: cliente=7 metodo=EFECTIVO monto=1000.05
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000004 registrado desde el portal: cliente=7 metodo=YAPE monto=2500.83 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000004 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000005 registrado desde el portal: cliente=8 metodo=YAPE monto=524.49 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000006 registrado desde el portal: cliente=12 metodo=YAPE monto=1846.73 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000006 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000007 registrado en caja por lucia.ramos@sigsf.com: cliente=14 metodo=EFECTIVO monto=1200.37
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000008 registrado desde el portal: cliente=15 metodo=YAPE monto=300.84 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000009 registrado desde el portal: cliente=15 metodo=YAPE monto=300.31 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000009 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000010 registrado desde el portal: cliente=21 metodo=PLIN monto=147.56 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000010 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000011 registrado desde el portal: cliente=21 metodo=PLIN monto=54.23 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000012 registrado desde el portal: cliente=25 metodo=YAPE monto=1200.08 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000012 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000013 registrado desde el portal: cliente=25 metodo=TUNKI monto=300.62 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000013 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000014 registrado desde el portal: cliente=26 metodo=YAPE monto=147.16 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000014 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000015 registrado desde el portal: cliente=30 metodo=YAPE monto=95.92 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000015 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000016 registrado desde el portal: cliente=32 metodo=YAPE monto=113.34 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000016 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000017 registrado desde el portal: cliente=33 metodo=PLIN monto=500.46 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000017 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000018 registrado desde el portal: cliente=34 metodo=YAPE monto=1200.82 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000018 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000019 registrado desde el portal: cliente=36 metodo=PLIN monto=933.49 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000019 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000020 registrado desde el portal: cliente=38 metodo=TUNKI monto=71.67 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000020 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000021 registrado desde el portal: cliente=40 metodo=YAPE monto=300.25 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000021 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000022 registrado desde el portal: cliente=40 metodo=YAPE monto=500.23 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000022 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000023 registrado desde el portal: cliente=41 metodo=TUNKI monto=2500.28 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000023 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000024 registrado desde el portal: cliente=41 metodo=YAPE monto=101.34 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000024 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000025 registrado en caja por lucia.ramos@sigsf.com: cliente=44 metodo=EFECTIVO monto=800.22
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000026 registrado desde el portal: cliente=44 metodo=TUNKI monto=98.51 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000026 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000027 registrado desde el portal: cliente=44 metodo=PLIN monto=850.05 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000027 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000028 registrado desde el portal: cliente=46 metodo=YAPE monto=500.37 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000028 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000029 registrado desde el portal: cliente=47 metodo=PLIN monto=500.72 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000029 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000030 registrado desde el portal: cliente=48 metodo=YAPE monto=1000.49 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000030 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000031 registrado desde el portal: cliente=48 metodo=TUNKI monto=40.32 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000032 registrado desde el portal: cliente=49 metodo=PLIN monto=1533.35 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000032 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000033 registrado desde el portal: cliente=50 metodo=PLIN monto=131.14 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000034 registrado en caja por lucia.ramos@sigsf.com: cliente=50 metodo=EFECTIVO monto=277.01
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000035 registrado desde el portal: cliente=51 metodo=TUNKI monto=1800.01 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000036 registrado desde el portal: cliente=52 metodo=TUNKI monto=800.85 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000036 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000037 registrado desde el portal: cliente=52 metodo=YAPE monto=277.02 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000037 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000038 registrado desde el portal: cliente=52 metodo=PLIN monto=1520.04 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000039 registrado desde el portal: cliente=53 metodo=PLIN monto=196.74 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000039 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000040 registrado desde el portal: cliente=54 metodo=PLIN monto=1800.56 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000040 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000041 registrado desde el portal: cliente=55 metodo=YAPE monto=226.67 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000041 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000042 registrado desde el portal: cliente=55 metodo=TUNKI monto=566.75 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000042 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000043 registrado desde el portal: cliente=55 metodo=YAPE monto=71.67 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000044 registrado desde el portal: cliente=58 metodo=YAPE monto=202.73 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000045 registrado desde el portal: cliente=59 metodo=TUNKI monto=3500.13 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000045 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000046 registrado desde el portal: cliente=60 metodo=YAPE monto=300.29 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000046 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000047 registrado desde el portal: cliente=61 metodo=TUNKI monto=286.01 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000048 registrado desde el portal: cliente=62 metodo=PLIN monto=457.80 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000048 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000049 registrado desde el portal: cliente=63 metodo=YAPE monto=68.53 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000049 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000050 registrado desde el portal: cliente=64 metodo=YAPE monto=129.13 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000050 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000051 registrado desde el portal: cliente=65 metodo=TUNKI monto=36.67 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000052 registrado desde el portal: cliente=66 metodo=YAPE monto=268.14 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000052 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000053 registrado desde el portal: cliente=67 metodo=YAPE monto=3500.95 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000053 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000054 registrado desde el portal: cliente=67 metodo=YAPE monto=153.34 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000054 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000055 registrado desde el portal: cliente=69 metodo=TUNKI monto=295.07 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000055 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000056 registrado desde el portal: cliente=74 metodo=YAPE monto=300.18 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000056 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000057 registrado desde el portal: cliente=75 metodo=YAPE monto=3500.05 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000057 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000058 registrado desde el portal: cliente=76 metodo=TUNKI monto=86.71 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000058 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000059 registrado desde el portal: cliente=80 metodo=PLIN monto=119.38 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000059 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000060 registrado desde el portal: cliente=81 metodo=TUNKI monto=113.37 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000060 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000061 registrado desde el portal: cliente=82 metodo=PLIN monto=1083.38 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000061 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000062 registrado desde el portal: cliente=83 metodo=YAPE monto=462.26 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000062 confirmado por lucia.ramos@sigsf.com
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000063 registrado desde el portal: cliente=86 metodo=PLIN monto=300.21 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000063 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000064 registrado desde el portal: cliente=90 metodo=TUNKI monto=70.62 estado=POR_VERIFICAR
+05:58:55 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000064 confirmado por lucia.ramos@sigsf.com
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   SIGSF - Servidor iniciado
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   Frontend:      http://localhost:8091/
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   API:           http://localhost:8091/api/health
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   Persistencia:  Memoria (demostración)
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   Seguridad:     PBKDF2 + sesiones con token (30 min) + roles
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   Respaldos:     /app/respaldos (automático desactivado)
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   Logs:          carpeta logs/ (sigsf.log, sigsf-acceso.log, sigsf-seguridad.log, sigsf-errores.log)
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain -   (Ctrl+C para detener)
+05:58:56 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
+05:58:56 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=172.17.0.1 recurso=GET /api/usuarios http=401
+05:58:56 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=172.17.0.1 recurso=POST /api/auth/login http=415
+05:58:56 INFO  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_OK usuario=admin@sigsf.com rol=null ip=172.17.0.1 recurso=POST /api/auth/login http=200
+05:58:56 INFO  [SISTEMA] c.u.s.version.GitCli - Sin repositorio Git en /app: la versión se toma de version.properties o VERSION.

@@ -1,0 +1,39 @@
+SIGSF 5.11.0 · Taller de Despliegue · Guion de 5 minutos
+Integrantes: Miguel Ángel Machaca Machaca; Ricardo Gabriel Cervantes Tejada; Cesar Huaripaucar Huaman.
+Diapositivas 1 a 8 = exposición (≈5 min: 15+40+40+45+50+35+50+25 s). Diapositivas 9 a 12 = anexos de consulta.
+
+1. Portada
+15 s. Presentamos el Plan de Despliegue de SIGSF, versión 5.11.0, del equipo Machaca, Cervantes y Huaripaucar. Partimos de lo ya construido (procesos, patrones, BD, seguridad, versionamiento y planes de pruebas) y mostramos cómo llevamos la aplicación a un servidor de forma repetible, verificable y reversible. La captura es el sistema corriendo en contenedor con PostgreSQL.
+
+2. Fundamentos y arquitectura de despliegue
+40 s. Fundamentos. El usuario entra por HTTPS a Nginx, que reenvía al JAR de SIGSF en el puerto 8091, y este usa PostgreSQL 16 con un rol de privilegios mínimos. En el servidor cada versión vive en su propia carpeta dentro de releases y un enlace llamado current apunta a la activa: cambiar de versión es cambiar ese enlace, y volver atrás también. Logs, respaldos y variables viven en shared. Tenemos cuatro entornos y cuatro principios: construir una vez, configurar por variables, versiones inmutables, y verificar y revertir automáticamente.
+
+3. Empaquetado y configuración
+40 s. Empaquetado en cuatro pasos: compilamos con Java 17 y corremos las 229 pruebas; generamos el JAR ejecutable con la versión, commit y etiqueta dentro; armamos el paquete de despliegue con solo lo necesario para ejecutar, 113 archivos con su huella SHA-256 y un manifiesto; y construimos la imagen Docker que corre con un usuario sin privilegios y un healthcheck propio. La configuración no está en el código: cada entorno define variables SIGSF_, y la contraseña se inyecta como secreto.
+
+4. Automatización CI/CD con GitHub Actions
+45 s. Automatización. El trabajo se hizo en la rama feature/despliegue-5.11.0, se integró con merge no fast-forward en release/5.11.0 y se etiquetó v5.11.0. Al publicar la etiqueta, el nuevo workflow cd.yml ejecuta cuatro etapas: compila y prueba, construye y prueba la imagen y la sube a GitHub Container Registry, crea el Release con los paquetes y sus SHA-256, y despliega por SSH con aprobación manual. Se suma a los workflows de integración continua y de plan de pruebas que ya teníamos. Controles: la etiqueta debe coincidir con VERSION, solo un despliegue a la vez y permisos mínimos.
+
+5. Despliegue y reversión en staging
+50 s. Esto se ejecutó de verdad en un entorno de staging y quedó en historial_despliegues.log. Desplegamos 5.10.0, actualizamos a 5.11.0 y ambas pasaron 9 de 9 verificaciones. Luego probamos fallas: un paquete 5.11.1 defectuoso, sin la página de login, pasó 7 de 9 y el script volvió solo a 5.11.0. Un paquete alterado fue rechazado antes de tocar nada porque su SHA-256 no coincidía. También hicimos rollback manual a 5.10.0 y regresamos. A la derecha, la pantalla de control de versiones antes y después: v5.11.0, rama release/5.11.0 y su commit.
+
+6. Herramientas elegidas
+35 s. Herramientas elegidas. JDK 17 para compilar y empaquetar, y jlink para una JRE mínima. Python orquesta el pipeline, el paquete y la prueba de humo sin instalar nada extra. Docker y Compose levantan la aplicación junto a PostgreSQL. GitHub Actions automatiza CI y CD, y GHCR guarda las imágenes. Git maneja ramas y etiquetas. En el servidor, systemd mantiene el servicio y Nginx da HTTPS. JUnit, Playwright con Chrome y el smoke test verifican cada despliegue.
+
+7. Resultados del plan de pruebas
+50 s. Resultados. Las 229 pruebas JUnit pasan, incluidas 5 nuevas de la sonda de salud. Las 7 pruebas JDBC, que estaban pendientes, ahora se ejecutaron sobre PostgreSQL 16 real. La prueba de humo dio 9 de 9 en el contenedor, en staging y con PostgreSQL, y Docker reporta el contenedor como healthy. El gráfico muestra las 10 etapas del pipeline, todas aprobadas; la más larga es compilar y probar, unos 19 segundos. Las pruebas encontraron un defecto real: los logs no se escribían en el volumen del contenedor; lo corregimos y agregamos una etapa que lo verifica. Pendiente, por falta de Internet en el entorno: correr el workflow en GitHub y publicar la imagen.
+
+8. Rutas compartidas e inventario
+25 s. Rutas compartidas: el repositorio, las ejecuciones de Actions, el Release v5.11.0 y la imagen en GHCR; estas tres últimas se activan al publicar la rama y la etiqueta. Todo queda en el inventario de documentación, con 222 recursos: el plan de despliegue, el diagrama, las 85 evidencias, los archivos de contenedor y el workflow de CD. Gracias.
+
+9. Anexo 1 · Codificación: contenedor
+Anexo. Extractos del Dockerfile y de docker-compose.yml. Archivos completos en la raíz del proyecto.
+
+10. Anexo 2 · Codificación: despliegue y smoke test
+Anexo. Pasos de desplegar.sh y verificaciones del smoke test. Si cualquier verificación falla, el despliegue vuelve a la versión anterior.
+
+11. Anexo 3 · Evidencias de pantalla
+Anexo. Capturas tomadas por el script de evidencias sobre las instancias desplegadas, y ubicación de los registros.
+
+12. Anexo 4 · Inventario de documentación
+Anexo. Inventario de documentación con la trazabilidad de cada requisito hacia su evidencia.

@@ -1,0 +1,20 @@
+tag v5.11.0
+Tagger: Claude <noreply@anthropic.com>
+Date:   Wed Nov 18 00:58:22 2026 -0500
+
+SIGSF 5.11.0 · Plan de despliegue, Docker, CI/CD y reversión
+
+commit f8f3c520d8b685fb0fe084c055c336169a4de9b4
+Merge: 73ce5bb 2b4be27
+Author: Claude <noreply@anthropic.com>
+Date:   Wed Nov 18 00:58:22 2026 -0500
+
+    Merge branch 'feature/despliegue-5.11.0' into release/5.11.0
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01M6CCRbALRLkdTYghGNvnN9
+
+ .dockerignore                                      |  24 ++
+ .github/workflows/cd.yml                           | 178 ++++++++++
+ .gitignore                                         |   4 +
+ CHANGELOG.md                                       |  11 +

@@ -1,2 +1,2 @@
 IMAGE          ID             DISK USAGE   CONTENT SIZE   EXTRA
-sigsf:5.11.0   8ee074fefbf8        133MB         50.4MB   U    
+sigsf:5.11.0   12d544466b61        133MB         50.4MB   U    

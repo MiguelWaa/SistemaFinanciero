@@ -1,7 +1,7 @@
 [
     {
-        "Id": "86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2",
-        "Created": "2026-11-18T05:53:05.049653609Z",
+        "Id": "ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5",
+        "Created": "2026-11-18T05:58:50.322775489Z",
         "Path": "sh",
         "Args": [
             "-c",
@@ -14,29 +14,35 @@
             "Restarting": false,
             "OOMKilled": false,
             "Dead": false,
-            "Pid": 9709,
+            "Pid": 14551,
             "ExitCode": 0,
             "Error": "",
-            "StartedAt": "2026-11-18T05:53:05.095615325Z",
+            "StartedAt": "2026-11-18T05:58:50.363977475Z",
             "FinishedAt": "0001-01-01T00:00:00Z",
             "Health": {
                 "Status": "healthy",
                 "FailingStreak": 0,
                 "Log": [
                     {
-                        "Start": "2026-11-18T00:53:10.228547725-05:00",
-                        "End": "2026-11-18T00:53:10.546228005-05:00",
+                        "Start": "2026-11-18T00:58:55.496628365-05:00",
+                        "End": "2026-11-18T00:58:55.904424705-05:00",
+                        "ExitCode": 1,
+                        "Output": "SIN RESPUESTA: ConnectException Connection refused (connect failed)\n"
+                    },
+                    {
+                        "Start": "2026-11-18T00:59:00.905709182-05:00",
+                        "End": "2026-11-18T00:59:01.163629031-05:00",
                         "ExitCode": 0,
                         "Output": "SANO 200 {\"status\":\"ok\",\"servicio\":\"SIGSF API\",\"persistencia\":\"Memoria (demostraci?n)\"}\n"
                     }
                 ]
             }
         },
-        "Image": "sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903",
-        "ResolvConfPath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/resolv.conf",
-        "HostnamePath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/hostname",
-        "HostsPath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/hosts",
-        "LogPath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2-json.log",
+        "Image": "sha256:12d544466b61cdd6b59be331fc9b86ac417bc189f5fb1bc82af333eb6cd725d8",
+        "ResolvConfPath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/hostname",
+        "HostsPath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/hosts",
+        "LogPath": "/var/lib/docker/containers/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5/ea53e5dcd888437b2f6fe60dc71c11664f39db0de32fd2ed42f36f94440025f5-json.log",
         "Name": "/sigsf-pipeline",
         "RestartCount": 0,
         "Driver": "overlayfs",
@@ -174,8 +180,8 @@
             },
             {
                 "Type": "volume",
-                "Name": "69b5880d760f1659d953232b3fef3cd998218d77f0577f96e5c298dbdba72daf",
-                "Source": "/var/lib/docker/volumes/69b5880d760f1659d953232b3fef3cd998218d77f0577f96e5c298dbdba72daf/_data",
+                "Name": "d0ef2fae668fb95a8d4ced01969c116c498f3061b09b7a658c6d3a4350bf9e57",
+                "Source": "/var/lib/docker/volumes/d0ef2fae668fb95a8d4ced01969c116c498f3061b09b7a658c6d3a4350bf9e57/_data",
                 "Destination": "/app/respaldos",
                 "Driver": "local",
                 "Mode": "",
@@ -184,7 +190,7 @@
             }
         ],
         "Config": {
-            "Hostname": "86435ad80e90",
+            "Hostname": "ea53e5dcd888",
             "Domainname": "",
             "User": "10001:10001",
             "AttachStdin": false,
@@ -236,15 +242,15 @@
             "Labels": {
                 "org.opencontainers.image.description": "Sistema Integral de Gestión de Servicios Financieros - UTP",
                 "org.opencontainers.image.licenses": "UNLICENSED",
-                "org.opencontainers.image.revision": "c4762b7",
+                "org.opencontainers.image.revision": "f8f3c52",
                 "org.opencontainers.image.source": "https://github.com/MiguelWaa/SistemaFinanciero",
                 "org.opencontainers.image.title": "SIGSF",
                 "org.opencontainers.image.version": "5.11.0"
             }
         },
         "NetworkSettings": {
-            "SandboxID": "3690b15d671b79fa0fbf03337cce69619d5f030dabb4720de7606dab09f1da0c",
-            "SandboxKey": "/var/run/docker/netns/3690b15d671b",
+            "SandboxID": "e1993af42fe4694fd9247fbf05b60c22b9ca1f3639b9a05110107104d07c021f",
+            "SandboxKey": "/var/run/docker/netns/e1993af42fe4",
             "Ports": {
                 "8091/tcp": [
                     {
@@ -261,10 +267,10 @@
                     "DriverOpts": null,
                     "GwPriority": 0,
                     "NetworkID": "4301a0ae69f39de9c65fecf3b573d5462d25ebe32fb9f8b277a8d3895a8c76fd",
-                    "EndpointID": "4f554cca75a018ce7275fb4fa6311cbaab1e8b564e202de6d9c0630cdeef6cb9",
+                    "EndpointID": "c32535ac837107fc9f3e1a779fe2bf8d2d06f3931930507633a4bfc123c3e23d",
                     "Gateway": "172.17.0.1",
                     "IPAddress": "172.17.0.2",
-                    "MacAddress": "26:d7:d2:71:3d:b1",
+                    "MacAddress": "e6:bf:09:41:58:7b",
                     "IPPrefixLen": 16,
                     "IPv6Gateway": "",
                     "GlobalIPv6Address": "",
@@ -275,8 +281,8 @@
         },
         "ImageManifestDescriptor": {
             "mediaType": "application/vnd.oci.image.manifest.v1+json",
-            "digest": "sha256:d11e34a4d240d1a93e942689b4c1d3834ebe082ebb89d2059130e82e31795440",
-            "size": 1811,
+            "digest": "sha256:f3065cab108c4e4d735ac620a317ba9ed38260d151e75ee8d3753c4baef569d3",
+            "size": 2376,
             "platform": {
                 "architecture": "amd64",
                 "os": "linux"

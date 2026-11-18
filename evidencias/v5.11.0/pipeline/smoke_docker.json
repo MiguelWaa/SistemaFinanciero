@@ -2,7 +2,7 @@
   "herramienta": "scripts/smoke_test.py",
   "url": "http://127.0.0.1:8096",
   "version_esperada": "5.11.0",
-  "fecha_utc": "2026-11-18T05:53:10+00:00",
+  "fecha_utc": "2026-11-18T05:58:56+00:00",
   "estado": "APROBADO",
   "aprobadas": 9,
   "total": 9,
@@ -10,7 +10,7 @@
     {
       "verificacion": "GET /api/health",
       "estado": "APROBADO",
-      "detalle": "HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 5.1s"
+      "detalle": "HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 6.1s"
     },
     {
       "verificacion": "Frontend /login.html",
@@ -45,7 +45,7 @@
     {
       "verificacion": "Versión desplegada (/api/version)",
       "estado": "APROBADO",
-      "detalle": "HTTP 200 esperada=5.11.0 recibida=5.11.0 etiqueta=v5.10.0-5-gc4762b7"
+      "detalle": "HTTP 200 esperada=5.11.0 recibida=5.11.0 etiqueta=v5.11.0"
     },
     {
       "verificacion": "Dashboard autenticado",

@@ -1,12 +1,12 @@
 $ /usr/local/bin/python3 scripts/smoke_test.py --url http://127.0.0.1:8096 --version 5.11.0 --login admin@sigsf.com:admin123 --salida /home/claude/src/proj/SistemaFinanciero/evidencias/v5.11.0/pipeline/smoke_docker.json
 
-[OK]    GET /api/health - HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 5.1s
+[OK]    GET /api/health - HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 6.1s
 [OK]    Frontend /login.html - HTTP 200, 3535 bytes
 [OK]    Cabecera CSP - default-src 'self'; script-src 'self'; script-src-attr 'none'; object-src 'none'; style-sr
 [OK]    Cabecera X-Content-Type-Options - nosniff
 [OK]    API protegida sin token - GET /api/usuarios -> HTTP 401
 [OK]    Content-Type no admitido - POST text/plain -> HTTP 415
 [OK]    Login de demostración - HTTP 200, token emitido
-[OK]    Versión desplegada (/api/version) - HTTP 200 esperada=5.11.0 recibida=5.11.0 etiqueta=v5.10.0-5-gc4762b7
+[OK]    Versión desplegada (/api/version) - HTTP 200 esperada=5.11.0 recibida=5.11.0 etiqueta=v5.11.0
 [OK]    Dashboard autenticado - HTTP 200, 372 bytes
 Resultado: APROBADO (9/9)
