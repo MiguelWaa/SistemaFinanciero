@@ -1,0 +1,6 @@
+/app/logs/LEEME.txt (con contenido)
+/app/logs/areas (con contenido)
+/app/logs/sigsf-acceso.log (con contenido)
+/app/logs/sigsf-errores.log (con contenido)
+/app/logs/sigsf-seguridad.log (con contenido)
+/app/logs/sigsf.log (con contenido)

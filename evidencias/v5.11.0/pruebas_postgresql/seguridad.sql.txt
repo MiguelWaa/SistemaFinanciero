@@ -1,0 +1,22 @@
+psql:/home/claude/src/proj/SistemaFinanciero/db/seguridad.sql:29: NOTICE:  relation "auditoria" already exists, skipping
+CREATE TABLE
+psql:/home/claude/src/proj/SistemaFinanciero/db/seguridad.sql:30: NOTICE:  relation "idx_auditoria_fecha" already exists, skipping
+CREATE INDEX
+CREATE INDEX
+CREATE FUNCTION
+psql:/home/claude/src/proj/SistemaFinanciero/db/seguridad.sql:41: NOTICE:  trigger "trg_auditoria_inmutable" for relation "auditoria" does not exist, skipping
+DROP TRIGGER
+CREATE TRIGGER
+DO
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+DO
+DO
+REVOKE
+GRANT
+GRANT
+GRANT
+REVOKE
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES

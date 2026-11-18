@@ -1,0 +1,15 @@
+2026-11-18 00:52:01 [desplegar] SHA-256 verificado: 3eb3a8a169708bce...
+2026-11-18 00:52:01 [desplegar] Versión 5.10.0 extraída en /tmp/sigsf-staging/releases/5.10.0-20261118005201
+2026-11-18 00:52:01 [desplegar] current -> /tmp/sigsf-staging/releases/5.10.0-20261118005201
+2026-11-18 00:52:01 [desplegar] Iniciado PID 8518
+[OK]    GET /api/health - HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 5.1s
+[OK]    Frontend /login.html - HTTP 200, 3535 bytes
+[OK]    Cabecera CSP - default-src 'self'; script-src 'self'; script-src-attr 'none'; object-src 'none'; style-sr
+[OK]    Cabecera X-Content-Type-Options - nosniff
+[OK]    API protegida sin token - GET /api/usuarios -> HTTP 401
+[OK]    Content-Type no admitido - POST text/plain -> HTTP 415
+[OK]    Login de demostración - HTTP 200, token emitido
+[OK]    Versión desplegada (/api/version) - HTTP 200 esperada=5.10.0 recibida=5.10.0 etiqueta=v5.10.0
+[OK]    Dashboard autenticado - HTTP 200, 371 bytes
+Resultado: APROBADO (9/9)
+2026-11-18 00:52:06 [desplegar] DESPLIEGUE CORRECTO: 5.10.0 en http://127.0.0.1:8095/

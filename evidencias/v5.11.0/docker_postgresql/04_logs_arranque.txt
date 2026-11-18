@@ -1,0 +1,19 @@
+05:53:56 INFO  [SISTEMA] c.u.s.ServerMain - Iniciando SIGSF...
+05:53:56 INFO  [SISTEMA] c.u.s.ServerMain - Conectando a jdbc:postgresql://127.0.0.1:5432/SistemaFinanciero (usuario: postgres)
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain - Conexión a PostgreSQL correcta.
+05:53:57 INFO  [SISTEMA] c.u.s.c.VerificadorEsquema - Versión del esquema de la base: 5.2.0 (la esperada por el código).
+05:53:57 INFO  [SISTEMA] c.u.s.c.VerificadorEsquema - Esquema de la base verificado: todas las tablas principales existen.
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   SIGSF - Servidor iniciado
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   Frontend:      http://localhost:8097/
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   API:           http://localhost:8097/api/health
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   Persistencia:  PostgreSQL (JDBC)
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   Seguridad:     PBKDF2 + sesiones con token (30 min) + roles
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   Respaldos:     /app/respaldos (automático desactivado)
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   Logs:          carpeta logs/ (sigsf.log, sigsf-acceso.log, sigsf-seguridad.log, sigsf-errores.log)
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain -   (Ctrl+C para detener)
+05:53:57 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
+05:54:10 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - ACCESO_DENEGADO usuario=anónimo rol=null ip=127.0.0.1 recurso=GET /api/usuarios http=401
+05:54:10 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+05:54:10 INFO  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_OK usuario=admin@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=200
+05:54:10 INFO  [SISTEMA] c.u.s.version.GitCli - Sin repositorio Git en /app: la versión se toma de version.properties o VERSION.

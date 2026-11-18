@@ -1,0 +1,94 @@
+[
+    {
+        "Id": "sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903",
+        "RepoTags": [
+            "sigsf:5.11.0"
+        ],
+        "RepoDigests": [
+            "sigsf@sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-11-18T00:53:04.508706302-05:00",
+        "Config": {
+            "User": "10001:10001",
+            "ExposedPorts": {
+                "8091/tcp": {}
+            },
+            "Env": [
+                "PATH=/opt/java/bin:/usr/bin:/bin",
+                "JAVA_HOME=/opt/java",
+                "LANG=C.UTF-8",
+                "LD_LIBRARY_PATH=/usr/local/lib:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu",
+                "SIGSF_PERSISTENCIA=postgresql",
+                "SIGSF_SERVER_PORT=8091",
+                "SIGSF_WEB_DIR=/app/web",
+                "SIGSF_BACKUP_DIR=/app/respaldos",
+                "SIGSF_BACKUP_AUTOMATICO_HORAS=0",
+                "JAVA_OPTS=-XX:MaxRAMPercentage=75 -Dfile.encoding=UTF-8 -Dsigsf.log.dir=/app/logs"
+            ],
+            "Entrypoint": [
+                "sh",
+                "-c",
+                "exec java $JAVA_OPTS -jar /app/dist/SIGSF.jar"
+            ],
+            "Volumes": {
+                "/app/logs": {},
+                "/app/respaldos": {}
+            },
+            "WorkingDir": "/app",
+            "Labels": {
+                "org.opencontainers.image.description": "Sistema Integral de Gestión de Servicios Financieros - UTP",
+                "org.opencontainers.image.licenses": "UNLICENSED",
+                "org.opencontainers.image.revision": "c4762b7",
+                "org.opencontainers.image.source": "https://github.com/MiguelWaa/SistemaFinanciero",
+                "org.opencontainers.image.title": "SIGSF",
+                "org.opencontainers.image.version": "5.11.0"
+            },
+            "Healthcheck": {
+                "Test": [
+                    "CMD",
+                    "java",
+                    "-cp",
+                    "/app/dist/SIGSF.jar",
+                    "com.utp.sistemafinanciero.despliegue.SondaSalud"
+                ],
+                "Interval": 15000000000,
+                "Timeout": 5000000000,
+                "StartPeriod": 40000000000,
+                "Retries": 3
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 132830478,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:7fc1c3c7b1a5b10affbd0077d94779a5efb24d28e53e7c44aa48be6d8db4ee58",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:b48608750a9154b0492bd7ad2ca2b96cc81053184e176657f5eb7d52a5b0d0a0",
+                "sha256:fe817c270e1dfc50f7413e70d045b71ca5dfe45ebadf05091e077d8ccbe1c4b0",
+                "sha256:e776ed9341bce5e7573c0bac5599832ba3e7eb4d07d167cd8d820828cdb3cac3",
+                "sha256:261629706cb76a6dba4cbe8bcfacb19b936c26d485c199332c6cb1e218ee75f5",
+                "sha256:fb0edc10ccd7cb9c0c0a2ee6f133d0711707bafba8c4d6a1de133a5f8b81c58e",
+                "sha256:c6517c094392285275d614f61e943479f46a9007be3c1276d69ad93ad1db5048"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-18T05:53:04.791862823Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "jtfcg2ur3h2br15dajdzeu6td",
+                    "CreatedAt": "2026-11-18T00:53:04.890616639-05:00"
+                }
+            ]
+        }
+    }
+]

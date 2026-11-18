@@ -1,0 +1,12 @@
+{
+  "url": "http://127.0.0.1:8097",
+  "capturas": [
+    "docker_pg_5.11.0_01_login.png",
+    "docker_pg_5.11.0_02_index.png",
+    "docker_pg_5.11.0_03_clientes.png",
+    "docker_pg_5.11.0_04_versiones.png"
+  ],
+  "errores": [
+    "consola: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}

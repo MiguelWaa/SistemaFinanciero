@@ -1,0 +1,14 @@
+== schema.sql
+psql:db/schema.sql:44: NOTICE:  table "rol" does not exist, skipping
+psql:db/schema.sql:46: NOTICE:  table "auditoria" does not exist, skipping
+== datos_ejemplo.sql
+== portal_cliente.sql
+== seguridad.sql
+psql:db/seguridad.sql:30: NOTICE:  relation "idx_auditoria_fecha" already exists, skipping
+psql:db/seguridad.sql:41: NOTICE:  trigger "trg_auditoria_inmutable" for relation "auditoria" does not exist, skipping
+== version_esquema.sql
+(4 rows)
+
+== pagos_qr.sql
+(0 rows)
+

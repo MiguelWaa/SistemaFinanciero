@@ -1,0 +1,56 @@
+{
+  "herramienta": "scripts/smoke_test.py",
+  "url": "http://127.0.0.1:8095",
+  "version_esperada": "5.11.0",
+  "fecha_utc": "2026-11-18T05:55:25+00:00",
+  "estado": "APROBADO",
+  "aprobadas": 9,
+  "total": 9,
+  "verificaciones": [
+    {
+      "verificacion": "GET /api/health",
+      "estado": "APROBADO",
+      "detalle": "HTTP 200 {'status': 'ok', 'servicio': 'SIGSF API', 'persistencia': 'Memoria (demostración)'} en 6.1s"
+    },
+    {
+      "verificacion": "Frontend /login.html",
+      "estado": "APROBADO",
+      "detalle": "HTTP 200, 3535 bytes"
+    },
+    {
+      "verificacion": "Cabecera CSP",
+      "estado": "APROBADO",
+      "detalle": "default-src 'self'; script-src 'self'; script-src-attr 'none'; object-src 'none'; style-sr"
+    },
+    {
+      "verificacion": "Cabecera X-Content-Type-Options",
+      "estado": "APROBADO",
+      "detalle": "nosniff"
+    },
+    {
+      "verificacion": "API protegida sin token",
+      "estado": "APROBADO",
+      "detalle": "GET /api/usuarios -> HTTP 401"
+    },
+    {
+      "verificacion": "Content-Type no admitido",
+      "estado": "APROBADO",
+      "detalle": "POST text/plain -> HTTP 415"
+    },
+    {
+      "verificacion": "Login de demostración",
+      "estado": "APROBADO",
+      "detalle": "HTTP 200, token emitido"
+    },
+    {
+      "verificacion": "Versión desplegada (/api/version)",
+      "estado": "APROBADO",
+      "detalle": "HTTP 200 esperada=5.11.0 recibida=5.11.0 etiqueta=v5.10.0-5-gc4762b7"
+    },
+    {
+      "verificacion": "Dashboard autenticado",
+      "estado": "APROBADO",
+      "detalle": "HTTP 200, 371 bytes"
+    }
+  ]
+}

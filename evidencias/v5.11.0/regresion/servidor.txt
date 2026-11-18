@@ -1,0 +1,150 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=40099 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+Picked up _JAVA_OPTIONS: -XX:+UnlockDiagnosticVMOptions -XX:DisableIntrinsic=_base64_encodeBlock,_base64_decodeBlock
+00:47:19 INFO  [SISTEMA] c.u.s.ServerMain - Iniciando SIGSF...
+00:47:19 WARN  [SISTEMA] c.u.s.ServerMain - [MODO DEMOSTRACIÓN] Persistencia en memoria: los datos se pierden al cerrar.
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000001 registrado en caja por lucia.ramos@sigsf.com: cliente=5 metodo=EFECTIVO monto=766.69
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000002 registrado desde el portal: cliente=5 metodo=YAPE monto=105.59 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000002 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000003 registrado en caja por lucia.ramos@sigsf.com: cliente=7 metodo=EFECTIVO monto=1000.05
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000004 registrado desde el portal: cliente=7 metodo=YAPE monto=2500.83 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000004 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000005 registrado desde el portal: cliente=8 metodo=YAPE monto=524.49 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000006 registrado desde el portal: cliente=12 metodo=YAPE monto=1846.73 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000006 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000007 registrado en caja por lucia.ramos@sigsf.com: cliente=14 metodo=EFECTIVO monto=1200.37
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000008 registrado desde el portal: cliente=15 metodo=YAPE monto=300.84 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000009 registrado desde el portal: cliente=15 metodo=YAPE monto=300.31 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000009 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000010 registrado desde el portal: cliente=21 metodo=PLIN monto=147.56 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000010 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000011 registrado desde el portal: cliente=21 metodo=PLIN monto=54.23 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000012 registrado desde el portal: cliente=25 metodo=YAPE monto=1200.08 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000012 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000013 registrado desde el portal: cliente=25 metodo=TUNKI monto=300.62 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000013 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000014 registrado desde el portal: cliente=26 metodo=YAPE monto=147.16 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000014 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000015 registrado desde el portal: cliente=30 metodo=YAPE monto=95.92 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000015 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000016 registrado desde el portal: cliente=32 metodo=YAPE monto=113.34 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000016 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000017 registrado desde el portal: cliente=33 metodo=PLIN monto=500.46 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000017 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000018 registrado desde el portal: cliente=34 metodo=YAPE monto=1200.82 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000018 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000019 registrado desde el portal: cliente=36 metodo=PLIN monto=933.49 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000019 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000020 registrado desde el portal: cliente=38 metodo=TUNKI monto=71.67 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000020 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000021 registrado desde el portal: cliente=40 metodo=YAPE monto=300.25 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000021 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000022 registrado desde el portal: cliente=40 metodo=YAPE monto=500.23 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000022 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000023 registrado desde el portal: cliente=41 metodo=TUNKI monto=2500.28 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000023 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000024 registrado desde el portal: cliente=41 metodo=YAPE monto=101.34 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000024 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000025 registrado en caja por lucia.ramos@sigsf.com: cliente=44 metodo=EFECTIVO monto=800.22
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000026 registrado desde el portal: cliente=44 metodo=TUNKI monto=98.51 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000026 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000027 registrado desde el portal: cliente=44 metodo=PLIN monto=850.05 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000027 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000028 registrado desde el portal: cliente=46 metodo=YAPE monto=500.37 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000028 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000029 registrado desde el portal: cliente=47 metodo=PLIN monto=500.72 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000029 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000030 registrado desde el portal: cliente=48 metodo=YAPE monto=1000.49 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000030 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000031 registrado desde el portal: cliente=48 metodo=TUNKI monto=40.32 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000032 registrado desde el portal: cliente=49 metodo=PLIN monto=1533.35 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000032 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000033 registrado desde el portal: cliente=50 metodo=PLIN monto=131.14 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000034 registrado en caja por lucia.ramos@sigsf.com: cliente=50 metodo=EFECTIVO monto=277.01
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000035 registrado desde el portal: cliente=51 metodo=TUNKI monto=1800.01 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000036 registrado desde el portal: cliente=52 metodo=TUNKI monto=800.85 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000036 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000037 registrado desde el portal: cliente=52 metodo=YAPE monto=277.02 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000037 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000038 registrado desde el portal: cliente=52 metodo=PLIN monto=1520.04 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000039 registrado desde el portal: cliente=53 metodo=PLIN monto=196.74 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000039 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000040 registrado desde el portal: cliente=54 metodo=PLIN monto=1800.56 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000040 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000041 registrado desde el portal: cliente=55 metodo=YAPE monto=226.67 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000041 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000042 registrado desde el portal: cliente=55 metodo=TUNKI monto=566.75 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000042 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000043 registrado desde el portal: cliente=55 metodo=YAPE monto=71.67 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000044 registrado desde el portal: cliente=58 metodo=YAPE monto=202.73 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000045 registrado desde el portal: cliente=59 metodo=TUNKI monto=3500.13 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000045 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000046 registrado desde el portal: cliente=60 metodo=YAPE monto=300.29 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000046 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000047 registrado desde el portal: cliente=61 metodo=TUNKI monto=286.01 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000048 registrado desde el portal: cliente=62 metodo=PLIN monto=457.80 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000048 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000049 registrado desde el portal: cliente=63 metodo=YAPE monto=68.53 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000049 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000050 registrado desde el portal: cliente=64 metodo=YAPE monto=129.13 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000050 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000051 registrado desde el portal: cliente=65 metodo=TUNKI monto=36.67 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000052 registrado desde el portal: cliente=66 metodo=YAPE monto=268.14 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000052 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000053 registrado desde el portal: cliente=67 metodo=YAPE monto=3500.95 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000053 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000054 registrado desde el portal: cliente=67 metodo=YAPE monto=153.34 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000054 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000055 registrado desde el portal: cliente=69 metodo=TUNKI monto=295.07 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000055 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000056 registrado desde el portal: cliente=74 metodo=YAPE monto=300.18 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000056 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000057 registrado desde el portal: cliente=75 metodo=YAPE monto=3500.05 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000057 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000058 registrado desde el portal: cliente=76 metodo=TUNKI monto=86.71 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000058 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000059 registrado desde el portal: cliente=80 metodo=PLIN monto=119.38 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000059 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000060 registrado desde el portal: cliente=81 metodo=TUNKI monto=113.37 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000060 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000061 registrado desde el portal: cliente=82 metodo=PLIN monto=1083.38 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000061 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000062 registrado desde el portal: cliente=83 metodo=YAPE monto=462.26 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000062 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000063 registrado desde el portal: cliente=86 metodo=PLIN monto=300.21 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000063 rechazado por lucia.ramos@sigsf.com: No se encontró el abono en la billetera.
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000064 registrado desde el portal: cliente=90 metodo=TUNKI monto=70.62 estado=POR_VERIFICAR
+00:47:23 INFO  [SISTEMA] c.u.s.s.PagoService - Pago PG-000064 confirmado por lucia.ramos@sigsf.com
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   SIGSF - Servidor iniciado
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   Frontend:      http://localhost:58171/
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   API:           http://localhost:58171/api/health
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   Persistencia:  Memoria (demostración)
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   Seguridad:     PBKDF2 + sesiones con token (30 min) + roles
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   Respaldos:     /home/claude/src/proj/SistemaFinanciero/pruebas/reportes/20261118T054658Z/respaldos (automático desactivado)
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   Logs:          carpeta logs/ (sigsf.log, sigsf-acceso.log, sigsf-seguridad.log, sigsf-errores.log)
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain -   (Ctrl+C para detener)
+00:47:23 INFO  [SISTEMA] c.u.s.ServerMain - ========================================================
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=[] rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario={} rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=1.0 rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=true rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=400
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+00:47:23 WARN  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_FALLIDO usuario=anónimo rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=415
+00:47:23 INFO  [SEGURIDAD] SIGSF.SEGURIDAD - LOGIN_OK usuario=admin@sigsf.com rol=null ip=127.0.0.1 recurso=POST /api/auth/login http=200

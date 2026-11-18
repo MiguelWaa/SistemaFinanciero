@@ -1,0 +1,63 @@
+{
+  "pipeline": "CD SIGSF (ejecución local)",
+  "version": "5.11.0",
+  "inicio_utc": "2026-11-18T05:52:42+00:00",
+  "etapas": [
+    {
+      "etapa": "compilar_junit",
+      "estado": "APROBADO",
+      "segundos": 19.0,
+      "registro": "01_compilar_junit.txt"
+    },
+    {
+      "etapa": "postgresql_jdbc",
+      "estado": "APROBADO",
+      "segundos": 1.7,
+      "registro": "02_postgresql_jdbc.txt"
+    },
+    {
+      "etapa": "empaquetar_jar",
+      "estado": "APROBADO",
+      "segundos": 0.3,
+      "registro": "03_empaquetar_jar.txt"
+    },
+    {
+      "etapa": "empaquetar_release",
+      "estado": "APROBADO",
+      "segundos": 0.5,
+      "registro": "04_empaquetar_release.txt"
+    },
+    {
+      "etapa": "docker_build",
+      "estado": "APROBADO",
+      "segundos": 0.8,
+      "registro": "05_docker_build.txt"
+    },
+    {
+      "etapa": "docker_run",
+      "estado": "APROBADO",
+      "segundos": 0.3,
+      "registro": "06_docker_run.txt"
+    },
+    {
+      "etapa": "docker_smoke",
+      "estado": "APROBADO",
+      "segundos": 5.4,
+      "registro": "07_docker_smoke.txt"
+    },
+    {
+      "etapa": "docker_healthcheck",
+      "estado": "APROBADO",
+      "segundos": 0.0,
+      "registro": "08_docker_healthcheck.txt"
+    },
+    {
+      "etapa": "desplegar_staging",
+      "estado": "APROBADO",
+      "segundos": 8.5,
+      "registro": "09_desplegar_staging.txt"
+    }
+  ],
+  "estado": "APROBADO",
+  "fin_utc": "2026-11-18T05:53:19+00:00"
+}

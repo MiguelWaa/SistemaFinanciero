@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: las páginas internas no reproducen audio sin petición
+ok 1 - las páginas internas no reproducen audio sin petición
+  ---
+  duration_ms: 3.778635
+  type: 'test'
+  ...
+# Subtest: el clic inicia el MP3 sin mute y con volumen normal
+ok 2 - el clic inicia el MP3 sin mute y con volumen normal
+  ---
+  duration_ms: 0.889818
+  type: 'test'
+  ...
+# Subtest: pausar y continuar conserva el punto del saludo
+ok 3 - pausar y continuar conserva el punto del saludo
+  ---
+  duration_ms: 0.764102
+  type: 'test'
+  ...
+# Subtest: al finalizar se puede repetir desde cero
+ok 4 - al finalizar se puede repetir desde cero
+  ---
+  duration_ms: 0.684617
+  type: 'test'
+  ...
+# Subtest: un bloqueo de audio deja un aviso y un nuevo intento por clic
+ok 5 - un bloqueo de audio deja un aviso y un nuevo intento por clic
+  ---
+  duration_ms: 7.462819
+  type: 'test'
+  ...
+# Subtest: los iframe no crean otro reproductor
+ok 6 - los iframe no crean otro reproductor
+  ---
+  duration_ms: 0.737626
+  type: 'test'
+  ...
+# Subtest: inicialización duplicada reutiliza el reproductor
+ok 7 - inicialización duplicada reutiliza el reproductor
+  ---
+  duration_ms: 1.102313
+  type: 'test'
+  ...
+# Subtest: cerrar el control detiene el audio
+ok 8 - cerrar el control detiene el audio
+  ---
+  duration_ms: 0.91888
+  type: 'test'
+  ...
+# Subtest: un error del archivo muestra una alternativa
+ok 9 - un error del archivo muestra una alternativa
+  ---
+  duration_ms: 1.248655
+  type: 'test'
+  ...
+# Subtest: la portada reutiliza su audio nativo, sin duplicarlo
+ok 10 - la portada reutiliza su audio nativo, sin duplicarlo
+  ---
+  duration_ms: 2.732301
+  type: 'test'
+  ...
+# Subtest: el inicio reproduce el video original y no el saludo MP3
+ok 11 - el inicio reproduce el video original y no el saludo MP3
+  ---
+  duration_ms: 0.774984
+  type: 'test'
+  ...
+# Subtest: autoplay audible bloqueado intenta silencio y permite activar sonido desde cero
+ok 12 - autoplay audible bloqueado intenta silencio y permite activar sonido desde cero
+  ---
+  duration_ms: 2.14505
+  type: 'test'
+  ...
+# Subtest: bloqueo de toda reproducción mantiene el botón y permite omitir
+ok 13 - bloqueo de toda reproducción mantiene el botón y permite omitir
+  ---
+  duration_ms: 2.036513
+  type: 'test'
+  ...
+# Subtest: el final del video revela la portada y devuelve el foco
+ok 14 - el final del video revela la portada y devuelve el foco
+  ---
+  duration_ms: 0.929819
+  type: 'test'
+  ...
+# Subtest: saltar detiene el video y no arranca otro audio
+ok 15 - saltar detiene el video y no arranca otro audio
+  ---
+  duration_ms: 0.791419
+  type: 'test'
+  ...
+# Subtest: repetir pausa el MP3 y reinicia el video en el mismo documento
+ok 16 - repetir pausa el MP3 y reinicia el video en el mismo documento
+  ---
+  duration_ms: 0.788687
+  type: 'test'
+  ...
+# Subtest: pausar espera al usuario y continuar mantiene el instante
+ok 17 - pausar espera al usuario y continuar mantiene el instante
+  ---
+  duration_ms: 0.821014
+  type: 'test'
+  ...
+# Subtest: movimiento reducido muestra el poster sin autoplay y permite clic explícito
+ok 18 - movimiento reducido muestra el poster sin autoplay y permite clic explícito
+  ---
+  duration_ms: 0.83936
+  type: 'test'
+  ...
+# Subtest: Escape libera la portada y detiene el video
+ok 19 - Escape libera la portada y detiene el video
+  ---
+  duration_ms: 0.779421
+  type: 'test'
+  ...
+# Subtest: error del video no impide entrar al sistema
+ok 20 - error del video no impide entrar al sistema
+  ---
+  duration_ms: 0.771334
+  type: 'test'
+  ...
+# Subtest: carga detenida tiene salida automática y detiene el video
+ok 21 - carga detenida tiene salida automática y detiene el video
+  ---
+  duration_ms: 0.723054
+  type: 'test'
+  ...
+# Subtest: una reproducción tardía después de omitir no vuelve a sonar
+ok 22 - una reproducción tardía después de omitir no vuelve a sonar
+  ---
+  duration_ms: 5.04575
+  type: 'test'
+  ...
+# Subtest: un rechazo tardío después de omitir no intenta autoplay silencioso
+ok 23 - un rechazo tardío después de omitir no intenta autoplay silencioso
+  ---
+  duration_ms: 1.831332
+  type: 'test'
+  ...
+# Subtest: no se superponen el video y el MP3
+ok 24 - no se superponen el video y el MP3
+  ---
+  duration_ms: 0.772622
+  type: 'test'
+  ...
+# Subtest: salir de la página cancela la presentación y sus temporizadores
+ok 25 - salir de la página cancela la presentación y sus temporizadores
+  ---
+  duration_ms: 0.792198
+  type: 'test'
+  ...
+# Subtest: DOMContentLoaded no duplica audio ni cambia el estado del video
+ok 26 - DOMContentLoaded no duplica audio ni cambia el estado del video
+  ---
+  duration_ms: 0.722634
+  type: 'test'
+  ...
+# Subtest: inicio audible autorizado no requiere clic y oculta controles
+ok 27 - inicio audible autorizado no requiere clic y oculta controles
+  ---
+  duration_ms: 0.792918
+  type: 'test'
+  ...
+# Subtest: mover el mouse muestra controles temporalmente sin interrumpir video
+ok 28 - mover el mouse muestra controles temporalmente sin interrumpir video
+  ---
+  duration_ms: 0.768312
+  type: 'test'
+  ...
+# Subtest: teclado y toque permiten descubrir controles
+ok 29 - teclado y toque permiten descubrir controles
+  ---
+  duration_ms: 0.692139
+  type: 'test'
+  ...
+# Subtest: pausa o silencio conservan controles disponibles
+ok 30 - pausa o silencio conservan controles disponibles
+  ---
+  duration_ms: 6.989769
+  type: 'test'
+  ...
+# Subtest: omitir limpia la visibilidad temporal de controles
+ok 31 - omitir limpia la visibilidad temporal de controles
+  ---
+  duration_ms: 0.80657
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 106.690472

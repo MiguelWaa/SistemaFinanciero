@@ -1,0 +1,286 @@
+[
+    {
+        "Id": "86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2",
+        "Created": "2026-11-18T05:53:05.049653609Z",
+        "Path": "sh",
+        "Args": [
+            "-c",
+            "exec java $JAVA_OPTS -jar /app/dist/SIGSF.jar"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 9709,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-11-18T05:53:05.095615325Z",
+            "FinishedAt": "0001-01-01T00:00:00Z",
+            "Health": {
+                "Status": "healthy",
+                "FailingStreak": 0,
+                "Log": [
+                    {
+                        "Start": "2026-11-18T00:53:10.228547725-05:00",
+                        "End": "2026-11-18T00:53:10.546228005-05:00",
+                        "ExitCode": 0,
+                        "Output": "SANO 200 {\"status\":\"ok\",\"servicio\":\"SIGSF API\",\"persistencia\":\"Memoria (demostraci?n)\"}\n"
+                    }
+                ]
+            }
+        },
+        "Image": "sha256:8ee074fefbf802db2a5dce1c81089aad3da3c58ac86239ae1df9d376389f1903",
+        "ResolvConfPath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/hostname",
+        "HostsPath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/hosts",
+        "LogPath": "/var/lib/docker/containers/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2/86435ad80e90d39ded039b09c13e4529472bb2ab403cd4620ed2d56ce4543db2-json.log",
+        "Name": "/sigsf-pipeline",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "sigsf-pipeline-logs:/app/logs"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "bridge",
+            "PortBindings": {
+                "8091/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "8096"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": [
+                "ALL"
+            ],
+            "CgroupnsMode": "host",
+            "Dns": null,
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": true,
+            "SecurityOpt": [
+                "no-new-privileges:true"
+            ],
+            "Tmpfs": {
+                "/tmp": ""
+            },
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "sigsf-pipeline-logs",
+                "Source": "/var/lib/docker/volumes/sigsf-pipeline-logs/_data",
+                "Destination": "/app/logs",
+                "Driver": "local",
+                "Mode": "z",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "volume",
+                "Name": "69b5880d760f1659d953232b3fef3cd998218d77f0577f96e5c298dbdba72daf",
+                "Source": "/var/lib/docker/volumes/69b5880d760f1659d953232b3fef3cd998218d77f0577f96e5c298dbdba72daf/_data",
+                "Destination": "/app/respaldos",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "86435ad80e90",
+            "Domainname": "",
+            "User": "10001:10001",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "8091/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "SIGSF_PERSISTENCIA=memoria",
+                "PATH=/opt/java/bin:/usr/bin:/bin",
+                "JAVA_HOME=/opt/java",
+                "LANG=C.UTF-8",
+                "LD_LIBRARY_PATH=/usr/local/lib:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu",
+                "SIGSF_SERVER_PORT=8091",
+                "SIGSF_WEB_DIR=/app/web",
+                "SIGSF_BACKUP_DIR=/app/respaldos",
+                "SIGSF_BACKUP_AUTOMATICO_HORAS=0",
+                "JAVA_OPTS=-XX:MaxRAMPercentage=75 -Dfile.encoding=UTF-8 -Dsigsf.log.dir=/app/logs"
+            ],
+            "Cmd": null,
+            "Healthcheck": {
+                "Test": [
+                    "CMD",
+                    "java",
+                    "-cp",
+                    "/app/dist/SIGSF.jar",
+                    "com.utp.sistemafinanciero.despliegue.SondaSalud"
+                ],
+                "Interval": 15000000000,
+                "Timeout": 5000000000,
+                "StartPeriod": 40000000000,
+                "Retries": 3
+            },
+            "Image": "sigsf:5.11.0",
+            "Volumes": {
+                "/app/logs": {},
+                "/app/respaldos": {}
+            },
+            "WorkingDir": "/app",
+            "Entrypoint": [
+                "sh",
+                "-c",
+                "exec java $JAVA_OPTS -jar /app/dist/SIGSF.jar"
+            ],
+            "Labels": {
+                "org.opencontainers.image.description": "Sistema Integral de Gestión de Servicios Financieros - UTP",
+                "org.opencontainers.image.licenses": "UNLICENSED",
+                "org.opencontainers.image.revision": "c4762b7",
+                "org.opencontainers.image.source": "https://github.com/MiguelWaa/SistemaFinanciero",
+                "org.opencontainers.image.title": "SIGSF",
+                "org.opencontainers.image.version": "5.11.0"
+            }
+        },
+        "NetworkSettings": {
+            "SandboxID": "3690b15d671b79fa0fbf03337cce69619d5f030dabb4720de7606dab09f1da0c",
+            "SandboxKey": "/var/run/docker/netns/3690b15d671b",
+            "Ports": {
+                "8091/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "8096"
+                    }
+                ]
+            },
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "4301a0ae69f39de9c65fecf3b573d5462d25ebe32fb9f8b277a8d3895a8c76fd",
+                    "EndpointID": "4f554cca75a018ce7275fb4fa6311cbaab1e8b564e202de6d9c0630cdeef6cb9",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "MacAddress": "26:d7:d2:71:3d:b1",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:d11e34a4d240d1a93e942689b4c1d3834ebe082ebb89d2059130e82e31795440",
+            "size": 1811,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]

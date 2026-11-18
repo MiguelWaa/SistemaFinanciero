@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:8095",
+  "capturas": [
+    "staging_5.10.0_01_login.png",
+    "staging_5.10.0_02_versiones.png"
+  ],
+  "errores": [
+    "consola: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}
