@@ -16,6 +16,8 @@ sh scripts/desplegar.sh release/sigsf-5.11.0.tar.gz --destino /opt/sigsf --syste
 sh scripts/rollback.sh --destino /opt/sigsf      # volver a la versión anterior
 ```
 
+Con Maven (Java 17 + Maven 3.9): `mvn clean package` compila, ejecuta las JUnit y genera `target/SIGSF.jar` + `target/lib/`; ejecutar desde la raíz con `java -jar target/SIGSF.jar`. No requiere Tomcat: el servidor HTTP va dentro del JAR.
+
 CD: `git push origin v5.11.0` ejecuta `.github/workflows/cd.yml` (JAR, imagen GHCR, Release y despliegue SSH).
 Resultados 18-11-2026: 229 JUnit, 7 JDBC en PostgreSQL 16, smoke 9/9 en contenedor y staging, reversión automática y manual comprobadas.
 Presentación del taller: `docs/presentacion/SIGSF_Despliegue_5min.pptx` y `.pdf`.

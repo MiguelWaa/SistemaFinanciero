@@ -22,3 +22,4 @@ db.properties
 *.tar.gz
 DOCUMENTACION_INTEGRAL.html
 web/video/*.tmp
+target
