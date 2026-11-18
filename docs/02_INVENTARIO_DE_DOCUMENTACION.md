@@ -1,4 +1,4 @@
-# Inventario y trazabilidad 5.10.0
+# Inventario y trazabilidad 5.11.0
 
 Entrada general: ../DOCUMENTACION_INTEGRAL.html. El inventario completo está en Inventario_documentacion.csv.
 
@@ -15,6 +15,8 @@ Entrada general: ../DOCUMENTACION_INTEGRAL.html. El inventario completo está en
 | 9. Seguridad Java y SCV | 12_PLAN_SEGURIDAD.md, 13_IMPLEMENTACION_Y_RETEST.md, .git y workflows |
 | 10. Pruebas | 10_PLAN_DE_PRUEBAS.md, 11_HERRAMIENTAS_Y_RESULTADOS_DE_PRUEBAS.md y evidencias/v5.6.0/ |
 | Plan de seguridad | Matriz PS-01 a PS-18, pruebas/seguridad/ y test/ |
+| 11. Despliegue (fundamentos, empaquetado, CI/CD, configuración) | 19_PLAN_DE_DESPLIEGUE.md, modelos/Despliegue.mmd, Dockerfile, docker-compose.yml, deploy/, .github/workflows/cd.yml, scripts/desplegar.sh, rollback.sh, smoke_test.py, empaquetar_release.py, pipeline_local.py |
+| Resultados del despliegue | evidencias/v5.11.0/ (pipeline, despliegue, docker_postgresql, configuracion, capturas, regresion, pruebas_postgresql) |
 | Herramientas / código / resultados | scripts/, test/, reportes actuales y presentación |
 
 Los documentos conservados de versiones anteriores sirven como antecedentes. La validación selectiva actual está en evidencias/v5.10.0/; la regresión completa anterior está en evidencias/v5.9.0/; la auditoría npm y análisis anteriores siguen en evidencias/v5.6.0/.

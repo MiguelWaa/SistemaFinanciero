@@ -1,9 +1,24 @@
-# SIGSF 5.10.0 - Proyecto integrado
+# SIGSF 5.11.0 - Proyecto integrado
 
 Sistema Integral de Gestión de Servicios Financieros. Curso Integrador I Sistemas - Software, UTP.
 
 Integrantes: Miguel Ángel Machaca Machaca; Ricardo Gabriel Cervantes Tejada; Cesar Huaripaucar Huaman.
 Docente: Rene Alonso Nieto Valencia.
+
+## Despliegue 5.11.0
+
+Plan completo: [docs/19_PLAN_DE_DESPLIEGUE.md](docs/19_PLAN_DE_DESPLIEGUE.md). Evidencias: `evidencias/v5.11.0/`.
+
+```sh
+python scripts/pipeline_local.py                 # mismas etapas que el CD: JUnit, paquete, Docker, staging
+docker compose --env-file deploy/sigsf.env up -d # producción en contenedores (app + PostgreSQL)
+sh scripts/desplegar.sh release/sigsf-5.11.0.tar.gz --destino /opt/sigsf --systemd
+sh scripts/rollback.sh --destino /opt/sigsf      # volver a la versión anterior
+```
+
+CD: `git push origin v5.11.0` ejecuta `.github/workflows/cd.yml` (JAR, imagen GHCR, Release y despliegue SSH).
+Resultados 18-11-2026: 229 JUnit, 7 JDBC en PostgreSQL 16, smoke 9/9 en contenedor y staging, reversión automática y manual comprobadas.
+Presentación del taller: `docs/presentacion/SIGSF_Despliegue_5min.pptx` y `.pdf`.
 
 ## Entrada automática 5.10.0
 
