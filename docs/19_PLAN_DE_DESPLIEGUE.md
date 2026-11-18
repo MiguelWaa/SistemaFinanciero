@@ -44,6 +44,8 @@ Usuario ──HTTPS──> Nginx :443 (TLS, HSTS) ──> SIGSF.jar :8091 (syste
 | Paquete de despliegue | `python scripts/empaquetar_release.py` | `release/sigsf-5.11.0.tar.gz` y `.zip` (113 archivos, 5,4 MB), `.sha256`, `SHA256SUMS`, `MANIFIESTO.json` (SHA-256 de cada archivo, commit, etiqueta) |
 | Imagen | `docker build -t sigsf:5.11.0 .` | Imagen de 133 MB, usuario 10001, `HEALTHCHECK` con la sonda Java `SondaSalud` |
 
+Alternativa con **Maven** (`pom.xml`): `mvn clean package` compila con `--release 17`, ejecuta las pruebas `*Test` con Surefire y genera `target/SIGSF.jar` (Main-Class y Class-Path `lib/`) y `target/lib/` con postgresql, slf4j y logback. Se ejecuta desde la raíz del proyecto con `java -jar target/SIGSF.jar`. SIGSF no se despliega en Tomcat: usa el servidor HTTP embebido de Java (`jdk.httpserver`), por lo que el JAR es autónomo.
+
 El paquete **solo** contiene lo necesario para ejecutar: `dist/`, `lib/*.jar` (sin `lib/test`), `web/`, `db/`, `deploy/`, scripts de despliegue, `VERSION`, `CHANGELOG.md`, plantilla de configuración y esta guía. Nunca incluye fuentes de prueba, `db.properties`, logs ni respaldos.
 
 ## 4. Configuración
@@ -140,6 +142,7 @@ Monitoreo: `HEALTHCHECK` Docker y `ExecStartPost` de systemd usan `SondaSalud` (
 | Herramienta | Uso | Archivo |
 |---|---|---|
 | JDK 17 (`javac`, `jar`, `jlink`) | Compilar, empaquetar, JRE mínima | `scripts/empaquetar.py`, `crear_imagen_base_local.sh` |
+| Maven 3.9 | Construcción alternativa con dependencias declaradas | `pom.xml` |
 | Python 3 | Orquestar pipeline, paquete y smoke | `empaquetar_release.py`, `pipeline_local.py`, `smoke_test.py` |
 | Docker / Docker Compose | Imagen y orquestación app + BD | `Dockerfile`, `.dockerignore`, `docker-compose.yml` |
 | GitHub Actions | CI y CD | `.github/workflows/ci.yml`, `plan-pruebas.yml`, `cd.yml` |
