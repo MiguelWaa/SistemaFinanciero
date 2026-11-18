@@ -78,6 +78,8 @@ def main():
         espera = 'for i in $(seq 1 30); do s=$(docker inspect -f "{{.State.Health.Status}}" sigsf-pipeline); ' \
                  'echo "intento $i: $s"; [ "$s" = healthy ] && exit 0; sleep 3; done; exit 1'
         etapa('docker_healthcheck', ['sh', '-c', espera], obligatoria=False)
+        etapa('docker_logs_escritura', ['docker', 'exec', 'sigsf-pipeline', 'sh', '-c',
+                                        'test -s /app/logs/sigsf.log && echo "sigsf.log escrito por el usuario 10001"'], obligatoria=False)
         subprocess.run(['sh', '-c', f'docker inspect sigsf-pipeline > "{ev}/docker_inspect.json"; '
                                     f'docker image inspect {tag} > "{ev}/docker_image.json"; '
                                     f'docker images {tag.split(":")[0]} > "{ev}/docker_images.txt"; '

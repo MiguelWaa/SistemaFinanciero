@@ -31,6 +31,11 @@ COPY --chown=10001:10001 web/                    /app/web/
 COPY --chown=10001:10001 db/                     /app/db/
 COPY --chown=10001:10001 db.properties.ejemplo   /app/db.properties.ejemplo
 COPY --chown=10001:10001 VERSION                 /app/VERSION
+COPY --chown=10001:10001 CHANGELOG.md            /app/CHANGELOG.md
+# Carpetas de escritura creadas con el dueño 10001 ANTES de declararlas volumen
+# (corrige "Permission denied" de Logback hallado en la prueba con PostgreSQL).
+COPY --chown=10001:10001 deploy/LEEME_volumenes.txt /app/logs/LEEME.txt
+COPY --chown=10001:10001 deploy/LEEME_volumenes.txt /app/respaldos/LEEME.txt
 
 # Configuración por variables de entorno (Configuracion.get lee SIGSF_<CLAVE>).
 # La contraseña NO va en la imagen: se inyecta en tiempo de ejecución.
