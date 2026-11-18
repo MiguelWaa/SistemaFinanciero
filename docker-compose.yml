@@ -1,0 +1,73 @@
+# ============================================================
+#  SIGSF 5.11.0 · Despliegue con Docker Compose (app + PostgreSQL)
+#
+#     cp deploy/sigsf.env.ejemplo deploy/sigsf.env   # editar contraseñas
+#     docker compose --env-file deploy/sigsf.env up -d
+#     docker compose ps            # ambos servicios deben quedar "healthy"
+#     docker compose logs -f app
+#
+#  La base se inicializa una sola vez (volumen vacío) con los scripts de db/
+#  en el orden oficial; el volumen pgdata conserva los datos entre despliegues.
+# ============================================================
+name: sigsf
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${SIGSF_DB_NAME:-SistemaFinanciero}
+      POSTGRES_USER: ${SIGSF_DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${SIGSF_DB_PASSWORD:?Defina SIGSF_DB_PASSWORD en deploy/sigsf.env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./db/datos_ejemplo.sql:/docker-entrypoint-initdb.d/02_datos_ejemplo.sql:ro
+      - ./db/portal_cliente.sql:/docker-entrypoint-initdb.d/03_portal_cliente.sql:ro
+      - ./db/seguridad.sql:/docker-entrypoint-initdb.d/04_seguridad.sql:ro
+      - ./db/version_esquema.sql:/docker-entrypoint-initdb.d/05_version_esquema.sql:ro
+      - ./db/pagos_qr.sql:/docker-entrypoint-initdb.d/06_pagos_qr.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks: [interna]
+
+  app:
+    image: ${SIGSF_IMAGEN:-ghcr.io/miguelwaa/sigsf}:${SIGSF_VERSION:-5.11.0}
+    build:
+      context: .
+      args:
+        VERSION: ${SIGSF_VERSION:-5.11.0}
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SIGSF_PERSISTENCIA: postgresql
+      SIGSF_DB_HOST: db
+      SIGSF_DB_PORT: "5432"
+      SIGSF_DB_NAME: ${SIGSF_DB_NAME:-SistemaFinanciero}
+      SIGSF_DB_USER: ${SIGSF_DB_USER:-postgres}
+      SIGSF_DB_PASSWORD: ${SIGSF_DB_PASSWORD:?Defina SIGSF_DB_PASSWORD en deploy/sigsf.env}
+      SIGSF_SESION_MINUTOS: ${SIGSF_SESION_MINUTOS:-30}
+      SIGSF_BACKUP_AUTOMATICO_HORAS: "0"
+    ports:
+      - "${SIGSF_PUERTO_PUBLICO:-8091}:8091"
+    volumes:
+      - logs:/app/logs
+      - respaldos:/app/respaldos
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    networks: [interna]
+
+volumes:
+  pgdata:
+  logs:
+  respaldos:
+
+networks:
+  interna:

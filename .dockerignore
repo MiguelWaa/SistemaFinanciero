@@ -1,0 +1,24 @@
+# Contexto mínimo para docker build (SIGSF 5.11.0)
+.git
+.github
+.githooks
+build
+nbproject
+docs
+evidencias
+pruebas
+test
+scripts
+src
+logs
+respaldos
+reportes
+release
+node_modules
+**/node_modules
+db.properties
+*.log
+*.zip
+*.tar.gz
+DOCUMENTACION_INTEGRAL.html
+web/video/*.tmp
