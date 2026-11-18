@@ -1,16 +1,17 @@
 #!/bin/sh
 # ============================================================
 #  SIGSF 5.11.0 · Reversión manual a la versión anterior
-#    sh scripts/rollback.sh [--destino /opt/sigsf] [--systemd] [--a releases/<id>]
+#    sh scripts/rollback.sh [--destino /opt/sigsf] [--systemd] [--a releases/<id>] [--login U:C]
 #  Sin --a vuelve a la versión instalada inmediatamente antes que la activa.
 # ============================================================
 set -eu
-DESTINO=/opt/sigsf; SYSTEMD=0; OBJETIVO=""
+DESTINO=/opt/sigsf; SYSTEMD=0; OBJETIVO=""; LOGIN=""
 while [ $# -gt 0 ]; do
   case "$1" in
     --destino) DESTINO="$2"; shift 2;;
     --systemd) SYSTEMD=1; shift;;
     --a) OBJETIVO="$2"; shift 2;;
+    --login) LOGIN="$2"; shift 2;;
     *) echo "Opción desconocida: $1" >&2; exit 2;;
   esac
 done
@@ -34,7 +35,9 @@ if [ "$SYSTEMD" = 1 ]; then systemctl start sigsf; else
 PUERTO="$(sed -n 's/^SIGSF_SERVER_PORT=//p' "$ENVF" | tail -1)"; PUERTO="${PUERTO:-8091}"
 VERSION="$(tr -d '\r\n ' < "$OBJETIVO/VERSION")"
 mkdir -p "$DESTINO/shared/despliegues"
-python3 "$OBJETIVO/scripts/smoke_test.py" --url "http://127.0.0.1:$PUERTO" --version "$VERSION" --esperar 90 \
+set -- --url "http://127.0.0.1:$PUERTO" --version "$VERSION" --esperar 90 \
   --salida "$DESTINO/shared/despliegues/rollback_$(date +%Y%m%d%H%M%S).json"
+[ -n "$LOGIN" ] && set -- "$@" --login "$LOGIN"
+python3 "$OBJETIVO/scripts/smoke_test.py" "$@"
 printf '%s ROLLBACK %s -> %s\n' "$(date -Iseconds)" "$(basename "$ACTUAL")" "$(basename "$OBJETIVO")" >> "$DESTINO/shared/historial_despliegues.log"
 log "Reversión completada: current -> $(basename "$OBJETIVO") ($VERSION)"

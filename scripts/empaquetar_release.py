@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = (ROOT / 'VERSION').read_text().strip()
 SALIDA = ROOT / 'release'
 INCLUIR = ['dist/SIGSF.jar', 'lib', 'web', 'db', 'deploy', 'VERSION', 'db.properties.ejemplo',
-           'INICIAR_DEMO.bat', 'INICIAR_DEMO.sh', 'README.md', 'docs/19_PLAN_DE_DESPLIEGUE.md',
+           'INICIAR_DEMO.bat', 'INICIAR_DEMO.sh', 'README.md', 'CHANGELOG.md', 'docs/19_PLAN_DE_DESPLIEGUE.md',
            'scripts/smoke_test.py', 'scripts/desplegar.sh', 'scripts/rollback.sh', 'scripts/iniciar_demo_windows.ps1']
 EXCLUIR = {'lib/test', 'deploy/sigsf.env'}
 
